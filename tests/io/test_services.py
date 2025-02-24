@@ -39,7 +39,9 @@ def test_alerts_service(enable: bool, mocker: pm.MockerFixture, capsys: pc.Captu
             plyer.notification.notify.assert_not_called(),
             "Notification method should not be called!",
         )
-        assert capsys.readouterr().out == "[regression_model_template] test: hello\n", "Notification should be printed to stdout!"
+        assert (
+            capsys.readouterr().out == "[regression_model_template] test: hello\n"
+        ), "Notification should be printed to stdout!"
 
 
 def test_mlflow_service(mlflow_service: services.MlflowService) -> None:
