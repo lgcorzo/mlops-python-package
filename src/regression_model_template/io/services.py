@@ -10,6 +10,7 @@ import sys
 import typing as T
 from typing import ClassVar
 import loguru
+import logging
 import mlflow
 import mlflow.tracking as mt
 import pydantic as pdt
@@ -17,7 +18,11 @@ from plyer import notification
 
 from regression_model_template.io.osvariables import Env
 
+
 # %% SERVICES
+class PropagateHandler(logging.Handler):
+    def emit(self, record: logging.LogRecord) -> None:
+        logging.getLogger(record.name).handle(record)
 
 
 class Service(abc.ABC, pdt.BaseModel, strict=True, frozen=True, extra="forbid"):
@@ -74,6 +79,7 @@ class LoggerService(Service):
         sinks = {"stderr": sys.stderr, "stdout": sys.stdout}
         config["sink"] = sinks.get(config["sink"], config["sink"])
         loguru.logger.add(**config)
+        loguru.logger.add(PropagateHandler(), format="{message}")
 
     def logger(self) -> loguru.Logger:
         """Return the main logger.
