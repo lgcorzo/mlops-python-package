@@ -39,7 +39,7 @@ You can use this package as part of your MLOps toolkit or platform (e.g., Model 
     - [Runner: GitHub Actions](#runner-github-actions)
   - [CLI](#cli)
     - [Parser: Argparse](#parser-argparse)
-    - [Logging: Loguru](#logging-loguru)
+    - [Logging: Loguru \& opentelemetry](#logging-loguru--opentelemetry)
   - [Code](#code)
     - [Coverage: Coverage](#coverage-coverage)
     - [Editor: VS Code](#editor-vs-code)
@@ -396,7 +396,7 @@ Integrations with the Command-Line Interface (CLI) of your system.
   - [Fire](https://github.com/google/python-fire): simple but no typing
   - [Click](https://click.palletsprojects.com/en/latest/): more verbose
 
-### Logging: [Loguru](https://loguru.readthedocs.io/en/stable/)
+### Logging: [Loguru](https://loguru.readthedocs.io/en/stable/) & opentelemetry
 
 - **Motivations**:
   - Show progress to the user
@@ -404,6 +404,8 @@ Integrations with the Command-Line Interface (CLI) of your system.
   - Saner logging syntax
 - **Limitations**:
   - Doesn't let you deviate from the base usage
+  - added opnetelemetry support to overcame limitations
+
 - **Alternatives**:
   - [Logging](https://docs.python.org/3/library/logging.html): available by default, but feel dated
 
