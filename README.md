@@ -408,7 +408,14 @@ Integrations with the Command-Line Interface (CLI) of your system.
 
 - **Alternatives**:
   - [Logging](https://docs.python.org/3/library/logging.html): available by default, but feel dated
+configure opnetelemtry with env variables:
 
+```.env
+export OTEL_SERVICE_NAME="Regression_model_service"
+export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318"
+export OTEL_LOG_LEVEL="debug"
+
+```
 ## Code
 
 Edition, validation, and versioning of your project source code.
