@@ -32,23 +32,15 @@ warnings.filterwarnings(action="ignore", category=UserWarning)
 
 # %% LOGGING & TELEMETRY SETUP
 
-# Get OpenTelemetry endpoint from environment variables TBD
-otel_traces_endpoint = "http://localhost:4318/v1/traces"
-otel_logs_endpoint = "http://localhost:4318/v1/logs"
-
-# Set up OpenTelemetry resources
-resource = Resource.create(attributes={"service.name": "Regression_model_service"})
-
-# Tracing setup
-tracer_provider = TracerProvider(resource=resource)
+tracer_provider = TracerProvider()
 trace.set_tracer_provider(tracer_provider)
-otlp_trace_exporter = OTLPSpanExporter(endpoint=otel_traces_endpoint)
+otlp_trace_exporter = OTLPSpanExporter()
 tracer_provider.add_span_processor(BatchSpanProcessor(otlp_trace_exporter))
 
 # Logging setup
-logger_provider = LoggerProvider(resource=resource)
+logger_provider = LoggerProvider()
 set_logger_provider(logger_provider)
-otlp_log_exporter = OTLPLogExporter(endpoint=otel_logs_endpoint)
+otlp_log_exporter = OTLPLogExporter()
 logger_provider.add_log_record_processor(BatchLogRecordProcessor(otlp_log_exporter))
 
 # Attach OpenTelemetry handler to Python's logging
@@ -68,11 +60,12 @@ parser.add_argument("-s", "--schema", action="store_true", help="Print settings 
 
 # %% SCRIPTS
 
+
 def main(argv: list[str] | None = None) -> int:
     """Main script for the application."""
-    
+
     tracer = trace.get_tracer(__name__)
-    
+
     with tracer.start_as_current_span("main_execution") as span:
         logger.info("Starting the application...")
 
@@ -101,9 +94,10 @@ def main(argv: list[str] | None = None) -> int:
             logger.info("Starting job execution...")
             runner.run()
             logger.info("Job execution completed successfully.")
-        
+
         logger.info("Application finished.")
         return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
