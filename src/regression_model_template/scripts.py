@@ -1,4 +1,3 @@
-
 """Scripts for the CLI application."""
 
 # ruff: noqa: E402
