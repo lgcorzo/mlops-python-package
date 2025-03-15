@@ -1184,22 +1184,48 @@ Learning VIM is one of the best investment for a career in IT. It can make you 3
 Compared to GitHub Copilot, VIM can take much more time to master. You can expect a ROI in less than a month.
 ## deployb images models
 
+https://mlflow.org/docs/latest/deployment/deploy-model-to-kubernetes#build-docker-for-deployment
+
 Building a Docker Image for MLflow Model
 The essential step to deploy an MLflow model to Kubernetes is to build a Docker image that contains the MLflow model and the inference server. This can be done via build-docker CLI command or Python API.
 
 ```python
-Python
 import mlflow
 
-mlflow.models.build_docker(
-    model_uri=f"runs:/{run_id}/model",
-    name="<image_name>",
-    enable_mlserver=True,
-)
+def get_champion_version(model_name: str) -> str:
+    """Obtiene la versión del modelo etiquetada como 'Champion' en MLflow Model Registry."""
+    client = mlflow.tracking.MlflowClient()
+    for version in client.get_latest_versions(model_name):
+        if "Champion" in version.aliases:
+            return version.version
+    raise ValueError(f"No 'Champion' version found for model {model_name}")
+
+def deploy_champion_model(model_name: str, image_name: str):
+    """Construye una imagen Docker para la versión 'Champion' de un modelo registrado."""
+    try:
+        champion_version = get_champion_version(model_name)
+        model_uri = f"models:/{model_name}/{champion_version}"
+        mlflow.models.build_docker(
+            model_uri=model_uri,
+            name=image_name,
+            enable_mlserver=True,
+        )
+        print(f"Docker image built successfully for model {model_name}, version {champion_version}")
+    except ValueError as e:
+        print(e)
+
+if __name__ == "__main__":
+    MODEL_NAME = "regression_model_template"
+    IMAGE_NAME = "regression_model_image"
+    deploy_champion_model(MODEL_NAME, IMAGE_NAME)
+
 ```
 
 ```bash
 mlflow models build-docker -m runs:/<run_id>/model -n <image_name> --enable-mlserver
+
+mlflow models build-docker -m models:/regression_model_template/4 -n regression_model_image --enable-mlserver
+
 ```
 If you want to use the bare-bones Flask server instead of MLServer, remove enable_mlserver=True. For other options, see the mlflow.models.build_docker function documentation.
 # Resources
