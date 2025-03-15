@@ -116,6 +116,7 @@ You can use this package as part of your MLOps toolkit or platform (e.g., Model 
     - [Code Workspace](#code-workspace)
     - [GitHub Copilot](#github-copilot)
     - [VSCode VIM](#vscode-vim)
+  - [deployb images models](#deployb-images-models)
 - [Resources](#resources)
   - [Python](#python)
   - [AI/ML/MLOps](#aimlmlops)
@@ -1181,7 +1182,26 @@ You should become familiar with the solution in less than a single coding sessio
 Learning VIM is one of the best investment for a career in IT. It can make you 30% more productive.
 
 Compared to GitHub Copilot, VIM can take much more time to master. You can expect a ROI in less than a month.
+## deployb images models
 
+Building a Docker Image for MLflow Model
+The essential step to deploy an MLflow model to Kubernetes is to build a Docker image that contains the MLflow model and the inference server. This can be done via build-docker CLI command or Python API.
+
+```python
+Python
+import mlflow
+
+mlflow.models.build_docker(
+    model_uri=f"runs:/{run_id}/model",
+    name="<image_name>",
+    enable_mlserver=True,
+)
+```
+
+```bash
+mlflow models build-docker -m runs:/<run_id>/model -n <image_name> --enable-mlserver
+```
+If you want to use the bare-bones Flask server instead of MLServer, remove enable_mlserver=True. For other options, see the mlflow.models.build_docker function documentation.
 # Resources
 
 This section provides resources for building packages for Python and AI/ML/MLOps.
