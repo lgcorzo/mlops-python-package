@@ -101,44 +101,60 @@ class FastAPIKafkaService(Service):
     def consume_messages(self) -> None:
         """Consume messages from Kafka topic and produce predictions."""
         while not self.stop_event.is_set():
-            if self.consumer:
-                msg = self.consumer.poll(1.0)
-            else:
-                logger.error("Kafka consumer is not initialized.")
-                break
+            msg = self.poll_message()
             if msg is None:
                 continue
             if msg.error():
-                if msg.error().code() == KafkaError._PARTITION_EOF:
-                    logger.debug("Reached end of partition.") # Reduced to debug level
-                    continue
-                else:
-                    logger.error(f"Consumer error: {msg.error()}")
+                if not self.handle_message_error(msg):
                     break
-            try:
-                input_data = json.loads(msg.value().decode('utf-8'))  # Parse message value as JSON
-                logger.debug(f"Received input  {input_data}") # Debug level
-                prediction_result = self.prediction_callback(input_data)
-                logger.debug(f"Prediction result: {prediction_result}") # Debug level
-
-                # Produce message to output topic
-                # Consider using json.dumps(prediction_result) for structured output
-                if self.producer:
-                    self.producer.produce(
-                        self.output_topic,
-                        key="prediction",
-                        value=str(prediction_result),  # Serialize prediction result to string
-                        callback=self.delivery_report
-                    )
-                    self.producer.flush()  # Ensure message is sent
-                else:
-                    logger.error("Kafka producer is not initialized.")
-            except json.JSONDecodeError as e:
-                logger.error(f"Failed to decode JSON message: {e}. Raw message: {msg.value()}")
-                continue # Skip to the next message
-            except Exception as e:
-                logger.exception("Error processing message:") # Logs full stack trace
                 continue
+            self.process_message(msg)
+        self.close_consumer()
+
+    def poll_message(self):
+        """Poll message from Kafka consumer."""
+        if self.consumer:
+            return self.consumer.poll(1.0)
+        else:
+            logger.error("Kafka consumer is not initialized.")
+            return None
+
+    def handle_message_error(self, msg) -> bool:
+        """Handle errors in polled messages."""
+        if msg.error().code() == KafkaError._PARTITION_EOF:
+            logger.debug("Reached end of partition.")  # Reduced to debug level
+            return True
+        else:
+            logger.error(f"Consumer error: {msg.error()}")
+            return False
+
+    def process_message(self, msg) -> None:
+        """Process a valid Kafka message."""
+        try:
+            input_data = json.loads(msg.value().decode('utf-8'))  # Parse message value as JSON
+            logger.debug(f"Received input  {input_data}")  # Debug level
+            prediction_result = self.prediction_callback(input_data)
+            logger.debug(f"Prediction result: {prediction_result}")  # Debug level
+
+            # Produce message to output topic
+            # Consider using json.dumps(prediction_result) for structured output
+            if self.producer:
+                self.producer.produce(
+                    self.output_topic,
+                    key="prediction",
+                    value=str(prediction_result),  # Serialize prediction result to string
+                    callback=self.delivery_report
+                )
+                self.producer.flush()  # Ensure message is sent
+            else:
+                logger.error("Kafka producer is not initialized.")
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to decode JSON message: {e}. Raw message: {msg.value()}")
+        except Exception as e:
+            logger.exception("Error processing message:")  # Logs full stack trace
+
+    def close_consumer(self) -> None:
+        """Close the Kafka consumer."""
         if self.consumer:
             self.consumer.close()
         logger.info("Kafka consumer stopped.")
