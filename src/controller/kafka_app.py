@@ -8,56 +8,29 @@ import threading
 import uvicorn
 import signal
 import os
-import abc
-import pydantic as pdt
 from confluent_kafka import Producer, Consumer, KafkaError
 import logging
-import json  # Import json for secure message parsing
+import json
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-logger = logging.getLogger(__name__)  # Get a logger for this module
+logger = logging.getLogger(__name__)
 
 
-# %% BASE SERVICE CLASS
-class Service(abc.ABC, pdt.BaseModel, strict=True, extra="forbid"):
-    """Base class for a global service.
-    Use services to manage global contexts.
-    e.g., logger object, mlflow client, spark context, ...
-    """
+app: FastAPI = FastAPI()
 
-    @abc.abstractmethod
-    def start(self) -> None:
-        """Start the service."""
+# Define Pydantic models *outside* the class AND before it.
+class PredictionRequest(BaseModel):
+    """Request model for prediction."""
+    input_: Dict[str, Any]
 
-    def stop(self) -> None:
-        """Stop the service."""
-        # Does nothing by default
-
+class PredictionResponse(BaseModel):
+    """Response model for prediction."""
+    result: Any
 
 # %% FASTAPI AND KAFKA SERVICE CLASS
-class FastAPIKafkaService(Service):
+class FastAPIKafkaService():
     """Service for deploying a FastAPI application with a Kafka producer and consumer."""
-
-    app: FastAPI = FastAPI()
-    server_thread: threading.Thread | None = None
-    stop_event: threading.Event = threading.Event()
-    prediction_callback: Callable[[Dict[str, Any]], Any]
-    kafka_config: Dict[str, Any]
-    input_topic: str
-    output_topic: str
-    producer: Producer | None = None
-    consumer: Consumer | None = None
-
-    class PredictionRequest(BaseModel):
-        """Request model for prediction."""
-
-        input_: Dict[str, Any]
-
-    class PredictionResponse(BaseModel):
-        """Response model for prediction."""
-
-        result: Any
 
     def __init__(
         self,
@@ -66,16 +39,21 @@ class FastAPIKafkaService(Service):
         input_topic: str,
         output_topic: str,
     ):
-        super().__init__()
+        self.server_thread: threading.Thread | None = None
+        self.stop_event: threading.Event = threading.Event()
         self.prediction_callback = prediction_callback
         self.kafka_config = kafka_config
         self.input_topic = input_topic
         self.output_topic = output_topic
+        self.producer: Producer | None = None
+        self.consumer: Consumer | None = None
+        # No longer needed here:
+        # self.PredictionRequest = PredictionRequest
+        # self.PredictionResponse = PredictionResponse
+
 
     def delivery_report(self, err, msg):
-        """Called once for each message produced to indicate delivery result.
-        Triggered either when the message was successfully delivered to the
-        broker, or upon failure for some reason."""
+        """Called once for each message produced to indicate delivery result."""
         if err is not None:
             logger.error("Message delivery failed: {}".format(err))
         else:
@@ -90,16 +68,17 @@ class FastAPIKafkaService(Service):
             logger.info("Kafka producer initialized")
         except Exception as e:
             logger.error(f"Failed to initialize Kafka producer: {e}")
-            raise  # Re-raise the exception to prevent the service from starting
+            raise
 
         # Initialize Kafka consumer
+        self.kafka_config['enable.auto.commit'] = False
         try:
             self.consumer = Consumer(self.kafka_config)
             self.consumer.subscribe([self.input_topic])
             logger.info(f"Kafka consumer subscribed to topic: {self.input_topic}")
         except Exception as e:
             logger.error(f"Failed to initialize Kafka consumer: {e}")
-            raise  # Re-raise to prevent service startup.
+            raise
 
         self.server_thread = threading.Thread(target=self.run_server)
         self.server_thread.start()
@@ -110,7 +89,7 @@ class FastAPIKafkaService(Service):
     def run_server(self) -> None:
         """Run the FastAPI server."""
         try:
-            uvicorn.run(self.app, host="0.0.0.0", port=8000, log_level="info")
+            uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
         except Exception as e:
             logger.error(f"Server error: {e}")
 
@@ -138,7 +117,7 @@ class FastAPIKafkaService(Service):
     def handle_message_error(self, msg) -> bool:
         """Handle errors in polled messages."""
         if msg.error().code() == KafkaError._PARTITION_EOF:
-            logger.debug("Reached end of partition.")  # Reduced to debug level
+            logger.debug("Reached end of partition.")
             return True
         else:
             logger.error(f"Consumer error: {msg.error()}")
@@ -147,27 +126,29 @@ class FastAPIKafkaService(Service):
     def process_message(self, msg) -> None:
         """Process a valid Kafka message."""
         try:
-            input_data = json.loads(msg.value().decode("utf-8"))  # Parse message value as JSON
-            logger.debug(f"Received input  {input_data}")  # Debug level
+            input_data = json.loads(msg.value().decode("utf-8"))
+            logger.debug(f"Received input  {input_data}")
             prediction_result = self.prediction_callback(input_data)
-            logger.debug(f"Prediction result: {prediction_result}")  # Debug level
+            logger.debug(f"Prediction result: {prediction_result}")
 
-            # Produce message to output topic
-            # Consider using json.dumps(prediction_result) for structured output
             if self.producer:
                 self.producer.produce(
                     self.output_topic,
                     key="prediction",
-                    value=str(prediction_result),  # Serialize prediction result to string
+                    value=json.dumps(prediction_result),
                     callback=self.delivery_report,
                 )
-                self.producer.flush()  # Ensure message is sent
+                self.producer.flush()
             else:
                 logger.error("Kafka producer is not initialized.")
+
+            if self.consumer:
+                self.consumer.commit(msg)
+
         except json.JSONDecodeError as e:
             logger.error(f"Failed to decode JSON message: {e}. Raw message: {msg.value()}")
         except Exception as e:
-            logger.exception("Error processing message:")  # Logs full stack trace
+            logger.exception("Error processing message:")
 
     def close_consumer(self) -> None:
         """Close the Kafka consumer."""
@@ -181,18 +162,17 @@ class FastAPIKafkaService(Service):
         if self.consumer:
             self.consumer.close()
             logger.info("Kafka consumer closed.")
-        # Sending a SIGINT signal to stop the server
         os.kill(os.getpid(), signal.SIGINT)
         logger.info("Service stopped.")
 
-    @app.post("/predict", response_model=PredictionResponse)
-    async def predict(self, request: PredictionRequest) -> PredictionResponse:
+    @app.post("/predict", response_model=PredictionResponse)  # Use global var
+    async def predict(self, request: PredictionRequest) -> PredictionResponse:  # Use global var
         """Endpoint for making predictions via HTTP."""
         try:
             logger.info(f"Received HTTP prediction request: {request.input_}")
             prediction_result = self.prediction_callback(request.input_)
             logger.info(f"HTTP prediction result: {prediction_result}")
-            return self.PredictionResponse(result=prediction_result)
+            return PredictionResponse(result=prediction_result)  # Use the global class
         except Exception as e:
             logger.exception("Error processing HTTP prediction request:")
             raise HTTPException(status_code=500, detail=str(e))
@@ -202,17 +182,16 @@ class FastAPIKafkaService(Service):
 if __name__ == "__main__":
     # Example prediction callback function
     def my_prediction_function(input_: Dict[str, Any]) -> Any:
-        # In practice, replace this with your model prediction logic.
-        return {"predicted_output": input_}  # Example: just echo the input data
+        return {"predicted_output": input_}
 
     # Kafka configuration
     kafka_config = {
-        "bootstrap.servers": "localhost:9092",  # Replace with your Kafka broker address
+        "bootstrap.servers": "localhost:9092",
         "group.id": "mygroup",
         "auto.offset.reset": "earliest",
     }
-    input_topic = "input_topic"  # Replace with your input Kafka topic
-    output_topic = "output_topic"  # Replace with your output Kafka topic
+    input_topic = "input_topic"
+    output_topic = "output_topic"
     fastapi_kafka_service = FastAPIKafkaService(
         prediction_callback=my_prediction_function,
         kafka_config=kafka_config,
@@ -220,4 +199,4 @@ if __name__ == "__main__":
         output_topic=output_topic,
     )
     fastapi_kafka_service.start()
-    print("FastAPI and Kafka service is running. Press Ctrl+C to stop.")
+    print("FastAPI and Kafka service is running.  Press Ctrl+C to stop.")
