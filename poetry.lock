@@ -2114,24 +2114,23 @@ tests = ["asttokens (>=2.1.0)", "coverage", "coverage-enable-subprocess", "ipyth
 
 [[package]]
 name = "fastapi"
-version = "0.1.17"
+version = "0.115.11"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.8"
 files = [
-    {file = "fastapi-0.1.17-py3-none-any.whl", hash = "sha256:a6aaad2f60684477480ac9d7a1c95e67f4696a722f184db467494bfdd5b8f29d"},
-    {file = "fastapi-0.1.17.tar.gz", hash = "sha256:a9a9b6cc32c38bab27a6549b94c44a30c70b485bc789d03de3aa8725f3394be5"},
+    {file = "fastapi-0.115.11-py3-none-any.whl", hash = "sha256:32e1541b7b74602e4ef4a0260ecaf3aadf9d4f19590bba3e1bf2ac4666aa2c64"},
+    {file = "fastapi-0.115.11.tar.gz", hash = "sha256:cc81f03f688678b92600a65a5e618b93592c65005db37157147204d8924bf94f"},
 ]
 
 [package.dependencies]
-pydantic = ">=0.17"
-starlette = ">=0.9.7"
+pydantic = ">=1.7.4,<1.8 || >1.8,<1.8.1 || >1.8.1,<2.0.0 || >2.0.0,<2.0.1 || >2.0.1,<2.1.0 || >2.1.0,<3.0.0"
+starlette = ">=0.40.0,<0.47.0"
+typing-extensions = ">=4.8.0"
 
 [package.extras]
-all = ["aiofiles", "email_validator", "graphene", "itsdangerous", "jinja2", "python-multipart", "pyyaml", "requests", "ujson", "ujson", "uvicorn"]
-dev = ["passlib[bcrypt]", "pyjwt"]
-doc = ["markdown-include", "mkdocs", "mkdocs-material"]
-test = ["black", "email_validator", "isort", "mypy", "pytest (>=4.0.0)", "pytest-cov", "requests"]
+all = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "itsdangerous (>=1.1.0)", "jinja2 (>=3.1.5)", "orjson (>=3.2.1)", "pydantic-extra-types (>=2.0.0)", "pydantic-settings (>=2.0.0)", "python-multipart (>=0.0.18)", "pyyaml (>=5.3.1)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0)", "uvicorn[standard] (>=0.12.0)"]
+standard = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "jinja2 (>=3.1.5)", "python-multipart (>=0.0.18)", "uvicorn[standard] (>=0.12.0)"]
 
 [[package]]
 name = "fastjsonschema"
@@ -3987,20 +3986,20 @@ xethub = ["mlflow-xethub"]
 
 [[package]]
 name = "mlserver"
-version = "1.2.4"
+version = "1.2.1"
 description = "ML server"
 optional = false
 python-versions = "*"
 files = [
-    {file = "mlserver-1.2.4-py3-none-any.whl", hash = "sha256:16437cddcb1471fe35d9d5de374224cf60a515b4ad555dc06f06a8dea3624565"},
-    {file = "mlserver-1.2.4.tar.gz", hash = "sha256:faa6586c09e7342ed4604b79a284393eda71346f66393955cb9670faffd47e8f"},
+    {file = "mlserver-1.2.1-py3-none-any.whl", hash = "sha256:5f359f7118745a318fd0ea7ab90451caa5a4ec643741ea8d8394442750b5829a"},
+    {file = "mlserver-1.2.1.tar.gz", hash = "sha256:9b5f47c10ecf6b73162fcf3cb100f40aa5418ce0d1228271836260bf43c41786"},
 ]
 
 [package.dependencies]
 aiofiles = "*"
 aiokafka = "*"
 click = "*"
-fastapi = "<0.89.0 || >0.89.0,<=0.89.1"
+fastapi = "*"
 grpcio = "*"
 numpy = "*"
 orjson = "*"
@@ -7824,4 +7823,4 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "c83c68d1a256a204f468220e020590dbec1ab09f681eddcf23504a2d28b9b2fd"
+content-hash = "18b6ab74880a5eab6a7ec553471f13bd795d69ba17e9316e266f0318d3268427"
