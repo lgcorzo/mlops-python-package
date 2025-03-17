@@ -11,6 +11,7 @@ import os
 from confluent_kafka import Producer, Consumer, KafkaError
 import logging
 import json
+import time
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -82,6 +83,7 @@ class FastAPIKafkaService():
 
         self.server_thread = threading.Thread(target=self.run_server)
         self.server_thread.start()
+        time.sleep(2)
         threading.Thread(target=self.consume_messages, daemon=True).start()
 
         logger.info("FastAPI server and Kafka consumer threads started.")
@@ -89,15 +91,17 @@ class FastAPIKafkaService():
     def run_server(self) -> None:
         """Run the FastAPI server."""
         try:
-            uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
+            uvicorn.run(app, host="0.0.0.0", port=8100, log_level="info")
         except Exception as e:
             logger.error(f"Server error: {e}")
 
     def consume_messages(self) -> None:
         """Consume messages from Kafka topic and produce predictions."""
         while not self.stop_event.is_set():
+            time.sleep(0.1)
             msg = self.poll_message()
             if msg is None:
+
                 continue
             if msg.error():
                 if not self.handle_message_error(msg):
@@ -187,7 +191,7 @@ if __name__ == "__main__":
     # Kafka configuration
     kafka_config = {
         "bootstrap.servers": "localhost:9092",
-        "group.id": "mygroup",
+        "group.id": "llmops-regression",
         "auto.offset.reset": "earliest",
     }
     input_topic = "input_topic"
