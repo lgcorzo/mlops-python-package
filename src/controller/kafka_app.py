@@ -2,7 +2,7 @@
 
 # %% IMPORTS
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Any, Dict, Callable
 import threading
 import uvicorn
@@ -18,19 +18,34 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 
-app: FastAPI = FastAPI()
+app: FastAPI = FastAPI(
+    title="Prediction Service API",
+    description="A FastAPI service that integrates with Kafka for making predictions.",
+    version="1.0.0",
+)
+
 
 # Define Pydantic models *outside* the class AND before it.
 class PredictionRequest(BaseModel):
     """Request model for prediction."""
-    input_: Dict[str, Any]
+    input_data: Dict[str, Any] = {
+        "feature_1": 12.5,
+        "feature_2": "example_string",
+        "feature_3": [1, 2, 3],
+        "feature_4": {"nested_key": "nested_value"}
+    }
+
 
 class PredictionResponse(BaseModel):
     """Response model for prediction."""
-    result: Any
+    result: Dict[str, Any] = {
+        "inference": 12.5,
+        "quality":1
+    }
+
 
 # %% FASTAPI AND KAFKA SERVICE CLASS
-class FastAPIKafkaService():
+class FastAPIKafkaService:
     """Service for deploying a FastAPI application with a Kafka producer and consumer."""
 
     def __init__(
@@ -52,7 +67,6 @@ class FastAPIKafkaService():
         # self.PredictionRequest = PredictionRequest
         # self.PredictionResponse = PredictionResponse
 
-
     def delivery_report(self, err, msg):
         """Called once for each message produced to indicate delivery result."""
         if err is not None:
@@ -72,7 +86,7 @@ class FastAPIKafkaService():
             raise
 
         # Initialize Kafka consumer
-        self.kafka_config['enable.auto.commit'] = False
+        self.kafka_config["enable.auto.commit"] = False
         try:
             self.consumer = Consumer(self.kafka_config)
             self.consumer.subscribe([self.input_topic])
@@ -101,7 +115,6 @@ class FastAPIKafkaService():
             time.sleep(0.1)
             msg = self.poll_message()
             if msg is None:
-
                 continue
             if msg.error():
                 if not self.handle_message_error(msg):
@@ -169,12 +182,18 @@ class FastAPIKafkaService():
         os.kill(os.getpid(), signal.SIGINT)
         logger.info("Service stopped.")
 
-    @app.post("/predict", response_model=PredictionResponse)  # Use global var
+    @app.post(
+        "/predict",
+        response_model=PredictionResponse,
+        summary="Make a Prediction",
+        description="This endpoint allows you to submit data for a prediction.",
+        tags=["Prediction"],
+    )
     async def predict(self, request: PredictionRequest) -> PredictionResponse:  # Use global var
         """Endpoint for making predictions via HTTP."""
         try:
-            logger.info(f"Received HTTP prediction request: {request.input_}")
-            prediction_result = self.prediction_callback(request.input_)
+            logger.info(f"Received HTTP prediction request: {request.input_data}")
+            prediction_result = self.prediction_callback(request.input_data)
             logger.info(f"HTTP prediction result: {prediction_result}")
             return PredictionResponse(result=prediction_result)  # Use the global class
         except Exception as e:
@@ -186,7 +205,11 @@ class FastAPIKafkaService():
 if __name__ == "__main__":
     # Example prediction callback function
     def my_prediction_function(input_: Dict[str, Any]) -> Any:
-        return {"predicted_output": input_}
+        result: Dict[str, Any] = {
+        "inference": 12.5,
+        "quality":1
+    }
+        return result
 
     # Kafka configuration
     kafka_config = {
