@@ -41,10 +41,8 @@ class PredictionRequest(BaseModel):
 class PredictionResponse(BaseModel):
     """Response model for prediction."""
 
-    result: Dict[str, Any] = {"inference": 12.5, "quality": 1, "error": None}
+    result: Dict[str, Any] = {"inference": 0.0, "quality": 0.0, "error": None}
 
-
-predictionresponse: PredictionResponse = PredictionResponse()
 
 
 # %% FASTAPI AND KAFKA SERVICE CLASS
@@ -142,16 +140,21 @@ class FastAPIKafkaService:
 
     def process_message(self, msg) -> None:
         """Process a valid Kafka message."""
+        predictionresponse: PredictionResponse = PredictionResponse()
         try:
-            input_data = json.loads(msg.value().decode("utf-8"))
-            logger.info(f"kafka Received input  {input_data}")
+            kafka_msg = json.loads(msg.value().decode("utf-8"))
+            input_data: PredictionRequest = PredictionRequest()
+            input_data.input_data = kafka_msg['input_data']
+            logger.info(f"kafka Received input  {kafka_msg}")
+            prediction_result = self.prediction_callback(input_data).result
         except json.JSONDecodeError as e:
             error = f"Failed to decode JSON message: {e}. Raw message: {msg.value()}"
+            predictionresponse.result['error'] = error
             logger.error(error)
-            input_data = error
+            prediction_result = predictionresponse.result
             
         try:
-            prediction_result = self.prediction_callback(input_data)
+            
             logger.debug(f"Prediction result: {prediction_result}")
 
             if self.producer:
@@ -203,7 +206,7 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
         logger.info(f"Received HTTP prediction request: {request}")
         prediction_result = fastapi_kafka_service.prediction_callback(request)
         logger.info(f"HTTP prediction result: {prediction_result}")
-        return PredictionResponse(result=prediction_result)  # Use the global class
+        return prediction_result  # Use the global class
     except Exception as e:
         logger.exception("Error processing HTTP prediction request:")
         raise HTTPException(status_code=500, detail=str(e))
@@ -212,10 +215,11 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
 # %% SCRIPT EXECUTION
 if __name__ == "__main__":
     # Example prediction callback function
-    def my_prediction_function(input_: PredictionRequest| str) ->  Dict[str, Any]:
+    def my_prediction_function(input_: PredictionRequest) ->  PredictionRequest:
+        predictionresponse: PredictionResponse = PredictionResponse()
         try:
             # TBD Porcess prediction
-            predictionresponse.result['inference'] = input_
+            predictionresponse.result['inference'] =  input_.input_data
             predictionresponse.result['quality'] = 1
             predictionresponse.result['error'] = None
             
@@ -224,7 +228,7 @@ if __name__ == "__main__":
             predictionresponse.result['quality'] = 0
             predictionresponse.result['error'] = str(e)
             
-        return predictionresponse.result
+        return predictionresponse
 
     # Kafka configuration
     kafka_config = {
