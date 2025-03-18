@@ -13,6 +13,7 @@ import logging
 import json
 import time
 
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -63,9 +64,6 @@ class FastAPIKafkaService:
         self.output_topic = output_topic
         self.producer: Producer | None = None
         self.consumer: Consumer | None = None
-        # No longer needed here:
-        # self.PredictionRequest = PredictionRequest
-        # self.PredictionResponse = PredictionResponse
 
     def delivery_report(self, err, msg):
         """Called once for each message produced to indicate delivery result."""
@@ -181,25 +179,31 @@ class FastAPIKafkaService:
             logger.info("Kafka consumer closed.")
         os.kill(os.getpid(), signal.SIGINT)
         logger.info("Service stopped.")
-
-    @app.post(
-        "/predict",
-        response_model=PredictionResponse,
-        summary="Make a Prediction",
-        description="This endpoint allows you to submit data for a prediction.",
-        tags=["Prediction"],
-    )
-    async def predict(self, request: PredictionRequest) -> PredictionResponse:  # Use global var
-        """Endpoint for making predictions via HTTP."""
-        try:
-            logger.info(f"Received HTTP prediction request: {request.input_data}")
-            prediction_result = self.prediction_callback(request.input_data)
-            logger.info(f"HTTP prediction result: {prediction_result}")
-            return PredictionResponse(result=prediction_result)  # Use the global class
-        except Exception as e:
-            logger.exception("Error processing HTTP prediction request:")
-            raise HTTPException(status_code=500, detail=str(e))
-
+        
+        
+fastapi_kafka_service: FastAPIKafkaService
+        
+@app.post(
+    "/predict",
+    response_model=PredictionResponse,
+    summary="Make a Prediction",
+    description="This endpoint allows you to submit data for a prediction.",
+    tags=["Prediction"],
+)
+async def predict(request: PredictionRequest) -> PredictionResponse:  # Use global var
+    """Endpoint for making predictions via HTTP."""
+    try:
+        logger.info(f"Received HTTP prediction request: {request.input_data}")
+        prediction_result = fastapi_kafka_service.prediction_callback(request.input_data)
+        logger.info(f"HTTP prediction result: {prediction_result}")
+        return PredictionResponse(result=prediction_result)  # Use the global class
+    except Exception as e:
+        logger.exception("Error processing HTTP prediction request:")
+        raise HTTPException(status_code=500, detail=str(e))
+    
+    
+    
+    
 
 # %% SCRIPT EXECUTION
 if __name__ == "__main__":
@@ -207,8 +211,8 @@ if __name__ == "__main__":
     def my_prediction_function(input_: Dict[str, Any]) -> Any:
         result: Dict[str, Any] = {
         "inference": 12.5,
-        "quality":1
-    }
+        "quality":1,
+         "input_data": input_}
         return result
 
     # Kafka configuration
