@@ -29,20 +29,22 @@ app: FastAPI = FastAPI(
 # Define Pydantic models *outside* the class AND before it.
 class PredictionRequest(BaseModel):
     """Request model for prediction."""
+
     input_data: Dict[str, Any] = {
         "feature_1": 12.5,
         "feature_2": "example_string",
         "feature_3": [1, 2, 3],
-        "feature_4": {"nested_key": "nested_value"}
+        "feature_4": {"nested_key": "nested_value"},
     }
 
 
 class PredictionResponse(BaseModel):
     """Response model for prediction."""
-    result: Dict[str, Any] = {
-        "inference": 12.5,
-        "quality":1
-    }
+
+    result: Dict[str, Any] = {"inference": 12.5, "quality": 1, "error": None}
+
+
+predictionresponse: PredictionResponse = PredictionResponse()
 
 
 # %% FASTAPI AND KAFKA SERVICE CLASS
@@ -51,7 +53,7 @@ class FastAPIKafkaService:
 
     def __init__(
         self,
-        prediction_callback: Callable[[Dict[str, Any]], Any],
+        prediction_callback: Callable[PredictionRequest, Any],
         kafka_config: Dict[str, Any],
         input_topic: str,
         output_topic: str,
@@ -142,7 +144,13 @@ class FastAPIKafkaService:
         """Process a valid Kafka message."""
         try:
             input_data = json.loads(msg.value().decode("utf-8"))
-            logger.debug(f"Received input  {input_data}")
+            logger.info(f"kafka Received input  {input_data}")
+        except json.JSONDecodeError as e:
+            error = f"Failed to decode JSON message: {e}. Raw message: {msg.value()}"
+            logger.error(error)
+            input_data = error
+            
+        try:
             prediction_result = self.prediction_callback(input_data)
             logger.debug(f"Prediction result: {prediction_result}")
 
@@ -160,8 +168,6 @@ class FastAPIKafkaService:
             if self.consumer:
                 self.consumer.commit(msg)
 
-        except json.JSONDecodeError as e:
-            logger.error(f"Failed to decode JSON message: {e}. Raw message: {msg.value()}")
         except Exception as e:
             logger.exception("Error processing message:")
 
@@ -179,10 +185,11 @@ class FastAPIKafkaService:
             logger.info("Kafka consumer closed.")
         os.kill(os.getpid(), signal.SIGINT)
         logger.info("Service stopped.")
-        
-        
+
+
 fastapi_kafka_service: FastAPIKafkaService
-        
+
+
 @app.post(
     "/predict",
     response_model=PredictionResponse,
@@ -193,27 +200,31 @@ fastapi_kafka_service: FastAPIKafkaService
 async def predict(request: PredictionRequest) -> PredictionResponse:  # Use global var
     """Endpoint for making predictions via HTTP."""
     try:
-        logger.info(f"Received HTTP prediction request: {request.input_data}")
-        prediction_result = fastapi_kafka_service.prediction_callback(request.input_data)
+        logger.info(f"Received HTTP prediction request: {request}")
+        prediction_result = fastapi_kafka_service.prediction_callback(request)
         logger.info(f"HTTP prediction result: {prediction_result}")
         return PredictionResponse(result=prediction_result)  # Use the global class
     except Exception as e:
         logger.exception("Error processing HTTP prediction request:")
         raise HTTPException(status_code=500, detail=str(e))
-    
-    
-    
-    
+
 
 # %% SCRIPT EXECUTION
 if __name__ == "__main__":
     # Example prediction callback function
-    def my_prediction_function(input_: Dict[str, Any]) -> Any:
-        result: Dict[str, Any] = {
-        "inference": 12.5,
-        "quality":1,
-         "input_data": input_}
-        return result
+    def my_prediction_function(input_: PredictionRequest| str) ->  Dict[str, Any]:
+        try:
+            # TBD Porcess prediction
+            predictionresponse.result['inference'] = input_
+            predictionresponse.result['quality'] = 1
+            predictionresponse.result['error'] = None
+            
+        except Exception as e:
+            predictionresponse.result['inference'] = 0
+            predictionresponse.result['quality'] = 0
+            predictionresponse.result['error'] = str(e)
+            
+        return predictionresponse.result
 
     # Kafka configuration
     kafka_config = {
