@@ -190,7 +190,7 @@ if __name__ == "__main__":
 
     # Kafka configuration
     kafka_config = {
-        "bootstrap.servers": "localhost:9092",
+        "bootstrap.servers": "kafka_server:9092",
         "group.id": "llmops-regression",
         "auto.offset.reset": "earliest",
     }
