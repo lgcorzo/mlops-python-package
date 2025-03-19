@@ -215,7 +215,7 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
 # %% SCRIPT EXECUTION
 if __name__ == "__main__":
     # Example prediction callback function
-    def my_prediction_function(input_: PredictionRequest) ->  PredictionRequest:
+    def my_prediction_function(input_: PredictionRequest) ->  PredictionResponse:
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
             # TBD Porcess prediction
