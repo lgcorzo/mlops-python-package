@@ -9,6 +9,8 @@ import uvicorn
 import signal
 import os
 from confluent_kafka import Producer, Consumer, KafkaError
+from regression_model_template.core.schemas import InputsSchema
+import pandas as pd
 import logging
 import json
 import time
@@ -29,13 +31,28 @@ app: FastAPI = FastAPI(
 # Define Pydantic models *outside* the class AND before it.
 class PredictionRequest(BaseModel):
     """Request model for prediction."""
-
     input_data: Dict[str, Any] = {
-        "feature_1": 12.5,
-        "feature_2": "example_string",
-        "feature_3": [1, 2, 3],
-        "feature_4": {"nested_key": "nested_value"},
-    }
+            "instant": 0,
+            "dteday": pd.Timestamp.now().strftime("%Y-%m-%d"),
+            "season": 1,
+            "yr": 0,
+            "mnth": 1,
+            "hr": 0,
+            "holiday": False,
+            "weekday": pd.Timestamp.now().weekday(),
+            "workingday": True,
+            "weathersit": 1,
+            "temp": 0.5,
+            "atemp": 0.5,
+            "hum": 0.5,
+            "windspeed": 0.2,
+            "casual": 0,
+            "registered": 0,
+        }
+
+    def validate_schema(self):
+        """Validates the input data against InputsSchema."""
+        return InputsSchema.validate(pd.DataFrame([self.input_data]))
 
 
 class PredictionResponse(BaseModel):
