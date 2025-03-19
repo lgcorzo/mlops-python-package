@@ -58,7 +58,7 @@ class PredictionRequest(BaseModel):
 class PredictionResponse(BaseModel):
     """Response model for prediction."""
 
-    result: Dict[str, Any] = {"inference": 0.0, "quality": 0.0, "error": None}
+    result: Dict[str, Any] = {"inference": 0.0, "quality": 0.0, "error": ''}
 
 
 
