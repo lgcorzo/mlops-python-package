@@ -1,19 +1,21 @@
 """FastAPI and Kafka Service for Predictions with Logging."""
 
 # %% IMPORTS
+import os
+import signal
+import threading
+import logging
+import time
+import json
+
+import uvicorn
+import pandas as pd
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from typing import Any, Dict, Callable
-import threading
-import uvicorn
-import signal
-import os
 from confluent_kafka import Producer, Consumer, KafkaError
+
 from regression_model_template.core.schemas import InputsSchema
-import pandas as pd
-import logging
-import json
-import time
 
 
 # Configure logging
@@ -31,24 +33,25 @@ app: FastAPI = FastAPI(
 # Define Pydantic models *outside* the class AND before it.
 class PredictionRequest(BaseModel):
     """Request model for prediction."""
+
     input_data: Dict[str, Any] = {
-            "instant": 0,
-            "dteday": pd.Timestamp.now().strftime("%Y-%m-%d"),
-            "season": 1,
-            "yr": 0,
-            "mnth": 1,
-            "hr": 0,
-            "holiday": False,
-            "weekday": pd.Timestamp.now().weekday(),
-            "workingday": True,
-            "weathersit": 1,
-            "temp": 0.5,
-            "atemp": 0.5,
-            "hum": 0.5,
-            "windspeed": 0.2,
-            "casual": 0,
-            "registered": 0,
-        }
+        "instant": 0,
+        "dteday": pd.Timestamp.now().strftime("%Y-%m-%d"),
+        "season": 1,
+        "yr": 0,
+        "mnth": 1,
+        "hr": 0,
+        "holiday": False,
+        "weekday": pd.Timestamp.now().weekday(),
+        "workingday": True,
+        "weathersit": 1,
+        "temp": 0.5,
+        "atemp": 0.5,
+        "hum": 0.5,
+        "windspeed": 0.2,
+        "casual": 0,
+        "registered": 0,
+    }
 
     def validate_schema(self):
         """Validates the input data against InputsSchema."""
@@ -58,8 +61,7 @@ class PredictionRequest(BaseModel):
 class PredictionResponse(BaseModel):
     """Response model for prediction."""
 
-    result: Dict[str, Any] = {"inference": 0.0, "quality": 0.0, "error": ''}
-
+    result: Dict[str, Any] = {"inference": 0.0, "quality": 0.0, "error": ""}
 
 
 # %% FASTAPI AND KAFKA SERVICE CLASS
@@ -161,17 +163,16 @@ class FastAPIKafkaService:
         try:
             kafka_msg = json.loads(msg.value().decode("utf-8"))
             input_data: PredictionRequest = PredictionRequest()
-            input_data.input_data = kafka_msg['input_data']
+            input_data.input_data = kafka_msg["input_data"]
             logger.info(f"kafka Received input  {kafka_msg}")
             prediction_result = self.prediction_callback(input_data).result
         except json.JSONDecodeError as e:
             error = f"Failed to decode JSON message: {e}. Raw message: {msg.value()}"
-            predictionresponse.result['error'] = error
+            predictionresponse.result["error"] = error
             logger.error(error)
             prediction_result = predictionresponse.result
-            
+
         try:
-            
             logger.debug(f"Prediction result: {prediction_result}")
 
             if self.producer:
@@ -232,19 +233,19 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
 # %% SCRIPT EXECUTION
 if __name__ == "__main__":
     # Example prediction callback function
-    def my_prediction_function(input_: PredictionRequest) ->  PredictionResponse:
+    def my_prediction_function(input_: PredictionRequest) -> PredictionResponse:
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
             # TBD Porcess prediction
-            predictionresponse.result['inference'] =  input_.input_data
-            predictionresponse.result['quality'] = 1
-            predictionresponse.result['error'] = None
-            
+            predictionresponse.result["inference"] = input_.input_data
+            predictionresponse.result["quality"] = 1
+            predictionresponse.result["error"] = None
+
         except Exception as e:
-            predictionresponse.result['inference'] = 0
-            predictionresponse.result['quality'] = 0
-            predictionresponse.result['error'] = str(e)
-            
+            predictionresponse.result["inference"] = 0
+            predictionresponse.result["quality"] = 0
+            predictionresponse.result["error"] = str(e)
+
         return predictionresponse
 
     # Kafka configuration
