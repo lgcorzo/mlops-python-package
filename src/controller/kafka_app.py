@@ -16,7 +16,9 @@ from typing import Any, Dict, Callable
 from confluent_kafka import Producer, Consumer, KafkaError
 
 from regression_model_template.core.schemas import InputsSchema
-
+from regression_model_template.io.registries import CustomLoader
+from regression_model_template.io import services
+from regression_model_template.io import registries
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -232,12 +234,22 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
 
 # %% SCRIPT EXECUTION
 if __name__ == "__main__":
+    alias_or_version: str | int = "Champion"
+    loader = CustomLoader()
+    mlflow_service = services.MlflowService()
+    mlflow_service.start()
+
+    model_uri = registries.uri_for_model_alias_or_version(
+        name=mlflow_service.registry_name, alias_or_version=alias_or_version
+    )
+    model = loader.load(uri=model_uri)
+
     # Example prediction callback function
     def my_prediction_function(input_: PredictionRequest) -> PredictionResponse:
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
-            # TBD Porcess prediction
-            predictionresponse.result["inference"] = input_.input_data
+            outputs = model.predict(inputs=input_)  # checked
+            predictionresponse.result["inference"] =outputs.inference[0]
             predictionresponse.result["quality"] = 1
             predictionresponse.result["error"] = None
 
