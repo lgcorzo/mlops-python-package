@@ -148,7 +148,6 @@ class BaselineSklearnModel(Model):
         "weathersit",
     ]
 
-    @T.override
     def fit(self, inputs: schemas.Inputs, targets: schemas.Targets) -> "BaselineSklearnModel":
         # subcomponents
         categoricals_transformer = preprocessing.OneHotEncoder(sparse_output=False, handle_unknown="ignore")
@@ -173,14 +172,12 @@ class BaselineSklearnModel(Model):
         self._pipeline.fit(X=inputs, y=targets[schemas.TargetsSchema.cnt])
         return self
 
-    @T.override
     def predict(self, inputs: schemas.Inputs) -> schemas.Outputs:
         model = self.get_internal_model()
         prediction = model.predict(inputs)
         outputs = schemas.Outputs({schemas.OutputsSchema.prediction: prediction}, index=inputs.index)
         return outputs
 
-    @T.override
     def explain_model(self) -> schemas.FeatureImportances:
         model = self.get_internal_model()
         regressor = model.named_steps["regressor"]
@@ -194,7 +191,6 @@ class BaselineSklearnModel(Model):
         )
         return feature_importances
 
-    @T.override
     def explain_samples(self, inputs: schemas.Inputs) -> schemas.SHAPValues:
         model = self.get_internal_model()
         regressor = model.named_steps["regressor"]
@@ -207,7 +203,6 @@ class BaselineSklearnModel(Model):
         )
         return shap_values
 
-    @T.override
     def get_internal_model(self) -> pipeline.Pipeline:
         model = self._pipeline
         if model is None:

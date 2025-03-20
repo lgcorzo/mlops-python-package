@@ -47,7 +47,6 @@ class EvaluationsJob(base.Job):
     # Thresholds
     thresholds: dict[str, metrics_.Threshold] = {"r2_score": metrics_.Threshold(threshold=0.5, greater_is_better=True)}
 
-    @T.override
     def run(self) -> base.Locals:
         # services
         # - logger

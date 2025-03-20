@@ -106,7 +106,6 @@ class SklearnMetric(Metric):
     name: str = "mean_squared_error"
     greater_is_better: bool = False
 
-    @T.override
     def score(self, targets: schemas.Targets, outputs: schemas.Outputs) -> float:
         metric = getattr(metrics, self.name)
         sign = 1 if self.greater_is_better else -1

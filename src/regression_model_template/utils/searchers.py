@@ -3,6 +3,7 @@
 # %% IMPORTS
 
 import abc
+from typing import Union
 import typing as T
 
 import pandas as pd
@@ -25,7 +26,7 @@ Results = tuple[
 ]
 
 # Cross-validation options for searchers
-CrossValidation = int | splitters.TrainTestSplits | splitters.Splitter
+CrossValidation = Union[int, splitters.TrainTestSplits, splitters.Splitter]
 
 # %% SEARCHERS
 
@@ -88,7 +89,6 @@ class GridCVSearcher(Searcher):
     error_score: str | float = "raise"
     return_train_score: bool = False
 
-    @T.override
     def search(
         self,
         model: models.Model,

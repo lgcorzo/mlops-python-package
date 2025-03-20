@@ -11,7 +11,7 @@ import json
 import uvicorn
 import pandas as pd
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from typing import Any, Dict, Callable
 from confluent_kafka import Producer, Consumer, KafkaError
 
@@ -55,7 +55,7 @@ class PredictionRequest(BaseModel):
         "registered": 0,
     }
 
-    def validate_schema(self):
+    def model_validate(self):
         """Validates the input data against InputsSchema."""
         return InputsSchema.validate(pd.DataFrame([self.input_data]))
 
@@ -72,7 +72,7 @@ class FastAPIKafkaService:
 
     def __init__(
         self,
-        prediction_callback: Callable[PredictionRequest, Any],
+        prediction_callback: Callable[[PredictionRequest], Any],
         kafka_config: Dict[str, Any],
         input_topic: str,
         output_topic: str,
@@ -124,7 +124,7 @@ class FastAPIKafkaService:
     def run_server(self) -> None:
         """Run the FastAPI server."""
         try:
-            uvicorn.run(app, host="0.0.0.0", port=8100, log_level="info")
+            uvicorn.run(app, host="127.0.0.1", port=8100, log_level="info")
         except Exception as e:
             logger.error(f"Server error: {e}")
 
@@ -191,7 +191,7 @@ class FastAPIKafkaService:
             if self.consumer:
                 self.consumer.commit(msg)
 
-        except Exception as e:
+        except Exception:
             logger.exception("Error processing message:")
 
     def close_consumer(self) -> None:
@@ -248,8 +248,8 @@ if __name__ == "__main__":
     def my_prediction_function(input_: PredictionRequest) -> PredictionResponse:
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
-            outputs = model.predict(inputs=input_)  # checked
-            predictionresponse.result["inference"] =outputs.inference[0]
+            outputs = model.predict(inputs=input_.model_validate())  # checked
+            predictionresponse.result["inference"] = outputs.inference[0]
             predictionresponse.result["quality"] = 1
             predictionresponse.result["error"] = None
 
