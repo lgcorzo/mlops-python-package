@@ -10,12 +10,13 @@ import json
 
 import uvicorn
 import pandas as pd
+import numpy as np
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Any, Dict, Callable
 from confluent_kafka import Producer, Consumer, KafkaError
 
-from regression_model_template.core.schemas import InputsSchema
+from regression_model_template.core.schemas import InputsSchema, Outputs
 from regression_model_template.io.registries import CustomLoader
 from regression_model_template.io import services
 from regression_model_template.io import registries
@@ -37,22 +38,21 @@ class PredictionRequest(BaseModel):
     """Request model for prediction."""
 
     input_data: Dict[str, Any] = {
-        "instant": 0,
-        "dteday": pd.Timestamp.now().strftime("%Y-%m-%d"),
-        "season": 1,
-        "yr": 0,
-        "mnth": 1,
-        "hr": 0,
-        "holiday": False,
-        "weekday": pd.Timestamp.now().weekday(),
-        "workingday": True,
-        "weathersit": 1,
-        "temp": 0.5,
-        "atemp": 0.5,
-        "hum": 0.5,
-        "windspeed": 0.2,
-        "casual": 0,
-        "registered": 0,
+        "dteday": [pd.Timestamp.now().strftime("%Y-%m-%d")],
+        "season": [1],
+        "yr": [0],
+        "mnth": [1],
+        "hr": [0],
+        "holiday": [False],
+        "weekday": [pd.Timestamp.now().weekday()],
+        "workingday": [True],
+        "weathersit": [1],
+        "temp": [0.5],
+        "atemp": [0.5],
+        "hum": [0.5],
+        "windspeed": [0.2],
+        "casual": [0],
+        "registered": [0],
     }
 
     def model_validate(self):
@@ -63,7 +63,10 @@ class PredictionRequest(BaseModel):
 class PredictionResponse(BaseModel):
     """Response model for prediction."""
 
-    result: Dict[str, Any] = {"inference": 0.0, "quality": 0.0, "error": ""}
+    result: Dict[str, Any] = {"inference": [0.0], 
+                              "quality": 0.0, 
+                              "error": ""}
+
 
 
 # %% FASTAPI AND KAFKA SERVICE CLASS
@@ -248,8 +251,9 @@ if __name__ == "__main__":
     def my_prediction_function(input_: PredictionRequest) -> PredictionResponse:
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
-            outputs = model.predict(inputs=input_.model_validate())  # checked
-            predictionresponse.result["inference"] = outputs.inference[0]
+            
+            outputs: Outputs = model.predict(inputs=InputsSchema.check(pd.DataFrame(input_.input_data)))
+            predictionresponse.result["inference"] = outputs.to_numpy().tolist()
             predictionresponse.result["quality"] = 1
             predictionresponse.result["error"] = None
 
