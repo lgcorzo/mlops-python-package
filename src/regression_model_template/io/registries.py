@@ -135,7 +135,6 @@ class CustomSaver(Saver):
             output = self.model.predict(inputs=model_input)
             return T.cast(schemas.Outputs, output.prediction)
 
-    @T.override
     def save(self, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info:
         adapter = CustomSaver.Adapter(model=model)
         return mlflow.pyfunc.log_model(
@@ -159,7 +158,6 @@ class BuiltinSaver(Saver):
 
     flavor: str
 
-    @T.override
     def save(
         self,
         model: models.Model,
@@ -232,13 +230,11 @@ class CustomLoader(Loader):
             """
             self.model = model
 
-        @T.override
         def predict(self, inputs: schemas.Inputs) -> schemas.Outputs:
             # model validation is already done in predict
             outputs = self.model.predict(data=inputs)
             return T.cast(schemas.Outputs, outputs)
 
-    @T.override
     def load(self, uri: str) -> "CustomLoader.Adapter":
         model = mlflow.pyfunc.load_model(model_uri=uri)
         adapter = CustomLoader.Adapter(model=model)
@@ -266,13 +262,11 @@ class BuiltinLoader(Loader):
             """
             self.model = model
 
-        @T.override
         def predict(self, inputs: schemas.Inputs) -> schemas.Outputs:
             columns = list(schemas.OutputsSchema.to_schema().columns)
             outputs = self.model.predict(data=inputs)  # unchecked data!
             return schemas.Outputs(outputs, columns=columns, index=inputs.index)
 
-    @T.override
     def load(self, uri: str) -> "BuiltinLoader.Adapter":
         model = mlflow.pyfunc.load_model(model_uri=uri)
         adapter = BuiltinLoader.Adapter(model=model)
@@ -319,7 +313,6 @@ class MlflowRegister(Register):
 
     KIND: T.Literal["MlflowRegister"] = "MlflowRegister"
 
-    @T.override
     def register(self, name: str, model_uri: str) -> Version:
         return mlflow.register_model(name=name, model_uri=model_uri, tags=self.tags)
 
