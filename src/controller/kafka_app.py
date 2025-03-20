@@ -229,7 +229,13 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
     except Exception as e:
         logger.exception("Error processing HTTP prediction request:")
         raise HTTPException(status_code=500, detail=str(e))
-
+    
+@app.get("/health", summary="Health Check", tags=["System"])
+async def health_check():
+    """
+    Simple health check endpoint to verify that the service is running.
+    """
+    return {"status": "healthy"}
 
 # %% SCRIPT EXECUTION
 if __name__ == "__main__":
