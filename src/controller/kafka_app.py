@@ -239,6 +239,7 @@ fastapi_kafka_service: FastAPIKafkaService
 )
 async def predict(request: PredictionRequest) -> PredictionResponse:  # Use global var
     """Endpoint for making predictions via HTTP."""
+    global fastapi_kafka_service
     try:
         logger.info(f"Received HTTP prediction request: {request}")
         prediction_result = fastapi_kafka_service.prediction_callback(request)
@@ -255,8 +256,8 @@ async def health_check():
     return {"status": "healthy"}
 
 
-# Main Execution
-if __name__ == "__main__":
+def main():
+    global fastapi_kafka_service
     # Configuration
     alias_or_version: str | int = "Champion"
     # Initialize Mlflow Service
@@ -298,3 +299,8 @@ if __name__ == "__main__":
     )
     fastapi_kafka_service.start()
     print("FastAPI and Kafka service is running.  Press Ctrl+C to stop.")
+
+
+# Main Execution
+if __name__ == "__main__":
+    main()
