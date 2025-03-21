@@ -118,6 +118,7 @@ You can use this package as part of your MLOps toolkit or platform (e.g., Model 
     - [VSCode VIM](#vscode-vim)
   - [deployb images models](#deployb-images-models)
   - [docker compose example:](#docker-compose-example)
+  - [Monitoring](#monitoring)
 - [Resources](#resources)
   - [Python](#python)
   - [AI/ML/MLOps](#aimlmlops)
@@ -1258,6 +1259,10 @@ If you want to use the bare-bones Flask server instead of MLServer, remove enabl
       extra_hosts:
         - "host.docker.internal:host-gateway"
 ```
+
+## Monitoring
+best option [nannyml](https://www.nannyml.com/) 
+
 # Resources
 
 This section provides resources for building packages for Python and AI/ML/MLOps.
