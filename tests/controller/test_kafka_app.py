@@ -10,7 +10,7 @@ from confluent_kafka import KafkaError
 
 
 # Assuming the code you provided is in a file named 'app.py'
-from controller.kafka_app import (
+from regression_model_template.controller.kafka_app import (
     FastAPIKafkaService,
     PredictionRequest,
     PredictionResponse,
@@ -26,8 +26,8 @@ from controller.kafka_app import (
 def mock_kafka_service():
     """Fixture to create a mocked FastAPIKafkaService."""
     with (
-        patch("controller.kafka_app.Producer") as MockProducer,
-        patch("controller.kafka_app.Consumer") as MockConsumer,
+        patch("regression_model_template.controller.kafka_app.Producer") as MockProducer,
+        patch("regression_model_template.controller.kafka_app.Consumer") as MockConsumer,
         patch("threading.Thread") as MockThread,
         patch("time.sleep") as MockSleep,
     ):
@@ -74,12 +74,12 @@ def test_delivery_report(mock_kafka_service):
     msg.topic.return_value = "test_topic"
     msg.partition.return_value = 1
 
-    with patch("controller.kafka_app.logger.info") as mock_logger_info:
+    with patch("regression_model_template.controller.kafka_app.logger.info") as mock_logger_info:
         service.delivery_report(err, msg)
         mock_logger_info.assert_called_once()
 
     err = "Delivery failed"
-    with patch("controller.kafka_app.logger.error") as mock_logger_error:
+    with patch("regression_model_template.controller.kafka_app.logger.error") as mock_logger_error:
         service.delivery_report(err, msg)
         mock_logger_error.assert_called_once()
 
@@ -116,7 +116,7 @@ def test_start_consumer_failure(mock_kafka_service):
 def test_run_server(mock_kafka_service):
     """Test the _run_server method."""
     service, *_ = mock_kafka_service
-    with patch("controller.kafka_app.uvicorn.run") as mock_uvicorn_run:
+    with patch("regression_model_template.controller.kafka_app.uvicorn.run") as mock_uvicorn_run:
         service._run_server()
         mock_uvicorn_run.assert_called_once_with(
             app, host=DEFAULT_FASTAPI_HOST, port=DEFAULT_FASTAPI_PORT, log_level="info"
@@ -126,7 +126,7 @@ def test_run_server(mock_kafka_service):
 def test_run_server_failure(mock_kafka_service):
     """Test the _run_server method when uvicorn fails."""
     service, *_ = mock_kafka_service
-    with patch("controller.kafka_app.uvicorn.run") as mock_uvicorn_run:
+    with patch("regression_model_template.controller.kafka_app.uvicorn.run") as mock_uvicorn_run:
         mock_uvicorn_run.side_effect = Exception("Uvicorn failed")
         service._run_server()
 
@@ -183,7 +183,7 @@ def test_poll_message_no_consumer(mock_kafka_service):
     """Test _poll_message handles missing consumer."""
     service, *_ = mock_kafka_service
     service.consumer = None
-    with patch("controller.kafka_app.logger.error") as mock_logger_error:
+    with patch("regression_model_template.controller.kafka_app.logger.error") as mock_logger_error:
         message = service._poll_message()
         assert message is None
         mock_logger_error.assert_called_once()
@@ -194,7 +194,7 @@ def test_handle_message_error_partition_eof(mock_kafka_service):
     service, *_ = mock_kafka_service
     msg = MagicMock()
     msg.error.return_value = MagicMock(code=MagicMock(return_value=KafkaError._PARTITION_EOF))
-    with patch("controller.kafka_app.logger.debug") as mock_logger_debug:
+    with patch("regression_model_template.controller.kafka_app.logger.debug") as mock_logger_debug:
         result = service._handle_message_error(msg)
         assert result is True
         mock_logger_debug.assert_called_once()
@@ -205,7 +205,7 @@ def test_handle_message_error_other_error(mock_kafka_service):
     service, *_ = mock_kafka_service
     msg = MagicMock()
     msg.error.return_value = MagicMock(code=MagicMock(return_value=1))
-    with patch("controller.kafka_app.logger.error") as mock_logger_error:
+    with patch("regression_model_template.controller.kafka_app.logger.error") as mock_logger_error:
         result = service._handle_message_error(msg)
         assert result is False
         mock_logger_error.assert_called_once()
@@ -245,7 +245,7 @@ def test_process_message_json_decode_error(mock_json_loads, mock_kafka_service):
 
     service.producer = MagicMock()
     service.consumer = MagicMock()
-    with patch("controller.kafka_app.logger.error") as mock_logger_error:
+    with patch("regression_model_template.controller.kafka_app.logger.error") as mock_logger_error:
         service._process_message(msg)
         mock_logger_error.assert_called()
     service.prediction_callback.assert_not_called()
@@ -264,7 +264,7 @@ def test_process_message_prediction_error(mock_json_loads, mock_kafka_service):
     service.producer = MagicMock()
     service.consumer = MagicMock()
     service.prediction_callback.side_effect = Exception("Prediction Failed")
-    with patch("controller.kafka_app.logger.exception") as mock_logger_exception:
+    with patch("regression_model_template.controller.kafka_app.logger.exception") as mock_logger_exception:
         service._process_message(msg)
         mock_logger_exception.assert_called()
     service.prediction_callback.assert_called_once()
@@ -277,7 +277,7 @@ def test_close_consumer(mock_kafka_service):
     service.consumer = MagicMock()
     service._close_consumer()
     service.consumer.close.assert_called_once()
-    with patch("controller.kafka_app.logger.info") as mock_logger_info:
+    with patch("regression_model_template.controller.kafka_app.logger.info") as mock_logger_info:
         service._close_consumer()
         mock_logger_info.assert_called()
 
@@ -291,7 +291,7 @@ def test_stop(mock_os_kill, mock_kafka_service):
     service.consumer.close.assert_called_once()
     mock_os_kill.assert_called_once_with(os.getpid(), signal.SIGINT)
     assert service.stop_event.is_set()
-    with patch("controller.kafka_app.logger.info") as mock_logger_info:
+    with patch("regression_model_template.controller.kafka_app.logger.info") as mock_logger_info:
         service.stop()
         assert service.stop_event.is_set()
         assert mock_logger_info.call_count == 2
@@ -299,11 +299,11 @@ def test_stop(mock_os_kill, mock_kafka_service):
 
 @pytest.mark.asyncio
 async def test_predict_endpoint():
-    with patch("controller.kafka_app.fastapi_kafka_service") as mock_fastapi_kafka_service:
+    with patch("regression_model_template.controller.kafka_app.fastapi_kafka_service") as mock_fastapi_kafka_service:
         mock_fastapi_kafka_service.prediction_callback.return_value = PredictionResponse(
             result={"inference": [1.0], "quality": 1.0, "error": None}
         )
-        with patch("controller.kafka_app.logger.info") as mock_logger_info:
+        with patch("regression_model_template.controller.kafka_app.logger.info") as mock_logger_info:
             request = PredictionRequest()
             response = await predict(request)
             assert response.result["inference"] == [1.0]
@@ -312,7 +312,7 @@ async def test_predict_endpoint():
 
 @pytest.mark.asyncio
 async def test_predict_endpoint_exception():
-    with patch("controller.kafka_app.fastapi_kafka_service") as mock_fastapi_kafka_service:
+    with patch("regression_model_template.controller.kafka_app.fastapi_kafka_service") as mock_fastapi_kafka_service:
         mock_fastapi_kafka_service.prediction_callback.side_effect = Exception("Test Exception")
         with pytest.raises(HTTPException):
             await predict(PredictionRequest())
@@ -327,11 +327,11 @@ async def test_health_check_endpoint():
 def test_main_function():
     """Test the main function."""
     with (
-        patch("controller.kafka_app.services.MlflowService") as MockMlflowService,
-        patch("controller.kafka_app.registries.uri_for_model_alias_or_version") as MockUri,
-        patch("controller.kafka_app.CustomLoader") as MockCustomLoader,
-        patch("controller.kafka_app.FastAPIKafkaService") as MockFastAPIKafkaService,
-        patch("controller.kafka_app.print") as mock_print,
+        patch("regression_model_template.controller.kafka_app.services.MlflowService") as MockMlflowService,
+        patch("regression_model_template.controller.kafka_app.registries.uri_for_model_alias_or_version") as MockUri,
+        patch("regression_model_template.controller.kafka_app.CustomLoader") as MockCustomLoader,
+        patch("regression_model_template.controller.kafka_app.FastAPIKafkaService") as MockFastAPIKafkaService,
+        patch("regression_model_template.controller.kafka_app.print") as mock_print,
     ):
         # Mock the mlflow service and its methods
         mock_mlflow_service = MagicMock()
@@ -348,7 +348,7 @@ def test_main_function():
         MockUri.return_value = "test_uri"
 
         # Call the main function
-        from controller.kafka_app import main
+        from regression_model_template.controller.kafka_app import main
 
         main()
 

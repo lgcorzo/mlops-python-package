@@ -117,6 +117,7 @@ You can use this package as part of your MLOps toolkit or platform (e.g., Model 
     - [GitHub Copilot](#github-copilot)
     - [VSCode VIM](#vscode-vim)
   - [deployb images models](#deployb-images-models)
+  - [docker compose example:](#docker-compose-example)
 - [Resources](#resources)
   - [Python](#python)
   - [AI/ML/MLOps](#aimlmlops)
@@ -1228,6 +1229,35 @@ mlflow models build-docker -m models:/regression_model_template/4 -n regression_
 
 ```
 If you want to use the bare-bones Flask server instead of MLServer, remove enable_mlserver=True. For other options, see the mlflow.models.build_docker function documentation.
+
+## docker compose example:
+
+```txt
+
+  kafka_inference:
+      image: regression_model_template:latest
+      restart: unless-stopped
+      container_name: kafka_inference
+      networks:
+        - servnet
+        - minio_mlflow_mlflownet
+      environment:
+      - DEFAULT_KAFKA_SERVER=kafka_server:9092
+      - DEFAULT_GROUP_ID=mlops-regression
+      - DEFAULT_AUTO_OFFSET_RESET=earliest
+      - DEFAULT_INPUT_TOPIC=input_topic
+      - DEFAULT_OUTPUT_TOPIC=output_topic
+      - DEFAULT_FASTAPI_HOST=127.0.0.1
+      - DEFAULT_FASTAPI_PORT=8100
+      - MLFLOW_TRACKING_URI=http://mlflow_server:5000
+      - MLFLOW_REGISTRY_URI=http://mlflow_server:5000
+      - MLFLOW_EXPERIMENT_NAME=regression_model_template_experiment
+      - MLFLOW_REGISTERED_MODEL_NAME=regression_model_template
+      ports:
+          - 8100:8100
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
+```
 # Resources
 
 This section provides resources for building packages for Python and AI/ML/MLOps.
