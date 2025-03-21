@@ -21,13 +21,13 @@ from regression_model_template.io.registries import CustomLoader
 
 
 # Constants
-DEFAULT_KAFKA_SERVER = "kafka_server:9092"
-DEFAULT_GROUP_ID = "llmops-regression"
-DEFAULT_AUTO_OFFSET_RESET = "earliest"
-DEFAULT_INPUT_TOPIC = "input_topic"
-DEFAULT_OUTPUT_TOPIC = "output_topic"
-DEFAULT_FASTAPI_HOST = "127.0.0.1"
-DEFAULT_FASTAPI_PORT = 8100
+DEFAULT_KAFKA_SERVER = os.getenv("DEFAULT_KAFKA_SERVER", "kafka_server:9092")
+DEFAULT_GROUP_ID = os.getenv("DEFAULT_GROUP_ID", "llmops-regression")
+DEFAULT_AUTO_OFFSET_RESET = os.getenv("DEFAULT_AUTO_OFFSET_RESET", "earliest")
+DEFAULT_INPUT_TOPIC = os.getenv("DEFAULT_INPUT_TOPIC", "input_topic")
+DEFAULT_OUTPUT_TOPIC = os.getenv("DEFAULT_OUTPUT_TOPIC", "output_topic")
+DEFAULT_FASTAPI_HOST = os.getenv("DEFAULT_FASTAPI_HOST", "127.0.0.1")
+DEFAULT_FASTAPI_PORT = int(os.getenv("DEFAULT_FASTAPI_PORT", 8100))
 LOGGING_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 
 
