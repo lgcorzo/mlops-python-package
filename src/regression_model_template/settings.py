@@ -10,7 +10,7 @@ from regression_model_template import jobs
 # %% SETTINGS
 
 
-class Settings(pdts.BaseSettings, strict=True, frozen=True, extra="forbid"):
+class Settings(pdts.BaseSettings, strict=True, frozen=True, extra="ignore"):
     """Base class for application settings.
 
     Use settings to provide high-level preferences.
