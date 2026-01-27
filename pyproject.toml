@@ -100,9 +100,7 @@ python_version = "3.12"
 check_untyped_defs = false
 ignore_missing_imports = true
 plugins = ["pandera.mypy", "pydantic.mypy"]
-exclude = ["src/regression_model_template/jobs/evaluations.py",
-"src/regression_model_template/jobs/training.py",
-"src/regression_model_template/io/registries.py"]
+exclude = []
 
 [tool.pytest.ini_options]
 addopts = "--verbosity=2"
