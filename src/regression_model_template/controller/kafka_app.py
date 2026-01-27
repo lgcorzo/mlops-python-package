@@ -13,7 +13,7 @@ import pandas as pd
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-from confluent_kafka import Producer, Consumer, KafkaError
+from confluent_kafka import Producer, Consumer, KafkaError, Message
 
 from regression_model_template.core.schemas import InputsSchema, Outputs
 from regression_model_template.io import services, registries
@@ -65,9 +65,9 @@ class PredictionRequest(BaseModel):
         "registered": [0, 50, 100, 150],
     }
 
-    def model_validate(self):
+    def validate_schema(self) -> pd.DataFrame:
         """Validates the input data against InputsSchema."""
-        return InputsSchema.validate(pd.DataFrame([self.input_data]))
+        return InputsSchema.validate(pd.DataFrame([self.input_data]))  # type: ignore[return-value]
 
 
 class PredictionResponse(BaseModel):
@@ -96,7 +96,7 @@ class FastAPIKafkaService:
         self.producer: Producer | None = None
         self.consumer: Consumer | None = None
 
-    def delivery_report(self, err, msg):
+    def delivery_report(self, err: KafkaError | None, msg: Message) -> None:
         """Called once for each message produced to indicate delivery result."""
         if err is not None:
             logger.error(f"Message delivery failed: {err}")
@@ -155,7 +155,7 @@ class FastAPIKafkaService:
             self._process_message(msg)
         self._close_consumer()
 
-    def _poll_message(self):
+    def _poll_message(self) -> Message | None:
         """Poll message from Kafka consumer."""
         if self.consumer:
             return self.consumer.poll(1.0)
@@ -163,7 +163,7 @@ class FastAPIKafkaService:
             logger.error("Kafka consumer is not initialized.")
             return None
 
-    def _handle_message_error(self, msg) -> bool:
+    def _handle_message_error(self, msg: Message) -> bool:
         """Handle errors in polled messages."""
         if msg.error().code() == KafkaError._PARTITION_EOF:
             logger.debug("Reached end of partition.")
@@ -172,7 +172,7 @@ class FastAPIKafkaService:
             logger.error(f"Consumer error: {msg.error()}")
             return False
 
-    def _process_message(self, msg) -> None:
+    def _process_message(self, msg: Message) -> None:
         """Process a valid Kafka message."""
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
@@ -251,12 +251,12 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
 
 
 @app.get("/health", summary="Health Check", tags=["System"])
-async def health_check():
+async def health_check() -> dict[str, str]:
     """Simple health check endpoint to verify that the service is running."""
     return {"status": "healthy"}
 
 
-def main():
+def main() -> None:
     global fastapi_kafka_service
     # Configuration
     alias_or_version: str | int = "Champion"

@@ -137,7 +137,7 @@ class CustomSaver(Saver):
 
     def save(self, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info:
         adapter = CustomSaver.Adapter(model=model)
-        return mlflow.pyfunc.log_model(
+        return mlflow.pyfunc.log_model(  # type: ignore[no-any-return]
             python_model=adapter,
             signature=signature,
             artifact_path=self.path,
@@ -166,7 +166,7 @@ class BuiltinSaver(Saver):
     ) -> Info:
         builtin_model = model.get_internal_model()
         module = getattr(mlflow, self.flavor)
-        return module.log_model(
+        return module.log_model(  # type: ignore[no-any-return]
             builtin_model, artifact_path=self.path, signature=signature, input_example=input_example
         )
 
