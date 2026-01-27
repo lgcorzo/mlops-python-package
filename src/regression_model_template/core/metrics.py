@@ -90,7 +90,9 @@ class Metric(abc.ABC, pdt.BaseModel, strict=True, frozen=True, extra="forbid"):
             score = self.score(targets=score_targets, outputs=score_outputs)
             return MlflowMetric(aggregate_results={self.name: score * sign})
 
-        return mlflow.metrics.make_metric(eval_fn=eval_fn, name=self.name, greater_is_better=self.greater_is_better)
+        return mlflow.metrics.make_metric(  # type: ignore[no-any-return]
+            eval_fn=eval_fn, name=self.name, greater_is_better=self.greater_is_better
+        )
 
 
 class SklearnMetric(Metric):
@@ -141,4 +143,6 @@ class Threshold(abc.ABC, pdt.BaseModel, strict=True, frozen=True, extra="forbid"
         Returns:
             MlflowThreshold: the mlflow threshold.
         """
-        return MlflowThreshold(threshold=self.threshold, greater_is_better=self.greater_is_better)
+        return MlflowThreshold(  # type: ignore[no-untyped-call]
+            threshold=self.threshold, greater_is_better=self.greater_is_better
+        )

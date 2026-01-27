@@ -102,7 +102,7 @@ class CustomSaver(Saver):
 
     KIND: T.Literal["CustomSaver"] = "CustomSaver"
 
-    class Adapter(mlflow.pyfunc.PythonModel):  # type: ignore[misc]
+    class Adapter(mlflow.pyfunc.PythonModel):  # type: ignore[misc, name-defined]
         """Adapt a custom model to the Mlflow PyFunc flavor for saving operations.
 
         https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html?#mlflow.pyfunc.PythonModel
@@ -118,7 +118,7 @@ class CustomSaver(Saver):
 
         def predict(
             self,
-            context: mlflow.pyfunc.PythonModelContext,
+            context: mlflow.pyfunc.PythonModelContext,  # type: ignore[name-defined]
             model_input: schemas.Inputs,
             params: dict[str, T.Any] | None = None,
         ) -> schemas.Outputs:
@@ -137,7 +137,7 @@ class CustomSaver(Saver):
 
     def save(self, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info:
         adapter = CustomSaver.Adapter(model=model)
-        return mlflow.pyfunc.log_model(
+        return mlflow.pyfunc.log_model(  # type: ignore[no-any-return]
             python_model=adapter,
             signature=signature,
             artifact_path=self.path,
@@ -163,10 +163,10 @@ class BuiltinSaver(Saver):
         model: models.Model,
         signature: signers.Signature,
         input_example: schemas.Inputs | None = None,
-    ) -> mlflow.entities.model_registry.ModelVersion:
+    ) -> Info:
         builtin_model = model.get_internal_model()
         module = getattr(mlflow, self.flavor)
-        return module.log_model(
+        return module.log_model(  # type: ignore[no-any-return]
             builtin_model, artifact_path=self.path, signature=signature, input_example=input_example
         )
 
@@ -222,7 +222,7 @@ class CustomLoader(Loader):
     class Adapter(Loader.Adapter):
         """Adapt a custom model for the project inference."""
 
-        def __init__(self, model: mlflow.pyfunc.PyFuncModel) -> None:
+        def __init__(self, model: mlflow.pyfunc.PyFuncModel) -> None:  # type: ignore[name-defined]
             """Initialize the adapter from an mlflow pyfunc model.
 
             Args:
@@ -254,7 +254,7 @@ class BuiltinLoader(Loader):
     class Adapter(Loader.Adapter):
         """Adapt a builtin model for the project inference."""
 
-        def __init__(self, model: mlflow.pyfunc.PyFuncModel) -> None:
+        def __init__(self, model: mlflow.pyfunc.PyFuncModel) -> None:  # type: ignore[name-defined]
             """Initialize the adapter from an mlflow pyfunc model.
 
             Args:
