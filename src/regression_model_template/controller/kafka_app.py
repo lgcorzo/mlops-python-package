@@ -247,7 +247,7 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
         return prediction_result  # Use the global class
     except Exception as e:
         logger.exception("Error processing HTTP prediction request:")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
 @app.get("/health", summary="Health Check", tags=["System"])
