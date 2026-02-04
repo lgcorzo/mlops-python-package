@@ -3,6 +3,7 @@ import json
 import pytest
 from regression_model_template.controller.kafka_app import FastAPIKafkaService
 
+
 def test_process_message_exception_leakage():
     # Mock dependencies
     mock_producer = MagicMock()
@@ -13,10 +14,7 @@ def test_process_message_exception_leakage():
         raise ValueError("Sensitive Database Error: Connection failed with user 'admin'")
 
     service = FastAPIKafkaService(
-        prediction_callback=sensitive_callback,
-        kafka_config={},
-        input_topic="in",
-        output_topic="out"
+        prediction_callback=sensitive_callback, kafka_config={}, input_topic="in", output_topic="out"
     )
     service.producer = mock_producer
     service.consumer = mock_consumer
@@ -32,7 +30,7 @@ def test_process_message_exception_leakage():
     # Verify what was produced
     assert mock_producer.produce.called
     args, kwargs = mock_producer.produce.call_args
-    value = json.loads(kwargs['value'])
+    value = json.loads(kwargs["value"])
 
     # Check if error is present
     assert "error" in value
