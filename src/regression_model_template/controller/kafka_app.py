@@ -260,9 +260,7 @@ class PredictionService:
         """Make a prediction using the model."""
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
-            outputs: Outputs = self.model.predict(
-                inputs=InputsSchema.check(pd.DataFrame(input_data.input_data))
-            )
+            outputs: Outputs = self.model.predict(inputs=InputsSchema.check(pd.DataFrame(input_data.input_data)))
             predictionresponse.result["inference"] = outputs.to_numpy().tolist()
             predictionresponse.result["quality"] = 1
             predictionresponse.result["error"] = None

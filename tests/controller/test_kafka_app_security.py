@@ -5,9 +5,10 @@ from regression_model_template.controller.kafka_app import (
     PredictionRequest,
     PredictionService,
     predict,
-    PredictionResponse
+    PredictionResponse,
 )
 import asyncio
+
 
 def test_prediction_service_sanitization():
     """Test that PredictionService sanitizes exceptions."""
@@ -18,7 +19,7 @@ def test_prediction_service_sanitization():
     mock_model.predict.side_effect = Exception(sensitive_error)
 
     service = PredictionService(model=mock_model)
-    request = PredictionRequest() # Use default values
+    request = PredictionRequest()  # Use default values
 
     # Call predict
     response = service.predict(request)
@@ -28,6 +29,7 @@ def test_prediction_service_sanitization():
     assert sensitive_error not in response.result["error"]
     assert response.result["quality"] == 0
     assert response.result["inference"] == 0
+
 
 def test_predict_endpoint_exception_leak():
     """Test that the predict endpoint does NOT leak exception details."""
