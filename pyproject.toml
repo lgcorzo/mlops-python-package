@@ -2,24 +2,30 @@
 
 # PROJECT
 
-[tool.poetry]
+[project]
 name = "regression_model_template"
 version = "2.0.0"
 description = "Predict the number of regression_model_template available."
-repository = "https://github.com/lgcorzo/mlops-python-package"
-documentation = "https://lgcorzo.github.io/mlops-python-package/"
-authors = []
+authors = [{ name = "lgcorzo" }]
 readme = "README.md"
 license = "MIT"
 keywords = ["mlops", "python", "package"]
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+dynamic = ["dependencies"]
+
+[project.urls]
+repository = "https://github.com/lgcorzo/mlops-python-package"
+documentation = "https://lgcorzo.github.io/mlops-python-package/"
+
+[project.scripts]
+regression_model_template = "regression_model_template.scripts:main"
+
+[tool.poetry]
 packages = [{ include = "regression_model_template", from = "src" }]
-
-# SCRIPTS
-
-[tool.poetry.scripts]
-regression_model_template = 'regression_model_template.scripts:main'
-
-# DEPENDENCIES
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -49,7 +55,6 @@ opentelemetry-exporter-otlp = "^1.30.0"
 confluent-kafka = "^2.8.2"
 fastapi = "^0.115.11"
 
-
 [tool.poetry.group.checks.dependencies]
 bandit = "^1.7.9"
 coverage = "^7.5.4"
@@ -60,6 +65,7 @@ pytest-xdist = "^3.6.1"
 pandera = { extras = ["mypy"], version = "^0.20.1" }
 ruff = "^0.5.0"
 pytest-mock = "^3.14.0"
+pytest-asyncio = "^0.23.7"
 
 [tool.poetry.group.commits.dependencies]
 commitizen = "^3.27.0"
@@ -105,6 +111,14 @@ exclude = []
 [tool.pytest.ini_options]
 addopts = "--verbosity=2"
 pythonpath = ["src"]
+asyncio_mode = "auto"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore:.*predict.*not supported:UserWarning",
+    "ignore:.*Add type hints to the .predict. method:UserWarning",
+    "ignore:.*min_items.*is deprecated:DeprecationWarning",
+    "ignore:.*np.inexact.*to a dtype is deprecated:DeprecationWarning",
+]
 
 [tool.ruff]
 fix = true

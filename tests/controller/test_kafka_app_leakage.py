@@ -1,6 +1,5 @@
 from unittest.mock import MagicMock
 import json
-import pytest
 from regression_model_template.controller.kafka_app import FastAPIKafkaService
 
 

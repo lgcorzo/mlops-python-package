@@ -68,7 +68,7 @@ class Model(abc.ABC, pdt.BaseModel, strict=True, frozen=False, extra="forbid"):
         """
 
     @abc.abstractmethod
-    def predict(self, inputs: schemas.Inputs) -> schemas.Outputs:
+    def predict(self, inputs: T.Any) -> schemas.Outputs:
         """Generate outputs with the model for the given inputs.
 
         Args:
@@ -172,7 +172,7 @@ class BaselineSklearnModel(Model):
         self._pipeline.fit(X=inputs, y=targets[schemas.TargetsSchema.cnt])
         return self
 
-    def predict(self, inputs: schemas.Inputs) -> schemas.Outputs:
+    def predict(self, inputs: T.Any) -> schemas.Outputs:
         model = self.get_internal_model()
         prediction = model.predict(inputs)
         outputs = schemas.Outputs({schemas.OutputsSchema.prediction: prediction}, index=inputs.index)

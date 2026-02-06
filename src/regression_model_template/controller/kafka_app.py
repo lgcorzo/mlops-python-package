@@ -6,6 +6,7 @@ import threading
 import logging
 import time
 import json
+import typing as T
 from typing import Any, Dict, Callable
 
 import uvicorn
@@ -181,15 +182,9 @@ class FastAPIKafkaService:
             input_obj.input_data = kafka_msg["input_data"]
             logger.info(f"kafka Received input  {kafka_msg}")
             prediction_result = self.prediction_callback(input_obj).result
-        except json.JSONDecodeError as e:
-            error = f"Failed to decode JSON message: {e}. Raw message: {msg.value()}"
-            predictionresponse.result["error"] = error
-            logger.error(error)
-            prediction_result = predictionresponse.result
-        except Exception:
-            error = "An error occurred during prediction processing."
-            logger.exception("Error during prediction processing")
-            predictionresponse.result["error"] = error
+        except Exception as e:
+            logger.exception(f"Error during prediction processing: {e}")
+            predictionresponse.result["error"] = "An error occurred during prediction processing."
             prediction_result = predictionresponse.result
 
         try:
@@ -226,7 +221,7 @@ class FastAPIKafkaService:
 
 
 # Global Service Instance
-fastapi_kafka_service: FastAPIKafkaService
+fastapi_kafka_service: "FastAPIKafkaService" = T.cast("FastAPIKafkaService", None)
 
 
 # FastAPI Endpoints
@@ -245,7 +240,7 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
         prediction_result = fastapi_kafka_service.prediction_callback(request)
         logger.info(f"HTTP prediction result: {prediction_result}")
         return prediction_result  # Use the global class
-    except Exception as e:
+    except Exception:
         logger.exception("Error processing HTTP prediction request:")
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
@@ -254,6 +249,29 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
 async def health_check() -> dict[str, str]:
     """Simple health check endpoint to verify that the service is running."""
     return {"status": "healthy"}
+
+
+class PredictionService:
+    """Service to handle prediction logic securely."""
+
+    def __init__(self, model: Any):
+        self.model = model
+
+    def predict(self, input_data: PredictionRequest) -> PredictionResponse:
+        """Make a prediction using the model."""
+        predictionresponse: PredictionResponse = PredictionResponse()
+        try:
+            outputs: Outputs = self.model.predict(inputs=InputsSchema.check(pd.DataFrame(input_data.input_data)))
+            predictionresponse.result["inference"] = outputs.to_numpy().tolist()
+            predictionresponse.result["quality"] = 1
+            predictionresponse.result["error"] = None
+        except Exception as e:
+            # Securely handle exceptions: Log details, return generic error
+            logger.exception(f"Prediction failed: {e}")
+            predictionresponse.result["inference"] = 0
+            predictionresponse.result["quality"] = 0
+            predictionresponse.result["error"] = "An error occurred during prediction processing."
+        return predictionresponse
 
 
 def main() -> None:
@@ -270,20 +288,8 @@ def main() -> None:
     loader = CustomLoader()
     model = loader.load(uri=model_uri)
 
-    # Prediction Callback Function
-    def my_prediction_function(input_data: PredictionRequest) -> PredictionResponse:
-        predictionresponse: PredictionResponse = PredictionResponse()
-        try:
-            outputs: Outputs = model.predict(inputs=InputsSchema.check(pd.DataFrame(input_data.input_data)))
-            predictionresponse.result["inference"] = outputs.to_numpy().tolist()
-            predictionresponse.result["quality"] = 1
-            predictionresponse.result["error"] = None
-        except Exception:
-            logger.exception("Prediction callback failed")
-            predictionresponse.result["inference"] = 0
-            predictionresponse.result["quality"] = 0
-            predictionresponse.result["error"] = "Prediction failed."
-        return predictionresponse
+    # Initialize Prediction Service
+    prediction_service = PredictionService(model)
 
     # Kafka Configuration
     kafka_config = {
@@ -293,7 +299,7 @@ def main() -> None:
     }
     # Initialize and Start Service
     fastapi_kafka_service = FastAPIKafkaService(
-        prediction_callback=my_prediction_function,
+        prediction_callback=prediction_service.predict,
         kafka_config=kafka_config,
         input_topic=DEFAULT_INPUT_TOPIC,
         output_topic=DEFAULT_OUTPUT_TOPIC,
