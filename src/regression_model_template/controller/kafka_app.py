@@ -186,9 +186,9 @@ class FastAPIKafkaService:
             predictionresponse.result["error"] = error
             logger.error(error)
             prediction_result = predictionresponse.result
-        except Exception as e:
-            error = f"Error during prediction processing: {e}"
-            logger.exception(error)
+        except Exception:
+            error = "An error occurred during prediction processing."
+            logger.exception("Error during prediction processing")
             predictionresponse.result["error"] = error
             prediction_result = predictionresponse.result
 
@@ -278,10 +278,11 @@ def main() -> None:
             predictionresponse.result["inference"] = outputs.to_numpy().tolist()
             predictionresponse.result["quality"] = 1
             predictionresponse.result["error"] = None
-        except Exception as e:
+        except Exception:
+            logger.exception("Prediction callback failed")
             predictionresponse.result["inference"] = 0
             predictionresponse.result["quality"] = 0
-            predictionresponse.result["error"] = str(e)
+            predictionresponse.result["error"] = "Prediction failed."
         return predictionresponse
 
     # Kafka Configuration
