@@ -6,6 +6,7 @@ import threading
 import logging
 import time
 import json
+import typing as T
 from typing import Any, Dict, Callable
 
 import uvicorn
@@ -183,7 +184,7 @@ class FastAPIKafkaService:
             prediction_result = self.prediction_callback(input_obj).result
         except Exception as e:
             logger.exception(f"Error during prediction processing: {e}")
-            predictionresponse.result["error"] = "Internal Processing Error"
+            predictionresponse.result["error"] = "An error occurred during prediction processing."
             prediction_result = predictionresponse.result
 
         try:
@@ -220,7 +221,7 @@ class FastAPIKafkaService:
 
 
 # Global Service Instance
-fastapi_kafka_service: Any = None
+fastapi_kafka_service: "FastAPIKafkaService" = T.cast("FastAPIKafkaService", None)
 
 
 # FastAPI Endpoints
@@ -239,7 +240,7 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
         prediction_result = fastapi_kafka_service.prediction_callback(request)
         logger.info(f"HTTP prediction result: {prediction_result}")
         return prediction_result  # Use the global class
-    except Exception as e:
+    except Exception:
         logger.exception("Error processing HTTP prediction request:")
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
@@ -269,7 +270,7 @@ class PredictionService:
             logger.exception(f"Prediction failed: {e}")
             predictionresponse.result["inference"] = 0
             predictionresponse.result["quality"] = 0
-            predictionresponse.result["error"] = "Internal Processing Error"
+            predictionresponse.result["error"] = "An error occurred during prediction processing."
         return predictionresponse
 
 

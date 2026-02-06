@@ -5,7 +5,6 @@ from regression_model_template.controller.kafka_app import (
     PredictionRequest,
     PredictionService,
     predict,
-    PredictionResponse,
 )
 import asyncio
 
@@ -25,7 +24,7 @@ def test_prediction_service_sanitization():
     response = service.predict(request)
 
     # Verify
-    assert response.result["error"] == "Internal Processing Error"
+    assert response.result["error"] == "An error occurred during prediction processing."
     assert sensitive_error not in response.result["error"]
     assert response.result["quality"] == 0
     assert response.result["inference"] == 0
