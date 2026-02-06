@@ -220,7 +220,7 @@ class FastAPIKafkaService:
 
 
 # Global Service Instance
-fastapi_kafka_service: FastAPIKafkaService
+fastapi_kafka_service: Any = None
 
 
 # FastAPI Endpoints
