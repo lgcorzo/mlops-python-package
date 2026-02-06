@@ -119,7 +119,7 @@ class CustomSaver(Saver):
         def predict(
             self,
             context: mlflow.pyfunc.PythonModelContext,  # type: ignore[name-defined]
-            model_input,
+            model_input: T.Any,
             params: dict[str, T.Any] | None = None,
         ) -> schemas.Outputs:
             """Generate predictions with a custom model for the given inputs.
@@ -189,7 +189,7 @@ class Loader(abc.ABC, pdt.BaseModel, strict=True, frozen=True, extra="forbid"):
         """Adapt any model for the project inference."""
 
         @abc.abstractmethod
-        def predict(self, inputs) -> schemas.Outputs:
+        def predict(self, inputs: T.Any) -> schemas.Outputs:
             """Generate predictions with the internal model for the given inputs.
 
             Args:
