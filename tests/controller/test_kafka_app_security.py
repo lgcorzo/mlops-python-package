@@ -1,12 +1,13 @@
-import pytest
+import asyncio
 from unittest.mock import MagicMock, patch
+
+import pytest
 from fastapi import HTTPException
 from regression_model_template.controller.kafka_app import (
     PredictionRequest,
     PredictionService,
     predict,
 )
-import asyncio
 
 
 def test_prediction_service_sanitization():

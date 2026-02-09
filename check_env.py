@@ -1,7 +1,9 @@
-import mlflow
 import os
 import sys
+
+import mlflow
 from confluent_kafka import Producer
+
 
 def check_env():
     print(f"Tracking URI: {mlflow.get_tracking_uri()}")

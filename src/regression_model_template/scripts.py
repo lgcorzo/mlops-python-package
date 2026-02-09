@@ -9,12 +9,11 @@ import argparse
 import json
 import sys
 
+# %% WARNINGS
+import warnings
+
 from regression_model_template import settings
 from regression_model_template.io import configs
-
-# %% WARNINGS
-
-import warnings
 
 # disable annoying mlflow warnings
 warnings.filterwarnings(action="ignore", category=UserWarning)

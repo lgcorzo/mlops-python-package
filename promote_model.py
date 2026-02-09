@@ -1,6 +1,8 @@
+import os
+
 import mlflow
 from mlflow.tracking import MlflowClient
-import os
+
 
 def promote_model():
     tracking_uri = os.getenv("MLFLOW_TRACKING_URI", "http://mlflow.llm-apps.svc.cluster.local:5000")

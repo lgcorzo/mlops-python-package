@@ -1,24 +1,22 @@
-import pytest
-from unittest.mock import patch, MagicMock
 import json
 import os
 import signal
+from unittest.mock import MagicMock, patch
 
-from fastapi import HTTPException
-
+import pytest
 from confluent_kafka import KafkaError
-
+from fastapi import HTTPException
 
 # Assuming the code you provided is in a file named 'app.py'
 from regression_model_template.controller.kafka_app import (
+    DEFAULT_FASTAPI_HOST,
+    DEFAULT_FASTAPI_PORT,
     FastAPIKafkaService,
     PredictionRequest,
     PredictionResponse,
+    app,
     health_check,
     predict,
-    app,
-    DEFAULT_FASTAPI_HOST,
-    DEFAULT_FASTAPI_PORT,
 )
 
 
