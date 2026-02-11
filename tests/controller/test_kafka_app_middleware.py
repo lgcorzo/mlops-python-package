@@ -4,7 +4,7 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 import os
 from unittest.mock import patch
 from importlib import reload
-import pytest
+
 
 def test_middleware_present():
     """Test that security middlewares are correctly added to the FastAPI app with defaults."""
@@ -32,13 +32,17 @@ def test_middleware_present():
     # Verify TrustedHost configuration
     assert trusted_host_middleware.kwargs["allowed_hosts"] == ["*"]
 
+
 def test_middleware_configuration_from_env():
     """Test that middleware configuration respects environment variables."""
     # Set environment variables
-    with patch.dict(os.environ, {
-        "ALLOWED_ORIGINS": "https://example.com,https://api.example.com",
-        "ALLOWED_HOSTS": "example.com,api.example.com"
-    }):
+    with patch.dict(
+        os.environ,
+        {
+            "ALLOWED_ORIGINS": "https://example.com,https://api.example.com",
+            "ALLOWED_HOSTS": "example.com,api.example.com",
+        },
+    ):
         # Reload the module to pick up new env vars
         reload(kafka_app)
         app = kafka_app.app
