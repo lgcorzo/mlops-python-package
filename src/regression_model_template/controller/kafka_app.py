@@ -49,9 +49,7 @@ app: FastAPI = FastAPI(
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 
-app.add_middleware(
-    TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS
-)
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS)
 
 # Browsers reject CORS if origins is '*' and credentials=True
 allow_credentials = True
