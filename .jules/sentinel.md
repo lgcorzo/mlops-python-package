@@ -12,3 +12,8 @@
 **Vulnerability:** The application was catching exceptions in logic callbacks and Kafka consumers, then assigning the raw exception string to a JSON `error` field in the successful response object. This leaked internal details even when the HTTP status code was 200 OK or when processing asynchronously via Kafka.
 **Learning:** Checking for HTTP 500 handlers is not enough. Review application-level error handling where business logic manually constructs error objects.
 **Prevention:** Ensure that any `result["error"]` or similar fields populated in catch blocks use generic messages, while the real exception is logged server-side.
+
+## 2026-06-18 - Insecure Default CORS Configuration
+**Vulnerability:** The application was missing explicit CORS and TrustedHost middleware, potentially exposing it to Host Header Injection and unauthorized cross-origin access.
+**Learning:** Defaulting to `allow_credentials=True` with `allow_origins=["*"]` is a common mistake that browsers reject. Safe defaults must ensure credentials are disabled if wildcard origins are used.
+**Prevention:** Implement conditional logic to force `allow_credentials=False` when `ALLOWED_ORIGINS` contains `*`, ensuring the application remains functional and spec-compliant by default.

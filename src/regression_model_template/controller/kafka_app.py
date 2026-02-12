@@ -12,6 +12,8 @@ from typing import Any, Dict, Callable
 import uvicorn
 import pandas as pd
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel
 
 from confluent_kafka import Producer, Consumer, KafkaError, Message
@@ -41,6 +43,27 @@ app: FastAPI = FastAPI(
     title="Prediction Service API",
     description="A FastAPI service that integrates with Kafka for making predictions.",
     version="1.0.0",
+)
+
+# Security Enhancements
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+
+app.add_middleware(
+    TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS
+)
+
+# Browsers reject CORS if origins is '*' and credentials=True
+allow_credentials = True
+if "*" in ALLOWED_ORIGINS:
+    allow_credentials = False
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=allow_credentials,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
