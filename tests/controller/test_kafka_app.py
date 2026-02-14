@@ -363,6 +363,7 @@ def test_main_function():
         mock_fastapi_kafka_service.start.assert_called_once()
         mock_print.assert_called()
 
+
 def test_middleware_configuration():
     """Test that security middlewares are configured."""
     from fastapi.middleware.cors import CORSMiddleware
