@@ -12,6 +12,8 @@ from typing import Any, Dict, Callable
 import uvicorn
 import pandas as pd
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel
 
 from confluent_kafka import Producer, Consumer, KafkaError, Message
@@ -29,6 +31,10 @@ DEFAULT_INPUT_TOPIC = os.getenv("DEFAULT_INPUT_TOPIC", "input_topic")
 DEFAULT_OUTPUT_TOPIC = os.getenv("DEFAULT_OUTPUT_TOPIC", "output_topic")
 DEFAULT_FASTAPI_HOST = os.getenv("DEFAULT_FASTAPI_HOST", "127.0.0.1")
 DEFAULT_FASTAPI_PORT = int(os.getenv("DEFAULT_FASTAPI_PORT", 8100))
+# Security Configuration
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+
 LOGGING_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 
 
@@ -41,6 +47,20 @@ app: FastAPI = FastAPI(
     title="Prediction Service API",
     description="A FastAPI service that integrates with Kafka for making predictions.",
     version="1.0.0",
+)
+
+# Add Middlewares
+app.add_middleware(
+    TrustedHostMiddleware,
+    allowed_hosts=ALLOWED_HOSTS,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True if "*" not in ALLOWED_ORIGINS else False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 

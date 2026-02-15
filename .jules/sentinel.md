@@ -12,3 +12,8 @@
 **Vulnerability:** The application was catching exceptions in logic callbacks and Kafka consumers, then assigning the raw exception string to a JSON `error` field in the successful response object. This leaked internal details even when the HTTP status code was 200 OK or when processing asynchronously via Kafka.
 **Learning:** Checking for HTTP 500 handlers is not enough. Review application-level error handling where business logic manually constructs error objects.
 **Prevention:** Ensure that any `result["error"]` or similar fields populated in catch blocks use generic messages, while the real exception is logged server-side.
+
+## 2026-02-15 - Missing Security Middleware in FastAPI
+**Vulnerability:** The FastAPI application lacked `CORSMiddleware` and `TrustedHostMiddleware`, making it potentially vulnerable to Cross-Site Scripting (XSS) via loose CORS and Host Header attacks.
+**Learning:** Even if a project structure implies security (e.g., specific middleware files), the main application entry point (`kafka_app.py` in this case) must explicitly add these middlewares. Defaulting to secure-by-default or explicit configuration is crucial.
+**Prevention:** Always verify `app.add_middleware` calls in the application factory or main script. Use environment variables for `ALLOWED_ORIGINS` and `ALLOWED_HOSTS` to allow strict configuration in production while maintaining development ease.
