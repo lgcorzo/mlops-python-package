@@ -12,3 +12,8 @@
 **Vulnerability:** The application was catching exceptions in logic callbacks and Kafka consumers, then assigning the raw exception string to a JSON `error` field in the successful response object. This leaked internal details even when the HTTP status code was 200 OK or when processing asynchronously via Kafka.
 **Learning:** Checking for HTTP 500 handlers is not enough. Review application-level error handling where business logic manually constructs error objects.
 **Prevention:** Ensure that any `result["error"]` or similar fields populated in catch blocks use generic messages, while the real exception is logged server-side.
+
+## 2026-03-05 - Middleware Regression Detection
+**Vulnerability:** The `CORSMiddleware` and `TrustedHostMiddleware` were missing from the application despite documentation/memory stating they were present.
+**Learning:** Documentation and memory can drift from the actual codebase state. Verification of security controls must be done against the running code, not just documentation.
+**Prevention:** Added permanent regression tests (`tests/controller/test_security_middleware.py`) that inspect the application's middleware stack to ensure security controls remain active.
