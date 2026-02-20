@@ -1,9 +1,7 @@
-import sys
-import os
-import pytest
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from regression_model_template.controller.kafka_app import app
+
 
 def test_middleware_presence():
     """Test that security middlewares are present in the app."""
@@ -11,6 +9,7 @@ def test_middleware_presence():
 
     assert CORSMiddleware in middleware_classes, "CORSMiddleware is missing"
     assert TrustedHostMiddleware in middleware_classes, "TrustedHostMiddleware is missing"
+
 
 def test_middleware_configuration():
     """Test that middlewares are configured correctly."""
@@ -33,11 +32,11 @@ def test_middleware_configuration():
     # app.user_middleware stores the Middleware wrapper which holds kwargs.
 
     assert "allowed_hosts" in trusted_host_middleware.kwargs
-    assert trusted_host_middleware.kwargs["allowed_hosts"] == ["*"] # Default
+    assert trusted_host_middleware.kwargs["allowed_hosts"] == ["*"]  # Default
 
     # CORSMiddleware
     assert "allow_origins" in cors_middleware.kwargs
-    assert cors_middleware.kwargs["allow_origins"] == ["*"] # Default
-    assert cors_middleware.kwargs["allow_credentials"] is False # Because origins is ["*"]
+    assert cors_middleware.kwargs["allow_origins"] == ["*"]  # Default
+    assert cors_middleware.kwargs["allow_credentials"] is False  # Because origins is ["*"]
     assert cors_middleware.kwargs["allow_methods"] == ["*"]
     assert cors_middleware.kwargs["allow_headers"] == ["*"]
