@@ -12,3 +12,8 @@
 **Vulnerability:** The application was catching exceptions in logic callbacks and Kafka consumers, then assigning the raw exception string to a JSON `error` field in the successful response object. This leaked internal details even when the HTTP status code was 200 OK or when processing asynchronously via Kafka.
 **Learning:** Checking for HTTP 500 handlers is not enough. Review application-level error handling where business logic manually constructs error objects.
 **Prevention:** Ensure that any `result["error"]` or similar fields populated in catch blocks use generic messages, while the real exception is logged server-side.
+
+## 2026-03-05 - Missing Security Middleware in FastAPI
+**Vulnerability:** The FastAPI application was initialized without `CORSMiddleware` or `TrustedHostMiddleware`, making it vulnerable to CORS attacks and Host header injection.
+**Learning:** Default FastAPI initialization does not include security headers. Explicit configuration is required.
+**Prevention:** Always add `TrustedHostMiddleware` and `CORSMiddleware` with configurable allowed hosts/origins via environment variables. Verify configuration by inspecting `app.user_middleware`.
