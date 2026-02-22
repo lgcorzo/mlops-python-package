@@ -3,6 +3,7 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from regression_model_template.controller.kafka_app import app
 import os
 
+
 def test_middleware_security_configuration():
     """Test that CORSMiddleware and TrustedHostMiddleware are configured."""
     middleware_types = [m.cls for m in app.user_middleware]
@@ -20,10 +21,14 @@ def test_middleware_security_configuration():
     for middleware in app.user_middleware:
         if middleware.cls == CORSMiddleware:
             # Check options - assuming defaults are set to ["*"] if not overridden
-            assert middleware.kwargs['allow_origins'] == os.getenv("ALLOWED_ORIGINS", "*").split(","), "CORSMiddleware allow_origins mismatch"
-            assert middleware.kwargs['allow_credentials'] is True, "CORSMiddleware allow_credentials mismatch"
-            assert middleware.kwargs['allow_methods'] == ["*"], "CORSMiddleware allow_methods mismatch"
-            assert middleware.kwargs['allow_headers'] == ["*"], "CORSMiddleware allow_headers mismatch"
+            assert middleware.kwargs["allow_origins"] == os.getenv("ALLOWED_ORIGINS", "*").split(
+                ","
+            ), "CORSMiddleware allow_origins mismatch"
+            assert middleware.kwargs["allow_credentials"] is True, "CORSMiddleware allow_credentials mismatch"
+            assert middleware.kwargs["allow_methods"] == ["*"], "CORSMiddleware allow_methods mismatch"
+            assert middleware.kwargs["allow_headers"] == ["*"], "CORSMiddleware allow_headers mismatch"
         elif middleware.cls == TrustedHostMiddleware:
-             # Check options - assuming defaults are set to ["*"] if not overridden
-            assert middleware.kwargs['allowed_hosts'] == os.getenv("ALLOWED_HOSTS", "*").split(","), "TrustedHostMiddleware allowed_hosts mismatch"
+            # Check options - assuming defaults are set to ["*"] if not overridden
+            assert middleware.kwargs["allowed_hosts"] == os.getenv("ALLOWED_HOSTS", "*").split(
+                ","
+            ), "TrustedHostMiddleware allowed_hosts mismatch"
