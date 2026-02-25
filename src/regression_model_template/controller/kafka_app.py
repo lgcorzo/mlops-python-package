@@ -15,7 +15,7 @@ from confluent_kafka import Consumer, KafkaError, Message, Producer
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 from regression_model_template.core.schemas import InputsSchema, Outputs
 from regression_model_template.io import registries, services
@@ -32,6 +32,7 @@ DEFAULT_FASTAPI_PORT = int(os.getenv("DEFAULT_FASTAPI_PORT", 8100))
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 LOGGING_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
+MAX_INPUT_ROWS = 10000
 
 # Security Configuration
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
@@ -85,6 +86,32 @@ class PredictionRequest(BaseModel):
     def validate_schema(self) -> pd.DataFrame:
         """Validates the input data against InputsSchema."""
         return InputsSchema.validate(pd.DataFrame([self.input_data]))  # type: ignore[return-value]
+
+    @field_validator("input_data")
+    @classmethod
+    def check_input_size(cls, v: Dict[str, Any]) -> Dict[str, Any]:
+        """Check if the input data size is within limits."""
+        if not v:
+            raise ValueError("Input data cannot be empty")
+
+        # Check max rows and consistency
+        first_len = -1
+        for key, value in v.items():
+            if not isinstance(value, list):
+                # If not a list (e.g. single value), pandas might handle it differently,
+                # but our schema expects Series (lists). Let's assume lists.
+                continue
+
+            current_len = len(value)
+            if first_len == -1:
+                first_len = current_len
+            elif current_len != first_len:
+                raise ValueError("All columns must have the same length")
+
+            if current_len > MAX_INPUT_ROWS:
+                raise ValueError(f"Input data exceeds maximum limit of {MAX_INPUT_ROWS} rows")
+
+        return v
 
 
 class PredictionResponse(BaseModel):
@@ -194,8 +221,8 @@ class FastAPIKafkaService:
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
             kafka_msg = json.loads(msg.value().decode("utf-8"))
-            input_obj: PredictionRequest = PredictionRequest()
-            input_obj.input_data = kafka_msg["input_data"]
+            # Use constructor to ensure validation runs
+            input_obj = PredictionRequest(input_data=kafka_msg["input_data"])
             logger.info(f"kafka Received input  {kafka_msg}")
             prediction_result = self.prediction_callback(input_obj).result
         except Exception as e:
