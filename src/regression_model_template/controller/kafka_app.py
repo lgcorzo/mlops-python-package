@@ -31,6 +31,8 @@ DEFAULT_INPUT_TOPIC = os.getenv("DEFAULT_INPUT_TOPIC", "input_topic")
 DEFAULT_OUTPUT_TOPIC = os.getenv("DEFAULT_OUTPUT_TOPIC", "output_topic")
 DEFAULT_FASTAPI_HOST = os.getenv("DEFAULT_FASTAPI_HOST", "127.0.0.1")
 DEFAULT_FASTAPI_PORT = int(os.getenv("DEFAULT_FASTAPI_PORT", 8100))
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 LOGGING_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 
 
@@ -45,24 +47,15 @@ app: FastAPI = FastAPI(
     version="1.0.0",
 )
 
-# Security Configuration
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
-ALLOW_CREDENTIALS = True
-if "*" in ALLOWED_ORIGINS:
-    ALLOW_CREDENTIALS = False
+# Security Middlewares
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
-    allow_credentials=ALLOW_CREDENTIALS,
+    allow_credentials=True if "*" not in ALLOWED_ORIGINS else False,
     allow_methods=["*"],
     allow_headers=["*"],
-)
-
-app.add_middleware(
-    TrustedHostMiddleware,
-    allowed_hosts=ALLOWED_HOSTS,
 )
 
 
