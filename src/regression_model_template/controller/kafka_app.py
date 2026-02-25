@@ -1,27 +1,25 @@
 """FastAPI and Kafka Service for Predictions with Logging."""
 
+import json
+import logging
 import os
 import signal
 import threading
-import logging
 import time
-import json
 import typing as T
-from typing import Any, Dict, Callable
+from typing import Any, Callable, Dict
 
-import uvicorn
 import pandas as pd
+import uvicorn
+from confluent_kafka import Consumer, KafkaError, Message, Producer
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel
 
-from confluent_kafka import Producer, Consumer, KafkaError, Message
-
 from regression_model_template.core.schemas import InputsSchema, Outputs
-from regression_model_template.io import services, registries
+from regression_model_template.io import registries, services
 from regression_model_template.io.registries import CustomLoader
-
 
 # Constants
 DEFAULT_KAFKA_SERVER = os.getenv("DEFAULT_KAFKA_SERVER", "kafka_server:9092")

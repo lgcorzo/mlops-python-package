@@ -1,8 +1,9 @@
-import requests
-import time
-import subprocess
 import os
+import subprocess
 import sys
+import time
+
+import requests
 
 # This script will run the actual FastAPI app but mock the Kafka part to allow it to start
 # without a real Kafka server.
