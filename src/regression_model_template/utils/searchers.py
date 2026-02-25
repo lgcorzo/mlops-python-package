@@ -3,8 +3,8 @@
 # %% IMPORTS
 
 import abc
-from typing import Union
 import typing as T
+from typing import Union
 
 import pandas as pd
 import pydantic as pdt

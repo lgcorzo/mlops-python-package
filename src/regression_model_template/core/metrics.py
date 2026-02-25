@@ -8,9 +8,9 @@ import abc
 import typing as T
 
 import mlflow
-from mlflow.metrics import MetricValue
 import pandas as pd
 import pydantic as pdt
+from mlflow.metrics import MetricValue
 from sklearn import metrics
 
 from regression_model_template.core import models, schemas

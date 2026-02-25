@@ -4,12 +4,12 @@
 
 import typing as T
 
+import pandas as pd
 import pydantic as pdt
 
 from regression_model_template.core import schemas
 from regression_model_template.io import datasets, registries
 from regression_model_template.jobs import base
-import pandas as pd
 
 # %% JOBS
 
