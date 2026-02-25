@@ -213,10 +213,12 @@ def test_handle_message_error_other_error(mock_kafka_service):
 def test_process_message(mock_json_loads, mock_kafka_service):
     """Test the _process_message method."""
     service, *_ = mock_kafka_service
-    mock_json_loads.return_value = {"input_data": "test_input"}
+    # Use valid input data structure for PredictionRequest
+    valid_input = PredictionRequest().input_data
+    mock_json_loads.return_value = {"input_data": valid_input}
     msg = MagicMock()
-    msg.value.return_value = b'{"input_data": "test_input"}'
-    msg.decode.return_value = '{"input_data": "test_input"}'
+    msg.value.return_value = json.dumps({"input_data": valid_input}).encode("utf-8")
+    msg.decode.return_value = json.dumps({"input_data": valid_input})
 
     service.producer = MagicMock()
     service.consumer = MagicMock()
@@ -254,10 +256,12 @@ def test_process_message_json_decode_error(mock_json_loads, mock_kafka_service):
 def test_process_message_prediction_error(mock_json_loads, mock_kafka_service):
     """Test _process_message handles prediction callback errors."""
     service, *_ = mock_kafka_service
-    mock_json_loads.return_value = {"input_data": "test_input"}
+    # Use valid input data structure for PredictionRequest
+    valid_input = PredictionRequest().input_data
+    mock_json_loads.return_value = {"input_data": valid_input}
     msg = MagicMock()
-    msg.value.return_value = b'{"input_data": "test_input"}'
-    msg.decode.return_value = '{"input_data": "test_input"}'
+    msg.value.return_value = json.dumps({"input_data": valid_input}).encode("utf-8")
+    msg.decode.return_value = json.dumps({"input_data": valid_input})
 
     service.producer = MagicMock()
     service.consumer = MagicMock()
