@@ -7,6 +7,7 @@ import pandas as pd
 # We use the caplog fixture directly, assuming the project configuration for logging doesn't interfere too much.
 # If it does, we might need to adjust the logging configuration in the test.
 
+
 @pytest.mark.asyncio
 async def test_predict_log_leakage(caplog):
     """
@@ -32,7 +33,7 @@ async def test_predict_log_leakage(caplog):
             "casual": [0],
             "registered": [0],
             # This field mimics a sensitive field that might be accidentally included
-            "password": [sensitive_value]
+            "password": [sensitive_value],
         }
     }
 
@@ -51,14 +52,15 @@ async def test_predict_log_leakage(caplog):
         # but is valid enough to pass type checking.
         request = MagicMock(spec=PredictionRequest)
         request.input_data = request_data["input_data"]
-        request.__str__.return_value = str(request_data) # Ensure str(request) leaks it
+        request.__str__.return_value = str(request_data)  # Ensure str(request) leaks it
         request.__repr__.return_value = str(request_data)
-
 
     # Mock the service
     with patch("regression_model_template.controller.kafka_app.fastapi_kafka_service") as mock_service:
         # Mock the callback to return a successful result so the function completes
-        mock_service.prediction_callback.return_value = MagicMock(result={"inference": [0.0], "quality": 1.0, "error": ""})
+        mock_service.prediction_callback.return_value = MagicMock(
+            result={"inference": [0.0], "quality": 1.0, "error": ""}
+        )
 
         # Configure logging capture
         caplog.set_level(logging.INFO)
@@ -77,6 +79,7 @@ async def test_predict_log_leakage(caplog):
 
         assert not found_leak, f"Sensitive value '{sensitive_value}' was found in INFO logs!"
 
+
 def test_kafka_consumer_log_leakage(caplog):
     """
     Test that the Kafka consumer processing does not log sensitive information at INFO level.
@@ -88,7 +91,7 @@ def test_kafka_consumer_log_leakage(caplog):
             "dteday": ["2024-01-01"],
             "season": [1],
             # ... other fields omitted for brevity as we just check if the whole msg is logged
-            "password": [sensitive_value]
+            "password": [sensitive_value],
         }
     }
 
@@ -97,16 +100,14 @@ def test_kafka_consumer_log_leakage(caplog):
     mock_prediction_callback.return_value = MagicMock(result={"inference": [0.0]})
 
     service = FastAPIKafkaService(
-        prediction_callback=mock_prediction_callback,
-        kafka_config={},
-        input_topic="test",
-        output_topic="test"
+        prediction_callback=mock_prediction_callback, kafka_config={}, input_topic="test", output_topic="test"
     )
 
     # Mock Kafka message
     mock_msg = MagicMock()
     mock_msg.error.return_value = None
     import json
+
     mock_msg.value.return_value = json.dumps(kafka_msg_value).encode("utf-8")
 
     # Configure logging capture
