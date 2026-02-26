@@ -113,8 +113,8 @@ SHAPValues = papd.DataFrame[SHAPValuesSchema]
 class FeatureImportancesSchema(Schema):
     """Schema for the project feature importances."""
 
-    feature: papd.Series[padt.String] = pa.Field()
-    importance: papd.Series[padt.Float32] = pa.Field()
+    feature: papd.Series[str] = pa.Field()
+    importance: papd.Series[float] = pa.Field()
 
 
 FeatureImportances = papd.DataFrame[FeatureImportancesSchema]
