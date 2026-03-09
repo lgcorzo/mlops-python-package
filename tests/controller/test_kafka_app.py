@@ -245,9 +245,9 @@ def test_process_message_json_decode_error(mock_json_loads, mock_kafka_service):
 
     service.producer = MagicMock()
     service.consumer = MagicMock()
-    with patch("regression_model_template.controller.kafka_app.logger.error") as mock_logger_error:
+    with patch("regression_model_template.controller.kafka_app.logger.exception") as mock_logger_exception:
         service._process_message(msg)
-        mock_logger_error.assert_called()
+        mock_logger_exception.assert_called()
     service.prediction_callback.assert_not_called()
     service.producer.produce.assert_called_once()
 
@@ -305,11 +305,11 @@ async def test_predict_endpoint():
         mock_fastapi_kafka_service.prediction_callback.return_value = PredictionResponse(
             result={"inference": [1.0], "quality": 1.0, "error": None}
         )
-        with patch("regression_model_template.controller.kafka_app.logger.info") as mock_logger_info:
+        with patch("regression_model_template.controller.kafka_app.logger.debug") as mock_logger_debug:
             request = PredictionRequest()
             response = await predict(request)
             assert response.result["inference"] == [1.0]
-            mock_logger_info.assert_called()
+            mock_logger_debug.assert_called()
 
 
 @pytest.mark.asyncio
