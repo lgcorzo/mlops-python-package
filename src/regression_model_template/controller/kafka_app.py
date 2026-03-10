@@ -226,7 +226,11 @@ class FastAPIKafkaService:
             try:
                 # We assume standard structure based on validation logic
                 col_keys = list(kafka_msg.get("input_data", {}).keys())
-                num_rows = len(kafka_msg.get("input_data", {})[col_keys[0]]) if col_keys and isinstance(kafka_msg["input_data"][col_keys[0]], list) else 0
+                num_rows = (
+                    len(kafka_msg.get("input_data", {})[col_keys[0]])
+                    if col_keys and isinstance(kafka_msg["input_data"][col_keys[0]], list)
+                    else 0
+                )
                 logger.info(f"Received Kafka prediction request for {num_rows} rows")
             except Exception:
                 logger.info("Received Kafka prediction request (could not parse row count)")
@@ -292,7 +296,11 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
         # Safely extract and log summary info at INFO level
         try:
             col_keys = list(request.input_data.keys())
-            num_rows = len(request.input_data[col_keys[0]]) if col_keys and isinstance(request.input_data[col_keys[0]], list) else 0
+            num_rows = (
+                len(request.input_data[col_keys[0]])
+                if col_keys and isinstance(request.input_data[col_keys[0]], list)
+                else 0
+            )
             logger.info(f"Received HTTP prediction request for {num_rows} rows")
         except Exception:
             logger.info("Received HTTP prediction request (could not parse row count)")
