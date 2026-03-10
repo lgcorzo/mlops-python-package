@@ -221,9 +221,19 @@ class FastAPIKafkaService:
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
             kafka_msg = json.loads(msg.value().decode("utf-8"))
+
+            # Safely extract and log summary info at INFO level
+            try:
+                # We assume standard structure based on validation logic
+                col_keys = list(kafka_msg.get("input_data", {}).keys())
+                num_rows = len(kafka_msg.get("input_data", {})[col_keys[0]]) if col_keys and isinstance(kafka_msg["input_data"][col_keys[0]], list) else 0
+                logger.info(f"Received Kafka prediction request for {num_rows} rows")
+            except Exception:
+                logger.info("Received Kafka prediction request (could not parse row count)")
+
             # Use constructor to ensure validation runs
             input_obj = PredictionRequest(input_data=kafka_msg["input_data"])
-            logger.info(f"kafka Received input  {kafka_msg}")
+            logger.debug(f"kafka Received input  {kafka_msg}")
             prediction_result = self.prediction_callback(input_obj).result
         except Exception as e:
             logger.exception(f"Error during prediction processing: {e}")
@@ -279,9 +289,18 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
     """Endpoint for making predictions via HTTP."""
     global fastapi_kafka_service
     try:
-        logger.info(f"Received HTTP prediction request: {request}")
+        # Safely extract and log summary info at INFO level
+        try:
+            col_keys = list(request.input_data.keys())
+            num_rows = len(request.input_data[col_keys[0]]) if col_keys and isinstance(request.input_data[col_keys[0]], list) else 0
+            logger.info(f"Received HTTP prediction request for {num_rows} rows")
+        except Exception:
+            logger.info("Received HTTP prediction request (could not parse row count)")
+
+        logger.debug(f"HTTP prediction request payload: {request}")
         prediction_result = fastapi_kafka_service.prediction_callback(request)
-        logger.info(f"HTTP prediction result: {prediction_result}")
+        logger.debug(f"HTTP prediction result: {prediction_result}")
+        logger.info("HTTP prediction request processed successfully")
         return prediction_result  # Use the global class
     except Exception:
         logger.exception("Error processing HTTP prediction request:")
