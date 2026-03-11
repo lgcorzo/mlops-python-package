@@ -223,7 +223,14 @@ class FastAPIKafkaService:
             kafka_msg = json.loads(msg.value().decode("utf-8"))
             # Use constructor to ensure validation runs
             input_obj = PredictionRequest(input_data=kafka_msg["input_data"])
-            logger.info(f"kafka Received input  {kafka_msg}")
+
+            try:
+                row_count = len(next(iter(kafka_msg["input_data"].values())))
+                logger.info(f"Kafka received prediction request with {row_count} rows.")
+            except Exception:
+                logger.info("Kafka received prediction request with unknown number of rows.")
+            logger.debug(f"Kafka Received input {kafka_msg}")
+
             prediction_result = self.prediction_callback(input_obj).result
         except Exception as e:
             logger.exception(f"Error during prediction processing: {e}")
@@ -279,9 +286,22 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
     """Endpoint for making predictions via HTTP."""
     global fastapi_kafka_service
     try:
-        logger.info(f"Received HTTP prediction request: {request}")
+        try:
+            row_count = len(next(iter(request.input_data.values())))
+            logger.info(f"Received HTTP prediction request with {row_count} rows.")
+        except Exception:
+            logger.info("Received HTTP prediction request with unknown number of rows.")
+        logger.debug(f"Received HTTP prediction request: {request}")
+
         prediction_result = fastapi_kafka_service.prediction_callback(request)
-        logger.info(f"HTTP prediction result: {prediction_result}")
+
+        try:
+            res_row_count = len(prediction_result.result.get("inference", []))
+            logger.info(f"HTTP prediction result with {res_row_count} inferences.")
+        except Exception:
+            logger.info("HTTP prediction result computed.")
+        logger.debug(f"HTTP prediction result: {prediction_result}")
+
         return prediction_result  # Use the global class
     except Exception:
         logger.exception("Error processing HTTP prediction request:")
