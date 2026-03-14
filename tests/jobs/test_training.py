@@ -84,32 +84,32 @@ def test_training_job(
     assert out["targets"].ndim == out["targets_"].ndim == 2, "Targets should be a dataframe!"
     # - lineage
     assert out["inputs_lineage"].name == "inputs", "Inputs lineage name should be inputs!"
-    assert (
-        out["inputs_lineage"].source.uri == inputs_reader.path
-    ), "Inputs lineage source should be the inputs reader path!"
+    assert out["inputs_lineage"].source.uri == inputs_reader.path, (
+        "Inputs lineage source should be the inputs reader path!"
+    )
     assert out["targets_lineage"].name == "targets", "Targets lineage name should be targets!"
-    assert (
-        out["targets_lineage"].source.uri == targets_reader.path
-    ), "Targets lineage source should be the targets reader path!"
+    assert out["targets_lineage"].source.uri == targets_reader.path, (
+        "Targets lineage source should be the targets reader path!"
+    )
     assert out["targets_lineage"].targets == schemas.TargetsSchema.cnt, "Targets lineage target should be cnt!"
     # - splitter
-    assert len(out["inputs_train"]) + len(out["inputs_test"]) == len(
-        out["inputs"]
-    ), "Train and test inputs should have the same length as inputs!"
-    assert len(out["targets_train"]) + len(out["targets_test"]) == len(
-        out["targets"]
-    ), "Train and test targets should have the same length as targets!"
-    assert (
-        len(out["train_index"]) == len(out["inputs_train"]) == len(out["targets_train"])
-    ), "Train inputs and targets should have the same length!"
-    assert (
-        len(out["test_index"]) == len(out["inputs_test"]) == len(out["targets_test"])
-    ), "Test inputs and targets should have the same length!"
+    assert len(out["inputs_train"]) + len(out["inputs_test"]) == len(out["inputs"]), (
+        "Train and test inputs should have the same length as inputs!"
+    )
+    assert len(out["targets_train"]) + len(out["targets_test"]) == len(out["targets"]), (
+        "Train and test targets should have the same length as targets!"
+    )
+    assert len(out["train_index"]) == len(out["inputs_train"]) == len(out["targets_train"]), (
+        "Train inputs and targets should have the same length!"
+    )
+    assert len(out["test_index"]) == len(out["inputs_test"]) == len(out["targets_test"]), (
+        "Test inputs and targets should have the same length!"
+    )
     # - outputs
     assert out["outputs_test"].shape == out["targets_test"].shape, "Outputs should have the same shape as targets!"
-    assert (
-        len(out["test_index"]) == len(out["outputs_test"]) == len(out["inputs_test"])
-    ), "Outputs should have the same length as inputs!"
+    assert len(out["test_index"]) == len(out["outputs_test"]) == len(out["inputs_test"]), (
+        "Outputs should have the same length as inputs!"
+    )
     # - i and score
     assert out["i"] == len(job.metrics), "i should be the number of metrics computed!"
     assert float("-inf") < out["score"] < float("+inf"), "Score should be between 0 and 1!"
