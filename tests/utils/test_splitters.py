@@ -37,9 +37,9 @@ def test_time_series_splitter(inputs: schemas.Inputs, targets: schemas.Targets) 
     assert n_splits == len(splits), "Splitter should return the given n splits!"
     for i, (train_index, test_index) in enumerate(splits):
         assert len(test_index) == test_size, "Test index should have the given test size!"
-        assert len(train_index) == (len(inputs) - test_size * (n_splits - i)), (
-            "Train index should have the cumulative remaining size!"
-        )
+        assert len(train_index) == (
+            len(inputs) - test_size * (n_splits - i)
+        ), "Train index should have the cumulative remaining size!"
         assert train_index.max() < test_index.min(), "Train index should always be lower than test index!"
         assert not inputs.iloc[train_index].empty, "Train index should be a subset of the inputs!"
         assert not inputs.iloc[test_index].empty, "Test index should be a subset of the inputs!"
