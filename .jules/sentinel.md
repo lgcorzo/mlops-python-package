@@ -27,3 +27,9 @@
 **Vulnerability:** The Kafka consumer was initializing a Pydantic model with default values and then assigning fields directly (e.g., `model = Model(); model.field = data`). This bypasses Pydantic validation because `validate_assignment` is `False` by default, allowing invalid or malicious data (like excessive rows causing DoS) to be processed.
 **Learning:** Pydantic models only validate arguments passed to `__init__` by default. Manual assignment after instantiation is unsafe for untrusted input.
 **Prevention:** Always instantiate Pydantic models with the data as keyword arguments (e.g., `model = Model(field=data)`) to ensure validation logic runs.
+
+## 2026-08-01 - Information Leakage and Log DoS via Excessive Payload Logging
+
+**Vulnerability:** The application was logging full raw input payloads (from HTTP and Kafka requests) and full prediction results at the `INFO` level. This created a high risk of Information Leakage (sensitive data appearing in central logs) and Log Exhaustion Denial of Service (DoS) if large payloads were submitted.
+**Learning:** Default logging of `request.json()` or `msg.value()` during processing is a common anti-pattern that bloats log aggregators and risks exposing PII/secrets. Log levels must distinguish between essential metadata (`INFO`) and full diagnostic traces (`DEBUG`).
+**Prevention:** Always log full payloads at `DEBUG` level. At `INFO` level, log only safe summaries or metadata (e.g., row counts, request IDs). When extracting metadata like row counts from raw JSON, wrap the parsing in a `try...except` block to prevent unexpected data structures from crashing the application before validation occurs.
