@@ -223,7 +223,14 @@ class FastAPIKafkaService:
             kafka_msg = json.loads(msg.value().decode("utf-8"))
             # Use constructor to ensure validation runs
             input_obj = PredictionRequest(input_data=kafka_msg["input_data"])
-            logger.info(f"kafka Received input  {kafka_msg}")
+            logger.debug(f"kafka Received input  {kafka_msg}")
+
+            try:
+                row_count = len(next(iter(input_obj.input_data.values()))) if input_obj.input_data else 0
+                logger.info(f"Kafka received prediction request with {row_count} rows")
+            except Exception:
+                logger.info("Kafka received prediction request with unparseable row count")
+
             prediction_result = self.prediction_callback(input_obj).result
         except Exception as e:
             logger.exception(f"Error during prediction processing: {e}")
@@ -279,9 +286,24 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
     """Endpoint for making predictions via HTTP."""
     global fastapi_kafka_service
     try:
-        logger.info(f"Received HTTP prediction request: {request}")
+        logger.debug(f"Received HTTP prediction request: {request}")
+
+        try:
+            row_count = len(next(iter(request.input_data.values()))) if request.input_data else 0
+            logger.info(f"Received HTTP prediction request with {row_count} rows")
+        except Exception:
+            logger.info("Received HTTP prediction request with unparseable row count")
+
         prediction_result = fastapi_kafka_service.prediction_callback(request)
-        logger.info(f"HTTP prediction result: {prediction_result}")
+
+        logger.debug(f"HTTP prediction result: {prediction_result}")
+
+        try:
+            result_count = len(prediction_result.result.get("inference", []))
+            logger.info(f"HTTP prediction resulted in {result_count} predictions")
+        except Exception:
+            logger.info("HTTP prediction completed with unparseable result count")
+
         return prediction_result  # Use the global class
     except Exception:
         logger.exception("Error processing HTTP prediction request:")
