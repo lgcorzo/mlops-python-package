@@ -225,25 +225,16 @@ class FastAPIKafkaService:
             # Secure logging: Log raw payload at DEBUG, safe summary at INFO
             logger.debug(f"kafka Received input  {kafka_msg}")
             try:
-                # Extract row count safely assuming it's a dict of lists
-                if "input_data" in kafka_msg and isinstance(kafka_msg["input_data"], dict):
-                    first_key = next(iter(kafka_msg["input_data"]))
-                    row_count = len(kafka_msg["input_data"][first_key])
-                    logger.info(f"kafka processing message with {row_count} rows")
-                else:
-                    logger.info("kafka processing message")
-            except Exception:
-                logger.info("kafka processing message")
-
-            # Use constructor to ensure validation runs
-            input_obj = PredictionRequest(input_data=kafka_msg["input_data"])
-            logger.debug(f"kafka Received input  {kafka_msg}")
-            try:
-                row_count = len(next(iter(kafka_msg.get("input_data", {}).values())))
-                num_cols = len(kafka_msg.get("input_data", {}))
+                # Extract row/column count safely
+                input_data = kafka_msg.get("input_data", {})
+                row_count = len(next(iter(input_data.values()))) if input_data else 0
+                num_cols = len(input_data)
                 logger.info(f"Kafka received input with {row_count} rows and {num_cols} columns")
             except Exception:
                 logger.info("Kafka received input with unknown or malformed data structure")
+
+            # Use constructor to ensure validation runs
+            input_obj = PredictionRequest(input_data=kafka_msg["input_data"])
 
             prediction_result = self.prediction_callback(input_obj).result
         except Exception as e:
@@ -303,7 +294,6 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
         logger.debug(f"Received HTTP prediction request: {request}")
         try:
             row_count = len(next(iter(request.input_data.values())))
-<<<<<<< HEAD
             num_cols = len(request.input_data)
             logger.info(f"Received HTTP prediction request with {row_count} rows and {num_cols} columns")
         except Exception:
@@ -318,18 +308,6 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
         except Exception:
             logger.info("HTTP prediction request processed successfully")
 
-=======
-            logger.info(f"Received HTTP prediction request with {row_count} rows")
-        except Exception:
-            logger.info("Received HTTP prediction request")
-        prediction_result = fastapi_kafka_service.prediction_callback(request)
-        logger.debug(f"HTTP prediction result: {prediction_result}")
-        try:
-            inference_len = len(prediction_result.result.get("inference", []))
-            logger.info(f"HTTP prediction result generated {inference_len} predictions")
-        except Exception:
-            logger.info("HTTP prediction result generated")
->>>>>>> origin/sentinel-fix-log-dos-and-info-leakage-1097663321870250444
         return prediction_result  # Use the global class
     except Exception:
         logger.exception("Error processing HTTP prediction request:")
