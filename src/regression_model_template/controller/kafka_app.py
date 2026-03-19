@@ -224,13 +224,14 @@ class FastAPIKafkaService:
             # Use constructor to ensure validation runs
             input_obj = PredictionRequest(input_data=kafka_msg["input_data"])
             logger.debug(f"kafka Received input  {kafka_msg}")
+            logger.debug(f"kafka Received input  {kafka_msg}")
 
             try:
                 row_count = len(next(iter(kafka_msg.get("input_data", {}).values())))
-                logger.info(f"Kafka received input with {row_count} rows")
+                num_cols = len(kafka_msg.get("input_data", {}))
+                logger.info(f"Kafka received input with {row_count} rows and {num_cols} columns")
             except Exception:
-                logger.info("Kafka received input with unknown or malformed row count")
-
+                logger.info("Kafka received input with unknown or malformed data structure")
 
             prediction_result = self.prediction_callback(input_obj).result
         except Exception as e:
@@ -290,14 +291,19 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
         logger.debug(f"Received HTTP prediction request: {request}")
         try:
             row_count = len(next(iter(request.input_data.values())))
-            logger.info(f"Received HTTP prediction request with {row_count} rows")
+            num_cols = len(request.input_data)
+            logger.info(f"Received HTTP prediction request with {row_count} rows and {num_cols} columns")
         except Exception:
-            logger.info("Received HTTP prediction request with unknown row count")
+            logger.info("Received HTTP prediction request with unknown data structure")
 
         prediction_result = fastapi_kafka_service.prediction_callback(request)
 
         logger.debug(f"HTTP prediction result: {prediction_result}")
-        logger.info("HTTP prediction request processed successfully")
+        try:
+            status = "error" if prediction_result.result.get("error") else "success"
+            logger.info(f"HTTP prediction request processed successfully with status: {status}")
+        except Exception:
+            logger.info("HTTP prediction request processed successfully")
 
         return prediction_result  # Use the global class
     except Exception:

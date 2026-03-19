@@ -28,9 +28,9 @@
 **Learning:** Pydantic models only validate arguments passed to `__init__` by default. Manual assignment after instantiation is unsafe for untrusted input.
 **Prevention:** Always instantiate Pydantic models with the data as keyword arguments (e.g., `model = Model(field=data)`) to ensure validation logic runs.
 
-## 2026-08-10 - Information Leakage and Log DoS via Full Payload Logging
+## 2026-08-11 - Information Leakage, Log Bloat, and Log DoS in Input Payloads
 
-**Vulnerability:** The application was logging the full contents of incoming Kafka messages and HTTP prediction requests at the `INFO` level. This risks exposing sensitive or PII data within logs and could lead to a Denial of Service (DoS) of the logging infrastructure by overwhelming it with massive payloads.
-**Learning:** Developers often log full payloads at `INFO` level during development to trace data flow, but fail to downgrade these logs to `DEBUG` for production, leading to excessive noise and potential security leaks.
-**Prevention:** Log complete input payloads at `DEBUG` level only. Use `INFO` level logging to output safe, summarized information (like the number of rows processed) while ensuring extraction of summaries is wrapped in `try...except` to prevent application crashes from malformed data.
+**Vulnerability:** The application was logging the full contents of incoming Kafka messages and HTTP prediction requests at the `INFO` level. This risks exposing sensitive or PII data within logs, causing log bloat, and could lead to a Denial of Service (DoS) of the logging infrastructure by overwhelming it with massive payloads.
+**Learning:** Production logs should generally not contain full raw user inputs, especially for data processing APIs where inputs can be large or sensitive. Verbose logging should be restricted to `DEBUG` levels.
+**Prevention:** Log complete input payloads at `DEBUG` level only. Use `INFO` level logging to output safe, summarized information (like row and column counts) while ensuring extraction of summaries is wrapped in `try...except` to prevent application crashes from malformed data.
 
