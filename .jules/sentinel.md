@@ -34,3 +34,9 @@
 **Learning:** Production logs should generally not contain full raw user inputs, especially for data processing APIs where inputs can be large or sensitive. Verbose logging should be restricted to `DEBUG` levels.
 **Prevention:** Log complete input payloads at `DEBUG` level only. Use `INFO` level logging to output safe, summarized information (like row and column counts) while ensuring extraction of summaries is wrapped in `try...except` to prevent application crashes from malformed data.
 
+
+## 2026-10-24 - Missing Security Headers
+
+**Vulnerability:** The FastAPI application was missing basic security HTTP headers (e.g., `X-Content-Type-Options`, `X-Frame-Options`, `Strict-Transport-Security`), leaving it vulnerable to MIME-type sniffing, Clickjacking, and Man-in-the-Middle attacks.
+**Learning:** Default FastAPI configurations do not automatically set security headers. Explicit middleware is needed to inject these headers into all HTTP responses.
+**Prevention:** Always add a custom middleware or use a specialized library to ensure all incoming responses get secure default headers (`nosniff`, `DENY`, HSTS).
