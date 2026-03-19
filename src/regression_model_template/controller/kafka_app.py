@@ -221,6 +221,20 @@ class FastAPIKafkaService:
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
             kafka_msg = json.loads(msg.value().decode("utf-8"))
+
+            # Secure logging: Log raw payload at DEBUG, safe summary at INFO
+            logger.debug(f"kafka Received input  {kafka_msg}")
+            try:
+                # Extract row count safely assuming it's a dict of lists
+                if "input_data" in kafka_msg and isinstance(kafka_msg["input_data"], dict):
+                    first_key = next(iter(kafka_msg["input_data"]))
+                    row_count = len(kafka_msg["input_data"][first_key])
+                    logger.info(f"kafka processing message with {row_count} rows")
+                else:
+                    logger.info("kafka processing message")
+            except Exception:
+                logger.info("kafka processing message")
+
             # Use constructor to ensure validation runs
             input_obj = PredictionRequest(input_data=kafka_msg["input_data"])
             logger.debug(f"kafka Received input  {kafka_msg}")
