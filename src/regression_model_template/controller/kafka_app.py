@@ -221,13 +221,20 @@ class FastAPIKafkaService:
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
             kafka_msg = json.loads(msg.value().decode("utf-8"))
+
+            # Secure logging: Log raw payload at DEBUG, safe summary at INFO
+            logger.debug(f"kafka Received input  {kafka_msg}")
+            try:
+                # Extract row/column count safely
+                input_data = kafka_msg.get("input_data", {})
+                row_count = len(next(iter(input_data.values()))) if input_data else 0
+                num_cols = len(input_data)
+                logger.info(f"Kafka received input with {row_count} rows and {num_cols} columns")
+            except Exception:
+                logger.info("Kafka received input with unknown or malformed data structure")
+
             # Use constructor to ensure validation runs
             input_obj = PredictionRequest(input_data=kafka_msg["input_data"])
-
-            # Log summary safely
-            row_count = len(next(iter(input_obj.input_data.values()))) if input_obj.input_data else 0
-            logger.info(f"kafka Received input with {row_count} rows")
-            logger.debug(f"kafka Received input payload: {kafka_msg}")
 
             prediction_result = self.prediction_callback(input_obj).result
         except Exception as e:
@@ -284,13 +291,23 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
     """Endpoint for making predictions via HTTP."""
     global fastapi_kafka_service
     try:
-        # Log summary safely
-        row_count = len(next(iter(request.input_data.values()))) if request.input_data else 0
-        logger.info(f"Received HTTP prediction request with {row_count} rows")
-        logger.debug(f"Full HTTP prediction request: {request}")
+        logger.debug(f"Received HTTP prediction request: {request}")
+        try:
+            row_count = len(next(iter(request.input_data.values())))
+            num_cols = len(request.input_data)
+            logger.info(f"Received HTTP prediction request with {row_count} rows and {num_cols} columns")
+        except Exception:
+            logger.info("Received HTTP prediction request with unknown data structure")
 
         prediction_result = fastapi_kafka_service.prediction_callback(request)
-        logger.info(f"HTTP prediction result: {prediction_result}")
+
+        logger.debug(f"HTTP prediction result: {prediction_result}")
+        try:
+            status = "error" if prediction_result.result.get("error") else "success"
+            logger.info(f"HTTP prediction request processed successfully with status: {status}")
+        except Exception:
+            logger.info("HTTP prediction request processed successfully")
+
         return prediction_result  # Use the global class
     except Exception:
         logger.exception("Error processing HTTP prediction request:")
