@@ -223,7 +223,12 @@ class FastAPIKafkaService:
             kafka_msg = json.loads(msg.value().decode("utf-8"))
             # Use constructor to ensure validation runs
             input_obj = PredictionRequest(input_data=kafka_msg["input_data"])
-            logger.info(f"kafka Received input  {kafka_msg}")
+
+            # Log summary safely
+            row_count = len(next(iter(input_obj.input_data.values()))) if input_obj.input_data else 0
+            logger.info(f"kafka Received input with {row_count} rows")
+            logger.debug(f"kafka Received input payload: {kafka_msg}")
+
             prediction_result = self.prediction_callback(input_obj).result
         except Exception as e:
             logger.exception(f"Error during prediction processing: {e}")
@@ -279,7 +284,11 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
     """Endpoint for making predictions via HTTP."""
     global fastapi_kafka_service
     try:
-        logger.info(f"Received HTTP prediction request: {request}")
+        # Log summary safely
+        row_count = len(next(iter(request.input_data.values()))) if request.input_data else 0
+        logger.info(f"Received HTTP prediction request with {row_count} rows")
+        logger.debug(f"Full HTTP prediction request: {request}")
+
         prediction_result = fastapi_kafka_service.prediction_callback(request)
         logger.info(f"HTTP prediction result: {prediction_result}")
         return prediction_result  # Use the global class
