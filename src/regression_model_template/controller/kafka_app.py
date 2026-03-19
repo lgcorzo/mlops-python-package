@@ -229,7 +229,8 @@ class FastAPIKafkaService:
                 row_count = len(next(iter(kafka_msg.get("input_data", {}).values())))
                 logger.info(f"Kafka received input with {row_count} rows")
             except Exception:
-                logger.info("Kafka received input with unknown number of rows")
+                logger.info("Kafka received input with unknown or malformed row count")
+
 
             prediction_result = self.prediction_callback(input_obj).result
         except Exception as e:
@@ -287,15 +288,17 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
     global fastapi_kafka_service
     try:
         logger.debug(f"Received HTTP prediction request: {request}")
-
         try:
             row_count = len(next(iter(request.input_data.values())))
-            logger.info(f"HTTP received input with {row_count} rows")
+            logger.info(f"Received HTTP prediction request with {row_count} rows")
         except Exception:
-            logger.info("HTTP received input with unknown number of rows")
+            logger.info("Received HTTP prediction request with unknown row count")
 
         prediction_result = fastapi_kafka_service.prediction_callback(request)
+
         logger.debug(f"HTTP prediction result: {prediction_result}")
+        logger.info("HTTP prediction request processed successfully")
+
         return prediction_result  # Use the global class
     except Exception:
         logger.exception("Error processing HTTP prediction request:")
