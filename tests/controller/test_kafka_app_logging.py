@@ -62,7 +62,7 @@ async def test_predict_endpoint_logging(mock_logger):
 
         # Verify safe info log was called
         expected_cols = len(request.input_data)
-        mock_logger.info.assert_any_call(f"Received HTTP prediction request with {expected_cols} columns")
+        mock_logger.info.assert_any_call(f"Received HTTP prediction request with 4 rows and {expected_cols} columns")
 
         # Verify debug log was called with the result
         mock_logger.debug.assert_any_call(f"HTTP prediction result: {mock_response}")
@@ -96,4 +96,4 @@ def test_kafka_process_message_logging(mock_logger, mock_kafka_service):
 
         # Verify safe info log was called
         expected_cols = len(valid_input)
-        mock_logger.info.assert_any_call(f"Kafka received input with {expected_cols} columns")
+        mock_logger.info.assert_any_call(f"Kafka received input with 4 rows and {expected_cols} columns")
