@@ -40,3 +40,9 @@
 **Vulnerability:** The FastAPI application was missing basic security HTTP headers (e.g., `X-Content-Type-Options`, `X-Frame-Options`, `Strict-Transport-Security`), leaving it vulnerable to MIME-type sniffing, Clickjacking, and Man-in-the-Middle attacks.
 **Learning:** Default FastAPI configurations do not automatically set security headers. Explicit middleware is needed to inject these headers into all HTTP responses.
 **Prevention:** Always add a custom middleware or use a specialized library to ensure all incoming responses get secure default headers (`nosniff`, `DENY`, HSTS).
+
+## 2026-11-05 - DoS Risk in Kafka Consumers via Unnecessary Sleep
+
+**Vulnerability:** The `_consume_messages` method contained a hardcoded `time.sleep(0.1)` inside the main `while` loop, creating an artificial bottleneck. This ignores the native blocking properties of `consumer.poll()` and needlessly limits message throughput, causing latency spikes and increasing the risk of Denial of Service (DoS) in high-volume environments.
+**Learning:** Manual thread sleeping is rarely necessary when a library exposes built-in waiting/polling timeouts (like `poll(1.0)`). Stacking custom `sleep()` logic on top of native polling leads to poor application performance.
+**Prevention:** Rely entirely on the consumer's `poll(timeout)` parameter to block while waiting for new messages efficiently. Avoid using arbitrary `time.sleep()` statements inside event loops or message-consuming pipelines unless explicitly needed for exponential backoff during error handling.

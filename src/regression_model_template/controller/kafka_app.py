@@ -198,7 +198,6 @@ class FastAPIKafkaService:
     def _consume_messages(self) -> None:
         """Consume messages from Kafka topic and produce predictions."""
         while not self.stop_event.is_set():
-            time.sleep(0.1)
             msg = self._poll_message()
             if msg is None:
                 continue
