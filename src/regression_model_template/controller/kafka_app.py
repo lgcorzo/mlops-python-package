@@ -12,7 +12,7 @@ from typing import Any, Callable, Dict
 import pandas as pd
 import uvicorn
 from confluent_kafka import Consumer, KafkaError, Message, Producer
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel, field_validator
@@ -59,6 +59,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next: Any) -> Any:
+    """Middleware to add security headers to HTTP responses."""
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    return response
 
 
 # Data Models
