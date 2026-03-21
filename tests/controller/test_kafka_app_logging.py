@@ -52,7 +52,9 @@ async def test_predict_endpoint_logging(mock_logger):
         mock_fastapi_kafka_service.prediction_callback.return_value = mock_response
 
         request = PredictionRequest()
-        response = await predict(request)
+        mock_http_request = MagicMock()
+        mock_http_request.client.host = "127.0.0.1"
+        response = await predict(request, mock_http_request)
 
         # Verify the response is returned
         assert response == mock_response

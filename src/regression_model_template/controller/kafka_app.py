@@ -7,6 +7,7 @@ import signal
 import threading
 import time
 import typing as T
+from collections import OrderedDict
 from typing import Any, Callable, Dict
 
 import pandas as pd
@@ -288,6 +289,39 @@ class FastAPIKafkaService:
 fastapi_kafka_service: "FastAPIKafkaService" = T.cast("FastAPIKafkaService", None)
 
 
+# Rate Limiting Configuration
+RATE_LIMIT_WINDOW = 60  # seconds
+MAX_REQUESTS_PER_WINDOW = 100
+MAX_TRACKED_IPS = 10000
+_rate_limit_records: OrderedDict[str, list[float]] = OrderedDict()
+
+
+def check_rate_limit(request: Request) -> None:
+    """Check if the client has exceeded the rate limit."""
+    client_ip = request.client.host if request.client else "unknown"
+    current_time = time.time()
+
+    # Initialize IP if not present, and handle bounded cache logic
+    if client_ip not in _rate_limit_records:
+        if len(_rate_limit_records) >= MAX_TRACKED_IPS:
+            _rate_limit_records.popitem(last=False)
+        _rate_limit_records[client_ip] = []
+
+    # Move IP to the end to mark it as recently used (LRU cache behavior)
+    _rate_limit_records.move_to_end(client_ip)
+
+    # Clean up old requests for this specific IP (O(1) operation relative to total IPs)
+    _rate_limit_records[client_ip] = [
+        t for t in _rate_limit_records[client_ip] if current_time - t < RATE_LIMIT_WINDOW
+    ]
+
+    if len(_rate_limit_records[client_ip]) >= MAX_REQUESTS_PER_WINDOW:
+        logger.warning(f"Rate limit exceeded for IP: {client_ip}")
+        raise HTTPException(status_code=429, detail="Too Many Requests")
+
+    _rate_limit_records[client_ip].append(current_time)
+
+
 # FastAPI Endpoints
 @app.post(
     "/predict",
@@ -296,8 +330,9 @@ fastapi_kafka_service: "FastAPIKafkaService" = T.cast("FastAPIKafkaService", Non
     description="This endpoint allows you to submit data for a prediction.",
     tags=["Prediction"],
 )
-async def predict(request: PredictionRequest) -> PredictionResponse:  # Use global var
+async def predict(request: PredictionRequest, http_request: Request) -> PredictionResponse:  # Use global var
     """Endpoint for making predictions via HTTP."""
+    check_rate_limit(http_request)
     global fastapi_kafka_service
     try:
         logger.debug(f"Received HTTP prediction request: {request}")

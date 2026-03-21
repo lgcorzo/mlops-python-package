@@ -46,3 +46,8 @@
 **Vulnerability:** The `_consume_messages` method contained a hardcoded `time.sleep(0.1)` inside the main `while` loop, creating an artificial bottleneck. This ignores the native blocking properties of `consumer.poll()` and needlessly limits message throughput, causing latency spikes and increasing the risk of Denial of Service (DoS) in high-volume environments.
 **Learning:** Manual thread sleeping is rarely necessary when a library exposes built-in waiting/polling timeouts (like `poll(1.0)`). Stacking custom `sleep()` logic on top of native polling leads to poor application performance.
 **Prevention:** Rely entirely on the consumer's `poll(timeout)` parameter to block while waiting for new messages efficiently. Avoid using arbitrary `time.sleep()` statements inside event loops or message-consuming pipelines unless explicitly needed for exponential backoff during error handling.
+
+## 2024-03-21 - Added Rate Limiting to HTTP Endpoints
+**Vulnerability:** The `/predict` endpoint lacked rate limiting, making it vulnerable to HTTP-based Denial of Service (DoS) attacks and brute-force resource exhaustion.
+**Learning:** In environments where adding external dependencies (like `slowapi`) is prohibited or difficult, a lightweight in-memory sliding window rate limiter can provide a baseline layer of defense.
+**Prevention:** Always implement rate limiting on unauthenticated or computationally expensive endpoints by default.
