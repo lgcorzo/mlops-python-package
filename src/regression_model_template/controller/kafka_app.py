@@ -311,9 +311,7 @@ def check_rate_limit(request: Request) -> None:
     _rate_limit_records.move_to_end(client_ip)
 
     # Clean up old requests for this specific IP (O(1) operation relative to total IPs)
-    _rate_limit_records[client_ip] = [
-        t for t in _rate_limit_records[client_ip] if current_time - t < RATE_LIMIT_WINDOW
-    ]
+    _rate_limit_records[client_ip] = [t for t in _rate_limit_records[client_ip] if current_time - t < RATE_LIMIT_WINDOW]
 
     if len(_rate_limit_records[client_ip]) >= MAX_REQUESTS_PER_WINDOW:
         logger.warning(f"Rate limit exceeded for IP: {client_ip}")
