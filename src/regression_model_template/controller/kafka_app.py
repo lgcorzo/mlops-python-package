@@ -7,6 +7,7 @@ import signal
 import threading
 import time
 import typing as T
+from collections import OrderedDict
 from typing import Any, Callable, Dict
 
 import pandas as pd
@@ -33,6 +34,9 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 LOGGING_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 MAX_INPUT_ROWS = 10000
+RATE_LIMIT_WINDOW = 60
+MAX_REQUESTS_PER_WINDOW = 100
+MAX_TRACKED_IPS = 10000
 
 # Security Configuration
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
@@ -284,8 +288,62 @@ class FastAPIKafkaService:
         logger.info("Service stopped.")
 
 
+class IPRateLimiter:
+    """In-memory sliding window rate limiter backed by an OrderedDict to track IP request counts."""
+
+    def __init__(
+        self,
+        max_requests: int = MAX_REQUESTS_PER_WINDOW,
+        window_size: int = RATE_LIMIT_WINDOW,
+        max_tracked_ips: int = MAX_TRACKED_IPS,
+    ):
+        self.max_requests = max_requests
+        self.window_size = window_size
+        self.max_tracked_ips = max_tracked_ips
+        self.tracked_ips: OrderedDict[str, list[float]] = OrderedDict()
+        self.lock = threading.Lock()
+
+    def is_rate_limited(self, ip: str) -> bool:
+        """Check if the IP has exceeded the rate limit."""
+        current_time = time.time()
+
+        with self.lock:
+            # Get or create the request list for this IP
+            if ip not in self.tracked_ips:
+                # If we've reached the max tracked IPs, evict the oldest (FIFO)
+                if len(self.tracked_ips) >= self.max_tracked_ips:
+                    self.tracked_ips.popitem(last=False)
+                self.tracked_ips[ip] = []
+
+            # Move the IP to the end (most recently used)
+            self.tracked_ips.move_to_end(ip)
+
+            # Filter out requests older than the window
+            requests = self.tracked_ips[ip]
+            window_start = current_time - self.window_size
+
+            # Find the index of the first request within the window
+            idx = 0
+            for req_time in requests:
+                if req_time >= window_start:
+                    break
+                idx += 1
+
+            # Keep only requests within the window
+            requests = requests[idx:]
+            self.tracked_ips[ip] = requests
+
+            if len(requests) >= self.max_requests:
+                return True
+
+            # Add the current request
+            self.tracked_ips[ip].append(current_time)
+            return False
+
+
 # Global Service Instance
 fastapi_kafka_service: "FastAPIKafkaService" = T.cast("FastAPIKafkaService", None)
+rate_limiter = IPRateLimiter()
 
 
 # FastAPI Endpoints
@@ -296,9 +354,16 @@ fastapi_kafka_service: "FastAPIKafkaService" = T.cast("FastAPIKafkaService", Non
     description="This endpoint allows you to submit data for a prediction.",
     tags=["Prediction"],
 )
-async def predict(request: PredictionRequest) -> PredictionResponse:  # Use global var
+async def predict(request: PredictionRequest, http_request: Request) -> PredictionResponse:  # Use global var
     """Endpoint for making predictions via HTTP."""
     global fastapi_kafka_service
+
+    if http_request and http_request.client:
+        client_ip = http_request.client.host
+        if rate_limiter.is_rate_limited(client_ip):
+            logger.warning(f"Rate limit exceeded for IP: {client_ip}")
+            raise HTTPException(status_code=429, detail="Too Many Requests")
+
     try:
         logger.debug(f"Received HTTP prediction request: {request}")
         try:

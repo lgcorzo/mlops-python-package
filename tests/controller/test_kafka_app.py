@@ -307,7 +307,9 @@ async def test_predict_endpoint():
         )
         with patch("regression_model_template.controller.kafka_app.logger.debug") as mock_logger_debug:
             request = PredictionRequest()
-            response = await predict(request)
+            mock_request = MagicMock()
+            mock_request.client.host = "127.0.0.1"
+            response = await predict(request, http_request=mock_request)
             assert response.result["inference"] == [1.0]
             mock_logger_debug.assert_called()
 
@@ -317,7 +319,9 @@ async def test_predict_endpoint_exception():
     with patch("regression_model_template.controller.kafka_app.fastapi_kafka_service") as mock_fastapi_kafka_service:
         mock_fastapi_kafka_service.prediction_callback.side_effect = Exception("Test Exception")
         with pytest.raises(HTTPException):
-            await predict(PredictionRequest())
+            mock_request = MagicMock()
+            mock_request.client.host = "127.0.0.1"
+            await predict(PredictionRequest(), http_request=mock_request)
 
 
 @pytest.mark.asyncio
