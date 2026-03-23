@@ -8,6 +8,7 @@ import threading
 import time
 import typing as T
 from typing import Any, Callable, Dict
+from collections import OrderedDict
 
 import pandas as pd
 import uvicorn
@@ -20,6 +21,11 @@ from pydantic import BaseModel, field_validator
 from regression_model_template.core.schemas import InputsSchema, Outputs
 from regression_model_template.io import registries, services
 from regression_model_template.io.registries import CustomLoader
+
+# Rate Limiting Configuration
+MAX_TRACKED_IPS = 10000
+RATE_LIMIT_REQUESTS = 10
+RATE_LIMIT_WINDOW_SEC = 60
 
 # Constants
 DEFAULT_KAFKA_SERVER = os.getenv("DEFAULT_KAFKA_SERVER", "kafka_server:9092")
@@ -69,6 +75,40 @@ async def add_security_headers(request: Request, call_next: Any) -> Any:
     response.headers["X-Frame-Options"] = "DENY"
     response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
     return response
+
+
+class RateLimiter:
+    """In-memory sliding window rate limiter backed by OrderedDict."""
+
+    def __init__(self, limit: int, window: int, max_ips: int):
+        self.limit = limit
+        self.window = window
+        self.max_ips = max_ips
+        self.requests: OrderedDict[str, list[float]] = OrderedDict()
+        self.lock = threading.Lock()
+
+    def is_allowed(self, ip: str) -> bool:
+        """Check if the given IP is allowed to make a request."""
+        now = time.time()
+        with self.lock:
+            if ip in self.requests:
+                # Remove stale requests
+                self.requests[ip] = [t for t in self.requests[ip] if now - t < self.window]
+                self.requests.move_to_end(ip)
+            else:
+                self.requests[ip] = []
+                if len(self.requests) > self.max_ips:
+                    self.requests.popitem(last=False)
+
+            if len(self.requests[ip]) >= self.limit:
+                return False
+
+            self.requests[ip].append(now)
+            return True
+
+
+# Initialize Rate Limiter
+rate_limiter = RateLimiter(RATE_LIMIT_REQUESTS, RATE_LIMIT_WINDOW_SEC, MAX_TRACKED_IPS)
 
 
 # Data Models
@@ -296,19 +336,26 @@ fastapi_kafka_service: "FastAPIKafkaService" = T.cast("FastAPIKafkaService", Non
     description="This endpoint allows you to submit data for a prediction.",
     tags=["Prediction"],
 )
-async def predict(request: PredictionRequest) -> PredictionResponse:  # Use global var
+async def predict(request_data: PredictionRequest, request: Request) -> PredictionResponse:  # Use global var
     """Endpoint for making predictions via HTTP."""
     global fastapi_kafka_service
+
+    # Rate limiting
+    client_ip = request.client.host if request.client else "127.0.0.1"
+    if not rate_limiter.is_allowed(client_ip):
+        logger.warning(f"Rate limit exceeded for IP: {client_ip}")
+        raise HTTPException(status_code=429, detail="Too Many Requests")
+
     try:
-        logger.debug(f"Received HTTP prediction request: {request}")
+        logger.debug(f"Received HTTP prediction request: {request_data}")
         try:
-            row_count = len(next(iter(request.input_data.values())))
-            num_cols = len(request.input_data)
+            row_count = len(next(iter(request_data.input_data.values())))
+            num_cols = len(request_data.input_data)
             logger.info(f"Received HTTP prediction request with {row_count} rows and {num_cols} columns")
         except Exception:
             logger.info("Received HTTP prediction request with unknown data structure")
 
-        prediction_result = fastapi_kafka_service.prediction_callback(request)
+        prediction_result = fastapi_kafka_service.prediction_callback(request_data)
 
         logger.debug(f"HTTP prediction result: {prediction_result}")
         try:

@@ -46,3 +46,8 @@
 **Vulnerability:** The `_consume_messages` method contained a hardcoded `time.sleep(0.1)` inside the main `while` loop, creating an artificial bottleneck. This ignores the native blocking properties of `consumer.poll()` and needlessly limits message throughput, causing latency spikes and increasing the risk of Denial of Service (DoS) in high-volume environments.
 **Learning:** Manual thread sleeping is rarely necessary when a library exposes built-in waiting/polling timeouts (like `poll(1.0)`). Stacking custom `sleep()` logic on top of native polling leads to poor application performance.
 **Prevention:** Rely entirely on the consumer's `poll(timeout)` parameter to block while waiting for new messages efficiently. Avoid using arbitrary `time.sleep()` statements inside event loops or message-consuming pipelines unless explicitly needed for exponential backoff during error handling.
+
+## 2026-03-23 - Missing Rate Limiting on Prediction Endpoint
+**Vulnerability:** The `/predict` endpoint, which accepts potentially large payloads and triggers machine learning model inference, lacked rate limiting. This left the service vulnerable to algorithmic Denial of Service (DoS) attacks and abuse by overwhelming the inference engine.
+**Learning:** Endpoints that consume significant computational resources (like ML inference) must be protected by rate limits, even if they are internal or expected to be low-traffic. Relying solely on API gateways is insufficient for defense-in-depth.
+**Prevention:** Implement an in-memory sliding window rate limiter using `OrderedDict` (to prevent memory leaks by evicting old IPs) and `threading.Lock` (for thread safety). Apply this to sensitive endpoints to ensure the application can self-protect.
