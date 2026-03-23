@@ -4,6 +4,7 @@ from unittest.mock import patch, MagicMock
 from fastapi import HTTPException
 from regression_model_template.controller.kafka_app import RateLimiter, predict, PredictionRequest
 
+
 def test_rate_limiter_allowed_requests():
     """Test that requests within the limit are allowed."""
     limiter = RateLimiter(limit=3, window=60, max_ips=10)
@@ -11,6 +12,7 @@ def test_rate_limiter_allowed_requests():
     assert limiter.is_allowed("192.168.1.1") is True
     assert limiter.is_allowed("192.168.1.1") is True
     assert limiter.is_allowed("192.168.1.1") is True
+
 
 def test_rate_limiter_blocked_requests():
     """Test that requests exceeding the limit are blocked."""
@@ -20,6 +22,7 @@ def test_rate_limiter_blocked_requests():
     assert limiter.is_allowed("10.0.0.1") is True
     assert limiter.is_allowed("10.0.0.1") is False  # 3rd request should be blocked
     assert limiter.is_allowed("10.0.0.1") is False
+
 
 def test_rate_limiter_window_expiration():
     """Test that requests are allowed again after the window expires."""
@@ -31,6 +34,7 @@ def test_rate_limiter_window_expiration():
     # Wait for the window to expire
     with patch("time.time", return_value=time.time() + 1.1):
         assert limiter.is_allowed("172.16.0.1") is True  # Allowed again
+
 
 def test_rate_limiter_max_ips_eviction():
     """Test that old IPs are evicted when max_ips capacity is reached."""
@@ -50,6 +54,7 @@ def test_rate_limiter_max_ips_eviction():
     assert "ip2" in limiter.requests
     assert "ip1" not in limiter.requests
 
+
 @pytest.mark.asyncio
 async def test_predict_endpoint_rate_limiting():
     """Test the /predict endpoint integration with RateLimiter."""
@@ -65,6 +70,7 @@ async def test_predict_endpoint_rate_limiting():
         assert excinfo.value.status_code == 429
         assert excinfo.value.detail == "Too Many Requests"
 
+
 @pytest.mark.asyncio
 async def test_predict_endpoint_success_with_mock():
     """Test the /predict endpoint succeeds if rate limiting passes."""
@@ -73,9 +79,10 @@ async def test_predict_endpoint_success_with_mock():
 
     request_data = PredictionRequest()
 
-    with patch("regression_model_template.controller.kafka_app.rate_limiter.is_allowed", return_value=True), \
-         patch("regression_model_template.controller.kafka_app.fastapi_kafka_service") as mock_service:
-
+    with (
+        patch("regression_model_template.controller.kafka_app.rate_limiter.is_allowed", return_value=True),
+        patch("regression_model_template.controller.kafka_app.fastapi_kafka_service") as mock_service,
+    ):
         # Mock successful prediction callback
         mock_result = MagicMock()
         mock_result.result = {"inference": [0.0]}
