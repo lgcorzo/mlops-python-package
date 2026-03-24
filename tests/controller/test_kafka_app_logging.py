@@ -51,17 +51,19 @@ async def test_predict_endpoint_logging(mock_logger):
         mock_response = PredictionResponse(result={"inference": [1.0], "quality": 1.0, "error": None})
         mock_fastapi_kafka_service.prediction_callback.return_value = mock_response
 
-        request = PredictionRequest()
-        response = await predict(request)
+        request_data = PredictionRequest()
+        mock_request = MagicMock()
+        mock_request.client.host = '127.0.0.1'
+        response = await predict(request_data, mock_request)
 
         # Verify the response is returned
         assert response == mock_response
 
         # Verify debug log was called with the request
-        mock_logger.debug.assert_any_call(f"Received HTTP prediction request: {request}")
+        mock_logger.debug.assert_any_call(f"Received HTTP prediction request: {request_data}")
 
         # Verify safe info log was called
-        expected_cols = len(request.input_data)
+        expected_cols = len(request_data.input_data)
         mock_logger.info.assert_any_call(f"Received HTTP prediction request with 4 rows and {expected_cols} columns")
 
         # Verify debug log was called with the result

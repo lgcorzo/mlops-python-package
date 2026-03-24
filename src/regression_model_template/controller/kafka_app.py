@@ -6,6 +6,7 @@ import os
 import signal
 import threading
 import time
+import collections
 import typing as T
 from typing import Any, Callable, Dict
 
@@ -33,6 +34,7 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 LOGGING_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 MAX_INPUT_ROWS = 10000
+MAX_TRACKED_IPS = 10000
 
 # Security Configuration
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
@@ -69,6 +71,39 @@ async def add_security_headers(request: Request, call_next: Any) -> Any:
     response.headers["X-Frame-Options"] = "DENY"
     response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
     return response
+
+
+class RateLimiter:
+    """In-memory sliding window rate limiter backed by OrderedDict."""
+
+    def __init__(self, max_requests: int = 100, window_seconds: int = 60, max_tracked_ips: int = MAX_TRACKED_IPS):
+        self.max_requests = max_requests
+        self.window_seconds = window_seconds
+        self.max_tracked_ips = max_tracked_ips
+        self.tracked_ips: collections.OrderedDict[str, list[float]] = collections.OrderedDict()
+
+    def is_allowed(self, ip: str) -> bool:
+        """Check if the given IP is allowed to make a request."""
+        current_time = time.time()
+
+        if ip not in self.tracked_ips:
+            if len(self.tracked_ips) >= self.max_tracked_ips:
+                self.tracked_ips.popitem(last=False)  # Evict oldest
+            self.tracked_ips[ip] = []
+
+        # Mark as recently used
+        self.tracked_ips.move_to_end(ip)
+
+        timestamps = self.tracked_ips[ip]
+        # Remove old timestamps
+        while timestamps and current_time - timestamps[0] > self.window_seconds:
+            timestamps.pop(0)
+
+        if len(timestamps) >= self.max_requests:
+            return False
+
+        timestamps.append(current_time)
+        return True
 
 
 # Data Models
@@ -287,6 +322,9 @@ class FastAPIKafkaService:
 # Global Service Instance
 fastapi_kafka_service: "FastAPIKafkaService" = T.cast("FastAPIKafkaService", None)
 
+# Rate Limiter Instance
+predict_rate_limiter = RateLimiter(max_requests=100, window_seconds=60)
+
 
 # FastAPI Endpoints
 @app.post(
@@ -296,19 +334,26 @@ fastapi_kafka_service: "FastAPIKafkaService" = T.cast("FastAPIKafkaService", Non
     description="This endpoint allows you to submit data for a prediction.",
     tags=["Prediction"],
 )
-async def predict(request: PredictionRequest) -> PredictionResponse:  # Use global var
+async def predict(request_data: PredictionRequest, request: Request) -> PredictionResponse:  # Use global var
     """Endpoint for making predictions via HTTP."""
     global fastapi_kafka_service
+
+    # Apply rate limiting
+    client_ip = request.client.host if request.client else "unknown"
+    if not predict_rate_limiter.is_allowed(client_ip):
+        logger.warning(f"Rate limit exceeded for IP: {client_ip}")
+        raise HTTPException(status_code=429, detail="Too Many Requests")
+
     try:
-        logger.debug(f"Received HTTP prediction request: {request}")
+        logger.debug(f"Received HTTP prediction request: {request_data}")
         try:
-            row_count = len(next(iter(request.input_data.values())))
-            num_cols = len(request.input_data)
+            row_count = len(next(iter(request_data.input_data.values())))
+            num_cols = len(request_data.input_data)
             logger.info(f"Received HTTP prediction request with {row_count} rows and {num_cols} columns")
         except Exception:
             logger.info("Received HTTP prediction request with unknown data structure")
 
-        prediction_result = fastapi_kafka_service.prediction_callback(request)
+        prediction_result = fastapi_kafka_service.prediction_callback(request_data)
 
         logger.debug(f"HTTP prediction result: {prediction_result}")
         try:
@@ -318,6 +363,8 @@ async def predict(request: PredictionRequest) -> PredictionResponse:  # Use glob
             logger.info("HTTP prediction request processed successfully")
 
         return prediction_result  # Use the global class
+    except HTTPException:
+        raise
     except Exception:
         logger.exception("Error processing HTTP prediction request:")
         raise HTTPException(status_code=500, detail="Internal Server Error")
