@@ -53,7 +53,7 @@ async def test_predict_endpoint_logging(mock_logger):
 
         request_data = PredictionRequest()
         mock_request = MagicMock()
-        mock_request.client.host = '127.0.0.1'
+        mock_request.client.host = "127.0.0.1"
         response = await predict(request_data, mock_request)
 
         # Verify the response is returned

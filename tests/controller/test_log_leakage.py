@@ -67,7 +67,7 @@ async def test_predict_log_leakage(caplog):
 
         # Call the endpoint
         mock_request = MagicMock()
-        mock_request.client.host = '127.0.0.1'
+        mock_request.client.host = "127.0.0.1"
         await predict(request, mock_request)
 
         # Check logs for leakage

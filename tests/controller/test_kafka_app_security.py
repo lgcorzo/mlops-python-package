@@ -45,7 +45,7 @@ def test_predict_endpoint_exception_leak():
             # Expect an HTTPException
             with pytest.raises(HTTPException) as excinfo:
                 mock_request = MagicMock()
-                mock_request.client.host = '127.0.0.1'
+                mock_request.client.host = "127.0.0.1"
                 await predict(PredictionRequest(), mock_request)
 
             # Verify that the sensitive message is leaked in the detail
