@@ -46,3 +46,9 @@
 **Vulnerability:** The `_consume_messages` method contained a hardcoded `time.sleep(0.1)` inside the main `while` loop, creating an artificial bottleneck. This ignores the native blocking properties of `consumer.poll()` and needlessly limits message throughput, causing latency spikes and increasing the risk of Denial of Service (DoS) in high-volume environments.
 **Learning:** Manual thread sleeping is rarely necessary when a library exposes built-in waiting/polling timeouts (like `poll(1.0)`). Stacking custom `sleep()` logic on top of native polling leads to poor application performance.
 **Prevention:** Rely entirely on the consumer's `poll(timeout)` parameter to block while waiting for new messages efficiently. Avoid using arbitrary `time.sleep()` statements inside event loops or message-consuming pipelines unless explicitly needed for exponential backoff during error handling.
+
+## 2026-12-01 - Algorithmic DoS Vulnerability on ML Endpoints
+
+**Vulnerability:** The `/predict` HTTP endpoint lacked an application-level rate limiter, leaving it vulnerable to algorithmic Denial of Service (DoS) attacks. Because ML inference can be highly compute-intensive, an attacker could trivially exhaust server resources by sending rapid, valid requests from a single IP.
+**Learning:** External API gateways are insufficient for defense-in-depth, especially when endpoints perform computationally expensive tasks like machine learning inference. Memory leaks must also be avoided when tracking IP histories.
+**Prevention:** Implement a bounded, in-memory rate limiter using `collections.OrderedDict`. This ensures O(1) eviction of the oldest tracked IPs (e.g., capping at `MAX_TRACKED_IPS = 10000`) and limits the number of requests per window, preventing both compute exhaustion and memory bloat.
