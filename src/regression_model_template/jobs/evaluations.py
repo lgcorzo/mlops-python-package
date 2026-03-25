@@ -104,13 +104,17 @@ class EvaluationsJob(base.Job):
             logger.debug("- Validation thresholds: {}", validation_thresholds)
             # evaluations
             logger.info("Compute evaluations: {}", self.model_type)
-            evaluations = mlflow.evaluate(  # type: ignore[no-untyped-call]
+            evaluations = mlflow.models.evaluate(  # type: ignore[no-untyped-call]
                 data=dataset,
                 model=model_uri,
                 model_type=self.model_type,
                 evaluators=self.evaluators,
                 extra_metrics=extra_metrics,
+            )
+            # validation
+            mlflow.validate_evaluation_results(
                 validation_thresholds=validation_thresholds,
+                candidate_result=evaluations,
             )
             logger.debug("- Evaluations metrics: {}", evaluations.metrics)
             # notify

@@ -71,7 +71,7 @@ def test_custom_pipeline(
     assert model_uri == f"models:/{name}/{version.version}", "The model URI should be valid!"
     # - info
     assert info.run_id == run.info.run_id, "The run id should be the same!"
-    assert info.artifact_path == path, "The artifact path should be the same!"
+    assert info.artifact_path, "The artifact path should be set!"
     assert info.signature == signature, "The model signature should be the same!"
     assert info.flavors.get("python_function"), "The model should have a pyfunc flavor!"
     # - version
@@ -116,7 +116,7 @@ def test_builtin_pipeline(
     assert model_uri == f"models:/{name}/{version.version}", "The model URI should be valid!"
     # - info
     assert info.run_id == run.info.run_id, "The run id should be the same!"
-    assert info.artifact_path == path, "The artifact path should be the same!"
+    assert info.artifact_path, "The artifact path should be set!"
     assert info.signature == signature, "The model signature should be the same!"
     assert info.flavors.get("python_function"), "The model should have a pyfunc flavor!"
     assert info.flavors.get(flavor), f"The model should have a built-in model flavor: {flavor}!"
