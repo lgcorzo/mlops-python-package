@@ -34,6 +34,7 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 LOGGING_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 MAX_INPUT_ROWS = 10000
+MAX_INPUT_COLS = 100
 MAX_TRACKED_IPS = 10000
 
 # Security Configuration
@@ -138,6 +139,10 @@ class PredictionRequest(BaseModel):
         """Check if the input data size is within limits."""
         if not v:
             raise ValueError("Input data cannot be empty")
+
+        # Check max columns
+        if len(v) > MAX_INPUT_COLS:
+            raise ValueError(f"Input data exceeds maximum limit of {MAX_INPUT_COLS} columns")
 
         # Check max rows and consistency
         first_len = -1

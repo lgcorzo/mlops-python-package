@@ -52,3 +52,8 @@
 **Vulnerability:** The `/predict` HTTP endpoint lacked an application-level rate limiter, leaving it vulnerable to algorithmic Denial of Service (DoS) attacks. Because ML inference can be highly compute-intensive, an attacker could trivially exhaust server resources by sending rapid, valid requests from a single IP.
 **Learning:** External API gateways are insufficient for defense-in-depth, especially when endpoints perform computationally expensive tasks like machine learning inference. Memory leaks must also be avoided when tracking IP histories.
 **Prevention:** Implement a bounded, in-memory rate limiter using `collections.OrderedDict`. This ensures O(1) eviction of the oldest tracked IPs (e.g., capping at `MAX_TRACKED_IPS = 10000`) and limits the number of requests per window, preventing both compute exhaustion and memory bloat.
+
+## 2026-12-05 - Algorithmic DoS Vulnerability via Unbounded Columns
+**Vulnerability:** The `/predict` endpoint enforced a maximum row limit but did not limit the number of columns, allowing an attacker to submit wide payloads causing memory exhaustion and Algorithmic DoS.
+**Learning:** When validating tabular or matrix-like data inputs, limits must be applied to all dimensions (both rows and columns) to properly bound memory usage.
+**Prevention:** Always define and enforce strict limits on both row and column counts for incoming data structures.
