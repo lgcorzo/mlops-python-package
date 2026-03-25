@@ -218,7 +218,8 @@ class FastAPIKafkaService:
 
     def _handle_message_error(self, msg: Message) -> bool:
         """Handle errors in polled messages."""
-        if msg.error().code() == KafkaError._PARTITION_EOF:
+        err = msg.error()
+        if err and err.code() == KafkaError._PARTITION_EOF:
             logger.debug("Reached end of partition.")
             return True
         else:
@@ -229,7 +230,11 @@ class FastAPIKafkaService:
         """Process a valid Kafka message."""
         predictionresponse: PredictionResponse = PredictionResponse()
         try:
-            kafka_msg = json.loads(msg.value().decode("utf-8"))
+            val = msg.value()
+            if val is None:
+                logger.error("Received message with None value")
+                return
+            kafka_msg = json.loads(val.decode("utf-8"))
 
             # Secure logging: Log raw payload at DEBUG, safe summary at INFO
             logger.debug(f"kafka Received input  {kafka_msg}")
@@ -264,7 +269,7 @@ class FastAPIKafkaService:
             else:
                 logger.error("Kafka producer is not initialized.")
             if self.consumer:
-                self.consumer.commit(msg)
+                self.consumer.commit(message=msg, asynchronous=True)
         except Exception:
             logger.exception("Error during Kafka production/commit:")
 

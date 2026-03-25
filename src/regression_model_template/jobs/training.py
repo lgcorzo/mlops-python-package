@@ -89,13 +89,13 @@ class TrainingJob(base.Job):
             # - index
             train_index, test_index = next(self.splitter.split(inputs=inputs, targets=targets))
             # - inputs
-            inputs_train = T.cast(schemas.Inputs, inputs.iloc[train_index])
-            inputs_test = T.cast(schemas.Inputs, inputs.iloc[test_index])
+            inputs_train = inputs.iloc[train_index]
+            inputs_test = inputs.iloc[test_index]
             logger.debug("- Inputs train shape: {}", inputs_train.shape)
             logger.debug("- Inputs test shape: {}", inputs_test.shape)
             # - targets
-            targets_train = T.cast(schemas.Targets, targets.iloc[train_index])
-            targets_test = T.cast(schemas.Targets, targets.iloc[test_index])
+            targets_train = targets.iloc[train_index]
+            targets_test = targets.iloc[test_index]
             logger.debug("- Targets train shape: {}", targets_train.shape)
             logger.debug("- Targets test shape: {}", targets_test.shape)
             # model

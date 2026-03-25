@@ -39,7 +39,7 @@ class PromotionJob(base.Job):
                 0
             ].version
         else:
-            version = self.version
+            version = str(self.version)
         logger.info("From version: {}", version)
         # alias
         logger.info("To alias: {}", self.alias)
