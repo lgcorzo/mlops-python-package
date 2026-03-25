@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from regression_model_template.controller.kafka_app import MAX_INPUT_ROWS, PredictionRequest
+from regression_model_template.controller.kafka_app import MAX_INPUT_ROWS, MAX_INPUT_COLS, PredictionRequest
 
 
 def test_prediction_request_max_rows():
@@ -16,6 +16,22 @@ def test_prediction_request_max_rows():
 
     # Check error message
     assert "Input data exceeds maximum limit" in str(excinfo.value)
+    assert "rows" in str(excinfo.value)
+
+
+def test_prediction_request_max_cols():
+    """Test that PredictionRequest enforces max cols limit."""
+
+    # Create input with MAX_INPUT_COLS + 1 columns
+    excessive_cols = MAX_INPUT_COLS + 1
+    input_data = {f"col{i}": [1, 2] for i in range(excessive_cols)}
+
+    with pytest.raises(ValidationError) as excinfo:
+        PredictionRequest(input_data=input_data)
+
+    # Check error message
+    assert "Input data exceeds maximum limit" in str(excinfo.value)
+    assert "columns" in str(excinfo.value)
 
 
 def test_prediction_request_valid_rows():
