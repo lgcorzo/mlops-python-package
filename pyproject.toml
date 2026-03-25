@@ -10,7 +10,7 @@ authors = [{ name = "lgcorzo" }]
 readme = "README.md"
 license = "MIT"
 keywords = ["mlops", "python", "package"]
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.13"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
@@ -28,10 +28,10 @@ regression_model_template = "regression_model_template.scripts:main"
 packages = [{ include = "regression_model_template", from = "src" }]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<3.13"
 loguru = "^0.7.2"
 matplotlib = "^3.9.0"
-mlflow = { version = "^2.14.3", extras = ["extras"] }
+mlflow = { version = "^3.10.1", extras = ["extras"] }
 numpy = "^1.26.4"
 omegaconf = "^2.3.0"
 pandas = "^2.2.2"
@@ -47,8 +47,8 @@ setuptools = "^71.1.0"
 scikit-learn = "1.4.2"
 shap = "^0.46.0"
 dvc = "^3.58.0"
-mlserver = "<1.6.1"
-mlserver-mlflow = "<1.6.1"
+mlserver = "^1.7.1"
+mlserver-mlflow = "^1.7.1"
 opentelemetry-instrumentation = "^0.51b0"
 opentelemetry-exporter-otlp-proto-http = "^1.30.0"
 opentelemetry-exporter-otlp = "^1.30.0"
