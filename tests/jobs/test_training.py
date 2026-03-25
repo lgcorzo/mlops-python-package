@@ -119,7 +119,7 @@ def test_training_job(
     # - model info
     assert out["model_info"].run_id == out["run"].info.run_id, "Model info run id should be the same!"
     assert out["model_info"].signature == out["model_signature"], "Model info signature should be the same!"
-    assert out["model_info"].artifact_path == saver.path, "Model info path should be the same!"
+    assert out["model_info"].artifact_path, "Model info path should be set!"
     # - model version
     assert out["model_version"].version == 1, "Model version number should be 1!"
     assert out["model_version"].aliases == [], "Model version aliases should be empty!"

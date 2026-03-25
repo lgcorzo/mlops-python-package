@@ -34,18 +34,19 @@ class PromotionJob(base.Job):
         logger.info("With client: {}", client)
         name = self.mlflow_service.registry_name
         # version
+        version: str | int
         if self.version is None:  # use the latest model version
             version = client.search_model_versions(f"name='{name}'", max_results=1, order_by=["version_number DESC"])[
                 0
             ].version
         else:
-            version = str(self.version)
+            version = self.version
         logger.info("From version: {}", version)
         # alias
         logger.info("To alias: {}", self.alias)
         # promote
         logger.info("Promote model: {}", name)
-        client.set_registered_model_alias(name=name, alias=self.alias, version=version)
+        client.set_registered_model_alias(name=name, alias=self.alias, version=str(version))
         model_version = client.get_model_version_by_alias(name=name, alias=self.alias)
         logger.debug("- Model version: {}", model_version)
         # notify
