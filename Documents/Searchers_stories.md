@@ -18,39 +18,46 @@
 
 ```mermaid
 classDiagram
-direction LR
+    direction LR
 
     class Searcher {
         <<abstract>>
         +KIND: str
         +param_grid: Grid
-        +search(model, metric, inputs, targets, cv) : Results
+        +search(model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) Results*
     }
+    Searcher --|> pdt.BaseModel : inherits
+    Searcher --|> abc.ABC : inherits
 
     class GridCVSearcher {
-        +KIND: "GridCVSearcher"
-        +n_jobs: int | None
-        +refit: bool
-        +verbose: int
-        +error_score: str | float
-        +return_train_score: bool
-        +search(model, metric, inputs, targets, cv) : Results
+        +KIND: T.Literal["GridCVSearcher"] = "GridCVSearcher"
+        +n_jobs: int | None = None
+        +refit: bool = True
+        +verbose: int = 3
+        +error_score: str | float = "raise"
+        +return_train_score: bool = False
+        +search(model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) Results
     }
+    GridCVSearcher --|> Searcher : inherits
 
     class Grid {
         <<type>>
-        [models.ParamKey, list[models.ParamValue]]
+        dict[models.ParamKey, list[models.ParamValue]]
     }
 
     class Results {
         <<type>>
-        Tuple[DataFrame, float, models.Params]
+        tuple[pd.DataFrame, float, models.Params]
     }
 
     class CrossValidation {
         <<type>>
-        int | splitters.TrainTestSplits | splitters.Splitter
+        Union[int, splitters.TrainTestSplits, splitters.Splitter]
     }
+
+    Searcher --> Grid : "uses"
+    Searcher --> Results : "returns"
+    Searcher --> CrossValidation : "uses"
 
     class models.Model {
         <<external>>
@@ -82,7 +89,7 @@ direction LR
 
 ## **User Stories: Searcher Management**
 
----
+------------
 
 ### **1. User Story: Configure Searcher**
 
@@ -96,7 +103,7 @@ The `Searcher` class serves as a base for defining parameter grids used in hyper
 - The configuration allows for a parameter grid to be specified at initialization.
 - The searcher instance accurately reflects the provided parameters.
 
----
+------------
 
 ### **2. User Story: Execute Hyperparameter Search**
 
@@ -110,7 +117,7 @@ The `search` method of a searcher class (e.g., `GridCVSearcher`) is called to pe
 - The search process runs without errors and utilizes the training data.
 - The searcher effectively integrates with the MLflow model and metrics used during evaluation.
 
----
+------------
 
 ### **3. User Story: Collect Search Results**
 
@@ -124,7 +131,7 @@ The results from the search include a DataFrame with cross-validation scores and
 - The job retrieves results in the expected format after executing the search.
 - The search results include performance metrics for each parameter configuration.
 
----
+------------
 
 ### **4. User Story: Identify Best Hyperparameters**
 

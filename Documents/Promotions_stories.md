@@ -20,57 +20,36 @@
 ```mermaid
 classDiagram
     class PromotionJob {
-        +KIND: str
-        +alias: str
-        +version: int | None
-        +run() : Locals
+        +KIND: T.Literal["PromotionJob"] = "PromotionJob"
+        +alias: str = "Champion"
+        +version: int | None = None
+        +run() base.Locals
     }
 
-    class LoggerService {
-        +start() : None
-        +stop() : None
-        +logger() : Logger
+    class Job {
+        <<abstract>>
+        +run()* base.Locals
     }
-
-    class AlertsService {
-        +start() : None
-        +stop() : None
-        +notify(title, message) : None
-    }
+    PromotionJob --|> Job : inherits
 
     class MlflowService {
-        +start() : None
-        +stop() : None
-        +client() : MlflowClient
+        +client() mt.MlflowClient
         +registry_name: str
     }
 
     class MlflowClient {
-        +search_model_versions(query, max_results, order_by) : list[ModelVersion]
-        +set_registered_model_alias(name, alias, version) : None
-        +get_model_version_by_alias(name, alias) : ModelVersion
+        +search_model_versions(query, max_results, order_by) list[ModelVersion]
+        +set_registered_model_alias(name, alias, version) None
+        +get_model_version_by_alias(name, alias) ModelVersion
     }
 
-    class ModelVersion {
-        +version: int
-    }
-
-    class Locals {
-        +Dict[str, Any]
-    }
-
-    PromotionJob --> LoggerService : "uses"
-    PromotionJob --> AlertsService : "uses"
     PromotionJob --> MlflowService : "uses"
-    MlflowService --> MlflowClient : "interacts with"
-    MlflowClient --> ModelVersion : "returns"
-    PromotionJob --> Locals : "returns"
-
+    MlflowService --> MlflowClient : "provides"
 ```
 
 ## **User Stories: Promotion Job Management**
 
----
+------------
 
 ### **1. User Story: Configure Promotion Job**
 
@@ -84,7 +63,7 @@ The `PromotionJob` class allows for the setup of the job by specifying the alias
 - The promotion job is initialized with the specified alias and model version.
 - Default values are correctly set, allowing for flexibility in promotion decisions.
 
----
+------------
 
 ### **2. User Story: Determine Model Version to Promote**
 
@@ -98,7 +77,7 @@ In the `run` method, the promotion job should check if a specific model version 
 - If a version is not specified, the job retrieves the latest model version based on the model name.
 - The selected version is logged for clarity.
 
----
+------------
 
 ### **3. User Story: Promote Model Version**
 
@@ -112,7 +91,7 @@ The job should use the MLflow client to set the specified alias to the chosen mo
 - The job correctly promotes the model version and sets the alias through the MLflow client.
 - Confirmation of the promotion action is logged with details of the model and version.
 
----
+------------
 
 ### **4. User Story: Notify Completion of Promotion**
 
@@ -126,7 +105,7 @@ At the conclusion of the job execution, the promotion job sends notifications to
 - Notifications include details about the promoted version and alias.
 - The alerts service successfully informs users of the job completion.
 
----
+------------
 
 ### **Common Acceptance Criteria**
 
@@ -145,7 +124,7 @@ At the conclusion of the job execution, the promotion job sends notifications to
    - Comprehensive docstrings explain the purpose of each class and method.
    - Users are provided with examples and guidance on how to configure and utilize the promotion job.
 
----
+------------
 
 ### **Definition of Done (DoD):** 
 

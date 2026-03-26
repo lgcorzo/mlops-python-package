@@ -17,16 +17,16 @@ classDiagram
     class Schema {
         <<abstract>>
         +Config
-        +check(data: pd.DataFrame): papd.DataFrame[TSchema]
+        +check(data: pd.DataFrame) papd.DataFrame[TSchema]
     }
-    Schema ..> pa.DataFrameModel : "extends"
+    Schema --|> pa.DataFrameModel : inherits
 
     %% Schema Config
     class SchemaConfig {
         +coerce: bool = True
         +strict: bool = True
     }
-    Schema ..> SchemaConfig : "inner class"
+    Schema +-- SchemaConfig : has
 
     %% InputsSchema
     class InputsSchema {
@@ -47,40 +47,40 @@ classDiagram
         +casual: papd.Series[padt.UInt32]
         +registered: papd.Series[padt.UInt32]
     }
-    Schema <|-- InputsSchema
+    Schema <|-- InputsSchema : specializes
 
     %% TargetsSchema
     class TargetsSchema {
         +instant: papd.Index[padt.UInt32]
         +cnt: papd.Series[padt.UInt32]
     }
-    Schema <|-- TargetsSchema
+    Schema <|-- TargetsSchema : specializes
 
     %% OutputsSchema
     class OutputsSchema {
         +instant: papd.Index[padt.UInt32]
         +prediction: papd.Series[padt.UInt32]
     }
-    Schema <|-- OutputsSchema
+    Schema <|-- OutputsSchema : specializes
 
     %% SHAPValuesSchema
     class SHAPValuesSchema {
         +Config
     }
-    Schema <|-- SHAPValuesSchema
+    Schema <|-- SHAPValuesSchema : specializes
 
     class SHAPValuesConfig {
         +dtype: str = "float32"
         +strict: bool = False
     }
-    SHAPValuesSchema ..> SHAPValuesConfig : "inner class"
+    SHAPValuesSchema +-- SHAPValuesConfig : has
 
     %% FeatureImportancesSchema
     class FeatureImportancesSchema {
-        +feature: papd.Series[padt.String]
-        +importance: papd.Series[padt.Float32]
+        +feature: papd.Series[str]
+        +importance: papd.Series[float]
     }
-    Schema <|-- FeatureImportancesSchema
+    Schema <|-- FeatureImportancesSchema : specializes
 
 
 
@@ -233,4 +233,4 @@ This implementation introduces schemas for managing SHAP values and feature impo
 
 ## Test location
 
-[tests/core/test_schemas.py](../tests/core/schemas.py)
+[tests/core/test_schemas.py](../tests/core/test_schemas.py)

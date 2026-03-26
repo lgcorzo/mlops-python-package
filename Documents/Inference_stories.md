@@ -21,65 +21,48 @@
 ```mermaid
 classDiagram
     class InferenceJob {
-        +KIND: str
+        +KIND: T.Literal["InferenceJob"] = "InferenceJob"
         +inputs: datasets.ReaderKind
         +outputs: datasets.WriterKind
-        +alias_or_version: str | int
-        +loader: registries.LoaderKind
-        +run() : Locals
+        +alias_or_version: str | int = "Champion"
+        +loader: registries.LoaderKind = CustomLoader()
+        +run() base.Locals
     }
 
-    class LoggerService {
-        +start() : None
-        +stop() : None
-        +logger() : Logger
+    class Job {
+        <<abstract>>
+        +run()* base.Locals
+    }
+    InferenceJob --|> Job : inherits
+
+    class ReaderKind {
+        <<type>>
+        Reader
     }
 
-    class AlertsService {
-        +start() : None
-        +stop() : None
-    }
-
-    class MlflowService {
-        +start() : None
-        +stop() : None
-    }
-
-    class DatasetReader {
-        +read() : Any
-    }
-
-    class DatasetWriter {
-        +write(data) : None
+    class WriterKind {
+        <<type>>
+        Writer
     }
 
     class LoaderKind {
-        +load(uri) : Any
+        <<type>>
+        Loader
     }
 
-    class Model {
-        +predict(inputs) : Any
+    class CustomLoader {
+        +load(uri: str) Any
     }
+    CustomLoader --|> LoaderKind : implements
 
-    class Locals {
-        +Dict[str, Any]
-    }
-
-    InferenceJob --> LoggerService : "uses"
-    InferenceJob --> AlertsService : "uses"
-    InferenceJob --> MlflowService : "uses"
+    InferenceJob --> ReaderKind : "uses"
+    InferenceJob --> WriterKind : "uses"
     InferenceJob --> LoaderKind : "uses"
-    InferenceJob --> DatasetReader : "uses"
-    InferenceJob --> DatasetWriter : "uses"
-    LoaderKind --> Model : "loads"
-    Model --> DatasetWriter : "writes predictions"
-    InferenceJob --> Locals : "returns"
-
 ```
 
 ## **User Stories: Inference Job Management**
 
----
+------------
 
 ### **1. User Story: Configure Inference Job**
 
@@ -93,7 +76,7 @@ The `InferenceJob` class enables the setup of the job with parameters such as in
 - The job is initialized with the necessary parameters.
 - Default values are properly handled for optional fields.
 
----
+------------
 
 ### **2. User Story: Read Input Data**
 
@@ -107,7 +90,7 @@ In the `run` method, the input data is read using the designated data reader, wh
 - The job successfully reads input data using the configured reader.
 - Input data is validated and conforms to the expected schema.
 
----
+------------
 
 ### **3. User Story: Load the Model**
 
@@ -121,7 +104,7 @@ The job uses the configured loader to access the specified version or alias of t
 - The model is loaded correctly from the registry using the provided loader.
 - The model instance must be ready for making predictions.
 
----
+------------
 
 ### **4. User Story: Generate Predictions**
 
@@ -135,7 +118,7 @@ The job leverages the model's predict method to produce output predictions based
 - Predictions are generated using the loaded model and validated input data.
 - The output of the predictions is in a usable format for further processing.
 
----
+------------
 
 ### **5. User Story: Write Predictions to Data Output**
 
@@ -149,7 +132,7 @@ The job takes the prediction outputs and writes them to the designated storage u
 - The predictions are successfully written to the specified output using the writer.
 - The method of storage should ensure data integrity.
 
----
+------------
 
 ### **6. User Story: Notify Completion of Inference**
 
@@ -163,7 +146,7 @@ At the end of the job execution, notifications are sent to relevant stakeholders
 - Notifications include job completion details, specifically the shape of the outputs.
 - The alerts service successfully informs users about job completion status.
 
----
+------------
 
 ### **Common Acceptance Criteria**
 
@@ -182,7 +165,7 @@ At the end of the job execution, notifications are sent to relevant stakeholders
    - Each class and method in the InferenceJob should have clear docstrings and examples provided for clarity.
    - Users should be guided on how to configure and use the inference job.
 
----
+------------
 
 ### **Definition of Done (DoD):** 
 

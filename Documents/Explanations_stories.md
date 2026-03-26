@@ -1,4 +1,4 @@
-# US [Model Explanations Job](./backlog_mlops_regresion.md) : Define a job for explaining the model structure and decisions.
+# US [Model Explanations Job](./backlog_mlops_regresion.md) : Explain predictions for a registered model version and dataset. structure and decisions.
 
 - [US Model Explanations Job : Define a job for explaining the model structure and decisions.](#us-model-explanations-job--define-a-job-for-explaining-the-model-structure-and-decisions)
   - [classes relations](#classes-relations)
@@ -22,67 +22,49 @@
 ```mermaid
 classDiagram
     class ExplanationsJob {
-        +KIND: str
+        +KIND: T.Literal["ExplanationsJob"] = "ExplanationsJob"
         +inputs_samples: datasets.ReaderKind
         +models_explanations: datasets.WriterKind
         +samples_explanations: datasets.WriterKind
-        +alias_or_version: str | int
-        +loader: registries.LoaderKind
-        +run() : Locals
+        +alias_or_version: str | int = "Champion"
+        +loader: registries.LoaderKind = CustomLoader()
+        +run() base.Locals
     }
 
-    class LoggerService {
-        +start() : None
-        +stop() : None
-        +logger() : Logger
+    class Job {
+        <<abstract>>
+        +run()* base.Locals
+    }
+    ExplanationsJob --|> Job : inherits
+
+    class ReaderKind {
+        <<type>>
+        Reader
     }
 
-    class AlertsService {
-        +start() : None
-        +stop() : None
-    }
-
-    class MlflowService {
-        +start() : None
-        +stop() : None
-    }
-
-    class DatasetReader {
-        +read() : Any
-    }
-
-    class DatasetWriter {
-        +write(data) : None
+    class WriterKind {
+        <<type>>
+        Writer
     }
 
     class LoaderKind {
-        +load(uri) : Any
+        <<type>>
+        Loader
     }
 
-    class Model {
-        +explain_model() : Any
-        +explain_samples(inputs) : Any
+    class CustomLoader {
+        +load(uri: str) Any
     }
+    CustomLoader --|> LoaderKind : implements
 
-    class Locals {
-        +Dict[str, Any]
-    }
-
-    ExplanationsJob --> LoggerService : "uses"
-    ExplanationsJob --> AlertsService : "uses"
-    ExplanationsJob --> MlflowService : "uses"
+    ExplanationsJob --> ReaderKind : "uses"
+    ExplanationsJob --> WriterKind : "uses"
     ExplanationsJob --> LoaderKind : "uses"
-    ExplanationsJob --> DatasetReader : "uses"
-    ExplanationsJob --> DatasetWriter : "uses"
-    LoaderKind --> Model : "loads"
-    Model --> DatasetWriter : "writes explanations"
-    ExplanationsJob --> Locals : "returns"
-
 ```
 
 ## **User Stories: Explanation Job Management**
 
----
+------------
 
 ### **1. User Story: Configure Explanations Job**
 
@@ -96,7 +78,7 @@ The `ExplanationsJob` class allows for setting up parameters such as input sampl
 - The explanations job is initialized with required parameters.
 - Default values are correctly handled for optional parameters.
 
----
+------------
 
 ### **2. User Story: Read Input Samples**
 
@@ -110,7 +92,7 @@ In the `run` method, input samples are read using the configured data reader, en
 - The job successfully reads input samples from the designated reader.
 - Input data is validated and checked for integrity before further processing.
 
----
+------------
 
 ### **3. User Story: Load the Model**
 
@@ -124,7 +106,7 @@ The job utilizes the specified loader to load the appropriate version or alias o
 - The model is correctly loaded from the registry using the configured loader.
 - The model instance must be valid and ready for explanation generation.
 
----
+------------
 
 ### **4. User Story: Generate Model Explanations**
 
@@ -138,7 +120,7 @@ The job calls the model's explanation generation methods to retrieve insights ab
 - The model successfully generates structured explanations about its internal operations.
 - The explanations are in a format that captures the necessary details for future analysis.
 
----
+------------
 
 ### **5. User Story: Generate Sample Explanations**
 
@@ -152,7 +134,7 @@ Sample explanations are generated based on the provided input samples, aiding in
 - The job should effectively generate explanations for each input sample.
 - Sample explanations should correlate appropriately with their respective input samples.
 
----
+------------
 
 ### **6. User Story: Write Explanations to Data Sources**
 

@@ -16,43 +16,22 @@
 
 ```mermaid
 classDiagram
-    %% Functions - Parsers
-    class Parser {
-        +parse_file(path: str): Config
-        +parse_string(string: str): Config
+    %% Module functions
+    class Configs {
+        +parse_file(path: str) Config
+        +parse_string(string: str) Config
+        +merge_configs(configs: T.Sequence[Config]) Config
+        +to_object(config: Config, resolve: bool = True) object
     }
 
-    Parser --> oc.OmegaConf : "uses"
-
-    %% Config
+    %% Config Type Alias
     class Config {
-        <<type alias>>
-        +ListConfig | DictConfig
+        <<typeAlias>>
+        oc.ListConfig | oc.DictConfig
     }
 
-    %% Functions - Mergers
-    class Merger {
-        +merge_configs(configs: T.Sequence[Config]): Config
-    }
-
-    Merger --> oc.OmegaConf : "uses"
-
-    %% Functions - Converters
-    class Converter {
-        +to_object(config: Config, resolve: bool = True): object
-    }
-
-    Converter --> oc.OmegaConf : "uses"
-
-    %% Relationships
-    Parser --> Config : "returns"
-    Merger --> Config : "returns"
-    Converter --> object : "returns"
-    
-    %% Dependencies on OmegaConf
-    oc.OmegaConf --> Config : "returns ListConfig | DictConfig"
-    oc.OmegaConf --> object : "converts to container"
-
+    Configs ..> oc.OmegaConf : uses
+    Configs ..> Config : returns/uses
 ```
 
 ## **1.  User Story: Parse Configuration File**
@@ -142,8 +121,8 @@ The `to_object` function converts an `OmegaConf` configuration object into stand
 
 ## Code location
 
-[src/regression_model_template/core/schemas.py](../src/regression_model_template/io/configs.py)
+[src/regression_model_template/io/configs.py](../src/regression_model_template/io/configs.py)
 
 ## Test location
 
-[tests/core/test_schemas.py](../tests/io/configs.py)
+[tests/io/test_configs.py](../tests/io/test_configs.py)
