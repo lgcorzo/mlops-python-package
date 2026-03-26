@@ -1,5 +1,4 @@
-# US [Model Training Job](./backlog_mlops_regresion.md) : Define a job for training and registering a single AI/ML model
-
+# US [Model Training Job](./backlog_mlops_regresion.md) : Train, evaluate, and register a machine learning model.
 - [US Model Training Job : Define a job for training and registering a single AI/ML model](#us-model-training-job--define-a-job-for-training-and-registering-a-single-aiml-model)
   - [classes relations](#classes-relations)
   - [**User Stories: Training Job Management**](#user-stories-training-job-management)
@@ -27,118 +26,76 @@
 classDiagram
     direction LR
     class TrainingJob {
-        +KIND: str
-        +run_config: RunConfig
-        +inputs: ReaderKind
-        +targets: ReaderKind
-        +model: ModelKind
-        +metrics: MetricsKind[]
-        +splitter: SplitterKind
-        +saver: SaverKind
-        +signer: SignerKind
-        +registry: RegisterKind
-        +run() : Locals
+        +KIND: T.Literal["TrainingJob"] = "TrainingJob"
+        +run_config: services.MlflowService.RunConfig
+        +inputs: datasets.ReaderKind
+        +targets: datasets.ReaderKind
+        +model: models.ModelKind
+        +metrics: metrics_.MetricsKind
+        +splitter: splitters.SplitterKind
+        +saver: registries.SaverKind
+        +signer: signers.SignerKind
+        +registry: registries.RegisterKind
+        +run() base.Locals
     }
 
-    class LoggerService {
-        +start() : None
-        +stop() : None
-        +logger() : Logger
+    class Job {
+        <<abstract>>
+        +run()* base.Locals
     }
-
-    class AlertsService {
-        +start() : None
-        +stop() : None
-        +notify(title, message) : None
-    }
+    TrainingJob --|> Job : inherits
 
     class MlflowService {
-        +start() : None
-        +stop() : None
-        +client() : MlflowClient
-        +run_context(run_config) : RunContext
+        +client() mt.MlflowClient
+        +run_context(run_config) RunContext
         +registry_name: str
     }
 
-    class MlflowClient {
-        +log_metric(run_id, key, value) : None
-        +log_input(dataset, context) : None
-        +tracking_uri: str
-    }
-
-    class RunContext {
-        +info: RunInfo
-    }
-
-    class RunInfo {
-        +run_id: str
-    }
-
     class ReaderKind {
-        +read() : DataFrame
-        +lineage(data, name, targets) : Dataset
-    }
-
-    class Dataset {
-        +to_dict() : dict
+        <<interface>>
+        +read() pd.DataFrame
+        +lineage(data, name, targets) mt.Dataset
     }
 
     class ModelKind {
-        +fit(inputs, targets) : None
-        +predict(inputs) : DataFrame
+        <<interface>>
+        +fit(inputs, targets)
+        +predict(inputs) pd.DataFrame
     }
 
     class MetricsKind {
-        +name: str
-        +score(targets, outputs) : float
+        <<interface>>
+        +score(targets, outputs) float
     }
 
     class SplitterKind {
-        +split(inputs, targets) : Tuple[TrainIndex, TestIndex]
+        <<interface>>
+        +split(inputs, targets) Iterator
     }
 
     class SaverKind {
-        +save(model, signature, input_example) : ModelInfo
-    }
-
-    class ModelInfo {
-        +model_uri: str
+        <<interface>>
+        +save(model, signature, input_example) ModelInfo
     }
 
     class SignerKind {
-        +sign(inputs, outputs) : ModelSignature
-    }
-
-    class ModelSignature {
-        +to_dict() : dict
+        <<interface>>
+        +sign(inputs, outputs) ModelSignature
     }
 
     class RegisterKind {
-        +register(name, model_uri) : ModelVersion
+        <<interface>>
+        +register(name, model_uri) ModelVersion
     }
 
-    class ModelVersion {
-        +version: int
-    }
-
-    TrainingJob --> LoggerService : "uses"
-    TrainingJob --> AlertsService : "uses"
     TrainingJob --> MlflowService : "uses"
-    MlflowService --> MlflowClient : "interacts with"
-    MlflowClient --> RunContext : "returns"
-    RunContext --> RunInfo : "contains"
     TrainingJob --> ReaderKind : "uses"
-    ReaderKind --> Dataset : "produces"
     TrainingJob --> ModelKind : "uses"
-    TrainingJob --> MetricsKind : "computes"
+    TrainingJob --> MetricsKind : "uses"
     TrainingJob --> SplitterKind : "uses"
     TrainingJob --> SaverKind : "uses"
-    SaverKind --> ModelInfo : "returns"
     TrainingJob --> SignerKind : "uses"
-    SignerKind --> ModelSignature : "produces"
     TrainingJob --> RegisterKind : "uses"
-    RegisterKind --> ModelVersion : "produces"
-
 ```
 
 ## **User Stories: Training Job Management**
@@ -188,7 +145,7 @@ Lineage information for both the input and target datasets is logged using MLflo
 - The lineage of both the input and target datasets is successfully logged in MLflow.
 - Logged lineage includes necessary details to trace back the data source.
 
----
+------------
 
 ### **4. User Story: Split Data for Training and Testing**
 
@@ -203,7 +160,7 @@ The job utilizes a defined splitter to partition the datasets into training and 
 - The job splits the datasets into training and testing subsets based on the specified splitter.
 - The shapes of the resulting training and testing sets are logged.
 
----
+------------
 
 ### **5. User Story: Fit the Model**
 
@@ -218,7 +175,7 @@ The training job invokes the model's fit method to train using the training data
 - The model is successfully fitted with the training data.
 - Any relevant training progress or metrics are logged for monitoring.
 
----
+------------
 
 ### **6. User Story: Generate Predictions**
 
@@ -233,7 +190,7 @@ After training, the model is used to generate predictions on the unseen test dat
 - Predictions are generated successfully for the test dataset.
 - The shape of the predictions is logged for reference.
 
----
+------------
 
 ### **7. User Story: Calculate Metrics**
 
@@ -248,7 +205,7 @@ The job calculates specified metrics (e.g., accuracy, precision) using the model
 - Each metric is computed and logged with its corresponding score.
 - The metrics must be correctly linked to the predictions and actual targets.
 
----
+------------
 
 ### **8. User Story: Sign the Model**
 
@@ -263,7 +220,7 @@ The trained model is signed using a specified signer to ensure that it captures 
 - The model is signed successfully, with the signature logged.
 - The signature includes all necessary metadata like versioning info or model parameters.
 
----
+------------
 
 ### **9. User Story: Save the Model**
 
@@ -278,7 +235,7 @@ The job invokes the appropriate saver to store the model and its signature in a 
 - The trained model is successfully saved, and the model URI is logged for future reference.
 - The saved model adheres to the defined specifications for the chosen format.
 
----
+------------
 
 ### **10. User Story: Register the Model**
 

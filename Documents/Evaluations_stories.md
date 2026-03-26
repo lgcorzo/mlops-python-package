@@ -1,5 +1,4 @@
-
-# US [Model Evaluation Job](./backlog_mlops_regresion.md) : Define a job for evaluating registered models with given datasets.
+# US [Model Evaluations Job](./backlog_mlops_regresion.md) : Evaluate a registered model version against a dataset.
 
 - [US Model Evaluation Job : Define a job for evaluating registered models with given datasets.](#us-model-evaluation-job--define-a-job-for-evaluating-registered-models-with-given-datasets)
   - [classes relations](#classes-relations)
@@ -21,60 +20,58 @@
 ```mermaid
 classDiagram
     class EvaluationsJob {
-        +KIND: Literal["EvaluationsJob"]
+        +KIND: T.Literal["EvaluationsJob"] = "EvaluationsJob"
         +run_config: services.MlflowService.RunConfig
         +inputs: datasets.ReaderKind
         +targets: datasets.ReaderKind
-        +model_type: str
-        +alias_or_version: str | int
-        +metrics: metrics_.MetricsKind
-        +evaluators: list[str]
+        +model_type: str = "regressor"
+        +alias_or_version: str | int = "Champion"
+        +metrics: metrics_.MetricsKind = [SklearnMetric()]
+        +evaluators: list[str] = ["default"]
         +thresholds: dict[str, metrics_.Threshold]
-        +run(): base.Locals
+        +run() base.Locals
     }
 
+    class Job {
+        <<abstract>>
+        +run()* base.Locals
+    }
+    EvaluationsJob --|> Job : inherits
+
     class MlflowService {
-        +client() : MlflowClient
-        +run_context(run_config: RunConfig) : context
+        +client() mt.MlflowClient
+        +run_context(run_config: RunConfig) T.Generator
     }
 
     class ReaderKind {
-        +read() : pd.DataFrame
-        +lineage(data: pd.DataFrame, name: str) : Lineage
+        <<type>>
+        Reader
     }
 
     class MetricsKind {
-        +to_mlflow() : dict
+        <<type>>
+        list[Metric]
     }
 
     class SklearnMetric {
-        +to_mlflow() : dict
+        +to_mlflow() dict
     }
 
     class Threshold {
-        +to_mlflow() : dict
-    }
-
-    class AlertsService {
-        +notify(title: str, message: str) : None
+        +threshold: float
+        +greater_is_better: bool = True
+        +to_mlflow() dict
     }
 
     EvaluationsJob --> MlflowService : "uses"
-    EvaluationsJob --> ReaderKind : "inputs & targets"
-    EvaluationsJob --> MetricsKind : "metrics"
-    EvaluationsJob --> SklearnMetric : "metrics"
-    EvaluationsJob --> AlertsService : "notifies"
-    EvaluationsJob --> Threshold : "thresholds"
-    MlflowService --> MlflowClient : "provides client"
-    ReaderKind --> pd.DataFrame : "returns"
-    SklearnMetric --> dict : "to_mlflow"
-    Threshold --> dict : "to_mlflow"
-
+    EvaluationsJob --> ReaderKind : "uses"
+    EvaluationsJob --> MetricsKind : "uses"
+    EvaluationsJob --> Threshold : "uses"
 ```
 
 ## **User Stories: Evaluation Job Management**
 
----
+------------
 
 ### **1. User Story: Configure Evaluation Job**
 
@@ -88,7 +85,7 @@ The `EvaluationsJob` class allows for setting up parameters such as input data r
 - The job can be initialized with necessary parameters (e.g., model type, input readers, metrics).
 - Default values are provided for optional parameters.
 
----
+------------
 
 ### **2. User Story: Read Input and Target Data**
 
@@ -102,7 +99,7 @@ The `run` method in the `EvaluationsJob` class reads input and target datasets u
 - The job reads inputs and targets from their respective sources.
 - Data shape and integrity checks are performed before proceeding with evaluations.
 
----
+------------
 
 ### **3. User Story: Log Data Lineage**
 
@@ -116,7 +113,7 @@ The `EvaluationsJob` class logs lineage information for input and target dataset
 - Input and target lineage is successfully logged using the MLflow tracking system.
 - Lineage information should be associated with the corresponding datasets clearly.
 
----
+------------
 
 ### **4. User Story: Evaluate Model Against Data**
 
@@ -130,7 +127,7 @@ The `run` method leverages MLflow's evaluate function to compute metrics for the
 - The job evaluates the model using the provided datasets, model type, evaluators, and thresholds.
 - Evaluation metrics such as accuracy, precision, recall, or R2 scores are computed and stored appropriately.
 
----
+------------
 
 ### **5. User Story: Notify Completion of Evaluations**
 
@@ -144,7 +141,7 @@ At the conclusion of the evaluation process, the `EvaluationsJob` class sends a 
 - Notification includes the title and summary message, indicating the evaluation job has finished successfully along with key metrics.
 - The notification service correctly handles successful and erroneous situations.
 
----
+------------
 
 ### **Common Acceptance Criteria**
 

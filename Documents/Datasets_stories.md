@@ -32,41 +32,43 @@ classDiagram
     class Reader {
         <<abstract>>
         +KIND: str
-        +limit: int | None
-        +read(): pd.DataFrame
-        +lineage(name: str, data: pd.DataFrame, targets: str | None, predictions: str | None): Lineage
+        +limit: int | None = None
+        +read() pd.DataFrame*
+        +lineage(name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) Lineage*
     }
-    Reader ..> pdt.BaseModel : "inherits"
+    Reader --|> pdt.BaseModel : inherits
+    Reader --|> abc.ABC : inherits
 
     %% ParquetReader Class
     class ParquetReader {
-        +KIND: T.Literal["ParquetReader"]
+        +KIND: T.Literal["ParquetReader"] = "ParquetReader"
         +path: str
-        +read(): pd.DataFrame
-        +lineage(name: str, data: pd.DataFrame, targets: str | None, predictions: str | None): Lineage
+        +read() pd.DataFrame
+        +lineage(name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) Lineage
     }
-    Reader <|-- ParquetReader : "specializes"
+    Reader <|-- ParquetReader : specializes
 
     %% Base Class: Writer
     class Writer {
         <<abstract>>
         +KIND: str
-        +write(data: pd.DataFrame): None
+        +write(data: pd.DataFrame) None*
     }
-    Writer ..> pdt.BaseModel : "inherits"
+    Writer --|> pdt.BaseModel : inherits
+    Writer --|> abc.ABC : inherits
 
     %% ParquetWriter Class
     class ParquetWriter {
-        +KIND: T.Literal["ParquetWriter"]
+        +KIND: T.Literal["ParquetWriter"] = "ParquetWriter"
         +path: str
-        +write(data: pd.DataFrame): None
+        +write(data: pd.DataFrame) None
     }
-    Writer <|-- ParquetWriter : "specializes"
+    Writer <|-- ParquetWriter : specializes
 
     %% Aliases
-    Lineage --> lineage.PandasDataset : "type alias"
-    ReaderKind --> ParquetReader : "type alias"
-    WriterKind --> ParquetWriter : "type alias"
+    Lineage --> lineage.PandasDataset : type alias
+    ReaderKind --> ParquetReader : type alias
+    WriterKind --> ParquetWriter : type alias
 
     %% Relationships
     Reader ..> pd.DataFrame : "returns"
@@ -319,8 +321,8 @@ The `ParquetWriter` class provides functionality to save a DataFrame in Parquet 
 
 ## Code location
 
-[src/regression_model_template/core/schemas.py](../src/regression_model_template/io/datasets.py)
+[src/regression_model_template/io/datasets.py](../src/regression_model_template/io/datasets.py)
 
 ## Test location
 
-[tests/core/test_schemas.py](../tests/io/datasets.py)
+[tests/io/test_datasets.py](../tests/io/test_datasets.py)

@@ -17,14 +17,16 @@ classDiagram
     class Model {
         <<abstract>>
         +KIND: str
-        +get_params(deep: bool = True): Params
-        +set_params(**params: ParamValue): T.Self
-        +fit(inputs: schemas.Inputs, targets: schemas.Targets): T.Self
-        +predict(inputs: schemas.Inputs): schemas.Outputs
-        +explain_model(): schemas.FeatureImportances
-        +explain_samples(inputs: schemas.Inputs): schemas.SHAPValues
-        +get_internal_model(): T.Any
+        +get_params(deep: bool = True) Params
+        +set_params(**params: ParamValue) T.Self
+        +fit(inputs: schemas.Inputs, targets: schemas.Targets) T.Self*
+        +predict(inputs: schemas.Inputs) schemas.Outputs*
+        +explain_model() schemas.FeatureImportances
+        +explain_samples(inputs: schemas.Inputs) schemas.SHAPValues
+        +get_internal_model() T.Any
     }
+    Model --|> pdt.BaseModel : inherits
+    Model --|> abc.ABC : inherits
 
     %% Derived Class
     class BaselineSklearnModel {
@@ -35,16 +37,13 @@ classDiagram
         -_pipeline: pipeline.Pipeline|None
         -_numericals: list[str]
         -_categoricals: list[str]
-        +fit(inputs: schemas.Inputs, targets: schemas.Targets): BaselineSklearnModel
-        +predict(inputs: schemas.Inputs): schemas.Outputs
-        +explain_model(): schemas.FeatureImportances
-        +explain_samples(inputs: schemas.Inputs): schemas.SHAPValues
-        +get_internal_model(): pipeline.Pipeline
+        +fit(inputs: schemas.Inputs, targets: schemas.Targets) BaselineSklearnModel
+        +predict(inputs: schemas.Inputs) schemas.Outputs
+        +explain_model() schemas.FeatureImportances
+        +explain_samples(inputs: schemas.Inputs) schemas.SHAPValues
+        +get_internal_model() pipeline.Pipeline
     }
-
-    %% Relationships
-    Model <|-- BaselineSklearnModel
-
+    Model <|-- BaselineSklearnModel : specializes
 ```
 
 ## **User Story: Develop a Base Model Class for Machine Learning Frameworks**

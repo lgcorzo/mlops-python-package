@@ -3,6 +3,10 @@ on:
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - 'Documents/**'
+      - 'docs/**'
+      - '**/*.md'
 concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.ref }}

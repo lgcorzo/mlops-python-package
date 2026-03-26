@@ -21,57 +21,43 @@
 
 ```mermaid
 classDiagram
-direction LR
+    direction LR
 
     class Main {
-        +main(argv: List[str]) : int
+        +main(argv: list[str] | None = None) int
     }
 
     class ArgumentParser {
-        +add_argument(name, nargs, default, action, help) : None
-        +parse_args(argv: List[str]) : Namespace
+        +parse_args(argv: list[str] | None) Namespace
     }
 
-    class Settings {
-        +MainSettings.model_json_schema() : dict
-        +MainSettings.model_validate(object_: dict) : MainSettings
+    class MainSettings {
+        +model_json_schema() dict
+        +model_validate(object_: dict) MainSettings
+        +job: Job
     }
 
     class Configs {
-        +parse_file(file: str) : dict
-        +parse_string(string: str) : dict
-        +merge_configs(configs: List[dict]) : dict
-        +to_object(config: dict) : Any
-    }
-
-    class Warnings {
-        +filterwarnings(action: str, category: Type) : None
-    }
-
-    class Namespace {
-        +files: List[str]
-        +extras: List[str]
-        +schema: bool
+        +parse_file(file: str) dict
+        +parse_string(string: str) dict
+        +merge_configs(configs: list[dict]) dict
+        +to_object(config: dict) Any
     }
 
     class Job {
-        +run() : None
+        +run()
     }
 
     Main --> ArgumentParser : "uses"
-    Main --> Settings : "uses"
-    Main --> Configs : "uses"
-    Main --> Warnings : "uses"
-    ArgumentParser --> Namespace : "produces"
-    Settings --> Job : "creates"
-    Job --> run : "executes"
-
-
+    Main --> MainSettings : "validates"
+    Main --> Configs : "parses"
+    MainSettings --> Job : "contains"
+    Job --> Main : "executes run()"
 ```
 
 ## **User Stories: CLI Application Management**
 
----
+------------
 
 ### **1. User Story: Parse Command-Line Arguments**
 
@@ -86,7 +72,7 @@ The CLI script parses command-line arguments to take in configuration files and 
 - The script successfully retrieves job configuration files and additional strings from the command-line input.
 - Help instructions are clearly available when required by the user.
 
----
+------------
 
 ### **2. User Story: Display Settings Schema**
 
@@ -101,7 +87,7 @@ The CLI application can output the settings schema as JSON when the `--schema` f
 - The schema is printed in JSON format with correct indentation when invoked.
 - The application exits successfully after displaying the schema.
 
----
+------------
 
 ### **3. User Story: Read Configuration Files**
 
@@ -116,7 +102,7 @@ The CLI script reads specified configuration files and parses their contents to 
 - The script can read and parse configuration files without errors.
 - The settings gathered from files are stored correctly for further processing.
 
----
+------------
 
 ### **4. User Story: Merge Configuration Settings**
 
@@ -131,7 +117,7 @@ The CLI application merges configurations from multiple sources (files and strin
 - The merging process combines settings appropriately without conflicts.
 - The final configuration object accurately reflects the merged settings.
 
----
+------------
 
 ### **5. User Story: Validate Configuration Settings**
 
@@ -146,7 +132,7 @@ The application validates the combined configuration settings against a predefin
 - The settings are validated, and any discrepancies trigger clear error messages.
 - Proper messages are presented if validation is successful.
 
----
+------------
 
 ### **6. User Story: Execute the Job**
 
@@ -161,7 +147,7 @@ The CLI invokes the job runner, executing the task as described by the gathered 
 - The job is executed successfully when appropriate configurations are provided.
 - Log messages indicate progress and completion of the job.
 
----
+------------
 
 ### **7. User Story: Handle No Configuration Provided**
 
@@ -176,7 +162,7 @@ The application checks if any configurations have been provided and raises an er
 - A RuntimeError is raised when both configuration files and command-line strings are absent.
 - The error message clearly informs the user of the missing configurations.
 
----
+------------
 
 ### **Common Acceptance Criteria**
 
@@ -195,7 +181,7 @@ The application checks if any configurations have been provided and raises an er
    - Clear and comprehensive docstrings are included for each method and class.
    - Users are provided with examples to understand how to use the command-line interface effectively.
 
----
+------------
 
 ### **Definition of Done (DoD):**
 

@@ -17,18 +17,21 @@
 
 ```mermaid
 classDiagram
-direction LR
+    direction LR
 
     class Signer {
         <<abstract>>
         +KIND: str
-        +sign(inputs: schemas.Inputs, outputs: schemas.Outputs) : Signature
+        +sign(inputs: schemas.Inputs, outputs: schemas.Outputs) Signature*
     }
+    Signer --|> pdt.BaseModel : inherits
+    Signer --|> abc.ABC : inherits
 
     class InferSigner {
-        +KIND: "InferSigner"
-        +sign(inputs: schemas.Inputs, outputs: schemas.Outputs) : Signature
+        +KIND: T.Literal["InferSigner"] = "InferSigner"
+        +sign(inputs: schemas.Inputs, outputs: schemas.Outputs) Signature
     }
+    InferSigner --|> Signer : inherits
 
     class Signature {
         <<type>>
@@ -43,22 +46,15 @@ direction LR
         <<external>>
     }
 
-    class mlflow.models.infer_signature {
-        <<external>>
-        +infer_signature(model_input, model_output) : ms.ModelSignature
-    }
-
-    Signer <|-- InferSigner
-    Signer o-- Signature : "returns"
-    Signer --> schemas.Inputs : "inputs"
-    Signer --> schemas.Outputs : "outputs"
+    Signer --> schemas.Inputs : "uses"
+    Signer --> schemas.Outputs : "uses"
+    Signer --> Signature : "returns"
     InferSigner --> mlflow.models.infer_signature : "uses"
-
 ```
 
 ## **User Stories: Signer Management**
 
----
+------------
 
 ### **1. User Story: Configure Model Signer**
 
@@ -72,7 +68,7 @@ The `Signer` abstract class allows for creating different signing strategies for
 - The signer class can be configured with specific signing strategies.
 - Default implementations may be available while allowing users to define custom strategies.
 
----
+------------
 
 ### **2. User Story: Generate Model Signatures**
 
@@ -86,7 +82,7 @@ The `sign` method of the `Signer` class generates a model signature using the pr
 - The method accurately captures the information from inputs and outputs to create the signature.
 - The generated signature is usable in downstream applications, such as model deployment or tracking.
 
----
+------------
 
 ### **3. User Story: Implement Signature Inference**
 
@@ -100,7 +96,7 @@ The `InferSigner` class provides functionality that leverages the MLflow library
 - Model signatures are generated accurately using the `InferSigner` strategy.
 - The inference correctly captures the structure of both inputs and outputs based on the received data.
 
----
+------------
 
 ### **Common Acceptance Criteria**
 
@@ -119,7 +115,7 @@ The `InferSigner` class provides functionality that leverages the MLflow library
    - Each method and class should contain comprehensive docstrings to describe how they function.
    - Examples demonstrating how to use both `Signer` and `InferSigner` should be included for user guidance.
 
----
+------------
 
 ### **Definition of Done (DoD):** 
 

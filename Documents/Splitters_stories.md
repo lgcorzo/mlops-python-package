@@ -18,49 +18,40 @@
 
 ```mermaid
 classDiagram
-direction LR
+    direction LR
 
     class Splitter {
         <<abstract>>
         +KIND: str
-        +split(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) : TrainTestSplits
-        +get_n_splits(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) : int
+        +split(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None = None) TrainTestSplits*
+        +get_n_splits(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None = None) int*
     }
+    Splitter --|> pdt.BaseModel : inherits
+    Splitter --|> abc.ABC : inherits
 
     class TrainTestSplitter {
-        +KIND: "TrainTestSplitter"
+        +KIND: T.Literal["TrainTestSplitter"] = "TrainTestSplitter"
         +shuffle: bool = False
-        +test_size: int | float = 24 * 30 * 2
+        +test_size: int | float = 1728
         +random_state: int = 42
-        +split(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) : TrainTestSplits
-        +get_n_splits(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) : int
+        +split(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None = None) TrainTestSplits
+        +get_n_splits(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None = None) int
     }
+    TrainTestSplitter --|> Splitter : inherits
 
     class TimeSeriesSplitter {
-        +KIND: "TimeSeriesSplitter"
+        +KIND: T.Literal["TimeSeriesSplitter"] = "TimeSeriesSplitter"
         +gap: int = 0
         +n_splits: int = 4
-        +test_size: int | float = 24 * 30 * 2
-        +split(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) : TrainTestSplits
-        +get_n_splits(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) : int
+        +test_size: int | float = 1728
+        +split(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None = None) TrainTestSplits
+        +get_n_splits(inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None = None) int
     }
+    TimeSeriesSplitter --|> Splitter : inherits
 
-    class schemas.Inputs {
-        <<external>>
-    }
-
-    class schemas.Targets {
-        <<external>>
-    }
-
-    class model_selection.train_test_split {
-        <<external>>
-        +train_test_split(index, shuffle, test_size, random_state)
-    }
-
-    class model_selection.TimeSeriesSplit {
-        <<external>>
-        +split(inputs)
+    class TrainTestSplits {
+        <<type>>
+        T.Iterator[tuple[Index, Index]]
     }
 
     class Index {
@@ -68,22 +59,9 @@ direction LR
         npt.NDArray[np.int64]
     }
 
-    class TrainTestSplits {
-        <<type>>
-        Iterator[tuple[Index, Index]]
-    }
-
-    Splitter <|-- TrainTestSplitter
-    Splitter <|-- TimeSeriesSplitter
-
-    Splitter --> schemas.Inputs : "inputs"
-    Splitter --> schemas.Targets : "targets"
-    Splitter --> Index : "groups"
-    Splitter o-- TrainTestSplits : "returns"
-
-    TrainTestSplitter --> model_selection.train_test_split : "uses"
-    TimeSeriesSplitter --> model_selection.TimeSeriesSplit : "uses"
-
+    Splitter --> schemas.Inputs : "uses"
+    Splitter --> schemas.Targets : "uses"
+    Splitter --> TrainTestSplits : "returns"
 ```
 
 ## **User Stories: Splitter Management**
@@ -102,7 +80,7 @@ The `Splitter` class serves as the base to specify configurations for splitting 
 - A splitter can be instantiated with specific parameters for splitting datasets.
 - Default values are handled and configurable through initialization.
 
----
+------------
 
 ### **2. User Story: Split Data into Train and Test Sets**
 
@@ -116,7 +94,7 @@ The `TrainTestSplitter` allows for a straightforward split between the training 
 - The job successfully divides input and target datasets into train and test subsets.
 - The shapes of the resulting datasets are logged for verification.
 
----
+------------
 
 ### **3. User Story: Split Data for Time Series Analysis**
 
@@ -130,7 +108,7 @@ The `TimeSeriesSplitter` class creates fixed-time subsets of the data, allowing 
 - The time series data is split according to specified parameters without shuffling.
 - The results accurately reflect the required time splits in the dataset.
 
----
+------------
 
 ### **4. User Story: Get Number of Splits**
 
@@ -144,7 +122,7 @@ Both the `TrainTestSplitter` and `TimeSeriesSplitter` should provide the number 
 - The method to get the number of splits returns an integer count accurately representing the available splits.
 - The information should be logged for reference during the training process.
 
----
+------------
 
 ### **Common Acceptance Criteria**
 
@@ -163,7 +141,7 @@ Both the `TrainTestSplitter` and `TimeSeriesSplitter` should provide the number 
    - Each class and method should contain thorough docstrings describing their intended use and how to interact with them.
    - Examples of initializing and using each splitter should be included for user reference.
 
----
+------------
 
 ### **Definition of Done (DoD):** 
 

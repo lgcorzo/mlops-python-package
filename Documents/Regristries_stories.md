@@ -1,4 +1,4 @@
-# US [Model Registry](./backlog_mlops_regresion.md) : Manage saving, loading, and registering machine learning models using MLflow.
+# US [Model Registries](./backlog_mlops_regresion.md) : Model registry logicading, and registering machine learning models using MLflow.
 
 - [US Model Registry : Manage saving, loading, and registering machine learning models using MLflow.](#us-model-registry--manage-saving-loading-and-registering-machine-learning-models-using-mlflow)
   - [classes relations](#classes-relations)
@@ -31,73 +31,73 @@
 
 ```mermaid
 classDiagram
-    %% Base Class: Saver
     class Saver {
         <<abstract>>
         +KIND: str
-        +path: str
-        +save(model: models.Model, signature: signers.Signature, input_example: schemas.Inputs): Info
+        +path: str = "model"
+        +save(model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) Info*
     }
+    Saver --|> pdt.BaseModel : inherits
+    Saver --|> abc.ABC : inherits
 
-    %% CustomSaver Class
     class CustomSaver {
-        +KIND: T.Literal["CustomSaver"]
-        +save(model: models.Model, signature: signers.Signature, input_example: schemas.Inputs): Info
+        +KIND: T.Literal["CustomSaver"] = "CustomSaver"
+        +save(model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) Info
     }
-    Saver <|-- CustomSaver : "specializes"
+    CustomSaver --|> Saver : inherits
 
-    %% BuiltinSaver Class
     class BuiltinSaver {
-        +KIND: T.Literal["BuiltinSaver"]
+        +KIND: T.Literal["BuiltinSaver"] = "BuiltinSaver"
         +flavor: str
-        +save(model: models.Model, signature: signers.Signature, input_example: schemas.Inputs | None): Version
+        +save(model: models.Model, signature: signers.Signature, input_example: schemas.Inputs | None) Info
     }
-    Saver <|-- BuiltinSaver : "specializes"
+    BuiltinSaver --|> Saver : inherits
 
-    %% Base Class: Loader
     class Loader {
         <<abstract>>
         +KIND: str
-        +load(uri: str): "Loader.Adapter"
+        +load(uri: str) Loader.Adapter*
     }
+    Loader --|> pdt.BaseModel : inherits
+    Loader --|> abc.ABC : inherits
 
-    %% CustomLoader Class
+    class Loader_Adapter {
+        <<abstract>>
+        +predict(inputs: T.Any) schemas.Outputs*
+    }
+    Loader *-- Loader_Adapter : inner class
+
     class CustomLoader {
-        +KIND: T.Literal["CustomLoader"]
-        +load(uri: str): "CustomLoader.Adapter"
+        +KIND: T.Literal["CustomLoader"] = "CustomLoader"
+        +load(uri: str) CustomLoader.Adapter
     }
-    Loader <|-- CustomLoader : "specializes"
+    CustomLoader --|> Loader : inherits
 
-    %% BuiltinLoader Class
     class BuiltinLoader {
-        +KIND: T.Literal["BuiltinLoader"]
-        +load(uri: str): "BuiltinLoader.Adapter"
+        +KIND: T.Literal["BuiltinLoader"] = "BuiltinLoader"
+        +load(uri: str) BuiltinLoader.Adapter
     }
-    Loader <|-- BuiltinLoader : "specializes"
+    BuiltinLoader --|> Loader : inherits
 
-    %% Base Class: Register
     class Register {
         <<abstract>>
         +KIND: str
-        +register(name: str, model_uri: str): Version
+        +tags: dict[str, T.Any] = {}
+        +register(name: str, model_uri: str) Version*
     }
+    Register --|> pdt.BaseModel : inherits
+    Register --|> abc.ABC : inherits
 
-    %% MlflowRegister Class
     class MlflowRegister {
-        +KIND: T.Literal["MlflowRegister"]
-        +register(name: str, model_uri: str): Version
+        +KIND: T.Literal["MlflowRegister"] = "MlflowRegister"
+        +register(name: str, model_uri: str) Version
     }
-    Register <|-- MlflowRegister : "specializes"
-
-    %% Relationships
-    Saver ..> mlflow.models.model.ModelInfo : "returns"
-    Loader ..> mlflow.pyfunc.PyFuncModel : "uses"
-    Register ..> mlflow.entities.model_registry.ModelVersion : "returns"
+    MlflowRegister --|> Register : inherits
 ```
 
 ## **User Stories: Model Saver and Loader**
 
----
+------------
 
 ### **1. User Story: Save Models to Registry**
 
@@ -112,7 +112,7 @@ The `Saver` class serves as a base for saving models to the MLflow model registr
 - Supports saving models with their signatures and input examples.
 - Provides metadata regarding the saved model through `ModelInfo`.
 
----
+------------
 
 ### **2. User Story: Load Models from Registry**
 
@@ -126,7 +126,7 @@ The `Loader` class serves as a base for loading models from the MLflow model reg
 - The `load` method is implemented by subclasses of `Loader` (CustomLoader and BuiltinLoader).
 - Models can be loaded using a unique URI, providing flexibility in model retrieval.
 
----
+------------
 
 ### **Common Acceptance Criteria**
 
@@ -145,7 +145,7 @@ The `Loader` class serves as a base for loading models from the MLflow model reg
    - Each class and method has clear, instructive docstrings.
    - Examples illustrate common use cases for saving and loading models.
 
----
+------------
 
 ### **Definition of Done (DoD):**
 
@@ -154,11 +154,11 @@ The `Loader` class serves as a base for loading models from the MLflow model reg
 - Code adheres to the project's coding standards and passes peer review.
 - Unit tests have a wide coverage of scenarios and edge cases.
 
----
+------------
 
 ## **User Stories: Custom and Built-in Savers**
 
----
+------------
 
 ### **1. User Story: Saving Custom Models**
 
@@ -172,7 +172,7 @@ The `CustomSaver` class extends the `Saver` base class and implements the logic 
 - Custom models can be saved using the `save` method from the `CustomSaver` class.
 - The saved model must retain its signature and input/output examples for later use.
 
----
+------------
 
 ### **2. User Story: Saving Built-in Models**
 
@@ -186,7 +186,7 @@ The `BuiltinSaver` class is designed to provide a straightforward way to save bu
 - Built-in models can be saved using the `save` method from the `BuiltinSaver` class.
 - The method handles flavor-specific serialization seamlessly.
 
----
+------------
 
 ### **Common Acceptance Criteria**
 
@@ -311,8 +311,8 @@ The `MlflowRegister` class provides methods for registering models within the ML
 
 ## Code location
 
-[src/regression_model_template/io/model_registries.py](../src/regression_model_template/io/registries.py)
+[src/regression_model_template/io/registries.py](../src/regression_model_template/io/registries.py)
 
 ## Test location
 
-[tests/io/test_model_registries.py](../tests/io/test_registries.py)
+[tests/io/test_registries.py](../tests/io/test_registries.py)

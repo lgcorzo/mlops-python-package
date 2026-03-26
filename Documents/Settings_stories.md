@@ -17,16 +17,17 @@
 
 ```mermaid
 classDiagram
-direction LR
+    direction LR
 
     class Settings {
         <<abstract>>
-        +job: jobs.JobKind
     }
+    Settings --|> pdts.BaseSettings : inherits
 
     class MainSettings {
         +job: jobs.JobKind
     }
+    MainSettings --|> Settings : inherits
 
     class jobs.JobKind {
         <<external>>
@@ -41,16 +42,13 @@ direction LR
         <<external>>
     }
 
-    Settings <|-- MainSettings
-    MainSettings --> jobs.JobKind : "job"
-    MainSettings --> pdt.Field : "Field"
-    Settings o-- pdts.BaseSettings : "inherits"
-
+    MainSettings --> jobs.JobKind : "uses"
+    MainSettings --> pdt.Field : "uses"
 ```
 
 ## **User Stories: Settings Management**
 
----
+------------
 
 ### **1. User Story: Configure Application Settings**
 
@@ -64,7 +62,7 @@ The `Settings` class encapsulates high-level preferences for the application, al
 - The settings class can be instantiated with various configurations needed for the application.
 - Default values are handled correctly, and the settings can be overridden.
 
----
+------------
 
 ### **2. User Story: Define Job Settings**
 
@@ -78,7 +76,7 @@ The `MainSettings` class holds the configuration for the job to be executed, ens
 - The job is specified within the `MainSettings` and reflects the expected type.
 - The job configuration can be validated against the expected structure before execution.
 
----
+------------
 
 ### **3. User Story: Validate Settings Structure**
 
@@ -92,7 +90,7 @@ The settings classes use Pydantic to automatically validate the structure of the
 - Validation occurs at instantiation, ensuring required parameters are not missing.
 - Clear error messages are raised for any discrepancies in the settings structure.
 
----
+------------
 
 ### **4. User Story: Separate Settings from Provider**
 
@@ -106,7 +104,7 @@ By defining settings as a distinct class, the application can cleanly interface 
 - The settings are decoupled from the underlying logic of the application so that changes in one do not directly impact the other.
 - The architecture allows for easy swapping of settings providers without extensive code changes.
 
----
+------------
 
 ### **Common Acceptance Criteria**
 
@@ -126,7 +124,7 @@ By defining settings as a distinct class, the application can cleanly interface 
    - Each class and method should include detailed docstrings explaining their purpose and usage.
    - Users should have access to examples that demonstrate the integration of settings into the application.
 
----
+------------
 
 ### **Definition of Done (DoD):** 
 

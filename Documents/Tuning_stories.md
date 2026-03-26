@@ -1,4 +1,4 @@
-# US [Model Tuning Job](./backlog_mlops_regresion.md) : Define a job for finding the best hyperparameters for a model
+# US [Model Tuning Job](./backlog_mlops_regresion.md) : Perform hyperparameter tuning for a model. the best hyperparameters for a model
 
 - [US Model Tuning Job : Define a job for finding the best hyperparameters for a model](#us-model-tuning-job--define-a-job-for-finding-the-best-hyperparameters-for-a-model)
   - [classes relations](#classes-relations)
@@ -20,99 +20,64 @@
 
 ```mermaid
 classDiagram
-direction LR
-
+    direction LR
     class TuningJob {
-        +KIND: str
-        +run_config: RunConfig
-        +inputs: ReaderKind
-        +targets: ReaderKind
-        +model: ModelKind
-        +metric: MetricKind
-        +splitter: SplitterKind
-        +searcher: SearcherKind
-        +run() : Locals
+        +KIND: T.Literal["TuningJob"] = "TuningJob"
+        +run_config: services.MlflowService.RunConfig
+        +inputs: datasets.ReaderKind
+        +targets: datasets.ReaderKind
+        +model: models.ModelKind
+        +metric: metrics.MetricKind
+        +splitter: splitters.SplitterKind
+        +searcher: searchers.SearcherKind
+        +run() base.Locals
     }
 
-    class LoggerService {
-        +start() : None
-        +stop() : None
-        +logger() : Logger
+    class Job {
+        <<abstract>>
+        +run()* base.Locals
     }
-
-    class AlertsService {
-        +start() : None
-        +stop() : None
-        +notify(title, message) : None
-    }
+    TuningJob --|> Job : inherits
 
     class MlflowService {
-        +start() : None
-        +stop() : None
-        +client() : MlflowClient
-        +run_context(run_config) : RunContext
+        +client() mt.MlflowClient
+        +run_context(run_config) RunContext
         +registry_name: str
     }
 
-    class MlflowClient {
-        +log_metric(run_id, key, value) : None
-        +log_input(dataset, context) : None
-        +tracking_uri: str
-    }
-
-    class RunContext {
-        +info: RunInfo
-    }
-
-    class RunInfo {
-        +run_id: str
-    }
-
     class ReaderKind {
-        +read() : DataFrame
-        +lineage(data, name, targets) : Dataset
-    }
-
-    class Dataset {
-        +to_dict() : dict
+        <<interface>>
+        +read() pd.DataFrame
+        +lineage(data, name, targets) mt.Dataset
     }
 
     class ModelKind {
-        +fit(inputs, targets) : None
-        +predict(inputs) : DataFrame
+        <<interface>>
+        +fit(inputs, targets)
+        +predict(inputs) pd.DataFrame
     }
 
     class MetricKind {
-        +name: str
-        +score(targets, outputs) : float
+        <<interface>>
+        +score(targets, outputs) float
     }
 
     class SplitterKind {
-        +split(inputs, targets) : Tuple[TrainIndex, TestIndex]
+        <<interface>>
+        +split(inputs, targets) Iterator
     }
 
     class SearcherKind {
-        +search(model, metric, inputs, targets, cv) : Tuple[Results, BestScore, BestParams]
+        <<interface>>
+        +search(model, metric, inputs, targets, cv) Results
     }
 
-    class Results {
-        +shape: Tuple[int, int]
-    }
-
-    TuningJob --> LoggerService : "uses"
-    TuningJob --> AlertsService : "uses"
     TuningJob --> MlflowService : "uses"
-    MlflowService --> MlflowClient : "interacts with"
-    MlflowClient --> RunContext : "returns"
-    RunContext --> RunInfo : "contains"
     TuningJob --> ReaderKind : "uses"
-    ReaderKind --> Dataset : "produces"
     TuningJob --> ModelKind : "uses"
-    TuningJob --> MetricKind : "optimizes"
+    TuningJob --> MetricKind : "uses"
     TuningJob --> SplitterKind : "uses"
-    TuningJob --> SearcherKind : "executes"
-    SearcherKind --> Results : "produces"
-
+    TuningJob --> SearcherKind : "uses"
 ```
 
 ## **User Stories: Tuning Job Management**
@@ -147,7 +112,7 @@ In the `run` method, input and target data are read using the designated data re
 - The job successfully reads and validates input and target datasets.
 - The shapes of the datasets are logged for monitoring purposes.
 
----
+------------
 
 ### **3. User Story: Log Data Lineage**
 
@@ -162,7 +127,7 @@ Lineage information is logged in MLflow for both input and target datasets used 
 - The lineage of both the input and target datasets is logged appropriately using the MLflow tracking system.
 - Logged lineage includes sufficient details to trace the origin of the data.
 
----
+------------
 
 ### **4. User Story: Run Hyperparameter Search**
 
@@ -177,7 +142,7 @@ The job invokes the hyperparameter searcher to find optimal hyperparameters base
 - The hyperparameter search is performed successfully using the configured searcher.
 - Results from the search, including performance metrics, should be logged.
 
----
+------------
 
 ### **5. User Story: Identify Best Hyperparameters**
 
@@ -192,7 +157,7 @@ The results of the hyperparameter search should include the best score and best 
 - The job captures and logs the best hyperparameters found and the associated performance score.
 - This information should be available for review and future reference.
 
----
+------------
 
 ### **6. User Story: Notify Completion of Tuning**
 
@@ -207,7 +172,7 @@ At the conclusion of the job execution, the tuning job sends a notification deta
 - Notifications include information about the best hyperparameter score.
 - The alerts service successfully communicates the tuning job's completion.
 
----
+------------
 
 ### **Common Acceptance Criteria**
 

@@ -18,44 +18,56 @@
 
 ```mermaid
 classDiagram
-    %% Base Class: Service
     class Service {
         <<abstract>>
-        +start(): None
-        +stop(): None
+        +start()* None
+        +stop() None
     }
+    Service --|> pdt.BaseModel : inherits
+    Service --|> abc.ABC : inherits
 
-    %% LoggerService Class
     class LoggerService {
-        +sink: str
-        +level: str
-        +start(): None
-        +logger(): loguru.Logger
+        +sink: str = "stderr"
+        +level: str = "DEBUG"
+        +format: str
+        +colorize: bool = True
+        +serialize: bool = False
+        +backtrace: bool = True
+        +diagnose: bool = False
+        +catch: bool = True
+        +start() None
+        +logger() loguru.Logger
     }
-    Service <|-- LoggerService : "specializes"
+    LoggerService --|> Service : inherits
 
-    %% AlertsService Class
     class AlertsService {
-        +enable: bool
-        +app_name: str
-        +notify(title: str, message: str): None
+        +enable: bool = True
+        +app_name: str = "regression_model_template"
+        +timeout: int | None = None
+        +start() None
+        +notify(title: str, message: str) None
     }
-    Service <|-- AlertsService : "specializes"
+    AlertsService --|> Service : inherits
 
-    %% MlflowService Class
     class MlflowService {
         +tracking_uri: str
         +registry_uri: str
-        +start(): None
-        +run_context(run_config: RunConfig): T.Generator[mlflow.ActiveRun, None, None]
-        +client(): mt.MlflowClient
+        +experiment_name: str
+        +registry_name: str
+        +autolog_disable: bool = False
+        +start() None
+        +run_context(run_config: RunConfig) T.Generator
+        +client() mt.MlflowClient
     }
-    Service <|-- MlflowService : "specializes"
+    MlflowService --|> Service : inherits
 
-    %% Relationships
-    LoggerService ..> loguru.Logger : "uses"
-    AlertsService ..> notification : "uses"
-    MlflowService ..> mlflow : "uses"
+    class RunConfig {
+        +name: str
+        +description: str | None = None
+        +tags: dict[str, T.Any] | None = None
+        +log_system_metrics: bool | None = True
+    }
+    MlflowService *-- RunConfig : inner class
 ```
 
 ## **User Stories: Global Services**

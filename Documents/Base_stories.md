@@ -19,45 +19,38 @@
 ```mermaid
 classDiagram
     class Job {
+        <<abstract>>
         +KIND: str
-        +logger_service: services.LoggerService
-        +alerts_service: services.AlertsService
-        +mlflow_service: services.MlflowService
-        +__enter__() : T.Self
-        +__exit__(exc_type, exc_value, exc_traceback) : Literal[False]
-        +run() : Locals
+        +logger_service: services.LoggerService = services.LoggerService()
+        +alerts_service: services.AlertsService = services.AlertsService()
+        +mlflow_service: services.MlflowService = services.MlflowService()
+        +__enter__() T.Self
+        +__exit__(exc_type, exc_value, exc_traceback) Literal[False]
+        +run()* Locals
     }
 
     class LoggerService {
-        +start() : None
-        +stop() : None
-        +logger() : Logger
+        +start() None
+        +stop() None
+        +logger() Logger
     }
 
     class AlertsService {
-        +start() : None
-        +stop() : None
+        +start() None
+        +stop() None
     }
 
     class MlflowService {
-        +start() : None
-        +stop() : None
+        +start() None
+        +stop() None
     }
 
-    class Logger {
-        +debug(msg: str, *args) : None
-    }
-
-    class Locals {
-        +Dict[str, Any]
-    }
-
-    Job --> LoggerService : "uses"
-    Job --> AlertsService : "uses"
-    Job --> MlflowService : "uses"
-    LoggerService --> Logger : "provides"
-    Job --> Locals : "returns"
-
+    Job --|> pdt.BaseModel : inherits
+    Job --|> abc.ABC : inherits
+    Job *-- LoggerService : composes
+    Job *-- AlertsService : composes
+    Job *-- MlflowService : composes
+    Job ..> Locals : returns
 ```
 
 ## **User Stories: Job Management**

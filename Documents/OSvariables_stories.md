@@ -17,12 +17,9 @@
 
 ```mermaid
 classDiagram
-    Singleton <|-- Env
-    BaseSettings <|-- Env
-
     class Singleton {
         - _instances: dict
-        + __new__(cls, *args, **kwargs)
+        + __new__(cls, *args, **kwargs) Singleton
     }
 
     class BaseSettings {
@@ -40,10 +37,12 @@ classDiagram
         + case_sensitive: bool = False
         + env_file: str = ".env"
         + env_file_encoding: str = "utf-8"
+        + extra: str = "ignore"
     }
 
-    Env --> Config : "inner class"
-
+    Env --|> Singleton : inherits
+    Env --|> BaseSettings : inherits
+    Env *-- Config : inner class
 ```
 
 
@@ -159,8 +158,8 @@ The `Env` class provides default and customizable values for MLflow-related conf
 - 
 ## Code location
 
-[src/regression_model_template/core/schemas.py](../src/regression_model_template/io/osvariables.py)
+[src/regression_model_template/io/osvariables.py](../src/regression_model_template/io/osvariables.py)
 
 ## Test location
 
-[tests/core/test_schemas.py](../tests/io/osvariables.py)
+[tests/io/test_osvariables.py](../tests/io/test_osvariables.py)
