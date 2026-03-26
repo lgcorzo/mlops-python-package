@@ -33,64 +33,64 @@
 classDiagram
     class Saver {
         <<abstract>>
-        +KIND: str
-        +path: str = "model"
-        +save(model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) Info*
+        +str KIND
+        +str path
+        +save(model, signature, input_example) Info
     }
-    Saver --|> pdt.BaseModel : inherits
-    Saver --|> abc.ABC : inherits
+    Saver --|> BaseModel : inherits
+    Saver --|> ABC : inherits
 
     class CustomSaver {
-        +KIND: T.Literal["CustomSaver"] = "CustomSaver"
-        +save(model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) Info
+        +str KIND
+        +save(model, signature, input_example) Info
     }
     CustomSaver --|> Saver : inherits
 
     class BuiltinSaver {
-        +KIND: T.Literal["BuiltinSaver"] = "BuiltinSaver"
-        +flavor: str
-        +save(model: models.Model, signature: signers.Signature, input_example: schemas.Inputs | None) Info
+        +str KIND
+        +str flavor
+        +save(model, signature, input_example) Info
     }
     BuiltinSaver --|> Saver : inherits
 
     class Loader {
         <<abstract>>
-        +KIND: str
-        +load(uri: str) Loader.Adapter*
+        +str KIND
+        +load(uri) Adapter
     }
-    Loader --|> pdt.BaseModel : inherits
-    Loader --|> abc.ABC : inherits
+    Loader --|> BaseModel : inherits
+    Loader --|> ABC : inherits
 
-    class Loader_Adapter {
+    class Adapter {
         <<abstract>>
-        +predict(inputs: T.Any) schemas.Outputs*
+        +predict(inputs) Outputs
     }
-    Loader *-- Loader_Adapter : inner class
+    Loader *-- Adapter : nested class
 
     class CustomLoader {
-        +KIND: T.Literal["CustomLoader"] = "CustomLoader"
-        +load(uri: str) CustomLoader.Adapter
+        +str KIND
+        +load(uri) Adapter
     }
     CustomLoader --|> Loader : inherits
 
     class BuiltinLoader {
-        +KIND: T.Literal["BuiltinLoader"] = "BuiltinLoader"
-        +load(uri: str) BuiltinLoader.Adapter
+        +str KIND
+        +load(uri) Adapter
     }
     BuiltinLoader --|> Loader : inherits
 
     class Register {
         <<abstract>>
-        +KIND: str
-        +tags: dict[str, T.Any] = {}
-        +register(name: str, model_uri: str) Version*
+        +str KIND
+        +dict tags
+        +register(name, model_uri) Version
     }
-    Register --|> pdt.BaseModel : inherits
-    Register --|> abc.ABC : inherits
+    Register --|> BaseModel : inherits
+    Register --|> ABC : inherits
 
     class MlflowRegister {
-        +KIND: T.Literal["MlflowRegister"] = "MlflowRegister"
-        +register(name: str, model_uri: str) Version
+        +str KIND
+        +register(name, model_uri) Version
     }
     MlflowRegister --|> Register : inherits
 ```
