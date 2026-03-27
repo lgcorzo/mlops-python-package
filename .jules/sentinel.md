@@ -57,3 +57,18 @@
 **Vulnerability:** The `/predict` endpoint enforced a maximum row limit but did not limit the number of columns, allowing an attacker to submit wide payloads causing memory exhaustion and Algorithmic DoS.
 **Learning:** When validating tabular or matrix-like data inputs, limits must be applied to all dimensions (both rows and columns) to properly bound memory usage.
 **Prevention:** Always define and enforce strict limits on both row and column counts for incoming data structures.
+
+## 2026-12-06 - Rate Limiter Bypass / DoS via Proxy IP Masking
+**Vulnerability:** The in-memory rate limiter relies on `request.client.host` which yields the proxy's IP address instead of the real client IP.
+**Learning:** When an application is deployed behind a load balancer or reverse proxy, `request.client.host` limits all users connecting through the proxy together, enabling an attacker to inadvertently block all users or bypass rate limiting.
+**Prevention:** Always use `X-Forwarded-For` (or equivalent proxy headers) to extract the actual client IP for rate limiting and auditing.
+
+## 2026-12-07 - Rate Limiter Bypass / IP Spoofing via X-Forwarded-For
+**Vulnerability:** Manually parsing the `X-Forwarded-For` header to determine the client IP allows an attacker to trivially spoof their IP address, bypassing the rate limiter and potentially causing DoS.
+**Learning:** Blindly trusting `X-Forwarded-For` without validating that the immediate connection comes from a trusted proxy allows IP spoofing.
+**Prevention:** Always use `ProxyHeadersMiddleware` (or equivalent secure middleware) configured with a strict list of trusted proxies (`trusted_hosts`) to securely extract the real client IP.
+
+## 2026-12-08 - Misconfigured ProxyHeadersMiddleware (Trusting ALLOWED_HOSTS)
+**Vulnerability:** `ProxyHeadersMiddleware` was configured using `ALLOWED_HOSTS` instead of a separate list of trusted proxy IPs. Since `ALLOWED_HOSTS` usually contains domain names (or `*`), this causes the middleware to either fail or blindly trust all `X-Forwarded-For` headers, leading to IP Spoofing.
+**Learning:** `TrustedHostMiddleware` uses domain names to validate the HTTP `Host` header, whereas `ProxyHeadersMiddleware` requires the IP addresses of trusted upstream proxies to securely parse `X-Forwarded-For`. Reusing the same variable conflates these two distinct security mechanisms.
+**Prevention:** Always define a separate `TRUSTED_PROXIES` configuration variable (defaulting to `127.0.0.1`) specifically for `ProxyHeadersMiddleware`.
