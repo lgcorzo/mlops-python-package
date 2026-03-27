@@ -55,7 +55,7 @@ app: FastAPI = FastAPI(
 )
 
 # Security Middlewares
-app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=TRUSTED_PROXIES)
+app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=TRUSTED_PROXIES)  # type: ignore[arg-type]
 
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS)
 

@@ -88,9 +88,7 @@ async def test_predict_rate_limiter_uses_proxy_middleware():
     scope = {
         "type": "http",
         "client": ("10.0.0.1", 12345),
-        "headers": [
-            (b"x-forwarded-for", b"203.0.113.1, 198.51.100.1")
-        ]
+        "headers": [(b"x-forwarded-for", b"203.0.113.1, 198.51.100.1")],
     }
 
     async def mock_receive():
@@ -110,9 +108,7 @@ async def test_predict_rate_limiter_uses_proxy_middleware():
     scope_untrusted = {
         "type": "http",
         "client": ("192.168.1.1", 12345),
-        "headers": [
-            (b"x-forwarded-for", b"203.0.113.1")
-        ]
+        "headers": [(b"x-forwarded-for", b"203.0.113.1")],
     }
 
     await middleware_instance(scope_untrusted, mock_receive, mock_send)
