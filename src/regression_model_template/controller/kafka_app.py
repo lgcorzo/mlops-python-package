@@ -16,6 +16,7 @@ from confluent_kafka import Consumer, KafkaError, Message, Producer
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 from pydantic import BaseModel, field_validator
 
 from regression_model_template.core.schemas import InputsSchema, Outputs
@@ -40,6 +41,7 @@ MAX_TRACKED_IPS = 10000
 # Security Configuration
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+TRUSTED_PROXIES = os.getenv("TRUSTED_PROXIES", "127.0.0.1").split(",")
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format=LOGGING_FORMAT)
@@ -53,6 +55,8 @@ app: FastAPI = FastAPI(
 )
 
 # Security Middlewares
+app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=TRUSTED_PROXIES)  # type: ignore[arg-type]
+
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS)
 
 app.add_middleware(
