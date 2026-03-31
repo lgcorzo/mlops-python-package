@@ -72,3 +72,8 @@
 **Vulnerability:** `ProxyHeadersMiddleware` was configured using `ALLOWED_HOSTS` instead of a separate list of trusted proxy IPs. Since `ALLOWED_HOSTS` usually contains domain names (or `*`), this causes the middleware to either fail or blindly trust all `X-Forwarded-For` headers, leading to IP Spoofing.
 **Learning:** `TrustedHostMiddleware` uses domain names to validate the HTTP `Host` header, whereas `ProxyHeadersMiddleware` requires the IP addresses of trusted upstream proxies to securely parse `X-Forwarded-For`. Reusing the same variable conflates these two distinct security mechanisms.
 **Prevention:** Always define a separate `TRUSTED_PROXIES` configuration variable (defaulting to `127.0.0.1`) specifically for `ProxyHeadersMiddleware`.
+
+## 2026-03-31 - Missing Cache-Control and CSP headers
+**Vulnerability:** The FastAPI application was not setting Content-Security-Policy and Cache-Control headers, leaving it vulnerable to sensitive data caching and lacking defense-in-depth against XSS.
+**Learning:** Just setting `X-Content-Type-Options`, `X-Frame-Options`, and `Strict-Transport-Security` is incomplete for full protection. Cache-Control prevents caching of APIs returning sensitive/private info.
+**Prevention:** Ensure `Content-Security-Policy` and `Cache-Control` are always included in security HTTP middlewares.
