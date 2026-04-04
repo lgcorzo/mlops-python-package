@@ -14,6 +14,9 @@ import pandas as pd
 import uvicorn
 from confluent_kafka import Consumer, KafkaError, Message, Producer
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
@@ -80,6 +83,17 @@ async def add_security_headers(request: Request, call_next: Any) -> Any:
     )
     response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
     return response
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
+    """Sanitize validation errors to prevent echoing sensitive input data."""
+    sanitized_errors = []
+    for error in exc.errors():
+        sanitized_error = {k: v for k, v in error.items() if k != "input"}
+        sanitized_errors.append(sanitized_error)
+    logger.debug(f"Validation error: {sanitized_errors}")
+    return JSONResponse(status_code=422, content={"detail": jsonable_encoder(sanitized_errors)})
 
 
 class RateLimiter:
