@@ -77,3 +77,8 @@
 **Vulnerability:** The FastAPI application was not setting Content-Security-Policy and Cache-Control headers, leaving it vulnerable to sensitive data caching and lacking defense-in-depth against XSS.
 **Learning:** Just setting `X-Content-Type-Options`, `X-Frame-Options`, and `Strict-Transport-Security` is incomplete for full protection. Cache-Control prevents caching of APIs returning sensitive/private info.
 **Prevention:** Ensure `Content-Security-Policy` and `Cache-Control` are always included in security HTTP middlewares.
+
+## 2024-05-18 - [Fix Shared Mutable State Data Leakage in Pydantic Models]
+**Vulnerability:** PredictionResponse and PredictionRequest Pydantic models initialized dictionary attributes with default dictionaries instead of default factories, creating a shared mutable state across instances which can cause data leakage between predictions in the FastAPI application.
+**Learning:** In standard Python and Pydantic (under certain circumstances or when nested deeply), mutable defaults are evaluated once and shared across all instances.
+**Prevention:** To prevent cross-request data leakage from shared mutable state in Pydantic models, always use `pydantic.Field(default_factory=lambda: ...)` when assigning default dictionary or list values to attributes.

@@ -17,7 +17,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, Field, field_validator
 
 from regression_model_template.core.schemas import InputsSchema, Outputs
 from regression_model_template.io import registries, services
@@ -119,7 +119,7 @@ class RateLimiter:
 class PredictionRequest(BaseModel):
     """Request model for prediction."""
 
-    input_data: Dict[str, Any] = {
+    input_data: Dict[str, Any] = Field(default_factory=lambda: {
         "dteday": [pd.Timestamp.now().strftime("%Y-%m-%d")] * 4,
         "season": [1, 2, 3, 4],
         "yr": [0, 0, 1, 1],
@@ -135,7 +135,7 @@ class PredictionRequest(BaseModel):
         "windspeed": [0.2, 0.25, 0.3, 0.35],
         "casual": [0, 10, 20, 30],
         "registered": [0, 50, 100, 150],
-    }
+    })
 
     def validate_schema(self) -> pd.DataFrame:
         """Validates the input data against InputsSchema."""
@@ -175,7 +175,7 @@ class PredictionRequest(BaseModel):
 class PredictionResponse(BaseModel):
     """Response model for prediction."""
 
-    result: Dict[str, Any] = {"inference": [0.0], "quality": 0.0, "error": ""}
+    result: Dict[str, Any] = Field(default_factory=lambda: {"inference": [0.0], "quality": 0.0, "error": ""})
 
 
 # Core Service Class
