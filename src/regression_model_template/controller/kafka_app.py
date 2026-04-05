@@ -119,23 +119,25 @@ class RateLimiter:
 class PredictionRequest(BaseModel):
     """Request model for prediction."""
 
-    input_data: Dict[str, Any] = Field(default_factory=lambda: {
-        "dteday": [pd.Timestamp.now().strftime("%Y-%m-%d")] * 4,
-        "season": [1, 2, 3, 4],
-        "yr": [0, 0, 1, 1],
-        "mnth": [1, 2, 3, 4],
-        "hr": [0, 6, 12, 18],
-        "holiday": [False, False, True, False],
-        "weekday": [pd.Timestamp.now().weekday()] * 4,
-        "workingday": [True, True, False, True],
-        "weathersit": [1, 2, 3, 1],
-        "temp": [0.5, 0.6, 0.7, 0.8],
-        "atemp": [0.5, 0.6, 0.7, 0.8],
-        "hum": [0.5, 0.55, 0.6, 0.65],
-        "windspeed": [0.2, 0.25, 0.3, 0.35],
-        "casual": [0, 10, 20, 30],
-        "registered": [0, 50, 100, 150],
-    })
+    input_data: Dict[str, Any] = Field(
+        default_factory=lambda: {
+            "dteday": [pd.Timestamp.now().strftime("%Y-%m-%d")] * 4,
+            "season": [1, 2, 3, 4],
+            "yr": [0, 0, 1, 1],
+            "mnth": [1, 2, 3, 4],
+            "hr": [0, 6, 12, 18],
+            "holiday": [False, False, True, False],
+            "weekday": [pd.Timestamp.now().weekday()] * 4,
+            "workingday": [True, True, False, True],
+            "weathersit": [1, 2, 3, 1],
+            "temp": [0.5, 0.6, 0.7, 0.8],
+            "atemp": [0.5, 0.6, 0.7, 0.8],
+            "hum": [0.5, 0.55, 0.6, 0.65],
+            "windspeed": [0.2, 0.25, 0.3, 0.35],
+            "casual": [0, 10, 20, 30],
+            "registered": [0, 50, 100, 150],
+        }
+    )
 
     def validate_schema(self) -> pd.DataFrame:
         """Validates the input data against InputsSchema."""
