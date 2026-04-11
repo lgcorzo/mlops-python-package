@@ -1,9 +1,14 @@
 name: Publish
+
 on:
+  push:
+    branches:
+      - main
   release:
     types:
       - edited
       - published
+      
 env:
   DOCKER_IMAGE: ghcr.io/lgcorzo/mlops-python-package
 concurrency:
