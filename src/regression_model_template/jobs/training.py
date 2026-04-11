@@ -2,10 +2,12 @@
 
 # %% IMPORTS
 
+import time
 import typing as T
 
 import mlflow
 import pydantic as pdt
+from mlflow.entities import Metric
 
 from regression_model_template.core import metrics as metrics_
 from regression_model_template.core import models, schemas
@@ -106,11 +108,19 @@ class TrainingJob(base.Job):
             outputs_test = self.model.predict(inputs=inputs_test)
             logger.debug("- Outputs test shape: {}", outputs_test.shape)
             # metrics
+            metrics_scores = {}
             for i, metric in enumerate(self.metrics, start=1):
                 logger.info("{}. Compute metric: {}", i, metric)
                 score = metric.score(targets=targets_test, outputs=outputs_test)
-                client.log_metric(run_id=run.info.run_id, key=metric.name, value=score)
+                metrics_scores[metric.name] = score
                 logger.debug("- Metric score: {}", score)
+            client.log_batch(
+                run_id=run.info.run_id,
+                metrics=[
+                    Metric(key=key, value=value, timestamp=int(time.time() * 1000), step=0)
+                    for key, value in metrics_scores.items()
+                ],
+            )
             # signer
             logger.info("Sign model: {}", self.signer)
             model_signature = self.signer.sign(inputs=inputs, outputs=outputs_test)
