@@ -70,6 +70,8 @@ def test_training_job(
         "i",
         "metric",
         "score",
+        "metrics_scores",
+        "metrics_scores_",
         "model_signature",
         "model_info",
         "model_version",
