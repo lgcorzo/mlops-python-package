@@ -57,6 +57,7 @@ jobs:
   sync-wiki-to-repo:
     if: github.event_name == 'gollum'
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
