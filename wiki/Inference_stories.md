@@ -1,4 +1,4 @@
-# US [Model Inference Job](./backlog_mlops_regresion.md) : Define a job for generating batch predictions from a registered model.
+# US [Model Inference Job](backlog_mlops_regresion) : Define a job for generating batch predictions from a registered model.
 
 - [US Model Inference Job : Define a job for generating batch predictions from a registered model.](#us-model-inference-job--define-a-job-for-generating-batch-predictions-from-a-registered-model)
   - [classes relations](#classes-relations)

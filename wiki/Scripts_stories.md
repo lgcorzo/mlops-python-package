@@ -1,4 +1,4 @@
-# US [CLI Application for Running AI/ML Jobs](./backlog_mlops_regresion.md) : Scripts for the CLI application
+# US [CLI Application for Running AI/ML Jobs](backlog_mlops_regresion) : Scripts for the CLI application
 
 - [US CLI Application for Running AI/ML Jobs : Scripts for the CLI application](#us-cli-application-for-running-aiml-jobs--scripts-for-the-cli-application)
   - [classes relations](#classes-relations)

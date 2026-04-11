@@ -1,4 +1,4 @@
-# US [Model Explanations Job](./backlog_mlops_regresion.md) : Explain predictions for a registered model version and dataset. structure and decisions.
+# US [Model Explanations Job](backlog_mlops_regresion) : Explain predictions for a registered model version and dataset. structure and decisions.
 
 - [US Model Explanations Job : Define a job for explaining the model structure and decisions.](#us-model-explanations-job--define-a-job-for-explaining-the-model-structure-and-decisions)
   - [classes relations](#classes-relations)

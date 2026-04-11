@@ -1,5 +1,5 @@
 
-# US [Model Promotion Job](./backlog_mlops_regresion.md) : Define a job for promoting a registered model version with an alias.
+# US [Model Promotion Job](backlog_mlops_regresion) : Define a job for promoting a registered model version with an alias.
 
 - [US Model Promotion Job : Define a job for promoting a registered model version with an alias.](#us-model-promotion-job--define-a-job-for-promoting-a-registered-model-version-with-an-alias)
   - [classes relations](#classes-relations)

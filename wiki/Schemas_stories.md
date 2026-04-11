@@ -1,4 +1,4 @@
-# US [Scchemas](./backlog_mlops_regresion.md) : Define structured data formats for input, output, and intermediate processes, ensuring consistency and validation throughout the pipeline
+# US [Scchemas](backlog_mlops_regresion) : Define structured data formats for input, output, and intermediate processes, ensuring consistency and validation throughout the pipeline
 
 - [US Scchemas : Define structured data formats for input, output, and intermediate processes, ensuring consistency and validation throughout the pipeline](#us-scchemas--define-structured-data-formats-for-input-output-and-intermediate-processes-ensuring-consistency-and-validation-throughout-the-pipeline)
   - [classes relations](#classes-relations)

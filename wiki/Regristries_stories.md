@@ -1,4 +1,4 @@
-# US [Model Registries](./backlog_mlops_regresion.md) : Model registry logicading, and registering machine learning models using MLflow.
+# US [Model Registries](backlog_mlops_regresion) : Model registry logicading, and registering machine learning models using MLflow.
 
 - [US Model Registry : Manage saving, loading, and registering machine learning models using MLflow.](#us-model-registry--manage-saving-loading-and-registering-machine-learning-models-using-mlflow)
   - [classes relations](#classes-relations)

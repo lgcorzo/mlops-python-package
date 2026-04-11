@@ -1,4 +1,4 @@
-# US [Application Settings Management](./backlog_mlops_regresion.md) : Define settings for the application.
+# US [Application Settings Management](backlog_mlops_regresion) : Define settings for the application.
 
 - [US Application Settings Management : Define settings for the application.](#us-application-settings-management--define-settings-for-the-application)
   - [classes relations](#classes-relations)

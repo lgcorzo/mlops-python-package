@@ -1,4 +1,4 @@
-# US [Model Training Job](./backlog_mlops_regresion.md) : Train, evaluate, and register a machine learning model.
+# US [Model Training Job](backlog_mlops_regresion) : Train, evaluate, and register a machine learning model.
 - [US Model Training Job : Define a job for training and registering a single AI/ML model](#us-model-training-job--define-a-job-for-training-and-registering-a-single-aiml-model)
   - [classes relations](#classes-relations)
   - [**User Stories: Training Job Management**](#user-stories-training-job-management)

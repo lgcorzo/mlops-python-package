@@ -1,4 +1,4 @@
-# US [Metrics](./backlog_mlops_regresion.md) : Provide standardized measurements for model performance, accuracy, and evaluation
+# US [Metrics](backlog_mlops_regresion) : Provide standardized measurements for model performance, accuracy, and evaluation
 
 Provide standardized measurements for model performance, accuracy, and evaluation. Useful for tracking improvement and identifying bottlenecks.
 
