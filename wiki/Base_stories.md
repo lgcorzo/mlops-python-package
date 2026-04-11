@@ -1,4 +1,4 @@
-# US [High-Level Project Jobs](./backlog_mlops_regresion.md) : Manage the execution context for high-level project jobs with integrated services.
+# US [High-Level Project Jobs](backlog_mlops_regresion) : Manage the execution context for high-level project jobs with integrated services.
 
 - [US High-Level Project Jobs : Manage the execution context for high-level project jobs with integrated services.](#us-high-level-project-jobs--manage-the-execution-context-for-high-level-project-jobs-with-integrated-services)
   - [classes relations](#classes-relations)

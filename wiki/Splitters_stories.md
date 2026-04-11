@@ -1,4 +1,4 @@
-# US [Data Splitting Functionality](./backlog_mlops_regresion.md) : Split dataframes into subsets for model training and evaluation.
+# US [Data Splitting Functionality](backlog_mlops_regresion) : Split dataframes into subsets for model training and evaluation.
 
 - [US Data Splitting Functionality : Split dataframes into subsets for model training and evaluation.](#us-data-splitting-functionality--split-dataframes-into-subsets-for-model-training-and-evaluation)
   - [classes relations](#classes-relations)

@@ -1,4 +1,4 @@
-# US [Datasetes](./backlog_mlops_regresion.md) :  Handle loading, preprocessing, and managing data sets for training, evaluation, and inference.
+# US [Datasetes](backlog_mlops_regresion) :  Handle loading, preprocessing, and managing data sets for training, evaluation, and inference.
 
 - [US Datasetes :  Handle loading, preprocessing, and managing data sets for training, evaluation, and inference.](#us-datasetes---handle-loading-preprocessing-and-managing-data-sets-for-training-evaluation-and-inference)
   - [classes relations](#classes-relations)

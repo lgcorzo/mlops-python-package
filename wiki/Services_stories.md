@@ -1,5 +1,5 @@
 
-# US [Global Context Management](./backlog_mlops_regresion.md) : Manage global contexts during execution for logging, notifications, and MLflow tracking.
+# US [Global Context Management](backlog_mlops_regresion) : Manage global contexts during execution for logging, notifications, and MLflow tracking.
 
 - [US Global Context Management : Manage global contexts during execution for logging, notifications, and MLflow tracking.](#us-global-context-management--manage-global-contexts-during-execution-for-logging-notifications-and-mlflow-tracking)
   - [classes relations](#classes-relations)

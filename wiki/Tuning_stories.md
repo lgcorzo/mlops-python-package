@@ -1,4 +1,4 @@
-# US [Model Tuning Job](./backlog_mlops_regresion.md) : Perform hyperparameter tuning for a model. the best hyperparameters for a model
+# US [Model Tuning Job](backlog_mlops_regresion) : Perform hyperparameter tuning for a model. the best hyperparameters for a model
 
 - [US Model Tuning Job : Define a job for finding the best hyperparameters for a model](#us-model-tuning-job--define-a-job-for-finding-the-best-hyperparameters-for-a-model)
   - [classes relations](#classes-relations)
