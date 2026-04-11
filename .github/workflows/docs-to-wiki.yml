@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - wiki
     paths:
       - "wiki/**"
   repository_dispatch:
@@ -22,9 +21,8 @@ permissions:
 
 jobs:
   sync-content-to-wiki:
-    if: always() && github.event_name != 'gollum' && (github.ref == format('refs/heads/{0}', github.event.repository.default_branch) || github.ref == 'refs/heads/wiki')
+    if: always() && format('refs/heads/{0}', github.event.repository.default_branch) == github.ref && github.event_name != 'gollum'
     runs-on: ubuntu-latest
-    environment: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && 'production' || '' }}
     steps:
       - uses: actions/checkout@v4
       - name: Sync repo wiki folder to wiki
@@ -32,13 +30,7 @@ jobs:
           # 1. Prepare wiki repository URL
           WIKI_URL="https://x-access-token:${{ secrets.WIKI_PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}.wiki.git"
           
-          # 2. Check if wiki remote exists before cloning
-          if ! git ls-remote "$WIKI_URL" > /dev/null 2>&1; then
-            echo "::warning title=Wiki Not Found::The GitHub Wiki repository was not found. Please ensure the Wiki is enabled and at least one page exists (e.g. Home.md)."
-            exit 0
-          fi
-
-          # 3. Clone the wiki to a temporary directory
+          # 2. Clone the wiki to a temporary directory
           git clone "$WIKI_URL" wiki_temp
           
           # 3. Clean all files in wiki_temp (except .git)
