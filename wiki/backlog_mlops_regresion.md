@@ -18,43 +18,43 @@
 
    The foundational components of the system that ensure efficient functionality across various modules:
 
-- **[US: Metrics](Metrics_stories.md)**: Provide standardized measurements for model performance, accuracy, and evaluation. Useful for tracking improvement and identifying bottlenecks.
-- **[US: Models](Models_stories.md)**: Define the structure of machine learning models, including architectures and checkpoints, to standardize training and deployment.
-- **[US: Schemas](Schemas_stories.md)**: Define structured data formats for input, output, and intermediate processes, ensuring consistency and validation throughout the pipeline.
+- **[US: Metrics](Metrics_stories)**: Provide standardized measurements for model performance, accuracy, and evaluation. Useful for tracking improvement and identifying bottlenecks.
+- **[US: Models](Models_stories)**: Define the structure of machine learning models, including architectures and checkpoints, to standardize training and deployment.
+- **[US: Schemas](Schemas_stories)**: Define structured data formats for input, output, and intermediate processes, ensuring consistency and validation throughout the pipeline.
 
 ### **FE: Input Outputs**
 
  Handle configuration, data ingestion, and external environment variables for seamless integration:
 
-- **[US: Config](Configs_stories.md)**: Store and manage configuration files to customize and control the behavior of different modules.
-- **[US: Dataset](Datasets_stories.md)**: Handle loading, preprocessing, and managing data sets for training, evaluation, and inference.
-- **[US: OSVariables](OSvariables_stories.md)**: Provide environment variables and system-level configurations for portability across various environments.
-- **[US: Registries](Regristries_stories.md)**: Maintain a central repository for tracking artifacts like models, datasets, and configurations.
-- **[US: Services](Services_stories.md)**: Connect and integrate external or internal services such as APIs, databases, and message brokers.
+- **[US: Config](Configs_stories)**: Store and manage configuration files to customize and control the behavior of different modules.
+- **[US: Dataset](Datasets_stories)**: Handle loading, preprocessing, and managing data sets for training, evaluation, and inference.
+- **[US: OSVariables](OSvariables_stories)**: Provide environment variables and system-level configurations for portability across various environments.
+- **[US: Registries](Regristries_stories)**: Maintain a central repository for tracking artifacts like models, datasets, and configurations.
+- **[US: Services](Services_stories)**: Connect and integrate external or internal services such as APIs, databases, and message brokers.
 
 ### **FE: Jobs**
 
    Define and manage specific tasks and workflows for various stages in the machine learning lifecycle:
 
-- **[US: Base](Base_stories.md)**: The foundational job configurations and implementations shared across all job types.
-- **[US: Evaluations](Evaluations_stories.md)**: Execute performance tests and comparisons for models, ensuring they meet predefined criteria.
-- **[US: Explanations](Explanations_stories.md)**: Generate explainability reports for machine learning models to provide insights into predictions and decisions.
-- **[US: Inference](Inference_stories.md)**: Execute predictions using trained models, optimized for low latency and high throughput.
+- **[US: Base](Base_stories)**: The foundational job configurations and implementations shared across all job types.
+- **[US: Evaluations](Evaluations_stories)**: Execute performance tests and comparisons for models, ensuring they meet predefined criteria.
+- **[US: Explanations](Explanations_stories)**: Generate explainability reports for machine learning models to provide insights into predictions and decisions.
+- **[US: Inference](Inference_stories)**: Execute predictions using trained models, optimized for low latency and high throughput.
 - **US: KafkaInference**: Specialized inference jobs designed to integrate with Kafka for real-time data streaming applications.
-- **[US: Promotion](Promotions_stories.md)**: Automate the promotion of models from development to production environments, ensuring governance and validation.
-- **[US: Training](Trainning_stories.md)**: Handle the full model training process, including data preparation, model fitting, and checkpointing.
-- **[US: Tuning](Tuning_stories.md)**: Optimize hyperparameters and configurations to improve model performance systematically.
+- **[US: Promotion](Promotions_stories)**: Automate the promotion of models from development to production environments, ensuring governance and validation.
+- **[US: Training](Trainning_stories)**: Handle the full model training process, including data preparation, model fitting, and checkpointing.
+- **[US: Tuning](Tuning_stories)**: Optimize hyperparameters and configurations to improve model performance systematically.
 
 ### **FE: Utils**
 Auxiliary tools and configurations that enhance functionality and streamline development
-- **[US: Searchers](Searchers_stories.md)**: Define functionalities for finding the best hyperparameters for a model.
-- **[US: Signers](Signers_stories.md)**:  Generate signatures for AI/ML models.
-- **[US: Splitters](Splitters_stories.md)**: Split dataframes into subsets for model training and evaluation. 
+- **[US: Searchers](Searchers_stories)**: Define functionalities for finding the best hyperparameters for a model.
+- **[US: Signers](Signers_stories)**:  Generate signatures for AI/ML models.
+- **[US: Splitters](Splitters_stories)**: Split dataframes into subsets for model training and evaluation. 
 
 ### **FE: main**
 General execution scripts
-- **[US. Scripts](Scripts_stories.md)**: Include utility scripts for automating tasks, data handling, and system management.
-- **[US: Settings](Settings_stories.md)**: Centralize settings and constants used across different modules for consistency and maintainability.
+- **[US. Scripts](Scripts_stories)**: Include utility scripts for automating tasks, data handling, and system management.
+- **[US: Settings](Settings_stories)**: Centralize settings and constants used across different modules for consistency and maintainability.
 
 
 ### **FE: Tasks for CI/CD**

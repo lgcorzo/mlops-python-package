@@ -1,4 +1,4 @@
-# US [Models](./backlog_mlops_regresion.md) : Define the structure of machine learning models, including architectures and checkpoints, to standardize training and deployment
+# US [Models](backlog_mlops_regresion) : Define the structure of machine learning models, including architectures and checkpoints, to standardize training and deployment
 
 - [US Models : Define the structure of machine learning models, including architectures and checkpoints, to standardize training and deployment](#us-models--define-the-structure-of-machine-learning-models-including-architectures-and-checkpoints-to-standardize-training-and-deployment)
   - [classes relations](#classes-relations)

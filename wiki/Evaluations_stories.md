@@ -1,4 +1,4 @@
-# US [Model Evaluations Job](./backlog_mlops_regresion.md) : Evaluate a registered model version against a dataset.
+# US [Model Evaluations Job](backlog_mlops_regresion) : Evaluate a registered model version against a dataset.
 
 - [US Model Evaluation Job : Define a job for evaluating registered models with given datasets.](#us-model-evaluation-job--define-a-job-for-evaluating-registered-models-with-given-datasets)
   - [classes relations](#classes-relations)

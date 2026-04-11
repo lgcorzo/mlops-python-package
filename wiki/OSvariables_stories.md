@@ -1,4 +1,4 @@
-# US [IO](./backlog_mlops_regresion.md) :  Provide environment variables and system-level configurations for portability across various environments.
+# US [IO](backlog_mlops_regresion) :  Provide environment variables and system-level configurations for portability across various environments.
 
 - [US IO :  Provide environment variables and system-level configurations for portability across various environments.](#us-io---provide-environment-variables-and-system-level-configurations-for-portability-across-various-environments)
   - [classes relations](#classes-relations)

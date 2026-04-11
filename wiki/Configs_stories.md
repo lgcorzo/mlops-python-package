@@ -1,4 +1,4 @@
-# US [Configs](./backlog_mlops_regresion.md) : Parse, Merge, and Convert Configuration Objects
+# US [Configs](backlog_mlops_regresion) : Parse, Merge, and Convert Configuration Objects
 
 - [US Configs : Parse, Merge, and Convert Configuration Objects](#us-configs--parse-merge-and-convert-configuration-objects)
   - [methods uml diagram](#methods-uml-diagram)

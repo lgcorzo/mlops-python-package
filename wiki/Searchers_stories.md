@@ -1,4 +1,4 @@
-# US [Hyperparameter Searchers](./backlog_mlops_regresion.md) : Define functionalities for finding the best hyperparameters for a model.
+# US [Hyperparameter Searchers](backlog_mlops_regresion) : Define functionalities for finding the best hyperparameters for a model.
 
 - [US Hyperparameter Searchers : Define functionalities for finding the best hyperparameters for a model.](#us-hyperparameter-searchers--define-functionalities-for-finding-the-best-hyperparameters-for-a-model)
   - [classes relations](#classes-relations)

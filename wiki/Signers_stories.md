@@ -1,4 +1,4 @@
-# US [Model Signature Generation](./backlog_mlops_regresion.md) : Generate signatures for AI/ML models.
+# US [Model Signature Generation](backlog_mlops_regresion) : Generate signatures for AI/ML models.
 
 - [US Model Signature Generation : Generate signatures for AI/ML models.](#us-model-signature-generation--generate-signatures-for-aiml-models)
   - [classes relations](#classes-relations)
