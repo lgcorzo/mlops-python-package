@@ -114,6 +114,11 @@ class TrainingJob(base.Job):
                 score = metric.score(targets=targets_test, outputs=outputs_test)
                 metrics_scores[metric.name] = score
                 logger.debug("- Metric score: {}", score)
+            # - summary
+            i = len(self.metrics)
+            metric = self.metrics[-1]
+            score = metrics_scores[metric.name]
+            metrics_scores_ = metrics_scores
             client.log_batch(
                 run_id=run.info.run_id,
                 metrics=[
