@@ -25,16 +25,24 @@ jobs:
     permissions:
       packages: write
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - run: poetry install --with dev
       - run: poetry run invoke packages
-      - uses: docker/login-action@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to Docker Hub
+        if: github.event.release.target_commitish == 'main' || github.event_name == 'workflow_dispatch'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v6
         with:
@@ -45,3 +53,5 @@ jobs:
           tags: |
             ${{ env.DOCKER_IMAGE }}:latest
             ${{ env.DOCKER_IMAGE }}:${{ github.ref_name }}
+            ${{ secrets.DOCKER_HUB_USERNAME != '' && format('{0}/mlops-python-package:latest', secrets.DOCKER_HUB_USERNAME) || '' }}
+            ${{ secrets.DOCKER_HUB_USERNAME != '' && format('{0}/mlops-python-package:{1}', secrets.DOCKER_HUB_USERNAME, github.ref_name) || '' }}
