@@ -1,0 +1,118 @@
+name: Wiki Content Sync
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "wiki/**"
+  repository_dispatch:
+    types: [docs]
+  workflow_dispatch:
+  gollum:
+
+env:
+  GIT_AUTHOR_NAME: GitHub Action
+  GIT_AUTHOR_EMAIL: action@github.com
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-content-to-wiki:
+    if: always() && format('refs/heads/{0}', github.event.repository.default_branch) == github.ref && github.event_name != 'gollum'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync repo wiki folder to wiki
+        run: |
+          # 1. Prepare wiki repository URL
+          WIKI_URL="https://x-access-token:${{ secrets.WIKI_PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}.wiki.git"
+          
+          # 2. Clone the wiki to a temporary directory
+          git clone "$WIKI_URL" wiki_temp
+          
+          # 3. Clean all files in wiki_temp (except .git)
+          find wiki_temp -mindepth 1 -maxdepth 1 -not -name ".git" -exec rm -rf {} +
+          
+          # 4. Copy everything from 'wiki/' folder to wiki_temp root
+          cp -r wiki/* wiki_temp/
+          
+          # 5. Commit and push changes
+          cd wiki_temp
+          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
+          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
+          git add .
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "chore: sync documentation to wiki [skip ci]"
+            # Targeting master as the wiki repo default for display
+            git push origin HEAD:master || git push origin HEAD:main
+          else
+            echo "No changes to sync."
+          fi
+        shell: bash
+
+  sync-wiki-to-repo:
+    if: github.event_name == 'gollum'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.WIKI_PERSONAL_ACCESS_TOKEN }}
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Verify Wiki Directory
+        id: safe
+        run: |
+          if [ -d "wiki" ]; then
+            echo "Wiki directory found."
+          else
+            echo "wiki directory not found. Please sync to wiki first."
+            exit 1
+          fi
+        shell: bash
+      - name: Sync Wiki to Repo
+        id: sync
+        run: |
+          # 1. Prepare wiki repository URL
+          WIKI_URL="https://x-access-token:${{ secrets.WIKI_PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}.wiki.git"
+          
+          # 2. Clone the wiki
+          git clone "$WIKI_URL" wiki_temp
+          
+          # 3. Create a new branch for the changes
+          SYNC_BRANCH="wiki-sync-$(date +%s)"
+          git checkout -b "$SYNC_BRANCH"
+          
+          # 4. Sync contents from wiki_temp to the local wiki/ folder
+          rm -rf wiki/*
+          cp -r wiki_temp/* wiki/
+          rm -rf wiki/.git
+          
+          # 5. Cleanup and Push the new branch
+          rm -rf wiki_temp
+          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
+          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
+          git add wiki/
+          
+          if [ -n "$(git status --porcelain wiki/)" ]; then
+             git commit -m "chore: sync wiki changes back to repository"
+             git push origin "$SYNC_BRANCH"
+             echo "branch_name=$SYNC_BRANCH" >> $GITHUB_OUTPUT
+          else
+             echo "No changes found."
+             exit 0
+          fi
+        shell: bash
+      - name: Create Pull Request
+        if: steps.sync.outputs.branch_name != ''
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ steps.sync.outputs.branch_name }}
+          destination_branch: ${{ github.event.repository.default_branch }}
+          pr_title: "[Chore] - Syncing Wiki changes from Web UI into repository"
+          pr_body: ":crown: *An automated PR* This PR syncs changes made directly in the GitHub Wiki back to the repository's `wiki/` folder."
+          pr_label: "wiki,automation"
+          github_token: ${{ secrets.WIKI_PERSONAL_ACCESS_TOKEN }}
