@@ -21,7 +21,7 @@ regression_model_template = "regression_model_template.scripts:main"
 python = ">=3.12,<3.13"
 loguru = "^0.7.2"
 matplotlib = "^3.9.0"
-mlflow = { version = "^3.10.1", extras = ["extras"] }
+mlflow = "^3.10.1"
 numpy = "^1.26.4"
 omegaconf = "^2.3.0"
 pandas = "^2.2.2"
