@@ -55,6 +55,16 @@ class Model(abc.ABC, pdt.BaseModel, strict=True, frozen=False, extra="forbid"):
             setattr(self, key, value)
         return self
 
+    def __sklearn_tags__(self) -> T.Any:
+        """Get the model tags for scikit-learn.
+
+        Returns:
+            T.Any: model tags.
+        """
+        from sklearn.base import BaseEstimator
+
+        return BaseEstimator().__sklearn_tags__()
+
     @abc.abstractmethod
     def fit(self, inputs: schemas.Inputs, targets: schemas.Targets) -> T.Self:
         """Fit the model on the given inputs and targets.
