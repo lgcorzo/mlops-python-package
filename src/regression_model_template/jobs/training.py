@@ -122,7 +122,7 @@ class TrainingJob(base.Job):
             client.log_batch(
                 run_id=run.info.run_id,
                 metrics=[
-                    Metric(key=key, value=value, timestamp=int(time.time() * 1000), step=0)  # type: ignore[no-untyped-call]
+                    Metric(key=key, value=value, timestamp=int(time.time() * 1000), step=0)
                     for key, value in metrics_scores.items()
                 ],
             )
