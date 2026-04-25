@@ -89,7 +89,7 @@ class RateLimiter:
         self.max_requests = max_requests
         self.window_seconds = window_seconds
         self.max_tracked_ips = max_tracked_ips
-        self.tracked_ips: collections.OrderedDict[str, list[float]] = collections.OrderedDict()
+        self.tracked_ips: collections.OrderedDict[str, collections.deque[float]] = collections.OrderedDict()
 
     def is_allowed(self, ip: str) -> bool:
         """Check if the given IP is allowed to make a request."""
@@ -98,7 +98,7 @@ class RateLimiter:
         if ip not in self.tracked_ips:
             if len(self.tracked_ips) >= self.max_tracked_ips:
                 self.tracked_ips.popitem(last=False)  # Evict oldest
-            self.tracked_ips[ip] = []
+            self.tracked_ips[ip] = collections.deque()
 
         # Mark as recently used
         self.tracked_ips.move_to_end(ip)
@@ -106,7 +106,7 @@ class RateLimiter:
         timestamps = self.tracked_ips[ip]
         # Remove old timestamps
         while timestamps and current_time - timestamps[0] > self.window_seconds:
-            timestamps.pop(0)
+            timestamps.popleft()
 
         if len(timestamps) >= self.max_requests:
             return False
