@@ -4,7 +4,7 @@ FROM python:3.12-slim AS builder
 WORKDIR /build
 
 # Install Poetry and export plugin
-RUN pip install poetry==1.8.3
+RUN pip install poetry==2.0.1
 
 # Copy dependency files
 COPY pyproject.toml poetry.lock README.md ./
