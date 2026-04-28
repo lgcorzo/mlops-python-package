@@ -66,13 +66,13 @@ def test_tuning_job(
     assert out["targets"].ndim == out["inputs_"].ndim == 2, "Targets should be a dataframe!"
     # - lineage
     assert out["inputs_lineage"].name == "inputs", "Inputs lineage name should be inputs!"
-    assert (
-        out["inputs_lineage"].source.uri == inputs_reader.path
-    ), "Inputs lineage source should be the inputs reader path!"
+    assert out["inputs_lineage"].source.uri == inputs_reader.path, (
+        "Inputs lineage source should be the inputs reader path!"
+    )
     assert out["targets_lineage"].name == "targets", "Targets lineage name should be targets!"
-    assert (
-        out["targets_lineage"].source.uri == targets_reader.path
-    ), "Targets lineage source should be the targets reader path!"
+    assert out["targets_lineage"].source.uri == targets_reader.path, (
+        "Targets lineage source should be the targets reader path!"
+    )
     assert out["targets_lineage"].targets == schemas.TargetsSchema.cnt, "Targets lineage target should be cnt!"
     # - results
     assert out["results"].ndim == 2, "Results should be a dataframe!"
