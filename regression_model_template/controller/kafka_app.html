@@ -287,7 +287,7 @@
 </span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="p">)</span>
 </span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>
 </span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="c1"># Security Middlewares</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">ProxyHeadersMiddleware</span><span class="p">,</span> <span class="n">trusted_hosts</span><span class="o">=</span><span class="n">TRUSTED_PROXIES</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">ProxyHeadersMiddleware</span><span class="p">,</span> <span class="n">trusted_hosts</span><span class="o">=</span><span class="n">TRUSTED_PROXIES</span><span class="p">)</span>
 </span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>
 </span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">TrustedHostMiddleware</span><span class="p">,</span> <span class="n">allowed_hosts</span><span class="o">=</span><span class="n">ALLOWED_HOSTS</span><span class="p">)</span>
 </span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>
