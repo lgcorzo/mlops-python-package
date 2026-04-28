@@ -1,10 +1,10 @@
 # https://python-poetry.org/docs/pyproject/
 
-[tool.poetry]
+[project]
 name = "regression_model_template"
 version = "2.0.0"
 description = "Predict the number of regression_model_template available."
-authors = ["lgcorzo"]
+authors = [{ name = "lgcorzo" }]
 readme = "README.md"
 license = "MIT"
 keywords = ["mlops", "python", "package"]
@@ -12,41 +12,43 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
 ]
-packages = [{ include = "regression_model_template", from = "src" }]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "loguru (>=0.7.2,<0.8.0)",
+    "matplotlib (>=3.9.0,<4.0.0)",
+    "mlflow (>=3.11.1,<4.0.0)",
+    "numpy (>=1.26.4,<2.0.0)",
+    "omegaconf (>=2.3.0,<3.0.0)",
+    "pandas (>=2.2.2,<3.0.0)",
+    "pandera (>=0.20.1,<0.21.0)",
+    "plotly (>=5.22.0,<6.0.0)",
+    "plyer (>=2.1.0,<3.0.0)",
+    "psutil (>=6.0.0,<7.0.0)",
+    "pyarrow (>=17.0.0,<18.0.0)",
+    "pydantic (>=2.7.4,<3.0.0)",
+    "pydantic-settings (>=2.3.4,<3.0.0)",
+    "pynvml (>=11.5.0,<12.0.0)",
+    "setuptools (>=78.1.1,<79.0.0)",
+    "scikit-learn (>=1.5.0,<2.0.0)",
+    "shap (>=0.46.0,<0.47.0)",
+    "dvc (>=3.67.1,<4.0.0)",
+    "mlserver (>=1.7.1,<2.0.0)",
+    "mlserver-mlflow (>=1.7.1,<2.0.0)",
+    "opentelemetry-instrumentation (>=0.51b0,<0.52)",
+    "opentelemetry-exporter-otlp-proto-http (>=1.30.0,<2.0.0)",
+    "opentelemetry-exporter-otlp (>=1.30.0,<2.0.0)",
+    "confluent-kafka (>=2.8.2,<3.0.0)",
+    "fastapi (==0.124.0)",
+    "pyopenssl (>=26.0.0,<27.0.0)",
+    "diskcache (>=5.6.3,<6.0.0)",
+    "starlette (>=0.49.3,<0.50.0)",
+]
 
-[tool.poetry.scripts]
+[project.scripts]
 regression_model_template = "regression_model_template.scripts:main"
 
-[tool.poetry.dependencies]
-python = ">=3.12,<3.13"
-loguru = "^0.7.2"
-matplotlib = "^3.9.0"
-mlflow = "^3.11.1"
-numpy = "^1.26.4"
-omegaconf = "^2.3.0"
-pandas = "^2.2.2"
-pandera = "^0.20.1"
-plotly = "^5.22.0"
-plyer = "^2.1.0"
-psutil = "^6.0.0"
-pyarrow = "^17.0.0"
-pydantic = "^2.7.4"
-pydantic-settings = "^2.3.4"
-pynvml = "^11.5.0"
-setuptools = "^78.1.1"
-scikit-learn = "^1.5.0"
-shap = "^0.46.0"
-dvc = "^3.67.1"
-mlserver = "^1.7.1"
-mlserver-mlflow = "^1.7.1"
-opentelemetry-instrumentation = "^0.51b0"
-opentelemetry-exporter-otlp-proto-http = "^1.30.0"
-opentelemetry-exporter-otlp = "^1.30.0"
-confluent-kafka = "^2.8.2"
-fastapi = "0.124.0"
-pyopenssl = "^26.0.0"
-diskcache = "^5.6.3"
-starlette = "^0.49.3"
+[tool.poetry]
+packages = [{ include = "regression_model_template", from = "src" }]
 
 [tool.poetry.group.checks.dependencies]
 bandit = "^1.7.9"

@@ -45,13 +45,13 @@ def test_sklearn_metric(
     assert low <= scorer <= high, "Scorer should be in the expected interval!"
     # - mlflow metric
     assert mlflow_metric.name == metric.name, "Mlflow metric name should be the same!"
-    assert (
-        mlflow_metric.greater_is_better == metric.greater_is_better
-    ), "Mlflow metric greater is better should be the same!"
+    assert mlflow_metric.greater_is_better == metric.greater_is_better, (
+        "Mlflow metric greater is better should be the same!"
+    )
     # - mlflow results
-    assert mlflow_results.metrics == {
-        metric.name: score * (1 if greater_is_better else -1)
-    }, "Mlflow results metrics should have the same name and score!"
+    assert mlflow_results.metrics == {metric.name: score * (1 if greater_is_better else -1)}, (
+        "Mlflow results metrics should have the same name and score!"
+    )
 
 
 # %% THRESHOLDS

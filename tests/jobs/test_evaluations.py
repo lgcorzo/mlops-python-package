@@ -93,13 +93,13 @@ def test_evaluations_job(
     assert out["targets"].ndim == out["targets_"].ndim == 2, "Targets should be a dataframe!"
     # - lineage
     assert out["inputs_lineage"].name == "inputs", "Inputs lineage name should be inputs!"
-    assert (
-        out["inputs_lineage"].source.uri == inputs_reader.path
-    ), "Inputs lineage source should be the inputs reader path!"
+    assert out["inputs_lineage"].source.uri == inputs_reader.path, (
+        "Inputs lineage source should be the inputs reader path!"
+    )
     assert out["targets_lineage"].name == "targets", "Targets lineage name should be targets!"
-    assert (
-        out["targets_lineage"].source.uri == targets_reader.path
-    ), "Targets lineage source should be the targets reader path!"
+    assert out["targets_lineage"].source.uri == targets_reader.path, (
+        "Targets lineage source should be the targets reader path!"
+    )
     assert out["targets_lineage"].targets == schemas.TargetsSchema.cnt, "Targets lineage target should be cnt!"
     # - dataset
     assert out["dataset"].name == "evaluation", "Dataset name should be evaluation!"
@@ -113,17 +113,17 @@ def test_evaluations_job(
     # - extra metrics
     assert len(out["extra_metrics"]) == len(job.metrics), "Extra metrics should have the same length as metrics!"
     assert out["extra_metrics"][0].name == job.metrics[0].name, "Extra metrics name should be the same!"
-    assert (
-        out["extra_metrics"][0].greater_is_better == job.metrics[0].greater_is_better
-    ), "Extra metrics greatter is better should be the same!"
+    assert out["extra_metrics"][0].greater_is_better == job.metrics[0].greater_is_better, (
+        "Extra metrics greatter is better should be the same!"
+    )
     # - validation thresholds
-    assert (
-        out["validation_thresholds"].keys() == thresholds.keys()
-    ), "Validation thresholds should have the same keys as thresholds!"
+    assert out["validation_thresholds"].keys() == thresholds.keys(), (
+        "Validation thresholds should have the same keys as thresholds!"
+    )
     # - evaluations
-    assert (
-        out["evaluations"].metrics["example_count"] == inputs_reader.limit
-    ), "Evaluations should have the same number of examples as the inputs!"
+    assert out["evaluations"].metrics["example_count"] == inputs_reader.limit, (
+        "Evaluations should have the same number of examples as the inputs!"
+    )
     assert job.metrics[0].name in out["evaluations"].metrics, "Metric should be logged in Mlflow!"
     # - mlflow tracking
     experiment = mlflow_service.client().get_experiment_by_name(name=mlflow_service.experiment_name)
