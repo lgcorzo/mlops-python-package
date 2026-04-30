@@ -2,6 +2,7 @@ import asyncio
 import time
 import threading
 
+
 def sync_prediction():
     """Simulates a CPU-bound synchronous prediction call."""
     print("  [Sync] Starting prediction...")
@@ -9,11 +10,13 @@ def sync_prediction():
     print("  [Sync] Prediction complete.")
     return {"result": "success"}
 
+
 async def async_health_check():
     """Simulates an asynchronous health check that should remain responsive."""
     for i in range(5):
-        print(f"  [Async] Health check {i+1}...")
+        print(f"  [Async] Health check {i + 1}...")
         await asyncio.sleep(0.5)
+
 
 async def run_blocking_scenario():
     print("\nScenario: Blocking Sync Call in Event Loop")
@@ -34,6 +37,7 @@ async def run_blocking_scenario():
     print(f"Total time: {end_time - start_time:.2f}s")
     print("Note: Notice how health checks were delayed until prediction finished.")
 
+
 async def run_non_blocking_scenario():
     print("\nScenario: Non-Blocking Call using ThreadPool")
     print("-" * 40)
@@ -53,6 +57,7 @@ async def run_non_blocking_scenario():
     end_time = time.time()
     print(f"Total time: {end_time - start_time:.2f}s")
     print("Note: Notice how health checks ran concurrently with prediction.")
+
 
 if __name__ == "__main__":
     asyncio.run(run_blocking_scenario())
