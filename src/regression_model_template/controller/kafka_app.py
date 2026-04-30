@@ -14,6 +14,7 @@ import pandas as pd
 import uvicorn
 from confluent_kafka import Consumer, KafkaError, Message, Producer
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
@@ -371,7 +372,7 @@ async def predict(request_data: PredictionRequest, request: Request) -> Predicti
         except Exception:
             logger.info("Received HTTP prediction request with unknown data structure")
 
-        prediction_result = fastapi_kafka_service.prediction_callback(request_data)
+        prediction_result = await run_in_threadpool(fastapi_kafka_service.prediction_callback, request_data)
 
         logger.debug(f"HTTP prediction result: {prediction_result}")
         try:
