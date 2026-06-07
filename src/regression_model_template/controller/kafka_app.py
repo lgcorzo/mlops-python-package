@@ -155,7 +155,7 @@ class PredictionRequest(BaseModel):
 
         # Check max rows and consistency
         first_len = -1
-        for key, value in v.items():
+        for value in v.values():
             if not isinstance(value, list):
                 # If not a list (e.g. single value), pandas might handle it differently,
                 # but our schema expects Series (lists). Let's assume lists.
@@ -163,12 +163,11 @@ class PredictionRequest(BaseModel):
 
             current_len = len(value)
             if first_len == -1:
+                if current_len > MAX_INPUT_ROWS:
+                    raise ValueError(f"Input data exceeds maximum limit of {MAX_INPUT_ROWS} rows")
                 first_len = current_len
             elif current_len != first_len:
                 raise ValueError("All columns must have the same length")
-
-            if current_len > MAX_INPUT_ROWS:
-                raise ValueError(f"Input data exceeds maximum limit of {MAX_INPUT_ROWS} rows")
 
         return v
 
