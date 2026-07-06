@@ -1,6 +1,5 @@
 import asyncio
 import time
-import threading
 
 
 def sync_prediction():
