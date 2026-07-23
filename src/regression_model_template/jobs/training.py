@@ -128,11 +128,11 @@ class TrainingJob(base.Job):
             )
             # signer
             logger.info("Sign model: {}", self.signer)
-            model_signature = self.signer.sign(inputs=inputs, outputs=outputs_test)
+            model_signature = self.signer.sign(inputs=inputs.head(5), outputs=outputs_test.head(5))
             logger.debug("- Model signature: {}", model_signature.to_dict())
             # saver
             logger.info("Save model: {}", self.saver)
-            model_info = self.saver.save(model=self.model, signature=model_signature, input_example=inputs)
+            model_info = self.saver.save(model=self.model, signature=model_signature, input_example=inputs.head(5))
             logger.debug("- Model URI: {}", model_info.model_uri)
             # register
             logger.info("Register model: {}", self.registry)
