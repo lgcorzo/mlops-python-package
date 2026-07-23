@@ -1,5 +1,5 @@
 # MLOps Python Package
-the original repository is fmind https://github.com/fmind/mlops-python-package
+
 
 [![check.yml](https://github.com/lgcorzo/mlops-python-package/actions/workflows/check.yml/badge.svg)](https://github.com/lgcorzo/mlops-python-package/actions/workflows/check.yml)
 [![publish.yml](https://github.com/lgcorzo/mlops-python-package/actions/workflows/publish.yml/badge.svg)](https://github.com/lgcorzo/mlops-python-package/actions/workflows/publish.yml)
