@@ -230,7 +230,7 @@ def test_process_message(mock_json_loads, mock_kafka_service):
 
     service.prediction_callback.assert_called_once()
     service.producer.produce.assert_called_once()
-    service.producer.flush.assert_called_once()
+    service.producer.poll.assert_called_once_with(0)
     service.consumer.commit.assert_called_once_with(message=msg, asynchronous=True)
 
 
