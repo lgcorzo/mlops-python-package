@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Scchemas User Story"
+description: "Define structured data formats for input, output, and intermediate processes, ensuring consistency and validation throughout the pipeline"
+tags:
+  - schemas
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Scchemas](backlog_mlops_regresion) : Define structured data formats for input, output, and intermediate processes, ensuring consistency and validation throughout the pipeline
 
 - [US Scchemas : Define structured data formats for input, output, and intermediate processes, ensuring consistency and validation throughout the pipeline](#us-scchemas--define-structured-data-formats-for-input-output-and-intermediate-processes-ensuring-consistency-and-validation-throughout-the-pipeline)

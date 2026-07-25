@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "IO User Story"
+description: "Provide environment variables and system-level configurations for portability across various environments."
+tags:
+  - osvariables
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [IO](backlog_mlops_regresion) :  Provide environment variables and system-level configurations for portability across various environments.
 
 - [US IO :  Provide environment variables and system-level configurations for portability across various environments.](#us-io---provide-environment-variables-and-system-level-configurations-for-portability-across-various-environments)

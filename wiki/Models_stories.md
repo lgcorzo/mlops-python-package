@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Models User Story"
+description: "Define the structure of machine learning models, including architectures and checkpoints, to standardize training and deployment"
+tags:
+  - models
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Models](backlog_mlops_regresion) : Define the structure of machine learning models, including architectures and checkpoints, to standardize training and deployment
 
 - [US Models : Define the structure of machine learning models, including architectures and checkpoints, to standardize training and deployment](#us-models--define-the-structure-of-machine-learning-models-including-architectures-and-checkpoints-to-standardize-training-and-deployment)

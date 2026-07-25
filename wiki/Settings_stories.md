@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Application Settings Management User Story"
+description: "Define settings for the application."
+tags:
+  - settings
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Application Settings Management](backlog_mlops_regresion) : Define settings for the application.
 
 - [US Application Settings Management : Define settings for the application.](#us-application-settings-management--define-settings-for-the-application)

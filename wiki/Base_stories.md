@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "High-Level Project Jobs User Story"
+description: "Manage the execution context for high-level project jobs with integrated services."
+tags:
+  - base
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [High-Level Project Jobs](backlog_mlops_regresion) : Manage the execution context for high-level project jobs with integrated services.
 
 - [US High-Level Project Jobs : Manage the execution context for high-level project jobs with integrated services.](#us-high-level-project-jobs--manage-the-execution-context-for-high-level-project-jobs-with-integrated-services)

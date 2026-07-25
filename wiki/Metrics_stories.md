@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Metrics User Story"
+description: "Provide standardized measurements for model performance, accuracy, and evaluation"
+tags:
+  - metrics
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Metrics](backlog_mlops_regresion) : Provide standardized measurements for model performance, accuracy, and evaluation
 
 Provide standardized measurements for model performance, accuracy, and evaluation. Useful for tracking improvement and identifying bottlenecks.

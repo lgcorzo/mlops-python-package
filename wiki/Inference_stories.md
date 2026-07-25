@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Model Inference Job User Story"
+description: "Define a job for generating batch predictions from a registered model."
+tags:
+  - inference
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Model Inference Job](backlog_mlops_regresion) : Define a job for generating batch predictions from a registered model.
 
 - [US Model Inference Job : Define a job for generating batch predictions from a registered model.](#us-model-inference-job--define-a-job-for-generating-batch-predictions-from-a-registered-model)

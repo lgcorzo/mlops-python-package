@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Configs User Story"
+description: "Parse, Merge, and Convert Configuration Objects"
+tags:
+  - configs
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Configs](backlog_mlops_regresion) : Parse, Merge, and Convert Configuration Objects
 
 - [US Configs : Parse, Merge, and Convert Configuration Objects](#us-configs--parse-merge-and-convert-configuration-objects)
