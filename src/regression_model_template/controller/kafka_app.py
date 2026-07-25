@@ -308,7 +308,14 @@ class FastAPIKafkaService:
             prediction_result = predictionresponse.result
 
         try:
-            logger.debug(f"Prediction result: {prediction_result}")
+            safe_prediction_result = prediction_result.copy() if isinstance(prediction_result, dict) else {}
+            if "inference" in safe_prediction_result:
+                inf_val = safe_prediction_result["inference"]
+                if isinstance(inf_val, list):
+                    safe_prediction_result["inference"] = f"<masked_list_len_{len(inf_val)}>"
+                else:
+                    safe_prediction_result["inference"] = "<masked>"
+            logger.debug(f"Prediction result: {safe_prediction_result}")
             if self.producer:
                 self.producer.produce(
                     self.output_topic,

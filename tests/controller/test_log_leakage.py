@@ -130,3 +130,62 @@ def test_kafka_consumer_log_leakage(caplog):
             break
 
     assert not found_leak, f"Sensitive value '{sensitive_value}' was found in Kafka consumer INFO logs!"
+
+
+def test_kafka_consumer_prediction_result_leakage(caplog):
+    """
+    Test that the Kafka consumer processing does not log raw prediction result values (inference)
+    at any log level, and instead uses a masked/summarized format.
+    """
+    # Setup prediction result with sensitive mock inference data
+    sensitive_inference = [999.88, 777.66, 555.44]
+
+    # Mock dependencies
+    mock_prediction_callback = MagicMock()
+    mock_prediction_callback.return_value = MagicMock(
+        result={"inference": sensitive_inference, "quality": 1.0, "error": None}
+    )
+
+    service = FastAPIKafkaService(
+        prediction_callback=mock_prediction_callback, kafka_config={}, input_topic="test", output_topic="test"
+    )
+
+    # Mock Kafka message with some valid input_data structure
+    mock_msg = MagicMock()
+    mock_msg.error.return_value = None
+    import json
+
+    kafka_msg_value = {
+        "input_data": {
+            "dteday": ["2024-01-01"],
+            "season": [1],
+        }
+    }
+    mock_msg.value.return_value = json.dumps(kafka_msg_value).encode("utf-8")
+
+    # Set log level to DEBUG so we catch all debug log statements
+    caplog.set_level(logging.DEBUG)
+
+    # Mock producer/consumer to avoid network calls
+    service.producer = MagicMock()
+    service.consumer = MagicMock()
+
+    # Process the message
+    service._process_message(mock_msg)
+
+    # Check logs for raw inference leakage vs masked logging
+    found_raw_leak = False
+    found_masked_log = False
+
+    for record in caplog.records:
+        # Check if the raw sensitive values are present in any log message
+        msg_str = record.message
+        if "999.88" in msg_str or "777.66" in msg_str or "555.44" in msg_str:
+            found_raw_leak = True
+
+        # Check if our expected masked log message is present
+        if "Prediction result:" in msg_str and "<masked_list_len_3>" in msg_str:
+            found_masked_log = True
+
+    assert not found_raw_leak, "Sensitive inference values were leaked in the logs!"
+    assert found_masked_log, "Masked/summarized prediction log was not found!"
