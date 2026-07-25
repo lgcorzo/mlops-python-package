@@ -254,6 +254,9 @@ class FastAPIKafkaService:
                     break
                 continue
             self._process_message(msg)
+        if self.producer:
+            logger.info("Flushing remaining Kafka producer messages before shutdown.")
+            self.producer.flush()
         self._close_consumer()
 
     def _poll_message(self) -> Message | None:
@@ -313,7 +316,7 @@ class FastAPIKafkaService:
                     value=json.dumps(prediction_result),
                     callback=self.delivery_report,
                 )
-                self.producer.flush()
+                self.producer.poll(0)
             else:
                 logger.error("Kafka producer is not initialized.")
             if self.consumer:
