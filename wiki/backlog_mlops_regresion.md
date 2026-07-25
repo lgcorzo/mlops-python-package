@@ -1,3 +1,13 @@
+---
+type: Backlog
+title: "Backlog for Class Diagram Implementation"
+description: "The central backlog of all project features and user stories."
+tags:
+  - backlog
+  - stories
+  - project-management
+timestamp: "2026-04-18T12:00:00Z"
+---
 # Backlog for Class Diagram Implementation
 
 - [Backlog for Class Diagram Implementation](#backlog-for-class-diagram-implementation)

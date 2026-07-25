@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Promotions User Story"
+description: "User story documentation and class details for Promotions."
+tags:
+  - promotions
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 
 # US [Model Promotion Job](backlog_mlops_regresion) : Define a job for promoting a registered model version with an alias.
 

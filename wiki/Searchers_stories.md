@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Hyperparameter Searchers User Story"
+description: "Define functionalities for finding the best hyperparameters for a model."
+tags:
+  - searchers
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Hyperparameter Searchers](backlog_mlops_regresion) : Define functionalities for finding the best hyperparameters for a model.
 
 - [US Hyperparameter Searchers : Define functionalities for finding the best hyperparameters for a model.](#us-hyperparameter-searchers--define-functionalities-for-finding-the-best-hyperparameters-for-a-model)

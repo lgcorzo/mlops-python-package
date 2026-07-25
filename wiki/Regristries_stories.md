@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Model Registries User Story"
+description: "Model registry logicading, and registering machine learning models using MLflow."
+tags:
+  - regristries
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Model Registries](backlog_mlops_regresion) : Model registry logicading, and registering machine learning models using MLflow.
 
 - [US Model Registry : Manage saving, loading, and registering machine learning models using MLflow.](#us-model-registry--manage-saving-loading-and-registering-machine-learning-models-using-mlflow)

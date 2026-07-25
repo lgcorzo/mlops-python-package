@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "CLI Application for Running AI/ML Jobs User Story"
+description: "Scripts for the CLI application"
+tags:
+  - scripts
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [CLI Application for Running AI/ML Jobs](backlog_mlops_regresion) : Scripts for the CLI application
 
 - [US CLI Application for Running AI/ML Jobs : Scripts for the CLI application](#us-cli-application-for-running-aiml-jobs--scripts-for-the-cli-application)

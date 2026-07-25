@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Model Explanations Job User Story"
+description: "Explain predictions for a registered model version and dataset. structure and decisions."
+tags:
+  - explanations
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Model Explanations Job](backlog_mlops_regresion) : Explain predictions for a registered model version and dataset. structure and decisions.
 
 - [US Model Explanations Job : Define a job for explaining the model structure and decisions.](#us-model-explanations-job--define-a-job-for-explaining-the-model-structure-and-decisions)

@@ -1,3 +1,13 @@
+---
+type: Index
+title: "Sidebar Navigation"
+description: "Sidebar containing links to various sections of the wiki."
+tags:
+  - navigation
+  - sidebar
+  - index
+timestamp: "2026-04-18T12:00:00Z"
+---
 # MLOps Python Package 📦
 
 * [🏠 Home](Home)

@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Model Evaluations Job User Story"
+description: "Evaluate a registered model version against a dataset."
+tags:
+  - evaluations
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Model Evaluations Job](backlog_mlops_regresion) : Evaluate a registered model version against a dataset.
 
 - [US Model Evaluation Job : Define a job for evaluating registered models with given datasets.](#us-model-evaluation-job--define-a-job-for-evaluating-registered-models-with-given-datasets)

@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Model Training Job User Story"
+description: "Train, evaluate, and register a machine learning model."
+tags:
+  - trainning
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Model Training Job](backlog_mlops_regresion) : Train, evaluate, and register a machine learning model.
 - [US Model Training Job : Define a job for training and registering a single AI/ML model](#us-model-training-job--define-a-job-for-training-and-registering-a-single-aiml-model)
   - [classes relations](#classes-relations)

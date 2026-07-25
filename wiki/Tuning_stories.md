@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Model Tuning Job User Story"
+description: "Perform hyperparameter tuning for a model. the best hyperparameters for a model"
+tags:
+  - tuning
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Model Tuning Job](backlog_mlops_regresion) : Perform hyperparameter tuning for a model. the best hyperparameters for a model
 
 - [US Model Tuning Job : Define a job for finding the best hyperparameters for a model](#us-model-tuning-job--define-a-job-for-finding-the-best-hyperparameters-for-a-model)

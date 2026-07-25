@@ -1,3 +1,12 @@
+---
+type: UserStory
+title: "Datasetes User Story"
+description: "Handle loading, preprocessing, and managing data sets for training, evaluation, and inference."
+tags:
+  - datasets
+  - user-story
+timestamp: "2026-04-18T12:00:00Z"
+---
 # US [Datasetes](backlog_mlops_regresion) :  Handle loading, preprocessing, and managing data sets for training, evaluation, and inference.
 
 - [US Datasetes :  Handle loading, preprocessing, and managing data sets for training, evaluation, and inference.](#us-datasetes---handle-loading-preprocessing-and-managing-data-sets-for-training-evaluation-and-inference)
