@@ -12,6 +12,7 @@ from typing import Any, Callable, Dict, cast
 import pandas as pd
 import uvicorn
 from confluent_kafka import Consumer, KafkaError, Message, Producer
+from confluent_kafka.admin import AdminClient, NewTopic  # type: ignore[attr-defined]
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
@@ -232,12 +233,33 @@ class FastAPIKafkaService:
         """Initialize Kafka consumer."""
         self.kafka_config["enable.auto.commit"] = False
         try:
+            self._ensure_topics_exist()
             self.consumer = Consumer(self.kafka_config)
             self.consumer.subscribe([self.input_topic])
             logger.info(f"Kafka consumer subscribed to topic: {self.input_topic}")
         except Exception as e:
             logger.error(f"Failed to initialize Kafka consumer: {e}")
             raise
+
+    def _ensure_topics_exist(self) -> None:
+        """Ensure input and output Kafka topics exist on the broker."""
+        try:
+            consumer_keys = {"group.id", "auto.offset.reset", "enable.auto.commit"}
+            admin_config = {k: v for k, v in self.kafka_config.items() if k not in consumer_keys}
+            admin = AdminClient(admin_config)
+            new_topics = [
+                NewTopic(self.input_topic, num_partitions=1, replication_factor=1),
+                NewTopic(self.output_topic, num_partitions=1, replication_factor=1),
+            ]
+            fs = admin.create_topics(new_topics)
+            for topic, f in fs.items():
+                try:
+                    f.result()
+                    logger.info(f"Topic '{topic}' created or verified on Kafka broker.")
+                except Exception as e:
+                    logger.debug(f"Topic '{topic}' creation note: {e}")
+        except Exception as e:
+            logger.warning(f"AdminClient topic auto-creation skipped: {e}")
 
     def _run_server(self) -> None:
         """Run the FastAPI server."""
@@ -281,6 +303,9 @@ class FastAPIKafkaService:
             KafkaError.UNKNOWN_TOPIC_OR_PART,
             KafkaError._UNKNOWN_TOPIC,
             KafkaError._UNKNOWN_PARTITION,
+            KafkaError._TIMED_OUT,
+            KafkaError._ALL_BROKERS_DOWN,
+            KafkaError._RESOLVE,
         )
         if err.code() in transient_codes:
             if err.code() == KafkaError._PARTITION_EOF:

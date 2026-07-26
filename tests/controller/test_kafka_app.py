@@ -24,6 +24,7 @@ def mock_kafka_service():
     with (
         patch("regression_model_template.controller.kafka_app.Producer") as MockProducer,
         patch("regression_model_template.controller.kafka_app.Consumer") as MockConsumer,
+        patch("regression_model_template.controller.kafka_app.AdminClient") as MockAdminClient,
         patch("threading.Thread") as MockThread,
     ):
         mock_producer = MagicMock()
@@ -31,6 +32,9 @@ def mock_kafka_service():
 
         mock_consumer = MagicMock()
         MockConsumer.return_value = mock_consumer
+
+        mock_admin = MagicMock()
+        MockAdminClient.return_value = mock_admin
 
         prediction_callback = MagicMock(return_value=PredictionResponse())
         kafka_config = {
