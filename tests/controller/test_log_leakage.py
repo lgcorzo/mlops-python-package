@@ -1,6 +1,6 @@
 import pytest
 import logging
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 from regression_model_template.controller.kafka_app import PredictionRequest, predict, FastAPIKafkaService
 import pandas as pd
 
@@ -57,10 +57,9 @@ async def test_predict_log_leakage(caplog):
 
     # Mock the service
     from regression_model_template.controller.kafka_app import app
+
     mock_prediction_service = MagicMock()
-    mock_prediction_service.predict.return_value = MagicMock(
-        result={"inference": [0.0], "quality": 1.0, "error": ""}
-    )
+    mock_prediction_service.predict.return_value = MagicMock(result={"inference": [0.0], "quality": 1.0, "error": ""})
     app.state.prediction_service = mock_prediction_service
 
     # Configure logging capture

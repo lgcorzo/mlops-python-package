@@ -1,5 +1,5 @@
 import asyncio
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
 from fastapi import HTTPException
@@ -65,6 +65,7 @@ def test_predict_endpoint_exception_leak():
 
     async def run_async_test():
         from regression_model_template.controller.kafka_app import app
+
         mock_prediction_service = MagicMock()
         sensitive_error_message = "Database connection failed at 192.168.1.100:5432"
         mock_prediction_service.predict.side_effect = Exception(sensitive_error_message)

@@ -7,7 +7,7 @@ import os
 import threading
 import time
 import collections
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, cast
 
 import pandas as pd
 import uvicorn
@@ -375,8 +375,8 @@ async def predict(request_data: PredictionRequest, request: Request) -> Predicti
         except Exception:
             logger.info("Received HTTP prediction request with unknown data structure")
 
-        prediction_service = request.app.state.prediction_service
-        prediction_result = await run_in_threadpool(prediction_service.predict, request_data)
+        prediction_service = cast(PredictionService, request.app.state.prediction_service)
+        prediction_result: PredictionResponse = await run_in_threadpool(prediction_service.predict, request_data)
 
         logger.debug(f"HTTP prediction result: {prediction_result}")
         try:
