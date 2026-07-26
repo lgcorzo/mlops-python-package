@@ -39,3 +39,5 @@ Welcome to the Open Knowledge Format (OKF) directory index for the MLOps Python 
 
 ---
 *Generated in accordance with Open Knowledge Format (OKF) v0.1 guidelines.*
+
+- [[kafka_app]]
