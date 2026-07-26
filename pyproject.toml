@@ -2,7 +2,7 @@
 
 [project]
 name = "regression_model_template"
-version = "2.0.0"
+version = "2.0.1"
 description = "Predict the number of regression_model_template available."
 authors = [{ name = "lgcorzo" }]
 readme = "README.md"
