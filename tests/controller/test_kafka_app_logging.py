@@ -45,32 +45,34 @@ def mock_kafka_service():
 @patch("regression_model_template.controller.kafka_app.logger")
 async def test_predict_endpoint_logging(mock_logger):
     """Test that the HTTP predict endpoint logs correctly using debug and safe info logs."""
+    from regression_model_template.controller.kafka_app import app
 
-    with patch("regression_model_template.controller.kafka_app.fastapi_kafka_service") as mock_fastapi_kafka_service:
-        # Provide a valid prediction response
-        mock_response = PredictionResponse(result={"inference": [1.0], "quality": 1.0, "error": None})
-        mock_fastapi_kafka_service.prediction_callback.return_value = mock_response
+    mock_prediction_service = MagicMock()
+    mock_response = PredictionResponse(result={"inference": [1.0], "quality": 1.0, "error": None})
+    mock_prediction_service.predict.return_value = mock_response
+    app.state.prediction_service = mock_prediction_service
 
-        request_data = PredictionRequest()
-        mock_request = MagicMock()
-        mock_request.client.host = "127.0.0.1"
-        response = await predict(request_data, mock_request)
+    request_data = PredictionRequest()
+    mock_request = MagicMock()
+    mock_request.app = app
+    mock_request.client.host = "127.0.0.1"
+    response = await predict(request_data, mock_request)
 
-        # Verify the response is returned
-        assert response == mock_response
+    # Verify the response is returned
+    assert response == mock_response
 
-        # Verify debug log was called with the request
-        mock_logger.debug.assert_any_call(f"Received HTTP prediction request: {request_data}")
+    # Verify debug log was called with the request
+    mock_logger.debug.assert_any_call(f"Received HTTP prediction request: {request_data}")
 
-        # Verify safe info log was called
-        expected_cols = len(request_data.input_data)
-        mock_logger.info.assert_any_call(f"Received HTTP prediction request with 4 rows and {expected_cols} columns")
+    # Verify safe info log was called
+    expected_cols = len(request_data.input_data)
+    mock_logger.info.assert_any_call(f"Received HTTP prediction request with 4 rows and {expected_cols} columns")
 
-        # Verify debug log was called with the result
-        mock_logger.debug.assert_any_call(f"HTTP prediction result: {mock_response}")
+    # Verify debug log was called with the result
+    mock_logger.debug.assert_any_call(f"HTTP prediction result: {mock_response}")
 
-        # Verify safe result info log was called
-        mock_logger.info.assert_any_call("HTTP prediction request processed successfully with status: success")
+    # Verify safe result info log was called
+    mock_logger.info.assert_any_call("HTTP prediction request processed successfully with status: success")
 
 
 @patch("regression_model_template.controller.kafka_app.logger")
