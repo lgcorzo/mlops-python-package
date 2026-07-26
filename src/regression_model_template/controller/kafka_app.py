@@ -219,7 +219,10 @@ class FastAPIKafkaService:
     def _initialize_kafka_producer(self) -> None:
         """Initialize Kafka producer."""
         try:
-            self.producer = Producer(self.kafka_config)
+            # Filter out consumer-only properties to avoid librdkafka configuration warnings
+            consumer_keys = {"group.id", "auto.offset.reset", "enable.auto.commit"}
+            producer_config = {k: v for k, v in self.kafka_config.items() if k not in consumer_keys}
+            self.producer = Producer(producer_config)
             logger.info("Kafka producer initialized")
         except Exception as e:
             logger.error(f"Failed to initialize Kafka producer: {e}")
@@ -270,11 +273,23 @@ class FastAPIKafkaService:
     def _handle_message_error(self, msg: Message) -> bool:
         """Handle errors in polled messages."""
         err = msg.error()
-        if err and err.code() == KafkaError._PARTITION_EOF:
-            logger.debug("Reached end of partition.")
+        if not err:
+            return True
+
+        transient_codes = (
+            KafkaError._PARTITION_EOF,
+            KafkaError.UNKNOWN_TOPIC_OR_PART,
+            KafkaError._UNKNOWN_TOPIC,
+            KafkaError._UNKNOWN_PARTITION,
+        )
+        if err.code() in transient_codes:
+            if err.code() == KafkaError._PARTITION_EOF:
+                logger.debug("Reached end of partition.")
+            else:
+                logger.warning(f"Transient consumer error: {err}")
             return True
         else:
-            logger.error(f"Consumer error: {msg.error()}")
+            logger.error(f"Consumer error: {err}")
             return False
 
     def _process_message(self, msg: Message) -> None:

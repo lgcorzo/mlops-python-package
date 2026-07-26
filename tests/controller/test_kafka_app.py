@@ -84,7 +84,10 @@ def test_start(mock_kafka_service):
     service, MockProducer, MockConsumer, MockThread = mock_kafka_service
     service.start()
 
-    MockProducer.assert_called_once_with(service.kafka_config)
+    expected_producer_config = {
+        "bootstrap.servers": "kafka_server:9092",
+    }
+    MockProducer.assert_called_once_with(expected_producer_config)
     assert service.kafka_config["enable.auto.commit"] is False
     MockConsumer.assert_called_once_with(service.kafka_config)
     service.consumer.subscribe.assert_called_once_with([service.input_topic])
@@ -203,6 +206,17 @@ def test_handle_message_error_other_error(mock_kafka_service):
         result = service._handle_message_error(msg)
         assert result is False
         mock_logger_error.assert_called_once()
+
+
+def test_handle_message_error_unknown_topic(mock_kafka_service):
+    """Test _handle_message_error handles transient UNKNOWN_TOPIC_OR_PART errors without breaking loop."""
+    service, *_ = mock_kafka_service
+    msg = MagicMock()
+    msg.error.return_value = MagicMock(code=MagicMock(return_value=KafkaError.UNKNOWN_TOPIC_OR_PART))
+    with patch("regression_model_template.controller.kafka_app.logger.warning") as mock_logger_warning:
+        result = service._handle_message_error(msg)
+        assert result is True
+        mock_logger_warning.assert_called_once()
 
 
 @patch("json.loads")
