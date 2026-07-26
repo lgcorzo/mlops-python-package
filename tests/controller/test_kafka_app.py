@@ -1,6 +1,4 @@
 import json
-import os
-import signal
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -27,7 +25,6 @@ def mock_kafka_service():
         patch("regression_model_template.controller.kafka_app.Producer") as MockProducer,
         patch("regression_model_template.controller.kafka_app.Consumer") as MockConsumer,
         patch("threading.Thread") as MockThread,
-        patch("time.sleep") as MockSleep,
     ):
         mock_producer = MagicMock()
         MockProducer.return_value = mock_producer
@@ -50,7 +47,7 @@ def mock_kafka_service():
             input_topic=input_topic,
             output_topic=output_topic,
         )
-        yield service, MockProducer, MockConsumer, MockThread, MockSleep
+        yield service, MockProducer, MockConsumer, MockThread
 
 
 def test_initialization(mock_kafka_service):
@@ -84,7 +81,7 @@ def test_delivery_report(mock_kafka_service):
 
 def test_start(mock_kafka_service):
     """Test the start method."""
-    service, MockProducer, MockConsumer, MockThread, MockSleep = mock_kafka_service
+    service, MockProducer, MockConsumer, MockThread = mock_kafka_service
     service.start()
 
     MockProducer.assert_called_once_with(service.kafka_config)
@@ -92,7 +89,6 @@ def test_start(mock_kafka_service):
     MockConsumer.assert_called_once_with(service.kafka_config)
     service.consumer.subscribe.assert_called_once_with([service.input_topic])
     assert MockThread.call_count == 2
-    MockSleep.assert_called_once()
 
 
 def test_start_producer_failure(mock_kafka_service):
@@ -284,14 +280,12 @@ def test_close_consumer(mock_kafka_service):
         mock_logger_info.assert_called()
 
 
-@patch("os.kill")
-def test_stop(mock_os_kill, mock_kafka_service):
+def test_stop(mock_kafka_service):
     """Test the stop method."""
     service, *_ = mock_kafka_service
     service.consumer = MagicMock()
     service.stop()
     service.consumer.close.assert_called_once()
-    mock_os_kill.assert_called_once_with(os.getpid(), signal.SIGINT)
     assert service.stop_event.is_set()
     with patch("regression_model_template.controller.kafka_app.logger.info") as mock_logger_info:
         service.stop()
@@ -301,27 +295,31 @@ def test_stop(mock_os_kill, mock_kafka_service):
 
 @pytest.mark.asyncio
 async def test_predict_endpoint():
-    with patch("regression_model_template.controller.kafka_app.fastapi_kafka_service") as mock_fastapi_kafka_service:
-        mock_fastapi_kafka_service.prediction_callback.return_value = PredictionResponse(
-            result={"inference": [1.0], "quality": 1.0, "error": None}
-        )
-        with patch("regression_model_template.controller.kafka_app.logger.debug") as mock_logger_debug:
-            request_data = PredictionRequest()
-            mock_request = MagicMock()
-            mock_request.client.host = "127.0.0.1"
-            response = await predict(request_data, mock_request)
-            assert response.result["inference"] == [1.0]
-            mock_logger_debug.assert_called()
+    mock_prediction_service = MagicMock()
+    mock_prediction_service.predict.return_value = PredictionResponse(
+        result={"inference": [1.0], "quality": 1.0, "error": None}
+    )
+    app.state.prediction_service = mock_prediction_service
+    with patch("regression_model_template.controller.kafka_app.logger.debug") as mock_logger_debug:
+        request_data = PredictionRequest()
+        mock_request = MagicMock()
+        mock_request.app = app
+        mock_request.client.host = "127.0.0.1"
+        response = await predict(request_data, mock_request)
+        assert response.result["inference"] == [1.0]
+        mock_logger_debug.assert_called()
 
 
 @pytest.mark.asyncio
 async def test_predict_endpoint_exception():
-    with patch("regression_model_template.controller.kafka_app.fastapi_kafka_service") as mock_fastapi_kafka_service:
-        mock_fastapi_kafka_service.prediction_callback.side_effect = Exception("Test Exception")
-        with pytest.raises(HTTPException):
-            mock_request = MagicMock()
-            mock_request.client.host = "127.0.0.1"
-            await predict(PredictionRequest(), mock_request)
+    mock_prediction_service = MagicMock()
+    mock_prediction_service.predict.side_effect = Exception("Test Exception")
+    app.state.prediction_service = mock_prediction_service
+    with pytest.raises(HTTPException):
+        mock_request = MagicMock()
+        mock_request.app = app
+        mock_request.client.host = "127.0.0.1"
+        await predict(PredictionRequest(), mock_request)
 
 
 @pytest.mark.asyncio

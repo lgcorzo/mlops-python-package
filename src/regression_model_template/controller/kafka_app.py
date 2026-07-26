@@ -3,12 +3,11 @@
 import json
 import logging
 import os
-import signal
+
 import threading
 import time
 import collections
-import typing as T
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, cast
 
 import pandas as pd
 import uvicorn
@@ -18,7 +17,7 @@ from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, Field, field_validator
 
 from regression_model_template.core.schemas import InputsSchema, Outputs
 from regression_model_template.io import registries, services
@@ -34,15 +33,11 @@ DEFAULT_FASTAPI_HOST = os.getenv("DEFAULT_FASTAPI_HOST", "127.0.0.1")
 DEFAULT_FASTAPI_PORT = int(os.getenv("DEFAULT_FASTAPI_PORT", 8100))
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+TRUSTED_PROXIES = os.getenv("TRUSTED_PROXIES", "127.0.0.1").split(",")
 LOGGING_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 MAX_INPUT_ROWS = 10000
 MAX_INPUT_COLS = 100
 MAX_TRACKED_IPS = 10000
-
-# Security Configuration
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
-TRUSTED_PROXIES = os.getenv("TRUSTED_PROXIES", "127.0.0.1").split(",")
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format=LOGGING_FORMAT)
@@ -117,11 +112,11 @@ class RateLimiter:
 
 
 # Data Models
-class PredictionRequest(BaseModel):
-    """Request model for prediction."""
-
-    input_data: Dict[str, Any] = {
-        "dteday": [pd.Timestamp.now().strftime("%Y-%m-%d")] * 4,
+def default_input_payload() -> Dict[str, Any]:
+    """Generate a fresh default input payload with current timestamps."""
+    today_str = pd.Timestamp.now().strftime("%Y-%m-%d")
+    return {
+        "dteday": [today_str] * 4,
         "season": [1, 2, 3, 4],
         "yr": [0, 0, 1, 1],
         "mnth": [1, 2, 3, 4],
@@ -137,6 +132,12 @@ class PredictionRequest(BaseModel):
         "casual": [0, 10, 20, 30],
         "registered": [0, 50, 100, 150],
     }
+
+
+class PredictionRequest(BaseModel):
+    """Request model for prediction."""
+
+    input_data: Dict[str, Any] = Field(default_factory=default_input_payload)
 
     def validate_schema(self) -> pd.DataFrame:
         """Validates the input data against InputsSchema."""
@@ -212,7 +213,6 @@ class FastAPIKafkaService:
         self._initialize_kafka_consumer()
         self.server_thread = threading.Thread(target=self._run_server)
         self.server_thread.start()
-        time.sleep(2)  # Allow server to start
         threading.Thread(target=self._consume_messages, daemon=True).start()
         logger.info("FastAPI server and Kafka consumer threads started.")
 
@@ -343,12 +343,8 @@ class FastAPIKafkaService:
         if self.consumer:
             self.consumer.close()
             logger.info("Kafka consumer closed.")
-        os.kill(os.getpid(), signal.SIGINT)
         logger.info("Service stopped.")
 
-
-# Global Service Instance
-fastapi_kafka_service: "FastAPIKafkaService" = T.cast("FastAPIKafkaService", None)
 
 # Rate Limiter Instance
 predict_rate_limiter = RateLimiter(max_requests=100, window_seconds=60)
@@ -362,10 +358,8 @@ predict_rate_limiter = RateLimiter(max_requests=100, window_seconds=60)
     description="This endpoint allows you to submit data for a prediction.",
     tags=["Prediction"],
 )
-async def predict(request_data: PredictionRequest, request: Request) -> PredictionResponse:  # Use global var
+async def predict(request_data: PredictionRequest, request: Request) -> PredictionResponse:
     """Endpoint for making predictions via HTTP."""
-    global fastapi_kafka_service
-
     # Apply rate limiting
     client_ip = request.client.host if request.client else "unknown"
     if not predict_rate_limiter.is_allowed(client_ip):
@@ -381,7 +375,8 @@ async def predict(request_data: PredictionRequest, request: Request) -> Predicti
         except Exception:
             logger.info("Received HTTP prediction request with unknown data structure")
 
-        prediction_result = await run_in_threadpool(fastapi_kafka_service.prediction_callback, request_data)
+        prediction_service = cast(PredictionService, request.app.state.prediction_service)
+        prediction_result: PredictionResponse = await run_in_threadpool(prediction_service.predict, request_data)
 
         logger.debug(f"HTTP prediction result: {prediction_result}")
         try:
@@ -390,7 +385,7 @@ async def predict(request_data: PredictionRequest, request: Request) -> Predicti
         except Exception:
             logger.info("HTTP prediction request processed successfully")
 
-        return prediction_result  # Use the global class
+        return prediction_result
     except HTTPException:
         raise
     except Exception:
@@ -421,14 +416,13 @@ class PredictionService:
         except Exception as e:
             # Securely handle exceptions: Log details, return generic error
             logger.exception(f"Prediction failed: {e}")
-            predictionresponse.result["inference"] = 0
-            predictionresponse.result["quality"] = 0
+            predictionresponse.result["inference"] = [0.0]
+            predictionresponse.result["quality"] = 0.0
             predictionresponse.result["error"] = "An error occurred during prediction processing."
         return predictionresponse
 
 
 def main() -> None:
-    global fastapi_kafka_service
     # Configuration
     alias_or_version: str | int = "Champion"
     # Initialize Mlflow Service
@@ -441,8 +435,9 @@ def main() -> None:
     loader = CustomLoader()
     model = loader.load(uri=model_uri)
 
-    # Initialize Prediction Service
+    # Initialize Prediction Service and attach to app.state
     prediction_service = PredictionService(model)
+    app.state.prediction_service = prediction_service
 
     # Kafka Configuration
     kafka_config = {
@@ -451,13 +446,13 @@ def main() -> None:
         "auto.offset.reset": DEFAULT_AUTO_OFFSET_RESET,
     }
     # Initialize and Start Service
-    fastapi_kafka_service = FastAPIKafkaService(
+    kafka_service = FastAPIKafkaService(
         prediction_callback=prediction_service.predict,
         kafka_config=kafka_config,
         input_topic=DEFAULT_INPUT_TOPIC,
         output_topic=DEFAULT_OUTPUT_TOPIC,
     )
-    fastapi_kafka_service.start()
+    kafka_service.start()
     print("FastAPI and Kafka service is running.  Press Ctrl+C to stop.")
 
 

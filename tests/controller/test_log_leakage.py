@@ -1,6 +1,6 @@
 import pytest
 import logging
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 from regression_model_template.controller.kafka_app import PredictionRequest, predict, FastAPIKafkaService
 import pandas as pd
 
@@ -56,30 +56,31 @@ async def test_predict_log_leakage(caplog):
         request.__repr__.return_value = str(request_data)
 
     # Mock the service
-    with patch("regression_model_template.controller.kafka_app.fastapi_kafka_service") as mock_service:
-        # Mock the callback to return a successful result so the function completes
-        mock_service.prediction_callback.return_value = MagicMock(
-            result={"inference": [0.0], "quality": 1.0, "error": ""}
-        )
+    from regression_model_template.controller.kafka_app import app
 
-        # Configure logging capture
-        caplog.set_level(logging.INFO)
+    mock_prediction_service = MagicMock()
+    mock_prediction_service.predict.return_value = MagicMock(result={"inference": [0.0], "quality": 1.0, "error": ""})
+    app.state.prediction_service = mock_prediction_service
 
-        # Call the endpoint
-        mock_request = MagicMock()
-        mock_request.client.host = "127.0.0.1"
-        await predict(request, mock_request)
+    # Configure logging capture
+    caplog.set_level(logging.INFO)
 
-        # Check logs for leakage
-        # If the sensitive value appears in the INFO logs, this assertion will fail
-        # confirming the vulnerability.
-        found_leak = False
-        for record in caplog.records:
-            if sensitive_value in record.message and record.levelno == logging.INFO:
-                found_leak = True
-                break
+    # Call the endpoint
+    mock_request = MagicMock()
+    mock_request.app = app
+    mock_request.client.host = "127.0.0.1"
+    await predict(request, mock_request)
 
-        assert not found_leak, f"Sensitive value '{sensitive_value}' was found in INFO logs!"
+    # Check logs for leakage
+    # If the sensitive value appears in the INFO logs, this assertion will fail
+    # confirming the vulnerability.
+    found_leak = False
+    for record in caplog.records:
+        if sensitive_value in record.message and record.levelno == logging.INFO:
+            found_leak = True
+            break
+
+    assert not found_leak, f"Sensitive value '{sensitive_value}' was found in INFO logs!"
 
 
 def test_kafka_consumer_log_leakage(caplog):
