@@ -2,15 +2,16 @@
 type: script
 title: "kafka_app"
 source_path: "src/regression_model_template/controller/kafka_app.py"
-description: "FastAPI endpoints and Kafka consumers for low-latency batch and streaming inference."
-tags: [controller, kafka, fastapi, inference]
-last_verified_commit: "fca24f2"
+description: "FastAPI and Kafka Service for Predictions with Logging."
+tags: [script, regression_model_template]
+last_verified_commit: "abe2ee0"
 ---
+
 # kafka_app
 
 Source File: `src/regression_model_template/controller/kafka_app.py`
 
-## Class Diagram
+FastAPI and Kafka Service for Predictions with Logging.
 
 ```mermaid
 classDiagram
@@ -42,8 +43,6 @@ classDiagram
 
     FastAPIKafkaService --> PredictionService : prediction_callback
 ```
-
-## Execution Flow
 
 ```mermaid
 sequenceDiagram
