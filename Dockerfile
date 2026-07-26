@@ -31,7 +31,7 @@ COPY --from=builder /build/dist/*.whl .
 # Install dependencies from the EXACT versions solved by Poetry
 RUN pip install -r requirements.txt
 # Install the application wheel
-RUN pip install *.whl
+RUN pip install --no-cache-dir --force-reinstall --no-deps *.whl
 
 # Copy configurations
 COPY confs/ ./confs/
