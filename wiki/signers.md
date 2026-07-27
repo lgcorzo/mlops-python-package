@@ -4,7 +4,7 @@ title: "signers"
 source_path: "src/regression_model_template/utils/signers.py"
 description: "Generate signatures for AI/ML models."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # signers
@@ -17,21 +17,22 @@ Generate signatures for AI/ML models.
 classDiagram
     class Signer {
         +KIND
-        +sign(inputs, outputs)
+        +sign(inputs, outputs) : Signature
     }
-    Signer <|-- InferSigner
     class InferSigner {
         +KIND
-        +sign(inputs, outputs)
+        +sign(inputs, outputs) : Signature
     }
+    Signer <|-- InferSigner
 ```
 
 ```mermaid
 flowchart TD
+
     signers --> abc
-    signers --> typing
     signers --> mlflow
-    signers --> pydantic
     signers --> mlflow_models
+    signers --> pydantic
     signers --> regression_model_template_core
+    signers --> typing
 ```

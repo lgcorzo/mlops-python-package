@@ -4,7 +4,7 @@ title: "services"
 source_path: "src/regression_model_template/io/services.py"
 description: "Manage global context during execution."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # services
@@ -16,13 +16,12 @@ Manage global context during execution.
 ```mermaid
 classDiagram
     class PropagateHandler {
-        +emit(record)
+        +emit(record) : None
     }
     class Service {
-        +start()
-        +stop()
+        +start() : None
+        +stop() : None
     }
-    Service <|-- LoggerService
     class LoggerService {
         +sink
         +level
@@ -32,18 +31,18 @@ classDiagram
         +backtrace
         +diagnose
         +catch
-        +start()
-        +logger()
+        +start() : None
+        +logger() : Any
     }
-    Service <|-- AlertsService
+    Service <|-- LoggerService
     class AlertsService {
         +enable
         +app_name
         +timeout
-        +start()
-        +notify(title, message)
+        +start() : None
+        +notify(title, message) : None
     }
-    Service <|-- MlflowService
+    Service <|-- AlertsService
     class MlflowService {
         +env
         +tracking_uri
@@ -58,25 +57,28 @@ classDiagram
         +autolog_log_models
         +autolog_log_datasets
         +autolog_silent
-        +start()
-        +run_context(run_config)
-        +client()
+        +start() : None
+        +run_context(run_config) : Any
+        +client() : Any
+    }
+    Service <|-- MlflowService
+    class MlflowService.RunConfig {
+        +name
+        +description
+        +tags
+        +log_system_metrics
     }
 ```
 
 ```mermaid
 flowchart TD
+
     services --> __future__
     services --> abc
     services --> contextlib
     services --> logging
-    services --> sys
-    services --> typing
-    services --> typing
     services --> loguru
     services --> mlflow
-    services --> mlflow_tracking
-    services --> pydantic
     services --> opentelemetry
     services --> opentelemetry__logs
     services --> opentelemetry_exporter_otlp_proto_http__log_exporter
@@ -87,5 +89,8 @@ flowchart TD
     services --> opentelemetry_sdk_trace
     services --> opentelemetry_sdk_trace_export
     services --> plyer
+    services --> pydantic
     services --> regression_model_template_io_osvariables
+    services --> sys
+    services --> typing
 ```

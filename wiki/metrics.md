@@ -4,7 +4,7 @@ title: "metrics"
 source_path: "src/regression_model_template/core/metrics.py"
 description: "Evaluate model performances with metrics."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # metrics
@@ -19,33 +19,34 @@ classDiagram
         +KIND
         +name
         +greater_is_better
-        +score(targets, outputs)
-        +scorer(model, inputs, targets)
-        +to_mlflow()
+        +score(targets, outputs) : float
+        +scorer(model, inputs, targets) : float
+        +to_mlflow() : MlflowMetric
     }
-    Metric <|-- SklearnMetric
     class SklearnMetric {
         +KIND
         +name
         +greater_is_better
-        +score(targets, outputs)
+        +score(targets, outputs) : float
     }
+    Metric <|-- SklearnMetric
     class Threshold {
         +threshold
         +greater_is_better
-        +to_mlflow()
+        +to_mlflow() : MlflowThreshold
     }
 ```
 
 ```mermaid
 flowchart TD
+
     metrics --> __future__
     metrics --> abc
-    metrics --> typing
     metrics --> mlflow
+    metrics --> mlflow_metrics
     metrics --> pandas
     metrics --> pydantic
-    metrics --> mlflow_metrics
-    metrics --> sklearn
     metrics --> regression_model_template_core
+    metrics --> sklearn
+    metrics --> typing
 ```

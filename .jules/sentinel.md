@@ -7,3 +7,8 @@
 **Vulnerability:** Clear logging of raw prediction result which contains sensitive output data (e.g., list of inference values).
 **Learning:** Logging entire prediction payloads at DEBUG level or any other level can expose sensitive inference outputs to log aggregation and monitoring systems, violating compliance and security standards.
 **Prevention:** Avoid logging raw prediction output values. Instead, clone the dictionary and mask or summarize the sensitive prediction list (e.g., indicating the length of the list, such as `<masked_list_len_X>`) before passing it to the logger.
+
+## 2026-07-27 - Automated Document Overwrites Without Differential Checking
+**Vulnerability:** Widespread unintentional corruption and excessive churn in repository documentation when applying automated parsing updates.
+**Learning:** Automatically writing to every markdown file without specifically filtering to files logically altered by git diffs violates "incremental update" policies and causes unnecessary build cycles and potential data loss on hand-curated sections.
+**Prevention:** Strictly utilize source control diff mechanisms (`git diff`) to map changed code files directly to their corresponding documentation artifacts, avoiding sweeping directory writes.

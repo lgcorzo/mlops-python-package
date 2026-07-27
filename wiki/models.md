@@ -4,7 +4,7 @@ title: "models"
 source_path: "src/regression_model_template/core/models.py"
 description: "Define trainable machine learning models."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # models
@@ -17,38 +17,40 @@ Define trainable machine learning models.
 classDiagram
     class Model {
         +KIND
-        +get_params(deep)
-        +set_params()
-        +__sklearn_tags__()
-        +fit(inputs, targets)
-        +predict(inputs)
-        +explain_model()
-        +explain_samples(inputs)
-        +get_internal_model()
+        +get_params(deep) : Params
+        +set_params() : Any
+        -__sklearn_tags__() : Any
+        +fit(inputs, targets) : Any
+        +predict(inputs) : Any
+        +explain_model() : Any
+        +explain_samples(inputs) : Any
+        +get_internal_model() : Any
     }
-    Model <|-- BaselineSklearnModel
     class BaselineSklearnModel {
         +KIND
         +max_depth
         +n_estimators
         +random_state
-        +_pipeline
-        +_numericals
-        +_categoricals
-        +fit(inputs, targets)
-        +predict(inputs)
-        +explain_model()
-        +explain_samples(inputs)
-        +get_internal_model()
+        #_pipeline
+        #_numericals
+        #_categoricals
+        +fit(inputs, targets) : Any
+        +predict(inputs) : Any
+        +explain_model() : Any
+        +explain_samples(inputs) : Any
+        +get_internal_model() : Any
     }
+    Model <|-- BaselineSklearnModel
 ```
 
 ```mermaid
 flowchart TD
+
     models --> abc
-    models --> typing
     models --> pydantic
+    models --> regression_model_template_core
     models --> shap
     models --> sklearn
-    models --> regression_model_template_core
+    models --> sklearn_base
+    models --> typing
 ```

@@ -4,7 +4,7 @@ title: "schemas"
 source_path: "src/regression_model_template/core/schemas.py"
 description: "Define and validate dataframe schemas."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # schemas
@@ -16,9 +16,12 @@ Define and validate dataframe schemas.
 ```mermaid
 classDiagram
     class Schema {
-        +check(data)
+        +check(cls, data) : Any
     }
-    Schema <|-- InputsSchema
+    class Schema.Config {
+        +coerce
+        +strict
+    }
     class InputsSchema {
         +instant
         +dteday
@@ -37,31 +40,35 @@ classDiagram
         +casual
         +registered
     }
-    Schema <|-- TargetsSchema
+    Schema <|-- InputsSchema
     class TargetsSchema {
         +instant
         +cnt
     }
-    Schema <|-- OutputsSchema
+    Schema <|-- TargetsSchema
     class OutputsSchema {
         +instant
         +prediction
     }
-    Schema <|-- SHAPValuesSchema
+    Schema <|-- OutputsSchema
     class SHAPValuesSchema {
     }
-    Schema <|-- FeatureImportancesSchema
+    Schema <|-- SHAPValuesSchema
+    class SHAPValuesSchema.Config {
+        +dtype
+        +strict
+    }
     class FeatureImportancesSchema {
         +feature
         +importance
     }
+    Schema <|-- FeatureImportancesSchema
 ```
 
 ```mermaid
 flowchart TD
-    schemas --> typing
+
     schemas --> pandas
     schemas --> pandera
-    schemas --> pandera_typing
-    schemas --> pandera_typing_common
+    schemas --> typing
 ```

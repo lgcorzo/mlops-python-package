@@ -4,7 +4,7 @@ title: "promotion"
 source_path: "src/regression_model_template/jobs/promotion.py"
 description: "Define a job for promoting a registered model version with an alias."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # promotion
@@ -19,12 +19,13 @@ classDiagram
         +KIND
         +alias
         +version
-        +run()
+        +run() : Any
     }
 ```
 
 ```mermaid
 flowchart TD
-    promotion --> typing
+
     promotion --> regression_model_template_jobs
+    promotion --> typing
 ```
