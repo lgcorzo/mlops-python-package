@@ -121,7 +121,7 @@ class CustomSaver(Saver):
             context: mlflow.pyfunc.PythonModelContext,  # type: ignore[name-defined]
             model_input: list[T.Any],
             params: dict[str, T.Any] | None = None,
-        ) -> schemas.Outputs:
+        ) -> list[T.Any]:
             """Generate predictions with a custom model for the given inputs.
 
             Args:
@@ -132,8 +132,10 @@ class CustomSaver(Saver):
             Returns:
                 schemas.Outputs: validated outputs of the project model.
             """
-            output = self.model.predict(inputs=model_input)
-            return T.cast(schemas.Outputs, output.prediction)
+            import pandas as pd
+            inputs = pd.DataFrame(model_input) if isinstance(model_input, list) else model_input
+            output = self.model.predict(inputs=inputs)
+            return T.cast(list[T.Any], output.prediction)
 
     def save(self, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info:
         adapter = CustomSaver.Adapter(model=model)
