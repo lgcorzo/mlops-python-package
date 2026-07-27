@@ -12,3 +12,8 @@
 **Vulnerability:** Widespread unintentional corruption and excessive churn in repository documentation when applying automated parsing updates.
 **Learning:** Automatically writing to every markdown file without specifically filtering to files logically altered by git diffs violates "incremental update" policies and causes unnecessary build cycles and potential data loss on hand-curated sections.
 **Prevention:** Strictly utilize source control diff mechanisms (`git diff`) to map changed code files directly to their corresponding documentation artifacts, avoiding sweeping directory writes.
+
+## 2026-07-27 - Missing MLFlow PythonModel Predict Type Hints
+**Vulnerability:** MyPy typing errors during CI evaluation of CustomSaver.Adapter.predict functions inside `src/regression_model_template/io/registries.py`.
+**Learning:** When defining predict functions for MLflow PyFunc models in this codebase, type hints must either be removed or wrapped in list (e.g., `list[typing.Any]`) to properly support MLflow's schema validation, otherwise static type checkers like mypy will cause CI checks to fail with `no-untyped-def`.
+**Prevention:** Always verify type hints when writing overriding mlflow functions (especially for arguments like `model_input`) and confirm compatibility against the test suite prior to committing.
