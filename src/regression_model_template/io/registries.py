@@ -133,6 +133,7 @@ class CustomSaver(Saver):
                 schemas.Outputs: validated outputs of the project model.
             """
             import pandas as pd
+
             inputs = pd.DataFrame(model_input) if isinstance(model_input, list) else model_input
             output = self.model.predict(inputs=inputs)
             return T.cast(list[T.Any], output.prediction)
