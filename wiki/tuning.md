@@ -4,7 +4,7 @@ title: "tuning"
 source_path: "src/regression_model_template/jobs/tuning.py"
 description: "Define a job for finding the best hyperparameters for a model."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # tuning
@@ -24,17 +24,18 @@ classDiagram
         +metric
         +splitter
         +searcher
-        +run()
+        +run() : Any
     }
 ```
 
 ```mermaid
 flowchart TD
-    tuning --> typing
+
     tuning --> mlflow
     tuning --> pydantic
     tuning --> regression_model_template_core
     tuning --> regression_model_template_io
     tuning --> regression_model_template_jobs
     tuning --> regression_model_template_utils
+    tuning --> typing
 ```

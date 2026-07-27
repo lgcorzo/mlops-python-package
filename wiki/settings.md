@@ -4,7 +4,7 @@ title: "settings"
 source_path: "src/regression_model_template/settings.py"
 description: "Define settings for the application."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # settings
@@ -17,14 +17,15 @@ Define settings for the application.
 classDiagram
     class Settings {
     }
-    Settings <|-- MainSettings
     class MainSettings {
         +job
     }
+    Settings <|-- MainSettings
 ```
 
 ```mermaid
 flowchart TD
+
     settings --> pydantic
     settings --> pydantic_settings
     settings --> regression_model_template

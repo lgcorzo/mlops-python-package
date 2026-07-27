@@ -4,7 +4,7 @@ title: "evaluations"
 source_path: "src/regression_model_template/jobs/evaluations.py"
 description: "Define a job for evaluating registered models with data."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # evaluations
@@ -25,18 +25,18 @@ classDiagram
         +metrics
         +evaluators
         +thresholds
-        +run()
+        +run() : Any
     }
 ```
 
 ```mermaid
 flowchart TD
-    evaluations --> typing
+
     evaluations --> mlflow
     evaluations --> pandas
     evaluations --> pydantic
     evaluations --> regression_model_template_core
-    evaluations --> regression_model_template_core
     evaluations --> regression_model_template_io
     evaluations --> regression_model_template_jobs
+    evaluations --> typing
 ```

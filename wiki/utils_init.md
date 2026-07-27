@@ -4,7 +4,7 @@ title: "utils_init"
 source_path: "src/regression_model_template/utils/__init__.py"
 description: "Helper components of the project."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # utils_init
@@ -15,5 +15,6 @@ Helper components of the project.
 
 ```mermaid
 flowchart TD
+
     A[No Classes/Dependencies found] --> B[End]
 ```

@@ -4,7 +4,7 @@ title: "training"
 source_path: "src/regression_model_template/jobs/training.py"
 description: "Define a job for training and registring a single AI/ML model."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # training
@@ -26,20 +26,20 @@ classDiagram
         +saver
         +signer
         +registry
-        +run()
+        +run() : Any
     }
 ```
 
 ```mermaid
 flowchart TD
-    training --> time
-    training --> typing
+
     training --> mlflow
-    training --> pydantic
     training --> mlflow_entities
-    training --> regression_model_template_core
+    training --> pydantic
     training --> regression_model_template_core
     training --> regression_model_template_io
     training --> regression_model_template_jobs
     training --> regression_model_template_utils
+    training --> time
+    training --> typing
 ```

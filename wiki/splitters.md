@@ -4,7 +4,7 @@ title: "splitters"
 source_path: "src/regression_model_template/utils/splitters.py"
 description: "Split dataframes into subsets (e.g., train/valid/test)."
 tags: [script, regression_model_template]
-last_verified_commit: "abe2ee0"
+last_verified_commit: "c0c5dbc"
 ---
 
 # splitters
@@ -17,36 +17,36 @@ Split dataframes into subsets (e.g., train/valid/test).
 classDiagram
     class Splitter {
         +KIND
-        +split(inputs, targets, groups)
-        +get_n_splits(inputs, targets, groups)
+        +split(inputs, targets, groups) : TrainTestSplits
+        +get_n_splits(inputs, targets, groups) : int
     }
-    Splitter <|-- TrainTestSplitter
     class TrainTestSplitter {
         +KIND
         +shuffle
         +test_size
         +random_state
-        +split(inputs, targets, groups)
-        +get_n_splits(inputs, targets, groups)
+        +split(inputs, targets, groups) : TrainTestSplits
+        +get_n_splits(inputs, targets, groups) : int
     }
-    Splitter <|-- TimeSeriesSplitter
+    Splitter <|-- TrainTestSplitter
     class TimeSeriesSplitter {
         +KIND
         +gap
         +n_splits
         +test_size
-        +split(inputs, targets, groups)
-        +get_n_splits(inputs, targets, groups)
+        +split(inputs, targets, groups) : TrainTestSplits
+        +get_n_splits(inputs, targets, groups) : int
     }
+    Splitter <|-- TimeSeriesSplitter
 ```
 
 ```mermaid
 flowchart TD
+
     splitters --> abc
-    splitters --> typing
     splitters --> numpy
-    splitters --> numpy_typing
     splitters --> pydantic
-    splitters --> sklearn
     splitters --> regression_model_template_core
+    splitters --> sklearn
+    splitters --> typing
 ```

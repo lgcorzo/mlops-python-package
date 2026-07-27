@@ -119,7 +119,7 @@ class CustomSaver(Saver):
         def predict(
             self,
             context: mlflow.pyfunc.PythonModelContext,  # type: ignore[name-defined]
-            model_input,
+            model_input: schemas.Inputs,
             params: dict[str, T.Any] | None = None,
         ) -> schemas.Outputs:
             """Generate predictions with a custom model for the given inputs.
