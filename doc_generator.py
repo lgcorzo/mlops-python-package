@@ -230,7 +230,7 @@ def process_file(filepath, commit_hash):
                                         or "Dependencies found" in block_content
                                     )
                                 ):
-                                    new_block = "\n" + flowchart[23:] + parts[i][end_idx + 3 :]
+                                    new_block = flowchart[23:] + parts[i][end_idx + 3 :]
                                     if parts[i] != new_block:
                                         parts[i] = new_block
                                         changed = True
