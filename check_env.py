@@ -1,5 +1,7 @@
 import os
+import mlflow
 from confluent_kafka import Producer
+
 
 
 def check_env():
