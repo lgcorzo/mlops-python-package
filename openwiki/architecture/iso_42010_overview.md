@@ -46,4 +46,4 @@ Per ISO/IEC/IEEE 42010:2022, the architecture description addresses specific sta
 - 🔄 **[Architecture/RuntimeSequences](runtime_sequences.md)** — Sequence View & Interaction Workflows.
 - 🖥️ **[Architecture/DeploymentView](deployment_view.md)** — Deployment View & Runtime Infrastructure.
 - 🔐 **[Architecture/SecurityView](security_view.md)** — Security View & Data Protection.
-- 📝 **[[Architecture/ADR/ADR_001_AST_Engine]]** — Architecture Decision Record.
+- 📝 **[Architecture/ADR/ADR_001_AST_Engine](adr/adr_001_ast_engine.md)** — Architecture Decision Record.

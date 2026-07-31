@@ -28,7 +28,7 @@ The architectural design of the system is described across distinct stakeholder 
 * 🔄 **[Architecture/RuntimeSequences](architecture/runtime_sequences.md)** — *Sequence View*: Message dispatches, job execution pipelines, and Kafka real-time streaming interaction flows.
 * 🖥️ **[Architecture/DeploymentView](architecture/deployment_view.md)** — *Deployment View*: Docker containerization, `docker-compose` setups, and MLServer deployment targets.
 * 🔐 **[Architecture/SecurityView](architecture/security_view.md)** — *Security View*: Authentication, environment key protection, model signature verification, and data sanitization boundaries.
-* 📝 **[[Architecture/ADR/ADR_001_AST_Engine]]** — *Architecture Decision Record*: Rationale for local AST extraction over external embedding databases.
+* 📝 **[Architecture/ADR/ADR_001_AST_Engine](architecture/adr/adr_001_ast_engine.md)** — *Architecture Decision Record*: Rationale for local AST extraction over external embedding databases.
 
 ---
 
@@ -42,7 +42,7 @@ The architectural design of the system is described across distinct stakeholder 
 
 ## 🏆 3. ISO/IEC 25010 Software Quality Assessment
 
-* 📊 **[[Quality/ISO25010Quality]]** — Comprehensive quality evaluation matrix covering Functional Suitability, Performance Efficiency, Maintainability, Security, and Portability.
+* 📊 **[Quality/ISO25010Quality](quality/iso_25010_quality.md)** — Comprehensive quality evaluation matrix covering Functional Suitability, Performance Efficiency, Maintainability, Security, and Portability.
 
 ---
 
@@ -73,7 +73,7 @@ The codebase is mirrored 1:1 into granular OKF wiki specifications under `openwi
 ### I/O & Infrastructure Layer (`[[src/regression_model_template/io](../src/regression_model_template/io)](../[src/regression_model_template/io](../src/regression_model_template/io))/`)
 * [Modules/RegressionModelTemplate/IO/Configs](modules/regression_model_template/io/configs.md) — Hydra/Omegaconf YAML configuration loaders (`[[src/regression_model_template/io/configs.py:L1-L45](../src/regression_model_template/io/configs.py#L1-L45)](../[src/regression_model_template/io/configs.py](../src/regression_model_template/io/configs.py)#L1-L45)`)
 * [Modules/RegressionModelTemplate/IO/Datasets](modules/regression_model_template/io/datasets.md) — Parquet data readers, writers & lineage loggers (`[[src/regression_model_template/io/datasets.py:L1-L125](../src/regression_model_template/io/datasets.py#L1-L125)](../[src/regression_model_template/io/datasets.py](../src/regression_model_template/io/datasets.py)#L1-L125)`)
-* [[Modules/RegressionModelTemplate/IO/OSVariables]] — Pydantic environment variable settings (`[[src/regression_model_template/io/osvariables.py:L1-L26](../src/regression_model_template/io/osvariables.py#L1-L26)](../[src/regression_model_template/io/osvariables.py](../src/regression_model_template/io/osvariables.py)#L1-L26)`)
+* [Modules/RegressionModelTemplate/IO/OSVariables](modules/regression_model_template/io/osvariables.md) — Pydantic environment variable settings (`[[src/regression_model_template/io/osvariables.py:L1-L26](../src/regression_model_template/io/osvariables.py#L1-L26)](../[src/regression_model_template/io/osvariables.py](../src/regression_model_template/io/osvariables.py)#L1-L26)`)
 * [Modules/RegressionModelTemplate/IO/Registries](modules/regression_model_template/io/registries.md) — MLflow Model Registry savers, loaders & adapters (`[[src/regression_model_template/io/registries.py:L1-L317](../src/regression_model_template/io/registries.py#L1-L317)](../[src/regression_model_template/io/registries.py](../src/regression_model_template/io/registries.py)#L1-L317)`)
 * [Modules/RegressionModelTemplate/IO/Services](modules/regression_model_template/io/services.md) — Telemetry, Loguru, Plyer alerts & MLflow service wrappers (`[[src/regression_model_template/io/services.py:L1-L252](../src/regression_model_template/io/services.py#L1-L252)](../[src/regression_model_template/io/services.py](../src/regression_model_template/io/services.py)#L1-L252)`)
 

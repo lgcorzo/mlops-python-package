@@ -254,7 +254,7 @@ def validate_wiki(wiki_path: str, strict: bool = False) -> int:
 
     # Report
     print(f"\n{'=' * 60}")
-    print(f"OKF Conformance Report")
+    print("OKF Conformance Report")
     print(f"{'=' * 60}")
     print(f"Wiki path:     {wiki_path}")
     print(f"Strict mode:   {'ON' if strict else 'OFF'}")
@@ -271,7 +271,7 @@ def validate_wiki(wiki_path: str, strict: bool = False) -> int:
         print(f"\nRESULT: FAIL ({len(total_errors)} errors)")
         return len(total_errors)
     else:
-        print(f"\nRESULT: PASS ✓")
+        print("\nRESULT: PASS ✓")
         return 0
 
 

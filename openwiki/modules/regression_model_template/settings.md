@@ -15,7 +15,7 @@ verified: "true"
 # Module Specification: Settings Provider
 
 * **Source File Reference:** `[[src/regression_model_template/settings.py](../../../src/regression_model_template/settings.py)](../../../[src/regression_model_template/settings.py](../../../src/regression_model_template/settings.py))` (Lines: L1-L25)
-* **Upstream Dependencies:** [[Modules/RegressionModelTemplate/IO/OSVariables]]
+* **Upstream Dependencies:** [Modules/RegressionModelTemplate/IO/OSVariables](io/osvariables.md)
 * **Downstream Consumers:** All jobs and controller services
 
 ## 1. Architectural Role & Responsibilities
