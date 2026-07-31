@@ -7,6 +7,8 @@ description: "Component view detailing subsystem organization, class hierarchies
 tags: ["iso42010", "component", "uml", "classdiagram", "architecture"]
 last_verified_commit: "HEAD"
 timestamp: "2026-07-31T16:17:00Z"
+generated: "agent:okf-professional-documenter"
+verified: "true"
 ---
 
 # ISO 42010 Component View: Subsystem Breakdown & UML 2.0 Class Diagrams

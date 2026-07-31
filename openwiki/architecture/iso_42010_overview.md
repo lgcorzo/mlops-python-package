@@ -7,6 +7,8 @@ description: "Master architecture description artifact defining entity of intere
 tags: ["iso42010", "architecture", "viewpoints", "stakeholders"]
 last_verified_commit: "HEAD"
 timestamp: "2026-07-31T16:17:00Z"
+generated: "agent:okf-professional-documenter"
+verified: "true"
 ---
 
 # ISO/IEC/IEEE 42010 Architecture Description Overview
@@ -29,19 +31,19 @@ Per ISO/IEC/IEEE 42010:2022, the architecture description addresses specific sta
 
 | Stakeholder Persona | Key Architectural Concerns | Framing ISO Viewpoint | Governed Wiki Page |
 | :--- | :--- | :--- | :--- |
-| **System Architect** | Component decoupling, job abstraction, lifecycle management | Component View | [[Architecture/ComponentStructure]] |
-| **ML Engineer** | Model reproducibility, metrics logging, MLflow tracking, SHAP explanations | Sequence & Component View | [[Architecture/RuntimeSequences]] |
-| **Data Engineer** | Dataset lineage, Parquet I/O, Pandera schema validation | Component & Context View | [[Architecture/SystemContext]] |
-| **DevOps & Platform Lead** | Deployment environments, Docker packaging, Kafka streaming service | Deployment View | [[Architecture/DeploymentView]] |
-| **Security & Compliance Officer** | Secret handling, model signers, API rate limiting, telemetry boundaries | Security View | [[Architecture/SecurityView]] |
+| **System Architect** | Component decoupling, job abstraction, lifecycle management | Component View | [Architecture/ComponentStructure](component_structure.md) |
+| **ML Engineer** | Model reproducibility, metrics logging, MLflow tracking, SHAP explanations | Sequence & Component View | [Architecture/RuntimeSequences](runtime_sequences.md) |
+| **Data Engineer** | Dataset lineage, Parquet I/O, Pandera schema validation | Component & Context View | [Architecture/SystemContext](system_context.md) |
+| **DevOps & Platform Lead** | Deployment environments, Docker packaging, Kafka streaming service | Deployment View | [Architecture/DeploymentView](deployment_view.md) |
+| **Security & Compliance Officer** | Secret handling, model signers, API rate limiting, telemetry boundaries | Security View | [Architecture/SecurityView](security_view.md) |
 
 ---
 
 ## 3. Viewpoints Framework & Index
 
-- 🌐 **[[Architecture/SystemContext]]** — Context View & System Boundaries.
-- 📦 **[[Architecture/ComponentStructure]]** — Component View & Class Diagrams.
-- 🔄 **[[Architecture/RuntimeSequences]]** — Sequence View & Interaction Workflows.
-- 🖥️ **[[Architecture/DeploymentView]]** — Deployment View & Runtime Infrastructure.
-- 🔐 **[[Architecture/SecurityView]]** — Security View & Data Protection.
+- 🌐 **[Architecture/SystemContext](system_context.md)** — Context View & System Boundaries.
+- 📦 **[Architecture/ComponentStructure](component_structure.md)** — Component View & Class Diagrams.
+- 🔄 **[Architecture/RuntimeSequences](runtime_sequences.md)** — Sequence View & Interaction Workflows.
+- 🖥️ **[Architecture/DeploymentView](deployment_view.md)** — Deployment View & Runtime Infrastructure.
+- 🔐 **[Architecture/SecurityView](security_view.md)** — Security View & Data Protection.
 - 📝 **[[Architecture/ADR/ADR_001_AST_Engine]]** — Architecture Decision Record.

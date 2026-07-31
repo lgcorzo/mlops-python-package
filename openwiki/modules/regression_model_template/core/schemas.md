@@ -3,18 +3,20 @@ iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
 title: "Module: Data Validation Schemas"
-source_path: "src/regression_model_template/core/schemas.py"
+source_path: "[[src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py)](../../../../[src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py))"
 description: "Pandera DataFrame schemas for strict input features, targets, predictions, and SHAP explanation data structures."
 tags: ["core", "schemas", "pandera", "validation", "pydantic"]
 last_verified_commit: "HEAD"
 timestamp: "2026-07-31T16:17:00Z"
+generated: "agent:okf-professional-documenter"
+verified: "true"
 ---
 
 # Module Specification: Data Validation Schemas
 
-* **Source File Reference:** `src/regression_model_template/core/schemas.py` (Lines: L1-L117)
+* **Source File Reference:** `[[src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py)](../../../../[src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py))` (Lines: L1-L117)
 * **Upstream Dependencies:** `pandera`, `pydantic`
-* **Downstream Consumers:** [[Modules/RegressionModelTemplate/Jobs/Training]], [[Modules/RegressionModelTemplate/Controller/KafkaApp]]
+* **Downstream Consumers:** [Modules/RegressionModelTemplate/Jobs/Training](../jobs/training.md), [Modules/RegressionModelTemplate/Controller/KafkaApp](../controller/kafka_app.md)
 
 ## 1. Architectural Role & Responsibilities
 `schemas.py` defines Pandera DataFrame schemas (`InputsSchema`, `TargetsSchema`, `OutputsSchema`, `SHAPValuesSchema`) to enforce strict type checking, non-null constraints, and numeric range limits across pipeline operations.
@@ -49,7 +51,7 @@ classDiagram
 
 ## 3. Class & Method Specifications
 
-### `Schema` (`src/regression_model_template/core/schemas.py:L20-L48`)
+### `Schema` (`[[src/regression_model_template/core/schemas.py:L20-L48](../../../../src/regression_model_template/core/schemas.py#L20-L48)](../../../../[src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py)#L20-L48)`)
 * `check(cls, data: pd.DataFrame) -> pd.DataFrame` (L39-L48): Class method executing Pandera schema validation on input DataFrame.
 
 ### Concrete Schema Implementations

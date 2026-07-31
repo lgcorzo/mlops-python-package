@@ -7,6 +7,8 @@ description: "Sequence view illustrating training pipelines, model evaluation, r
 tags: ["iso42010", "sequence", "workflow", "training", "kafka"]
 last_verified_commit: "HEAD"
 timestamp: "2026-07-31T16:17:00Z"
+generated: "agent:okf-professional-documenter"
+verified: "true"
 ---
 
 # ISO 42010 Sequence View: Runtime Workflows & Execution Sequences

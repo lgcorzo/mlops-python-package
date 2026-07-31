@@ -7,6 +7,8 @@ description: "Architecture decision record documenting choice of local Graphify 
 tags: ["adr", "iso42010", "decision", "graphify", "ast"]
 last_verified_commit: "HEAD"
 timestamp: "2026-07-31T16:17:00Z"
+generated: "agent:okf-professional-documenter"
+verified: "true"
 ---
 
 # Architecture Decision Record (ADR 001)
@@ -39,5 +41,5 @@ Adopt local, deterministic AST CLI extraction tools (`graphify update .`, Python
 
 ## 5. Affected System Artifacts
 * Modifies `openwiki/` documentation hierarchy.
-* Anchored to `src/regression_model_template/`.
-* Links to [[Architecture/ComponentStructure]] and [[Index]].
+* Anchored to `[[src/regression_model_template](../../../src/regression_model_template)](../../../[src/regression_model_template](../../../src/regression_model_template))/`.
+* Links to [Architecture/ComponentStructure](../component_structure.md) and [Index](../../index.md).
