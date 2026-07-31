@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: training
 
+Source File: `src/regression_model_template/jobs/training.py`
 * **Source Directory Reference:** `src/regression_model_template/jobs/`
 * **Package Dependency:** Upstream: `pydantic`, `mlflow`, `regression_model_template.io`, `regression_model_template.utils`, `time`, `typing`, `regression_model_template.core`, `regression_model_template.jobs`, `mlflow.entities` | Downstream: None
 
@@ -19,9 +20,18 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class TrainingJob {
-        +run()
+        +KIND
+        +run_config
+        +inputs
+        +targets
+        +model
+        +metrics
+        +splitter
+        +saver
+        +signer
+        +registry
+        +run() : Any
     }
 ```
 
@@ -31,28 +41,19 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace training {
-        class training_module
+    class TrainingJob {
+        +KIND
+        +run_config
+        +inputs
+        +targets
+        +model
+        +metrics
+        +splitter
+        +saver
+        +signer
+        +registry
+        +run() : Any
     }
-    class pydantic_module
-    training_module --> pydantic_module : imports
-    class mlflow_module
-    training_module --> mlflow_module : imports
-    class regression_model_template_io_module
-    training_module --> regression_model_template_io_module : imports
-    class regression_model_template_utils_module
-    training_module --> regression_model_template_utils_module : imports
-    class time_module
-    training_module --> time_module : imports
-    class typing_module
-    training_module --> typing_module : imports
-    class regression_model_template_core_module
-    training_module --> regression_model_template_core_module : imports
-    class regression_model_template_jobs_module
-    training_module --> regression_model_template_jobs_module : imports
-    class mlflow_entities_module
-    training_module --> mlflow_entities_module : imports
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -79,3 +80,16 @@ sequenceDiagram
 * **Source Citations:**
   - Class `TrainingJob`: `src/regression_model_template/jobs/training.py:21`
   - Method `run`: `src/regression_model_template/jobs/training.py:57`
+
+```mermaid
+flowchart TD
+    training --> mlflow
+    training --> mlflow_entities
+    training --> pydantic
+    training --> regression_model_template_core
+    training --> regression_model_template_io
+    training --> regression_model_template_jobs
+    training --> regression_model_template_utils
+    training --> time
+    training --> typing
+```

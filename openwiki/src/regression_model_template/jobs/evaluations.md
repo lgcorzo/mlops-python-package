@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: evaluations
 
+Source File: `src/regression_model_template/jobs/evaluations.py`
 * **Source Directory Reference:** `src/regression_model_template/jobs/`
 * **Package Dependency:** Upstream: `pydantic`, `mlflow`, `pandas`, `regression_model_template.io`, `typing`, `regression_model_template.core`, `regression_model_template.jobs` | Downstream: None
 
@@ -19,9 +20,17 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class EvaluationsJob {
-        +run()
+        +KIND
+        +run_config
+        +inputs
+        +targets
+        +model_type
+        +alias_or_version
+        +metrics
+        +evaluators
+        +thresholds
+        +run() : Any
     }
 ```
 
@@ -31,24 +40,18 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace evaluations {
-        class evaluations_module
+    class EvaluationsJob {
+        +KIND
+        +run_config
+        +inputs
+        +targets
+        +model_type
+        +alias_or_version
+        +metrics
+        +evaluators
+        +thresholds
+        +run() : Any
     }
-    class pydantic_module
-    evaluations_module --> pydantic_module : imports
-    class mlflow_module
-    evaluations_module --> mlflow_module : imports
-    class pandas_module
-    evaluations_module --> pandas_module : imports
-    class regression_model_template_io_module
-    evaluations_module --> regression_model_template_io_module : imports
-    class typing_module
-    evaluations_module --> typing_module : imports
-    class regression_model_template_core_module
-    evaluations_module --> regression_model_template_core_module : imports
-    class regression_model_template_jobs_module
-    evaluations_module --> regression_model_template_jobs_module : imports
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -75,3 +78,14 @@ sequenceDiagram
 * **Source Citations:**
   - Class `EvaluationsJob`: `src/regression_model_template/jobs/evaluations.py:19`
   - Method `run`: `src/regression_model_template/jobs/evaluations.py:50`
+
+```mermaid
+flowchart TD
+    evaluations --> mlflow
+    evaluations --> pandas
+    evaluations --> pydantic
+    evaluations --> regression_model_template_core
+    evaluations --> regression_model_template_io
+    evaluations --> regression_model_template_jobs
+    evaluations --> typing
+```

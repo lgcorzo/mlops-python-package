@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: datasets
 
+Source File: `src/regression_model_template/io/datasets.py`
 * **Source Directory Reference:** `src/regression_model_template/io/`
 * **Package Dependency:** Upstream: `pydantic`, `pandas`, `abc`, `typing`, `mlflow.data.pandas_dataset` | Downstream: None
 
@@ -19,23 +20,29 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Reader {
-        +read()
-        +lineage()
+        +KIND
+        +limit
+        +read() : Any
+        +lineage(name, data, targets, predictions) : Lineage
     }
     class ParquetReader {
-        +read()
-        +lineage()
+        +KIND
+        +path
+        +read() : Any
+        +lineage(name, data, targets, predictions) : Lineage
     }
-    Reader <|-- ParquetReader : Inheritance / Specialization
+    Reader <|-- ParquetReader
     class Writer {
-        +write()
+        +KIND
+        +write(data) : None
     }
     class ParquetWriter {
-        +write()
+        +KIND
+        +path
+        +write(data) : None
     }
-    Writer <|-- ParquetWriter : Inheritance / Specialization
+    Writer <|-- ParquetWriter
 ```
 
 ## 3. Package & Class Relations
@@ -44,20 +51,29 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace datasets {
-        class datasets_module
+    class Reader {
+        +KIND
+        +limit
+        +read() : Any
+        +lineage(name, data, targets, predictions) : Lineage
     }
-    class pydantic_module
-    datasets_module --> pydantic_module : imports
-    class pandas_module
-    datasets_module --> pandas_module : imports
-    class abc_module
-    datasets_module --> abc_module : imports
-    class typing_module
-    datasets_module --> typing_module : imports
-    class mlflow_data_pandas_dataset_module
-    datasets_module --> mlflow_data_pandas_dataset_module : imports
+    class ParquetReader {
+        +KIND
+        +path
+        +read() : Any
+        +lineage(name, data, targets, predictions) : Lineage
+    }
+    Reader <|-- ParquetReader
+    class Writer {
+        +KIND
+        +write(data) : None
+    }
+    class ParquetWriter {
+        +KIND
+        +path
+        +write(data) : None
+    }
+    Writer <|-- ParquetWriter
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -105,3 +121,12 @@ sequenceDiagram
   - Method `write`: `src/regression_model_template/io/datasets.py:105`
   - Class `ParquetWriter`: `src/regression_model_template/io/datasets.py:113`
   - Method `write`: `src/regression_model_template/io/datasets.py:124`
+
+```mermaid
+flowchart TD
+    datasets --> abc
+    datasets --> mlflow
+    datasets --> pandas
+    datasets --> pydantic
+    datasets --> typing
+```

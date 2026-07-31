@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: services
 
+Source File: `src/regression_model_template/io/services.py`
 * **Source Directory Reference:** `src/regression_model_template/io/`
 * **Package Dependency:** Upstream: `mlflow`, `opentelemetry.sdk.resources`, `contextlib`, `opentelemetry._logs`, `opentelemetry.sdk._logs.export`, `typing`, `mlflow.tracking`, `plyer`, `__future__`, `sys`, `opentelemetry.exporter.otlp.proto.http._log_exporter`, `pydantic`, `logging`, `loguru`, `opentelemetry.sdk.trace`, `opentelemetry`, `opentelemetry.exporter.otlp.proto.http.trace_exporter`, `opentelemetry.sdk.trace.export`, `abc`, `opentelemetry.sdk._logs`, `regression_model_template.io.osvariables` | Downstream: None
 
@@ -19,31 +20,58 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class PropagateHandler {
-        +emit()
+        +emit(record) : None
     }
     class Service {
-        +start()
-        +stop()
+        +start() : None
+        +stop() : None
     }
     class LoggerService {
-        +start()
-        +logger()
+        +sink
+        +level
+        +format
+        +colorize
+        +serialize
+        +backtrace
+        +diagnose
+        +catch
+        +start() : None
+        +logger() : Any
     }
-    Service <|-- LoggerService : Inheritance / Specialization
+    Service <|-- LoggerService
     class AlertsService {
-        +start()
-        +notify()
+        +enable
+        +app_name
+        +timeout
+        +start() : None
+        +notify(title, message) : None
     }
-    Service <|-- AlertsService : Inheritance / Specialization
+    Service <|-- AlertsService
     class MlflowService {
-        +start()
-        +run_context()
-        +client()
+        +env
+        +tracking_uri
+        +registry_uri
+        +experiment_name
+        +registry_name
+        +autolog_disable
+        +autolog_disable_for_unsupported_versions
+        +autolog_exclusive
+        +autolog_log_input_examples
+        +autolog_log_model_signatures
+        +autolog_log_models
+        +autolog_log_datasets
+        +autolog_silent
+        +start() : None
+        +run_context(run_config) : Any
+        +client() : Any
     }
-    Service <|-- MlflowService : Inheritance / Specialization
-    class RunConfig {
+    Service <|-- MlflowService
+    class MlflowService.RunConfig {
+        +name
+        +description
+        +tags
+        +log_system_metrics
     }
 ```
 
@@ -53,52 +81,59 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace services {
-        class services_module
+    class PropagateHandler {
+        +emit(record) : None
     }
-    class mlflow_module
-    services_module --> mlflow_module : imports
-    class opentelemetry_sdk_resources_module
-    services_module --> opentelemetry_sdk_resources_module : imports
-    class contextlib_module
-    services_module --> contextlib_module : imports
-    class opentelemetry__logs_module
-    services_module --> opentelemetry__logs_module : imports
-    class opentelemetry_sdk__logs_export_module
-    services_module --> opentelemetry_sdk__logs_export_module : imports
-    class typing_module
-    services_module --> typing_module : imports
-    class mlflow_tracking_module
-    services_module --> mlflow_tracking_module : imports
-    class plyer_module
-    services_module --> plyer_module : imports
-    class __future___module
-    services_module --> __future___module : imports
-    class sys_module
-    services_module --> sys_module : imports
-    class opentelemetry_exporter_otlp_proto_http__log_exporter_module
-    services_module --> opentelemetry_exporter_otlp_proto_http__log_exporter_module : imports
-    class pydantic_module
-    services_module --> pydantic_module : imports
-    class logging_module
-    services_module --> logging_module : imports
-    class loguru_module
-    services_module --> loguru_module : imports
-    class opentelemetry_sdk_trace_module
-    services_module --> opentelemetry_sdk_trace_module : imports
-    class opentelemetry_module
-    services_module --> opentelemetry_module : imports
-    class opentelemetry_exporter_otlp_proto_http_trace_exporter_module
-    services_module --> opentelemetry_exporter_otlp_proto_http_trace_exporter_module : imports
-    class opentelemetry_sdk_trace_export_module
-    services_module --> opentelemetry_sdk_trace_export_module : imports
-    class abc_module
-    services_module --> abc_module : imports
-    class opentelemetry_sdk__logs_module
-    services_module --> opentelemetry_sdk__logs_module : imports
-    class regression_model_template_io_osvariables_module
-    services_module --> regression_model_template_io_osvariables_module : imports
+    class Service {
+        +start() : None
+        +stop() : None
+    }
+    class LoggerService {
+        +sink
+        +level
+        +format
+        +colorize
+        +serialize
+        +backtrace
+        +diagnose
+        +catch
+        +start() : None
+        +logger() : Any
+    }
+    Service <|-- LoggerService
+    class AlertsService {
+        +enable
+        +app_name
+        +timeout
+        +start() : None
+        +notify(title, message) : None
+    }
+    Service <|-- AlertsService
+    class MlflowService {
+        +env
+        +tracking_uri
+        +registry_uri
+        +experiment_name
+        +registry_name
+        +autolog_disable
+        +autolog_disable_for_unsupported_versions
+        +autolog_exclusive
+        +autolog_log_input_examples
+        +autolog_log_model_signatures
+        +autolog_log_models
+        +autolog_log_datasets
+        +autolog_silent
+        +start() : None
+        +run_context(run_config) : Any
+        +client() : Any
+    }
+    Service <|-- MlflowService
+    class MlflowService.RunConfig {
+        +name
+        +description
+        +tags
+        +log_system_metrics
+    }
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -160,3 +195,27 @@ sequenceDiagram
   - Method `run_context`: `src/regression_model_template/io/services.py:229`
   - Method `client`: `src/regression_model_template/io/services.py:246`
   - Class `RunConfig`: `src/regression_model_template/io/services.py:180`
+
+```mermaid
+flowchart TD
+    services --> __future__
+    services --> abc
+    services --> contextlib
+    services --> logging
+    services --> loguru
+    services --> mlflow
+    services --> opentelemetry
+    services --> opentelemetry__logs
+    services --> opentelemetry_exporter_otlp_proto_http__log_exporter
+    services --> opentelemetry_exporter_otlp_proto_http_trace_exporter
+    services --> opentelemetry_sdk__logs
+    services --> opentelemetry_sdk__logs_export
+    services --> opentelemetry_sdk_resources
+    services --> opentelemetry_sdk_trace
+    services --> opentelemetry_sdk_trace_export
+    services --> plyer
+    services --> pydantic
+    services --> regression_model_template_io_osvariables
+    services --> sys
+    services --> typing
+```

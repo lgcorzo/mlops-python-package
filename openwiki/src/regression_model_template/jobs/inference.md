@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: inference
 
+Source File: `src/regression_model_template/jobs/inference.py`
 * **Source Directory Reference:** `src/regression_model_template/jobs/`
 * **Package Dependency:** Upstream: `pydantic`, `pandas`, `regression_model_template.io`, `typing`, `regression_model_template.core`, `regression_model_template.jobs` | Downstream: None
 
@@ -19,9 +20,13 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class InferenceJob {
-        +run()
+        +KIND
+        +inputs
+        +outputs
+        +alias_or_version
+        +loader
+        +run() : Any
     }
 ```
 
@@ -31,22 +36,14 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace inference {
-        class inference_module
+    class InferenceJob {
+        +KIND
+        +inputs
+        +outputs
+        +alias_or_version
+        +loader
+        +run() : Any
     }
-    class pydantic_module
-    inference_module --> pydantic_module : imports
-    class pandas_module
-    inference_module --> pandas_module : imports
-    class regression_model_template_io_module
-    inference_module --> regression_model_template_io_module : imports
-    class typing_module
-    inference_module --> typing_module : imports
-    class regression_model_template_core_module
-    inference_module --> regression_model_template_core_module : imports
-    class regression_model_template_jobs_module
-    inference_module --> regression_model_template_jobs_module : imports
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -73,3 +70,13 @@ sequenceDiagram
 * **Source Citations:**
   - Class `InferenceJob`: `src/regression_model_template/jobs/inference.py:17`
   - Method `run`: `src/regression_model_template/jobs/inference.py:38`
+
+```mermaid
+flowchart TD
+    inference --> pandas
+    inference --> pydantic
+    inference --> regression_model_template_core
+    inference --> regression_model_template_io
+    inference --> regression_model_template_jobs
+    inference --> typing
+```

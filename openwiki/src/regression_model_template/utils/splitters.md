@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: splitters
 
+Source File: `src/regression_model_template/utils/splitters.py`
 * **Source Directory Reference:** `src/regression_model_template/utils/`
 * **Package Dependency:** Upstream: `sklearn`, `pydantic`, `abc`, `numpy`, `typing`, `regression_model_template.core`, `numpy.typing` | Downstream: None
 
@@ -19,21 +20,29 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Splitter {
-        +split()
-        +get_n_splits()
+        +KIND
+        +split(inputs, targets, groups) : TrainTestSplits
+        +get_n_splits(inputs, targets, groups) : int
     }
     class TrainTestSplitter {
-        +split()
-        +get_n_splits()
+        +KIND
+        +shuffle
+        +test_size
+        +random_state
+        +split(inputs, targets, groups) : TrainTestSplits
+        +get_n_splits(inputs, targets, groups) : int
     }
-    Splitter <|-- TrainTestSplitter : Inheritance / Specialization
+    Splitter <|-- TrainTestSplitter
     class TimeSeriesSplitter {
-        +split()
-        +get_n_splits()
+        +KIND
+        +gap
+        +n_splits
+        +test_size
+        +split(inputs, targets, groups) : TrainTestSplits
+        +get_n_splits(inputs, targets, groups) : int
     }
-    Splitter <|-- TimeSeriesSplitter : Inheritance / Specialization
+    Splitter <|-- TimeSeriesSplitter
 ```
 
 ## 3. Package & Class Relations
@@ -42,24 +51,29 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace splitters {
-        class splitters_module
+    class Splitter {
+        +KIND
+        +split(inputs, targets, groups) : TrainTestSplits
+        +get_n_splits(inputs, targets, groups) : int
     }
-    class sklearn_module
-    splitters_module --> sklearn_module : imports
-    class pydantic_module
-    splitters_module --> pydantic_module : imports
-    class abc_module
-    splitters_module --> abc_module : imports
-    class numpy_module
-    splitters_module --> numpy_module : imports
-    class typing_module
-    splitters_module --> typing_module : imports
-    class regression_model_template_core_module
-    splitters_module --> regression_model_template_core_module : imports
-    class numpy_typing_module
-    splitters_module --> numpy_typing_module : imports
+    class TrainTestSplitter {
+        +KIND
+        +shuffle
+        +test_size
+        +random_state
+        +split(inputs, targets, groups) : TrainTestSplits
+        +get_n_splits(inputs, targets, groups) : int
+    }
+    Splitter <|-- TrainTestSplitter
+    class TimeSeriesSplitter {
+        +KIND
+        +gap
+        +n_splits
+        +test_size
+        +split(inputs, targets, groups) : TrainTestSplits
+        +get_n_splits(inputs, targets, groups) : int
+    }
+    Splitter <|-- TimeSeriesSplitter
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -103,3 +117,13 @@ sequenceDiagram
   - Class `TimeSeriesSplitter`: `src/regression_model_template/utils/splitters.py:88`
   - Method `split`: `src/regression_model_template/utils/splitters.py:103`
   - Method `get_n_splits`: `src/regression_model_template/utils/splitters.py:107`
+
+```mermaid
+flowchart TD
+    splitters --> abc
+    splitters --> numpy
+    splitters --> pydantic
+    splitters --> regression_model_template_core
+    splitters --> sklearn
+    splitters --> typing
+```

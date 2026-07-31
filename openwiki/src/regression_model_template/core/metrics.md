@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: metrics
 
+Source File: `src/regression_model_template/core/metrics.py`
 * **Source Directory Reference:** `src/regression_model_template/core/`
 * **Package Dependency:** Upstream: `sklearn`, `pydantic`, `mlflow`, `__future__`, `abc`, `pandas`, `mlflow.metrics`, `typing`, `regression_model_template.core` | Downstream: None
 
@@ -19,18 +20,25 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Metric {
-        +score()
-        +scorer()
-        +to_mlflow()
+        +KIND
+        +name
+        +greater_is_better
+        +score(targets, outputs) : float
+        +scorer(model, inputs, targets) : float
+        +to_mlflow() : MlflowMetric
     }
     class SklearnMetric {
-        +score()
+        +KIND
+        +name
+        +greater_is_better
+        +score(targets, outputs) : float
     }
-    Metric <|-- SklearnMetric : Inheritance / Specialization
+    Metric <|-- SklearnMetric
     class Threshold {
-        +to_mlflow()
+        +threshold
+        +greater_is_better
+        +to_mlflow() : MlflowThreshold
     }
 ```
 
@@ -40,28 +48,26 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace metrics {
-        class metrics_module
+    class Metric {
+        +KIND
+        +name
+        +greater_is_better
+        +score(targets, outputs) : float
+        +scorer(model, inputs, targets) : float
+        +to_mlflow() : MlflowMetric
     }
-    class sklearn_module
-    metrics_module --> sklearn_module : imports
-    class pydantic_module
-    metrics_module --> pydantic_module : imports
-    class mlflow_module
-    metrics_module --> mlflow_module : imports
-    class __future___module
-    metrics_module --> __future___module : imports
-    class abc_module
-    metrics_module --> abc_module : imports
-    class pandas_module
-    metrics_module --> pandas_module : imports
-    class mlflow_metrics_module
-    metrics_module --> mlflow_metrics_module : imports
-    class typing_module
-    metrics_module --> typing_module : imports
-    class regression_model_template_core_module
-    metrics_module --> regression_model_template_core_module : imports
+    class SklearnMetric {
+        +KIND
+        +name
+        +greater_is_better
+        +score(targets, outputs) : float
+    }
+    Metric <|-- SklearnMetric
+    class Threshold {
+        +threshold
+        +greater_is_better
+        +to_mlflow() : MlflowThreshold
+    }
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -103,3 +109,16 @@ sequenceDiagram
   - Method `score`: `src/regression_model_template/core/metrics.py:111`
   - Class `Threshold`: `src/regression_model_template/core/metrics.py:126`
   - Method `to_mlflow`: `src/regression_model_template/core/metrics.py:140`
+
+```mermaid
+flowchart TD
+    metrics --> __future__
+    metrics --> abc
+    metrics --> mlflow
+    metrics --> mlflow_metrics
+    metrics --> pandas
+    metrics --> pydantic
+    metrics --> regression_model_template_core
+    metrics --> sklearn
+    metrics --> typing
+```

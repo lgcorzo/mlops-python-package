@@ -1,3 +1,4 @@
+import mlflow
 import os
 from confluent_kafka import Producer
 

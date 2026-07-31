@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: settings
 
+Source File: `src/regression_model_template/settings.py`
 * **Source Directory Reference:** `src/regression_model_template/`
 * **Package Dependency:** Upstream: `pydantic_settings`, `pydantic`, `regression_model_template` | Downstream: None
 
@@ -19,12 +20,12 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Settings {
     }
     class MainSettings {
+        +job
     }
-    Settings <|-- MainSettings : Inheritance / Specialization
+    Settings <|-- MainSettings
 ```
 
 ## 3. Package & Class Relations
@@ -33,16 +34,12 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace settings {
-        class settings_module
+    class Settings {
     }
-    class pydantic_settings_module
-    settings_module --> pydantic_settings_module : imports
-    class pydantic_module
-    settings_module --> pydantic_module : imports
-    class regression_model_template_module
-    settings_module --> regression_model_template_module : imports
+    class MainSettings {
+        +job
+    }
+    Settings <|-- MainSettings
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -67,3 +64,10 @@ sequenceDiagram
 * **Source Citations:**
   - Class `Settings`: `src/regression_model_template/settings.py:13`
   - Class `MainSettings`: `src/regression_model_template/settings.py:21`
+
+```mermaid
+flowchart TD
+    settings --> pydantic
+    settings --> pydantic_settings
+    settings --> regression_model_template
+```

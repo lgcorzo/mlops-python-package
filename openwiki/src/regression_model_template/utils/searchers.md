@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: searchers
 
+Source File: `src/regression_model_template/utils/searchers.py`
 * **Source Directory Reference:** `src/regression_model_template/utils/`
 * **Package Dependency:** Upstream: `sklearn`, `pydantic`, `pandas`, `abc`, `regression_model_template.utils`, `typing`, `regression_model_template.core` | Downstream: None
 
@@ -19,14 +20,21 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Searcher {
-        +search()
+        +KIND
+        +param_grid
+        +search(model, metric, inputs, targets, cv) : Results
     }
     class GridCVSearcher {
-        +search()
+        +KIND
+        +n_jobs
+        +refit
+        +verbose
+        +error_score
+        +return_train_score
+        +search(model, metric, inputs, targets, cv) : Results
     }
-    Searcher <|-- GridCVSearcher : Inheritance / Specialization
+    Searcher <|-- GridCVSearcher
 ```
 
 ## 3. Package & Class Relations
@@ -35,24 +43,21 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace searchers {
-        class searchers_module
+    class Searcher {
+        +KIND
+        +param_grid
+        +search(model, metric, inputs, targets, cv) : Results
     }
-    class sklearn_module
-    searchers_module --> sklearn_module : imports
-    class pydantic_module
-    searchers_module --> pydantic_module : imports
-    class pandas_module
-    searchers_module --> pandas_module : imports
-    class abc_module
-    searchers_module --> abc_module : imports
-    class regression_model_template_utils_module
-    searchers_module --> regression_model_template_utils_module : imports
-    class typing_module
-    searchers_module --> typing_module : imports
-    class regression_model_template_core_module
-    searchers_module --> regression_model_template_core_module : imports
+    class GridCVSearcher {
+        +KIND
+        +n_jobs
+        +refit
+        +verbose
+        +error_score
+        +return_train_score
+        +search(model, metric, inputs, targets, cv) : Results
+    }
+    Searcher <|-- GridCVSearcher
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -85,3 +90,14 @@ sequenceDiagram
   - Method `search`: `src/regression_model_template/utils/searchers.py:49`
   - Class `GridCVSearcher`: `src/regression_model_template/utils/searchers.py:71`
   - Method `search`: `src/regression_model_template/utils/searchers.py:92`
+
+```mermaid
+flowchart TD
+    searchers --> abc
+    searchers --> pandas
+    searchers --> pydantic
+    searchers --> regression_model_template_core
+    searchers --> regression_model_template_utils
+    searchers --> sklearn
+    searchers --> typing
+```

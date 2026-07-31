@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: registries
 
+Source File: `src/regression_model_template/io/registries.py`
 * **Source Directory Reference:** `src/regression_model_template/io/`
 * **Package Dependency:** Upstream: `pydantic`, `mlflow`, `regression_model_template.utils`, `abc`, `typing`, `regression_model_template.core` | Downstream: None
 
@@ -19,51 +20,61 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Saver {
-        +save()
+        +KIND
+        +path
+        +save(model, signature, input_example) : Info
     }
     class CustomSaver {
-        +save()
+        +KIND
+        +save(model, signature, input_example) : Info
     }
-    Saver <|-- CustomSaver : Inheritance / Specialization
+    Saver <|-- CustomSaver
+    class CustomSaver.Adapter {
+        -__init__(model)
+        +predict(context, model_input, params) : Any
+    }
     class BuiltinSaver {
-        +save()
+        +KIND
+        +flavor
+        +save(model, signature, input_example) : Info
     }
-    Saver <|-- BuiltinSaver : Inheritance / Specialization
+    Saver <|-- BuiltinSaver
     class Loader {
-        +load()
+        +KIND
+        +load(uri) : Any
+    }
+    class Loader.Adapter {
+        +predict(inputs) : Any
     }
     class CustomLoader {
-        +load()
+        +KIND
+        +load(uri) : Any
     }
-    Loader <|-- CustomLoader : Inheritance / Specialization
+    Loader <|-- CustomLoader
+    class CustomLoader.Adapter {
+        -__init__(model) : None
+        +predict(inputs) : Any
+    }
     class BuiltinLoader {
-        +load()
+        +KIND
+        +load(uri) : Any
     }
-    Loader <|-- BuiltinLoader : Inheritance / Specialization
+    Loader <|-- BuiltinLoader
+    class BuiltinLoader.Adapter {
+        -__init__(model) : None
+        +predict(inputs) : Any
+    }
     class Register {
-        +register()
+        +KIND
+        +tags
+        +register(name, model_uri) : Version
     }
     class MlflowRegister {
-        +register()
+        +KIND
+        +register(name, model_uri) : Version
     }
-    Register <|-- MlflowRegister : Inheritance / Specialization
-    class Adapter {
-        +__init__()
-        +predict()
-    }
-    class Adapter {
-        +predict()
-    }
-    class Adapter {
-        +__init__()
-        +predict()
-    }
-    class Adapter {
-        +__init__()
-        +predict()
-    }
+    Register <|-- MlflowRegister
 ```
 
 ## 3. Package & Class Relations
@@ -72,22 +83,61 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace registries {
-        class registries_module
+    class Saver {
+        +KIND
+        +path
+        +save(model, signature, input_example) : Info
     }
-    class pydantic_module
-    registries_module --> pydantic_module : imports
-    class mlflow_module
-    registries_module --> mlflow_module : imports
-    class regression_model_template_utils_module
-    registries_module --> regression_model_template_utils_module : imports
-    class abc_module
-    registries_module --> abc_module : imports
-    class typing_module
-    registries_module --> typing_module : imports
-    class regression_model_template_core_module
-    registries_module --> regression_model_template_core_module : imports
+    class CustomSaver {
+        +KIND
+        +save(model, signature, input_example) : Info
+    }
+    Saver <|-- CustomSaver
+    class CustomSaver.Adapter {
+        -__init__(model)
+        +predict(context, model_input, params) : Any
+    }
+    class BuiltinSaver {
+        +KIND
+        +flavor
+        +save(model, signature, input_example) : Info
+    }
+    Saver <|-- BuiltinSaver
+    class Loader {
+        +KIND
+        +load(uri) : Any
+    }
+    class Loader.Adapter {
+        +predict(inputs) : Any
+    }
+    class CustomLoader {
+        +KIND
+        +load(uri) : Any
+    }
+    Loader <|-- CustomLoader
+    class CustomLoader.Adapter {
+        -__init__(model) : None
+        +predict(inputs) : Any
+    }
+    class BuiltinLoader {
+        +KIND
+        +load(uri) : Any
+    }
+    Loader <|-- BuiltinLoader
+    class BuiltinLoader.Adapter {
+        -__init__(model) : None
+        +predict(inputs) : Any
+    }
+    class Register {
+        +KIND
+        +tags
+        +register(name, model_uri) : Version
+    }
+    class MlflowRegister {
+        +KIND
+        +register(name, model_uri) : Version
+    }
+    Register <|-- MlflowRegister
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -190,3 +240,13 @@ sequenceDiagram
   - Class `Adapter`: `src/regression_model_template/io/registries.py:254`
   - Method `__init__`: `src/regression_model_template/io/registries.py:257`
   - Method `predict`: `src/regression_model_template/io/registries.py:265`
+
+```mermaid
+flowchart TD
+    registries --> abc
+    registries --> mlflow
+    registries --> pydantic
+    registries --> regression_model_template_core
+    registries --> regression_model_template_utils
+    registries --> typing
+```

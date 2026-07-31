@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: configs
 
+Source File: `src/regression_model_template/io/configs.py`
 * **Source Directory Reference:** `src/regression_model_template/io/`
 * **Package Dependency:** Upstream: `typing`, `omegaconf` | Downstream: None
 
@@ -61,3 +62,9 @@ sequenceDiagram
 
 * **Source Citations:**
   - Module: `src/regression_model_template/io/configs.py`
+
+```mermaid
+flowchart TD
+    configs --> omegaconf
+    configs --> typing
+```

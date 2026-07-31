@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: schemas
 
+Source File: `src/regression_model_template/core/schemas.py`
 * **Source Directory Reference:** `src/regression_model_template/core/`
 * **Package Dependency:** Upstream: `pandera.typing`, `pandas`, `pandera.typing.common`, `pandera`, `typing` | Downstream: None
 
@@ -19,29 +20,54 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Schema {
-        +check()
+        +check(cls, data) : Any
+    }
+    class Schema.Config {
+        +coerce
+        +strict
     }
     class InputsSchema {
+        +instant
+        +dteday
+        +season
+        +yr
+        +mnth
+        +hr
+        +holiday
+        +weekday
+        +workingday
+        +weathersit
+        +temp
+        +atemp
+        +hum
+        +windspeed
+        +casual
+        +registered
     }
-    Schema <|-- InputsSchema : Inheritance / Specialization
+    Schema <|-- InputsSchema
     class TargetsSchema {
+        +instant
+        +cnt
     }
-    Schema <|-- TargetsSchema : Inheritance / Specialization
+    Schema <|-- TargetsSchema
     class OutputsSchema {
+        +instant
+        +prediction
     }
-    Schema <|-- OutputsSchema : Inheritance / Specialization
+    Schema <|-- OutputsSchema
     class SHAPValuesSchema {
     }
-    Schema <|-- SHAPValuesSchema : Inheritance / Specialization
+    Schema <|-- SHAPValuesSchema
+    class SHAPValuesSchema.Config {
+        +dtype
+        +strict
+    }
     class FeatureImportancesSchema {
+        +feature
+        +importance
     }
-    Schema <|-- FeatureImportancesSchema : Inheritance / Specialization
-    class Config {
-    }
-    class Config {
-    }
+    Schema <|-- FeatureImportancesSchema
 ```
 
 ## 3. Package & Class Relations
@@ -50,20 +76,54 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace schemas {
-        class schemas_module
+    class Schema {
+        +check(cls, data) : Any
     }
-    class pandera_typing_module
-    schemas_module --> pandera_typing_module : imports
-    class pandas_module
-    schemas_module --> pandas_module : imports
-    class pandera_typing_common_module
-    schemas_module --> pandera_typing_common_module : imports
-    class pandera_module
-    schemas_module --> pandera_module : imports
-    class typing_module
-    schemas_module --> typing_module : imports
+    class Schema.Config {
+        +coerce
+        +strict
+    }
+    class InputsSchema {
+        +instant
+        +dteday
+        +season
+        +yr
+        +mnth
+        +hr
+        +holiday
+        +weekday
+        +workingday
+        +weathersit
+        +temp
+        +atemp
+        +hum
+        +windspeed
+        +casual
+        +registered
+    }
+    Schema <|-- InputsSchema
+    class TargetsSchema {
+        +instant
+        +cnt
+    }
+    Schema <|-- TargetsSchema
+    class OutputsSchema {
+        +instant
+        +prediction
+    }
+    Schema <|-- OutputsSchema
+    class SHAPValuesSchema {
+    }
+    Schema <|-- SHAPValuesSchema
+    class SHAPValuesSchema.Config {
+        +dtype
+        +strict
+    }
+    class FeatureImportancesSchema {
+        +feature
+        +importance
+    }
+    Schema <|-- FeatureImportancesSchema
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -104,3 +164,10 @@ sequenceDiagram
   - Class `FeatureImportancesSchema`: `src/regression_model_template/core/schemas.py:113`
   - Class `Config`: `src/regression_model_template/core/schemas.py:27`
   - Class `Config`: `src/regression_model_template/core/schemas.py:98`
+
+```mermaid
+flowchart TD
+    schemas --> pandas
+    schemas --> pandera
+    schemas --> typing
+```

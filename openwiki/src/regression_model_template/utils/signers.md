@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: signers
 
+Source File: `src/regression_model_template/utils/signers.py`
 * **Source Directory Reference:** `src/regression_model_template/utils/`
 * **Package Dependency:** Upstream: `pydantic`, `mlflow`, `abc`, `mlflow.models`, `typing`, `regression_model_template.core` | Downstream: None
 
@@ -19,14 +20,15 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Signer {
-        +sign()
+        +KIND
+        +sign(inputs, outputs) : Signature
     }
     class InferSigner {
-        +sign()
+        +KIND
+        +sign(inputs, outputs) : Signature
     }
-    Signer <|-- InferSigner : Inheritance / Specialization
+    Signer <|-- InferSigner
 ```
 
 ## 3. Package & Class Relations
@@ -35,22 +37,15 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace signers {
-        class signers_module
+    class Signer {
+        +KIND
+        +sign(inputs, outputs) : Signature
     }
-    class pydantic_module
-    signers_module --> pydantic_module : imports
-    class mlflow_module
-    signers_module --> mlflow_module : imports
-    class abc_module
-    signers_module --> abc_module : imports
-    class mlflow_models_module
-    signers_module --> mlflow_models_module : imports
-    class typing_module
-    signers_module --> typing_module : imports
-    class regression_model_template_core_module
-    signers_module --> regression_model_template_core_module : imports
+    class InferSigner {
+        +KIND
+        +sign(inputs, outputs) : Signature
+    }
+    Signer <|-- InferSigner
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -82,3 +77,13 @@ sequenceDiagram
   - Method `sign`: `src/regression_model_template/utils/signers.py:33`
   - Class `InferSigner`: `src/regression_model_template/utils/signers.py:45`
   - Method `sign`: `src/regression_model_template/utils/signers.py:50`
+
+```mermaid
+flowchart TD
+    signers --> abc
+    signers --> mlflow
+    signers --> mlflow_models
+    signers --> pydantic
+    signers --> regression_model_template_core
+    signers --> typing
+```

@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: __init__
 
+Source File: `src/regression_model_template/jobs/__init__.py`
 * **Source Directory Reference:** `src/regression_model_template/jobs/`
 * **Package Dependency:** Upstream: `regression_model_template.jobs.tuning`, `regression_model_template.jobs.explanations`, `regression_model_template.jobs.promotion`, `regression_model_template.jobs.inference`, `regression_model_template.jobs.evaluations`, `regression_model_template.jobs.training` | Downstream: None
 
@@ -69,3 +70,13 @@ sequenceDiagram
 
 * **Source Citations:**
   - Module: `src/regression_model_template/jobs/__init__.py`
+
+```mermaid
+flowchart TD
+    jobs_init --> regression_model_template_jobs_evaluations
+    jobs_init --> regression_model_template_jobs_explanations
+    jobs_init --> regression_model_template_jobs_inference
+    jobs_init --> regression_model_template_jobs_promotion
+    jobs_init --> regression_model_template_jobs_training
+    jobs_init --> regression_model_template_jobs_tuning
+```

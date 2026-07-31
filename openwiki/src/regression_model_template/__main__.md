@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: __main__
 
+Source File: `src/regression_model_template/__main__.py`
 * **Source Directory Reference:** `src/regression_model_template/`
 * **Package Dependency:** Upstream: `regression_model_template` | Downstream: None
 
@@ -59,3 +60,8 @@ sequenceDiagram
 
 * **Source Citations:**
   - Module: `src/regression_model_template/__main__.py`
+
+```mermaid
+flowchart TD
+    __main__ --> regression_model_template
+```

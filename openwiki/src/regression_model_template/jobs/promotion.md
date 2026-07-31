@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: promotion
 
+Source File: `src/regression_model_template/jobs/promotion.py`
 * **Source Directory Reference:** `src/regression_model_template/jobs/`
 * **Package Dependency:** Upstream: `typing`, `regression_model_template.jobs` | Downstream: None
 
@@ -19,9 +20,11 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class PromotionJob {
-        +run()
+        +KIND
+        +alias
+        +version
+        +run() : Any
     }
 ```
 
@@ -31,14 +34,12 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace promotion {
-        class promotion_module
+    class PromotionJob {
+        +KIND
+        +alias
+        +version
+        +run() : Any
     }
-    class typing_module
-    promotion_module --> typing_module : imports
-    class regression_model_template_jobs_module
-    promotion_module --> regression_model_template_jobs_module : imports
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -65,3 +66,9 @@ sequenceDiagram
 * **Source Citations:**
   - Class `PromotionJob`: `src/regression_model_template/jobs/promotion.py:12`
   - Method `run`: `src/regression_model_template/jobs/promotion.py:27`
+
+```mermaid
+flowchart TD
+    promotion --> regression_model_template_jobs
+    promotion --> typing
+```

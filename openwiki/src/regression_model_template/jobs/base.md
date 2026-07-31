@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: base
 
+Source File: `src/regression_model_template/jobs/base.py`
 * **Source Directory Reference:** `src/regression_model_template/jobs/`
 * **Package Dependency:** Upstream: `pydantic`, `regression_model_template.io`, `abc`, `types`, `typing` | Downstream: None
 
@@ -19,11 +20,14 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Job {
-        +__enter__()
-        +__exit__()
-        +run()
+        +KIND
+        +logger_service
+        +alerts_service
+        +mlflow_service
+        -__enter__() : Any
+        -__exit__(exc_type, exc_value, exc_traceback) : Any
+        +run() : Locals
     }
 ```
 
@@ -33,20 +37,15 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace base {
-        class base_module
+    class Job {
+        +KIND
+        +logger_service
+        +alerts_service
+        +mlflow_service
+        -__enter__() : Any
+        -__exit__(exc_type, exc_value, exc_traceback) : Any
+        +run() : Locals
     }
-    class pydantic_module
-    base_module --> pydantic_module : imports
-    class regression_model_template_io_module
-    base_module --> regression_model_template_io_module : imports
-    class abc_module
-    base_module --> abc_module : imports
-    class types_module
-    base_module --> types_module : imports
-    class typing_module
-    base_module --> typing_module : imports
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -75,3 +74,12 @@ sequenceDiagram
   - Method `__enter__`: `src/regression_model_template/jobs/base.py:39`
   - Method `__exit__`: `src/regression_model_template/jobs/base.py:54`
   - Method `run`: `src/regression_model_template/jobs/base.py:80`
+
+```mermaid
+flowchart TD
+    base --> abc
+    base --> pydantic
+    base --> regression_model_template_io
+    base --> types
+    base --> typing
+```

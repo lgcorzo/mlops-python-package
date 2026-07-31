@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: explanations
 
+Source File: `src/regression_model_template/jobs/explanations.py`
 * **Source Directory Reference:** `src/regression_model_template/jobs/`
 * **Package Dependency:** Upstream: `pydantic`, `regression_model_template.io`, `typing`, `regression_model_template.core`, `regression_model_template.jobs` | Downstream: None
 
@@ -19,9 +20,14 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class ExplanationsJob {
-        +run()
+        +KIND
+        +inputs_samples
+        +models_explanations
+        +samples_explanations
+        +alias_or_version
+        +loader
+        +run() : Any
     }
 ```
 
@@ -31,20 +37,15 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace explanations {
-        class explanations_module
+    class ExplanationsJob {
+        +KIND
+        +inputs_samples
+        +models_explanations
+        +samples_explanations
+        +alias_or_version
+        +loader
+        +run() : Any
     }
-    class pydantic_module
-    explanations_module --> pydantic_module : imports
-    class regression_model_template_io_module
-    explanations_module --> regression_model_template_io_module : imports
-    class typing_module
-    explanations_module --> typing_module : imports
-    class regression_model_template_core_module
-    explanations_module --> regression_model_template_core_module : imports
-    class regression_model_template_jobs_module
-    explanations_module --> regression_model_template_jobs_module : imports
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -71,3 +72,12 @@ sequenceDiagram
 * **Source Citations:**
   - Class `ExplanationsJob`: `src/regression_model_template/jobs/explanations.py:16`
   - Method `run`: `src/regression_model_template/jobs/explanations.py:39`
+
+```mermaid
+flowchart TD
+    explanations --> pydantic
+    explanations --> regression_model_template_core
+    explanations --> regression_model_template_io
+    explanations --> regression_model_template_jobs
+    explanations --> typing
+```

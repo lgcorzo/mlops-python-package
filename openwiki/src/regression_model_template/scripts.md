@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: scripts
 
+Source File: `src/regression_model_template/scripts.py`
 * **Source Directory Reference:** `src/regression_model_template/`
 * **Package Dependency:** Upstream: `argparse`, `regression_model_template.io`, `warnings`, `regression_model_template`, `sys`, `json` | Downstream: None
 
@@ -69,3 +70,13 @@ sequenceDiagram
 
 * **Source Citations:**
   - Module: `src/regression_model_template/scripts.py`
+
+```mermaid
+flowchart TD
+    scripts --> argparse
+    scripts --> json
+    scripts --> regression_model_template
+    scripts --> regression_model_template_io
+    scripts --> sys
+    scripts --> warnings
+```

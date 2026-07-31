@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: osvariables
 
+Source File: `src/regression_model_template/io/osvariables.py`
 * **Source Directory Reference:** `src/regression_model_template/io/`
 * **Package Dependency:** Upstream: `pydantic_settings`, `typing` | Downstream: None
 
@@ -19,16 +20,24 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Singleton {
-        +__new__()
+        #_instances
+        -__new__(cls) : Any
     }
-    object <|-- Singleton : Inheritance / Specialization
+    object <|-- Singleton
     class Env {
+        +mlflow_tracking_uri
+        +mlflow_registry_uri
+        +mlflow_experiment_name
+        +mlflow_registered_model_name
     }
-    Singleton <|-- Env : Inheritance / Specialization
-    BaseSettings <|-- Env : Inheritance / Specialization
-    class Config {
+    Singleton <|-- Env
+    BaseSettings <|-- Env
+    class Env.Config {
+        +case_sensitive
+        +env_file
+        +env_file_encoding
+        +extra
     }
 ```
 
@@ -38,14 +47,25 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace osvariables {
-        class osvariables_module
+    class Singleton {
+        #_instances
+        -__new__(cls) : Any
     }
-    class pydantic_settings_module
-    osvariables_module --> pydantic_settings_module : imports
-    class typing_module
-    osvariables_module --> typing_module : imports
+    object <|-- Singleton
+    class Env {
+        +mlflow_tracking_uri
+        +mlflow_registry_uri
+        +mlflow_experiment_name
+        +mlflow_registered_model_name
+    }
+    Singleton <|-- Env
+    BaseSettings <|-- Env
+    class Env.Config {
+        +case_sensitive
+        +env_file
+        +env_file_encoding
+        +extra
+    }
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -76,3 +96,9 @@ sequenceDiagram
   - Method `__new__`: `src/regression_model_template/io/osvariables.py:10`
   - Class `Env`: `src/regression_model_template/io/osvariables.py:16`
   - Class `Config`: `src/regression_model_template/io/osvariables.py:22`
+
+```mermaid
+flowchart TD
+    osvariables --> pydantic_settings
+    osvariables --> typing
+```

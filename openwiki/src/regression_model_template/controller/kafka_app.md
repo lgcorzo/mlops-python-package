@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: kafka_app
 
+Source File: `src/regression_model_template/controller/kafka_app.py`
 * **Source Directory Reference:** `src/regression_model_template/controller/`
 * **Package Dependency:** Upstream: `typing`, `json`, `regression_model_template.io.registries`, `threading`, `confluent_kafka.admin`, `pandas`, `confluent_kafka`, `pydantic`, `logging`, `regression_model_template.io`, `uvicorn`, `time`, `fastapi.concurrency`, `fastapi`, `regression_model_template.core.schemas`, `uvicorn.middleware.proxy_headers`, `fastapi.middleware.cors`, `fastapi.middleware.trustedhost`, `collections`, `os` | Downstream: None
 
@@ -19,37 +20,38 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class RateLimiter {
-        +__init__()
-        +is_allowed()
+        -__init__(max_requests, window_seconds, max_tracked_ips)
+        +is_allowed(ip) : bool
     }
     class PredictionRequest {
-        +validate_schema()
-        +check_input_size()
+        +input_data
+        +validate_schema() : Any
+        +check_input_size(cls, v) : Dict
     }
-    BaseModel <|-- PredictionRequest : Inheritance / Specialization
+    BaseModel <|-- PredictionRequest
     class PredictionResponse {
+        +result
     }
-    BaseModel <|-- PredictionResponse : Inheritance / Specialization
+    BaseModel <|-- PredictionResponse
     class FastAPIKafkaService {
-        +__init__()
-        +delivery_report()
-        +start()
-        +_initialize_kafka_producer()
-        +_initialize_kafka_consumer()
-        +_ensure_topics_exist()
-        +_run_server()
-        +_consume_messages()
-        +_poll_message()
-        +_handle_message_error()
-        +_process_message()
-        +_close_consumer()
-        +stop()
+        -__init__(prediction_callback, kafka_config, input_topic, output_topic)
+        +delivery_report(err, msg) : None
+        +start() : None
+        #_initialize_kafka_producer() : None
+        #_initialize_kafka_consumer() : None
+        #_ensure_topics_exist() : None
+        #_run_server() : None
+        #_consume_messages() : None
+        #_poll_message() : Any
+        #_handle_message_error(msg) : bool
+        #_process_message(msg) : None
+        #_close_consumer() : None
+        +stop() : None
     }
     class PredictionService {
-        +__init__()
-        +predict()
+        -__init__(model)
+        +predict(input_data) : PredictionResponse
     }
 ```
 
@@ -59,50 +61,39 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace kafka_app {
-        class kafka_app_module
+    class RateLimiter {
+        -__init__(max_requests, window_seconds, max_tracked_ips)
+        +is_allowed(ip) : bool
     }
-    class typing_module
-    kafka_app_module --> typing_module : imports
-    class json_module
-    kafka_app_module --> json_module : imports
-    class regression_model_template_io_registries_module
-    kafka_app_module --> regression_model_template_io_registries_module : imports
-    class threading_module
-    kafka_app_module --> threading_module : imports
-    class confluent_kafka_admin_module
-    kafka_app_module --> confluent_kafka_admin_module : imports
-    class pandas_module
-    kafka_app_module --> pandas_module : imports
-    class confluent_kafka_module
-    kafka_app_module --> confluent_kafka_module : imports
-    class pydantic_module
-    kafka_app_module --> pydantic_module : imports
-    class logging_module
-    kafka_app_module --> logging_module : imports
-    class regression_model_template_io_module
-    kafka_app_module --> regression_model_template_io_module : imports
-    class uvicorn_module
-    kafka_app_module --> uvicorn_module : imports
-    class time_module
-    kafka_app_module --> time_module : imports
-    class fastapi_concurrency_module
-    kafka_app_module --> fastapi_concurrency_module : imports
-    class fastapi_module
-    kafka_app_module --> fastapi_module : imports
-    class regression_model_template_core_schemas_module
-    kafka_app_module --> regression_model_template_core_schemas_module : imports
-    class uvicorn_middleware_proxy_headers_module
-    kafka_app_module --> uvicorn_middleware_proxy_headers_module : imports
-    class fastapi_middleware_cors_module
-    kafka_app_module --> fastapi_middleware_cors_module : imports
-    class fastapi_middleware_trustedhost_module
-    kafka_app_module --> fastapi_middleware_trustedhost_module : imports
-    class collections_module
-    kafka_app_module --> collections_module : imports
-    class os_module
-    kafka_app_module --> os_module : imports
+    class PredictionRequest {
+        +input_data
+        +validate_schema() : Any
+        +check_input_size(cls, v) : Dict
+    }
+    BaseModel <|-- PredictionRequest
+    class PredictionResponse {
+        +result
+    }
+    BaseModel <|-- PredictionResponse
+    class FastAPIKafkaService {
+        -__init__(prediction_callback, kafka_config, input_topic, output_topic)
+        +delivery_report(err, msg) : None
+        +start() : None
+        #_initialize_kafka_producer() : None
+        #_initialize_kafka_consumer() : None
+        #_ensure_topics_exist() : None
+        #_run_server() : None
+        #_consume_messages() : None
+        #_poll_message() : Any
+        #_handle_message_error(msg) : bool
+        #_process_message(msg) : None
+        #_close_consumer() : None
+        +stop() : None
+    }
+    class PredictionService {
+        -__init__(model)
+        +predict(input_data) : PredictionResponse
+    }
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -166,3 +157,27 @@ sequenceDiagram
   - Class `PredictionService`: `src/regression_model_template/controller/kafka_app.py:442`
   - Method `__init__`: `src/regression_model_template/controller/kafka_app.py:445`
   - Method `predict`: `src/regression_model_template/controller/kafka_app.py:448`
+
+```mermaid
+flowchart TD
+    kafka_app --> collections
+    kafka_app --> confluent_kafka
+    kafka_app --> confluent_kafka_admin
+    kafka_app --> fastapi
+    kafka_app --> fastapi_concurrency
+    kafka_app --> fastapi_middleware_cors
+    kafka_app --> fastapi_middleware_trustedhost
+    kafka_app --> json
+    kafka_app --> logging
+    kafka_app --> os
+    kafka_app --> pandas
+    kafka_app --> pydantic
+    kafka_app --> regression_model_template_core_schemas
+    kafka_app --> regression_model_template_io
+    kafka_app --> regression_model_template_io_registries
+    kafka_app --> threading
+    kafka_app --> time
+    kafka_app --> typing
+    kafka_app --> uvicorn
+    kafka_app --> uvicorn_middleware_proxy_headers
+```

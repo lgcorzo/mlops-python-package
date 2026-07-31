@@ -8,6 +8,7 @@ timestamp: "2026-07-30T19:10:46Z"
 
 # Module Name: models
 
+Source File: `src/regression_model_template/core/models.py`
 * **Source Directory Reference:** `src/regression_model_template/core/`
 * **Package Dependency:** Upstream: `sklearn`, `pydantic`, `abc`, `shap`, `typing`, `regression_model_template.core`, `sklearn.base` | Downstream: None
 
@@ -19,25 +20,32 @@ The following class diagram models the object-oriented structure, explicit inher
 
 ```mermaid
 classDiagram
-    direction BT
     class Model {
-        +get_params()
-        +set_params()
-        +__sklearn_tags__()
-        +fit()
-        +predict()
-        +explain_model()
-        +explain_samples()
-        +get_internal_model()
+        +KIND
+        +get_params(deep) : Params
+        +set_params() : Any
+        -__sklearn_tags__() : Any
+        +fit(inputs, targets) : Any
+        +predict(inputs) : Any
+        +explain_model() : Any
+        +explain_samples(inputs) : Any
+        +get_internal_model() : Any
     }
     class BaselineSklearnModel {
-        +fit()
-        +predict()
-        +explain_model()
-        +explain_samples()
-        +get_internal_model()
+        +KIND
+        +max_depth
+        +n_estimators
+        +random_state
+        #_pipeline
+        #_numericals
+        #_categoricals
+        +fit(inputs, targets) : Any
+        +predict(inputs) : Any
+        +explain_model() : Any
+        +explain_samples(inputs) : Any
+        +get_internal_model() : Any
     }
-    Model <|-- BaselineSklearnModel : Inheritance / Specialization
+    Model <|-- BaselineSklearnModel
 ```
 
 ## 3. Package & Class Relations
@@ -46,24 +54,32 @@ The following diagram defines the package boundaries and directional inter-packa
 
 ```mermaid
 classDiagram
-    direction LR
-    namespace models {
-        class models_module
+    class Model {
+        +KIND
+        +get_params(deep) : Params
+        +set_params() : Any
+        -__sklearn_tags__() : Any
+        +fit(inputs, targets) : Any
+        +predict(inputs) : Any
+        +explain_model() : Any
+        +explain_samples(inputs) : Any
+        +get_internal_model() : Any
     }
-    class sklearn_module
-    models_module --> sklearn_module : imports
-    class pydantic_module
-    models_module --> pydantic_module : imports
-    class abc_module
-    models_module --> abc_module : imports
-    class shap_module
-    models_module --> shap_module : imports
-    class typing_module
-    models_module --> typing_module : imports
-    class regression_model_template_core_module
-    models_module --> regression_model_template_core_module : imports
-    class sklearn_base_module
-    models_module --> sklearn_base_module : imports
+    class BaselineSklearnModel {
+        +KIND
+        +max_depth
+        +n_estimators
+        +random_state
+        #_pipeline
+        #_numericals
+        #_categoricals
+        +fit(inputs, targets) : Any
+        +predict(inputs) : Any
+        +explain_model() : Any
+        +explain_samples(inputs) : Any
+        +get_internal_model() : Any
+    }
+    Model <|-- BaselineSklearnModel
 ```
 
 * **Inheritance & Polymorphism:** Detailed breakdown of abstract base classes, interfaces, and concrete overrides.
@@ -109,3 +125,14 @@ sequenceDiagram
   - Method `explain_model`: `src/regression_model_template/core/models.py:191`
   - Method `explain_samples`: `src/regression_model_template/core/models.py:204`
   - Method `get_internal_model`: `src/regression_model_template/core/models.py:216`
+
+```mermaid
+flowchart TD
+    models --> abc
+    models --> pydantic
+    models --> regression_model_template_core
+    models --> shap
+    models --> sklearn
+    models --> sklearn_base
+    models --> typing
+```
