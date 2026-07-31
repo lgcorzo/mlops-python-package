@@ -65,8 +65,18 @@ def convert_file(file_path, wiki_root):
     content = wiki_pattern.sub(replace_wiki, content)
     
     # 2. Convert (src/path/to/file.py:L1-L10) to [src/path/to/file.py:L1-L10](../src/path/to/file.py#L1-L10)
-    # relative to the repo root.
+    # relative to the repo root, avoiding double-wrapping.
     repo_root = os.path.dirname(wiki_root)
+    
+    # Temporarily replace existing markdown links to avoid double wrapping
+    link_placeholders = []
+    def save_link(match):
+        placeholder = f"__LINK_PLACEHOLDER_{len(link_placeholders)}__"
+        link_placeholders.append(match.group(0))
+        return placeholder
+        
+    markdown_link_pattern = re.compile(r'\[[^\]]*\]\([^\)]*\)')
+    content_temp = markdown_link_pattern.sub(save_link, content)
     
     src_pattern = re.compile(r'\b(src/[a-zA-Z0-9_\-\./]+(?::L\d+(?:-L\d+)?)?)\b')
     
@@ -86,7 +96,14 @@ def convert_file(file_path, wiki_root):
             return f"[{full_ref}]({rel_path}{line_anchor})"
         return full_ref
 
-    content = src_pattern.sub(replace_src, content)
+    content_temp = src_pattern.sub(replace_src, content_temp)
+    
+    # Restore the saved markdown links
+    def restore_link(match):
+        idx = int(match.group(1))
+        return link_placeholders[idx]
+        
+    content = re.sub(r'__LINK_PLACEHOLDER_(\d+)__', restore_link, content_temp)
     
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
