@@ -30,3 +30,6 @@
 *.py[cod]
 __pycache__/
 
+# graphyfy
+graphify-out/
+

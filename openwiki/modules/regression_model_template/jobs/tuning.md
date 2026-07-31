@@ -1,0 +1,25 @@
+---
+iso_doc_type: "Specification"
+iso_viewpoint: "ComponentView"
+type: "module"
+title: "Module: Hyperparameter Tuning Job"
+source_path: "src/regression_model_template/jobs/tuning.py"
+description: "Hyperparameter search optimization pipeline job running GridSearch / RandomSearch CV."
+tags: ["jobs", "tuning", "gridsearch", "hyperparameters", "cv"]
+last_verified_commit: "HEAD"
+timestamp: "2026-07-31T16:17:00Z"
+---
+
+# Module Specification: Hyperparameter Tuning Job
+
+* **Source File Reference:** `src/regression_model_template/jobs/tuning.py` (Lines: L18-L104)
+* **Upstream Dependencies:** [[Modules/RegressionModelTemplate/Jobs/Base]], [[Modules/RegressionModelTemplate/Utils/Searchers]]
+* **Downstream Consumers:** [[Modules/RegressionModelTemplate/Scripts]]
+
+## 1. Architectural Role & Responsibilities
+`TuningJob` executes cross-validation hyperparameter optimization searches (`GridCVSearcher`), finding optimal parameter combinations and logging search trials to MLflow runs.
+
+## 2. Class & Method Specifications
+
+### `TuningJob` (`src/regression_model_template/jobs/tuning.py:L18-L104`)
+* `run(self)` (L54-L104): Executes hyperparameter optimization across grid search spaces, identifying best parameter set and logging performance metrics.
