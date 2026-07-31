@@ -1,0 +1,49 @@
+#!/bin/bash
+# .git/hooks/post-checkout
+# Git ejecuta este hook después de cambiar de rama (checkout).
+# Recibe tres argumentos: 
+#   $1 = hash del commit anterior
+#   $2 = hash del nuevo commit
+#   $3 = 1 si es cambio de rama, 0 si es checkout de archivo individual
+
+# Evitar ejecutar si no fue un cambio de rama real
+if [ "$3" != "1" ]; then
+    exit 0
+fi
+
+# 1. Detección de OS
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" ]]; then
+    # --- ENTORNO WINDOWS ---
+    # Delegamos de manera oculta y asíncrona a PowerShell enviando los mismos argumentos
+    powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File ".git/hooks/update-graph-checkout.ps1" "$1" "$2" "$3" &
+else
+    # --- ENTORNO UBUNTU / LINUX ---
+    # Guardia: Evitar superposición si ya hay una actualización corriendo
+    if pgrep -f "graphify" > /dev/null; then
+        echo "Actualización de grafo ya en ejecución en Linux. Saltando..."
+        exit 0
+    fi
+
+    # Contar cuántos archivos cambiaron entre la rama anterior y la nueva
+    CHANGED_FILES=$(git diff --name-only "$1" "$2" | wc -l)
+
+    if [ "$CHANGED_FILES" -gt 5 ]; then
+        # Cambio grande: Reconstrucción completa (build)
+        if command -v graphify > /dev/null 2>&1; then
+            export GRAPHIFY_FORCE=true
+            nohup timeout 300 graphify update . > ~/.cache/graphify-rebuild.log 2>&1 &
+        elif command -v uvx > /dev/null 2>&1; then
+            export GRAPHIFY_FORCE=true
+            nohup timeout 300 uvx --from graphifyy graphify update . > ~/.cache/graphify-rebuild.log 2>&1 &
+        fi
+    else
+        # Cambio pequeño: Actualización incremental rápida
+        if command -v graphify > /dev/null 2>&1; then
+            nohup timeout 300 graphify update . > ~/.cache/graphify-rebuild.log 2>&1 &
+        elif command -v uvx > /dev/null 2>&1; then
+            nohup timeout 300 uvx --from graphifyy graphify update . > ~/.cache/graphify-rebuild.log 2>&1 &
+        fi
+    fi
+fi
+
+exit 0

@@ -7,6 +7,8 @@ description: "Comprehensive developer onboarding guide for environment setup, ex
 tags: ["iso26514", "user_guide", "developer", "onboarding"]
 last_verified_commit: "HEAD"
 timestamp: "2026-07-31T16:17:00Z"
+generated: "agent:okf-professional-documenter"
+verified: "true"
 ---
 
 # ISO 26514 Developer & User Guide

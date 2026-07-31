@@ -7,6 +7,8 @@ description: "Deployment view detailing Docker image layers, docker-compose, MLS
 tags: ["iso42010", "deployment", "docker", "mlserver", "kafka"]
 last_verified_commit: "HEAD"
 timestamp: "2026-07-31T16:17:00Z"
+generated: "agent:okf-professional-documenter"
+verified: "true"
 ---
 
 # ISO 42010 Deployment View: Runtime Infrastructure & Containerization
@@ -52,7 +54,7 @@ graph LR
 
 ---
 
-## 3. Environment Configuration (`src/regression_model_template/io/osvariables.py:L16-L26`)
+## 3. Environment Configuration (`[[src/regression_model_template/io/osvariables.py:L16-L26](../../src/regression_model_template/io/osvariables.py#L16-L26)](../../[src/regression_model_template/io/osvariables.py](../../src/regression_model_template/io/osvariables.py)#L16-L26)`)
 
 The service automatically ingests runtime settings from `.env` files or system environment variables:
 

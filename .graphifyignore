@@ -1,0 +1,16 @@
+# Directorios a excluir en Graphify para evitar procesar ruido
+.git/
+node_modules/
+dist/
+build/
+target/
+.venv/
+venv/
+__pycache__/
+.idea/
+.vscode/
+ai-vault/
+.agentskills/
+.github/
+*.db
+*.log

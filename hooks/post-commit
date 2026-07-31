@@ -1,0 +1,33 @@
+#!/bin/bash
+# .git/hooks/post-commit
+# Git requires a Bash shell to initiate hooks on both Linux and Windows (Git Bash).
+# Este script actúa como puente inteligente detectando el sistema operativo.
+
+# 1. Detección de Sistema Operativo
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" ]]; then
+    # --- ENTORNO WINDOWS ---
+    # Delegamos de manera oculta y asíncrona a PowerShell para no congelar la consola de Git
+    powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File ".git/hooks/update-graph.ps1" &
+else
+    # --- ENTORNO UBUNTU / LINUX ---
+    # Guardia: Evitar superposición si ya hay una actualización corriendo
+    if pgrep -f "graphify" > /dev/null; then
+        echo "Actualización de grafo ya en ejecución en Linux. Saltando..."
+        exit 0
+    fi
+
+    # Ejecutar actualizaciones en segundo plano (con límite de tiempo de 5 min)
+    if command -v graphify > /dev/null 2>&1; then
+        nohup timeout 300 graphify update . > ~/.cache/graphify-rebuild.log 2>&1 &
+    elif command -v uvx > /dev/null 2>&1; then
+        nohup timeout 300 uvx --from graphifyy graphify update . > ~/.cache/graphify-rebuild.log 2>&1 &
+    fi
+
+    # Log bridge event for ISO 15289 traceability
+    REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [ -n "$REPO_ROOT" ] && [ -f "$REPO_ROOT/hooks/log-bridge-event.sh" ]; then
+        bash "$REPO_ROOT/hooks/log-bridge-event.sh" "post_commit_graph_update" "graphify update triggered"
+    fi
+fi
+
+exit 0
