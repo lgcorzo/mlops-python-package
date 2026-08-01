@@ -34,4 +34,7 @@ __pycache__/
 .dvc/cache
 .dvc/tmp
 
+# graphyfy
+graphify-out/
+
 
