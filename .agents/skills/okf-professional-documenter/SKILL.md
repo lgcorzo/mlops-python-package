@@ -29,6 +29,7 @@ You are a **Professional ISO Documentation Agent** responsible for generating an
 - **Never** use system-specific absolute paths (`/home/`, `/mnt/`, `C:\`).
 - Use exclusively **relative paths** from the repository root.
 - File citations **must include line spans**: `src/core/parser.py:L15-L120`.
+- **Never** use double brackets `[[ ]]` for source file references or paths, as it causes a double-wrapping issue with the link converter. Standard markdown links like `[src/...](../src/...)` or plain strings should be used.
 
 ### 3. Espejo Estructural (1:1 Mirroring)
 
@@ -104,19 +105,36 @@ last_verified_commit: "a1b2c3d"
 
 ---
 
-## UML 2.0 Diagram Standards (Mermaid.js)
+## UML 2.0 Diagram Standards (Mermaid.js) (Strict)
 
-### Class Diagrams
-- Use explicit inheritance (`<|--`), realizations (`<|..`), associations (`-->`).
-- Include method signatures with visibility markers (`+`, `-`, `#`).
+### 1. Class Diagrams (`classDiagram`)
+- **Show Fields (Variables) and Methods**: Every class must explicitly list its key member variables with types (e.g. `-variable_name: type`) and methods with parameters/types and return types (e.g. `+method_name(arg1: Type) ReturnType`).
+- **Clarity of Inheritance & Polymorphism**:
+  - Use `<|--` for Generalization/Inheritance (e.g. `SubClass <|-- SuperClass`).
+  - Use `<|..` for Realization/Interface Implementation (e.g. `ConcreteClass <|.. IInterface`).
+  - Annotate interfaces with `<<interface>>` and abstract classes with `<<abstract>>`.
+  - Explicitly show polymorphism: repeat overridden methods in subclasses, using a trailing asterisk (e.g. `parse()*`) or bolding to differentiate abstract or overridden behavior.
+  - Represent encapsulation visibility markers: `+` (public), `-` (private), `#` (protected), `~` (package/internal).
 - Derive all relationships from Pyreverse/Graphify AST data.
 
-### Sequence Diagrams
-- Use autonumbered steps.
-- Show polymorphic method calls and control flow.
+### 2. Sequence Diagrams (`sequenceDiagram`)
+- **Lifelines & Participants**: Define participants and actors clearly with descriptive names.
+- **Focus of Control (Activation)**: Use `activate` and `deactivate` (or `++` / `--` shorthand) to represent exactly when a call is active and when control returns.
+- **Message Types**:
+  - Solid line with filled arrowhead (`->>`) for synchronous call dispatches.
+  - Dashed line with open arrowhead (`-->>`) for return messages.
+  - Solid line with open arrowhead (`->`) for asynchronous/one-way dispatches.
+- **Structured Control Flow**: Use `alt`/`else` blocks for conditional logic, `loop` blocks for iterations, and `opt` blocks for optional paths.
+- Use autonumbered steps where appropriate to trace execution.
 
-### Package/Component Diagrams
+### 3. Package/Component Diagrams
 - Show clear system boundaries and layer interactions.
+- You **must** generate Package Relation diagrams for upper-level folders to show module dependencies and architectural layers.
+
+### 4. Required Diagrams for Modules
+- For every documented module, you **must** include:
+  - **UML 2.0 Class Diagrams** showing internal structures and relationships.
+  - **Execution Flow Diagrams (Sequence/Activity)** demonstrating key method invocations and state changes (e.g., `run()` method executions).
 
 ---
 

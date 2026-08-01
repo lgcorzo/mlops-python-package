@@ -286,7 +286,7 @@ timestamp: "2026-07-31T16:00:00Z"
 ## 1. Architectural Role & Responsibilities
 [Detailed technical description of module purpose, AST parsing strategy, and domain logic.]
 
-## 2. UML 2.0 Class Diagram
+## 2. UML 2.0 Class Diagram Example
 ```mermaid
 classDiagram
     direction BT
@@ -301,6 +301,44 @@ classDiagram
     }
     BaseParser <|.. PythonASTParser : Realization
 ```
+
+## 2b. UML 2.0 Sequence Diagram Example
+```mermaid
+sequenceDiagram
+    participant User as Developer
+    participant Parser as PythonASTParser
+    participant AST as ASTNode
+    
+    User->>Parser: parse("parser.py")
+    activate Parser
+    Parser->>AST: extractSymbols(node)
+    activate AST
+    AST-->>Parser: List[Symbol]
+    deactivate AST
+    Parser-->>User: ASTResult
+    deactivate Parser
+```
+
+### UML 2.0 & Mermaid Diagram Rules (Strict)
+
+1. **UML 2.0 Class Diagrams (`classDiagram`)**:
+   - **Show Fields (Variables) and Methods**: Every class must explicitly list its key member variables with types (e.g. `-variable_name: type`) and methods with parameters/types and return types (e.g. `+method_name(arg1: Type) ReturnType`).
+   - **Clarity of Inheritance & Polymorphism**:
+     - Use `<|--` for Generalization/Inheritance (e.g. `SubClass <|-- SuperClass`).
+     - Use `<|..` for Realization/Interface Implementation (e.g. `ConcreteClass <|.. IInterface`).
+     - Annotate interfaces with `<<interface>>` and abstract classes with `<<abstract>>`.
+     - Explicitly show polymorphism: repeat overridden methods in subclasses, using a trailing asterisk (e.g. `parse()*`) or bolding to differentiate abstract or overridden behavior.
+     - Represent encapsulation visibility markers: `+` (public), `-` (private), `#` (protected), `~` (package/internal).
+
+2. **UML 2.0 Sequence Diagrams (`sequenceDiagram`) for Execution Workflows**:
+   - **Lifelines & Participants**: Define participants and actors clearly with descriptive names.
+   - **Focus of Control (Activation)**: Use `activate` and `deactivate` (or `++` / `--` shorthand) to represent exactly when a call is active and when control returns.
+   - **Message Types**:
+     - Solid line with filled arrowhead (`->>`) for synchronous call dispatches.
+     - Dashed line with open arrowhead (`-->>`) for return messages.
+     - Solid line with open arrowhead (`->`) for asynchronous/one-way dispatches.
+   - **Structured Control Flow**: Use `alt`/`else` blocks for conditional logic, `loop` blocks for iterations, and `opt` blocks for optional paths.
+
 
 ## 3. Class & Method Specifications
 
