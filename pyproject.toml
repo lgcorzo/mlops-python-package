@@ -42,6 +42,8 @@ dependencies = [
     "pyopenssl (>=26.0.0,<27.0.0)",
     "diskcache (>=5.6.3,<6.0.0)",
     "starlette (>=0.50.0,<1.0.0)",
+    # explicitly define secure version for transitive dependency cryptography (April 2026 environment)
+    "cryptography (>=46.0.6,<50.0.0)",
 ]
 
 [project.scripts]
