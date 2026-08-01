@@ -2,29 +2,58 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: Environment Variables Settings"
-source_path: "[src/regression_model_template/io/osvariables.py](/src/regression_model_template/io/osvariables.py)"
-description: "Singleton environment variable loader backed by Pydantic BaseSettings."
-tags: ["io", "osvariables", "singleton", "env", "pydantic"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: osvariables"
+source_path: "src/regression_model_template/io/osvariables.py"
+description: "Documentation for regression_model_template.io.osvariables"
+tags: ["module", "osvariables", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: Environment Variables Settings
+# Module Specification: osvariables
 
-* **Source File Reference:** [`src/regression_model_template/io/osvariables.py`](/src/regression_model_template/io/osvariables.py) (Lines: L1-L26)
-* **Upstream Dependencies:** `pydantic_settings`
-* **Downstream Consumers:** [Modules/RegressionModelTemplate/Settings](../settings.md), [Modules/RegressionModelTemplate/IO/Services](services.md)
+* **Source Reference:** [src/regression_model_template/io/osvariables.py](../../../src/regression_model_template/io/osvariables.py) (Lines: L1-L26)
 
 ## 1. Architectural Role & Responsibilities
-`osvariables.py` defines `Singleton` metaclass and `Env` settings provider. Enforces thread-safe environment variable parsing (`MLFLOW_TRACKING_URI`, `KAFKA_BOOTSTRAP_SERVERS`, `OTEL_EXPORTER_OTLP_ENDPOINT`).
+Documentation for regression_model_template.io.osvariables
 
-## 2. Class Specifications
+## 2. UML 2.0 Class Diagram
+```mermaid
+classDiagram
+    direction BT
+    class Singleton {
+        -_instances: dict[type, 'Singleton']
+        -__new__(cls: type['Singleton']) 'Singleton'
+    }
+    class Env {
+        +mlflow_tracking_uri: str
+        +mlflow_registry_uri: str
+        +mlflow_experiment_name: str
+        +mlflow_registered_model_name: str
+    }
+```
 
-### `Singleton` ([`src/regression_model_template/io/osvariables.py:L6-L13`](/src/regression_model_template/io/osvariables.py#L6-L13))
-* `__new__(cls)` (L10-L13): Guarantees single instance instantiation for environment settings.
+## 3. Class & Method Specifications
 
-### `Env` ([`src/regression_model_template/io/osvariables.py:L16-L26`](/src/regression_model_template/io/osvariables.py#L16-L26))
-* Ingests `.env` files or system environment variables into typed fields.
+### `Singleton` ([`src/regression_model_template/io/osvariables.py:L6-L13`](../../../src/regression_model_template/io/osvariables.py#L6-L13))
+
+No description available.
+
+#### Methods
+
+* **`__new__(cls: type['Singleton']) -> 'Singleton'`** (L10-L13)
+  - **Purpose**: No description available.
+  - **Inputs**:
+    - `cls` (`type['Singleton']`): Parameter description.
+  - **Outputs**:
+    - `'Singleton'`: Return value description.
+
+### `Env` ([`src/regression_model_template/io/osvariables.py:L16-L26`](../../../src/regression_model_template/io/osvariables.py#L16-L26))
+
+No description available.
+
+#### Methods
+
+*No methods defined.*

@@ -2,70 +2,74 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: Hyperparameter Tuning Job"
-source_path: "[`src/regression_model_template/jobs/tuning.py`](/src/regression_model_template/jobs/tuning.py)"
-description: "Hyperparameter search optimization pipeline job running GridSearch / RandomSearch CV."
-tags: ["jobs", "tuning", "gridsearch", "hyperparameters", "cv"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: tuning"
+source_path: "src/regression_model_template/jobs/tuning.py"
+description: "Define a job for finding the best hyperparameters for a model."
+tags: ["module", "tuning", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: Hyperparameter Tuning Job
+# Module Specification: tuning
 
-* **Source File Reference:** [`src/regression_model_template/jobs/tuning.py`](/src/regression_model_template/jobs/tuning.py) (Lines: L18-L105)
-* **Upstream Dependencies:** [Modules/RegressionModelTemplate/Jobs/Base](base.md), [Modules/RegressionModelTemplate/Utils/Searchers](../utils/searchers.md)
-* **Downstream Consumers:** [Modules/RegressionModelTemplate/Scripts](../scripts.md)
+* **Source Reference:** [src/regression_model_template/jobs/tuning.py](../../../src/regression_model_template/jobs/tuning.py) (Lines: L1-L104)
 
 ## 1. Architectural Role & Responsibilities
-`TuningJob` executes cross-validation hyperparameter optimization searches (`GridCVSearcher`), finding optimal parameter combinations and logging search trials to MLflow runs.
+Define a job for finding the best hyperparameters for a model.
 
 ## 2. UML 2.0 Class Diagram
-
 ```mermaid
 classDiagram
     direction BT
-    class Job {
-        <<abstract>>
-        +logger_service: LoggerService
-        +mlflow_service: MlflowService
-        +alerts_service: AlertsService
-        +run()* Locals
-    }
     class TuningJob {
-        +KIND: Literal
-        +run_config: RunConfig
-        +inputs: ReaderKind
-        +targets: ReaderKind
-        +model: ModelKind
-        +metric: MetricKind
-        +splitter: SplitterKind
-        +searcher: SearcherKind
-        +run() base.Locals
+        +KIND: T.Literal['TuningJob']
+        +run_config: services.MlflowService.RunConfig
+        +inputs: datasets.ReaderKind
+        +targets: datasets.ReaderKind
+        +model: models.ModelKind
+        +metric: metrics.MetricKind
+        +splitter: splitters.SplitterKind
+        +searcher: searchers.SearcherKind
+        +run(self: Any) base.Locals
     }
+```
 
-    Job <|-- TuningJob : Inheritance
+## 2b. Execution Flow (Sequence Diagram)
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as Runner
+    participant Job as TuningJob
+    
+    User->>Job: run()
+    activate Job
+    Note over Job: Reads inputs and performs workflow steps
+    Job-->>User: Locals (dict)
+    deactivate Job
 ```
 
 ## 3. Class & Method Specifications
 
-### `TuningJob` ([`src/regression_model_template/jobs/tuning.py:L18-L105`](/src/regression_model_template/jobs/tuning.py#L18-L105))
+### `TuningJob` ([`src/regression_model_template/jobs/tuning.py:L18-L104`](../../../src/regression_model_template/jobs/tuning.py#L18-L104))
 
-`TuningJob` is a concrete execution job that searches hyperparameter spaces using cross-validation over training datasets. It optimizes a single evaluation metric and records trial results.
+Find the best hyperparameters for a model.
+
+Parameters:
+    run_config (services.MlflowService.RunConfig): mlflow run config.
+    inputs (datasets.ReaderKind): reader for the inputs data.
+    targets (datasets.ReaderKind): reader for the targets data.
+    model (models.ModelKind): machine learning model to tune.
+    metric (metrics.MetricKind): tuning metric to optimize.
+    splitter (splitters.SplitterKind): data sets splitter.
+    searcher: (searchers.SearcherKind): hparams searcher.
 
 #### Methods
 
-* **`run(self) -> base.Locals`** (L54-L105)
-  - **Purpose**: Runs hyperparameter tuning over the parameter grids. Reads input/target data, performs schema validation, tracks dataset lineages in MLflow, executes cross-validation hyperparameter searches, logs optimization parameters, and alerts on completion.
-  - **Steps Executed**:
-    1. Obtains the configured Logger and initializes an MLflow run context.
-    2. Reads training features and targets dataframes.
-    3. Performs Pydantic schema validation checks.
-    4. Logs training dataset lineages (features and target columns) to the MLflow run.
-    5. Calls the searcher instance's `search` method, passing the model, evaluation metric, datasets, and cross-validation data splitter.
-    6. Extracts the optimization search grid dataframe, best performance score, and optimal hyperparameter dictionary.
-    7. Sends completion alerts with the best parameter score.
-  - **Inputs**: None.
+* **`run(self: Any) -> base.Locals`** (L54-L104)
+  - **Purpose**: Run the tuning job in context.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
   - **Outputs**:
-    - `base.Locals` (`dict`): Dictionary containing all local variables (including the optimization `results`, `best_score`, and `best_params` dictionary).
+    - `base.Locals`: Return value description.

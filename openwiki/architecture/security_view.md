@@ -2,60 +2,70 @@
 iso_doc_type: "Description"
 iso_viewpoint: "SecurityView"
 type: "architecture"
-title: "ISO 42010 Security View — Cryptography, Authentication & Boundaries"
-description: "Security view documenting secret isolation, rate limiting, model signatures, Pandera schema validation, and telemetry security."
-tags: ["iso42010", "security", "ratelimit", "validation", "cryptography"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Security View"
+description: "Security View detailing HTTP security headers, IP rate limiters, input validation caps, and data protection boundaries."
+tags: ["iso42010", "security", "rate-limiting", "validation", "headers"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# ISO 42010 Security View: Cryptography, Authentication & Boundaries
+# Security View: mlops-python-package
 
-## 1. Security Architecture & Threat Mitigation Boundaries
+This viewpoint describes the security controls, validation boundaries, and protection mechanisms built into the prediction serving engine.
+
+## 1. Security Architecture Diagram
 
 ```mermaid
 graph TD
-    subgraph Untrusted Network Domain
-        req["External API Request / Message"]
-    end
+    Client["Incoming Prediction Request"]
     
-    subgraph Security Controls Boundary
-        rl["Rate Limiter (Sliding Window)<br/>(kafka_app.py:L70-L112)"]
-        sv["Pandera Schema Validation<br/>(core/schemas.py:L20-L48)"]
-        sign["Model Signature Inferrer<br/>(utils/signers.py:L21-L51)"]
-    end
-    
-    subgraph Execution & Storage Domain
-        inf["Model Inference Engine"]
-        reg["MLflow Model Registry"]
+    subgraph "FastAPI Security Layer"
+        Proxy["ProxyHeaders / TrustedHost Middleware"]
+        Limiter["Sliding Window Rate Limiter"]
+        Headers["Security Headers Middleware"]
     end
 
-    req --> rl
-    rl -->|"Passed IP Check"| sv
-    rl -->|"Exceeded Rate Limit"| block["429 Too Many Requests"]
-    sv -->|"Validated Data Types"| inf
-    sv -->|"Invalid Schema"| err["422 Validation Error"]
-    inf --> sign
-    sign --> reg
+    subgraph "Validation Layer"
+        SizeCheck["Payload Size & Dimension Verification"]
+        SchemaCheck["Pandera Dataframe Schema Coercion"]
+    end
+
+    Model["Model Prediction (Inference)"]
+
+    Client --> Proxy
+    Proxy --> Limiter
+    Limiter --> Headers
+    Headers --> SizeCheck
+    SizeCheck --> SchemaCheck
+    SchemaCheck --> Model
 ```
-
----
 
 ## 2. Security Mechanisms & Implementation
 
-### A. IP Rate Limiting ([`src/regression_model_template/controller/kafka_app.py:L70-L112`](/src/regression_model_template/controller/kafka_app.py#L70-L112))
-* **Mechanism:** In-memory `RateLimiter` class enforcing sliding window token bucket rate limits per client IP address.
-* **Default Limits:** Maximum 100 requests per minute per IP to prevent Denial of Service (DoS) attacks on real-time prediction endpoints.
+### 1. Sliding Window Rate Limiter
+- **Implementation:** `RateLimiter` class in `src/regression_model_template/controller/kafka_app.py:L82-L113`.
+- **Logic:** Tracks client IP in an `OrderedDict` of deques holding timestamps.
+- **Limits:** Capped at `100` requests per `60` seconds window.
+- **Memory Protection:** Maximum tracked IPs limit of `10000`. Once reached, the oldest tracked IP is evicted (Least Recently Used replacement) to prevent memory exhaustion.
 
-### B. Input Sanitization & Schema Validation ([`src/regression_model_template/core/schemas.py:L20-L117`](/src/regression_model_template/core/schemas.py#L20-L117))
-* **Mechanism:** Strict type enforcement using Pandera DataFrames and Pydantic `BaseModel` classes (`InputsSchema`, `PredictionRequest`).
-* **Protection:** Prevents SQL/NoSQL injection, invalid payload deserialization, and unexpected null pointer exceptions during ML matrix operations.
+### 2. HTTP Security Headers Middleware
+- **Implementation:** `add_security_headers` middleware in `src/regression_model_template/controller/kafka_app.py:L68-L80`.
+- **Headers Appended:**
+  - `X-Content-Type-Options: nosniff` (Prevents MIME sniffing).
+  - `X-Frame-Options: DENY` (Mitigates clickjacking).
+  - `Strict-Transport-Security` (Enforces HTTPS access).
+  - `Content-Security-Policy` (Restricts script and style source loading).
+  - `Cache-Control` (Disables caching of prediction outputs containing sensitive data).
 
-### C. Model Artifact Integrity & Signing ([`src/regression_model_template/utils/signers.py:L21-L51`](/src/regression_model_template/utils/signers.py#L21-L51))
-* **Mechanism:** Automatic model signature inference (`InferSigner`) recording exact input feature names, data types, and output tensor shapes.
-* **Protection:** Ensures models registered in MLflow cannot be tampered with or executed with incompatible input payloads.
+### 3. Payload Dimension Safeguards
+- **Implementation:** `PredictionRequest.check_input_size` validator in `src/regression_model_template/controller/kafka_app.py:L147-L174`.
+- **Caps:**
+  - Max Columns: `100` (`MAX_INPUT_COLS`).
+  - Max Rows: `10000` (`MAX_INPUT_ROWS`).
+  - Column length uniformity check (ensures the payload is a valid rectangular shape).
 
-### D. Environment Secret Isolation ([`src/regression_model_template/io/osvariables.py:L16-L26`](/src/regression_model_template/io/osvariables.py#L16-L26))
-* **Mechanism:** Centralized `Env` configuration relying on Pydantic `BaseSettings`. Secrets (MLflow tokens, Kafka passwords) are ingested directly from system environment variables or sealed Kubernetes secrets. No hardcoded credentials exist in source code.
+### 4. Input Sanitization & Coercion
+- **Implementation:** `InputsSchema.check` validator in `src/regression_model_template/core/schemas.py`.
+- **Mechanics:** Coerces types and validates structure before invoking model prediction. Out-of-bounds inputs or malformed types are safely rejected, preventing engine failures.

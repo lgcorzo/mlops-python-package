@@ -2,43 +2,74 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: Base Pipeline Job"
-source_path: "[src/regression_model_template/jobs/base.py](/src/regression_model_template/jobs/base.py)"
-description: "Abstract context-managed base class for all pipeline jobs handling service lifecycles and exception handling."
-tags: ["jobs", "base", "contextmanager", "pipeline"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: base"
+source_path: "src/regression_model_template/jobs/base.py"
+description: "Base for high-level project jobs."
+tags: ["module", "base", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: Base Pipeline Job
+# Module Specification: base
 
-* **Source File Reference:** [`src/regression_model_template/jobs/base.py`](/src/regression_model_template/jobs/base.py) (Lines: L21-L85)
-* **Upstream Dependencies:** [Modules/RegressionModelTemplate/IO/Services](../io/services.md)
-* **Downstream Consumers:** All concrete jobs in `jobs/*.py`
+* **Source Reference:** [src/regression_model_template/jobs/base.py](../../../src/regression_model_template/jobs/base.py) (Lines: L1-L85)
 
 ## 1. Architectural Role & Responsibilities
-`base.py` defines abstract base class `Job`. Manages resource acquisition and cleanup (`__enter__`, `__exit__`), initializes logging, telemetry, and MLflow services, and enforces execution contracts via `run()`.
+Base for high-level project jobs.
 
 ## 2. UML 2.0 Class Diagram
-
 ```mermaid
 classDiagram
     direction BT
     class Job {
-        <<abstract>>
-        +run_config: RunConfig
-        +services: List~Service~
-        +__enter__() Job
-        +__exit__(exc_type, exc_val, exc_tb)
-        +run()*
+        +KIND: str
+        +logger_service: services.LoggerService
+        +alerts_service: services.AlertsService
+        +mlflow_service: services.MlflowService
+        -__enter__(self: Any) T.Self
+        -__exit__(self: Any, exc_type: T.Type[BaseException] | None, exc_value: BaseException | None, exc_traceback: TS.TracebackType | None) T.Literal[False]
+        +run(self: Any) Locals
     }
 ```
 
 ## 3. Class & Method Specifications
 
-### `Job` ([`src/regression_model_template/jobs/base.py:L21-L85`](/src/regression_model_template/jobs/base.py#L21-L85))
-* `__enter__(self) -> Job` (L39-L52): Starts all registered services (`LoggerService`, `MlflowService`) upon entering `with` context block.
-* `__exit__(self, exc_type, exc_value, exc_traceback)` (L54-L77): Stops all services, logs uncaught exceptions, and triggers failure alerts if necessary.
-* `run(self)` (L80-L85): Abstract workflow execution method.
+### `Job` ([`src/regression_model_template/jobs/base.py:L21-L85`](../../../src/regression_model_template/jobs/base.py#L21-L85))
+
+Base class for a job.
+
+use a job to execute runs in  context.
+e.g., to define common services like logger
+
+Parameters:
+    logger_service (services.LoggerService): manage the logger system.
+    alerts_service (services.AlertsService): manage the alerts system.
+    mlflow_service (services.MlflowService): manage the mlflow system.
+
+#### Methods
+
+* **`__enter__(self: Any) -> T.Self`** (L39-L52)
+  - **Purpose**: Enter the job context.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+  - **Outputs**:
+    - `T.Self`: Return value description.
+
+* **`__exit__(self: Any, exc_type: T.Type[BaseException] | None, exc_value: BaseException | None, exc_traceback: TS.TracebackType | None) -> T.Literal[False]`** (L54-L77)
+  - **Purpose**: Exit the job context.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+    - `exc_type` (`T.Type[BaseException] | None`): Parameter description.
+    - `exc_value` (`BaseException | None`): Parameter description.
+    - `exc_traceback` (`TS.TracebackType | None`): Parameter description.
+  - **Outputs**:
+    - `T.Literal[False]`: Return value description.
+
+* **`run(self: Any) -> Locals`** (L80-L85)
+  - **Purpose**: Run the job in context.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+  - **Outputs**:
+    - `Locals`: Return value description.

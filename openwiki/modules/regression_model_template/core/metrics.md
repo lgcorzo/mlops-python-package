@@ -2,109 +2,124 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: Metrics & Evaluation Scorers"
-source_path: "[`src/regression_model_template/core/metrics.py`](/src/regression_model_template/core/metrics.py)"
-description: "Abstract metric definition, Scikit-Learn evaluation wrappers (RMSE, MAE, R2), and MLflow scorer exporters."
-tags: ["core", "metrics", "rmse", "mae", "r2", "mlflow"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: metrics"
+source_path: "src/regression_model_template/core/metrics.py"
+description: "Evaluate model performances with metrics."
+tags: ["module", "metrics", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: Metrics & Evaluation Scorers
+# Module Specification: metrics
 
-* **Source File Reference:** [`src/regression_model_template/core/metrics.py`](/src/regression_model_template/core/metrics.py) (Lines: L1-L149)
-* **Upstream Dependencies:** `scikit-learn`, `mlflow`
-* **Downstream Consumers:** [Modules/RegressionModelTemplate/Jobs/Evaluations](../jobs/evaluations.md), [Modules/RegressionModelTemplate/Jobs/Training](../jobs/training.md), [Modules/RegressionModelTemplate/Jobs/Tuning](../jobs/tuning.md)
+* **Source Reference:** [src/regression_model_template/core/metrics.py](../../../src/regression_model_template/core/metrics.py) (Lines: L1-L148)
 
 ## 1. Architectural Role & Responsibilities
-`metrics.py` provides uniform metric wrappers for regression evaluation. Supports calculating RMSE, MAE, R2 scores, generating Scikit-Learn custom scorers, and logging evaluation metrics directly to MLflow.
+Evaluate model performances with metrics.
 
 ## 2. UML 2.0 Class Diagram
-
 ```mermaid
 classDiagram
     direction BT
     class Metric {
-        <<abstract>>
+        +KIND: str
         +name: str
         +greater_is_better: bool
-        +score(targets: Targets, outputs: Outputs)* float
-        +scorer(model: Model, inputs: Inputs, targets: Targets) float
-        +to_mlflow() MlflowMetric
+        +score(self: Any, targets: schemas.Targets, outputs: schemas.Outputs) float
+        +scorer(self: Any, model: models.Model, inputs: schemas.Inputs, targets: schemas.Targets) float
+        +to_mlflow(self: Any) MlflowMetric
     }
     class SklearnMetric {
+        +KIND: T.Literal['SklearnMetric']
         +name: str
         +greater_is_better: bool
-        +score(targets: Targets, outputs: Outputs) float
+        +score(self: Any, targets: schemas.Targets, outputs: schemas.Outputs) float
     }
     class Threshold {
-        +threshold: float
+        +threshold: int | float
         +greater_is_better: bool
-        +to_mlflow() MlflowThreshold
+        +to_mlflow(self: Any) MlflowThreshold
     }
-
-    Metric <|-- SklearnMetric : Inheritance
 ```
 
 ## 3. Class & Method Specifications
 
-### `Metric` ([`src/regression_model_template/core/metrics.py:L27-L95`](/src/regression_model_template/core/metrics.py#L27-L95))
+### `Metric` ([`src/regression_model_template/core/metrics.py:L27-L95`](../../../src/regression_model_template/core/metrics.py#L27-L95))
 
-`Metric` is the abstract base class and Pydantic model for project-level evaluation metrics. It standardizes the reporting interface for model validation, handling metric optimization directions (maximizing vs. minimizing) and exporting metric wrappers to MLflow and Scikit-Learn evaluation pipelines.
+Base class for a project metric.
 
-#### Methods
+Use metrics to evaluate model performance.
+e.g., accuracy, precision, recall, MAE, F1, ...
 
-* **`score(self, targets: schemas.Targets, outputs: schemas.Outputs) -> float`** (L44-L53)
-  - **Purpose**: Abstract core method that computes the metric's performance score by comparing expected targets with predicted model outputs.
-  - **Inputs**:
-    - `targets` (`schemas.Targets` / `pandas.DataFrame`): The ground truth expected target labels.
-    - `outputs` (`schemas.Outputs` / `pandas.DataFrame`): The predictions output by the model.
-  - **Outputs**:
-    - `float`: The computed metric score.
-
-* **`scorer(self, model: models.Model, inputs: schemas.Inputs, targets: schemas.Targets) -> float`** (L55-L68)
-  - **Purpose**: Helper wrapper that evaluates the metric directly on a model instance by running inference on new inputs and passing the predictions alongside ground truth labels to the `score()` method. Compatible with standard Scikit-Learn evaluation calls.
-  - **Inputs**:
-    - `model` (`models.Model`): The model instance to evaluate.
-    - `inputs` (`schemas.Inputs` / `pandas.DataFrame`): Feature matrix containing sample rows.
-    - `targets` (`schemas.Targets` / `pandas.DataFrame`): Ground truth target labels.
-  - **Outputs**:
-    - `float`: The computed metric score for the model's predictions.
-
-* **`to_mlflow(self) -> MlflowMetric`** (L70-L95)
-  - **Purpose**: Converts the project metric into a standard MLflow compatible metric wrapper. Internally constructs an evaluation function that processes predictions and target pandas Series, adjusts the score sign based on optimization direction, and aggregates the results for logging.
-  - **Inputs**: None.
-  - **Outputs**:
-    - `MlflowMetric` (`mlflow.metrics.MetricValue`): The MLflow metric entity ready to be passed to evaluation workflows.
-
----
-
-### `SklearnMetric` ([`src/regression_model_template/core/metrics.py:L98-L117`](/src/regression_model_template/core/metrics.py#L98-L117))
-
-`SklearnMetric` is a concrete subclass of `Metric` wrapping standard Scikit-Learn metric calculations (such as `root_mean_squared_error`, `mean_absolute_error`, etc.) dynamically using python reflection.
+Parameters:
+    name (str): name of the metric for the reporting.
+    greater_is_better (bool): maximize or minimize result.
 
 #### Methods
 
-* **`score(self, targets: schemas.Targets, outputs: schemas.Outputs) -> float`** (L111-L117)
-  - **Purpose**: Performs Scikit-Learn metric computation. Dynamically fetches the scorer function by name from `sklearn.metrics`, extracts the target and prediction columns, runs the computation, adjusts the sign based on whether greater is better, and returns the result.
+* **`score(self: Any, targets: schemas.Targets, outputs: schemas.Outputs) -> float`** (L44-L53)
+  - **Purpose**: Score the outputs against the targets.
   - **Inputs**:
-    - `targets` (`schemas.Targets`): Ground truth expected target labels.
-    - `outputs` (`schemas.Outputs`): Predicted output values.
+    - `self` (`Any`): Parameter description.
+    - `targets` (`schemas.Targets`): Parameter description.
+    - `outputs` (`schemas.Outputs`): Parameter description.
   - **Outputs**:
-    - `float`: The computed Scikit-Learn metric score.
+    - `float`: Return value description.
 
----
+* **`scorer(self: Any, model: models.Model, inputs: schemas.Inputs, targets: schemas.Targets) -> float`** (L55-L68)
+  - **Purpose**: Score model outputs against targets.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+    - `model` (`models.Model`): Parameter description.
+    - `inputs` (`schemas.Inputs`): Parameter description.
+    - `targets` (`schemas.Targets`): Parameter description.
+  - **Outputs**:
+    - `float`: Return value description.
 
-### `Threshold` ([`src/regression_model_template/core/metrics.py:L126-L149`](/src/regression_model_template/core/metrics.py#L126-L149))
+* **`to_mlflow(self: Any) -> MlflowMetric`** (L70-L95)
+  - **Purpose**: Convert the metric to an Mlflow metric.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+  - **Outputs**:
+    - `MlflowMetric`: Return value description.
 
-`Threshold` represents an evaluation constraint boundary (such as maximum error or minimum R2) used by model validation and promotion workflows to gate candidates.
+### `SklearnMetric` ([`src/regression_model_template/core/metrics.py:L98-L117`](../../../src/regression_model_template/core/metrics.py#L98-L117))
+
+Compute metrics with sklearn.
+
+Parameters:
+    name (str): name of the sklearn metric.
+    greater_is_better (bool): maximize or minimize.
 
 #### Methods
 
-* **`to_mlflow(self) -> MlflowThreshold`** (L140-L149)
-  - **Purpose**: Converts the pydantic model constraint into a native MLflow metric threshold constraint.
-  - **Inputs**: None.
+* **`score(self: Any, targets: schemas.Targets, outputs: schemas.Outputs) -> float`** (L111-L117)
+  - **Purpose**: No description available.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+    - `targets` (`schemas.Targets`): Parameter description.
+    - `outputs` (`schemas.Outputs`): Parameter description.
   - **Outputs**:
-    - `MlflowThreshold` (`mlflow.models.MetricThreshold`): MLflow threshold check object.
+    - `float`: Return value description.
+
+### `Threshold` ([`src/regression_model_template/core/metrics.py:L126-L148`](../../../src/regression_model_template/core/metrics.py#L126-L148))
+
+A project threshold for a metric.
+
+Use thresholds to monitor model performances.
+e.g., to trigger an alert when a threshold is met.
+
+Parameters:
+    threshold (int | float): absolute threshold value.
+    greater_is_better (bool): maximize or minimize result.
+
+#### Methods
+
+* **`to_mlflow(self: Any) -> MlflowThreshold`** (L140-L148)
+  - **Purpose**: Convert the threshold to an mlflow threshold.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+  - **Outputs**:
+    - `MlflowThreshold`: Return value description.

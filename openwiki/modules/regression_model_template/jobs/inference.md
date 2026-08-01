@@ -2,68 +2,68 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: Batch & Online Inference Job"
-source_path: "[`src/regression_model_template/jobs/inference.py`](/src/regression_model_template/jobs/inference.py)"
-description: "Batch inference job loading production models, executing predictions, and persisting output Parquet files."
-tags: ["jobs", "inference", "prediction", "batch", "parquet"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: inference"
+source_path: "src/regression_model_template/jobs/inference.py"
+description: "Define a job for generating batch predictions from a registered model."
+tags: ["module", "inference", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: Batch & Online Inference Job
+# Module Specification: inference
 
-* **Source File Reference:** [`src/regression_model_template/jobs/inference.py`](/src/regression_model_template/jobs/inference.py) (Lines: L17-L67)
-* **Upstream Dependencies:** [Modules/RegressionModelTemplate/Jobs/Base](base.md), [Modules/RegressionModelTemplate/IO/Registries](../io/registries.md), [Modules/RegressionModelTemplate/IO/Datasets](../io/datasets.md)
-* **Downstream Consumers:** [Modules/RegressionModelTemplate/Scripts](../scripts.md)
+* **Source Reference:** [src/regression_model_template/jobs/inference.py](../../../src/regression_model_template/jobs/inference.py) (Lines: L1-L66)
 
 ## 1. Architectural Role & Responsibilities
-`InferenceJob` loads active production model (`CustomLoader`), processes batch input datasets (`ParquetReader`), runs vector predictions, and writes output Parquet predictions (`ParquetWriter`).
+Define a job for generating batch predictions from a registered model.
 
 ## 2. UML 2.0 Class Diagram
-
 ```mermaid
 classDiagram
     direction BT
-    class Job {
-        <<abstract>>
-        +logger_service: LoggerService
-        +mlflow_service: MlflowService
-        +alerts_service: AlertsService
-        +run()* Locals
-    }
     class InferenceJob {
-        +KIND: Literal
-        +inputs: ReaderKind
-        +outputs: WriterKind
+        +KIND: T.Literal['InferenceJob']
+        +inputs: datasets.ReaderKind
+        +outputs: datasets.WriterKind
         +alias_or_version: str | int
-        +loader: LoaderKind
-        +run() base.Locals
+        +loader: registries.LoaderKind
+        +run(self: Any) base.Locals
     }
+```
 
-    Job <|-- InferenceJob : Inheritance
+## 2b. Execution Flow (Sequence Diagram)
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as Runner
+    participant Job as InferenceJob
+    
+    User->>Job: run()
+    activate Job
+    Note over Job: Reads inputs and performs workflow steps
+    Job-->>User: Locals (dict)
+    deactivate Job
 ```
 
 ## 3. Class & Method Specifications
 
-### `InferenceJob` ([`src/regression_model_template/jobs/inference.py:L17-L67`](/src/regression_model_template/jobs/inference.py#L17-L67))
+### `InferenceJob` ([`src/regression_model_template/jobs/inference.py:L17-L66`](../../../src/regression_model_template/jobs/inference.py#L17-L66))
 
-`InferenceJob` is a concrete execution job that retrieves a deployed model candidate from the MLflow model registry (by model version or alias, e.g., the default "Champion" model alias) and generates batch prediction outputs from feature dataset inputs.
+Generate batch predictions from a registered model.
+
+Parameters:
+    inputs (datasets.ReaderKind): reader for the inputs data.
+    outputs (datasets.WriterKind): writer for the outputs data.
+    alias_or_version (str | int): alias or version for the  model.
+    loader (registries.LoaderKind): registry loader for the model.
 
 #### Methods
 
-* **`run(self) -> base.Locals`** (L38-L67)
-  - **Purpose**: Executes the batch prediction pipeline. Loads the target model candidate, ingests the inputs dataset, runs inference predictions, writes out predictions, and sends alert notifications.
-  - **Steps Executed**:
-    1. Obtains the configured Logger and MLflow client handles.
-    2. Ingests the batch inputs dataframe from the inputs reader connector.
-    3. Performs Pydantic schema validation to ensure input features strictly comply with the schema contract.
-    4. Computes the target model's MLflow registry URI based on the registry name and model version/alias.
-    5. Loads the model pipeline object into memory using the registry loader connector.
-    6. Runs predictions on the inputs dataframe using the loaded model instance.
-    7. Formats the predictions dataframe and writes it to the output target writer connector.
-    8. Dispatches an execution completion alert containing the final predictions dataframe shape.
-  - **Inputs**: None.
+* **`run(self: Any) -> base.Locals`** (L38-L66)
+  - **Purpose**: No description available.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
   - **Outputs**:
-    - `base.Locals` (`dict`): Dictionary containing all local variables (including the final generated `outputs` dataframe).
+    - `base.Locals`: Return value description.

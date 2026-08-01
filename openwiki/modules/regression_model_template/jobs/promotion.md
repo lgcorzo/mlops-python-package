@@ -2,45 +2,66 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: Model Registry Promotion Job"
-source_path: "[src/regression_model_template/jobs/promotion.py](/src/regression_model_template/jobs/promotion.py)"
-description: "Model registry promotion job comparing candidate metrics against production models and transitioning stages in MLflow Registry."
-tags: ["jobs", "promotion", "mlflow", "registry", "staging", "production"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: promotion"
+source_path: "src/regression_model_template/jobs/promotion.py"
+description: "Define a job for promoting a registered model version with an alias."
+tags: ["module", "promotion", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: Model Registry Promotion Job
+# Module Specification: promotion
 
-* **Source File Reference:** [`src/regression_model_template/jobs/promotion.py`](/src/regression_model_template/jobs/promotion.py) (Lines: L12-L57)
-* **Upstream Dependencies:** [Modules/RegressionModelTemplate/Jobs/Base](base.md), [Modules/RegressionModelTemplate/IO/Registries](../io/registries.md)
-* **Downstream Consumers:** [Modules/RegressionModelTemplate/Scripts](../scripts.md)
+* **Source Reference:** [src/regression_model_template/jobs/promotion.py](../../../src/regression_model_template/jobs/promotion.py) (Lines: L1-L57)
 
 ## 1. Architectural Role & Responsibilities
-`PromotionJob` compares candidate model metric evaluation scores against existing `Production` models. If candidate performance passes threshold criteria, transitions model stage from `Staging` to `Production` in MLflow Registry (`MlflowRegister`).
+Define a job for promoting a registered model version with an alias.
 
 ## 2. UML 2.0 Class Diagram
-
 ```mermaid
 classDiagram
     direction BT
-    class Job {
-        <<abstract>>
-        +KIND: str
-        +run()*
-    }
     class PromotionJob {
-        +KIND: Literal
+        +KIND: T.Literal['PromotionJob']
         +alias: str
         +version: int | None
-        +run() base.Locals
+        +run(self: Any) base.Locals
     }
-    Job <|-- PromotionJob : Inheritance
+```
+
+## 2b. Execution Flow (Sequence Diagram)
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as Runner
+    participant Job as PromotionJob
+    
+    User->>Job: run()
+    activate Job
+    Note over Job: Reads inputs and performs workflow steps
+    Job-->>User: Locals (dict)
+    deactivate Job
 ```
 
 ## 3. Class & Method Specifications
 
-### `PromotionJob` ([`src/regression_model_template/jobs/promotion.py:L12-L57`](/src/regression_model_template/jobs/promotion.py#L12-L57))
-* `run(self)` (L27-L57): Executes automated model promotion check and updates MLflow Model Registry stages.
+### `PromotionJob` ([`src/regression_model_template/jobs/promotion.py:L12-L57`](../../../src/regression_model_template/jobs/promotion.py#L12-L57))
+
+Define a job for promoting a registered model version with an alias.
+
+https://mlflow.org/docs/latest/model-registry.html#concepts
+
+Parameters:
+    alias (str): the mlflow alias to transition the registered model version.
+    version (int | None): the model version to transition (use None for latest).
+
+#### Methods
+
+* **`run(self: Any) -> base.Locals`** (L27-L57)
+  - **Purpose**: No description available.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+  - **Outputs**:
+    - `base.Locals`: Return value description.

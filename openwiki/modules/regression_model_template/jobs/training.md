@@ -2,75 +2,78 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: Training Pipeline Job"
-source_path: "[`src/regression_model_template/jobs/training.py`](/src/regression_model_template/jobs/training.py)"
-description: "Model training pipeline job reading datasets, fitting estimators, logging metrics, and registering model artifacts."
-tags: ["jobs", "training", "mlflow", "pipeline", "fit"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: training"
+source_path: "src/regression_model_template/jobs/training.py"
+description: "Define a job for training and registring a single AI/ML model."
+tags: ["module", "training", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: Training Pipeline Job
+# Module Specification: training
 
-* **Source File Reference:** [`src/regression_model_template/jobs/training.py`](/src/regression_model_template/jobs/training.py) (Lines: L21-L146)
-* **Upstream Dependencies:** [Modules/RegressionModelTemplate/Jobs/Base](base.md), [Modules/RegressionModelTemplate/Core/Models](../core/models.md), [Modules/RegressionModelTemplate/IO/Datasets](../io/datasets.md), [Modules/RegressionModelTemplate/IO/Registries](../io/registries.md)
-* **Downstream Consumers:** [Modules/RegressionModelTemplate/Scripts](../scripts.md)
+* **Source Reference:** [src/regression_model_template/jobs/training.py](../../../src/regression_model_template/jobs/training.py) (Lines: L1-L145)
 
 ## 1. Architectural Role & Responsibilities
-`TrainingJob` implements the complete model training lifecycle workflow. Reads raw feature datasets, performs Pandera schema validation, splits train/validation data, fits `BaselineSklearnModel`, evaluates regression metrics, logs artifacts to MLflow, and registers model candidates.
+Define a job for training and registring a single AI/ML model.
 
 ## 2. UML 2.0 Class Diagram
-
 ```mermaid
 classDiagram
     direction BT
-    class Job {
-        <<abstract>>
-        +logger_service: LoggerService
-        +mlflow_service: MlflowService
-        +alerts_service: AlertsService
-        +run()* Locals
-    }
     class TrainingJob {
-        +run_config: RunConfig
-        +inputs: ReaderKind
-        +targets: ReaderKind
-        +model: ModelKind
-        +metrics: MetricsKind
-        +splitter: SplitterKind
-        +saver: SaverKind
-        +signer: SignerKind
-        +registry: RegisterKind
-        +run() Locals
+        +KIND: T.Literal['TrainingJob']
+        +run_config: services.MlflowService.RunConfig
+        +inputs: datasets.ReaderKind
+        +targets: datasets.ReaderKind
+        +model: models.ModelKind
+        +metrics: metrics_.MetricsKind
+        +splitter: splitters.SplitterKind
+        +saver: registries.SaverKind
+        +signer: signers.SignerKind
+        +registry: registries.RegisterKind
+        +run(self: Any) base.Locals
     }
+```
 
-    Job <|-- TrainingJob : Inheritance
+## 2b. Execution Flow (Sequence Diagram)
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as Runner
+    participant Job as TrainingJob
+    
+    User->>Job: run()
+    activate Job
+    Note over Job: Reads inputs and performs workflow steps
+    Job-->>User: Locals (dict)
+    deactivate Job
 ```
 
 ## 3. Class & Method Specifications
 
-### `TrainingJob` ([`src/regression_model_template/jobs/training.py:L21-L146`](/src/regression_model_template/jobs/training.py#L21-L146))
+### `TrainingJob` ([`src/regression_model_template/jobs/training.py:L21-L145`](../../../src/regression_model_template/jobs/training.py#L21-L145))
 
-`TrainingJob` is a concrete execution job that fits a machine learning model candidate and registers it to the central MLflow registry. It encapsulates data ingestion, schema enforcement, dataset split logic, model training, evaluation score reporting, signing, saving, and registering within a managed MLflow run context.
+Train and register a single AI/ML model.
+
+Parameters:
+    run_config (services.MlflowService.RunConfig): mlflow run config.
+    inputs (datasets.ReaderKind): reader for the inputs data.
+    targets (datasets.ReaderKind): reader for the targets data.
+    model (models.ModelKind): machine learning model to train.
+    metrics (metrics_.MetricKind): metrics for the reporting.
+    splitter (splitters.SplitterKind): data sets splitter.
+    saver (registries.SaverKind): model saver.
+    signer (signers.SignerKind): model signer.
+    registry (registries.RegisterKind): model register.
 
 #### Methods
 
-* **`run(self) -> base.Locals`** (L57-L146)
-  - **Purpose**: Executes the end-to-end model training, validation, and registration pipeline under a managed MLflow tracking run.
-  - **Steps Executed**:
-    1. Retrieves services (Logger, MLflow Client) and initializes a managed MLflow run context.
-    2. Reads training features and ground truth targets from data reader connectors.
-    3. Performs Pydantic/Pandera checks to enforce input and target schema contracts.
-    4. Logs training dataset lineages to the active MLflow run.
-    5. Splits features and targets into training and validation sets using the configured data splitter strategy.
-    6. Fits the model estimator on the training set.
-    7. Evaluates the fitted model on the validation set, calculates all configured metrics, and logs them in a single batch to MLflow.
-    8. Infers input/output signatures and signs the model candidate.
-    9. Saves the signed model candidate artifact to the designated store path.
-    10. Registers the saved candidate to the MLflow model registry under the configured package registry name.
-    11. Dispatches alerts notifications upon successful pipeline completion.
-  - **Inputs**: None.
+* **`run(self: Any) -> base.Locals`** (L57-L145)
+  - **Purpose**: No description available.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
   - **Outputs**:
-    - `base.Locals` (`dict`): Dictionary containing all local execution variables (including the final `model_version`).
+    - `base.Locals`: Return value description.
