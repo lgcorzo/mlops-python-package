@@ -5,7 +5,7 @@
 [![publish.yml](https://github.com/lgcorzo/mlops-python-package/actions/workflows/publish.yml/badge.svg)](https://github.com/lgcorzo/mlops-python-package/actions/workflows/publish.yml)
 [![Documentation](https://img.shields.io/badge/documentation-available-brightgreen.svg)](https://lgcorzo.github.io/mlops-python-package/)
 [![License](https://img.shields.io/github/license/lgcorzo/mlops-python-package)](https://github.com/lgcorzo/mlops-python-package/blob/main/LICENSE.txt)
-[![Release](https://img.shields.io/github/v/release/lgcorzo/mlops-python-package)](https://github.com/lgcorzo/mlops-python-package/releases)
+[![Release](https://img.shields.io/github/v/release/lgcorzo/mlops-python-package?sort=semver)](https://github.com/lgcorzo/mlops-python-package/releases)
 
 **This repository contains a Python code base with best practices designed to support your MLOps initiatives.**
 
