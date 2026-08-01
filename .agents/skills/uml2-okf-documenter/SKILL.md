@@ -302,27 +302,25 @@ classDiagram
     BaseParser <|.. PythonASTParser : Realization
 ```
 
-## 3. Comprehensive Method Contracts
+## 3. Class & Method Specifications
 
-### `parse(file_path: str, include_private: bool = False) -> ASTResult`
-* **Source Line Citation:** `src/core/parser.py:L45-L95`
-* **Visibility:** Public (`+`)
-* **Behavior:** Reads source file, parses native AST structure, extracts classes, methods, parameters, and line spans.
+For each class defined in the module, provide a clear, human-readable summary of the class, followed by a list of all public and key private methods. Format the methods exactly as follows:
 
-#### Input Parameters
-| Parameter | Data Type | Required / Default | Semantic Description |
-| :--- | :--- | :--- | :--- |
-| `file_path` | `str` | Required | Relative path to target source file. |
-| `include_private` | `bool` | Optional (`False`) | Includes private (`_`) methods when True. |
+### `ClassName` ([`src/path/to/class.py:Lstart-Lend`](/src/path/to/class.py#Lstart-Lend))
 
-#### Return Value & Output Shape
-| Return Type | Scenario | Description |
-| :--- | :--- | :--- |
-| `ASTResult` | Success | Object containing list of `Symbol` definitions and dependency imports. |
+[Concise functional description of the class in simple terms.]
 
-#### Thrown Exceptions & Error States
-* `FileNotFoundError`: Target file missing (`src/errors.py:L15`).
-* `SyntaxError`: Code parsing failed (`src/core/parser.py:L62`).
+#### Methods
+
+* **`method_name(self, param1: Type1, param2: Type2) -> ReturnType`** (Lstart-Lend)
+  - **Purpose**: [Clear description of what the method does in plain, human-understandable terms.]
+  - **Inputs**:
+    - `param1` (`Type1`): [Description of param1.]
+    - `param2` (`Type2`): [Description of param2.]
+  - **Outputs**:
+    - `ReturnType` (`Type`): [Description of the return value.]
+  - **Raises**:
+    - `ExceptionClass`: [Under what condition this exception is raised.]
 
 ---
 

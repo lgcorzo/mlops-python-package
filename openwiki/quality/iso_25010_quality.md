@@ -1,0 +1,27 @@
+---
+iso_doc_type: "Report"
+iso_viewpoint: "QualityView"
+type: "quality"
+title: "ISO/IEC 25010 Software Quality Assessment Matrix"
+description: "System quality characteristics evaluation matrix adhering to ISO/IEC 25010 SQuaRE standards."
+tags: ["iso25010", "quality", "square", "audit"]
+last_verified_commit: "HEAD"
+timestamp: "2026-07-31T16:17:00Z"
+generated: "agent:okf-professional-documenter"
+verified: "true"
+---
+
+# ISO/IEC 25010 Software Quality Assessment Matrix
+
+The system quality of `mlops-python-package` is evaluated across the 8 standard quality characteristics defined in **ISO/IEC 25010**:
+
+| Quality Characteristic | Sub-Characteristic | System Implementation & Evidence | Source Line Citation |
+| :--- | :--- | :--- | :--- |
+| **Functional Suitability** | Functional Completeness | 100% coverage of MLOps lifecycle jobs (training, tuning, evaluation, SHAP explanation, registry promotion, inference). | [`src/regression_model_template/jobs`](/src/regression_model_template/jobs) |
+| **Performance Efficiency** | Time Behaviour | Real-time Kafka consumer processes batch prediction requests asynchronously; local AST index updates run in < 5 seconds. | [`src/regression_model_template/controller/kafka_app.py:L271-L285`](/src/regression_model_template/controller/kafka_app.py#L271-L285) |
+| **Compatibility** | Interoperability | Standard MLflow REST API, OpenTelemetry OTLP export, PyArrow Parquet formats, and Kafka JSON event protocol. | [`src/regression_model_template/io/services.py:L162-L252`](/src/regression_model_template/io/services.py#L162-L252) |
+| **Usability** | Operability | Unified CLI interface dispatcher (`regression_model_template [JOB_NAME]`) and simple Hydra YAML configuration files. | [`src/regression_model_template/scripts.py:L1-L55`](/src/regression_model_template/scripts.py#L1-L55) |
+| **Reliability** | Fault Tolerance | Exception handling and context-managed cleanup (`Job.__exit__`) ensure runs close cleanly even upon error. | [`src/regression_model_template/jobs/base.py:L54-L77`](/src/regression_model_template/jobs/base.py#L54-L77) |
+| **Security** | Confidentiality & Integrity | IP sliding-window rate limiting, Pandera input sanitization, Pydantic settings secret isolation, and model signature verification. | [`src/regression_model_template/controller/kafka_app.py:L70-L112`](/src/regression_model_template/controller/kafka_app.py#L70-L112) |
+| **Maintainability** | Modularity & Testability | Clean separation into `controller`, `core`, `io`, `jobs`, `utils` subsystems with pytest suite coverage. | `tests/` |
+| **Portability** | Adaptability | Platform-independent Python 3.12 implementation, Docker containerization, and `docker-compose` support. | `Dockerfile:L1-L35` |
