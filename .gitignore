@@ -30,6 +30,8 @@
 *.py[cod]
 __pycache__/
 
-# graphyfy
-graphify-out/
+# DVC
+.dvc/cache
+.dvc/tmp
+
 

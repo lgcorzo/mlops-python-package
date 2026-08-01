@@ -1,0 +1,6 @@
+[core]
+    remote = minio
+['remote "minio"']
+    url = s3://mlflow/dvc-data
+    endpointurl = https://mlflow-minio-hl.storage.svc.cluster.local:9000
+    ssl_verify = false

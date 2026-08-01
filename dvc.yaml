@@ -1,0 +1,51 @@
+stages:
+  prepare_data:
+    cmd: python -m regression_model_template.init_data --output-dir data
+    outs:
+      - data/inputs_train.parquet
+      - data/targets_train.parquet
+      - data/inputs_test.parquet
+      - data/targets_test.parquet
+
+  tuning:
+    cmd: regression_model_template confs/tuning.yaml -e '{"job":{"mlflow_service":{"autolog_disable":true},"alerts_service":{"enable":false}}}'
+    deps:
+      - confs/tuning.yaml
+      - data/inputs_train.parquet
+      - data/targets_train.parquet
+
+  training:
+    cmd: regression_model_template confs/training.yaml -e '{"job":{"mlflow_service":{"autolog_disable":true},"alerts_service":{"enable":false}}}'
+    deps:
+      - confs/training.yaml
+      - data/inputs_train.parquet
+      - data/targets_train.parquet
+
+  promotion:
+    cmd: regression_model_template confs/promotion.yaml -e '{"job":{"mlflow_service":{"autolog_disable":true},"alerts_service":{"enable":false}}}'
+    deps:
+      - confs/promotion.yaml
+
+  inference:
+    cmd: regression_model_template confs/inference.yaml -e '{"job":{"mlflow_service":{"autolog_disable":true},"alerts_service":{"enable":false}}}'
+    deps:
+      - confs/inference.yaml
+      - data/inputs_test.parquet
+    outs:
+      - outputs/predictions_test.parquet
+
+  evaluations:
+    cmd: regression_model_template confs/evaluations.yaml -e '{"job":{"mlflow_service":{"autolog_disable":true},"alerts_service":{"enable":false}}}'
+    deps:
+      - confs/evaluations.yaml
+      - data/inputs_train.parquet
+      - data/targets_train.parquet
+
+  explanations:
+    cmd: regression_model_template confs/explanations.yaml -e '{"job":{"mlflow_service":{"autolog_disable":true},"alerts_service":{"enable":false}}}'
+    deps:
+      - confs/explanations.yaml
+      - data/inputs_test.parquet
+    outs:
+      - outputs/models_explanations.parquet
+      - outputs/samples_explanations.parquet
