@@ -3,7 +3,7 @@ iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
 title: "Module: Metrics & Evaluation Scorers"
-source_path: "src/regression_model_template/core/metrics.py"
+source_path: "[`src/regression_model_template/core/metrics.py`](/src/regression_model_template/core/metrics.py)"
 description: "Abstract metric definition, Scikit-Learn evaluation wrappers (RMSE, MAE, R2), and MLflow scorer exporters."
 tags: ["core", "metrics", "rmse", "mae", "r2", "mlflow"]
 last_verified_commit: "HEAD"
