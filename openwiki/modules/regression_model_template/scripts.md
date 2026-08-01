@@ -2,28 +2,25 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: CLI Command Dispatcher"
-source_path: "[[src/regression_model_template/scripts.py](../../../src/regression_model_template/scripts.py)](../../../[src/regression_model_template/scripts.py](../../../src/regression_model_template/scripts.py))"
-description: "Command-line argument parser and pipeline job launcher for training, tuning, evaluation, SHAP explanations, and promotion."
-tags: ["scripts", "cli", "argparse", "jobs"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: scripts"
+source_path: "src/regression_model_template/scripts.py"
+description: "Scripts for the CLI application."
+tags: ["module", "scripts", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: CLI Command Dispatcher
+# Module Specification: scripts
 
-* **Source File Reference:** `[[src/regression_model_template/scripts.py](../../../src/regression_model_template/scripts.py)](../../../[src/regression_model_template/scripts.py](../../../src/regression_model_template/scripts.py))` (Lines: L1-L55)
-* **Upstream Dependencies:** [Modules/RegressionModelTemplate/Jobs/Training](jobs/training.md), [Modules/RegressionModelTemplate/Jobs/Tuning](jobs/tuning.md), [Modules/RegressionModelTemplate/Jobs/Evaluations](jobs/evaluations.md), [Modules/RegressionModelTemplate/Jobs/Explanations](jobs/explanations.md), [Modules/RegressionModelTemplate/Jobs/Promotion](jobs/promotion.md), [Modules/RegressionModelTemplate/Jobs/Inference](jobs/inference.md)
-* **Downstream Consumers:** Package binary script `regression_model_template`
+* **Source Reference:** [src/regression_model_template/scripts.py](../../../src/regression_model_template/scripts.py) (Lines: L1-L47)
 
 ## 1. Architectural Role & Responsibilities
-`scripts.py` parses terminal arguments (`argparse`), initializes Hydra configuration specs, instantiates requested `Job` implementations (`TrainingJob`, `TuningJob`, etc.), and executes pipeline workflows within context managers.
+Scripts for the CLI application.
 
-## 2. Public Function Contracts
+## 3. Class & Method Specifications
 
-### `main() -> None`
-* **Line Citation:** `[[src/regression_model_template/scripts.py:L15-L55](../../../src/regression_model_template/scripts.py#L15-L55)](../../../[src/regression_model_template/scripts.py](../../../src/regression_model_template/scripts.py)#L15-L55)`
-* **Visibility:** Public (`+`)
-* **Behavior:** Parses CLI command arguments (`train`, `tune`, `evaluate`, `explain`, `promote`, `infer`), resolves `--config-path` and `--config-name`, and invokes target job.
+### Function: `main(argv: list[str] | None) -> int` ([`src/regression_model_template/scripts.py:L31-L47`](../../../src/regression_model_template/scripts.py#L31-L47))
+
+Main script for the application.

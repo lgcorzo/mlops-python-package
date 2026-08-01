@@ -2,26 +2,68 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: Batch & Online Inference Job"
-source_path: "[[src/regression_model_template/jobs/inference.py](../../../../src/regression_model_template/jobs/inference.py)](../../../../[src/regression_model_template/jobs/inference.py](../../../../src/regression_model_template/jobs/inference.py))"
-description: "Batch inference job loading production models, executing predictions, and persisting output Parquet files."
-tags: ["jobs", "inference", "prediction", "batch", "parquet"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: inference"
+source_path: "src/regression_model_template/jobs/inference.py"
+description: "Define a job for generating batch predictions from a registered model."
+tags: ["module", "inference", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: Batch & Online Inference Job
+# Module Specification: inference
 
-* **Source File Reference:** `[[src/regression_model_template/jobs/inference.py](../../../../src/regression_model_template/jobs/inference.py)](../../../../[src/regression_model_template/jobs/inference.py](../../../../src/regression_model_template/jobs/inference.py))` (Lines: L17-L66)
-* **Upstream Dependencies:** [Modules/RegressionModelTemplate/Jobs/Base](base.md), [Modules/RegressionModelTemplate/IO/Registries](../io/registries.md), [Modules/RegressionModelTemplate/IO/Datasets](../io/datasets.md)
-* **Downstream Consumers:** [Modules/RegressionModelTemplate/Scripts](../scripts.md)
+* **Source Reference:** [src/regression_model_template/jobs/inference.py](../../../src/regression_model_template/jobs/inference.py) (Lines: L1-L66)
 
 ## 1. Architectural Role & Responsibilities
-`InferenceJob` loads active production model (`CustomLoader`), processes batch input datasets (`ParquetReader`), runs vector predictions, and writes output Parquet predictions (`ParquetWriter`).
+Define a job for generating batch predictions from a registered model.
 
-## 2. Class & Method Specifications
+## 2. UML 2.0 Class Diagram
+```mermaid
+classDiagram
+    direction BT
+    class InferenceJob {
+        +KIND: T.Literal['InferenceJob']
+        +inputs: datasets.ReaderKind
+        +outputs: datasets.WriterKind
+        +alias_or_version: str | int
+        +loader: registries.LoaderKind
+        +run(self: Any) base.Locals
+    }
+```
 
-### `InferenceJob` (`[[src/regression_model_template/jobs/inference.py:L17-L66](../../../../src/regression_model_template/jobs/inference.py#L17-L66)](../../../../[src/regression_model_template/jobs/inference.py](../../../../src/regression_model_template/jobs/inference.py)#L17-L66)`)
-* `run(self)` (L38-L66): Executes batch inference workflow on target dataset inputs.
+## 2b. Execution Flow (Sequence Diagram)
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as Runner
+    participant Job as InferenceJob
+    
+    User->>Job: run()
+    activate Job
+    Note over Job: Reads inputs and performs workflow steps
+    Job-->>User: Locals (dict)
+    deactivate Job
+```
+
+## 3. Class & Method Specifications
+
+### `InferenceJob` ([`src/regression_model_template/jobs/inference.py:L17-L66`](../../../src/regression_model_template/jobs/inference.py#L17-L66))
+
+Generate batch predictions from a registered model.
+
+Parameters:
+    inputs (datasets.ReaderKind): reader for the inputs data.
+    outputs (datasets.WriterKind): writer for the outputs data.
+    alias_or_version (str | int): alias or version for the  model.
+    loader (registries.LoaderKind): registry loader for the model.
+
+#### Methods
+
+* **`run(self: Any) -> base.Locals`** (L38-L66)
+  - **Purpose**: No description available.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+  - **Outputs**:
+    - `base.Locals`: Return value description.

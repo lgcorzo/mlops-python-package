@@ -2,65 +2,66 @@
 iso_doc_type: "Description"
 iso_viewpoint: "ContextView"
 type: "architecture"
-title: "ISO 42010 Context View — System Context & External Boundaries"
-description: "System context view showing external interfaces, data flow, MLflow, DVC, Kafka, and OpenTelemetry boundaries."
-tags: ["iso42010", "context", "c4", "architecture"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "System Context View"
+description: "System Context View showing external boundaries, actors, data sources, and integrations (Kafka, MLflow)."
+tags: ["iso42010", "context", "boundaries", "kafka", "mlflow"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# ISO 42010 Context View: System Context & External Boundaries
+# System Context View: mlops-python-package
 
-## 1. System Context Diagram (C4 Level 1)
+This viewpoint describes the boundaries of the MLOps Regression Service, outlining actors, external system dependencies, and incoming/outgoing data streams.
+
+## 1. System Context Diagram
 
 ```mermaid
 graph TD
-    user["🧑‍💻 ML Engineer / Operator"]
-    client["💻 External Prediction Client"]
-    
-    subgraph MLOps Package Boundaries ["mlops-python-package (regression_model_template)"]
-        cli["CLI Scripts & Job Dispatcher<br/>(scripts.py)"]
-        jobs["Pipeline Jobs Engine<br/>(jobs/*.py)"]
-        kafka_service["Kafka FastAPI Controller<br/>(controller/kafka_app.py)"]
-    end
-    
-    subgraph External Systems & Services
-        mlflow["🔬 MLflow Tracking & Registry Server"]
-        dvc["📦 DVC Remote Storage / Parquet Store"]
-        kafka["📡 Apache Kafka Cluster"]
-        otel["📊 OpenTelemetry OTLP Collector"]
+    subgraph "External Systems"
+        MLflow["MLflow Tracking & Registry"]
+        Kafka["Kafka Broker (bootstrap.servers)"]
+        FS["Local / Cloud Storage (Parquet)"]
     end
 
-    user -->|"Executes training / evaluation jobs"| cli
-    cli -->|"Launches"| jobs
-    jobs -->|"Logs parameters, metrics, artifacts"| mlflow
-    jobs -->|"Reads / writes datasets with lineage"| dvc
-    jobs -->|"Emits telemetry & metrics"| otel
-    
-    client -->|"HTTP REST Requests / JSON"| kafka_service
-    kafka_service -->|"Subscribes & Publishes Inference Events"| kafka
-    kafka_service -->|"Queries registered model"| mlflow
-    kafka_service -->|"Exports traces & metrics"| otel
+    subgraph "mlops-python-package"
+        Jobs["Job Execution Engine (Training, Tuning, etc.)"]
+        Serving["Serving Service (FastAPI & Kafka App)"]
+    end
+
+    Developer["Data Scientist / Developer"] -- "Triggers Jobs via CLI" --> Jobs
+    HTTPClient["HTTP Prediction Client"] -- "POST /predict" --> Serving
+    KafkaProducer["External Data Streamer"] -- "Publishes to input_topic" --> Kafka
+
+    Jobs -- "Logs experiments & models" --> MLflow
+    Jobs -- "Reads / Writes datasets" --> FS
+    Serving -- "Loads registered models" --> MLflow
+    Serving -- "Consumes input_topic" --> Kafka
+    Serving -- "Publishes prediction to output_topic" --> Kafka
+    Kafka -- "Delivers predictions" --> HTTPClient
 ```
 
----
+## 2. Interface Definitions & Boundaries
 
-## 2. External Integration Interfaces
+### MLflow Integration
+- **Role:** Central repository for model tracking and model registration.
+- **Protocol:** REST HTTP / gRPC via `mlflow` client.
+- **Boundaries:** Configured using the `MLflowService` wrapper (`src/regression_model_template/io/services.py:L130-L195`).
 
-### A. MLflow Tracking & Model Registry (`[[src/regression_model_template/io/services.py:L162-L252](../../src/regression_model_template/io/services.py#L162-L252)](../../[src/regression_model_template/io/services.py](../../src/regression_model_template/io/services.py)#L162-L252)`, `registries.py:L69-L317`)
-* **Protocol:** HTTP/REST & MLflow Python Client API.
-* **Role:** Tracks run metadata, experiment hyperparameters, evaluation metrics (`rmse`, `mae`, `r2`), SHAP artifacts, model signatures, and manages model lifecycle states (`Staging`, `Production`, `Archived`).
+### Kafka Broker
+- **Role:** Real-time data streaming message queue.
+- **Protocol:** Kafka Protocol via `confluent_kafka` C-extension client.
+- **Topics:**
+  - `input_topic` (Default): Receives features payload dictionaries.
+  - `output_topic` (Default): Emits inference results with predicted output values.
 
-### B. Apache Kafka Event Streaming (`[[src/regression_model_template/controller/kafka_app.py:L184-L386](../../src/regression_model_template/controller/kafka_app.py#L184-L386)](../../[src/regression_model_template/controller/kafka_app.py](../../src/regression_model_template/controller/kafka_app.py)#L184-L386)`)
-* **Protocol:** TCP Kafka Protocol via `confluent-kafka`.
-* **Role:** Real-time event streaming for online prediction requests (`input_topic`) and prediction output dispatches (`output_topic`).
+### Storage Interface
+- **Role:** Handles batch inputs and outputs.
+- **Protocol:** Filesystem I/O via Pandas/PyArrow.
+- **Formats:** Parquet dataset readers and writers (`src/regression_model_template/io/datasets.py:L10-L100`).
 
-### C. OpenTelemetry OTLP Collector (`[[src/regression_model_template/io/services.py:L1-L124](../../src/regression_model_template/io/services.py#L1-L124)](../../[src/regression_model_template/io/services.py](../../src/regression_model_template/io/services.py)#L1-L124)`)
-* **Protocol:** gRPC / HTTP OTLP (`opentelemetry-exporter-otlp`).
-* **Role:** Collects distributed traces, service execution metrics, and log records (`Loguru` propagate handler) for system monitoring.
+## 3. Actor Roles & Interactions
 
-### D. Data Storage & Parquet I/O (`[[src/regression_model_template/io/datasets.py:L19-L125](../../src/regression_model_template/io/datasets.py#L19-L125)](../../[src/regression_model_template/io/datasets.py](../../src/regression_model_template/io/datasets.py)#L19-L125)`)
-* **Protocol:** Local Filesystem / Cloud Storage (S3/GCS via PyArrow & DVC).
-* **Role:** Storage and retrieval of dataset splits (train, validation, test) in Parquet format with lineage hashing.
+- **Data Scientist:** Triggers pipeline jobs (`training`, `tuning`, `evaluations`, `promotion`, `explanations`, `inference`) via CLI entry points.
+- **Prediction Client:** Queries predictions in real-time using either HTTP endpoints or asynchronous Kafka message streams.

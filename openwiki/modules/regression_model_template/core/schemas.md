@@ -2,60 +2,119 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: Data Validation Schemas"
-source_path: "[[src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py)](../../../../[src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py))"
-description: "Pandera DataFrame schemas for strict input features, targets, predictions, and SHAP explanation data structures."
-tags: ["core", "schemas", "pandera", "validation", "pydantic"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: schemas"
+source_path: "src/regression_model_template/core/schemas.py"
+description: "Define and validate dataframe schemas."
+tags: ["module", "schemas", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: Data Validation Schemas
+# Module Specification: schemas
 
-* **Source File Reference:** `[[src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py)](../../../../[src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py))` (Lines: L1-L117)
-* **Upstream Dependencies:** `pandera`, `pydantic`
-* **Downstream Consumers:** [Modules/RegressionModelTemplate/Jobs/Training](../jobs/training.md), [Modules/RegressionModelTemplate/Controller/KafkaApp](../controller/kafka_app.md)
+* **Source Reference:** [src/regression_model_template/core/schemas.py](../../../src/regression_model_template/core/schemas.py) (Lines: L1-L120)
 
 ## 1. Architectural Role & Responsibilities
-`schemas.py` defines Pandera DataFrame schemas (`InputsSchema`, `TargetsSchema`, `OutputsSchema`, `SHAPValuesSchema`) to enforce strict type checking, non-null constraints, and numeric range limits across pipeline operations.
+Define and validate dataframe schemas.
 
 ## 2. UML 2.0 Class Diagram
-
 ```mermaid
 classDiagram
     direction BT
     class Schema {
-        <<abstract>>
-        +check(data: DataFrame) DataFrame
+        +check(cls: T.Type[TSchema], data: pd.DataFrame) papd.DataFrame[TSchema]
     }
     class InputsSchema {
-        +check(data) DataFrame
+        +instant: papd.Index[padt.UInt32]
+        +dteday: papd.Series[padt.DateTime]
+        +season: papd.Series[padt.UInt8]
+        +yr: papd.Series[padt.UInt8]
+        +mnth: papd.Series[padt.UInt8]
+        +hr: papd.Series[padt.UInt8]
+        +holiday: papd.Series[padt.Bool]
+        +weekday: papd.Series[padt.UInt8]
+        +workingday: papd.Series[padt.Bool]
+        +weathersit: papd.Series[padt.UInt8]
+        +temp: papd.Series[padt.Float16]
+        +atemp: papd.Series[padt.Float16]
+        +hum: papd.Series[padt.Float16]
+        +windspeed: papd.Series[padt.Float16]
+        +casual: papd.Series[padt.UInt32]
+        +registered: papd.Series[padt.UInt32]
     }
     class TargetsSchema {
-        +check(data) DataFrame
+        +instant: papd.Index[padt.UInt32]
+        +cnt: papd.Series[padt.UInt32]
     }
     class OutputsSchema {
-        +check(data) DataFrame
+        +instant: papd.Index[padt.UInt32]
+        +prediction: papd.Series[padt.UInt32]
     }
     class SHAPValuesSchema {
-        +check(data) DataFrame
     }
-
-    Schema <|-- InputsSchema : Inheritance
-    Schema <|-- TargetsSchema : Inheritance
-    Schema <|-- OutputsSchema : Inheritance
-    Schema <|-- SHAPValuesSchema : Inheritance
+    class FeatureImportancesSchema {
+        +feature: papd.Series[str]
+        +importance: papd.Series[float]
+    }
 ```
 
 ## 3. Class & Method Specifications
 
-### `Schema` (`[[src/regression_model_template/core/schemas.py:L20-L48](../../../../src/regression_model_template/core/schemas.py#L20-L48)](../../../../[src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py)#L20-L48)`)
-* `check(cls, data: pd.DataFrame) -> pd.DataFrame` (L39-L48): Class method executing Pandera schema validation on input DataFrame.
+### `Schema` ([`src/regression_model_template/core/schemas.py:L20-L48`](../../../src/regression_model_template/core/schemas.py#L20-L48))
 
-### Concrete Schema Implementations
-* `InputsSchema` (L51-L69): Validates raw input features (numeric dtypes, min/max ranges).
-* `TargetsSchema` (L75-L79): Validates target ground truth values.
-* `OutputsSchema` (L85-L89): Validates prediction outputs.
-* `SHAPValuesSchema` (L95-L107): Validates SHAP value matrices.
+Base class for a dataframe schema.
+
+Use a schema to type your dataframe object.
+e.g., to communicate and validate its fields.
+
+#### Methods
+
+* **`check(cls: T.Type[TSchema], data: pd.DataFrame) -> papd.DataFrame[TSchema]`** (L39-L48)
+  - **Purpose**: Check the dataframe with this schema.
+  - **Inputs**:
+    - `cls` (`T.Type[TSchema]`): Parameter description.
+    - `data` (`pd.DataFrame`): Parameter description.
+  - **Outputs**:
+    - `papd.DataFrame[TSchema]`: Return value description.
+
+### `InputsSchema` ([`src/regression_model_template/core/schemas.py:L51-L69`](../../../src/regression_model_template/core/schemas.py#L51-L69))
+
+Schema for the project inputs.
+
+#### Methods
+
+*No methods defined.*
+
+### `TargetsSchema` ([`src/regression_model_template/core/schemas.py:L75-L79`](../../../src/regression_model_template/core/schemas.py#L75-L79))
+
+Schema for the project target.
+
+#### Methods
+
+*No methods defined.*
+
+### `OutputsSchema` ([`src/regression_model_template/core/schemas.py:L85-L89`](../../../src/regression_model_template/core/schemas.py#L85-L89))
+
+Schema for the project output.
+
+#### Methods
+
+*No methods defined.*
+
+### `SHAPValuesSchema` ([`src/regression_model_template/core/schemas.py:L95-L107`](../../../src/regression_model_template/core/schemas.py#L95-L107))
+
+Schema for the project shap values.
+
+#### Methods
+
+*No methods defined.*
+
+### `FeatureImportancesSchema` ([`src/regression_model_template/core/schemas.py:L113-L117`](../../../src/regression_model_template/core/schemas.py#L113-L117))
+
+Schema for the project feature importances.
+
+#### Methods
+
+*No methods defined.*

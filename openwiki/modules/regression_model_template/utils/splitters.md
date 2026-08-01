@@ -2,58 +2,141 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: Dataset Splitters"
-source_path: "[[src/regression_model_template/utils/splitters.py](../../../../src/regression_model_template/utils/splitters.py)](../../../../[src/regression_model_template/utils/splitters.py](../../../../src/regression_model_template/utils/splitters.py))"
-description: "Train/test splitters and time-series cross-validation splitters."
-tags: ["utils", "splitters", "traintest", "timeseries", "scikit-learn"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Module: splitters"
+source_path: "src/regression_model_template/utils/splitters.py"
+description: "Split dataframes into subsets (e.g., train/valid/test)."
+tags: ["module", "splitters", "regression_model_template"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Module Specification: Dataset Splitters
+# Module Specification: splitters
 
-* **Source File Reference:** `[[src/regression_model_template/utils/splitters.py](../../../../src/regression_model_template/utils/splitters.py)](../../../../[src/regression_model_template/utils/splitters.py](../../../../src/regression_model_template/utils/splitters.py))` (Lines: L24-L108)
-* **Upstream Dependencies:** `scikit-learn`
-* **Downstream Consumers:** [Modules/RegressionModelTemplate/Jobs/Training](../jobs/training.md), [Modules/RegressionModelTemplate/Jobs/Tuning](../jobs/tuning.md)
+* **Source Reference:** [src/regression_model_template/utils/splitters.py](../../../src/regression_model_template/utils/splitters.py) (Lines: L1-L111)
 
 ## 1. Architectural Role & Responsibilities
-`splitters.py` defines `Splitter` abstraction, implementing `TrainTestSplitter` (randomized train/test partitioning) and `TimeSeriesSplitter` (temporal sequence cross-validation partitioning).
+Split dataframes into subsets (e.g., train/valid/test).
 
 ## 2. UML 2.0 Class Diagram
-
 ```mermaid
 classDiagram
     direction BT
     class Splitter {
-        <<abstract>>
-        +split(inputs, targets, groups)*
-        +get_n_splits(inputs, targets, groups)*
+        +KIND: str
+        +split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) TrainTestSplits
+        +get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) int
     }
     class TrainTestSplitter {
-        -test_size: float
-        +split(inputs, targets, groups)
-        +get_n_splits(inputs, targets, groups)
+        +KIND: T.Literal['TrainTestSplitter']
+        +shuffle: bool
+        +test_size: int | float
+        +random_state: int
+        +split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) TrainTestSplits
+        +get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) int
     }
     class TimeSeriesSplitter {
-        -n_splits: int
-        +split(inputs, targets, groups)
-        +get_n_splits(inputs, targets, groups)
+        +KIND: T.Literal['TimeSeriesSplitter']
+        +gap: int
+        +n_splits: int
+        +test_size: int | float
+        +split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) TrainTestSplits
+        +get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) int
     }
-
-    Splitter <|-- TrainTestSplitter : Inheritance
-    Splitter <|-- TimeSeriesSplitter : Inheritance
 ```
 
-## 3. Class Specifications
+## 3. Class & Method Specifications
 
-### `Splitter` (`[[src/regression_model_template/utils/splitters.py:L24-L59](../../../../src/regression_model_template/utils/splitters.py#L24-L59)](../../../../[src/regression_model_template/utils/splitters.py](../../../../src/regression_model_template/utils/splitters.py)#L24-L59)`)
-* `split(self, inputs, targets, groups)` (L36-L46): Abstract split generator.
-* `get_n_splits(self, inputs, targets, groups)` (L49-L59): Abstract split count retriever.
+### `Splitter` ([`src/regression_model_template/utils/splitters.py:L24-L59`](../../../src/regression_model_template/utils/splitters.py#L24-L59))
 
-### `TrainTestSplitter` (`[[src/regression_model_template/utils/splitters.py:L62-L85](../../../../src/regression_model_template/utils/splitters.py#L62-L85)](../../../../[src/regression_model_template/utils/splitters.py](../../../../src/regression_model_template/utils/splitters.py)#L62-L85)`)
-* Performs standard train/test split partitioning.
+Base class for a splitter.
 
-### `TimeSeriesSplitter` (`[[src/regression_model_template/utils/splitters.py:L88-L108](../../../../src/regression_model_template/utils/splitters.py#L88-L108)](../../../../[src/regression_model_template/utils/splitters.py](../../../../src/regression_model_template/utils/splitters.py)#L88-L108)`)
-* Performs expanding-window temporal cross-validation splits.
+Use splitters to split data in sets.
+e.g., split between a train/test subsets.
+
+# https://scikit-learn.org/stable/glossary.html#term-CV-splitter
+
+#### Methods
+
+* **`split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`** (L36-L46)
+  - **Purpose**: Split a dataframe into subsets.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+    - `inputs` (`schemas.Inputs`): Parameter description.
+    - `targets` (`schemas.Targets`): Parameter description.
+    - `groups` (`Index | None`): Parameter description.
+  - **Outputs**:
+    - `TrainTestSplits`: Return value description.
+
+* **`get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`** (L49-L59)
+  - **Purpose**: Get the number of splits generated.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+    - `inputs` (`schemas.Inputs`): Parameter description.
+    - `targets` (`schemas.Targets`): Parameter description.
+    - `groups` (`Index | None`): Parameter description.
+  - **Outputs**:
+    - `int`: Return value description.
+
+### `TrainTestSplitter` ([`src/regression_model_template/utils/splitters.py:L62-L85`](../../../src/regression_model_template/utils/splitters.py#L62-L85))
+
+Split a dataframe into a train and test set.
+
+Parameters:
+    shuffle (bool): shuffle the dataset. Default is False.
+    test_size (int | float): number/ratio for the test set.
+    random_state (int): random state for the splitter object.
+
+#### Methods
+
+* **`split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`** (L77-L82)
+  - **Purpose**: No description available.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+    - `inputs` (`schemas.Inputs`): Parameter description.
+    - `targets` (`schemas.Targets`): Parameter description.
+    - `groups` (`Index | None`): Parameter description.
+  - **Outputs**:
+    - `TrainTestSplits`: Return value description.
+
+* **`get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`** (L84-L85)
+  - **Purpose**: No description available.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+    - `inputs` (`schemas.Inputs`): Parameter description.
+    - `targets` (`schemas.Targets`): Parameter description.
+    - `groups` (`Index | None`): Parameter description.
+  - **Outputs**:
+    - `int`: Return value description.
+
+### `TimeSeriesSplitter` ([`src/regression_model_template/utils/splitters.py:L88-L108`](../../../src/regression_model_template/utils/splitters.py#L88-L108))
+
+Split a dataframe into fixed time series subsets.
+
+Parameters:
+    gap (int): gap between splits.
+    n_splits (int): number of split to generate.
+    test_size (int | float): number or ratio for the test dataset.
+
+#### Methods
+
+* **`split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`** (L103-L105)
+  - **Purpose**: No description available.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+    - `inputs` (`schemas.Inputs`): Parameter description.
+    - `targets` (`schemas.Targets`): Parameter description.
+    - `groups` (`Index | None`): Parameter description.
+  - **Outputs**:
+    - `TrainTestSplits`: Return value description.
+
+* **`get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`** (L107-L108)
+  - **Purpose**: No description available.
+  - **Inputs**:
+    - `self` (`Any`): Parameter description.
+    - `inputs` (`schemas.Inputs`): Parameter description.
+    - `targets` (`schemas.Targets`): Parameter description.
+    - `groups` (`Index | None`): Parameter description.
+  - **Outputs**:
+    - `int`: Return value description.

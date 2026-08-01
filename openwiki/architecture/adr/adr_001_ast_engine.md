@@ -2,44 +2,35 @@
 iso_doc_type: "Description"
 iso_viewpoint: "ArchitectureDecision"
 type: "adr"
-title: "ADR 001: Local AST Extraction Over External Vector Databases"
-description: "Architecture decision record documenting choice of local Graphify and Python AST tools over complex third-party vector/embedding servers."
-tags: ["adr", "iso42010", "decision", "graphify", "ast"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "ADR 001: Local AST Parsing Over Heavy External LLM Databases"
+description: "Decision record documenting choice of local Graphify/Pyreverse AST scripts over complex external LLM search servers."
+tags: ["adr", "iso42010", "decision", "ast"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# Architecture Decision Record (ADR 001)
+# Architecture Decision Record: ADR 001
 
 ## 1. Status
-**ACCEPTED** (Date: 2026-07-31)
-
----
+**ACCEPTED** (Date: 2026-08-01)
 
 ## 2. Context & Stakeholder Concern
-* **Addressed Concern:** Avoid multi-service installation complexity, external vector database management, and network API dependencies when generating software architecture documentation.
-* **Framing Viewpoint:** Component View, Maintainability, and Security View.
-
----
+* **Addressed Concern:** Developers need a reliable, cost-efficient way to verify codebase structural changes and update documentation without relying on heavy external background databases or third-party vector/embedding models.
+* **Framing Viewpoint:** Component View & System Maintainability.
 
 ## 3. Decision
-Adopt local, deterministic AST CLI extraction tools (`graphify update .`, Python native `ast` module analysis) as the primary knowledge graph and symbol extraction engine, combined with synthesis performed directly by the primary agent LLM.
-
----
+Adopt lightweight local AST CLI tools (`graphify update .` and `pyreverse` code extraction) as the primary knowledge extraction engine, with synthesis performed exclusively by the primary agent LLM. All structural changes must be verified against this AST index.
 
 ## 4. Rationale & Alternatives Evaluated
 
 | Alternative Evaluated | Trade-Off / Failure Mode | Evaluation Result |
 | :--- | :--- | :--- |
-| **External Vector Database / RAG** | Requires running external background vector servers, loss of exact line citations, high API cost. | Rejected |
-| **Manual Hand-Written Documentation** | Becomes stale immediately upon git commits, lacks exact symbol line spans. | Rejected |
-| **Local AST Tools + Primary LLM** | 100% precise line number citations, 0% hallucination on method signatures, fast local execution without network costs. | **Selected** |
+| **External Vector Search Server** | High token overhead, potential code leakage to third parties, requires background containers. | Rejected |
+| **Manual Documentation Maintenance** | High risk of out-of-date documentation, missing method signatures, drift between docs and code. | Rejected |
+| **Local AST Engine (Graphify + Pyreverse)** | Zero-hallucination signatures, local execution in seconds, no external service dependencies. | **Selected** |
 
----
-
-## 5. Affected System Artifacts
-* Modifies `openwiki/` documentation hierarchy.
-* Anchored to `[[src/regression_model_template](../../../src/regression_model_template)](../../../[src/regression_model_template](../../../src/regression_model_template))/`.
-* Links to [Architecture/ComponentStructure](../component_structure.md) and [Index](../../index.md).
+## 5. Consequences
+- **Positive:** Fast documentation updates, exact matching of signatures and line spans, 100% data privacy.
+- **Negative:** Requires Python and conda environments with `graphify` and `pylint` installed on the developer workstation.

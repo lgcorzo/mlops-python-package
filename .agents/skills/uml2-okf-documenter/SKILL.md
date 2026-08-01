@@ -286,7 +286,7 @@ timestamp: "2026-07-31T16:00:00Z"
 ## 1. Architectural Role & Responsibilities
 [Detailed technical description of module purpose, AST parsing strategy, and domain logic.]
 
-## 2. UML 2.0 Class Diagram
+## 2. UML 2.0 Class Diagram Example
 ```mermaid
 classDiagram
     direction BT
@@ -302,27 +302,63 @@ classDiagram
     BaseParser <|.. PythonASTParser : Realization
 ```
 
-## 3. Comprehensive Method Contracts
+## 2b. UML 2.0 Sequence Diagram Example
+```mermaid
+sequenceDiagram
+    participant User as Developer
+    participant Parser as PythonASTParser
+    participant AST as ASTNode
+    
+    User->>Parser: parse("parser.py")
+    activate Parser
+    Parser->>AST: extractSymbols(node)
+    activate AST
+    AST-->>Parser: List[Symbol]
+    deactivate AST
+    Parser-->>User: ASTResult
+    deactivate Parser
+```
 
-### `parse(file_path: str, include_private: bool = False) -> ASTResult`
-* **Source Line Citation:** `src/core/parser.py:L45-L95`
-* **Visibility:** Public (`+`)
-* **Behavior:** Reads source file, parses native AST structure, extracts classes, methods, parameters, and line spans.
+### UML 2.0 & Mermaid Diagram Rules (Strict)
 
-#### Input Parameters
-| Parameter | Data Type | Required / Default | Semantic Description |
-| :--- | :--- | :--- | :--- |
-| `file_path` | `str` | Required | Relative path to target source file. |
-| `include_private` | `bool` | Optional (`False`) | Includes private (`_`) methods when True. |
+1. **UML 2.0 Class Diagrams (`classDiagram`)**:
+   - **Show Fields (Variables) and Methods**: Every class must explicitly list its key member variables with types (e.g. `-variable_name: type`) and methods with parameters/types and return types (e.g. `+method_name(arg1: Type) ReturnType`).
+   - **Clarity of Inheritance & Polymorphism**:
+     - Use `<|--` for Generalization/Inheritance (e.g. `SubClass <|-- SuperClass`).
+     - Use `<|..` for Realization/Interface Implementation (e.g. `ConcreteClass <|.. IInterface`).
+     - Annotate interfaces with `<<interface>>` and abstract classes with `<<abstract>>`.
+     - Explicitly show polymorphism: repeat overridden methods in subclasses, using a trailing asterisk (e.g. `parse()*`) or bolding to differentiate abstract or overridden behavior.
+     - Represent encapsulation visibility markers: `+` (public), `-` (private), `#` (protected), `~` (package/internal).
 
-#### Return Value & Output Shape
-| Return Type | Scenario | Description |
-| :--- | :--- | :--- |
-| `ASTResult` | Success | Object containing list of `Symbol` definitions and dependency imports. |
+2. **UML 2.0 Sequence Diagrams (`sequenceDiagram`) for Execution Workflows**:
+   - **Lifelines & Participants**: Define participants and actors clearly with descriptive names.
+   - **Focus of Control (Activation)**: Use `activate` and `deactivate` (or `++` / `--` shorthand) to represent exactly when a call is active and when control returns.
+   - **Message Types**:
+     - Solid line with filled arrowhead (`->>`) for synchronous call dispatches.
+     - Dashed line with open arrowhead (`-->>`) for return messages.
+     - Solid line with open arrowhead (`->`) for asynchronous/one-way dispatches.
+   - **Structured Control Flow**: Use `alt`/`else` blocks for conditional logic, `loop` blocks for iterations, and `opt` blocks for optional paths.
 
-#### Thrown Exceptions & Error States
-* `FileNotFoundError`: Target file missing (`src/errors.py:L15`).
-* `SyntaxError`: Code parsing failed (`src/core/parser.py:L62`).
+
+## 3. Class & Method Specifications
+
+For each class defined in the module, provide a clear, human-readable summary of the class, followed by a list of all public and key private methods. Format the methods exactly as follows:
+
+### `ClassName` ([`src/path/to/class.py:Lstart-Lend`](/src/path/to/class.py#Lstart-Lend))
+
+[Concise functional description of the class in simple terms.]
+
+#### Methods
+
+* **`method_name(self, param1: Type1, param2: Type2) -> ReturnType`** (Lstart-Lend)
+  - **Purpose**: [Clear description of what the method does in plain, human-understandable terms.]
+  - **Inputs**:
+    - `param1` (`Type1`): [Description of param1.]
+    - `param2` (`Type2`): [Description of param2.]
+  - **Outputs**:
+    - `ReturnType` (`Type`): [Description of the return value.]
+  - **Raises**:
+    - `ExceptionClass`: [Under what condition this exception is raised.]
 
 ---
 

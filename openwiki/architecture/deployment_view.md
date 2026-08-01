@@ -2,67 +2,61 @@
 iso_doc_type: "Description"
 iso_viewpoint: "DeploymentView"
 type: "architecture"
-title: "ISO 42010 Deployment View — Runtime Infrastructure & Containerization"
-description: "Deployment view detailing Docker image layers, docker-compose, MLServer, and environment configuration."
-tags: ["iso42010", "deployment", "docker", "mlserver", "kafka"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "Deployment View"
+description: "Deployment View documenting infrastructure, poetry environments, Docker configurations, and MLflow registry setups."
+tags: ["iso42010", "deployment", "infrastructure", "docker", "poetry"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# ISO 42010 Deployment View: Runtime Infrastructure & Containerization
+# Deployment View: mlops-python-package
 
-## 1. Deployment Overview & Container Strategy
+This viewpoint describes the target deployment environments, containerization boundaries, and dependency management structures.
 
-`mlops-python-package` supports containerized deployment for both batch pipeline training and real-time Kafka/FastAPI streaming endpoints.
+## 1. Infrastructure Deployment Topology
+
+The service is packaged as a Docker container, running a FastAPI web application and confluent-kafka consumer threads, communicating with external MLflow and Kafka brokers.
 
 ```mermaid
-graph LR
-    subgraph Container Ecosystem
-        docker["Dockerfile (Python 3.12-slim)"]
-        compose["docker-compose.yml"]
-        mlserver["MLServer / MLflow Model Server"]
-    end
-    
-    subgraph Runtime Deployment Targets
-        k8s["Kubernetes Pod / Cluster"]
-        docker_host["Docker Engine / Local Host"]
-        mlflow_serv["MLflow Tracking Host"]
+graph TD
+    subgraph "Docker Compose Mesh"
+        App[Prediction App Container]
+        Kafka[Kafka Broker Local Container]
     end
 
-    docker --> compose
-    compose --> docker_host
-    docker --> k8s
-    mlserver --> k8s
+    subgraph "External Cloud / Host Network"
+        MLflowServer[Remote MLflow Tracking Registry]
+        DataStore[S3 / GCS / Local Storage]
+    end
+
+    App -- "Reads datasets" --> DataStore
+    App -- "Pulls Champion model" --> MLflowServer
+    App -- "Publishes/Consumes messages" --> Kafka
 ```
 
----
+## 2. Dependency Management & Runtime Environment
 
-## 2. Docker Configuration (`Dockerfile` & `docker-compose.yml`)
+- **Python Version:** Pinned to `3.12` in `.python-version` and `pyproject.toml`.
+- **Package Manager:** Poetry. Dependencies are locked in `poetry.lock`.
+- **Key System Packages:**
+  - `fastapi` & `uvicorn` (HTTP Application serving).
+  - `confluent-kafka` (High-performance C-wrapper Client for Kafka).
+  - `mlflow` (Experiment tracking and model loader).
+  - `pandera` & `pydantic` (Runtime validations).
 
-### A. Base Image & Build Layers
-* **Base Image:** `python:3.12-slim`
-* **Dependency Manager:** `poetry`
-* **Build Stages:** Multi-stage build isolating build tools (`gcc`, `curl`) from final minimal runtime image.
-* **Environment Variables:** `PYTHONPATH=/app/src`, `POETRY_VIRTUALENVS_CREATE=false`.
+## 3. Containerization Specifications
 
-### B. Service Topology (`docker-compose.yml`)
-* **Kafka Service:** Listens on port `9092` for real-time inference streaming.
-* **FastAPI Service:** Exposes `/health`, `/metrics`, and `/predict` on port `8000`.
-* **MLflow Tracking Server:** Connected via `MLFLOW_TRACKING_URI`.
+### Dockerfile (`/Dockerfile`)
+The service uses a multi-stage Docker build to build confluent-kafka and run the FastAPI app securely:
+- **Base:** `python:3.12-slim`
+- **Builder:** Installs build essentials and dependencies.
+- **Runtime:** Copies environment and runs the main service entrypoint:
+  `python -m regression_model_template.controller.kafka_app`
 
----
-
-## 3. Environment Configuration (`[[src/regression_model_template/io/osvariables.py:L16-L26](../../src/regression_model_template/io/osvariables.py#L16-L26)](../../[src/regression_model_template/io/osvariables.py](../../src/regression_model_template/io/osvariables.py)#L16-L26)`)
-
-The service automatically ingests runtime settings from `.env` files or system environment variables:
-
-| Variable | Default Value | Description |
-| :--- | :--- | :--- |
-| `ENV` | `dev` | Environment scope (`dev`, `staging`, `prod`). |
-| `MLFLOW_TRACKING_URI` | `http://localhost:5000` | Target MLflow tracking server URI. |
-| `KAFKA_BOOTSTRAP_SERVERS` | `localhost:9092` | Kafka broker endpoints. |
-| `KAFKA_INPUT_TOPIC` | `regression-inputs` | Kafka topic for raw inference payloads. |
-| `KAFKA_OUTPUT_TOPIC` | `regression-outputs` | Kafka topic for prediction results. |
-| `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://localhost:4317` | OpenTelemetry OTLP gRPC endpoint. |
+### Compose Config (`/docker-compose.yml`)
+Binds port `8100` and configures environment variables:
+- `DEFAULT_KAFKA_SERVER`: Address of target broker.
+- `DEFAULT_INPUT_TOPIC`: Kafka input topic name.
+- `DEFAULT_OUTPUT_TOPIC`: Kafka output topic name.

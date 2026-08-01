@@ -2,48 +2,75 @@
 iso_doc_type: "Description"
 iso_viewpoint: "ArchitectureDescription"
 type: "architecture"
-title: "ISO/IEC/IEEE 42010 Architecture Description Overview"
-description: "Master architecture description artifact defining entity of interest, stakeholder perspectives, and framing viewpoints for mlops-python-package."
-tags: ["iso42010", "architecture", "viewpoints", "stakeholders"]
-last_verified_commit: "HEAD"
-timestamp: "2026-07-31T16:17:00Z"
-generated: "agent:okf-professional-documenter"
+title: "ISO/IEC/IEEE 42010 Architecture Description"
+description: "Master architecture description artifact defining stakeholders, viewpoints, and system views for the mlops-python-package."
+tags: ["iso42010", "architecture", "okf", "openwiki"]
+timestamp: "2026-08-01T09:57:53Z"
+generated: "agent:uml2-okf-documenter"
 verified: "true"
+last_verified_commit: "8f9670a"
 ---
 
-# ISO/IEC/IEEE 42010 Architecture Description Overview
+# ISO/IEC/IEEE 42010 Architecture Description: mlops-python-package
 
-## 1. Entity of Interest (EoI) & System Identification
+## 1. Entity of Interest (EoI) & Identification
 
-* **System Name:** `mlops-python-package` (`regression_model_template`)
-* **Version:** 2.0.1
-* **Target Runtime:** Python 3.12+ / Linux & Windows / Docker / Kubernetes
-* **Primary Source Repository:** `.` (Anchored to repo root)
-* **Primary Architect:** MLOps & Systems Engineering Team
-
-`mlops-python-package` is an enterprise MLOps framework designed for end-to-end regression machine learning lifecycle management. It provides structured pipelines for data ingestion, training, hyperparameter tuning, model evaluation, SHAP explainability, model registration/promotion, and real-time Kafka event streaming inference.
-
----
+* **System Name:** mlops-python-package (Regression Model Template Service)
+* **Target Environment:** Python 3.12+ / Linux & Windows / Uvicorn / Kafka
+* **Primary Source Repository:** `lgcorzo/mlops-python-package`
+* **Purpose:** Production-grade template for regression model training, hyperparameter tuning, model evaluation, registry management, batch/online inference, and FastAPI-Kafka prediction serving.
 
 ## 2. Stakeholder Perspectives & Concerns Matrix
 
-Per ISO/IEC/IEEE 42010:2022, the architecture description addresses specific stakeholder concerns through standard viewpoints:
-
-| Stakeholder Persona | Key Architectural Concerns | Framing ISO Viewpoint | Governed Wiki Page |
-| :--- | :--- | :--- | :--- |
-| **System Architect** | Component decoupling, job abstraction, lifecycle management | Component View | [Architecture/ComponentStructure](component_structure.md) |
-| **ML Engineer** | Model reproducibility, metrics logging, MLflow tracking, SHAP explanations | Sequence & Component View | [Architecture/RuntimeSequences](runtime_sequences.md) |
-| **Data Engineer** | Dataset lineage, Parquet I/O, Pandera schema validation | Component & Context View | [Architecture/SystemContext](system_context.md) |
-| **DevOps & Platform Lead** | Deployment environments, Docker packaging, Kafka streaming service | Deployment View | [Architecture/DeploymentView](deployment_view.md) |
-| **Security & Compliance Officer** | Secret handling, model signers, API rate limiting, telemetry boundaries | Security View | [Architecture/SecurityView](security_view.md) |
-
----
+| Stakeholder Persona | Primary Concerns | Framing ISO Viewpoint | Governed Wiki Page |
+|:---|:---|:---|:---|
+| **System Architect** | Modularity, clean architecture (DDD boundaries), AST dependencies | Component View | [[Architecture/component_structure]] |
+| **Lead Developer** | Execution flows, job context managers, method interfaces | Sequence View | [[Architecture/runtime_sequences]] |
+| **Security Officer** | Rate limiting, CORS, trusted hosts, security headers, validation | Security View | [[Architecture/security_view]] |
+| **DevOps Lead** | Dockerization, Conda dependency management, MLflow server registry | Deployment View | [[Architecture/deployment_view]] |
+| **ISO Auditor** | Traceability, provenance, AD coherence, quality evaluation | Quality View | [[Quality/iso_25010_quality]] |
+| **Data Scientist** | Training pipelines, evaluation metrics, hyperparameter tuning | Context View | [[Architecture/system_context]] |
 
 ## 3. Viewpoints Framework & Index
 
-- 🌐 **[Architecture/SystemContext](system_context.md)** — Context View & System Boundaries.
-- 📦 **[Architecture/ComponentStructure](component_structure.md)** — Component View & Class Diagrams.
-- 🔄 **[Architecture/RuntimeSequences](runtime_sequences.md)** — Sequence View & Interaction Workflows.
-- 🖥️ **[Architecture/DeploymentView](deployment_view.md)** — Deployment View & Runtime Infrastructure.
-- 🔐 **[Architecture/SecurityView](security_view.md)** — Security View & Data Protection.
-- 📝 **[Architecture/ADR/ADR_001_AST_Engine](adr/adr_001_ast_engine.md)** — Architecture Decision Record.
+- 🌐 **[Context View](system_context.md)** — Boundaries, external services (Kafka, MLflow), and pipeline stages.
+- 📦 **[Component View](component_structure.md)** — Subsystem structure and package UML diagrams.
+- 🔄 **[Sequence View](runtime_sequences.md)** — Job lifecycle context manager and prediction service sequences.
+- 🚀 **[Deployment View](deployment_view.md)** — Containerization, poetry configuration, and MLflow setups.
+- 🔐 **[Security View](security_view.md)** — Security headers, IP rate limiter, and schema verification.
+- 📝 **[ADR: AST-Only Local Analysis](adr/adr_001_ast_engine.md)** — Architecture Decision Record.
+
+## 4. Architecture Description Artifact Structure
+
+This architecture description is structured inside the canonical OpenWiki directory:
+
+```
+openwiki/
+├── index.md                          # Master Index & Navigation
+├── architecture/
+│   ├── iso_42010_overview.md         # THIS FILE — AD overview & viewpoint index
+│   ├── system_context.md             # Context View
+│   ├── component_structure.md        # Component View
+│   ├── runtime_sequences.md          # Sequence View
+│   ├── deployment_view.md            # Deployment View
+│   ├── security_view.md              # Security View
+│   └── adr/
+│       └── adr_001_ast_engine.md     # ADR: AST-only local analysis
+├── specifications/
+│   ├── srs_requirements.md           # Software Requirements Specification
+│   └── api_contracts.md              # HTTP & Kafka contracts
+├── quality/
+│   └── iso_25010_quality.md          # ISO 25010 Quality Model Assessment
+├── user_guides/
+│   └── developer_guide.md            # Onboarding & onboarding manual
+└── logs.md                           # Audit log
+```
+
+## 5. ISO Compliance Traceability
+
+| ISO Standard | Application in This System | Evidence Location |
+|:---|:---|:---|
+| **ISO/IEC/IEEE 42010:2022** | Centralized AD suite with explicit stakeholder concerns | `openwiki/architecture/` |
+| **ISO/IEC/IEEE 15289:2019** | Strict YAML frontmatter doc type classification | All `openwiki/**/*.md` |
+| **ISO/IEC 25010** | SQuaRE characteristics assessment matrix | `openwiki/quality/iso_25010_quality.md` |
+| **ISO/IEC/IEEE 26514** | Developer guides, CLI execution rules | `openwiki/user_guides/developer_guide.md` |
