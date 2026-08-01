@@ -33,7 +33,7 @@ __pycache__/
 # DVC
 .dvc/cache
 .dvc/tmp
-/data/*.parquet
+#/data/*.parquet
 
 # graphyfy
 graphify-out/
