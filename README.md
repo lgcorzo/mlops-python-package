@@ -1269,5 +1269,6 @@ This section provides resources for building packages for Python and AI/ML/MLOps
 
 ## AI/ML/MLOps
 
+- https://github.com/fmind/mlops-python-package
 - https://github.com/josephmisiti/awesome-machine-learning
 - https://github.com/visenger/awesome-mlops
