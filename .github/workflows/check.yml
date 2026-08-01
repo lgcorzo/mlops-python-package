@@ -17,6 +17,8 @@ permissions:
 jobs:
   checks:
     runs-on: ubuntu-latest
+    env:
+      MLFLOW_ALLOW_FILE_STORE: "true"
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup

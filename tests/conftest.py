@@ -14,6 +14,8 @@ from regression_model_template.utils import searchers, signers, splitters
 
 # %% CONFIGS
 
+os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
+
 LIMIT = 1500
 N_SPLITS = 3
 TEST_SIZE = 24 * 7  # 1 week
