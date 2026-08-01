@@ -23,31 +23,56 @@ Define trainable machine learning models.
 ```mermaid
 classDiagram
     direction BT
+    
     class Model {
+        <<abstract>>
         +KIND: str
-        +get_params(self: Any, deep: bool) Params
-        +set_params(self: Any) T.Self
-        -__sklearn_tags__(self: Any) T.Any
-        +fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) T.Self
-        +predict(self: Any, inputs: T.Any) schemas.Outputs
-        +explain_model(self: Any) schemas.FeatureImportances
-        +explain_samples(self: Any, inputs: schemas.Inputs) schemas.SHAPValues
-        +get_internal_model(self: Any) T.Any
+        +get_params(deep: bool) Params
+        +set_params(**params) Self
+        +fit(inputs: Inputs, targets: Targets)* Self
+        +predict(inputs: Any)* Outputs
+        +explain_model() FeatureImportances
+        +explain_samples(inputs: Inputs) SHAPValues
+        +get_internal_model() Any
     }
+
     class BaselineSklearnModel {
-        +KIND: T.Literal['BaselineSklearnModel']
+        +KIND: Literal["BaselineSklearnModel"]
         +max_depth: int
         +n_estimators: int
         +random_state: int | None
-        -_pipeline: pipeline.Pipeline | None
-        -_numericals: list[str]
-        -_categoricals: list[str]
-        +fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) 'BaselineSklearnModel'
-        +predict(self: Any, inputs: T.Any) schemas.Outputs
-        +explain_model(self: Any) schemas.FeatureImportances
-        +explain_samples(self: Any, inputs: schemas.Inputs) schemas.SHAPValues
-        +get_internal_model(self: Any) pipeline.Pipeline
+        -_pipeline: Pipeline | None
+        -_numericals: list~str~
+        -_categoricals: list~str~
+        +fit(inputs: Inputs, targets: Targets)* BaselineSklearnModel
+        +predict(inputs: Any)* Outputs
+        +explain_model()* FeatureImportances
+        +explain_samples(inputs: Inputs)* SHAPValues
+        +get_internal_model()* Pipeline
     }
+
+    class Inputs {
+        <<type>>
+    }
+    class Targets {
+        <<type>>
+    }
+    class Outputs {
+        <<type>>
+    }
+    class FeatureImportances {
+        <<type>>
+    }
+    class SHAPValues {
+        <<type>>
+    }
+
+    Model <|-- BaselineSklearnModel : Generalization (Polymorphism)
+    Model ..> Inputs : Depends
+    Model ..> Targets : Depends
+    Model ..> Outputs : Depends
+    Model ..> FeatureImportances : Depends
+    Model ..> SHAPValues : Depends
 ```
 
 ## 3. Class & Method Specifications
