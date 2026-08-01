@@ -33,12 +33,12 @@ last_verified_commit: "8f9670a"
 
 ## 3. Viewpoints Framework & Index
 
-- 🌐 [[Architecture/system_context]] — Context View: Boundaries, external services (Kafka, MLflow), and pipeline stages.
-- 📦 [[Architecture/component_structure]] — Component View: Subsystem structure and package UML diagrams.
-- 🔄 [[Architecture/runtime_sequences]] — Sequence View: Job lifecycle context manager and prediction service sequences.
-- 🚀 [[Architecture/deployment_view]] — Deployment View: Containerization, poetry configuration, and MLflow setups.
-- 🔐 [[Architecture/security_view]] — Security View: Security headers, IP rate limiter, and schema verification.
-- 📝 [[Architecture/adr/adr_001_ast_engine]] — ADR: AST-only documentation updates using local Graphify.
+- 🌐 **[Context View](system_context.md)** — Boundaries, external services (Kafka, MLflow), and pipeline stages.
+- 📦 **[Component View](component_structure.md)** — Subsystem structure and package UML diagrams.
+- 🔄 **[Sequence View](runtime_sequences.md)** — Job lifecycle context manager and prediction service sequences.
+- 🚀 **[Deployment View](deployment_view.md)** — Containerization, poetry configuration, and MLflow setups.
+- 🔐 **[Security View](security_view.md)** — Security headers, IP rate limiter, and schema verification.
+- 📝 **[ADR: AST-Only Local Analysis](adr/adr_001_ast_engine.md)** — Architecture Decision Record.
 
 ## 4. Architecture Description Artifact Structure
 

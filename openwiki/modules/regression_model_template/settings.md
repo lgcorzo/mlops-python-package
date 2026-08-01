@@ -14,7 +14,9 @@ last_verified_commit: "8f9670a"
 
 # Module Specification: settings
 
-* **Source Reference:** [src/regression_model_template/settings.py](../../../src/regression_model_template/settings.py) (Lines: L1-L28)
+* **Source Reference:** [src/regression_model_template/settings.py](../../../src/regression_model_template/settings.py#L1-L28)
+* **Upstream Dependencies:** [Modules/RegressionModelTemplate/IO/OSVariables](io/osvariables.md)
+* **Downstream Consumers:** All jobs and controller services
 
 ## 1. Architectural Role & Responsibilities
 Define settings for the application.
