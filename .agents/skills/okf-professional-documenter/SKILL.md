@@ -29,12 +29,14 @@ You are a **Professional ISO Documentation Agent** responsible for generating an
 - **Never** use system-specific absolute paths (`/home/`, `/mnt/`, `C:\`).
 - Use exclusively **relative paths** from the repository root.
 - File citations **must include line spans**: `src/core/parser.py:L15-L120`.
-- **Never** use double brackets `[[ ]]` for source file references or paths, as it causes a double-wrapping issue with the link converter. Standard markdown links like `[src/...](../src/...)` or plain strings should be used.
+- **Never** use double brackets `[[ ]]` for source file references or paths, as it causes a double-wrapping issue with the link converter. Standard relative Markdown links (`[text](path.md)`) must be used to resolve broken cross-directory references.
+- `openwiki/index.md` is an exception and can use Wiki-links (`[[file-name]]`) for progressive disclosure navigation.
 
 ### 3. Espejo Estructural (1:1 Mirroring)
 
-- The hierarchy of folders in `./openwiki/` must mirror the structure of `src/` or `Code/`.
+- The hierarchy of folders in `./openwiki/` must strictly mirror the directory layout of the source code (1:1 mapping).
 - Each source module gets its own OKF page in `openwiki/modules/`.
+- OpenWiki OKF documentation must use exclusively relative paths anchored from the repository root. Absolute paths are strictly banned for all operations, wikilinks, and source references.
 
 ### 4. ISO 42010 Viewpoint Mapping
 
@@ -65,9 +67,9 @@ Every generated page must declare its ISO 15289 document type:
 | `Report` | Quality assessments, audit logs |
 | `Request` | Change proposals, feature enhancements |
 
-### 6. Mandatory OKF v0.2 YAML Frontmatter
+### 6. Mandatory OKF v0.2 Structure and YAML Frontmatter
 
-Every generated `.md` file must include:
+Every generated script or class must have its own `.md` file featuring strict YAML frontmatter, a mandatory relative path reference directly under the title, and embedded Mermaid.js diagrams.
 
 ```yaml
 ---
@@ -84,6 +86,10 @@ verified: "true"
 last_verified_commit: "a1b2c3d"
 ---
 ```
+
+# Exact Module Name
+
+[src/core/parser.py](../src/core/parser.py)
 
 ### 7. Provenance & Attestation (ISO 15289 Traceability)
 
@@ -102,6 +108,20 @@ last_verified_commit: "a1b2c3d"
 - Read `.specify/bridge/sovereignty-rules.md` before generating documentation.
 - Documentation generation is governed by the OpenWiki/OKF domain.
 - Do not modify files owned by Spec-Kit or Superpowers domains.
+
+---
+
+### 10. Incremental Generation & Updates
+
+- OKF documentation generation should be performed incrementally via Git diffs.
+- Identify changed source files by extracting the `last_verified_commit` from existing `openwiki/*.md` files and running `git diff <last_verified_commit> HEAD --name-only`. Full regeneration should be avoided.
+- Existing manually curated content (like YAML tags, descriptions, and custom Mermaid diagrams) within the files must be parsed and preserved rather than naively overwriting the entire file.
+- To prevent unaffected Markdown components from being continuously rewritten, ensure that string replacements for auto-generated sections (e.g., Mermaid flowcharts) are strictly idempotent and do not prepend extra whitespace or newlines during concatenation.
+
+### 11. Validation & Git Hygiene
+
+- To validate OpenWiki Markdown files for OKF conformance, use the script `python3 skills/validate/scripts/okf_validate.py openwiki --strict`.
+- Documentation generation and automation scripts must adhere strictly to Git hygiene by ensuring that any temporary scripts (e.g., `parse_ast.py`) are deleted from the working directory and not committed, preventing repository pollution.
 
 ---
 
@@ -144,9 +164,14 @@ last_verified_commit: "a1b2c3d"
 
 ## Canonical Directory Structure
 
+The documentation repository wiki (`openwiki/` folder) follows the Open Knowledge Format (OKF) v0.2 specification, requiring standard YAML frontmatter blocks with a `type` field on all concept files, alongside reserved `index.md` (directory contents listing) and `logs.md` (chronological change history) files.
+
+While `openwiki/index.md` can use Wiki-links (`[[file-name]]`) for progressive disclosure navigation, standard relative Markdown links (`[text](path.md)`) must be used to resolve broken cross-directory references in other files.
+
 ```
 openwiki/
-├── index.md                      # Master Navigation Hub
+├── index.md                      # Master Navigation Hub (can use Wiki-links)
+├── logs.md                       # Audit Log (chronological change history)
 ├── architecture/
 │   ├── iso_42010_overview.md     # AD Overview & Viewpoints
 │   ├── system_context.md         # Context View
@@ -157,7 +182,6 @@ openwiki/
 ├── quality/
 │   └── iso_25010_quality.md      # Quality Assessment
 ├── modules/                      # 1:1 Mirror of src/
-├── user_guides/
-│   └── developer_guide.md        # Developer Guide
-└── logs.md                       # Audit Log
+└── user_guides/
+    └── developer_guide.md        # Developer Guide
 ```
