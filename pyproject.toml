@@ -70,7 +70,7 @@ commitizen = "^3.27.0"
 pre-commit = "^3.7.1"
 
 [tool.poetry.group.dev.dependencies]
-invoke = "^2.2.0"
+invoke = "^3.0.3"
 pip-audit = "^2.10.0"
 safety = "^3.7.0"
 
