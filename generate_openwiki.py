@@ -45,9 +45,7 @@ def delete_generated_docs():
                 try:
                     os.rmdir(os.path.join(root, name))
                 except OSError:
-                    pass # directory not empty due to reserved files
-
-
+                    pass  # directory not empty due to reserved files
 
 
 def unparse_annotation(node):
@@ -213,46 +211,46 @@ def generate_plantuml(classes):
     return "\n".join(lines)
 
 
-registry = {
-    'modules': {},
-    'class_to_module': {},
-    'function_to_module': {}
-}
+registry = {"modules": {}, "class_to_module": {}, "function_to_module": {}}
+
 
 def build_registry(files_to_process):
     for py_file in files_to_process:
         parsed = parse_python_file(py_file)
-        registry['modules'][py_file] = parsed
-        for cls in parsed['classes']:
-            registry['class_to_module'][cls['name']] = py_file
-        for func in parsed['functions']:
-            registry['function_to_module'][func['name']] = py_file
+        registry["modules"][py_file] = parsed
+        for cls in parsed["classes"]:
+            registry["class_to_module"][cls["name"]] = py_file
+        for func in parsed["functions"]:
+            registry["function_to_module"][func["name"]] = py_file
+
 
 def generate_package_diagram_content():
-    lines = ["```plantuml", "package \"src\" {"]
+    lines = ["```plantuml", 'package "src" {']
     packages = set()
-    for py_file in registry['modules'].keys():
+    for py_file in registry["modules"].keys():
         parts = py_file.split("/")[:-1]
         pkg = ".".join(parts)
         if pkg:
             packages.add(pkg)
     for pkg in sorted(packages):
-        lines.append(f"    package \"{pkg}\" {{}}")
+        lines.append(f'    package "{pkg}" {{}}')
     lines.append("}")
     lines.append("```")
     return "\n".join(lines)
 
+
 def generate_dependency_graph():
     lines = ["```plantuml", "digraph Dependencies {"]
-    for mod_path, data in registry['modules'].items():
+    for mod_path, data in registry["modules"].items():
         mod_name = os.path.splitext(os.path.basename(mod_path))[0]
-        for imp in data['imports']:
-            imp_name = imp.split('.')[-1] if '.' in imp else imp
-            if imp_name != '*':
-                lines.append(f"    \"{mod_name}\" -> \"{imp_name}\"")
+        for imp in data["imports"]:
+            imp_name = imp.split(".")[-1] if "." in imp else imp
+            if imp_name != "*":
+                lines.append(f'    "{mod_name}" -> "{imp_name}"')
     lines.append("}")
     lines.append("```")
     return "\n".join(lines)
+
 
 def generate_markdown(parsed_data, relative_filepath):
     mod_name = os.path.splitext(os.path.basename(relative_filepath))[0]
@@ -357,10 +355,10 @@ last_verified_commit: "{commit_hash}"
     # Inject Used By
     used_by = []
     mod_path_dotted = relative_filepath.replace("src/", "").replace(".py", "").replace("/", ".")
-    for other_py, other_data in registry['modules'].items():
+    for other_py, other_data in registry["modules"].items():
         if other_py == relative_filepath:
             continue
-        for imp in other_data['imports']:
+        for imp in other_data["imports"]:
             if mod_path_dotted in imp or imp.startswith(mod_name):
                 used_by.append(other_py)
                 break
@@ -401,15 +399,17 @@ def update_index_files(processed_files):
     diagrams_path = "openwiki/architecture/diagrams.md"
     os.makedirs(os.path.dirname(diagrams_path), exist_ok=True)
     with open(diagrams_path, "w", encoding="utf-8") as f:
-        f.write(f'---\niso_doc_type: "Description"\niso_viewpoint: "ArchitectureDescription"\ntype: "diagrams"\ntitle: "Diagrams"\ndescription: "Auto-generated architecture diagrams."\ntags: ["diagrams"]\ntimestamp: "{timestamp}"\ngenerated: "agent:ast-documentation-generator"\nverified: "true"\nlast_verified_commit: "{commit_hash}"\n---\n# Architecture Diagrams\n\n')
+        f.write(
+            f'---\niso_doc_type: "Description"\niso_viewpoint: "ArchitectureDescription"\ntype: "diagrams"\ntitle: "Diagrams"\ndescription: "Auto-generated architecture diagrams."\ntags: ["diagrams"]\ntimestamp: "{timestamp}"\ngenerated: "agent:ast-documentation-generator"\nverified: "true"\nlast_verified_commit: "{commit_hash}"\n---\n# Architecture Diagrams\n\n'
+        )
         f.write("## Package Diagram\n")
         f.write(generate_package_diagram_content())
         f.write("\n\n## Dependency Graph\n")
         f.write(generate_dependency_graph())
 
     # Build Alphabetical Index
-    classes_list = sorted(list(registry['class_to_module'].keys()))
-    api_list = sorted(list(registry['function_to_module'].keys()))
+    classes_list = sorted(list(registry["class_to_module"].keys()))
+    api_list = sorted(list(registry["function_to_module"].keys()))
 
     with open(summary_path, "w", encoding="utf-8") as f:
         f.write(
@@ -422,14 +422,14 @@ def update_index_files(processed_files):
 
         f.write("## Alphabetical class index\n\n")
         for cls_name in classes_list:
-            mod = registry['class_to_module'][cls_name]
+            mod = registry["class_to_module"][cls_name]
             rel_mod = os.path.relpath(mod, "src")[:-3] + ".md"
             f.write(f"* [{cls_name}](modules/{rel_mod}#{cls_name.lower()})\n")
         f.write("\n")
 
         f.write("## Public API index\n\n")
         for api_name in api_list:
-            mod = registry['function_to_module'][api_name]
+            mod = registry["function_to_module"][api_name]
             rel_mod = os.path.relpath(mod, "src")[:-3] + ".md"
             f.write(f"* [{api_name}](modules/{rel_mod}#{api_name.lower()})\n")
         f.write("\n")
@@ -447,6 +447,7 @@ def update_index_files(processed_files):
             )
             f.write("Welcome to the generated AST documentation.\n\n")
             f.write("Please see [SUMMARY.md](SUMMARY.md) for navigation.\n")
+
 
 def main():
     parser = argparse.ArgumentParser(description="AST Documentation Generator")
@@ -487,6 +488,7 @@ def main():
 
     update_index_files(files_to_process)
     print("Documentation generation complete.")
+
 
 if __name__ == "__main__":
     main()
