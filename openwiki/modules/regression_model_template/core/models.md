@@ -5,149 +5,113 @@ type: "module"
 title: "Module: models"
 source_path: "src/regression_model_template/core/models.py"
 description: "Define trainable machine learning models."
-tags: ["module", "models", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "models"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: models
 
-* **Source Reference:** [src/regression_model_template/core/models.py](../../../src/regression_model_template/core/models.py) (Lines: L1-L223)
+* **Source Reference:** [src/regression_model_template/core/models.py](../../../src/regression_model_template/core/models.py)
 
 ## 1. Architectural Role & Responsibilities
 Define trainable machine learning models.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
-    
     class Model {
-        <<abstract>>
         +KIND: str
-        +get_params(deep: bool) Params
-        +set_params(**params) Self
-        +fit(inputs: Inputs, targets: Targets)* Self
-        +predict(inputs: Any)* Outputs
-        +explain_model() FeatureImportances
-        +explain_samples(inputs: Inputs) SHAPValues
-        +get_internal_model() Any
+        +get_params(self: Any, deep: bool) Params
+        +set_params(self: Any, **params: ParamValue) T.Self
+        +__sklearn_tags__(self: Any) T.Any
+        +fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) T.Self
+        +predict(self: Any, inputs: T.Any) schemas.Outputs
+        +explain_model(self: Any) schemas.FeatureImportances
+        +explain_samples(self: Any, inputs: schemas.Inputs) schemas.SHAPValues
+        +get_internal_model(self: Any) T.Any
     }
-
+    ABC <|-- Model : Generalization
+    BaseModel <|-- Model : Generalization
     class BaselineSklearnModel {
-        +KIND: Literal["BaselineSklearnModel"]
+        +KIND: T.Literal~BaselineSklearnModel~
         +max_depth: int
         +n_estimators: int
         +random_state: int | None
-        -_pipeline: Pipeline | None
-        -_numericals: list~str~
-        -_categoricals: list~str~
-        +fit(inputs: Inputs, targets: Targets)* BaselineSklearnModel
-        +predict(inputs: Any)* Outputs
-        +explain_model()* FeatureImportances
-        +explain_samples(inputs: Inputs)* SHAPValues
-        +get_internal_model()* Pipeline
+        +_pipeline: pipeline.Pipeline | None
+        +_numericals: list~str~
+        +_categoricals: list~str~
+        +fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) BaselineSklearnModel
+        +predict(self: Any, inputs: T.Any) schemas.Outputs
+        +explain_model(self: Any) schemas.FeatureImportances
+        +explain_samples(self: Any, inputs: schemas.Inputs) schemas.SHAPValues
+        +get_internal_model(self: Any) pipeline.Pipeline
     }
-
-    class Inputs {
-        <<type>>
-    }
-    class Targets {
-        <<type>>
-    }
-    class Outputs {
-        <<type>>
-    }
-    class FeatureImportances {
-        <<type>>
-    }
-    class SHAPValues {
-        <<type>>
-    }
-
-    Model <|-- BaselineSklearnModel : Generalization (Polymorphism)
-    Model ..> Inputs : Depends
-    Model ..> Targets : Depends
-    Model ..> Outputs : Depends
-    Model ..> FeatureImportances : Depends
-    Model ..> SHAPValues : Depends
+    Model <|-- BaselineSklearnModel : Generalization
 ```
 
 ## 3. Class & Method Specifications
 
-### `Model` ([`src/regression_model_template/core/models.py:L24-L122`](../../../src/regression_model_template/core/models.py#L24-L122))
+### `Model`
 
 Base class for a project model.
 
 Use a model to adapt AI/ML frameworks.
 e.g., to swap easily one model with another.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`str`)
 
-* **`get_params(self: Any, deep: bool) -> Params`** (L33-L46)
+#### Public Methods
+* **`get_params(self: Any, deep: bool) -> Params`**
   - **Purpose**: Get the model params.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `deep` (`bool`): Parameter description.
-  - **Outputs**:
-    - `Params`: Return value description.
-
-* **`set_params(self: Any) -> T.Self`** (L48-L56)
+    - `self` (`Any`)
+    - `deep` (`bool`)
+  - **Outputs**: `Params`
+* **`set_params(self: Any, **params: ParamValue) -> T.Self`**
   - **Purpose**: Set the model params in place.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `T.Self`: Return value description.
-
-* **`__sklearn_tags__(self: Any) -> T.Any`** (L58-L66)
-  - **Purpose**: Get the model tags for scikit-learn.
-  - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `T.Any`: Return value description.
-
-* **`fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) -> T.Self`** (L69-L78)
+    - `self` (`Any`)
+    - `**params` (`ParamValue`)
+  - **Outputs**: `T.Self`
+* **`fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) -> T.Self`**
   - **Purpose**: Fit the model on the given inputs and targets.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `inputs` (`schemas.Inputs`): Parameter description.
-    - `targets` (`schemas.Targets`): Parameter description.
-  - **Outputs**:
-    - `T.Self`: Return value description.
-
-* **`predict(self: Any, inputs: T.Any) -> schemas.Outputs`** (L81-L89)
+    - `self` (`Any`)
+    - `inputs` (`schemas.Inputs`)
+    - `targets` (`schemas.Targets`)
+  - **Outputs**: `T.Self`
+* **`predict(self: Any, inputs: T.Any) -> schemas.Outputs`**
   - **Purpose**: Generate outputs with the model for the given inputs.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `inputs` (`T.Any`): Parameter description.
-  - **Outputs**:
-    - `schemas.Outputs`: Return value description.
-
-* **`explain_model(self: Any) -> schemas.FeatureImportances`** (L91-L100)
+    - `self` (`Any`)
+    - `inputs` (`T.Any`)
+  - **Outputs**: `schemas.Outputs`
+* **`explain_model(self: Any) -> schemas.FeatureImportances`**
   - **Purpose**: Explain the internal model structure.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `schemas.FeatureImportances`: Return value description.
-
-* **`explain_samples(self: Any, inputs: schemas.Inputs) -> schemas.SHAPValues`** (L102-L111)
+    - `self` (`Any`)
+  - **Outputs**: `schemas.FeatureImportances`
+* **`explain_samples(self: Any, inputs: schemas.Inputs) -> schemas.SHAPValues`**
   - **Purpose**: Explain model outputs on input samples.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `inputs` (`schemas.Inputs`): Parameter description.
-  - **Outputs**:
-    - `schemas.SHAPValues`: Return value description.
-
-* **`get_internal_model(self: Any) -> T.Any`** (L113-L122)
+    - `self` (`Any`)
+    - `inputs` (`schemas.Inputs`)
+  - **Outputs**: `schemas.SHAPValues`
+* **`get_internal_model(self: Any) -> T.Any`**
   - **Purpose**: Return the internal model in the object.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `T.Any`: Return value description.
+    - `self` (`Any`)
+  - **Outputs**: `T.Any`
 
-### `BaselineSklearnModel` ([`src/regression_model_template/core/models.py:L125-L220`](../../../src/regression_model_template/core/models.py#L125-L220))
+#### Private Methods
+* **`__sklearn_tags__(self: Any) -> T.Any`**
+  - **Purpose**: Get the model tags for scikit-learn.
+
+### `BaselineSklearnModel`
 
 Simple baseline model based on scikit-learn.
 
@@ -156,43 +120,62 @@ Parameters:
     n_estimators (int): number of estimators in the random forest.
     random_state (int, optional): random state of the machine learning pipeline.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[BaselineSklearnModel]`)
+* **`max_depth`** (`int`)
+* **`n_estimators`** (`int`)
+* **`random_state`** (`int | None`)
+* **`_pipeline`** (`pipeline.Pipeline | None`)
+* **`_numericals`** (`list[str]`)
+* **`_categoricals`** (`list[str]`)
 
-* **`fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) -> 'BaselineSklearnModel'`** (L161-L183)
+#### Public Methods
+* **`fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) -> BaselineSklearnModel`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `inputs` (`schemas.Inputs`): Parameter description.
-    - `targets` (`schemas.Targets`): Parameter description.
-  - **Outputs**:
-    - `'BaselineSklearnModel'`: Return value description.
-
-* **`predict(self: Any, inputs: T.Any) -> schemas.Outputs`** (L185-L189)
+    - `self` (`Any`)
+    - `inputs` (`schemas.Inputs`)
+    - `targets` (`schemas.Targets`)
+  - **Outputs**: `BaselineSklearnModel`
+* **`predict(self: Any, inputs: T.Any) -> schemas.Outputs`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `inputs` (`T.Any`): Parameter description.
-  - **Outputs**:
-    - `schemas.Outputs`: Return value description.
-
-* **`explain_model(self: Any) -> schemas.FeatureImportances`** (L191-L202)
+    - `self` (`Any`)
+    - `inputs` (`T.Any`)
+  - **Outputs**: `schemas.Outputs`
+* **`explain_model(self: Any) -> schemas.FeatureImportances`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `schemas.FeatureImportances`: Return value description.
-
-* **`explain_samples(self: Any, inputs: schemas.Inputs) -> schemas.SHAPValues`** (L204-L214)
+    - `self` (`Any`)
+  - **Outputs**: `schemas.FeatureImportances`
+* **`explain_samples(self: Any, inputs: schemas.Inputs) -> schemas.SHAPValues`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `inputs` (`schemas.Inputs`): Parameter description.
-  - **Outputs**:
-    - `schemas.SHAPValues`: Return value description.
-
-* **`get_internal_model(self: Any) -> pipeline.Pipeline`** (L216-L220)
+    - `self` (`Any`)
+    - `inputs` (`schemas.Inputs`)
+  - **Outputs**: `schemas.SHAPValues`
+* **`get_internal_model(self: Any) -> pipeline.Pipeline`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `pipeline.Pipeline`: Return value description.
+    - `self` (`Any`)
+  - **Outputs**: `pipeline.Pipeline`
+
+## Dependencies
+
+* `abc`
+* `typing`
+* `pydantic`
+* `shap`
+* `sklearn.compose`
+* `sklearn.ensemble`
+* `sklearn.pipeline`
+* `sklearn.preprocessing`
+* `regression_model_template.core.schemas`
+
+## Used By
+
+* [metrics.py](../../regression_model_template/core/metrics.md)
+* [registries.py](../../regression_model_template/io/registries.md)
+* [training.py](../../regression_model_template/jobs/training.md)
+* [tuning.py](../../regression_model_template/jobs/tuning.md)
+* [searchers.py](../../regression_model_template/utils/searchers.md)

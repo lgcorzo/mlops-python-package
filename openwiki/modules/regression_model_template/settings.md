@@ -5,53 +5,57 @@ type: "module"
 title: "Module: settings"
 source_path: "src/regression_model_template/settings.py"
 description: "Define settings for the application."
-tags: ["module", "settings", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "settings"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: settings
 
-* **Source Reference:** [src/regression_model_template/settings.py](../../../src/regression_model_template/settings.py#L1-L28)
-* **Upstream Dependencies:** [Modules/RegressionModelTemplate/IO/OSVariables](io/osvariables.md)
-* **Downstream Consumers:** All jobs and controller services
+* **Source Reference:** [src/regression_model_template/settings.py](../../src/regression_model_template/settings.py)
 
 ## 1. Architectural Role & Responsibilities
 Define settings for the application.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
     class Settings {
     }
+    BaseSettings <|-- Settings : Generalization
     class MainSettings {
         +job: jobs.JobKind
     }
+    Settings <|-- MainSettings : Generalization
 ```
 
 ## 3. Class & Method Specifications
 
-### `Settings` ([`src/regression_model_template/settings.py:L13-L18`](../../../src/regression_model_template/settings.py#L13-L18))
+### `Settings`
 
 Base class for application settings.
 
 Use settings to provide high-level preferences.
 i.e., to separate settings from provider (e.g., CLI).
 
-#### Methods
-
-*No methods defined.*
-
-### `MainSettings` ([`src/regression_model_template/settings.py:L21-L28`](../../../src/regression_model_template/settings.py#L21-L28))
+### `MainSettings`
 
 Main settings of the application.
 
 Parameters:
     job (jobs.JobKind): job to run.
 
-#### Methods
+#### Attributes
+* **`job`** (`jobs.JobKind`)
 
-*No methods defined.*
+## Dependencies
+
+* `pydantic`
+* `pydantic_settings`
+* `regression_model_template.jobs`
+
+## Used By
+
+* [scripts.py](../regression_model_template/scripts.md)

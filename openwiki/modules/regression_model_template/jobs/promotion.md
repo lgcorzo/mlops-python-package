@@ -5,49 +5,35 @@ type: "module"
 title: "Module: promotion"
 source_path: "src/regression_model_template/jobs/promotion.py"
 description: "Define a job for promoting a registered model version with an alias."
-tags: ["module", "promotion", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "promotion"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: promotion
 
-* **Source Reference:** [src/regression_model_template/jobs/promotion.py](../../../src/regression_model_template/jobs/promotion.py) (Lines: L1-L57)
+* **Source Reference:** [src/regression_model_template/jobs/promotion.py](../../../src/regression_model_template/jobs/promotion.py)
 
 ## 1. Architectural Role & Responsibilities
 Define a job for promoting a registered model version with an alias.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
     class PromotionJob {
-        +KIND: T.Literal['PromotionJob']
+        +KIND: T.Literal~PromotionJob~
         +alias: str
         +version: int | None
         +run(self: Any) base.Locals
     }
-```
-
-## 2b. Execution Flow (Sequence Diagram)
-```mermaid
-sequenceDiagram
-    autonumber
-    participant User as Runner
-    participant Job as PromotionJob
-    
-    User->>Job: run()
-    activate Job
-    Note over Job: Reads inputs and performs workflow steps
-    Job-->>User: Locals (dict)
-    deactivate Job
+    Job <|-- PromotionJob : Generalization
 ```
 
 ## 3. Class & Method Specifications
 
-### `PromotionJob` ([`src/regression_model_template/jobs/promotion.py:L12-L57`](../../../src/regression_model_template/jobs/promotion.py#L12-L57))
+### `PromotionJob`
 
 Define a job for promoting a registered model version with an alias.
 
@@ -57,11 +43,23 @@ Parameters:
     alias (str): the mlflow alias to transition the registered model version.
     version (int | None): the model version to transition (use None for latest).
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[PromotionJob]`)
+* **`alias`** (`str`)
+* **`version`** (`int | None`)
 
-* **`run(self: Any) -> base.Locals`** (L27-L57)
+#### Public Methods
+* **`run(self: Any) -> base.Locals`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `base.Locals`: Return value description.
+    - `self` (`Any`)
+  - **Outputs**: `base.Locals`
+
+## Dependencies
+
+* `typing`
+* `regression_model_template.jobs.base`
+
+## Used By
+
+* [__init__.py](../../regression_model_template/jobs/__init__.md)

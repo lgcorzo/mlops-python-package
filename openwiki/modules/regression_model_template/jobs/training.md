@@ -5,26 +5,25 @@ type: "module"
 title: "Module: training"
 source_path: "src/regression_model_template/jobs/training.py"
 description: "Define a job for training and registring a single AI/ML model."
-tags: ["module", "training", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "training"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: training
 
-* **Source Reference:** [src/regression_model_template/jobs/training.py](../../../src/regression_model_template/jobs/training.py) (Lines: L1-L145)
+* **Source Reference:** [src/regression_model_template/jobs/training.py](../../../src/regression_model_template/jobs/training.py)
 
 ## 1. Architectural Role & Responsibilities
 Define a job for training and registring a single AI/ML model.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
     class TrainingJob {
-        +KIND: T.Literal['TrainingJob']
+        +KIND: T.Literal~TrainingJob~
         +run_config: services.MlflowService.RunConfig
         +inputs: datasets.ReaderKind
         +targets: datasets.ReaderKind
@@ -36,25 +35,12 @@ classDiagram
         +registry: registries.RegisterKind
         +run(self: Any) base.Locals
     }
-```
-
-## 2b. Execution Flow (Sequence Diagram)
-```mermaid
-sequenceDiagram
-    autonumber
-    participant User as Runner
-    participant Job as TrainingJob
-    
-    User->>Job: run()
-    activate Job
-    Note over Job: Reads inputs and performs workflow steps
-    Job-->>User: Locals (dict)
-    deactivate Job
+    Job <|-- TrainingJob : Generalization
 ```
 
 ## 3. Class & Method Specifications
 
-### `TrainingJob` ([`src/regression_model_template/jobs/training.py:L21-L145`](../../../src/regression_model_template/jobs/training.py#L21-L145))
+### `TrainingJob`
 
 Train and register a single AI/ML model.
 
@@ -69,11 +55,42 @@ Parameters:
     signer (signers.SignerKind): model signer.
     registry (registries.RegisterKind): model register.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[TrainingJob]`)
+* **`run_config`** (`services.MlflowService.RunConfig`)
+* **`inputs`** (`datasets.ReaderKind`)
+* **`targets`** (`datasets.ReaderKind`)
+* **`model`** (`models.ModelKind`)
+* **`metrics`** (`metrics_.MetricsKind`)
+* **`splitter`** (`splitters.SplitterKind`)
+* **`saver`** (`registries.SaverKind`)
+* **`signer`** (`signers.SignerKind`)
+* **`registry`** (`registries.RegisterKind`)
 
-* **`run(self: Any) -> base.Locals`** (L57-L145)
+#### Public Methods
+* **`run(self: Any) -> base.Locals`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `base.Locals`: Return value description.
+    - `self` (`Any`)
+  - **Outputs**: `base.Locals`
+
+## Dependencies
+
+* `time`
+* `typing`
+* `mlflow`
+* `pydantic`
+* `mlflow.entities.Metric`
+* `regression_model_template.core.metrics`
+* `regression_model_template.core.models`
+* `regression_model_template.core.schemas`
+* `regression_model_template.io.datasets`
+* `regression_model_template.io.registries`
+* `regression_model_template.io.services`
+* `regression_model_template.jobs.base`
+* `regression_model_template.utils.signers`
+* `regression_model_template.utils.splitters`
+
+## Used By
+
+* [__init__.py](../../regression_model_template/jobs/__init__.md)

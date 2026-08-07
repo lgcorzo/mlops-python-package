@@ -5,31 +5,33 @@ type: "module"
 title: "Module: services"
 source_path: "src/regression_model_template/io/services.py"
 description: "Manage global context during execution."
-tags: ["module", "services", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "services"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: services
 
-* **Source Reference:** [src/regression_model_template/io/services.py](../../../src/regression_model_template/io/services.py) (Lines: L1-L252)
+* **Source Reference:** [src/regression_model_template/io/services.py](../../../src/regression_model_template/io/services.py)
 
 ## 1. Architectural Role & Responsibilities
 Manage global context during execution.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
     class PropagateHandler {
         +emit(self: Any, record: logging.LogRecord) None
     }
+    Handler <|-- PropagateHandler : Generalization
     class Service {
         +start(self: Any) None
         +stop(self: Any) None
     }
+    ABC <|-- Service : Generalization
+    BaseModel <|-- Service : Generalization
     class LoggerService {
         +sink: str
         +level: str
@@ -42,6 +44,7 @@ classDiagram
         +start(self: Any) None
         +logger(self: Any) loguru.Logger
     }
+    Service <|-- LoggerService : Generalization
     class AlertsService {
         +enable: bool
         +app_name: str
@@ -49,8 +52,9 @@ classDiagram
         +start(self: Any) None
         +notify(self: Any, title: str, message: str) None
     }
+    Service <|-- AlertsService : Generalization
     class MlflowService {
-        +env: ClassVar[Env]
+        +env: ClassVar~Env~
         +tracking_uri: str
         +registry_uri: str
         +experiment_name: str
@@ -64,51 +68,46 @@ classDiagram
         +autolog_log_datasets: bool
         +autolog_silent: bool
         +start(self: Any) None
-        +run_context(self: Any, run_config: RunConfig) T.Generator[mlflow.ActiveRun, None, None]
+        +run_context(self: Any, run_config: RunConfig) T.Generator~(mlflow.ActiveRun, None, None)~
         +client(self: Any) mt.MlflowClient
     }
+    Service <|-- MlflowService : Generalization
 ```
 
 ## 3. Class & Method Specifications
 
-### `PropagateHandler` ([`src/regression_model_template/io/services.py:L33-L35`](../../../src/regression_model_template/io/services.py#L33-L35))
+### `PropagateHandler`
 
 No description available.
 
-#### Methods
-
-* **`emit(self: Any, record: logging.LogRecord) -> None`** (L34-L35)
+#### Public Methods
+* **`emit(self: Any, record: logging.LogRecord) -> None`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `record` (`logging.LogRecord`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
+    - `self` (`Any`)
+    - `record` (`logging.LogRecord`)
+  - **Outputs**: `None`
 
-### `Service` ([`src/regression_model_template/io/services.py:L38-L50`](../../../src/regression_model_template/io/services.py#L38-L50))
+### `Service`
 
 Base class for a global service.
 
 Use services to manage global contexts.
 e.g., logger object, mlflow client, spark context, ...
 
-#### Methods
-
-* **`start(self: Any) -> None`** (L46-L47)
+#### Public Methods
+* **`start(self: Any) -> None`**
   - **Purpose**: Start the service.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`stop(self: Any) -> None`** (L49-L50)
+    - `self` (`Any`)
+  - **Outputs**: `None`
+* **`stop(self: Any) -> None`**
   - **Purpose**: Stop the service.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
+    - `self` (`Any`)
+  - **Outputs**: `None`
 
-### `LoggerService` ([`src/regression_model_template/io/services.py:L54-L124`](../../../src/regression_model_template/io/services.py#L54-L124))
+### `LoggerService`
 
 Service for logging messages.
 
@@ -124,23 +123,29 @@ Parameters:
     diagnose (bool): enable variable display.
     catch (bool): catch errors during log handling.
 
-#### Methods
+#### Attributes
+* **`sink`** (`str`)
+* **`level`** (`str`)
+* **`format`** (`str`)
+* **`colorize`** (`bool`)
+* **`serialize`** (`bool`)
+* **`backtrace`** (`bool`)
+* **`diagnose`** (`bool`)
+* **`catch`** (`bool`)
 
-* **`start(self: Any) -> None`** (L84-L116)
+#### Public Methods
+* **`start(self: Any) -> None`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`logger(self: Any) -> loguru.Logger`** (L118-L124)
+    - `self` (`Any`)
+  - **Outputs**: `None`
+* **`logger(self: Any) -> loguru.Logger`**
   - **Purpose**: Return the main logger.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `loguru.Logger`: Return value description.
+    - `self` (`Any`)
+  - **Outputs**: `loguru.Logger`
 
-### `AlertsService` ([`src/regression_model_template/io/services.py:L127-L159`](../../../src/regression_model_template/io/services.py#L127-L159))
+### `AlertsService`
 
 Service for sending notifications.
 
@@ -155,25 +160,26 @@ Parameters:
     app_name (str): name of the application.
     timeout (int | None): timeout in secs.
 
-#### Methods
+#### Attributes
+* **`enable`** (`bool`)
+* **`app_name`** (`str`)
+* **`timeout`** (`int | None`)
 
-* **`start(self: Any) -> None`** (L146-L147)
+#### Public Methods
+* **`start(self: Any) -> None`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`notify(self: Any, title: str, message: str) -> None`** (L149-L159)
+    - `self` (`Any`)
+  - **Outputs**: `None`
+* **`notify(self: Any, title: str, message: str) -> None`**
   - **Purpose**: Send a notification to the system.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `title` (`str`): Parameter description.
-    - `message` (`str`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
+    - `self` (`Any`)
+    - `title` (`str`)
+    - `message` (`str`)
+  - **Outputs**: `None`
 
-### `MlflowService` ([`src/regression_model_template/io/services.py:L162-L252`](../../../src/regression_model_template/io/services.py#L162-L252))
+### `MlflowService`
 
 Service for Mlflow tracking and registry.
 
@@ -191,26 +197,69 @@ Parameters:
     autolog_log_datasets (bool): If True, logs datasets used during autologging.
     autolog_silent (bool): If True, suppresses all Mlflow warnings during autologging.
 
-#### Methods
+#### Attributes
+* **`env`** (`ClassVar[Env]`)
+* **`tracking_uri`** (`str`)
+* **`registry_uri`** (`str`)
+* **`experiment_name`** (`str`)
+* **`registry_name`** (`str`)
+* **`autolog_disable`** (`bool`)
+* **`autolog_disable_for_unsupported_versions`** (`bool`)
+* **`autolog_exclusive`** (`bool`)
+* **`autolog_log_input_examples`** (`bool`)
+* **`autolog_log_model_signatures`** (`bool`)
+* **`autolog_log_models`** (`bool`)
+* **`autolog_log_datasets`** (`bool`)
+* **`autolog_silent`** (`bool`)
 
-* **`start(self: Any) -> None`** (L211-L226)
+#### Public Methods
+* **`start(self: Any) -> None`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`run_context(self: Any, run_config: RunConfig) -> T.Generator[mlflow.ActiveRun, None, None]`** (L229-L244)
+    - `self` (`Any`)
+  - **Outputs**: `None`
+* **`run_context(self: Any, run_config: RunConfig) -> T.Generator[(mlflow.ActiveRun, None, None)]`**
   - **Purpose**: Yield an active Mlflow run and exit it afterwards.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `run_config` (`RunConfig`): Parameter description.
-  - **Outputs**:
-    - `T.Generator[mlflow.ActiveRun, None, None]`: Return value description.
-
-* **`client(self: Any) -> mt.MlflowClient`** (L246-L252)
+    - `self` (`Any`)
+    - `run_config` (`RunConfig`)
+  - **Outputs**: `T.Generator[(mlflow.ActiveRun, None, None)]`
+* **`client(self: Any) -> mt.MlflowClient`**
   - **Purpose**: Return a new Mlflow client.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `mt.MlflowClient`: Return value description.
+    - `self` (`Any`)
+  - **Outputs**: `mt.MlflowClient`
+
+## Dependencies
+
+* `__future__.annotations`
+* `abc`
+* `contextlib`
+* `logging`
+* `sys`
+* `typing`
+* `typing.ClassVar`
+* `loguru`
+* `mlflow`
+* `mlflow.tracking`
+* `pydantic`
+* `opentelemetry.trace`
+* `opentelemetry._logs.set_logger_provider`
+* `opentelemetry.exporter.otlp.proto.http._log_exporter.OTLPLogExporter`
+* `opentelemetry.exporter.otlp.proto.http.trace_exporter.OTLPSpanExporter`
+* `opentelemetry.sdk._logs.LoggerProvider`
+* `opentelemetry.sdk._logs.LoggingHandler`
+* `opentelemetry.sdk._logs.export.BatchLogRecordProcessor`
+* `opentelemetry.sdk.resources.Resource`
+* `opentelemetry.sdk.trace.TracerProvider`
+* `opentelemetry.sdk.trace.export.BatchSpanProcessor`
+* `plyer.notification`
+* `regression_model_template.io.osvariables.Env`
+
+## Used By
+
+* [kafka_app.py](../../regression_model_template/controller/kafka_app.md)
+* [base.py](../../regression_model_template/jobs/base.md)
+* [evaluations.py](../../regression_model_template/jobs/evaluations.md)
+* [training.py](../../regression_model_template/jobs/training.md)
+* [tuning.py](../../regression_model_template/jobs/tuning.md)

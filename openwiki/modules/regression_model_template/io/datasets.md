@@ -5,22 +5,21 @@ type: "module"
 title: "Module: datasets"
 source_path: "src/regression_model_template/io/datasets.py"
 description: "Read/Write datasets from/to external sources/destinations."
-tags: ["module", "datasets", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "datasets"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: datasets
 
-* **Source Reference:** [src/regression_model_template/io/datasets.py](../../../src/regression_model_template/io/datasets.py) (Lines: L1-L128)
+* **Source Reference:** [src/regression_model_template/io/datasets.py](../../../src/regression_model_template/io/datasets.py)
 
 ## 1. Architectural Role & Responsibilities
 Read/Write datasets from/to external sources/destinations.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
     class Reader {
@@ -29,26 +28,32 @@ classDiagram
         +read(self: Any) pd.DataFrame
         +lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) Lineage
     }
+    ABC <|-- Reader : Generalization
+    BaseModel <|-- Reader : Generalization
     class ParquetReader {
-        +KIND: T.Literal['ParquetReader']
+        +KIND: T.Literal~ParquetReader~
         +path: str
         +read(self: Any) pd.DataFrame
         +lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) Lineage
     }
+    Reader <|-- ParquetReader : Generalization
     class Writer {
         +KIND: str
         +write(self: Any, data: pd.DataFrame) None
     }
+    ABC <|-- Writer : Generalization
+    BaseModel <|-- Writer : Generalization
     class ParquetWriter {
-        +KIND: T.Literal['ParquetWriter']
+        +KIND: T.Literal~ParquetWriter~
         +path: str
         +write(self: Any, data: pd.DataFrame) None
     }
+    Writer <|-- ParquetWriter : Generalization
 ```
 
 ## 3. Class & Method Specifications
 
-### `Reader` ([`src/regression_model_template/io/datasets.py:L19-L59`](../../../src/regression_model_template/io/datasets.py#L19-L59))
+### `Reader`
 
 Base class for a dataset reader.
 
@@ -58,83 +63,102 @@ e.g., to read file, database, cloud storage, ...
 Parameters:
     limit (int, optional): maximum number of rows to read. Defaults to None.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`str`)
+* **`limit`** (`int | None`)
 
-* **`read(self: Any) -> pd.DataFrame`** (L34-L39)
+#### Public Methods
+* **`read(self: Any) -> pd.DataFrame`**
   - **Purpose**: Read a dataframe from a dataset.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `pd.DataFrame`: Return value description.
-
-* **`lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`** (L42-L59)
+    - `self` (`Any`)
+  - **Outputs**: `pd.DataFrame`
+* **`lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`**
   - **Purpose**: Generate lineage information.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `name` (`str`): Parameter description.
-    - `data` (`pd.DataFrame`): Parameter description.
-    - `targets` (`str | None`): Parameter description.
-    - `predictions` (`str | None`): Parameter description.
-  - **Outputs**:
-    - `Lineage`: Return value description.
+    - `self` (`Any`)
+    - `name` (`str`)
+    - `data` (`pd.DataFrame`)
+    - `targets` (`str | None`)
+    - `predictions` (`str | None`)
+  - **Outputs**: `Lineage`
 
-### `ParquetReader` ([`src/regression_model_template/io/datasets.py:L62-L87`](../../../src/regression_model_template/io/datasets.py#L62-L87))
+### `ParquetReader`
 
 Read a dataframe from a parquet file.
 
 Parameters:
     path (str): local path to the dataset.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[ParquetReader]`)
+* **`path`** (`str`)
 
-* **`read(self: Any) -> pd.DataFrame`** (L73-L78)
+#### Public Methods
+* **`read(self: Any) -> pd.DataFrame`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `pd.DataFrame`: Return value description.
-
-* **`lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`** (L80-L87)
+    - `self` (`Any`)
+  - **Outputs**: `pd.DataFrame`
+* **`lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `name` (`str`): Parameter description.
-    - `data` (`pd.DataFrame`): Parameter description.
-    - `targets` (`str | None`): Parameter description.
-    - `predictions` (`str | None`): Parameter description.
-  - **Outputs**:
-    - `Lineage`: Return value description.
+    - `self` (`Any`)
+    - `name` (`str`)
+    - `data` (`pd.DataFrame`)
+    - `targets` (`str | None`)
+    - `predictions` (`str | None`)
+  - **Outputs**: `Lineage`
 
-### `Writer` ([`src/regression_model_template/io/datasets.py:L95-L110`](../../../src/regression_model_template/io/datasets.py#L95-L110))
+### `Writer`
 
 Base class for a dataset writer.
 
 Use a writer to save a dataset from memory.
 e.g., to write file, database, cloud storage, ...
 
-#### Methods
+#### Attributes
+* **`KIND`** (`str`)
 
-* **`write(self: Any, data: pd.DataFrame) -> None`** (L105-L110)
+#### Public Methods
+* **`write(self: Any, data: pd.DataFrame) -> None`**
   - **Purpose**: Write a dataframe to a dataset.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `data` (`pd.DataFrame`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
+    - `self` (`Any`)
+    - `data` (`pd.DataFrame`)
+  - **Outputs**: `None`
 
-### `ParquetWriter` ([`src/regression_model_template/io/datasets.py:L113-L125`](../../../src/regression_model_template/io/datasets.py#L113-L125))
+### `ParquetWriter`
 
 Writer a dataframe to a parquet file.
 
 Parameters:
     path (str): local or S3 path to the dataset.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[ParquetWriter]`)
+* **`path`** (`str`)
 
-* **`write(self: Any, data: pd.DataFrame) -> None`** (L124-L125)
+#### Public Methods
+* **`write(self: Any, data: pd.DataFrame) -> None`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `data` (`pd.DataFrame`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
+    - `self` (`Any`)
+    - `data` (`pd.DataFrame`)
+  - **Outputs**: `None`
+
+## Dependencies
+
+* `abc`
+* `typing`
+* `mlflow.data.pandas_dataset`
+* `pandas`
+* `pydantic`
+
+## Used By
+
+* [evaluations.py](../../regression_model_template/jobs/evaluations.md)
+* [explanations.py](../../regression_model_template/jobs/explanations.md)
+* [inference.py](../../regression_model_template/jobs/inference.md)
+* [training.py](../../regression_model_template/jobs/training.md)
+* [tuning.py](../../regression_model_template/jobs/tuning.md)
