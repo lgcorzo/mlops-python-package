@@ -5,22 +5,21 @@ type: "module"
 title: "Module: searchers"
 source_path: "src/regression_model_template/utils/searchers.py"
 description: "Find the best hyperparameters for a model."
-tags: ["module", "searchers", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "searchers"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: searchers
 
-* **Source Reference:** [src/regression_model_template/utils/searchers.py](../../../src/regression_model_template/utils/searchers.py) (Lines: L1-L116)
+* **Source Reference:** [src/regression_model_template/utils/searchers.py](../../../src/regression_model_template/utils/searchers.py)
 
 ## 1. Architectural Role & Responsibilities
 Find the best hyperparameters for a model.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
     class Searcher {
@@ -28,8 +27,10 @@ classDiagram
         +param_grid: Grid
         +search(self: Any, model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) Results
     }
+    ABC <|-- Searcher : Generalization
+    BaseModel <|-- Searcher : Generalization
     class GridCVSearcher {
-        +KIND: T.Literal['GridCVSearcher']
+        +KIND: T.Literal~GridCVSearcher~
         +n_jobs: int | None
         +refit: bool
         +verbose: int
@@ -37,11 +38,12 @@ classDiagram
         +return_train_score: bool
         +search(self: Any, model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) Results
     }
+    Searcher <|-- GridCVSearcher : Generalization
 ```
 
 ## 3. Class & Method Specifications
 
-### `Searcher` ([`src/regression_model_template/utils/searchers.py:L34-L68`](../../../src/regression_model_template/utils/searchers.py#L34-L68))
+### `Searcher`
 
 Base class for a searcher.
 
@@ -51,21 +53,23 @@ i.e., to find the best model params.
 Parameters:
     param_grid (Grid): mapping of param key -> values.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`str`)
+* **`param_grid`** (`Grid`)
 
-* **`search(self: Any, model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) -> Results`** (L49-L68)
+#### Public Methods
+* **`search(self: Any, model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) -> Results`**
   - **Purpose**: Search the best model for the given inputs and targets.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `model` (`models.Model`): Parameter description.
-    - `metric` (`metrics.Metric`): Parameter description.
-    - `inputs` (`schemas.Inputs`): Parameter description.
-    - `targets` (`schemas.Targets`): Parameter description.
-    - `cv` (`CrossValidation`): Parameter description.
-  - **Outputs**:
-    - `Results`: Return value description.
+    - `self` (`Any`)
+    - `model` (`models.Model`)
+    - `metric` (`metrics.Metric`)
+    - `inputs` (`schemas.Inputs`)
+    - `targets` (`schemas.Targets`)
+    - `cv` (`CrossValidation`)
+  - **Outputs**: `Results`
 
-### `GridCVSearcher` ([`src/regression_model_template/utils/searchers.py:L71-L113`](../../../src/regression_model_template/utils/searchers.py#L71-L113))
+### `GridCVSearcher`
 
 Grid searcher with cross-fold validation.
 
@@ -78,16 +82,39 @@ Parameters:
     error_score (str | float): strategy or value on error.
     return_train_score (bool): include train scores if True.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[GridCVSearcher]`)
+* **`n_jobs`** (`int | None`)
+* **`refit`** (`bool`)
+* **`verbose`** (`int`)
+* **`error_score`** (`str | float`)
+* **`return_train_score`** (`bool`)
 
-* **`search(self: Any, model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) -> Results`** (L92-L113)
+#### Public Methods
+* **`search(self: Any, model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) -> Results`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `model` (`models.Model`): Parameter description.
-    - `metric` (`metrics.Metric`): Parameter description.
-    - `inputs` (`schemas.Inputs`): Parameter description.
-    - `targets` (`schemas.Targets`): Parameter description.
-    - `cv` (`CrossValidation`): Parameter description.
-  - **Outputs**:
-    - `Results`: Return value description.
+    - `self` (`Any`)
+    - `model` (`models.Model`)
+    - `metric` (`metrics.Metric`)
+    - `inputs` (`schemas.Inputs`)
+    - `targets` (`schemas.Targets`)
+    - `cv` (`CrossValidation`)
+  - **Outputs**: `Results`
+
+## Dependencies
+
+* `abc`
+* `typing`
+* `typing.Union`
+* `pandas`
+* `pydantic`
+* `sklearn.model_selection`
+* `regression_model_template.core.metrics`
+* `regression_model_template.core.models`
+* `regression_model_template.core.schemas`
+* `regression_model_template.utils.splitters`
+
+## Used By
+
+* [tuning.py](../../regression_model_template/jobs/tuning.md)

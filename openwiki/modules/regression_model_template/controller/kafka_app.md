@@ -5,261 +5,231 @@ type: "module"
 title: "Module: kafka_app"
 source_path: "src/regression_model_template/controller/kafka_app.py"
 description: "FastAPI and Kafka Service for Predictions with Logging."
-tags: ["module", "kafka_app", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "kafka_app"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: kafka_app
 
-* **Source Reference:** [src/regression_model_template/controller/kafka_app.py](../../../src/regression_model_template/controller/kafka_app.py) (Lines: L1-L501)
+* **Source Reference:** [src/regression_model_template/controller/kafka_app.py](../../../src/regression_model_template/controller/kafka_app.py)
 
 ## 1. Architectural Role & Responsibilities
 FastAPI and Kafka Service for Predictions with Logging.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
     class RateLimiter {
-        -__init__(self: Any, max_requests: int, window_seconds: int, max_tracked_ips: int) Any
+        +__init__(self: Any, max_requests: int, window_seconds: int, max_tracked_ips: int) Any
         +is_allowed(self: Any, ip: str) bool
     }
     class PredictionRequest {
-        +input_data: Dict[str, Any]
+        +input_data: Dict~(str, Any)~
         +validate_schema(self: Any) pd.DataFrame
-        +check_input_size(cls: Any, v: Dict[str, Any]) Dict[str, Any]
+        +check_input_size(cls: Any, v: Dict~(str, Any)~) Dict~(str, Any)~
     }
+    BaseModel <|-- PredictionRequest : Generalization
     class PredictionResponse {
-        +result: Dict[str, Any]
+        +result: Dict~(str, Any)~
     }
+    BaseModel <|-- PredictionResponse : Generalization
     class FastAPIKafkaService {
-        -__init__(self: Any, prediction_callback: Callable[[PredictionRequest], PredictionResponse], kafka_config: Dict[str, Any], input_topic: str, output_topic: str) Any
+        +__init__(self: Any, prediction_callback: Callable~(~PredictionRequest~, PredictionResponse)~, kafka_config: Dict~(str, Any)~, input_topic: str, output_topic: str) Any
         +delivery_report(self: Any, err: KafkaError | None, msg: Message) None
         +start(self: Any) None
-        -_initialize_kafka_producer(self: Any) None
-        -_initialize_kafka_consumer(self: Any) None
-        -_ensure_topics_exist(self: Any) None
-        -_run_server(self: Any) None
-        -_consume_messages(self: Any) None
-        -_poll_message(self: Any) Message | None
-        -_handle_message_error(self: Any, msg: Message) bool
-        -_process_message(self: Any, msg: Message) None
-        -_close_consumer(self: Any) None
+        +_initialize_kafka_producer(self: Any) None
+        +_initialize_kafka_consumer(self: Any) None
+        +_ensure_topics_exist(self: Any) None
+        +_run_server(self: Any) None
+        +_consume_messages(self: Any) None
+        +_poll_message(self: Any) Message | None
+        +_handle_message_error(self: Any, msg: Message) bool
+        +_process_message(self: Any, msg: Message) None
+        +_close_consumer(self: Any) None
         +stop(self: Any) None
     }
     class PredictionService {
-        -__init__(self: Any, model: Any) Any
+        +__init__(self: Any, model: Any) Any
         +predict(self: Any, input_data: PredictionRequest) PredictionResponse
     }
 ```
 
-## 2b. Execution Flow (Sequence Diagram)
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Client as HTTP Client
-    participant API as FastAPI App
-    participant Service as PredictionService
-    
-    Client->>API: POST /predict
-    activate API
-    API->>Service: predict(input_data)
-    activate Service
-    Service-->>API: PredictionResponse
-    deactivate Service
-    API-->>Client: JSON Response
-    deactivate API
-```
-
 ## 3. Class & Method Specifications
 
-### `RateLimiter` ([`src/regression_model_template/controller/kafka_app.py:L82-L112`](../../../src/regression_model_template/controller/kafka_app.py#L82-L112))
+### `RateLimiter`
 
 In-memory sliding window rate limiter backed by OrderedDict.
 
-#### Methods
-
-* **`__init__(self: Any, max_requests: int, window_seconds: int, max_tracked_ips: int) -> Any`** (L85-L89)
+#### Public Methods
+* **`__init__(self: Any, max_requests: int, window_seconds: int, max_tracked_ips: int) -> Any`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `max_requests` (`int`): Parameter description.
-    - `window_seconds` (`int`): Parameter description.
-    - `max_tracked_ips` (`int`): Parameter description.
-  - **Outputs**:
-    - `Any`: Return value description.
-
-* **`is_allowed(self: Any, ip: str) -> bool`** (L91-L112)
+    - `self` (`Any`)
+    - `max_requests` (`int`)
+    - `window_seconds` (`int`)
+    - `max_tracked_ips` (`int`)
+  - **Outputs**: `Any`
+* **`is_allowed(self: Any, ip: str) -> bool`**
   - **Purpose**: Check if the given IP is allowed to make a request.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `ip` (`str`): Parameter description.
-  - **Outputs**:
-    - `bool`: Return value description.
+    - `self` (`Any`)
+    - `ip` (`str`)
+  - **Outputs**: `bool`
 
-### Function: `default_input_payload() -> Dict[str, Any]` ([`src/regression_model_template/controller/kafka_app.py:L116-L135`](../../../src/regression_model_template/controller/kafka_app.py#L116-L135))
-
-Generate a fresh default input payload with current timestamps.
-
-### `PredictionRequest` ([`src/regression_model_template/controller/kafka_app.py:L138-L174`](../../../src/regression_model_template/controller/kafka_app.py#L138-L174))
+### `PredictionRequest`
 
 Request model for prediction.
 
-#### Methods
+#### Attributes
+* **`input_data`** (`Dict[(str, Any)]`)
 
-* **`validate_schema(self: Any) -> pd.DataFrame`** (L143-L145)
+#### Public Methods
+* **`validate_schema(self: Any) -> pd.DataFrame`**
   - **Purpose**: Validates the input data against InputsSchema.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `pd.DataFrame`: Return value description.
-
-* **`check_input_size(cls: Any, v: Dict[str, Any]) -> Dict[str, Any]`** (L149-L174)
+    - `self` (`Any`)
+  - **Outputs**: `pd.DataFrame`
+* **`check_input_size(cls: Any, v: Dict[(str, Any)]) -> Dict[(str, Any)]`**
   - **Purpose**: Check if the input data size is within limits.
   - **Inputs**:
-    - `cls` (`Any`): Parameter description.
-    - `v` (`Dict[str, Any]`): Parameter description.
-  - **Outputs**:
-    - `Dict[str, Any]`: Return value description.
+    - `cls` (`Any`)
+    - `v` (`Dict[(str, Any)]`)
+  - **Outputs**: `Dict[(str, Any)]`
 
-### `PredictionResponse` ([`src/regression_model_template/controller/kafka_app.py:L177-L180`](../../../src/regression_model_template/controller/kafka_app.py#L177-L180))
+### `PredictionResponse`
 
 Response model for prediction.
 
-#### Methods
+#### Attributes
+* **`result`** (`Dict[(str, Any)]`)
 
-*No methods defined.*
-
-### `FastAPIKafkaService` ([`src/regression_model_template/controller/kafka_app.py:L184-L386`](../../../src/regression_model_template/controller/kafka_app.py#L184-L386))
+### `FastAPIKafkaService`
 
 Service for deploying a FastAPI application with a Kafka producer and consumer.
 
-#### Methods
-
-* **`__init__(self: Any, prediction_callback: Callable[[PredictionRequest], PredictionResponse], kafka_config: Dict[str, Any], input_topic: str, output_topic: str) -> Any`** (L187-L201)
+#### Public Methods
+* **`__init__(self: Any, prediction_callback: Callable[([PredictionRequest], PredictionResponse)], kafka_config: Dict[(str, Any)], input_topic: str, output_topic: str) -> Any`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `prediction_callback` (`Callable[[PredictionRequest], PredictionResponse]`): Parameter description.
-    - `kafka_config` (`Dict[str, Any]`): Parameter description.
-    - `input_topic` (`str`): Parameter description.
-    - `output_topic` (`str`): Parameter description.
-  - **Outputs**:
-    - `Any`: Return value description.
-
-* **`delivery_report(self: Any, err: KafkaError | None, msg: Message) -> None`** (L203-L208)
+    - `self` (`Any`)
+    - `prediction_callback` (`Callable[([PredictionRequest], PredictionResponse)]`)
+    - `kafka_config` (`Dict[(str, Any)]`)
+    - `input_topic` (`str`)
+    - `output_topic` (`str`)
+  - **Outputs**: `Any`
+* **`delivery_report(self: Any, err: KafkaError | None, msg: Message) -> None`**
   - **Purpose**: Called once for each message produced to indicate delivery result.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `err` (`KafkaError | None`): Parameter description.
-    - `msg` (`Message`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`start(self: Any) -> None`** (L210-L218)
+    - `self` (`Any`)
+    - `err` (`KafkaError | None`)
+    - `msg` (`Message`)
+  - **Outputs**: `None`
+* **`start(self: Any) -> None`**
   - **Purpose**: Start the FastAPI application and Kafka consumer.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`_initialize_kafka_producer(self: Any) -> None`** (L220-L230)
-  - **Purpose**: Initialize Kafka producer.
-  - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`_initialize_kafka_consumer(self: Any) -> None`** (L232-L242)
-  - **Purpose**: Initialize Kafka consumer.
-  - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`_ensure_topics_exist(self: Any) -> None`** (L244-L262)
-  - **Purpose**: Ensure input and output Kafka topics exist on the broker.
-  - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`_run_server(self: Any) -> None`** (L264-L269)
-  - **Purpose**: Run the FastAPI server.
-  - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`_consume_messages(self: Any) -> None`** (L271-L285)
-  - **Purpose**: Consume messages from Kafka topic and produce predictions.
-  - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`_poll_message(self: Any) -> Message | None`** (L287-L293)
-  - **Purpose**: Poll message from Kafka consumer.
-  - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `Message | None`: Return value description.
-
-* **`_handle_message_error(self: Any, msg: Message) -> bool`** (L295-L318)
-  - **Purpose**: Handle errors in polled messages.
-  - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `msg` (`Message`): Parameter description.
-  - **Outputs**:
-    - `bool`: Return value description.
-
-* **`_process_message(self: Any, msg: Message) -> None`** (L320-L372)
-  - **Purpose**: Process a valid Kafka message.
-  - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `msg` (`Message`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`_close_consumer(self: Any) -> None`** (L374-L378)
-  - **Purpose**: Close the Kafka consumer.
-  - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
-
-* **`stop(self: Any) -> None`** (L380-L386)
+    - `self` (`Any`)
+  - **Outputs**: `None`
+* **`stop(self: Any) -> None`**
   - **Purpose**: Stop the FastAPI application and Kafka consumer.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `None`: Return value description.
+    - `self` (`Any`)
+  - **Outputs**: `None`
 
-### `PredictionService` ([`src/regression_model_template/controller/kafka_app.py:L442-L462`](../../../src/regression_model_template/controller/kafka_app.py#L442-L462))
+#### Private Methods
+* **`_initialize_kafka_producer(self: Any) -> None`**
+  - **Purpose**: Initialize Kafka producer.
+* **`_initialize_kafka_consumer(self: Any) -> None`**
+  - **Purpose**: Initialize Kafka consumer.
+* **`_ensure_topics_exist(self: Any) -> None`**
+  - **Purpose**: Ensure input and output Kafka topics exist on the broker.
+* **`_run_server(self: Any) -> None`**
+  - **Purpose**: Run the FastAPI server.
+* **`_consume_messages(self: Any) -> None`**
+  - **Purpose**: Consume messages from Kafka topic and produce predictions.
+* **`_poll_message(self: Any) -> Message | None`**
+  - **Purpose**: Poll message from Kafka consumer.
+* **`_handle_message_error(self: Any, msg: Message) -> bool`**
+  - **Purpose**: Handle errors in polled messages.
+* **`_process_message(self: Any, msg: Message) -> None`**
+  - **Purpose**: Process a valid Kafka message.
+* **`_close_consumer(self: Any) -> None`**
+  - **Purpose**: Close the Kafka consumer.
+
+### `PredictionService`
 
 Service to handle prediction logic securely.
 
-#### Methods
-
-* **`__init__(self: Any, model: Any) -> Any`** (L445-L446)
+#### Public Methods
+* **`__init__(self: Any, model: Any) -> Any`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `model` (`Any`): Parameter description.
-  - **Outputs**:
-    - `Any`: Return value description.
-
-* **`predict(self: Any, input_data: PredictionRequest) -> PredictionResponse`** (L448-L462)
+    - `self` (`Any`)
+    - `model` (`Any`)
+  - **Outputs**: `Any`
+* **`predict(self: Any, input_data: PredictionRequest) -> PredictionResponse`**
   - **Purpose**: Make a prediction using the model.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `input_data` (`PredictionRequest`): Parameter description.
-  - **Outputs**:
-    - `PredictionResponse`: Return value description.
+    - `self` (`Any`)
+    - `input_data` (`PredictionRequest`)
+  - **Outputs**: `PredictionResponse`
 
-### Function: `main() -> None` ([`src/regression_model_template/controller/kafka_app.py:L465-L496`](../../../src/regression_model_template/controller/kafka_app.py#L465-L496))
+## Standalone Functions
 
+### `default_input_payload() -> Dict[(str, Any)]`
+Generate a fresh default input payload with current timestamps.
+
+#### Inputs
+
+#### Outputs
+* `Dict[(str, Any)]`
+
+### `main() -> None`
 No description available.
+
+#### Inputs
+
+#### Outputs
+* `None`
+
+## Dependencies
+
+* `json`
+* `logging`
+* `os`
+* `threading`
+* `time`
+* `collections`
+* `typing.Any`
+* `typing.Callable`
+* `typing.Dict`
+* `typing.cast`
+* `pandas`
+* `uvicorn`
+* `confluent_kafka.Consumer`
+* `confluent_kafka.KafkaError`
+* `confluent_kafka.Message`
+* `confluent_kafka.Producer`
+* `confluent_kafka.admin.AdminClient`
+* `confluent_kafka.admin.NewTopic`
+* `fastapi.FastAPI`
+* `fastapi.HTTPException`
+* `fastapi.Request`
+* `fastapi.concurrency.run_in_threadpool`
+* `fastapi.middleware.cors.CORSMiddleware`
+* `fastapi.middleware.trustedhost.TrustedHostMiddleware`
+* `uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware`
+* `pydantic.BaseModel`
+* `pydantic.Field`
+* `pydantic.field_validator`
+* `regression_model_template.core.schemas.InputsSchema`
+* `regression_model_template.core.schemas.Outputs`
+* `regression_model_template.io.registries`
+* `regression_model_template.io.services`
+* `regression_model_template.io.registries.CustomLoader`
+
+## Used By
+
+_Not used by any other module._

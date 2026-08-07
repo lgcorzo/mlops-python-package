@@ -5,24 +5,27 @@ type: "module"
 title: "Module: configs"
 source_path: "src/regression_model_template/io/configs.py"
 description: "Parse, merge, and convert config objects."
-tags: ["module", "configs", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "configs"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: configs
 
-* **Source Reference:** [src/regression_model_template/io/configs.py](../../../src/regression_model_template/io/configs.py) (Lines: L1-L68)
+* **Source Reference:** [src/regression_model_template/io/configs.py](../../../src/regression_model_template/io/configs.py)
 
 ## 1. Architectural Role & Responsibilities
 Parse, merge, and convert config objects.
 
+## 2. UML 2.0 Class Diagram
+_No classes found._
+
 ## 3. Class & Method Specifications
 
-### Function: `parse_file(path: str) -> Config` ([`src/regression_model_template/io/configs.py:L16-L25`](../../../src/regression_model_template/io/configs.py#L16-L25))
+## Standalone Functions
 
+### `parse_file(path: str) -> Config`
 Parse a config file from a path.
 
 Args:
@@ -31,8 +34,13 @@ Args:
 Returns:
     Config: representation of the config file.
 
-### Function: `parse_string(string: str) -> Config` ([`src/regression_model_template/io/configs.py:L28-L37`](../../../src/regression_model_template/io/configs.py#L28-L37))
+#### Inputs
+* `path` (`str`)
 
+#### Outputs
+* `Config`
+
+### `parse_string(string: str) -> Config`
 Parse the given config string.
 
 Args:
@@ -41,8 +49,13 @@ Args:
 Returns:
     Config: representation of the config string.
 
-### Function: `merge_configs(configs: T.Sequence[Config]) -> Config` ([`src/regression_model_template/io/configs.py:L43-L52`](../../../src/regression_model_template/io/configs.py#L43-L52))
+#### Inputs
+* `string` (`str`)
 
+#### Outputs
+* `Config`
+
+### `merge_configs(configs: T.Sequence[Config]) -> Config`
 Merge a list of config into a single config.
 
 Args:
@@ -51,8 +64,13 @@ Args:
 Returns:
     Config: representation of the merged config objects.
 
-### Function: `to_object(config: Config, resolve: bool) -> object` ([`src/regression_model_template/io/configs.py:L58-L68`](../../../src/regression_model_template/io/configs.py#L58-L68))
+#### Inputs
+* `configs` (`T.Sequence[Config]`)
 
+#### Outputs
+* `Config`
+
+### `to_object(config: Config, resolve: bool) -> object`
 Convert a config object to a python object.
 
 Args:
@@ -61,3 +79,19 @@ Args:
 
 Returns:
     object: conversion of the config to a python object.
+
+#### Inputs
+* `config` (`Config`)
+* `resolve` (`bool`)
+
+#### Outputs
+* `object`
+
+## Dependencies
+
+* `typing`
+* `omegaconf`
+
+## Used By
+
+* [scripts.py](../../regression_model_template/scripts.md)

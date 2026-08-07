@@ -5,22 +5,21 @@ type: "module"
 title: "Module: registries"
 source_path: "src/regression_model_template/io/registries.py"
 description: "Savers, loaders, and registers for model registries."
-tags: ["module", "registries", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "registries"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: registries
 
-* **Source Reference:** [src/regression_model_template/io/registries.py](../../../src/regression_model_template/io/registries.py) (Lines: L1-L320)
+* **Source Reference:** [src/regression_model_template/io/registries.py](../../../src/regression_model_template/io/registries.py)
 
 ## 1. Architectural Role & Responsibilities
 Savers, loaders, and registers for model registries.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
     class Saver {
@@ -28,74 +27,52 @@ classDiagram
         +path: str
         +save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) Info
     }
+    ABC <|-- Saver : Generalization
+    BaseModel <|-- Saver : Generalization
     class CustomSaver {
-        +KIND: T.Literal['CustomSaver']
+        +KIND: T.Literal~CustomSaver~
         +save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) Info
     }
+    Saver <|-- CustomSaver : Generalization
     class BuiltinSaver {
-        +KIND: T.Literal['BuiltinSaver']
+        +KIND: T.Literal~BuiltinSaver~
         +flavor: str
         +save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs | None) Info
     }
+    Saver <|-- BuiltinSaver : Generalization
     class Loader {
         +KIND: str
-        +load(self: Any, uri: str) 'Loader.Adapter'
+        +load(self: Any, uri: str) Loader.Adapter
     }
+    ABC <|-- Loader : Generalization
+    BaseModel <|-- Loader : Generalization
     class CustomLoader {
-        +KIND: T.Literal['CustomLoader']
-        +load(self: Any, uri: str) 'CustomLoader.Adapter'
+        +KIND: T.Literal~CustomLoader~
+        +load(self: Any, uri: str) CustomLoader.Adapter
     }
+    Loader <|-- CustomLoader : Generalization
     class BuiltinLoader {
-        +KIND: T.Literal['BuiltinLoader']
-        +load(self: Any, uri: str) 'BuiltinLoader.Adapter'
+        +KIND: T.Literal~BuiltinLoader~
+        +load(self: Any, uri: str) BuiltinLoader.Adapter
     }
+    Loader <|-- BuiltinLoader : Generalization
     class Register {
         +KIND: str
-        +tags: dict[str, T.Any]
+        +tags: dict~(str, T.Any)~
         +register(self: Any, name: str, model_uri: str) Version
     }
+    ABC <|-- Register : Generalization
+    BaseModel <|-- Register : Generalization
     class MlflowRegister {
-        +KIND: T.Literal['MlflowRegister']
+        +KIND: T.Literal~MlflowRegister~
         +register(self: Any, name: str, model_uri: str) Version
     }
+    Register <|-- MlflowRegister : Generalization
 ```
 
 ## 3. Class & Method Specifications
 
-### Function: `uri_for_model_alias(name: str, alias: str) -> str` ([`src/regression_model_template/io/registries.py:L24-L34`](../../../src/regression_model_template/io/registries.py#L24-L34))
-
-Create a model URI from a model name and an alias.
-
-Args:
-    name (str): name of the mlflow registered model.
-    alias (str): alias of the registered model.
-
-Returns:
-    str: model URI as "models:/name@alias".
-
-### Function: `uri_for_model_version(name: str, version: int) -> str` ([`src/regression_model_template/io/registries.py:L37-L47`](../../../src/regression_model_template/io/registries.py#L37-L47))
-
-Create a model URI from a model name and a version.
-
-Args:
-    name (str): name of the mlflow registered model.
-    version (int): version of the registered model.
-
-Returns:
-    str: model URI as "models:/name/version."
-
-### Function: `uri_for_model_alias_or_version(name: str, alias_or_version: str | int) -> str` ([`src/regression_model_template/io/registries.py:L50-L63`](../../../src/regression_model_template/io/registries.py#L50-L63))
-
-Create a model URi from a model name and an alias or version.
-
-Args:
-    name (str): name of the mlflow registered model.
-    alias_or_version (str | int): alias or version of the registered model.
-
-Returns:
-    str: model URI as "models:/name@alias" or "models:/name/version" based on input.
-
-### `Saver` ([`src/regression_model_template/io/registries.py:L69-L94`](../../../src/regression_model_template/io/registries.py#L69-L94))
+### `Saver`
 
 Base class for saving models in registry.
 
@@ -105,37 +82,40 @@ e.g., to switch between serialization flavors.
 Parameters:
     path (str): model path inside the Mlflow store.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`str`)
+* **`path`** (`str`)
 
-* **`save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info`** (L84-L94)
+#### Public Methods
+* **`save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info`**
   - **Purpose**: Save a model in the model registry.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `model` (`models.Model`): Parameter description.
-    - `signature` (`signers.Signature`): Parameter description.
-    - `input_example` (`schemas.Inputs`): Parameter description.
-  - **Outputs**:
-    - `Info`: Return value description.
+    - `self` (`Any`)
+    - `model` (`models.Model`)
+    - `signature` (`signers.Signature`)
+    - `input_example` (`schemas.Inputs`)
+  - **Outputs**: `Info`
 
-### `CustomSaver` ([`src/regression_model_template/io/registries.py:L97-L145`](../../../src/regression_model_template/io/registries.py#L97-L145))
+### `CustomSaver`
 
 Saver for project models using the Mlflow PyFunc module.
 
 https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[CustomSaver]`)
 
-* **`save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info`** (L138-L145)
+#### Public Methods
+* **`save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `model` (`models.Model`): Parameter description.
-    - `signature` (`signers.Signature`): Parameter description.
-    - `input_example` (`schemas.Inputs`): Parameter description.
-  - **Outputs**:
-    - `Info`: Return value description.
+    - `self` (`Any`)
+    - `model` (`models.Model`)
+    - `signature` (`signers.Signature`)
+    - `input_example` (`schemas.Inputs`)
+  - **Outputs**: `Info`
 
-### `BuiltinSaver` ([`src/regression_model_template/io/registries.py:L148-L171`](../../../src/regression_model_template/io/registries.py#L148-L171))
+### `BuiltinSaver`
 
 Saver for built-in models using an Mlflow flavor module.
 
@@ -144,52 +124,56 @@ https://mlflow.org/docs/latest/models.html#built-in-model-flavors
 Parameters:
     flavor (str): Mlflow flavor module to use for the serialization.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[BuiltinSaver]`)
+* **`flavor`** (`str`)
 
-* **`save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs | None) -> Info`** (L161-L171)
+#### Public Methods
+* **`save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs | None) -> Info`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `model` (`models.Model`): Parameter description.
-    - `signature` (`signers.Signature`): Parameter description.
-    - `input_example` (`schemas.Inputs | None`): Parameter description.
-  - **Outputs**:
-    - `Info`: Return value description.
+    - `self` (`Any`)
+    - `model` (`models.Model`)
+    - `signature` (`signers.Signature`)
+    - `input_example` (`schemas.Inputs | None`)
+  - **Outputs**: `Info`
 
-### `Loader` ([`src/regression_model_template/io/registries.py:L179-L211`](../../../src/regression_model_template/io/registries.py#L179-L211))
+### `Loader`
 
 Base class for loading models from registry.
 
 Separate model definition from deserialization.
 e.g., to switch between deserialization flavors.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`str`)
 
-* **`load(self: Any, uri: str) -> 'Loader.Adapter'`** (L203-L211)
+#### Public Methods
+* **`load(self: Any, uri: str) -> Loader.Adapter`**
   - **Purpose**: Load a model from the model registry.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `uri` (`str`): Parameter description.
-  - **Outputs**:
-    - `'Loader.Adapter'`: Return value description.
+    - `self` (`Any`)
+    - `uri` (`str`)
+  - **Outputs**: `Loader.Adapter`
 
-### `CustomLoader` ([`src/regression_model_template/io/registries.py:L214-L241`](../../../src/regression_model_template/io/registries.py#L214-L241))
+### `CustomLoader`
 
 Loader for custom models using the Mlflow PyFunc module.
 
 https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[CustomLoader]`)
 
-* **`load(self: Any, uri: str) -> 'CustomLoader.Adapter'`** (L238-L241)
+#### Public Methods
+* **`load(self: Any, uri: str) -> CustomLoader.Adapter`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `uri` (`str`): Parameter description.
-  - **Outputs**:
-    - `'CustomLoader.Adapter'`: Return value description.
+    - `self` (`Any`)
+    - `uri` (`str`)
+  - **Outputs**: `CustomLoader.Adapter`
 
-### `BuiltinLoader` ([`src/regression_model_template/io/registries.py:L244-L273`](../../../src/regression_model_template/io/registries.py#L244-L273))
+### `BuiltinLoader`
 
 Loader for built-in models using the Mlflow PyFunc module.
 
@@ -197,17 +181,18 @@ Note: use Mlflow PyFunc instead of flavors to use standard API.
 
 https://mlflow.org/docs/latest/models.html#built-in-model-flavors
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[BuiltinLoader]`)
 
-* **`load(self: Any, uri: str) -> 'BuiltinLoader.Adapter'`** (L270-L273)
+#### Public Methods
+* **`load(self: Any, uri: str) -> BuiltinLoader.Adapter`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `uri` (`str`): Parameter description.
-  - **Outputs**:
-    - `'BuiltinLoader.Adapter'`: Return value description.
+    - `self` (`Any`)
+    - `uri` (`str`)
+  - **Outputs**: `BuiltinLoader.Adapter`
 
-### `Register` ([`src/regression_model_template/io/registries.py:L281-L305`](../../../src/regression_model_template/io/registries.py#L281-L305))
+### `Register`
 
 Base class for registring models to a location.
 
@@ -217,30 +202,104 @@ e.g., to change the model registry backend.
 Parameters:
     tags (dict[str, T.Any]): tags for the model.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`str`)
+* **`tags`** (`dict[(str, T.Any)]`)
 
-* **`register(self: Any, name: str, model_uri: str) -> Version`** (L296-L305)
+#### Public Methods
+* **`register(self: Any, name: str, model_uri: str) -> Version`**
   - **Purpose**: Register a model given its name and URI.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `name` (`str`): Parameter description.
-    - `model_uri` (`str`): Parameter description.
-  - **Outputs**:
-    - `Version`: Return value description.
+    - `self` (`Any`)
+    - `name` (`str`)
+    - `model_uri` (`str`)
+  - **Outputs**: `Version`
 
-### `MlflowRegister` ([`src/regression_model_template/io/registries.py:L308-L317`](../../../src/regression_model_template/io/registries.py#L308-L317))
+### `MlflowRegister`
 
 Register for models in the Mlflow Model Registry.
 
 https://mlflow.org/docs/latest/model-registry.html
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[MlflowRegister]`)
 
-* **`register(self: Any, name: str, model_uri: str) -> Version`** (L316-L317)
+#### Public Methods
+* **`register(self: Any, name: str, model_uri: str) -> Version`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-    - `name` (`str`): Parameter description.
-    - `model_uri` (`str`): Parameter description.
-  - **Outputs**:
-    - `Version`: Return value description.
+    - `self` (`Any`)
+    - `name` (`str`)
+    - `model_uri` (`str`)
+  - **Outputs**: `Version`
+
+## Standalone Functions
+
+### `uri_for_model_alias(name: str, alias: str) -> str`
+Create a model URI from a model name and an alias.
+
+Args:
+    name (str): name of the mlflow registered model.
+    alias (str): alias of the registered model.
+
+Returns:
+    str: model URI as "models:/name@alias".
+
+#### Inputs
+* `name` (`str`)
+* `alias` (`str`)
+
+#### Outputs
+* `str`
+
+### `uri_for_model_version(name: str, version: int) -> str`
+Create a model URI from a model name and a version.
+
+Args:
+    name (str): name of the mlflow registered model.
+    version (int): version of the registered model.
+
+Returns:
+    str: model URI as "models:/name/version."
+
+#### Inputs
+* `name` (`str`)
+* `version` (`int`)
+
+#### Outputs
+* `str`
+
+### `uri_for_model_alias_or_version(name: str, alias_or_version: str | int) -> str`
+Create a model URi from a model name and an alias or version.
+
+Args:
+    name (str): name of the mlflow registered model.
+    alias_or_version (str | int): alias or version of the registered model.
+
+Returns:
+    str: model URI as "models:/name@alias" or "models:/name/version" based on input.
+
+#### Inputs
+* `name` (`str`)
+* `alias_or_version` (`str | int`)
+
+#### Outputs
+* `str`
+
+## Dependencies
+
+* `abc`
+* `typing`
+* `mlflow`
+* `pydantic`
+* `regression_model_template.core.models`
+* `regression_model_template.core.schemas`
+* `regression_model_template.utils.signers`
+
+## Used By
+
+* [kafka_app.py](../../regression_model_template/controller/kafka_app.md)
+* [evaluations.py](../../regression_model_template/jobs/evaluations.md)
+* [explanations.py](../../regression_model_template/jobs/explanations.md)
+* [inference.py](../../regression_model_template/jobs/inference.md)
+* [training.py](../../regression_model_template/jobs/training.md)

@@ -4,56 +4,67 @@ iso_viewpoint: "ComponentView"
 type: "module"
 title: "Module: osvariables"
 source_path: "src/regression_model_template/io/osvariables.py"
-description: "Documentation for regression_model_template.io.osvariables"
-tags: ["module", "osvariables", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+description: "No description available."
+tags: ["module", "osvariables"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: osvariables
 
-* **Source Reference:** [src/regression_model_template/io/osvariables.py](../../../src/regression_model_template/io/osvariables.py) (Lines: L1-L26)
+* **Source Reference:** [src/regression_model_template/io/osvariables.py](../../../src/regression_model_template/io/osvariables.py)
 
 ## 1. Architectural Role & Responsibilities
-Documentation for regression_model_template.io.osvariables
+No description available.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
     class Singleton {
-        -_instances: dict[type, 'Singleton']
-        -__new__(cls: type['Singleton']) 'Singleton'
+        +_instances: dict~(type, Singleton)~
+        +__new__(cls: type~Singleton~, *args: tuple~(Any, Ellipsis)~, **kwargs: dict~(str, Any)~) Singleton
     }
+    object <|-- Singleton : Generalization
     class Env {
         +mlflow_tracking_uri: str
         +mlflow_registry_uri: str
         +mlflow_experiment_name: str
         +mlflow_registered_model_name: str
     }
+    Singleton <|-- Env : Generalization
+    BaseSettings <|-- Env : Generalization
 ```
 
 ## 3. Class & Method Specifications
 
-### `Singleton` ([`src/regression_model_template/io/osvariables.py:L6-L13`](../../../src/regression_model_template/io/osvariables.py#L6-L13))
+### `Singleton`
 
 No description available.
 
-#### Methods
+#### Attributes
+* **`_instances`** (`dict[(type, Singleton)]`)
 
-* **`__new__(cls: type['Singleton']) -> 'Singleton'`** (L10-L13)
+#### Private Methods
+* **`__new__(cls: type[Singleton], *args: tuple[(Any, Ellipsis)], **kwargs: dict[(str, Any)]) -> Singleton`**
   - **Purpose**: No description available.
-  - **Inputs**:
-    - `cls` (`type['Singleton']`): Parameter description.
-  - **Outputs**:
-    - `'Singleton'`: Return value description.
 
-### `Env` ([`src/regression_model_template/io/osvariables.py:L16-L26`](../../../src/regression_model_template/io/osvariables.py#L16-L26))
+### `Env`
 
 No description available.
 
-#### Methods
+#### Attributes
+* **`mlflow_tracking_uri`** (`str`)
+* **`mlflow_registry_uri`** (`str`)
+* **`mlflow_experiment_name`** (`str`)
+* **`mlflow_registered_model_name`** (`str`)
 
-*No methods defined.*
+## Dependencies
+
+* `typing.Any`
+* `pydantic_settings.BaseSettings`
+
+## Used By
+
+* [services.py](../../regression_model_template/io/services.md)

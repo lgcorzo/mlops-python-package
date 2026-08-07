@@ -5,26 +5,25 @@ type: "module"
 title: "Module: explanations"
 source_path: "src/regression_model_template/jobs/explanations.py"
 description: "Define a job for explaining the model structure and decisions."
-tags: ["module", "explanations", "regression_model_template"]
-timestamp: "2026-08-01T09:57:53Z"
-generated: "agent:uml2-okf-documenter"
+tags: ["module", "explanations"]
+timestamp: "2026-08-07T08:29:41Z"
+generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8f9670a"
+last_verified_commit: "12aa8d5"
 ---
-
 # Module Specification: explanations
 
-* **Source Reference:** [src/regression_model_template/jobs/explanations.py](../../../src/regression_model_template/jobs/explanations.py) (Lines: L1-L78)
+* **Source Reference:** [src/regression_model_template/jobs/explanations.py](../../../src/regression_model_template/jobs/explanations.py)
 
 ## 1. Architectural Role & Responsibilities
 Define a job for explaining the model structure and decisions.
 
 ## 2. UML 2.0 Class Diagram
-```mermaid
+```plantuml
 classDiagram
     direction BT
     class ExplanationsJob {
-        +KIND: T.Literal['ExplanationsJob']
+        +KIND: T.Literal~ExplanationsJob~
         +inputs_samples: datasets.ReaderKind
         +models_explanations: datasets.WriterKind
         +samples_explanations: datasets.WriterKind
@@ -32,25 +31,12 @@ classDiagram
         +loader: registries.LoaderKind
         +run(self: Any) base.Locals
     }
-```
-
-## 2b. Execution Flow (Sequence Diagram)
-```mermaid
-sequenceDiagram
-    autonumber
-    participant User as Runner
-    participant Job as ExplanationsJob
-    
-    User->>Job: run()
-    activate Job
-    Note over Job: Reads inputs and performs workflow steps
-    Job-->>User: Locals (dict)
-    deactivate Job
+    Job <|-- ExplanationsJob : Generalization
 ```
 
 ## 3. Class & Method Specifications
 
-### `ExplanationsJob` ([`src/regression_model_template/jobs/explanations.py:L16-L78`](../../../src/regression_model_template/jobs/explanations.py#L16-L78))
+### `ExplanationsJob`
 
 Generate explanations from the model and a data sample.
 
@@ -61,11 +47,30 @@ Parameters:
     alias_or_version (str | int): alias or version for the  model.
     loader (registries.LoaderKind): registry loader for the model.
 
-#### Methods
+#### Attributes
+* **`KIND`** (`T.Literal[ExplanationsJob]`)
+* **`inputs_samples`** (`datasets.ReaderKind`)
+* **`models_explanations`** (`datasets.WriterKind`)
+* **`samples_explanations`** (`datasets.WriterKind`)
+* **`alias_or_version`** (`str | int`)
+* **`loader`** (`registries.LoaderKind`)
 
-* **`run(self: Any) -> base.Locals`** (L39-L78)
+#### Public Methods
+* **`run(self: Any) -> base.Locals`**
   - **Purpose**: No description available.
   - **Inputs**:
-    - `self` (`Any`): Parameter description.
-  - **Outputs**:
-    - `base.Locals`: Return value description.
+    - `self` (`Any`)
+  - **Outputs**: `base.Locals`
+
+## Dependencies
+
+* `typing`
+* `pydantic`
+* `regression_model_template.core.schemas`
+* `regression_model_template.io.datasets`
+* `regression_model_template.io.registries`
+* `regression_model_template.jobs.base`
+
+## Used By
+
+* [__init__.py](../../regression_model_template/jobs/__init__.md)
