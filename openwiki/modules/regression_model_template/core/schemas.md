@@ -6,19 +6,23 @@ title: "Module: schemas"
 source_path: "src/regression_model_template/core/schemas.py"
 description: "Define and validate dataframe schemas."
 tags: ["module", "schemas"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: schemas
 
-* **Source Reference:** [src/regression_model_template/core/schemas.py](../../../src/regression_model_template/core/schemas.py)
+* **Source Reference:** [src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py)
 
 ## 1. Architectural Role & Responsibilities
 Define and validate dataframe schemas.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: DTO
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -63,6 +67,23 @@ classDiagram
         +importance: papd.Series~float~
     }
     Schema <|-- FeatureImportancesSchema : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    Schema.check->>cast: invoke
+    Schema.check->>validate: invoke
+```
+
+### Component Diagram
+```plantuml
+component [schemas] as Comp
+Comp --> [typing]
+Comp --> [pandas]
+Comp --> [pandera]
+Comp --> [typing]
+Comp --> [common]
 ```
 
 ## 3. Class & Method Specifications
@@ -155,3 +176,15 @@ Schema for the project feature importances.
 * [searchers.py](../../regression_model_template/utils/searchers.md)
 * [signers.py](../../regression_model_template/utils/signers.md)
 * [splitters.py](../../regression_model_template/utils/splitters.md)
+* [conftest.py](../../tests/conftest.md)
+* [test_metrics.py](../../tests/core/test_metrics.md)
+* [test_models.py](../../tests/core/test_models.md)
+* [test_schemas.py](../../tests/core/test_schemas.md)
+* [test_datasets.py](../../tests/io/test_datasets.md)
+* [test_registries.py](../../tests/io/test_registries.md)
+* [test_evaluations.py](../../tests/jobs/test_evaluations.md)
+* [test_training.py](../../tests/jobs/test_training.md)
+* [test_tuning.py](../../tests/jobs/test_tuning.md)
+* [test_searchers.py](../../tests/utils/test_searchers.md)
+* [test_signers.py](../../tests/utils/test_signers.md)
+* [test_splitters.py](../../tests/utils/test_splitters.md)

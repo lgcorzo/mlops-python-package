@@ -6,19 +6,23 @@ title: "Module: models"
 source_path: "src/regression_model_template/core/models.py"
 description: "Define trainable machine learning models."
 tags: ["module", "models"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: models
 
-* **Source Reference:** [src/regression_model_template/core/models.py](../../../src/regression_model_template/core/models.py)
+* **Source Reference:** [src/regression_model_template/core/models.py](../../../../src/regression_model_template/core/models.py)
 
 ## 1. Architectural Role & Responsibilities
 Define trainable machine learning models.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: Entity / Domain Model
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -50,6 +54,54 @@ classDiagram
         +get_internal_model(self: Any) pipeline.Pipeline
     }
     Model <|-- BaselineSklearnModel : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    Model.get_params->>model_dump: invoke
+    Model.get_params->>items: invoke
+    Model.get_params->>isupper: invoke
+    Model.get_params->>startswith: invoke
+    Model.set_params->>items: invoke
+    Model.set_params->>setattr: invoke
+    Model.__sklearn_tags__->>BaseEstimator: invoke
+    Model.__sklearn_tags__->>__sklearn_tags__: invoke
+    Model.explain_model->>NotImplementedError: invoke
+    Model.explain_samples->>NotImplementedError: invoke
+    Model.get_internal_model->>NotImplementedError: invoke
+    BaselineSklearnModel.fit->>ColumnTransformer: invoke
+    BaselineSklearnModel.fit->>RandomForestRegressor: invoke
+    BaselineSklearnModel.fit->>fit: invoke
+    BaselineSklearnModel.fit->>Pipeline: invoke
+    BaselineSklearnModel.fit->>OneHotEncoder: invoke
+    BaselineSklearnModel.predict->>predict: invoke
+    BaselineSklearnModel.predict->>Outputs: invoke
+    BaselineSklearnModel.predict->>get_internal_model: invoke
+    BaselineSklearnModel.explain_model->>FeatureImportances: invoke
+    BaselineSklearnModel.explain_model->>get_feature_names_out: invoke
+    BaselineSklearnModel.explain_model->>get_internal_model: invoke
+    BaselineSklearnModel.explain_samples->>transform: invoke
+    BaselineSklearnModel.explain_samples->>get_feature_names_out: invoke
+    BaselineSklearnModel.explain_samples->>TreeExplainer: invoke
+    BaselineSklearnModel.explain_samples->>shap_values: invoke
+    BaselineSklearnModel.explain_samples->>SHAPValues: invoke
+    BaselineSklearnModel.explain_samples->>get_internal_model: invoke
+    BaselineSklearnModel.get_internal_model->>ValueError: invoke
+```
+
+### Component Diagram
+```plantuml
+component [models] as Comp
+Comp --> [abc]
+Comp --> [typing]
+Comp --> [pydantic]
+Comp --> [shap]
+Comp --> [compose]
+Comp --> [ensemble]
+Comp --> [pipeline]
+Comp --> [preprocessing]
+Comp --> [schemas]
 ```
 
 ## 3. Class & Method Specifications
@@ -179,3 +231,12 @@ Parameters:
 * [training.py](../../regression_model_template/jobs/training.md)
 * [tuning.py](../../regression_model_template/jobs/tuning.md)
 * [searchers.py](../../regression_model_template/utils/searchers.md)
+* [conftest.py](../../tests/conftest.md)
+* [test_metrics.py](../../tests/core/test_metrics.md)
+* [test_models.py](../../tests/core/test_models.md)
+* [test_schemas.py](../../tests/core/test_schemas.md)
+* [test_registries.py](../../tests/io/test_registries.md)
+* [test_explanations.py](../../tests/jobs/test_explanations.md)
+* [test_training.py](../../tests/jobs/test_training.md)
+* [test_tuning.py](../../tests/jobs/test_tuning.md)
+* [test_searchers.py](../../tests/utils/test_searchers.md)

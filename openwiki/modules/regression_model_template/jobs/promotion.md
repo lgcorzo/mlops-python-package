@@ -6,19 +6,23 @@ title: "Module: promotion"
 source_path: "src/regression_model_template/jobs/promotion.py"
 description: "Define a job for promoting a registered model version with an alias."
 tags: ["module", "promotion"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: promotion
 
-* **Source Reference:** [src/regression_model_template/jobs/promotion.py](../../../src/regression_model_template/jobs/promotion.py)
+* **Source Reference:** [src/regression_model_template/jobs/promotion.py](../../../../src/regression_model_template/jobs/promotion.py)
 
 ## 1. Architectural Role & Responsibilities
 Define a job for promoting a registered model version with an alias.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -29,6 +33,28 @@ classDiagram
         +run(self: Any) base.Locals
     }
     Job <|-- PromotionJob : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    PromotionJob.run->>debug: invoke
+    PromotionJob.run->>logger: invoke
+    PromotionJob.run->>str: invoke
+    PromotionJob.run->>info: invoke
+    PromotionJob.run->>get_model_version_by_alias: invoke
+    PromotionJob.run->>search_model_versions: invoke
+    PromotionJob.run->>notify: invoke
+    PromotionJob.run->>set_registered_model_alias: invoke
+    PromotionJob.run->>locals: invoke
+    PromotionJob.run->>client: invoke
+```
+
+### Component Diagram
+```plantuml
+component [promotion] as Comp
+Comp --> [typing]
+Comp --> [base]
 ```
 
 ## 3. Class & Method Specifications

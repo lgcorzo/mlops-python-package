@@ -6,19 +6,23 @@ title: "Module: datasets"
 source_path: "src/regression_model_template/io/datasets.py"
 description: "Read/Write datasets from/to external sources/destinations."
 tags: ["module", "datasets"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:51Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: datasets
 
-* **Source Reference:** [src/regression_model_template/io/datasets.py](../../../src/regression_model_template/io/datasets.py)
+* **Source Reference:** [src/regression_model_template/io/datasets.py](../../../../src/regression_model_template/io/datasets.py)
 
 ## 1. Architectural Role & Responsibilities
 Read/Write datasets from/to external sources/destinations.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -49,6 +53,25 @@ classDiagram
         +write(self: Any, data: pd.DataFrame) None
     }
     Writer <|-- ParquetWriter : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    ParquetReader.read->>head: invoke
+    ParquetReader.read->>read_parquet: invoke
+    ParquetReader.lineage->>from_pandas: invoke
+    ParquetWriter.write->>to_parquet: invoke
+```
+
+### Component Diagram
+```plantuml
+component [datasets] as Comp
+Comp --> [abc]
+Comp --> [typing]
+Comp --> [pandas_dataset]
+Comp --> [pandas]
+Comp --> [pydantic]
 ```
 
 ## 3. Class & Method Specifications
@@ -162,3 +185,11 @@ Parameters:
 * [inference.py](../../regression_model_template/jobs/inference.md)
 * [training.py](../../regression_model_template/jobs/training.md)
 * [tuning.py](../../regression_model_template/jobs/tuning.md)
+* [conftest.py](../../tests/conftest.md)
+* [test_schemas.py](../../tests/core/test_schemas.md)
+* [test_datasets.py](../../tests/io/test_datasets.md)
+* [test_evaluations.py](../../tests/jobs/test_evaluations.md)
+* [test_explanations.py](../../tests/jobs/test_explanations.md)
+* [test_inference.py](../../tests/jobs/test_inference.md)
+* [test_training.py](../../tests/jobs/test_training.md)
+* [test_tuning.py](../../tests/jobs/test_tuning.md)

@@ -6,19 +6,23 @@ title: "Module: signers"
 source_path: "src/regression_model_template/utils/signers.py"
 description: "Generate signatures for AI/ML models."
 tags: ["module", "signers"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: signers
 
-* **Source Reference:** [src/regression_model_template/utils/signers.py](../../../src/regression_model_template/utils/signers.py)
+* **Source Reference:** [src/regression_model_template/utils/signers.py](../../../../src/regression_model_template/utils/signers.py)
 
 ## 1. Architectural Role & Responsibilities
 Generate signatures for AI/ML models.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -33,6 +37,23 @@ classDiagram
         +sign(self: Any, inputs: schemas.Inputs, outputs: schemas.Outputs) Signature
     }
     Signer <|-- InferSigner : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    InferSigner.sign->>infer_signature: invoke
+```
+
+### Component Diagram
+```plantuml
+component [signers] as Comp
+Comp --> [abc]
+Comp --> [typing]
+Comp --> [mlflow]
+Comp --> [pydantic]
+Comp --> [signature]
+Comp --> [schemas]
 ```
 
 ## 3. Class & Method Specifications
@@ -87,3 +108,7 @@ Generate model signatures from inputs/outputs data.
 
 * [registries.py](../../regression_model_template/io/registries.md)
 * [training.py](../../regression_model_template/jobs/training.md)
+* [conftest.py](../../tests/conftest.md)
+* [test_registries.py](../../tests/io/test_registries.md)
+* [test_training.py](../../tests/jobs/test_training.md)
+* [test_signers.py](../../tests/utils/test_signers.md)

@@ -6,19 +6,23 @@ title: "Module: explanations"
 source_path: "src/regression_model_template/jobs/explanations.py"
 description: "Define a job for explaining the model structure and decisions."
 tags: ["module", "explanations"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: explanations
 
-* **Source Reference:** [src/regression_model_template/jobs/explanations.py](../../../src/regression_model_template/jobs/explanations.py)
+* **Source Reference:** [src/regression_model_template/jobs/explanations.py](../../../../src/regression_model_template/jobs/explanations.py)
 
 ## 1. Architectural Role & Responsibilities
 Define a job for explaining the model structure and decisions.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -32,6 +36,36 @@ classDiagram
         +run(self: Any) base.Locals
     }
     Job <|-- ExplanationsJob : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    ExplanationsJob.run->>debug: invoke
+    ExplanationsJob.run->>logger: invoke
+    ExplanationsJob.run->>explain_samples: invoke
+    ExplanationsJob.run->>load: invoke
+    ExplanationsJob.run->>explain_model: invoke
+    ExplanationsJob.run->>info: invoke
+    ExplanationsJob.run->>len: invoke
+    ExplanationsJob.run->>unwrap_python_model: invoke
+    ExplanationsJob.run->>write: invoke
+    ExplanationsJob.run->>notify: invoke
+    ExplanationsJob.run->>read: invoke
+    ExplanationsJob.run->>locals: invoke
+    ExplanationsJob.run->>uri_for_model_alias_or_version: invoke
+    ExplanationsJob.run->>check: invoke
+```
+
+### Component Diagram
+```plantuml
+component [explanations] as Comp
+Comp --> [typing]
+Comp --> [pydantic]
+Comp --> [schemas]
+Comp --> [datasets]
+Comp --> [registries]
+Comp --> [base]
 ```
 
 ## 3. Class & Method Specifications

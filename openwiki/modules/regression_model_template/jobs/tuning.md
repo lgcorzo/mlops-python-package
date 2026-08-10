@@ -6,19 +6,23 @@ title: "Module: tuning"
 source_path: "src/regression_model_template/jobs/tuning.py"
 description: "Define a job for finding the best hyperparameters for a model."
 tags: ["module", "tuning"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: tuning
 
-* **Source Reference:** [src/regression_model_template/jobs/tuning.py](../../../src/regression_model_template/jobs/tuning.py)
+* **Source Reference:** [src/regression_model_template/jobs/tuning.py](../../../../src/regression_model_template/jobs/tuning.py)
 
 ## 1. Architectural Role & Responsibilities
 Define a job for finding the best hyperparameters for a model.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -34,6 +38,39 @@ classDiagram
         +run(self: Any) base.Locals
     }
     Job <|-- TuningJob : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    TuningJob.run->>debug: invoke
+    TuningJob.run->>logger: invoke
+    TuningJob.run->>log_input: invoke
+    TuningJob.run->>info: invoke
+    TuningJob.run->>search: invoke
+    TuningJob.run->>lineage: invoke
+    TuningJob.run->>to_dict: invoke
+    TuningJob.run->>notify: invoke
+    TuningJob.run->>read: invoke
+    TuningJob.run->>check: invoke
+    TuningJob.run->>locals: invoke
+    TuningJob.run->>run_context: invoke
+```
+
+### Component Diagram
+```plantuml
+component [tuning] as Comp
+Comp --> [typing]
+Comp --> [mlflow]
+Comp --> [pydantic]
+Comp --> [metrics]
+Comp --> [models]
+Comp --> [schemas]
+Comp --> [datasets]
+Comp --> [services]
+Comp --> [base]
+Comp --> [searchers]
+Comp --> [splitters]
 ```
 
 ## 3. Class & Method Specifications

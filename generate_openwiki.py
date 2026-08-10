@@ -20,7 +20,36 @@ def get_last_commit():
     return run_command("git rev-parse --short HEAD") or "HEAD"
 
 
+IGNORED_DIRS = {
+    ".venv",
+    ".git",
+    ".github",
+    ".vscode",
+    ".idea",
+    "node_modules",
+    "dist",
+    "bin",
+    "obj",
+    "target",
+    "coverage",
+    "__pycache__",
+    "openwiki",
+    ".dvc",
+    ".jules",
+    ".agents",
+}
+
+
+def is_ignored(filepath):
+    parts = filepath.split(os.sep)
+    for part in parts:
+        if part in IGNORED_DIRS:
+            return True
+    return False
+
+
 def get_changed_files():
+
     # Attempt to get changes from the latest commit if HEAD~1 fails (e.g. shallow clone or single commit)
     diff_output = run_command("git diff --name-only origin/main HEAD", ignore_errors=True)
     if diff_output is None:
@@ -28,7 +57,7 @@ def get_changed_files():
 
     if not diff_output:
         return []
-    return [f for f in diff_output.split("\n") if f.endswith(".py") and f.startswith("src/")]
+    return [f for f in diff_output.split("\n") if f.endswith(".py") and not is_ignored(f)]
 
 
 def delete_generated_docs():
@@ -46,6 +75,40 @@ def delete_generated_docs():
                     os.rmdir(os.path.join(root, name))
                 except OSError:
                     pass  # directory not empty due to reserved files
+
+
+def extract_calls(node):
+    calls = []
+    for child in ast.walk(node):
+        if isinstance(child, ast.Call):
+            if isinstance(child.func, ast.Name):
+                calls.append(child.func.id)
+            elif isinstance(child.func, ast.Attribute):
+                calls.append(child.func.attr)
+    return list(set(calls))
+
+
+def extract_complex_doc(docstring):
+    if not docstring:
+        return {"description": "No description available.", "complexity": None, "side_effects": None}
+    lines = docstring.split("\n")
+    complexity = None
+    side_effects = None
+    desc = []
+
+    for line in lines:
+        if line.lower().startswith("complexity:"):
+            complexity = line.split(":", 1)[1].strip()
+        elif line.lower().startswith("side effects:"):
+            side_effects = line.split(":", 1)[1].strip()
+        else:
+            desc.append(line)
+
+    return {
+        "description": "\n".join(desc).strip() or "No description available.",
+        "complexity": complexity,
+        "side_effects": side_effects,
+    }
 
 
 def unparse_annotation(node):
@@ -128,12 +191,18 @@ def parse_python_file(filepath):
                 else:
                     imports.append(f"{module}.{alias.name}")
         elif isinstance(node, ast.ClassDef):
+            docstring = extract_docstring(node)
+            extracted = extract_complex_doc(docstring)
             cls_info = {
                 "name": node.name,
-                "docstring": extract_docstring(node),
+                "docstring": extracted["description"],
+                "complexity": extracted["complexity"],
+                "side_effects": extracted["side_effects"],
                 "bases": [unparse_annotation(b) for b in node.bases],
                 "attributes": [],
                 "methods": [],
+                "constructor": None,
+                "calls": extract_calls(node),
             }
 
             for child in node.body:
@@ -148,23 +217,36 @@ def parse_python_file(filepath):
                             cls_info["attributes"].append({"name": target.id, "type": "Any"})
                 elif isinstance(child, ast.FunctionDef):
                     is_private = child.name.startswith("_") and child.name != "__init__"
+                    docstring = extract_docstring(child)
+                    extracted = extract_complex_doc(docstring)
                     method_info = {
                         "name": child.name,
-                        "docstring": extract_docstring(child),
+                        "docstring": extracted["description"],
+                        "complexity": extracted["complexity"],
+                        "side_effects": extracted["side_effects"],
                         "args": parse_args(child.args),
                         "returns": unparse_annotation(child.returns),
                         "is_private": is_private,
+                        "calls": extract_calls(child),
                     }
-                    cls_info["methods"].append(method_info)
+                    if child.name == "__init__":
+                        cls_info["constructor"] = method_info
+                    else:
+                        cls_info["methods"].append(method_info)
             classes.append(cls_info)
         elif isinstance(node, ast.FunctionDef):
             is_private = node.name.startswith("_")
+            docstring = extract_docstring(node)
+            extracted = extract_complex_doc(docstring)
             functions.append({
                 "name": node.name,
-                "docstring": extract_docstring(node),
+                "docstring": extracted["description"],
+                "complexity": extracted["complexity"],
+                "side_effects": extracted["side_effects"],
                 "args": parse_args(node.args),
                 "returns": unparse_annotation(node.returns),
                 "is_private": is_private,
+                "calls": extract_calls(node),
             })
 
     return {
@@ -239,6 +321,39 @@ def generate_package_diagram_content():
     return "\n".join(lines)
 
 
+def generate_call_graph():
+    lines = ["```plantuml", "digraph CallGraph {"]
+
+    # Build a list of all defined functions/methods across the project to map internal calls
+    defined_callables = set()
+    for mod_path, data in registry["modules"].items():
+        for func in data["functions"]:
+            defined_callables.add(func["name"])
+        for cls in data["classes"]:
+            defined_callables.add(cls["name"])
+            for m in cls["methods"]:
+                defined_callables.add(m["name"])
+
+    edges = set()
+    for mod_path, data in registry["modules"].items():
+        for func in data["functions"]:
+            for call in func.get("calls", []):
+                if call in defined_callables:
+                    edges.add(f'    "{func["name"]}()" -> "{call}()"')
+        for cls in data["classes"]:
+            for m in cls.get("methods", []):
+                for call in m.get("calls", []):
+                    if call in defined_callables:
+                        edges.add(f'    "{cls["name"]}.{m["name"]}()" -> "{call}()"')
+
+    for edge in sorted(edges):
+        lines.append(edge)
+
+    lines.append("}")
+    lines.append("```")
+    return "\n".join(lines)
+
+
 def generate_dependency_graph():
     lines = ["```plantuml", "digraph Dependencies {"]
     for mod_path, data in registry["modules"].items():
@@ -252,20 +367,14 @@ def generate_dependency_graph():
     return "\n".join(lines)
 
 
-def generate_markdown(parsed_data, relative_filepath):
+def generate_markdown(parsed_data, relative_filepath, md_path):
     mod_name = os.path.splitext(os.path.basename(relative_filepath))[0]
 
     timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     commit_hash = get_last_commit()
 
-    # Calculate source reference path relative to openwiki/modules/ (../../)
-    # The depth depends on relative_filepath
-    depth = len(relative_filepath.split(os.sep)) - 1
-    back_path = (
-        "../" * depth + "src/" + relative_filepath.split("src/", 1)[-1]
-        if "src/" in relative_filepath
-        else "../../" + relative_filepath
-    )
+    # Calculate source reference path
+    back_path = os.path.relpath(relative_filepath, os.path.dirname(md_path))
 
     frontmatter = f"""---
 iso_doc_type: "Specification"
@@ -288,18 +397,89 @@ last_verified_commit: "{commit_hash}"
 
     body.append("## 1. Architectural Role & Responsibilities")
     body.append(f"{parsed_data['docstring']}\n")
+    # Architecture Detection
+    body.append("### Detected Architecture Patterns")
+    patterns = []
+    if "controller" in relative_filepath.lower():
+        patterns.append("Controller")
+    if "services" in relative_filepath.lower() or "service" in mod_name.lower():
+        patterns.append("Service")
+    if "models" in relative_filepath.lower() or "entity" in mod_name.lower():
+        patterns.append("Entity / Domain Model")
+    if "repositories" in relative_filepath.lower():
+        patterns.append("Repository")
+    if "schemas" in relative_filepath.lower() or "dto" in mod_name.lower():
+        patterns.append("DTO")
+    if "factory" in mod_name.lower() or "builder" in mod_name.lower():
+        patterns.append("Factory / Builder")
+    if "adapter" in mod_name.lower() or "port" in mod_name.lower():
+        patterns.append("Adapter / Port")
 
-    body.append("## 2. UML 2.0 Class Diagram")
+    if patterns:
+        body.append(f"Detected roles: {', '.join(patterns)}\n")
+    else:
+        body.append("Detected roles: General Subsystem\n")
+
+    body.append("## 2. UML Diagrams")
+    body.append("### Class Diagram")
     puml = generate_plantuml(parsed_data["classes"])
     if puml:
         body.append(puml)
     else:
         body.append("_No classes found._")
+
+    body.append("\n### Sequence Diagram")
+    seq_lines = ["```plantuml", "sequenceDiagram"]
+    has_seq = False
+
+    for cls in parsed_data["classes"]:
+        for m in cls["methods"]:
+            if m.get("calls"):
+                has_seq = True
+                caller = f"{cls['name']}.{m['name']}"
+                for call in m["calls"]:
+                    seq_lines.append(f"    {caller}->>{call}: invoke")
+
+    for func in parsed_data["functions"]:
+        if func.get("calls"):
+            has_seq = True
+            for call in func["calls"]:
+                seq_lines.append(f"    {func['name']}->>{call}: invoke")
+
+    seq_lines.append("```")
+    if has_seq:
+        body.append("\n".join(seq_lines))
+    else:
+        body.append("_No sequences found._")
+
+    body.append("\n### Component Diagram")
+    comp_lines = ["```plantuml", f"component [{mod_name}] as Comp"]
+    # Look for imports as dependencies for the component
+    for imp in parsed_data["imports"]:
+        comp_name = imp.split(".")[-1]
+        if comp_name != "*":
+            comp_lines.append(f"Comp --> [{comp_name}]")
+    comp_lines.append("```")
+    body.append("\n".join(comp_lines))
+
     body.append("\n## 3. Class & Method Specifications\n")
 
     for cls in parsed_data["classes"]:
         body.append(f"### `{cls['name']}`")
         body.append(f"\n{cls['docstring']}\n")
+
+        if cls.get("constructor"):
+            c = cls["constructor"]
+            body.append("#### Constructor")
+            args_str = ", ".join(f"{arg['name']}: {arg['type']}" for arg in c["args"])
+            body.append(f"* **`__init__({args_str})`**")
+            body.append(
+                f"  - **Purpose**: {c['docstring'].splitlines()[0] if c['docstring'] else 'No description available.'}"
+            )
+            body.append("  - **Inputs**:")
+            for arg in c["args"]:
+                body.append(f"    - `{arg['name']}` (`{arg['type']}`)")
+            body.append("")
 
         if cls["attributes"]:
             body.append("#### Attributes")
@@ -318,6 +498,10 @@ last_verified_commit: "{commit_hash}"
                 body.append(
                     f"  - **Purpose**: {m['docstring'].splitlines()[0] if m['docstring'] else 'No description available.'}"
                 )
+                if m.get("complexity"):
+                    body.append(f"  - **Complexity**: {m['complexity']}")
+                if m.get("side_effects"):
+                    body.append(f"  - **Side Effects**: {m['side_effects']}")
                 body.append("  - **Inputs**:")
                 for arg in m["args"]:
                     body.append(f"    - `{arg['name']}` (`{arg['type']}`)")
@@ -340,6 +524,10 @@ last_verified_commit: "{commit_hash}"
             args_str = ", ".join(f"{arg['name']}: {arg['type']}" for arg in func["args"])
             body.append(f"### `{func['name']}({args_str}) -> {func['returns']}`")
             body.append(f"{func['docstring']}\n")
+            if func.get("complexity"):
+                body.append(f"**Complexity**: {func['complexity']}\n")
+            if func.get("side_effects"):
+                body.append(f"**Side Effects**: {func['side_effects']}\n")
             body.append("#### Inputs")
             for arg in func["args"]:
                 body.append(f"* `{arg['name']}` (`{arg['type']}`)")
@@ -366,11 +554,19 @@ last_verified_commit: "{commit_hash}"
     body.append("\n## Used By\n")
     if used_by:
         for u in sorted(used_by):
-            rel_u = os.path.relpath(u, "src")[:-3] + ".md"
-            depth = len(relative_filepath.split(os.sep)) - 1
-            up_path = "../" * (depth - 1)
-            if depth == 1:
-                up_path = "./"
+            if u.startswith(f"src{os.sep}") or u.startswith("src/"):
+                rel_u = u[4:]
+            else:
+                rel_u = u
+            rel_u = rel_u[:-3] + ".md"
+
+            # calculate correct relative path up
+            up_path = os.path.relpath("openwiki/modules", os.path.dirname(md_path))
+            if up_path == ".":
+                up_path = ""
+            else:
+                up_path += "/"
+
             body.append(f"* [{os.path.basename(u)}]({up_path}{rel_u})")
     else:
         body.append("_Not used by any other module._")
@@ -406,6 +602,8 @@ def update_index_files(processed_files):
         f.write(generate_package_diagram_content())
         f.write("\n\n## Dependency Graph\n")
         f.write(generate_dependency_graph())
+        f.write("\n\n## Call Graph\n")
+        f.write(generate_call_graph())
 
     # Build Alphabetical Index
     classes_list = sorted(list(registry["class_to_module"].keys()))
@@ -455,10 +653,12 @@ def main():
     args = parser.parse_args()
 
     all_files = []
-    for root, _, files in os.walk("src"):
+    for root, dirs, files in os.walk("."):
+        dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
         for f in files:
             if f.endswith(".py"):
-                all_files.append(os.path.join(root, f))
+                filepath = os.path.relpath(os.path.join(root, f), ".")
+                all_files.append(filepath)
 
     if args.mode == "full":
         delete_generated_docs()
@@ -472,17 +672,29 @@ def main():
     # We must build the registry using ALL files so cross-references are complete
     build_registry(all_files)
 
+    os.makedirs("openwiki/architecture", exist_ok=True)
     os.makedirs("openwiki/modules", exist_ok=True)
+    os.makedirs("openwiki/api", exist_ok=True)
+    os.makedirs("openwiki/classes", exist_ok=True)
+    os.makedirs("openwiki/diagrams", exist_ok=True)
+    os.makedirs("openwiki/dependencies", exist_ok=True)
+    os.makedirs("openwiki/glossary", exist_ok=True)
+    os.makedirs("openwiki/decisions", exist_ok=True)
+    os.makedirs("openwiki/generated", exist_ok=True)
 
     for py_file in files_to_process:
         parsed = parse_python_file(py_file)
 
-        rel_py = os.path.relpath(py_file, "src")
+        if py_file.startswith(f"src{os.sep}") or py_file.startswith("src/"):
+            rel_py = py_file[4:]
+        else:
+            rel_py = py_file
+
         md_path = os.path.join("openwiki/modules", rel_py[:-3] + ".md")
 
         os.makedirs(os.path.dirname(md_path), exist_ok=True)
 
-        md_content = generate_markdown(parsed, py_file)
+        md_content = generate_markdown(parsed, py_file, md_path)
         with open(md_path, "w", encoding="utf-8") as f:
             f.write(md_content)
 

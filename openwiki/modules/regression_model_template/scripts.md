@@ -6,20 +6,51 @@ title: "Module: scripts"
 source_path: "src/regression_model_template/scripts.py"
 description: "Scripts for the CLI application."
 tags: ["module", "scripts"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:51Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: scripts
 
-* **Source Reference:** [src/regression_model_template/scripts.py](../../src/regression_model_template/scripts.py)
+* **Source Reference:** [src/regression_model_template/scripts.py](../../../src/regression_model_template/scripts.py)
 
 ## 1. Architectural Role & Responsibilities
 Scripts for the CLI application.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 _No classes found._
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    main->>RuntimeError: invoke
+    main->>to_object: invoke
+    main->>model_json_schema: invoke
+    main->>merge_configs: invoke
+    main->>len: invoke
+    main->>model_validate: invoke
+    main->>parse_string: invoke
+    main->>parse_args: invoke
+    main->>dump: invoke
+    main->>parse_file: invoke
+    main->>run: invoke
+```
+
+### Component Diagram
+```plantuml
+component [scripts] as Comp
+Comp --> [argparse]
+Comp --> [json]
+Comp --> [sys]
+Comp --> [warnings]
+Comp --> [settings]
+Comp --> [configs]
+```
 
 ## 3. Class & Method Specifications
 
@@ -46,3 +77,4 @@ Main script for the application.
 ## Used By
 
 * [__main__.py](../regression_model_template/__main__.md)
+* [test_scripts.py](../tests/test_scripts.md)

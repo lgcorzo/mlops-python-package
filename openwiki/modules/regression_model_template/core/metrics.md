@@ -6,19 +6,23 @@ title: "Module: metrics"
 source_path: "src/regression_model_template/core/metrics.py"
 description: "Evaluate model performances with metrics."
 tags: ["module", "metrics"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: metrics
 
-* **Source Reference:** [src/regression_model_template/core/metrics.py](../../../src/regression_model_template/core/metrics.py)
+* **Source Reference:** [src/regression_model_template/core/metrics.py](../../../../src/regression_model_template/core/metrics.py)
 
 ## 1. Architectural Role & Responsibilities
 Evaluate model performances with metrics.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -46,6 +50,37 @@ classDiagram
     }
     ABC <|-- Threshold : Generalization
     BaseModel <|-- Threshold : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    Metric.scorer->>predict: invoke
+    Metric.scorer->>score: invoke
+    Metric.to_mlflow->>MlflowMetric: invoke
+    Metric.to_mlflow->>Outputs: invoke
+    Metric.to_mlflow->>score: invoke
+    Metric.to_mlflow->>make_metric: invoke
+    Metric.to_mlflow->>Targets: invoke
+    SklearnMetric.score->>metric: invoke
+    SklearnMetric.score->>getattr: invoke
+    SklearnMetric.score->>float: invoke
+    Threshold.to_mlflow->>MlflowThreshold: invoke
+```
+
+### Component Diagram
+```plantuml
+component [metrics] as Comp
+Comp --> [annotations]
+Comp --> [abc]
+Comp --> [typing]
+Comp --> [mlflow]
+Comp --> [pandas]
+Comp --> [pydantic]
+Comp --> [MetricValue]
+Comp --> [metrics]
+Comp --> [models]
+Comp --> [schemas]
 ```
 
 ## 3. Class & Method Specifications
@@ -151,3 +186,9 @@ Parameters:
 * [training.py](../../regression_model_template/jobs/training.md)
 * [tuning.py](../../regression_model_template/jobs/tuning.md)
 * [searchers.py](../../regression_model_template/utils/searchers.md)
+* [conftest.py](../../tests/conftest.md)
+* [test_metrics.py](../../tests/core/test_metrics.md)
+* [test_evaluations.py](../../tests/jobs/test_evaluations.md)
+* [test_training.py](../../tests/jobs/test_training.md)
+* [test_tuning.py](../../tests/jobs/test_tuning.md)
+* [test_searchers.py](../../tests/utils/test_searchers.md)

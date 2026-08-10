@@ -6,19 +6,23 @@ title: "Module: settings"
 source_path: "src/regression_model_template/settings.py"
 description: "Define settings for the application."
 tags: ["module", "settings"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:51Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: settings
 
-* **Source Reference:** [src/regression_model_template/settings.py](../../src/regression_model_template/settings.py)
+* **Source Reference:** [src/regression_model_template/settings.py](../../../src/regression_model_template/settings.py)
 
 ## 1. Architectural Role & Responsibilities
 Define settings for the application.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -29,6 +33,17 @@ classDiagram
         +job: jobs.JobKind
     }
     Settings <|-- MainSettings : Generalization
+```
+
+### Sequence Diagram
+_No sequences found._
+
+### Component Diagram
+```plantuml
+component [settings] as Comp
+Comp --> [pydantic]
+Comp --> [pydantic_settings]
+Comp --> [jobs]
 ```
 
 ## 3. Class & Method Specifications

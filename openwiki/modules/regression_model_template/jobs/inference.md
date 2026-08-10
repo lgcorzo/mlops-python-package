@@ -6,19 +6,23 @@ title: "Module: inference"
 source_path: "src/regression_model_template/jobs/inference.py"
 description: "Define a job for generating batch predictions from a registered model."
 tags: ["module", "inference"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: inference
 
-* **Source Reference:** [src/regression_model_template/jobs/inference.py](../../../src/regression_model_template/jobs/inference.py)
+* **Source Reference:** [src/regression_model_template/jobs/inference.py](../../../../src/regression_model_template/jobs/inference.py)
 
 ## 1. Architectural Role & Responsibilities
 Define a job for generating batch predictions from a registered model.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -31,6 +35,36 @@ classDiagram
         +run(self: Any) base.Locals
     }
     Job <|-- InferenceJob : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    InferenceJob.run->>debug: invoke
+    InferenceJob.run->>logger: invoke
+    InferenceJob.run->>load: invoke
+    InferenceJob.run->>predict: invoke
+    InferenceJob.run->>DataFrame: invoke
+    InferenceJob.run->>info: invoke
+    InferenceJob.run->>len: invoke
+    InferenceJob.run->>write: invoke
+    InferenceJob.run->>notify: invoke
+    InferenceJob.run->>read: invoke
+    InferenceJob.run->>locals: invoke
+    InferenceJob.run->>uri_for_model_alias_or_version: invoke
+    InferenceJob.run->>check: invoke
+```
+
+### Component Diagram
+```plantuml
+component [inference] as Comp
+Comp --> [typing]
+Comp --> [pandas]
+Comp --> [pydantic]
+Comp --> [schemas]
+Comp --> [datasets]
+Comp --> [registries]
+Comp --> [base]
 ```
 
 ## 3. Class & Method Specifications
