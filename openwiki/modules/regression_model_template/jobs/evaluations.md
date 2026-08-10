@@ -6,19 +6,23 @@ title: "Module: evaluations"
 source_path: "src/regression_model_template/jobs/evaluations.py"
 description: "Define a job for evaluating registered models with data."
 tags: ["module", "evaluations"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: evaluations
 
-* **Source Reference:** [src/regression_model_template/jobs/evaluations.py](../../../src/regression_model_template/jobs/evaluations.py)
+* **Source Reference:** [src/regression_model_template/jobs/evaluations.py](../../../../src/regression_model_template/jobs/evaluations.py)
 
 ## 1. Architectural Role & Responsibilities
 Define a job for evaluating registered models with data.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -35,6 +39,45 @@ classDiagram
         +run(self: Any) base.Locals
     }
     Job <|-- EvaluationsJob : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    EvaluationsJob.run->>logger: invoke
+    EvaluationsJob.run->>log_input: invoke
+    EvaluationsJob.run->>validate_evaluation_results: invoke
+    EvaluationsJob.run->>info: invoke
+    EvaluationsJob.run->>evaluate: invoke
+    EvaluationsJob.run->>uri_for_model_alias_or_version: invoke
+    EvaluationsJob.run->>client: invoke
+    EvaluationsJob.run->>from_pandas: invoke
+    EvaluationsJob.run->>notify: invoke
+    EvaluationsJob.run->>concat: invoke
+    EvaluationsJob.run->>check: invoke
+    EvaluationsJob.run->>locals: invoke
+    EvaluationsJob.run->>to_mlflow: invoke
+    EvaluationsJob.run->>to_dict: invoke
+    EvaluationsJob.run->>items: invoke
+    EvaluationsJob.run->>read: invoke
+    EvaluationsJob.run->>debug: invoke
+    EvaluationsJob.run->>lineage: invoke
+    EvaluationsJob.run->>run_context: invoke
+```
+
+### Component Diagram
+```plantuml
+component [evaluations] as Comp
+Comp --> [typing]
+Comp --> [mlflow]
+Comp --> [pandas]
+Comp --> [pydantic]
+Comp --> [metrics]
+Comp --> [schemas]
+Comp --> [datasets]
+Comp --> [registries]
+Comp --> [services]
+Comp --> [base]
 ```
 
 ## 3. Class & Method Specifications

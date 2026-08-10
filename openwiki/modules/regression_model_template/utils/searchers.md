@@ -6,19 +6,23 @@ title: "Module: searchers"
 source_path: "src/regression_model_template/utils/searchers.py"
 description: "Find the best hyperparameters for a model."
 tags: ["module", "searchers"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: searchers
 
-* **Source Reference:** [src/regression_model_template/utils/searchers.py](../../../src/regression_model_template/utils/searchers.py)
+* **Source Reference:** [src/regression_model_template/utils/searchers.py](../../../../src/regression_model_template/utils/searchers.py)
 
 ## 1. Architectural Role & Responsibilities
 Find the best hyperparameters for a model.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -39,6 +43,29 @@ classDiagram
         +search(self: Any, model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) Results
     }
     Searcher <|-- GridCVSearcher : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    GridCVSearcher.search->>fit: invoke
+    GridCVSearcher.search->>DataFrame: invoke
+    GridCVSearcher.search->>GridSearchCV: invoke
+```
+
+### Component Diagram
+```plantuml
+component [searchers] as Comp
+Comp --> [abc]
+Comp --> [typing]
+Comp --> [Union]
+Comp --> [pandas]
+Comp --> [pydantic]
+Comp --> [model_selection]
+Comp --> [metrics]
+Comp --> [models]
+Comp --> [schemas]
+Comp --> [splitters]
 ```
 
 ## 3. Class & Method Specifications
@@ -118,3 +145,6 @@ Parameters:
 ## Used By
 
 * [tuning.py](../../regression_model_template/jobs/tuning.md)
+* [conftest.py](../../tests/conftest.md)
+* [test_tuning.py](../../tests/jobs/test_tuning.md)
+* [test_searchers.py](../../tests/utils/test_searchers.md)

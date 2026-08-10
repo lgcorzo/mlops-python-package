@@ -6,19 +6,23 @@ title: "Module: registries"
 source_path: "src/regression_model_template/io/registries.py"
 description: "Savers, loaders, and registers for model registries."
 tags: ["module", "registries"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:51Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: registries
 
-* **Source Reference:** [src/regression_model_template/io/registries.py](../../../src/regression_model_template/io/registries.py)
+* **Source Reference:** [src/regression_model_template/io/registries.py](../../../../src/regression_model_template/io/registries.py)
 
 ## 1. Architectural Role & Responsibilities
 Savers, loaders, and registers for model registries.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -68,6 +72,36 @@ classDiagram
         +register(self: Any, name: str, model_uri: str) Version
     }
     Register <|-- MlflowRegister : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    CustomSaver.save->>Adapter: invoke
+    CustomSaver.save->>log_model: invoke
+    BuiltinSaver.save->>getattr: invoke
+    BuiltinSaver.save->>get_internal_model: invoke
+    BuiltinSaver.save->>log_model: invoke
+    CustomLoader.load->>load_model: invoke
+    CustomLoader.load->>Adapter: invoke
+    BuiltinLoader.load->>load_model: invoke
+    BuiltinLoader.load->>Adapter: invoke
+    MlflowRegister.register->>register_model: invoke
+    uri_for_model_alias_or_version->>isinstance: invoke
+    uri_for_model_alias_or_version->>uri_for_model_alias: invoke
+    uri_for_model_alias_or_version->>uri_for_model_version: invoke
+```
+
+### Component Diagram
+```plantuml
+component [registries] as Comp
+Comp --> [abc]
+Comp --> [typing]
+Comp --> [mlflow]
+Comp --> [pydantic]
+Comp --> [models]
+Comp --> [schemas]
+Comp --> [signers]
 ```
 
 ## 3. Class & Method Specifications
@@ -303,3 +337,10 @@ Returns:
 * [explanations.py](../../regression_model_template/jobs/explanations.md)
 * [inference.py](../../regression_model_template/jobs/inference.md)
 * [training.py](../../regression_model_template/jobs/training.md)
+* [conftest.py](../../tests/conftest.md)
+* [test_registries.py](../../tests/io/test_registries.md)
+* [test_evaluations.py](../../tests/jobs/test_evaluations.md)
+* [test_explanations.py](../../tests/jobs/test_explanations.md)
+* [test_inference.py](../../tests/jobs/test_inference.md)
+* [test_promotion.py](../../tests/jobs/test_promotion.md)
+* [test_training.py](../../tests/jobs/test_training.md)

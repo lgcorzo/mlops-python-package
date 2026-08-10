@@ -6,20 +6,40 @@ title: "Module: configs"
 source_path: "src/regression_model_template/io/configs.py"
 description: "Parse, merge, and convert config objects."
 tags: ["module", "configs"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: configs
 
-* **Source Reference:** [src/regression_model_template/io/configs.py](../../../src/regression_model_template/io/configs.py)
+* **Source Reference:** [src/regression_model_template/io/configs.py](../../../../src/regression_model_template/io/configs.py)
 
 ## 1. Architectural Role & Responsibilities
 Parse, merge, and convert config objects.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 _No classes found._
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    parse_file->>load: invoke
+    parse_string->>create: invoke
+    merge_configs->>merge: invoke
+    to_object->>to_container: invoke
+```
+
+### Component Diagram
+```plantuml
+component [configs] as Comp
+Comp --> [typing]
+Comp --> [omegaconf]
+```
 
 ## 3. Class & Method Specifications
 
@@ -95,3 +115,4 @@ Returns:
 ## Used By
 
 * [scripts.py](../../regression_model_template/scripts.md)
+* [test_configs.py](../../tests/io/test_configs.md)

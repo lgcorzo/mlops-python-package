@@ -6,19 +6,23 @@ title: "Module: services"
 source_path: "src/regression_model_template/io/services.py"
 description: "Manage global context during execution."
 tags: ["module", "services"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: services
 
-* **Source Reference:** [src/regression_model_template/io/services.py](../../../src/regression_model_template/io/services.py)
+* **Source Reference:** [src/regression_model_template/io/services.py](../../../../src/regression_model_template/io/services.py)
 
 ## 1. Architectural Role & Responsibilities
 Manage global context during execution.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: Service
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -72,6 +76,70 @@ classDiagram
         +client(self: Any) mt.MlflowClient
     }
     Service <|-- MlflowService : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    PropagateHandler.emit->>handle: invoke
+    PropagateHandler.emit->>getLogger: invoke
+    LoggerService.start->>PropagateHandler: invoke
+    LoggerService.start->>getLogger: invoke
+    LoggerService.start->>model_dump: invoke
+    LoggerService.start->>info: invoke
+    LoggerService.start->>remove: invoke
+    LoggerService.start->>TracerProvider: invoke
+    LoggerService.start->>BatchSpanProcessor: invoke
+    LoggerService.start->>LoggerProvider: invoke
+    LoggerService.start->>OTLPSpanExporter: invoke
+    LoggerService.start->>get: invoke
+    LoggerService.start->>add: invoke
+    LoggerService.start->>BatchLogRecordProcessor: invoke
+    LoggerService.start->>LoggingHandler: invoke
+    LoggerService.start->>basicConfig: invoke
+    LoggerService.start->>OTLPLogExporter: invoke
+    LoggerService.start->>set_tracer_provider: invoke
+    LoggerService.start->>set_logger_provider: invoke
+    LoggerService.start->>add_log_record_processor: invoke
+    LoggerService.start->>create: invoke
+    LoggerService.start->>add_span_processor: invoke
+    LoggerService.start->>addHandler: invoke
+    AlertsService.notify->>notify: invoke
+    AlertsService.notify->>print: invoke
+    MlflowService.start->>set_experiment: invoke
+    MlflowService.start->>set_registry_uri: invoke
+    MlflowService.start->>autolog: invoke
+    MlflowService.start->>set_tracking_uri: invoke
+    MlflowService.run_context->>start_run: invoke
+    MlflowService.client->>MlflowClient: invoke
+```
+
+### Component Diagram
+```plantuml
+component [services] as Comp
+Comp --> [annotations]
+Comp --> [abc]
+Comp --> [contextlib]
+Comp --> [logging]
+Comp --> [sys]
+Comp --> [typing]
+Comp --> [ClassVar]
+Comp --> [loguru]
+Comp --> [mlflow]
+Comp --> [tracking]
+Comp --> [pydantic]
+Comp --> [trace]
+Comp --> [set_logger_provider]
+Comp --> [OTLPLogExporter]
+Comp --> [OTLPSpanExporter]
+Comp --> [LoggerProvider]
+Comp --> [LoggingHandler]
+Comp --> [BatchLogRecordProcessor]
+Comp --> [Resource]
+Comp --> [TracerProvider]
+Comp --> [BatchSpanProcessor]
+Comp --> [notification]
+Comp --> [Env]
 ```
 
 ## 3. Class & Method Specifications
@@ -263,3 +331,13 @@ Parameters:
 * [evaluations.py](../../regression_model_template/jobs/evaluations.md)
 * [training.py](../../regression_model_template/jobs/training.md)
 * [tuning.py](../../regression_model_template/jobs/tuning.md)
+* [conftest.py](../../tests/conftest.md)
+* [test_registries.py](../../tests/io/test_registries.md)
+* [test_services.py](../../tests/io/test_services.md)
+* [test_base.py](../../tests/jobs/test_base.md)
+* [test_evaluations.py](../../tests/jobs/test_evaluations.md)
+* [test_explanations.py](../../tests/jobs/test_explanations.md)
+* [test_inference.py](../../tests/jobs/test_inference.md)
+* [test_promotion.py](../../tests/jobs/test_promotion.md)
+* [test_training.py](../../tests/jobs/test_training.md)
+* [test_tuning.py](../../tests/jobs/test_tuning.md)

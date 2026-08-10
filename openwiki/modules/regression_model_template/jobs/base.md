@@ -6,19 +6,23 @@ title: "Module: base"
 source_path: "src/regression_model_template/jobs/base.py"
 description: "Base for high-level project jobs."
 tags: ["module", "base"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: base
 
-* **Source Reference:** [src/regression_model_template/jobs/base.py](../../../src/regression_model_template/jobs/base.py)
+* **Source Reference:** [src/regression_model_template/jobs/base.py](../../../../src/regression_model_template/jobs/base.py)
 
 ## 1. Architectural Role & Responsibilities
 Base for high-level project jobs.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: General Subsystem
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
@@ -33,6 +37,27 @@ classDiagram
     }
     ABC <|-- Job : Generalization
     BaseModel <|-- Job : Generalization
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    Job.__enter__->>debug: invoke
+    Job.__enter__->>logger: invoke
+    Job.__enter__->>start: invoke
+    Job.__exit__->>debug: invoke
+    Job.__exit__->>logger: invoke
+    Job.__exit__->>stop: invoke
+```
+
+### Component Diagram
+```plantuml
+component [base] as Comp
+Comp --> [abc]
+Comp --> [types]
+Comp --> [typing]
+Comp --> [pydantic]
+Comp --> [services]
 ```
 
 ## 3. Class & Method Specifications
@@ -84,3 +109,4 @@ Parameters:
 * [promotion.py](../../regression_model_template/jobs/promotion.md)
 * [training.py](../../regression_model_template/jobs/training.md)
 * [tuning.py](../../regression_model_template/jobs/tuning.md)
+* [test_base.py](../../tests/jobs/test_base.md)

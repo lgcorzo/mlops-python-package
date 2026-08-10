@@ -6,24 +6,27 @@ title: "Module: kafka_app"
 source_path: "src/regression_model_template/controller/kafka_app.py"
 description: "FastAPI and Kafka Service for Predictions with Logging."
 tags: ["module", "kafka_app"]
-timestamp: "2026-08-07T08:29:41Z"
+timestamp: "2026-08-10T08:55:52Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "12aa8d5"
+last_verified_commit: "8412d40"
 ---
 # Module Specification: kafka_app
 
-* **Source Reference:** [src/regression_model_template/controller/kafka_app.py](../../../src/regression_model_template/controller/kafka_app.py)
+* **Source Reference:** [src/regression_model_template/controller/kafka_app.py](../../../../src/regression_model_template/controller/kafka_app.py)
 
 ## 1. Architectural Role & Responsibilities
 FastAPI and Kafka Service for Predictions with Logging.
 
-## 2. UML 2.0 Class Diagram
+### Detected Architecture Patterns
+Detected roles: Controller
+
+## 2. UML Diagrams
+### Class Diagram
 ```plantuml
 classDiagram
     direction BT
     class RateLimiter {
-        +__init__(self: Any, max_requests: int, window_seconds: int, max_tracked_ips: int) Any
         +is_allowed(self: Any, ip: str) bool
     }
     class PredictionRequest {
@@ -37,7 +40,6 @@ classDiagram
     }
     BaseModel <|-- PredictionResponse : Generalization
     class FastAPIKafkaService {
-        +__init__(self: Any, prediction_callback: Callable~(~PredictionRequest~, PredictionResponse)~, kafka_config: Dict~(str, Any)~, input_topic: str, output_topic: str) Any
         +delivery_report(self: Any, err: KafkaError | None, msg: Message) None
         +start(self: Any) None
         +_initialize_kafka_producer(self: Any) None
@@ -52,9 +54,152 @@ classDiagram
         +stop(self: Any) None
     }
     class PredictionService {
-        +__init__(self: Any, model: Any) Any
         +predict(self: Any, input_data: PredictionRequest) PredictionResponse
     }
+```
+
+### Sequence Diagram
+```plantuml
+sequenceDiagram
+    RateLimiter.is_allowed->>deque: invoke
+    RateLimiter.is_allowed->>move_to_end: invoke
+    RateLimiter.is_allowed->>len: invoke
+    RateLimiter.is_allowed->>popitem: invoke
+    RateLimiter.is_allowed->>time: invoke
+    RateLimiter.is_allowed->>popleft: invoke
+    RateLimiter.is_allowed->>append: invoke
+    PredictionRequest.validate_schema->>DataFrame: invoke
+    PredictionRequest.validate_schema->>validate: invoke
+    PredictionRequest.check_input_size->>values: invoke
+    PredictionRequest.check_input_size->>len: invoke
+    PredictionRequest.check_input_size->>field_validator: invoke
+    PredictionRequest.check_input_size->>isinstance: invoke
+    PredictionRequest.check_input_size->>ValueError: invoke
+    FastAPIKafkaService.delivery_report->>topic: invoke
+    FastAPIKafkaService.delivery_report->>info: invoke
+    FastAPIKafkaService.delivery_report->>partition: invoke
+    FastAPIKafkaService.delivery_report->>error: invoke
+    FastAPIKafkaService.start->>info: invoke
+    FastAPIKafkaService.start->>_initialize_kafka_producer: invoke
+    FastAPIKafkaService.start->>clear: invoke
+    FastAPIKafkaService.start->>start: invoke
+    FastAPIKafkaService.start->>Thread: invoke
+    FastAPIKafkaService.start->>_initialize_kafka_consumer: invoke
+    FastAPIKafkaService._initialize_kafka_producer->>info: invoke
+    FastAPIKafkaService._initialize_kafka_producer->>items: invoke
+    FastAPIKafkaService._initialize_kafka_producer->>error: invoke
+    FastAPIKafkaService._initialize_kafka_producer->>Producer: invoke
+    FastAPIKafkaService._initialize_kafka_consumer->>_ensure_topics_exist: invoke
+    FastAPIKafkaService._initialize_kafka_consumer->>subscribe: invoke
+    FastAPIKafkaService._initialize_kafka_consumer->>info: invoke
+    FastAPIKafkaService._initialize_kafka_consumer->>error: invoke
+    FastAPIKafkaService._initialize_kafka_consumer->>Consumer: invoke
+    FastAPIKafkaService._ensure_topics_exist->>debug: invoke
+    FastAPIKafkaService._ensure_topics_exist->>NewTopic: invoke
+    FastAPIKafkaService._ensure_topics_exist->>result: invoke
+    FastAPIKafkaService._ensure_topics_exist->>info: invoke
+    FastAPIKafkaService._ensure_topics_exist->>create_topics: invoke
+    FastAPIKafkaService._ensure_topics_exist->>items: invoke
+    FastAPIKafkaService._ensure_topics_exist->>warning: invoke
+    FastAPIKafkaService._ensure_topics_exist->>AdminClient: invoke
+    FastAPIKafkaService._run_server->>error: invoke
+    FastAPIKafkaService._run_server->>run: invoke
+    FastAPIKafkaService._consume_messages->>info: invoke
+    FastAPIKafkaService._consume_messages->>error: invoke
+    FastAPIKafkaService._consume_messages->>is_set: invoke
+    FastAPIKafkaService._consume_messages->>_close_consumer: invoke
+    FastAPIKafkaService._consume_messages->>_process_message: invoke
+    FastAPIKafkaService._consume_messages->>_handle_message_error: invoke
+    FastAPIKafkaService._consume_messages->>_poll_message: invoke
+    FastAPIKafkaService._consume_messages->>flush: invoke
+    FastAPIKafkaService._poll_message->>poll: invoke
+    FastAPIKafkaService._poll_message->>error: invoke
+    FastAPIKafkaService._handle_message_error->>debug: invoke
+    FastAPIKafkaService._handle_message_error->>warning: invoke
+    FastAPIKafkaService._handle_message_error->>code: invoke
+    FastAPIKafkaService._handle_message_error->>error: invoke
+    FastAPIKafkaService._process_message->>info: invoke
+    FastAPIKafkaService._process_message->>dumps: invoke
+    FastAPIKafkaService._process_message->>error: invoke
+    FastAPIKafkaService._process_message->>len: invoke
+    FastAPIKafkaService._process_message->>exception: invoke
+    FastAPIKafkaService._process_message->>value: invoke
+    FastAPIKafkaService._process_message->>PredictionRequest: invoke
+    FastAPIKafkaService._process_message->>poll: invoke
+    FastAPIKafkaService._process_message->>prediction_callback: invoke
+    FastAPIKafkaService._process_message->>get: invoke
+    FastAPIKafkaService._process_message->>loads: invoke
+    FastAPIKafkaService._process_message->>produce: invoke
+    FastAPIKafkaService._process_message->>decode: invoke
+    FastAPIKafkaService._process_message->>debug: invoke
+    FastAPIKafkaService._process_message->>copy: invoke
+    FastAPIKafkaService._process_message->>values: invoke
+    FastAPIKafkaService._process_message->>commit: invoke
+    FastAPIKafkaService._process_message->>iter: invoke
+    FastAPIKafkaService._process_message->>next: invoke
+    FastAPIKafkaService._process_message->>isinstance: invoke
+    FastAPIKafkaService._process_message->>PredictionResponse: invoke
+    FastAPIKafkaService._close_consumer->>info: invoke
+    FastAPIKafkaService._close_consumer->>close: invoke
+    FastAPIKafkaService.stop->>info: invoke
+    FastAPIKafkaService.stop->>close: invoke
+    FastAPIKafkaService.stop->>set: invoke
+    PredictionService.predict->>predict: invoke
+    PredictionService.predict->>DataFrame: invoke
+    PredictionService.predict->>exception: invoke
+    PredictionService.predict->>tolist: invoke
+    PredictionService.predict->>PredictionResponse: invoke
+    PredictionService.predict->>check: invoke
+    PredictionService.predict->>to_numpy: invoke
+    default_input_payload->>strftime: invoke
+    default_input_payload->>now: invoke
+    default_input_payload->>weekday: invoke
+    main->>load: invoke
+    main->>PredictionService: invoke
+    main->>FastAPIKafkaService: invoke
+    main->>start: invoke
+    main->>CustomLoader: invoke
+    main->>print: invoke
+    main->>MlflowService: invoke
+    main->>uri_for_model_alias_or_version: invoke
+```
+
+### Component Diagram
+```plantuml
+component [kafka_app] as Comp
+Comp --> [json]
+Comp --> [logging]
+Comp --> [os]
+Comp --> [threading]
+Comp --> [time]
+Comp --> [collections]
+Comp --> [Any]
+Comp --> [Callable]
+Comp --> [Dict]
+Comp --> [cast]
+Comp --> [pandas]
+Comp --> [uvicorn]
+Comp --> [Consumer]
+Comp --> [KafkaError]
+Comp --> [Message]
+Comp --> [Producer]
+Comp --> [AdminClient]
+Comp --> [NewTopic]
+Comp --> [FastAPI]
+Comp --> [HTTPException]
+Comp --> [Request]
+Comp --> [run_in_threadpool]
+Comp --> [CORSMiddleware]
+Comp --> [TrustedHostMiddleware]
+Comp --> [ProxyHeadersMiddleware]
+Comp --> [BaseModel]
+Comp --> [Field]
+Comp --> [field_validator]
+Comp --> [InputsSchema]
+Comp --> [Outputs]
+Comp --> [registries]
+Comp --> [services]
+Comp --> [CustomLoader]
 ```
 
 ## 3. Class & Method Specifications
@@ -63,15 +208,16 @@ classDiagram
 
 In-memory sliding window rate limiter backed by OrderedDict.
 
-#### Public Methods
-* **`__init__(self: Any, max_requests: int, window_seconds: int, max_tracked_ips: int) -> Any`**
+#### Constructor
+* **`__init__(self: Any, max_requests: int, window_seconds: int, max_tracked_ips: int)`**
   - **Purpose**: No description available.
   - **Inputs**:
     - `self` (`Any`)
     - `max_requests` (`int`)
     - `window_seconds` (`int`)
     - `max_tracked_ips` (`int`)
-  - **Outputs**: `Any`
+
+#### Public Methods
 * **`is_allowed(self: Any, ip: str) -> bool`**
   - **Purpose**: Check if the given IP is allowed to make a request.
   - **Inputs**:
@@ -110,8 +256,8 @@ Response model for prediction.
 
 Service for deploying a FastAPI application with a Kafka producer and consumer.
 
-#### Public Methods
-* **`__init__(self: Any, prediction_callback: Callable[([PredictionRequest], PredictionResponse)], kafka_config: Dict[(str, Any)], input_topic: str, output_topic: str) -> Any`**
+#### Constructor
+* **`__init__(self: Any, prediction_callback: Callable[([PredictionRequest], PredictionResponse)], kafka_config: Dict[(str, Any)], input_topic: str, output_topic: str)`**
   - **Purpose**: No description available.
   - **Inputs**:
     - `self` (`Any`)
@@ -119,7 +265,8 @@ Service for deploying a FastAPI application with a Kafka producer and consumer.
     - `kafka_config` (`Dict[(str, Any)]`)
     - `input_topic` (`str`)
     - `output_topic` (`str`)
-  - **Outputs**: `Any`
+
+#### Public Methods
 * **`delivery_report(self: Any, err: KafkaError | None, msg: Message) -> None`**
   - **Purpose**: Called once for each message produced to indicate delivery result.
   - **Inputs**:
@@ -162,13 +309,14 @@ Service for deploying a FastAPI application with a Kafka producer and consumer.
 
 Service to handle prediction logic securely.
 
-#### Public Methods
-* **`__init__(self: Any, model: Any) -> Any`**
+#### Constructor
+* **`__init__(self: Any, model: Any)`**
   - **Purpose**: No description available.
   - **Inputs**:
     - `self` (`Any`)
     - `model` (`Any`)
-  - **Outputs**: `Any`
+
+#### Public Methods
 * **`predict(self: Any, input_data: PredictionRequest) -> PredictionResponse`**
   - **Purpose**: Make a prediction using the model.
   - **Inputs**:
@@ -232,4 +380,11 @@ No description available.
 
 ## Used By
 
-_Not used by any other module._
+* [test_kafka_app.py](../../tests/controller/test_kafka_app.md)
+* [test_kafka_app_dos.py](../../tests/controller/test_kafka_app_dos.md)
+* [test_kafka_app_leakage.py](../../tests/controller/test_kafka_app_leakage.md)
+* [test_kafka_app_logging.py](../../tests/controller/test_kafka_app_logging.md)
+* [test_kafka_app_security.py](../../tests/controller/test_kafka_app_security.md)
+* [test_log_leakage.py](../../tests/controller/test_log_leakage.md)
+* [test_middleware_config.py](../../tests/controller/test_middleware_config.md)
+* [test_rate_limiter.py](../../tests/controller/test_rate_limiter.md)
