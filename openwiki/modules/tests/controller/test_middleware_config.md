@@ -6,10 +6,10 @@ title: "Module: test_middleware_config"
 source_path: "tests/controller/test_middleware_config.py"
 description: "No description available."
 tags: ["module", "test_middleware_config"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-11T05:39:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_middleware_config
 
@@ -28,23 +28,23 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    reset_module->>reload: invoke
-    reset_module->>get: invoke
     reset_module->>fixture: invoke
+    reset_module->>get: invoke
+    reset_module->>reload: invoke
     reset_module->>pop: invoke
     test_cors_default_config->>reload: invoke
+    test_cors_default_config->>next: invoke
     test_cors_default_config->>print: invoke
     test_cors_default_config->>get: invoke
-    test_cors_default_config->>next: invoke
     test_trusted_host_default_config->>reload: invoke
     test_trusted_host_default_config->>next: invoke
+    test_custom_cors_config->>setenv: invoke
     test_custom_cors_config->>reload: invoke
     test_custom_cors_config->>next: invoke
-    test_custom_cors_config->>setenv: invoke
     test_custom_cors_config->>set: invoke
+    test_custom_trusted_host_config->>setenv: invoke
     test_custom_trusted_host_config->>reload: invoke
     test_custom_trusted_host_config->>next: invoke
-    test_custom_trusted_host_config->>setenv: invoke
     test_custom_trusted_host_config->>set: invoke
 ```
 

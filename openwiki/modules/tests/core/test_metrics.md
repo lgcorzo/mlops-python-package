@@ -6,10 +6,10 @@ title: "Module: test_metrics"
 source_path: "tests/core/test_metrics.py"
 description: "No description available."
 tags: ["module", "test_metrics"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-11T05:39:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_metrics
 
@@ -28,14 +28,14 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_sklearn_metric->>to_mlflow: invoke
-    test_sklearn_metric->>score: invoke
-    test_sklearn_metric->>scorer: invoke
     test_sklearn_metric->>parametrize: invoke
-    test_sklearn_metric->>float: invoke
-    test_sklearn_metric->>evaluate: invoke
     test_sklearn_metric->>concat: invoke
     test_sklearn_metric->>SklearnMetric: invoke
+    test_sklearn_metric->>score: invoke
+    test_sklearn_metric->>scorer: invoke
+    test_sklearn_metric->>to_mlflow: invoke
+    test_sklearn_metric->>evaluate: invoke
+    test_sklearn_metric->>float: invoke
     test_threshold->>Threshold: invoke
     test_threshold->>to_mlflow: invoke
 ```

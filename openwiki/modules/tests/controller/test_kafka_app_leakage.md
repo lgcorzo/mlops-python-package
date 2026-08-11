@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_leakage"
 source_path: "tests/controller/test_kafka_app_leakage.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_leakage"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-11T05:39:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_kafka_app_leakage
 
@@ -28,13 +28,13 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_process_message_exception_leakage->>encode: invoke
-    test_process_message_exception_leakage->>dumps: invoke
     test_process_message_exception_leakage->>MagicMock: invoke
     test_process_message_exception_leakage->>FastAPIKafkaService: invoke
+    test_process_message_exception_leakage->>encode: invoke
     test_process_message_exception_leakage->>_process_message: invoke
-    test_process_message_exception_leakage->>ValueError: invoke
     test_process_message_exception_leakage->>loads: invoke
+    test_process_message_exception_leakage->>ValueError: invoke
+    test_process_message_exception_leakage->>dumps: invoke
 ```
 
 ### Component Diagram

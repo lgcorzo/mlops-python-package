@@ -5,10 +5,10 @@ type: "diagrams"
 title: "Diagrams"
 description: "Auto-generated architecture diagrams."
 tags: ["diagrams"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-11T05:39:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Architecture Diagrams
 
@@ -36,9 +36,6 @@ package "src" {
 ## Dependency Graph
 ```plantuml
 digraph Dependencies {
-    "patch_all" -> "re"
-    "patch_all" -> "os"
-    "patch_ignore" -> "re"
     "generate_openwiki" -> "argparse"
     "generate_openwiki" -> "ast"
     "generate_openwiki" -> "datetime"

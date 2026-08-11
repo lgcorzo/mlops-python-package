@@ -5,10 +5,10 @@ type: "summary"
 title: "Summary"
 description: "Auto-generated summary."
 tags: ["summary"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-11T05:39:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Summary
 
@@ -305,8 +305,6 @@ last_verified_commit: "8412d40"
 * [okf_validate](modules/skills/validate/scripts/okf_validate.md)
 * [osvariables](modules/regression_model_template/io/osvariables.md)
 * [packages](modules/tasks/packages.md)
-* [patch_all](modules/patch_all.md)
-* [patch_ignore](modules/patch_ignore.md)
 * [projects](modules/tasks/projects.md)
 * [promotion](modules/regression_model_template/jobs/promotion.md)
 * [registries](modules/regression_model_template/io/registries.md)

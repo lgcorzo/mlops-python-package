@@ -6,10 +6,10 @@ title: "Module: datasets"
 source_path: "src/regression_model_template/io/datasets.py"
 description: "Read/Write datasets from/to external sources/destinations."
 tags: ["module", "datasets"]
-timestamp: "2026-08-10T08:55:51Z"
+timestamp: "2026-08-11T05:39:15Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: datasets
 
@@ -58,8 +58,8 @@ classDiagram
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    ParquetReader.read->>head: invoke
     ParquetReader.read->>read_parquet: invoke
+    ParquetReader.read->>head: invoke
     ParquetReader.lineage->>from_pandas: invoke
     ParquetWriter.write->>to_parquet: invoke
 ```

@@ -85,7 +85,7 @@ def extract_calls(node):
                 calls.append(child.func.id)
             elif isinstance(child.func, ast.Attribute):
                 calls.append(child.func.attr)
-    return list(set(calls))
+    return list(dict.fromkeys(calls))
 
 
 def extract_complex_doc(docstring):
