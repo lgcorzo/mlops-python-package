@@ -85,7 +85,7 @@ def extract_calls(node):
                 calls.append(child.func.id)
             elif isinstance(child.func, ast.Attribute):
                 calls.append(child.func.attr)
-    return list(set(calls))
+    return list(dict.fromkeys(calls))
 
 
 def extract_complex_doc(docstring):
@@ -308,13 +308,13 @@ def build_registry(files_to_process):
 
 def generate_package_diagram_content():
     lines = ["```plantuml", 'package "src" {']
-    packages = set()
+    packages = []
     for py_file in registry["modules"].keys():
         parts = py_file.split("/")[:-1]
         pkg = ".".join(parts)
         if pkg:
-            packages.add(pkg)
-    for pkg in sorted(packages):
+            packages.append(pkg)
+    for pkg in sorted(list(dict.fromkeys(packages))):
         lines.append(f'    package "{pkg}" {{}}')
     lines.append("}")
     lines.append("```")
@@ -325,28 +325,30 @@ def generate_call_graph():
     lines = ["```plantuml", "digraph CallGraph {"]
 
     # Build a list of all defined functions/methods across the project to map internal calls
-    defined_callables = set()
+    defined_callables = []
     for mod_path, data in registry["modules"].items():
         for func in data["functions"]:
-            defined_callables.add(func["name"])
+            defined_callables.append(func["name"])
         for cls in data["classes"]:
-            defined_callables.add(cls["name"])
+            defined_callables.append(cls["name"])
             for m in cls["methods"]:
-                defined_callables.add(m["name"])
+                defined_callables.append(m["name"])
 
-    edges = set()
+    defined_callables_set = set(defined_callables)
+
+    edges = []
     for mod_path, data in registry["modules"].items():
         for func in data["functions"]:
             for call in func.get("calls", []):
-                if call in defined_callables:
-                    edges.add(f'    "{func["name"]}()" -> "{call}()"')
+                if call in defined_callables_set:
+                    edges.append(f'    "{func["name"]}()" -> "{call}()"')
         for cls in data["classes"]:
             for m in cls.get("methods", []):
                 for call in m.get("calls", []):
-                    if call in defined_callables:
-                        edges.add(f'    "{cls["name"]}.{m["name"]}()" -> "{call}()"')
+                    if call in defined_callables_set:
+                        edges.append(f'    "{cls["name"]}.{m["name"]}()" -> "{call}()"')
 
-    for edge in sorted(edges):
+    for edge in sorted(list(dict.fromkeys(edges))):
         lines.append(edge)
 
     lines.append("}")
@@ -392,11 +394,14 @@ last_verified_commit: "{commit_hash}"
 """
 
     body = []
-    body.append(f"# Module Specification: {mod_name}\n")
-    body.append(f"* **Source Reference:** [{relative_filepath}]({back_path})\n")
+    body.append(f"# Module Specification: {mod_name}")
+    body.append("")
+    body.append(f"* **Source Reference:** [{relative_filepath}]({back_path})")
+    body.append("")
 
     body.append("## 1. Architectural Role & Responsibilities")
-    body.append(f"{parsed_data['docstring']}\n")
+    body.append(f"{parsed_data['docstring']}")
+    body.append("")
     # Architecture Detection
     body.append("### Detected Architecture Patterns")
     patterns = []
@@ -416,9 +421,10 @@ last_verified_commit: "{commit_hash}"
         patterns.append("Adapter / Port")
 
     if patterns:
-        body.append(f"Detected roles: {', '.join(patterns)}\n")
+        body.append(f"Detected roles: {', '.join(patterns)}")
     else:
-        body.append("Detected roles: General Subsystem\n")
+        body.append("Detected roles: General Subsystem")
+    body.append("")
 
     body.append("## 2. UML Diagrams")
     body.append("### Class Diagram")
@@ -428,7 +434,8 @@ last_verified_commit: "{commit_hash}"
     else:
         body.append("_No classes found._")
 
-    body.append("\n### Sequence Diagram")
+    body.append("")
+    body.append("### Sequence Diagram")
     seq_lines = ["```plantuml", "sequenceDiagram"]
     has_seq = False
 
@@ -452,7 +459,8 @@ last_verified_commit: "{commit_hash}"
     else:
         body.append("_No sequences found._")
 
-    body.append("\n### Component Diagram")
+    body.append("")
+    body.append("### Component Diagram")
     comp_lines = ["```plantuml", f"component [{mod_name}] as Comp"]
     # Look for imports as dependencies for the component
     for imp in parsed_data["imports"]:
@@ -462,11 +470,15 @@ last_verified_commit: "{commit_hash}"
     comp_lines.append("```")
     body.append("\n".join(comp_lines))
 
-    body.append("\n## 3. Class & Method Specifications\n")
+    body.append("")
+    body.append("## 3. Class & Method Specifications")
+    body.append("")
 
     for cls in parsed_data["classes"]:
         body.append(f"### `{cls['name']}`")
-        body.append(f"\n{cls['docstring']}\n")
+        body.append("")
+        body.append(f"{cls['docstring']}")
+        body.append("")
 
         if cls.get("constructor"):
             c = cls["constructor"]
@@ -519,21 +531,29 @@ last_verified_commit: "{commit_hash}"
             body.append("")
 
     if parsed_data["functions"]:
-        body.append("## Standalone Functions\n")
+        body.append("## Standalone Functions")
+        body.append("")
         for func in parsed_data["functions"]:
             args_str = ", ".join(f"{arg['name']}: {arg['type']}" for arg in func["args"])
             body.append(f"### `{func['name']}({args_str}) -> {func['returns']}`")
-            body.append(f"{func['docstring']}\n")
+            body.append(f"{func['docstring']}")
+            body.append("")
             if func.get("complexity"):
-                body.append(f"**Complexity**: {func['complexity']}\n")
+                body.append(f"**Complexity**: {func['complexity']}")
+                body.append("")
             if func.get("side_effects"):
-                body.append(f"**Side Effects**: {func['side_effects']}\n")
+                body.append(f"**Side Effects**: {func['side_effects']}")
+                body.append("")
             body.append("#### Inputs")
             for arg in func["args"]:
                 body.append(f"* `{arg['name']}` (`{arg['type']}`)")
-            body.append(f"\n#### Outputs\n* `{func['returns']}`\n")
+            body.append("")
+            body.append("#### Outputs")
+            body.append(f"* `{func['returns']}`")
+            body.append("")
 
-    body.append("## Dependencies\n")
+    body.append("## Dependencies")
+    body.append("")
     if parsed_data["imports"]:
         for imp in parsed_data["imports"]:
             body.append(f"* `{imp}`")
@@ -551,7 +571,9 @@ last_verified_commit: "{commit_hash}"
                 used_by.append(other_py)
                 break
 
-    body.append("\n## Used By\n")
+    body.append("")
+    body.append("## Used By")
+    body.append("")
     if used_by:
         for u in sorted(used_by):
             if u.startswith(f"src{os.sep}") or u.startswith("src/"):

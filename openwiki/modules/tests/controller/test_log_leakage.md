@@ -6,10 +6,10 @@ title: "Module: test_log_leakage"
 source_path: "tests/controller/test_log_leakage.py"
 description: "No description available."
 tags: ["module", "test_log_leakage"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-12T05:53:46Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_log_leakage
 
@@ -28,18 +28,18 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_kafka_consumer_log_leakage->>encode: invoke
-    test_kafka_consumer_log_leakage->>dumps: invoke
     test_kafka_consumer_log_leakage->>MagicMock: invoke
     test_kafka_consumer_log_leakage->>FastAPIKafkaService: invoke
-    test_kafka_consumer_log_leakage->>_process_message: invoke
+    test_kafka_consumer_log_leakage->>encode: invoke
     test_kafka_consumer_log_leakage->>set_level: invoke
-    test_kafka_consumer_prediction_result_leakage->>encode: invoke
-    test_kafka_consumer_prediction_result_leakage->>dumps: invoke
+    test_kafka_consumer_log_leakage->>_process_message: invoke
+    test_kafka_consumer_log_leakage->>dumps: invoke
     test_kafka_consumer_prediction_result_leakage->>MagicMock: invoke
     test_kafka_consumer_prediction_result_leakage->>FastAPIKafkaService: invoke
-    test_kafka_consumer_prediction_result_leakage->>_process_message: invoke
+    test_kafka_consumer_prediction_result_leakage->>encode: invoke
     test_kafka_consumer_prediction_result_leakage->>set_level: invoke
+    test_kafka_consumer_prediction_result_leakage->>_process_message: invoke
+    test_kafka_consumer_prediction_result_leakage->>dumps: invoke
 ```
 
 ### Component Diagram

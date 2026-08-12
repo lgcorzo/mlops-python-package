@@ -6,10 +6,10 @@ title: "Module: test_rate_limiter"
 source_path: "tests/controller/test_rate_limiter.py"
 description: "No description available."
 tags: ["module", "test_rate_limiter"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-12T05:53:46Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_rate_limiter
 
@@ -28,20 +28,20 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_rate_limiter_allows_requests_below_limit->>is_allowed: invoke
     test_rate_limiter_allows_requests_below_limit->>RateLimiter: invoke
-    test_rate_limiter_rejects_requests_above_limit->>is_allowed: invoke
+    test_rate_limiter_allows_requests_below_limit->>is_allowed: invoke
     test_rate_limiter_rejects_requests_above_limit->>RateLimiter: invoke
-    test_rate_limiter_evicts_oldest_ips->>list: invoke
-    test_rate_limiter_evicts_oldest_ips->>is_allowed: invoke
+    test_rate_limiter_rejects_requests_above_limit->>is_allowed: invoke
     test_rate_limiter_evicts_oldest_ips->>RateLimiter: invoke
+    test_rate_limiter_evicts_oldest_ips->>is_allowed: invoke
+    test_rate_limiter_evicts_oldest_ips->>list: invoke
     test_rate_limiter_evicts_oldest_ips->>keys: invoke
-    test_rate_limiter_window_expiration->>sleep: invoke
     test_rate_limiter_window_expiration->>RateLimiter: invoke
+    test_rate_limiter_window_expiration->>sleep: invoke
     test_rate_limiter_window_expiration->>is_allowed: invoke
-    test_rate_limiter_move_to_end_on_access->>list: invoke
-    test_rate_limiter_move_to_end_on_access->>is_allowed: invoke
     test_rate_limiter_move_to_end_on_access->>RateLimiter: invoke
+    test_rate_limiter_move_to_end_on_access->>is_allowed: invoke
+    test_rate_limiter_move_to_end_on_access->>list: invoke
     test_rate_limiter_move_to_end_on_access->>keys: invoke
 ```
 

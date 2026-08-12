@@ -6,10 +6,10 @@ title: "Module: test_promotion"
 source_path: "tests/jobs/test_promotion.py"
 description: "No description available."
 tags: ["module", "test_promotion"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-12T05:53:45Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_promotion
 
@@ -28,13 +28,13 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_promotion_job->>PromotionJob: invoke
     test_promotion_job->>parametrize: invoke
-    test_promotion_job->>param: invoke
+    test_promotion_job->>PromotionJob: invoke
+    test_promotion_job->>run: invoke
     test_promotion_job->>set: invoke
+    test_promotion_job->>param: invoke
     test_promotion_job->>readouterr: invoke
     test_promotion_job->>xfail: invoke
-    test_promotion_job->>run: invoke
 ```
 
 ### Component Diagram

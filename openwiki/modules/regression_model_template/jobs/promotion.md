@@ -6,10 +6,10 @@ title: "Module: promotion"
 source_path: "src/regression_model_template/jobs/promotion.py"
 description: "Define a job for promoting a registered model version with an alias."
 tags: ["module", "promotion"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-12T05:53:45Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: promotion
 
@@ -38,16 +38,16 @@ classDiagram
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    PromotionJob.run->>debug: invoke
     PromotionJob.run->>logger: invoke
-    PromotionJob.run->>str: invoke
     PromotionJob.run->>info: invoke
-    PromotionJob.run->>get_model_version_by_alias: invoke
-    PromotionJob.run->>search_model_versions: invoke
-    PromotionJob.run->>notify: invoke
-    PromotionJob.run->>set_registered_model_alias: invoke
-    PromotionJob.run->>locals: invoke
     PromotionJob.run->>client: invoke
+    PromotionJob.run->>set_registered_model_alias: invoke
+    PromotionJob.run->>get_model_version_by_alias: invoke
+    PromotionJob.run->>debug: invoke
+    PromotionJob.run->>notify: invoke
+    PromotionJob.run->>locals: invoke
+    PromotionJob.run->>str: invoke
+    PromotionJob.run->>search_model_versions: invoke
 ```
 
 ### Component Diagram

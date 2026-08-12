@@ -6,10 +6,10 @@ title: "Module: test_models"
 source_path: "tests/core/test_models.py"
 description: "No description available."
 tags: ["module", "test_models"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-12T05:53:45Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_models
 
@@ -28,27 +28,27 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_model->>explain_samples: invoke
-    test_model->>explain_model: invoke
-    test_model->>Outputs: invoke
-    test_model->>get_params: invoke
     test_model->>MyModel: invoke
-    test_model->>raises: invoke
+    test_model->>get_params: invoke
     test_model->>isinstance: invoke
-    test_model->>set_params: invoke
+    test_model->>raises: invoke
+    test_model->>explain_model: invoke
+    test_model->>explain_samples: invoke
     test_model->>get_internal_model: invoke
+    test_model->>Outputs: invoke
+    test_model->>set_params: invoke
+    test_baseline_sklearn_model->>set_params: invoke
+    test_baseline_sklearn_model->>fit: invoke
     test_baseline_sklearn_model->>predict: invoke
     test_baseline_sklearn_model->>explain_samples: invoke
-    test_baseline_sklearn_model->>BaselineSklearnModel: invoke
     test_baseline_sklearn_model->>explain_model: invoke
     test_baseline_sklearn_model->>match: invoke
-    test_baseline_sklearn_model->>sum: invoke
+    test_baseline_sklearn_model->>raises: invoke
+    test_baseline_sklearn_model->>get_internal_model: invoke
     test_baseline_sklearn_model->>get_params: invoke
     test_baseline_sklearn_model->>len: invoke
-    test_baseline_sklearn_model->>fit: invoke
-    test_baseline_sklearn_model->>raises: invoke
-    test_baseline_sklearn_model->>set_params: invoke
-    test_baseline_sklearn_model->>get_internal_model: invoke
+    test_baseline_sklearn_model->>sum: invoke
+    test_baseline_sklearn_model->>BaselineSklearnModel: invoke
 ```
 
 ### Component Diagram

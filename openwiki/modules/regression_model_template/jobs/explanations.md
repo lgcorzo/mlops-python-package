@@ -6,10 +6,10 @@ title: "Module: explanations"
 source_path: "src/regression_model_template/jobs/explanations.py"
 description: "Define a job for explaining the model structure and decisions."
 tags: ["module", "explanations"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-12T05:53:45Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: explanations
 
@@ -41,20 +41,20 @@ classDiagram
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    ExplanationsJob.run->>debug: invoke
     ExplanationsJob.run->>logger: invoke
-    ExplanationsJob.run->>explain_samples: invoke
-    ExplanationsJob.run->>load: invoke
-    ExplanationsJob.run->>explain_model: invoke
     ExplanationsJob.run->>info: invoke
-    ExplanationsJob.run->>len: invoke
-    ExplanationsJob.run->>unwrap_python_model: invoke
+    ExplanationsJob.run->>read: invoke
+    ExplanationsJob.run->>check: invoke
+    ExplanationsJob.run->>debug: invoke
+    ExplanationsJob.run->>uri_for_model_alias_or_version: invoke
+    ExplanationsJob.run->>explain_model: invoke
+    ExplanationsJob.run->>explain_samples: invoke
     ExplanationsJob.run->>write: invoke
     ExplanationsJob.run->>notify: invoke
-    ExplanationsJob.run->>read: invoke
     ExplanationsJob.run->>locals: invoke
-    ExplanationsJob.run->>uri_for_model_alias_or_version: invoke
-    ExplanationsJob.run->>check: invoke
+    ExplanationsJob.run->>unwrap_python_model: invoke
+    ExplanationsJob.run->>len: invoke
+    ExplanationsJob.run->>load: invoke
 ```
 
 ### Component Diagram

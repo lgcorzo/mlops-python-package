@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_logging"
 source_path: "tests/controller/test_kafka_app_logging.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_logging"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-12T05:53:46Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_kafka_app_logging
 
@@ -31,14 +31,14 @@ sequenceDiagram
     mock_kafka_service->>MagicMock: invoke
     mock_kafka_service->>patch: invoke
     mock_kafka_service->>FastAPIKafkaService: invoke
-    test_kafka_process_message_logging->>encode: invoke
     test_kafka_process_message_logging->>patch: invoke
-    test_kafka_process_message_logging->>assert_any_call: invoke
-    test_kafka_process_message_logging->>dumps: invoke
-    test_kafka_process_message_logging->>len: invoke
-    test_kafka_process_message_logging->>PredictionRequest: invoke
     test_kafka_process_message_logging->>MagicMock: invoke
+    test_kafka_process_message_logging->>encode: invoke
+    test_kafka_process_message_logging->>PredictionRequest: invoke
     test_kafka_process_message_logging->>_process_message: invoke
+    test_kafka_process_message_logging->>assert_any_call: invoke
+    test_kafka_process_message_logging->>len: invoke
+    test_kafka_process_message_logging->>dumps: invoke
 ```
 
 ### Component Diagram

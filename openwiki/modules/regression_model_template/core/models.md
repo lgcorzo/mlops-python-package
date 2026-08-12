@@ -6,10 +6,10 @@ title: "Module: models"
 source_path: "src/regression_model_template/core/models.py"
 description: "Define trainable machine learning models."
 tags: ["module", "models"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-12T05:53:45Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: models
 
@@ -59,34 +59,34 @@ classDiagram
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    Model.get_params->>model_dump: invoke
     Model.get_params->>items: invoke
-    Model.get_params->>isupper: invoke
+    Model.get_params->>model_dump: invoke
     Model.get_params->>startswith: invoke
+    Model.get_params->>isupper: invoke
     Model.set_params->>items: invoke
     Model.set_params->>setattr: invoke
-    Model.__sklearn_tags__->>BaseEstimator: invoke
     Model.__sklearn_tags__->>__sklearn_tags__: invoke
+    Model.__sklearn_tags__->>BaseEstimator: invoke
     Model.explain_model->>NotImplementedError: invoke
     Model.explain_samples->>NotImplementedError: invoke
     Model.get_internal_model->>NotImplementedError: invoke
+    BaselineSklearnModel.fit->>OneHotEncoder: invoke
     BaselineSklearnModel.fit->>ColumnTransformer: invoke
     BaselineSklearnModel.fit->>RandomForestRegressor: invoke
-    BaselineSklearnModel.fit->>fit: invoke
     BaselineSklearnModel.fit->>Pipeline: invoke
-    BaselineSklearnModel.fit->>OneHotEncoder: invoke
+    BaselineSklearnModel.fit->>fit: invoke
+    BaselineSklearnModel.predict->>get_internal_model: invoke
     BaselineSklearnModel.predict->>predict: invoke
     BaselineSklearnModel.predict->>Outputs: invoke
-    BaselineSklearnModel.predict->>get_internal_model: invoke
-    BaselineSklearnModel.explain_model->>FeatureImportances: invoke
-    BaselineSklearnModel.explain_model->>get_feature_names_out: invoke
     BaselineSklearnModel.explain_model->>get_internal_model: invoke
-    BaselineSklearnModel.explain_samples->>transform: invoke
-    BaselineSklearnModel.explain_samples->>get_feature_names_out: invoke
-    BaselineSklearnModel.explain_samples->>TreeExplainer: invoke
-    BaselineSklearnModel.explain_samples->>shap_values: invoke
-    BaselineSklearnModel.explain_samples->>SHAPValues: invoke
+    BaselineSklearnModel.explain_model->>get_feature_names_out: invoke
+    BaselineSklearnModel.explain_model->>FeatureImportances: invoke
     BaselineSklearnModel.explain_samples->>get_internal_model: invoke
+    BaselineSklearnModel.explain_samples->>transform: invoke
+    BaselineSklearnModel.explain_samples->>TreeExplainer: invoke
+    BaselineSklearnModel.explain_samples->>SHAPValues: invoke
+    BaselineSklearnModel.explain_samples->>shap_values: invoke
+    BaselineSklearnModel.explain_samples->>get_feature_names_out: invoke
     BaselineSklearnModel.get_internal_model->>ValueError: invoke
 ```
 

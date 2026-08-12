@@ -6,10 +6,10 @@ title: "Module: formats"
 source_path: "tasks/formats.py"
 description: "Format tasks for pyinvoke."
 tags: ["module", "formats"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-12T05:53:45Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: formats
 
