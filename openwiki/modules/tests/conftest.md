@@ -6,10 +6,10 @@ title: "Module: conftest"
 source_path: "tests/conftest.py"
 description: "Configuration for the tests."
 tags: ["module", "conftest"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: conftest
 
@@ -28,25 +28,25 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    tests_path->>dirname: invoke
     tests_path->>fixture: invoke
     tests_path->>abspath: invoke
-    data_path->>join: invoke
+    tests_path->>dirname: invoke
     data_path->>fixture: invoke
-    confs_path->>join: invoke
+    data_path->>join: invoke
     confs_path->>fixture: invoke
-    inputs_path->>join: invoke
+    confs_path->>join: invoke
     inputs_path->>fixture: invoke
-    targets_path->>join: invoke
+    inputs_path->>join: invoke
     targets_path->>fixture: invoke
-    outputs_path->>join: invoke
+    targets_path->>join: invoke
     outputs_path->>fixture: invoke
-    tmp_outputs_path->>join: invoke
+    outputs_path->>join: invoke
     tmp_outputs_path->>fixture: invoke
-    tmp_models_explanations_path->>join: invoke
+    tmp_outputs_path->>join: invoke
     tmp_models_explanations_path->>fixture: invoke
-    tmp_samples_explanations_path->>join: invoke
+    tmp_models_explanations_path->>join: invoke
     tmp_samples_explanations_path->>fixture: invoke
+    tmp_samples_explanations_path->>join: invoke
     extra_config->>fixture: invoke
     inputs_reader->>fixture: invoke
     inputs_reader->>ParquetReader: invoke
@@ -54,86 +54,86 @@ sequenceDiagram
     inputs_samples_reader->>ParquetReader: invoke
     targets_reader->>fixture: invoke
     targets_reader->>ParquetReader: invoke
-    outputs_reader->>predict: invoke
-    outputs_reader->>ParquetWriter: invoke
-    outputs_reader->>BaselineSklearnModel: invoke
     outputs_reader->>fixture: invoke
-    outputs_reader->>write: invoke
-    outputs_reader->>fit: invoke
     outputs_reader->>ParquetReader: invoke
     outputs_reader->>exists: invoke
-    outputs_reader->>read: invoke
     outputs_reader->>check: invoke
+    outputs_reader->>fit: invoke
+    outputs_reader->>ParquetWriter: invoke
+    outputs_reader->>write: invoke
+    outputs_reader->>read: invoke
+    outputs_reader->>predict: invoke
+    outputs_reader->>BaselineSklearnModel: invoke
     tmp_outputs_writer->>fixture: invoke
     tmp_outputs_writer->>ParquetWriter: invoke
     tmp_models_explanations_writer->>fixture: invoke
     tmp_models_explanations_writer->>ParquetWriter: invoke
     tmp_samples_explanations_writer->>fixture: invoke
     tmp_samples_explanations_writer->>ParquetWriter: invoke
-    inputs->>read: invoke
     inputs->>fixture: invoke
+    inputs->>read: invoke
     inputs->>check: invoke
-    inputs_samples->>read: invoke
     inputs_samples->>fixture: invoke
+    inputs_samples->>read: invoke
     inputs_samples->>check: invoke
-    targets->>read: invoke
     targets->>fixture: invoke
+    targets->>read: invoke
     targets->>check: invoke
-    outputs->>read: invoke
     outputs->>fixture: invoke
+    outputs->>read: invoke
     outputs->>check: invoke
     train_test_splitter->>fixture: invoke
     train_test_splitter->>TrainTestSplitter: invoke
-    time_series_splitter->>TimeSeriesSplitter: invoke
     time_series_splitter->>fixture: invoke
-    searcher->>GridCVSearcher: invoke
+    time_series_splitter->>TimeSeriesSplitter: invoke
     searcher->>fixture: invoke
-    train_test_sets->>next: invoke
-    train_test_sets->>cast: invoke
+    searcher->>GridCVSearcher: invoke
     train_test_sets->>fixture: invoke
+    train_test_sets->>next: invoke
     train_test_sets->>split: invoke
-    model->>fit: invoke
+    train_test_sets->>cast: invoke
     model->>fixture: invoke
     model->>BaselineSklearnModel: invoke
+    model->>fit: invoke
     metric->>fixture: invoke
     metric->>SklearnMetric: invoke
-    signer->>InferSigner: invoke
     signer->>fixture: invoke
-    logger_service->>stop: invoke
-    logger_service->>start: invoke
+    signer->>InferSigner: invoke
     logger_service->>fixture: invoke
     logger_service->>LoggerService: invoke
+    logger_service->>start: invoke
+    logger_service->>stop: invoke
     logger_caplog->>logger: invoke
-    logger_caplog->>remove: invoke
     logger_caplog->>add: invoke
-    alerts_service->>stop: invoke
+    logger_caplog->>remove: invoke
+    alerts_service->>fixture: invoke
     alerts_service->>AlertsService: invoke
     alerts_service->>start: invoke
-    alerts_service->>fixture: invoke
-    mlflow_service->>stop: invoke
+    alerts_service->>stop: invoke
+    mlflow_service->>fixture: invoke
     mlflow_service->>MlflowService: invoke
     mlflow_service->>start: invoke
-    mlflow_service->>fixture: invoke
-    tests_path_resolver->>register_new_resolver: invoke
+    mlflow_service->>stop: invoke
     tests_path_resolver->>fixture: invoke
-    tmp_path_resolver->>register_new_resolver: invoke
+    tests_path_resolver->>register_new_resolver: invoke
     tmp_path_resolver->>fixture: invoke
-    signature->>sign: invoke
+    tmp_path_resolver->>register_new_resolver: invoke
     signature->>fixture: invoke
-    saver->>CustomSaver: invoke
+    signature->>sign: invoke
     saver->>fixture: invoke
-    loader->>CustomLoader: invoke
+    saver->>CustomSaver: invoke
     loader->>fixture: invoke
-    register->>MlflowRegister: invoke
+    loader->>CustomLoader: invoke
     register->>fixture: invoke
+    register->>MlflowRegister: invoke
     model_version->>fixture: invoke
-    model_version->>save: invoke
     model_version->>RunConfig: invoke
-    model_version->>register: invoke
     model_version->>run_context: invoke
-    model_alias->>set_registered_model_alias: invoke
+    model_version->>save: invoke
+    model_version->>register: invoke
     model_alias->>fixture: invoke
     model_alias->>client: invoke
+    model_alias->>set_registered_model_alias: invoke
     model_alias->>get_model_version_by_alias: invoke
 ```
 

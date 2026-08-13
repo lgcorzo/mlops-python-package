@@ -6,10 +6,10 @@ title: "Module: kafka_app"
 source_path: "src/regression_model_template/controller/kafka_app.py"
 description: "FastAPI and Kafka Service for Predictions with Logging."
 tags: ["module", "kafka_app"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: kafka_app
 
@@ -61,107 +61,107 @@ classDiagram
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    RateLimiter.is_allowed->>deque: invoke
+    RateLimiter.is_allowed->>time: invoke
     RateLimiter.is_allowed->>move_to_end: invoke
+    RateLimiter.is_allowed->>append: invoke
+    RateLimiter.is_allowed->>deque: invoke
+    RateLimiter.is_allowed->>popleft: invoke
     RateLimiter.is_allowed->>len: invoke
     RateLimiter.is_allowed->>popitem: invoke
-    RateLimiter.is_allowed->>time: invoke
-    RateLimiter.is_allowed->>popleft: invoke
-    RateLimiter.is_allowed->>append: invoke
-    PredictionRequest.validate_schema->>DataFrame: invoke
     PredictionRequest.validate_schema->>validate: invoke
-    PredictionRequest.check_input_size->>values: invoke
-    PredictionRequest.check_input_size->>len: invoke
+    PredictionRequest.validate_schema->>DataFrame: invoke
     PredictionRequest.check_input_size->>field_validator: invoke
-    PredictionRequest.check_input_size->>isinstance: invoke
+    PredictionRequest.check_input_size->>values: invoke
     PredictionRequest.check_input_size->>ValueError: invoke
-    FastAPIKafkaService.delivery_report->>topic: invoke
-    FastAPIKafkaService.delivery_report->>info: invoke
-    FastAPIKafkaService.delivery_report->>partition: invoke
+    PredictionRequest.check_input_size->>len: invoke
+    PredictionRequest.check_input_size->>isinstance: invoke
     FastAPIKafkaService.delivery_report->>error: invoke
-    FastAPIKafkaService.start->>info: invoke
-    FastAPIKafkaService.start->>_initialize_kafka_producer: invoke
+    FastAPIKafkaService.delivery_report->>info: invoke
+    FastAPIKafkaService.delivery_report->>topic: invoke
+    FastAPIKafkaService.delivery_report->>partition: invoke
     FastAPIKafkaService.start->>clear: invoke
-    FastAPIKafkaService.start->>start: invoke
-    FastAPIKafkaService.start->>Thread: invoke
+    FastAPIKafkaService.start->>_initialize_kafka_producer: invoke
     FastAPIKafkaService.start->>_initialize_kafka_consumer: invoke
-    FastAPIKafkaService._initialize_kafka_producer->>info: invoke
-    FastAPIKafkaService._initialize_kafka_producer->>items: invoke
-    FastAPIKafkaService._initialize_kafka_producer->>error: invoke
+    FastAPIKafkaService.start->>Thread: invoke
+    FastAPIKafkaService.start->>start: invoke
+    FastAPIKafkaService.start->>info: invoke
     FastAPIKafkaService._initialize_kafka_producer->>Producer: invoke
+    FastAPIKafkaService._initialize_kafka_producer->>info: invoke
+    FastAPIKafkaService._initialize_kafka_producer->>error: invoke
+    FastAPIKafkaService._initialize_kafka_producer->>items: invoke
     FastAPIKafkaService._initialize_kafka_consumer->>_ensure_topics_exist: invoke
+    FastAPIKafkaService._initialize_kafka_consumer->>Consumer: invoke
     FastAPIKafkaService._initialize_kafka_consumer->>subscribe: invoke
     FastAPIKafkaService._initialize_kafka_consumer->>info: invoke
     FastAPIKafkaService._initialize_kafka_consumer->>error: invoke
-    FastAPIKafkaService._initialize_kafka_consumer->>Consumer: invoke
-    FastAPIKafkaService._ensure_topics_exist->>debug: invoke
-    FastAPIKafkaService._ensure_topics_exist->>NewTopic: invoke
-    FastAPIKafkaService._ensure_topics_exist->>result: invoke
-    FastAPIKafkaService._ensure_topics_exist->>info: invoke
+    FastAPIKafkaService._ensure_topics_exist->>AdminClient: invoke
     FastAPIKafkaService._ensure_topics_exist->>create_topics: invoke
     FastAPIKafkaService._ensure_topics_exist->>items: invoke
+    FastAPIKafkaService._ensure_topics_exist->>NewTopic: invoke
     FastAPIKafkaService._ensure_topics_exist->>warning: invoke
-    FastAPIKafkaService._ensure_topics_exist->>AdminClient: invoke
-    FastAPIKafkaService._run_server->>error: invoke
+    FastAPIKafkaService._ensure_topics_exist->>result: invoke
+    FastAPIKafkaService._ensure_topics_exist->>info: invoke
+    FastAPIKafkaService._ensure_topics_exist->>debug: invoke
     FastAPIKafkaService._run_server->>run: invoke
-    FastAPIKafkaService._consume_messages->>info: invoke
-    FastAPIKafkaService._consume_messages->>error: invoke
-    FastAPIKafkaService._consume_messages->>is_set: invoke
+    FastAPIKafkaService._run_server->>error: invoke
     FastAPIKafkaService._consume_messages->>_close_consumer: invoke
-    FastAPIKafkaService._consume_messages->>_process_message: invoke
-    FastAPIKafkaService._consume_messages->>_handle_message_error: invoke
+    FastAPIKafkaService._consume_messages->>is_set: invoke
     FastAPIKafkaService._consume_messages->>_poll_message: invoke
+    FastAPIKafkaService._consume_messages->>error: invoke
+    FastAPIKafkaService._consume_messages->>_process_message: invoke
+    FastAPIKafkaService._consume_messages->>info: invoke
     FastAPIKafkaService._consume_messages->>flush: invoke
+    FastAPIKafkaService._consume_messages->>_handle_message_error: invoke
     FastAPIKafkaService._poll_message->>poll: invoke
     FastAPIKafkaService._poll_message->>error: invoke
+    FastAPIKafkaService._handle_message_error->>error: invoke
+    FastAPIKafkaService._handle_message_error->>code: invoke
     FastAPIKafkaService._handle_message_error->>debug: invoke
     FastAPIKafkaService._handle_message_error->>warning: invoke
-    FastAPIKafkaService._handle_message_error->>code: invoke
-    FastAPIKafkaService._handle_message_error->>error: invoke
-    FastAPIKafkaService._process_message->>info: invoke
-    FastAPIKafkaService._process_message->>dumps: invoke
-    FastAPIKafkaService._process_message->>error: invoke
-    FastAPIKafkaService._process_message->>len: invoke
-    FastAPIKafkaService._process_message->>exception: invoke
-    FastAPIKafkaService._process_message->>value: invoke
-    FastAPIKafkaService._process_message->>PredictionRequest: invoke
-    FastAPIKafkaService._process_message->>poll: invoke
-    FastAPIKafkaService._process_message->>prediction_callback: invoke
-    FastAPIKafkaService._process_message->>get: invoke
-    FastAPIKafkaService._process_message->>loads: invoke
-    FastAPIKafkaService._process_message->>produce: invoke
-    FastAPIKafkaService._process_message->>decode: invoke
-    FastAPIKafkaService._process_message->>debug: invoke
-    FastAPIKafkaService._process_message->>copy: invoke
-    FastAPIKafkaService._process_message->>values: invoke
-    FastAPIKafkaService._process_message->>commit: invoke
-    FastAPIKafkaService._process_message->>iter: invoke
-    FastAPIKafkaService._process_message->>next: invoke
-    FastAPIKafkaService._process_message->>isinstance: invoke
     FastAPIKafkaService._process_message->>PredictionResponse: invoke
+    FastAPIKafkaService._process_message->>value: invoke
+    FastAPIKafkaService._process_message->>loads: invoke
+    FastAPIKafkaService._process_message->>debug: invoke
+    FastAPIKafkaService._process_message->>PredictionRequest: invoke
+    FastAPIKafkaService._process_message->>error: invoke
+    FastAPIKafkaService._process_message->>decode: invoke
+    FastAPIKafkaService._process_message->>get: invoke
+    FastAPIKafkaService._process_message->>len: invoke
+    FastAPIKafkaService._process_message->>info: invoke
+    FastAPIKafkaService._process_message->>prediction_callback: invoke
+    FastAPIKafkaService._process_message->>exception: invoke
+    FastAPIKafkaService._process_message->>isinstance: invoke
+    FastAPIKafkaService._process_message->>copy: invoke
+    FastAPIKafkaService._process_message->>produce: invoke
+    FastAPIKafkaService._process_message->>poll: invoke
+    FastAPIKafkaService._process_message->>commit: invoke
+    FastAPIKafkaService._process_message->>next: invoke
+    FastAPIKafkaService._process_message->>dumps: invoke
+    FastAPIKafkaService._process_message->>iter: invoke
+    FastAPIKafkaService._process_message->>values: invoke
     FastAPIKafkaService._close_consumer->>info: invoke
     FastAPIKafkaService._close_consumer->>close: invoke
+    FastAPIKafkaService.stop->>set: invoke
     FastAPIKafkaService.stop->>info: invoke
     FastAPIKafkaService.stop->>close: invoke
-    FastAPIKafkaService.stop->>set: invoke
-    PredictionService.predict->>predict: invoke
-    PredictionService.predict->>DataFrame: invoke
-    PredictionService.predict->>exception: invoke
-    PredictionService.predict->>tolist: invoke
     PredictionService.predict->>PredictionResponse: invoke
+    PredictionService.predict->>predict: invoke
+    PredictionService.predict->>tolist: invoke
+    PredictionService.predict->>exception: invoke
     PredictionService.predict->>check: invoke
     PredictionService.predict->>to_numpy: invoke
+    PredictionService.predict->>DataFrame: invoke
     default_input_payload->>strftime: invoke
     default_input_payload->>now: invoke
     default_input_payload->>weekday: invoke
+    main->>MlflowService: invoke
+    main->>start: invoke
+    main->>uri_for_model_alias_or_version: invoke
+    main->>CustomLoader: invoke
     main->>load: invoke
     main->>PredictionService: invoke
     main->>FastAPIKafkaService: invoke
-    main->>start: invoke
-    main->>CustomLoader: invoke
     main->>print: invoke
-    main->>MlflowService: invoke
-    main->>uri_for_model_alias_or_version: invoke
 ```
 
 ### Component Diagram

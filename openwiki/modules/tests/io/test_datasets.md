@@ -6,10 +6,10 @@ title: "Module: test_datasets"
 source_path: "tests/io/test_datasets.py"
 description: "No description available."
 tags: ["module", "test_datasets"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_datasets
 
@@ -28,16 +28,16 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_parquet_reader->>lineage: invoke
-    test_parquet_reader->>len: invoke
     test_parquet_reader->>parametrize: invoke
-    test_parquet_reader->>set: invoke
-    test_parquet_reader->>input_names: invoke
-    test_parquet_reader->>read: invoke
     test_parquet_reader->>ParquetReader: invoke
+    test_parquet_reader->>read: invoke
+    test_parquet_reader->>lineage: invoke
+    test_parquet_reader->>set: invoke
+    test_parquet_reader->>len: invoke
+    test_parquet_reader->>input_names: invoke
+    test_parquet_writer->>ParquetWriter: invoke
     test_parquet_writer->>write: invoke
     test_parquet_writer->>exists: invoke
-    test_parquet_writer->>ParquetWriter: invoke
 ```
 
 ### Component Diagram

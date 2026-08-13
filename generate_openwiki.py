@@ -85,7 +85,7 @@ def extract_calls(node):
                 calls.append(child.func.id)
             elif isinstance(child.func, ast.Attribute):
                 calls.append(child.func.attr)
-    return list(set(calls))
+    return list(dict.fromkeys(calls))
 
 
 def extract_complex_doc(docstring):
@@ -148,23 +148,29 @@ def parse_args(args):
     offset = len(args.args) - len(defaults)
 
     for i, arg in enumerate(args.args):
-        parsed.append({
-            "name": arg.arg,
-            "type": unparse_annotation(arg.annotation),
-            "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
-        })
+        parsed.append(
+            {
+                "name": arg.arg,
+                "type": unparse_annotation(arg.annotation),
+                "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
+            }
+        )
     if args.vararg:
-        parsed.append({
-            "name": f"*{args.vararg.arg}",
-            "type": unparse_annotation(args.vararg.annotation),
-            "default": None,
-        })
+        parsed.append(
+            {
+                "name": f"*{args.vararg.arg}",
+                "type": unparse_annotation(args.vararg.annotation),
+                "default": None,
+            }
+        )
     if args.kwarg:
-        parsed.append({
-            "name": f"**{args.kwarg.arg}",
-            "type": unparse_annotation(args.kwarg.annotation),
-            "default": None,
-        })
+        parsed.append(
+            {
+                "name": f"**{args.kwarg.arg}",
+                "type": unparse_annotation(args.kwarg.annotation),
+                "default": None,
+            }
+        )
     return parsed
 
 
@@ -207,10 +213,12 @@ def parse_python_file(filepath):
 
             for child in node.body:
                 if isinstance(child, ast.AnnAssign) and isinstance(child.target, ast.Name):
-                    cls_info["attributes"].append({
-                        "name": child.target.id,
-                        "type": unparse_annotation(child.annotation),
-                    })
+                    cls_info["attributes"].append(
+                        {
+                            "name": child.target.id,
+                            "type": unparse_annotation(child.annotation),
+                        }
+                    )
                 elif isinstance(child, ast.Assign):
                     for target in child.targets:
                         if isinstance(target, ast.Name):
@@ -238,16 +246,18 @@ def parse_python_file(filepath):
             is_private = node.name.startswith("_")
             docstring = extract_docstring(node)
             extracted = extract_complex_doc(docstring)
-            functions.append({
-                "name": node.name,
-                "docstring": extracted["description"],
-                "complexity": extracted["complexity"],
-                "side_effects": extracted["side_effects"],
-                "args": parse_args(node.args),
-                "returns": unparse_annotation(node.returns),
-                "is_private": is_private,
-                "calls": extract_calls(node),
-            })
+            functions.append(
+                {
+                    "name": node.name,
+                    "docstring": extracted["description"],
+                    "complexity": extracted["complexity"],
+                    "side_effects": extracted["side_effects"],
+                    "args": parse_args(node.args),
+                    "returns": unparse_annotation(node.returns),
+                    "is_private": is_private,
+                    "calls": extract_calls(node),
+                }
+            )
 
     return {
         "filepath": filepath,
@@ -392,11 +402,14 @@ last_verified_commit: "{commit_hash}"
 """
 
     body = []
-    body.append(f"# Module Specification: {mod_name}\n")
-    body.append(f"* **Source Reference:** [{relative_filepath}]({back_path})\n")
+    body.append(f"# Module Specification: {mod_name}")
+    body.append("")
+    body.append(f"* **Source Reference:** [{relative_filepath}]({back_path})")
+    body.append("")
 
     body.append("## 1. Architectural Role & Responsibilities")
-    body.append(f"{parsed_data['docstring']}\n")
+    body.append(f"{parsed_data['docstring']}")
+    body.append("")
     # Architecture Detection
     body.append("### Detected Architecture Patterns")
     patterns = []
@@ -416,10 +429,11 @@ last_verified_commit: "{commit_hash}"
         patterns.append("Adapter / Port")
 
     if patterns:
-        body.append(f"Detected roles: {', '.join(patterns)}\n")
+        body.append(f"Detected roles: {', '.join(patterns)}")
     else:
-        body.append("Detected roles: General Subsystem\n")
+        body.append("Detected roles: General Subsystem")
 
+    body.append("")
     body.append("## 2. UML Diagrams")
     body.append("### Class Diagram")
     puml = generate_plantuml(parsed_data["classes"])
@@ -428,7 +442,8 @@ last_verified_commit: "{commit_hash}"
     else:
         body.append("_No classes found._")
 
-    body.append("\n### Sequence Diagram")
+    body.append("")
+    body.append("### Sequence Diagram")
     seq_lines = ["```plantuml", "sequenceDiagram"]
     has_seq = False
 
@@ -452,7 +467,8 @@ last_verified_commit: "{commit_hash}"
     else:
         body.append("_No sequences found._")
 
-    body.append("\n### Component Diagram")
+    body.append("")
+    body.append("### Component Diagram")
     comp_lines = ["```plantuml", f"component [{mod_name}] as Comp"]
     # Look for imports as dependencies for the component
     for imp in parsed_data["imports"]:
@@ -462,11 +478,15 @@ last_verified_commit: "{commit_hash}"
     comp_lines.append("```")
     body.append("\n".join(comp_lines))
 
-    body.append("\n## 3. Class & Method Specifications\n")
+    body.append("")
+    body.append("## 3. Class & Method Specifications")
+    body.append("")
 
     for cls in parsed_data["classes"]:
         body.append(f"### `{cls['name']}`")
-        body.append(f"\n{cls['docstring']}\n")
+        body.append("")
+        body.append(f"{cls['docstring']}")
+        body.append("")
 
         if cls.get("constructor"):
             c = cls["constructor"]
@@ -519,21 +539,29 @@ last_verified_commit: "{commit_hash}"
             body.append("")
 
     if parsed_data["functions"]:
-        body.append("## Standalone Functions\n")
+        body.append("## Standalone Functions")
+        body.append("")
         for func in parsed_data["functions"]:
             args_str = ", ".join(f"{arg['name']}: {arg['type']}" for arg in func["args"])
             body.append(f"### `{func['name']}({args_str}) -> {func['returns']}`")
-            body.append(f"{func['docstring']}\n")
+            body.append(f"{func['docstring']}")
+            body.append("")
             if func.get("complexity"):
-                body.append(f"**Complexity**: {func['complexity']}\n")
+                body.append(f"**Complexity**: {func['complexity']}")
+                body.append("")
             if func.get("side_effects"):
-                body.append(f"**Side Effects**: {func['side_effects']}\n")
+                body.append(f"**Side Effects**: {func['side_effects']}")
+                body.append("")
             body.append("#### Inputs")
             for arg in func["args"]:
                 body.append(f"* `{arg['name']}` (`{arg['type']}`)")
-            body.append(f"\n#### Outputs\n* `{func['returns']}`\n")
+            body.append("")
+            body.append("#### Outputs")
+            body.append(f"* `{func['returns']}`")
+            body.append("")
 
-    body.append("## Dependencies\n")
+    body.append("## Dependencies")
+    body.append("")
     if parsed_data["imports"]:
         for imp in parsed_data["imports"]:
             body.append(f"* `{imp}`")
@@ -551,7 +579,9 @@ last_verified_commit: "{commit_hash}"
                 used_by.append(other_py)
                 break
 
-    body.append("\n## Used By\n")
+    body.append("")
+    body.append("## Used By")
+    body.append("")
     if used_by:
         for u in sorted(used_by):
             if u.startswith(f"src{os.sep}") or u.startswith("src/"):
@@ -660,17 +690,34 @@ def main():
                 filepath = os.path.relpath(os.path.join(root, f), ".")
                 all_files.append(filepath)
 
+    # We must build the registry using ALL files so cross-references are complete
+    build_registry(all_files)
+
     if args.mode == "full":
         delete_generated_docs()
         files_to_process = all_files
     else:
-        files_to_process = get_changed_files()
+        changed_files = get_changed_files()
+
+        # In diff mode, we need to include dependent files to properly update "Used By" lists
+        impacted_files = set(changed_files)
+
+        for changed_file in changed_files:
+            mod_name = os.path.splitext(os.path.basename(changed_file))[0]
+            mod_path_dotted = changed_file.replace("src/", "").replace(".py", "").replace("/", ".")
+
+            for other_py, other_data in registry["modules"].items():
+                if other_py == changed_file:
+                    continue
+                for imp in other_data["imports"]:
+                    if mod_path_dotted in imp or imp.startswith(mod_name):
+                        impacted_files.add(other_py)
+                        break
+
+        files_to_process = list(impacted_files)
 
     print(f"Mode: {args.mode}")
     print(f"Files to process: {len(files_to_process)}")
-
-    # We must build the registry using ALL files so cross-references are complete
-    build_registry(all_files)
 
     os.makedirs("openwiki/architecture", exist_ok=True)
     os.makedirs("openwiki/modules", exist_ok=True)

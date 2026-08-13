@@ -6,10 +6,10 @@ title: "Module: projects"
 source_path: "tasks/projects.py"
 description: "Project tasks for pyinvoke."
 tags: ["module", "projects"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: projects
 
@@ -29,16 +29,16 @@ _No classes found._
 ```plantuml
 sequenceDiagram
     requirements->>run: invoke
-    environment->>strip: invoke
-    environment->>split: invoke
-    environment->>write: invoke
-    environment->>dump: invoke
-    environment->>append: invoke
-    environment->>read: invoke
     environment->>task: invoke
     environment->>open: invoke
-    run->>capitalize: invoke
+    environment->>strip: invoke
+    environment->>dump: invoke
+    environment->>write: invoke
+    environment->>read: invoke
+    environment->>split: invoke
+    environment->>append: invoke
     run->>run: invoke
+    run->>capitalize: invoke
     all->>task: invoke
     all->>call: invoke
 ```

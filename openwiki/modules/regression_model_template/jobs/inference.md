@@ -6,10 +6,10 @@ title: "Module: inference"
 source_path: "src/regression_model_template/jobs/inference.py"
 description: "Define a job for generating batch predictions from a registered model."
 tags: ["module", "inference"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: inference
 
@@ -40,19 +40,19 @@ classDiagram
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    InferenceJob.run->>debug: invoke
     InferenceJob.run->>logger: invoke
+    InferenceJob.run->>info: invoke
+    InferenceJob.run->>read: invoke
+    InferenceJob.run->>check: invoke
+    InferenceJob.run->>debug: invoke
+    InferenceJob.run->>uri_for_model_alias_or_version: invoke
     InferenceJob.run->>load: invoke
     InferenceJob.run->>predict: invoke
-    InferenceJob.run->>DataFrame: invoke
-    InferenceJob.run->>info: invoke
-    InferenceJob.run->>len: invoke
     InferenceJob.run->>write: invoke
     InferenceJob.run->>notify: invoke
-    InferenceJob.run->>read: invoke
     InferenceJob.run->>locals: invoke
-    InferenceJob.run->>uri_for_model_alias_or_version: invoke
-    InferenceJob.run->>check: invoke
+    InferenceJob.run->>len: invoke
+    InferenceJob.run->>DataFrame: invoke
 ```
 
 ### Component Diagram

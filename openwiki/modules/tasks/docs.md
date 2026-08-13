@@ -6,10 +6,10 @@ title: "Module: docs"
 source_path: "tasks/docs.py"
 description: "Docs tasks for pyinvoke."
 tags: ["module", "docs"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: docs
 

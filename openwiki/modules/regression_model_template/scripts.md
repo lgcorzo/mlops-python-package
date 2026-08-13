@@ -6,10 +6,10 @@ title: "Module: scripts"
 source_path: "src/regression_model_template/scripts.py"
 description: "Scripts for the CLI application."
 tags: ["module", "scripts"]
-timestamp: "2026-08-10T08:55:51Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: scripts
 
@@ -28,17 +28,17 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    main->>RuntimeError: invoke
-    main->>to_object: invoke
-    main->>model_json_schema: invoke
-    main->>merge_configs: invoke
-    main->>len: invoke
-    main->>model_validate: invoke
-    main->>parse_string: invoke
     main->>parse_args: invoke
+    main->>merge_configs: invoke
+    main->>to_object: invoke
+    main->>model_validate: invoke
+    main->>model_json_schema: invoke
     main->>dump: invoke
     main->>parse_file: invoke
+    main->>parse_string: invoke
+    main->>RuntimeError: invoke
     main->>run: invoke
+    main->>len: invoke
 ```
 
 ### Component Diagram

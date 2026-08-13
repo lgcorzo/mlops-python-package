@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_security"
 source_path: "tests/controller/test_kafka_app_security.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_security"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_kafka_app_security
 
@@ -28,18 +28,18 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_prediction_service_sanitization->>predict: invoke
+    test_prediction_service_sanitization->>MagicMock: invoke
     test_prediction_service_sanitization->>Exception: invoke
     test_prediction_service_sanitization->>PredictionService: invoke
     test_prediction_service_sanitization->>PredictionRequest: invoke
-    test_prediction_service_sanitization->>MagicMock: invoke
-    test_predict_endpoint_exception_leak->>predict: invoke
-    test_predict_endpoint_exception_leak->>run_async_test: invoke
-    test_predict_endpoint_exception_leak->>Exception: invoke
-    test_predict_endpoint_exception_leak->>PredictionRequest: invoke
-    test_predict_endpoint_exception_leak->>MagicMock: invoke
-    test_predict_endpoint_exception_leak->>raises: invoke
+    test_prediction_service_sanitization->>predict: invoke
     test_predict_endpoint_exception_leak->>run: invoke
+    test_predict_endpoint_exception_leak->>MagicMock: invoke
+    test_predict_endpoint_exception_leak->>Exception: invoke
+    test_predict_endpoint_exception_leak->>run_async_test: invoke
+    test_predict_endpoint_exception_leak->>raises: invoke
+    test_predict_endpoint_exception_leak->>predict: invoke
+    test_predict_endpoint_exception_leak->>PredictionRequest: invoke
 ```
 
 ### Component Diagram

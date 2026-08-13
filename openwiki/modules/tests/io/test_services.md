@@ -6,10 +6,10 @@ title: "Module: test_services"
 source_path: "tests/io/test_services.py"
 description: "No description available."
 tags: ["module", "test_services"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_services
 
@@ -28,25 +28,25 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_logger_service->>debug: invoke
     test_logger_service->>logger: invoke
+    test_logger_service->>debug: invoke
     test_logger_service->>error: invoke
+    test_alerts_service->>parametrize: invoke
     test_alerts_service->>AlertsService: invoke
     test_alerts_service->>patch: invoke
+    test_alerts_service->>notify: invoke
     test_alerts_service->>assert_called_once: invoke
     test_alerts_service->>assert_not_called: invoke
-    test_alerts_service->>parametrize: invoke
     test_alerts_service->>readouterr: invoke
-    test_alerts_service->>notify: invoke
-    test_mlflow_service->>values: invoke
+    test_mlflow_service->>RunConfig: invoke
+    test_mlflow_service->>client: invoke
     test_mlflow_service->>get_run: invoke
     test_mlflow_service->>get_experiment_by_name: invoke
-    test_mlflow_service->>items: invoke
-    test_mlflow_service->>RunConfig: invoke
+    test_mlflow_service->>run_context: invoke
     test_mlflow_service->>get_tracking_uri: invoke
     test_mlflow_service->>get_registry_uri: invoke
-    test_mlflow_service->>client: invoke
-    test_mlflow_service->>run_context: invoke
+    test_mlflow_service->>values: invoke
+    test_mlflow_service->>items: invoke
 ```
 
 ### Component Diagram

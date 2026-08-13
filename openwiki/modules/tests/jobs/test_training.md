@@ -6,10 +6,10 @@ title: "Module: test_training"
 source_path: "tests/jobs/test_training.py"
 description: "No description available."
 tags: ["module", "test_training"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_training
 
@@ -28,19 +28,19 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_training_job->>values: invoke
-    test_training_job->>float: invoke
-    test_training_job->>get_model_version: invoke
-    test_training_job->>get_experiment_by_name: invoke
-    test_training_job->>len: invoke
-    test_training_job->>items: invoke
-    test_training_job->>TrainingJob: invoke
     test_training_job->>RunConfig: invoke
-    test_training_job->>set: invoke
-    test_training_job->>readouterr: invoke
-    test_training_job->>run: invoke
     test_training_job->>client: invoke
+    test_training_job->>TrainingJob: invoke
+    test_training_job->>get_experiment_by_name: invoke
     test_training_job->>search_runs: invoke
+    test_training_job->>get_model_version: invoke
+    test_training_job->>run: invoke
+    test_training_job->>set: invoke
+    test_training_job->>values: invoke
+    test_training_job->>items: invoke
+    test_training_job->>len: invoke
+    test_training_job->>float: invoke
+    test_training_job->>readouterr: invoke
 ```
 
 ### Component Diagram

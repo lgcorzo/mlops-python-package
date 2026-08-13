@@ -6,10 +6,10 @@ title: "Module: test_explanations"
 source_path: "tests/jobs/test_explanations.py"
 description: "No description available."
 tags: ["module", "test_explanations"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_explanations
 
@@ -28,14 +28,14 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_explanations_job->>str: invoke
-    test_explanations_job->>ExplanationsJob: invoke
-    test_explanations_job->>len: invoke
     test_explanations_job->>parametrize: invoke
-    test_explanations_job->>set: invoke
-    test_explanations_job->>readouterr: invoke
     test_explanations_job->>isinstance: invoke
+    test_explanations_job->>ExplanationsJob: invoke
     test_explanations_job->>run: invoke
+    test_explanations_job->>set: invoke
+    test_explanations_job->>str: invoke
+    test_explanations_job->>len: invoke
+    test_explanations_job->>readouterr: invoke
 ```
 
 ### Component Diagram

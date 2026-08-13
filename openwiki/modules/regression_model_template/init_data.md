@@ -6,10 +6,10 @@ title: "Module: init_data"
 source_path: "src/regression_model_template/init_data.py"
 description: "Script to initialize synthetic train and test parquet datasets."
 tags: ["module", "init_data"]
-timestamp: "2026-08-10T08:55:51Z"
+timestamp: "2026-08-13T05:18:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: init_data
 
@@ -29,22 +29,22 @@ _No classes found._
 ```plantuml
 sequenceDiagram
     generate_data->>makedirs: invoke
-    generate_data->>DataFrame: invoke
-    generate_data->>randint: invoke
     generate_data->>date_range: invoke
-    generate_data->>range: invoke
+    generate_data->>DataFrame: invoke
+    generate_data->>check: invoke
+    generate_data->>to_parquet: invoke
+    generate_data->>print: invoke
     generate_data->>join: invoke
     generate_data->>astype: invoke
-    generate_data->>uniform: invoke
     generate_data->>choice: invoke
-    generate_data->>arange: invoke
-    generate_data->>print: invoke
-    generate_data->>to_parquet: invoke
-    generate_data->>check: invoke
+    generate_data->>randint: invoke
     generate_data->>Index: invoke
+    generate_data->>arange: invoke
+    generate_data->>uniform: invoke
+    generate_data->>range: invoke
+    main->>ArgumentParser: invoke
     main->>add_argument: invoke
     main->>parse_args: invoke
-    main->>ArgumentParser: invoke
     main->>generate_data: invoke
 ```
 
