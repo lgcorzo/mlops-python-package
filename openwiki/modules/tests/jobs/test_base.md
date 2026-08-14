@@ -6,10 +6,10 @@ title: "Module: test_base"
 source_path: "tests/jobs/test_base.py"
 description: "No description available."
 tags: ["module", "test_base"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-14T05:37:38Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_base
 
@@ -28,10 +28,10 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_job->>hasattr: invoke
-    test_job->>set: invoke
     test_job->>MyJob: invoke
+    test_job->>hasattr: invoke
     test_job->>run: invoke
+    test_job->>set: invoke
     test_job->>locals: invoke
 ```
 

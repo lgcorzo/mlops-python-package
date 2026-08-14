@@ -6,10 +6,10 @@ title: "Module: test_scripts"
 source_path: "tests/test_scripts.py"
 description: "No description available."
 tags: ["module", "test_scripts"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-14T05:37:38Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_scripts
 
@@ -29,19 +29,19 @@ _No classes found._
 ```plantuml
 sequenceDiagram
     test_schema->>main: invoke
-    test_schema->>loads: invoke
     test_schema->>readouterr: invoke
-    test_main->>listdir: invoke
-    test_main->>list: invoke
-    test_main->>join: invoke
+    test_schema->>loads: invoke
     test_main->>parametrize: invoke
+    test_main->>join: invoke
+    test_main->>list: invoke
     test_main->>sorted: invoke
-    test_main->>param: invoke
-    test_main->>xfail: invoke
     test_main->>main: invoke
+    test_main->>param: invoke
+    test_main->>listdir: invoke
+    test_main->>xfail: invoke
     test_main__no_configs->>match: invoke
-    test_main__no_configs->>main: invoke
     test_main__no_configs->>raises: invoke
+    test_main__no_configs->>main: invoke
 ```
 
 ### Component Diagram

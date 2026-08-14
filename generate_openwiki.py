@@ -85,7 +85,7 @@ def extract_calls(node):
                 calls.append(child.func.id)
             elif isinstance(child.func, ast.Attribute):
                 calls.append(child.func.attr)
-    return list(set(calls))
+    return list(dict.fromkeys(calls))
 
 
 def extract_complex_doc(docstring):
@@ -308,12 +308,13 @@ def build_registry(files_to_process):
 
 def generate_package_diagram_content():
     lines = ["```plantuml", 'package "src" {']
-    packages = set()
+    packages = []
     for py_file in registry["modules"].keys():
         parts = py_file.split("/")[:-1]
         pkg = ".".join(parts)
         if pkg:
-            packages.add(pkg)
+            if pkg not in packages:
+                packages.append(pkg)
     for pkg in sorted(packages):
         lines.append(f'    package "{pkg}" {{}}')
     lines.append("}")
@@ -325,26 +326,33 @@ def generate_call_graph():
     lines = ["```plantuml", "digraph CallGraph {"]
 
     # Build a list of all defined functions/methods across the project to map internal calls
-    defined_callables = set()
+    defined_callables = []
     for mod_path, data in registry["modules"].items():
         for func in data["functions"]:
-            defined_callables.add(func["name"])
+            if func["name"] not in defined_callables:
+                defined_callables.append(func["name"])
         for cls in data["classes"]:
-            defined_callables.add(cls["name"])
+            if cls["name"] not in defined_callables:
+                defined_callables.append(cls["name"])
             for m in cls["methods"]:
-                defined_callables.add(m["name"])
+                if m["name"] not in defined_callables:
+                    defined_callables.append(m["name"])
 
-    edges = set()
+    edges = []
     for mod_path, data in registry["modules"].items():
         for func in data["functions"]:
             for call in func.get("calls", []):
                 if call in defined_callables:
-                    edges.add(f'    "{func["name"]}()" -> "{call}()"')
+                    edge = f'    "{func["name"]}()" -> "{call}()"'
+                    if edge not in edges:
+                        edges.append(edge)
         for cls in data["classes"]:
             for m in cls.get("methods", []):
                 for call in m.get("calls", []):
                     if call in defined_callables:
-                        edges.add(f'    "{cls["name"]}.{m["name"]}()" -> "{call}()"')
+                        edge = f'    "{cls["name"]}.{m["name"]}()" -> "{call}()"'
+                        if edge not in edges:
+                            edges.append(edge)
 
     for edge in sorted(edges):
         lines.append(edge)

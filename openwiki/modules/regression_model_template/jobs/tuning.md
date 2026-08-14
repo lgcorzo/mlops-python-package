@@ -6,10 +6,10 @@ title: "Module: tuning"
 source_path: "src/regression_model_template/jobs/tuning.py"
 description: "Define a job for finding the best hyperparameters for a model."
 tags: ["module", "tuning"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-14T05:37:38Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: tuning
 
@@ -43,18 +43,18 @@ classDiagram
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    TuningJob.run->>debug: invoke
     TuningJob.run->>logger: invoke
-    TuningJob.run->>log_input: invoke
     TuningJob.run->>info: invoke
-    TuningJob.run->>search: invoke
-    TuningJob.run->>lineage: invoke
-    TuningJob.run->>to_dict: invoke
-    TuningJob.run->>notify: invoke
-    TuningJob.run->>read: invoke
-    TuningJob.run->>check: invoke
     TuningJob.run->>locals: invoke
     TuningJob.run->>run_context: invoke
+    TuningJob.run->>read: invoke
+    TuningJob.run->>check: invoke
+    TuningJob.run->>debug: invoke
+    TuningJob.run->>lineage: invoke
+    TuningJob.run->>log_input: invoke
+    TuningJob.run->>search: invoke
+    TuningJob.run->>notify: invoke
+    TuningJob.run->>to_dict: invoke
 ```
 
 ### Component Diagram

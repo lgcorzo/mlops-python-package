@@ -6,10 +6,10 @@ title: "Module: simulated_integration_test"
 source_path: "tests/controller/simulated_integration_test.py"
 description: "No description available."
 tags: ["module", "simulated_integration_test"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-14T05:37:38Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: simulated_integration_test
 
@@ -28,19 +28,19 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
+    run_simulated_test->>print: invoke
     run_simulated_test->>copy: invoke
-    run_simulated_test->>json: invoke
-    run_simulated_test->>sleep: invoke
-    run_simulated_test->>remove: invoke
-    run_simulated_test->>wait: invoke
     run_simulated_test->>Popen: invoke
+    run_simulated_test->>open: invoke
     run_simulated_test->>write: invoke
-    run_simulated_test->>kill: invoke
+    run_simulated_test->>sleep: invoke
+    run_simulated_test->>get: invoke
     run_simulated_test->>terminate: invoke
     run_simulated_test->>exists: invoke
-    run_simulated_test->>print: invoke
-    run_simulated_test->>get: invoke
-    run_simulated_test->>open: invoke
+    run_simulated_test->>wait: invoke
+    run_simulated_test->>remove: invoke
+    run_simulated_test->>kill: invoke
+    run_simulated_test->>json: invoke
 ```
 
 ### Component Diagram

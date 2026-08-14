@@ -6,10 +6,10 @@ title: "Module: okf_validate"
 source_path: "skills/validate/scripts/okf_validate.py"
 description: "OKF v0.2 Conformance Checker for OpenWiki Documentation."
 tags: ["module", "okf_validate"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-14T05:37:38Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: okf_validate
 
@@ -39,46 +39,46 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    extract_frontmatter->>_parse_yaml: invoke
-    extract_frontmatter->>len: invoke
-    extract_frontmatter->>startswith: invoke
     extract_frontmatter->>split: invoke
-    check_frontmatter_fields->>join: invoke
+    extract_frontmatter->>_parse_yaml: invoke
+    extract_frontmatter->>startswith: invoke
+    extract_frontmatter->>len: invoke
     check_frontmatter_fields->>get: invoke
     check_frontmatter_fields->>append: invoke
+    check_frontmatter_fields->>join: invoke
     check_frontmatter_fields->>sorted: invoke
-    check_absolute_paths->>search: invoke
-    check_absolute_paths->>splitlines: invoke
-    check_absolute_paths->>append: invoke
     check_absolute_paths->>enumerate: invoke
+    check_absolute_paths->>splitlines: invoke
+    check_absolute_paths->>search: invoke
+    check_absolute_paths->>append: invoke
     check_mermaid_syntax->>enumerate: invoke
-    check_mermaid_syntax->>strip: invoke
     check_mermaid_syntax->>splitlines: invoke
+    check_mermaid_syntax->>strip: invoke
     check_mermaid_syntax->>startswith: invoke
-    check_mermaid_syntax->>count: invoke
     check_mermaid_syntax->>append: invoke
-    validate_wiki->>extend: invoke
-    validate_wiki->>extract_frontmatter: invoke
-    validate_wiki->>relpath: invoke
-    validate_wiki->>check_mermaid_syntax: invoke
-    validate_wiki->>getcwd: invoke
-    validate_wiki->>glob: invoke
-    validate_wiki->>strip: invoke
-    validate_wiki->>len: invoke
-    validate_wiki->>check_absolute_paths: invoke
-    validate_wiki->>join: invoke
-    validate_wiki->>check_frontmatter_fields: invoke
+    check_mermaid_syntax->>count: invoke
     validate_wiki->>sorted: invoke
     validate_wiki->>print: invoke
-    validate_wiki->>read: invoke
+    validate_wiki->>glob: invoke
+    validate_wiki->>relpath: invoke
+    validate_wiki->>extract_frontmatter: invoke
+    validate_wiki->>extend: invoke
+    validate_wiki->>len: invoke
+    validate_wiki->>join: invoke
+    validate_wiki->>strip: invoke
     validate_wiki->>append: invoke
+    validate_wiki->>check_absolute_paths: invoke
+    validate_wiki->>getcwd: invoke
     validate_wiki->>open: invoke
-    main->>exit: invoke
-    main->>validate_wiki: invoke
+    validate_wiki->>read: invoke
+    validate_wiki->>check_frontmatter_fields: invoke
+    validate_wiki->>check_mermaid_syntax: invoke
     main->>ArgumentParser: invoke
-    main->>isdir: invoke
     main->>add_argument: invoke
     main->>parse_args: invoke
+    main->>validate_wiki: invoke
+    main->>exit: invoke
+    main->>isdir: invoke
     main->>print: invoke
 ```
 

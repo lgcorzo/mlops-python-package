@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_dos"
 source_path: "tests/controller/test_kafka_app_dos.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_dos"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-14T05:37:38Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_kafka_app_dos
 
@@ -28,22 +28,22 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_prediction_request_max_rows->>PredictionRequest: invoke
-    test_prediction_request_max_rows->>range: invoke
     test_prediction_request_max_rows->>raises: invoke
+    test_prediction_request_max_rows->>PredictionRequest: invoke
     test_prediction_request_max_rows->>str: invoke
-    test_prediction_request_max_cols->>PredictionRequest: invoke
-    test_prediction_request_max_cols->>range: invoke
+    test_prediction_request_max_rows->>range: invoke
     test_prediction_request_max_cols->>raises: invoke
+    test_prediction_request_max_cols->>PredictionRequest: invoke
     test_prediction_request_max_cols->>str: invoke
+    test_prediction_request_max_cols->>range: invoke
     test_prediction_request_valid_rows->>PredictionRequest: invoke
-    test_prediction_request_valid_rows->>range: invoke
     test_prediction_request_valid_rows->>len: invoke
-    test_prediction_request_empty->>PredictionRequest: invoke
+    test_prediction_request_valid_rows->>range: invoke
     test_prediction_request_empty->>raises: invoke
+    test_prediction_request_empty->>PredictionRequest: invoke
     test_prediction_request_empty->>str: invoke
-    test_prediction_request_inconsistent_lengths->>PredictionRequest: invoke
     test_prediction_request_inconsistent_lengths->>raises: invoke
+    test_prediction_request_inconsistent_lengths->>PredictionRequest: invoke
     test_prediction_request_inconsistent_lengths->>str: invoke
 ```
 
