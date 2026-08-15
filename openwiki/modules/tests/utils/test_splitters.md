@@ -6,10 +6,10 @@ title: "Module: test_splitters"
 source_path: "tests/utils/test_splitters.py"
 description: "No description available."
 tags: ["module", "test_splitters"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_splitters
 
@@ -28,19 +28,19 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_train_test_splitter->>get_n_splits: invoke
-    test_train_test_splitter->>len: invoke
-    test_train_test_splitter->>split: invoke
-    test_train_test_splitter->>list: invoke
     test_train_test_splitter->>TrainTestSplitter: invoke
+    test_train_test_splitter->>get_n_splits: invoke
+    test_train_test_splitter->>list: invoke
+    test_train_test_splitter->>split: invoke
+    test_train_test_splitter->>len: invoke
+    test_time_series_splitter->>TimeSeriesSplitter: invoke
     test_time_series_splitter->>get_n_splits: invoke
+    test_time_series_splitter->>list: invoke
     test_time_series_splitter->>enumerate: invoke
-    test_time_series_splitter->>max: invoke
     test_time_series_splitter->>split: invoke
     test_time_series_splitter->>len: invoke
-    test_time_series_splitter->>list: invoke
+    test_time_series_splitter->>max: invoke
     test_time_series_splitter->>min: invoke
-    test_time_series_splitter->>TimeSeriesSplitter: invoke
 ```
 
 ### Component Diagram

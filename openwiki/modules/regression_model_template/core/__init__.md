@@ -6,10 +6,10 @@ title: "Module: __init__"
 source_path: "src/regression_model_template/core/__init__.py"
 description: "Core components of the project."
 tags: ["module", "__init__"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: __init__
 

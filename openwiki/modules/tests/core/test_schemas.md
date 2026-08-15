@@ -6,10 +6,10 @@ title: "Module: test_schemas"
 source_path: "tests/core/test_schemas.py"
 description: "No description available."
 tags: ["module", "test_schemas"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_schemas
 
@@ -36,8 +36,8 @@ sequenceDiagram
     test_outputs_schema->>check: invoke
     test_shap_values_schema->>explain_samples: invoke
     test_shap_values_schema->>check: invoke
-    test_feature_importances_schema->>check: invoke
     test_feature_importances_schema->>explain_model: invoke
+    test_feature_importances_schema->>check: invoke
 ```
 
 ### Component Diagram

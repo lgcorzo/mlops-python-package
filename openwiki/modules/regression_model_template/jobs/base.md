@@ -6,10 +6,10 @@ title: "Module: base"
 source_path: "src/regression_model_template/jobs/base.py"
 description: "Base for high-level project jobs."
 tags: ["module", "base"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: base
 
@@ -42,11 +42,11 @@ classDiagram
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    Job.__enter__->>debug: invoke
-    Job.__enter__->>logger: invoke
     Job.__enter__->>start: invoke
-    Job.__exit__->>debug: invoke
+    Job.__enter__->>logger: invoke
+    Job.__enter__->>debug: invoke
     Job.__exit__->>logger: invoke
+    Job.__exit__->>debug: invoke
     Job.__exit__->>stop: invoke
 ```
 

@@ -6,10 +6,10 @@ title: "Module: test_configs"
 source_path: "tests/io/test_configs.py"
 description: "No description available."
 tags: ["module", "test_configs"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_configs
 
@@ -28,13 +28,13 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_parse_file->>parse_file: invoke
     test_parse_file->>join: invoke
-    test_parse_file->>write: invoke
+    test_parse_file->>parse_file: invoke
     test_parse_file->>open: invoke
+    test_parse_file->>write: invoke
     test_parse_string->>parse_string: invoke
-    test_merge_configs->>create: invoke
     test_merge_configs->>merge_configs: invoke
+    test_merge_configs->>create: invoke
     test_merge_configs->>range: invoke
     test_to_object->>create: invoke
     test_to_object->>to_object: invoke

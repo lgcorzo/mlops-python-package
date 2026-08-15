@@ -6,10 +6,10 @@ title: "Module: evaluations"
 source_path: "src/regression_model_template/jobs/evaluations.py"
 description: "Define a job for evaluating registered models with data."
 tags: ["module", "evaluations"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: evaluations
 
@@ -45,24 +45,24 @@ classDiagram
 ```plantuml
 sequenceDiagram
     EvaluationsJob.run->>logger: invoke
-    EvaluationsJob.run->>log_input: invoke
-    EvaluationsJob.run->>validate_evaluation_results: invoke
     EvaluationsJob.run->>info: invoke
-    EvaluationsJob.run->>evaluate: invoke
-    EvaluationsJob.run->>uri_for_model_alias_or_version: invoke
     EvaluationsJob.run->>client: invoke
-    EvaluationsJob.run->>from_pandas: invoke
-    EvaluationsJob.run->>notify: invoke
-    EvaluationsJob.run->>concat: invoke
-    EvaluationsJob.run->>check: invoke
     EvaluationsJob.run->>locals: invoke
-    EvaluationsJob.run->>to_mlflow: invoke
-    EvaluationsJob.run->>to_dict: invoke
-    EvaluationsJob.run->>items: invoke
+    EvaluationsJob.run->>run_context: invoke
     EvaluationsJob.run->>read: invoke
+    EvaluationsJob.run->>check: invoke
     EvaluationsJob.run->>debug: invoke
     EvaluationsJob.run->>lineage: invoke
-    EvaluationsJob.run->>run_context: invoke
+    EvaluationsJob.run->>log_input: invoke
+    EvaluationsJob.run->>from_pandas: invoke
+    EvaluationsJob.run->>uri_for_model_alias_or_version: invoke
+    EvaluationsJob.run->>evaluate: invoke
+    EvaluationsJob.run->>validate_evaluation_results: invoke
+    EvaluationsJob.run->>notify: invoke
+    EvaluationsJob.run->>to_dict: invoke
+    EvaluationsJob.run->>to_mlflow: invoke
+    EvaluationsJob.run->>concat: invoke
+    EvaluationsJob.run->>items: invoke
 ```
 
 ### Component Diagram

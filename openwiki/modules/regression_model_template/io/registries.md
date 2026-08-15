@@ -6,10 +6,10 @@ title: "Module: registries"
 source_path: "src/regression_model_template/io/registries.py"
 description: "Savers, loaders, and registers for model registries."
 tags: ["module", "registries"]
-timestamp: "2026-08-10T08:55:51Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: registries
 
@@ -79,8 +79,8 @@ classDiagram
 sequenceDiagram
     CustomSaver.save->>Adapter: invoke
     CustomSaver.save->>log_model: invoke
-    BuiltinSaver.save->>getattr: invoke
     BuiltinSaver.save->>get_internal_model: invoke
+    BuiltinSaver.save->>getattr: invoke
     BuiltinSaver.save->>log_model: invoke
     CustomLoader.load->>load_model: invoke
     CustomLoader.load->>Adapter: invoke
@@ -88,8 +88,8 @@ sequenceDiagram
     BuiltinLoader.load->>Adapter: invoke
     MlflowRegister.register->>register_model: invoke
     uri_for_model_alias_or_version->>isinstance: invoke
-    uri_for_model_alias_or_version->>uri_for_model_alias: invoke
     uri_for_model_alias_or_version->>uri_for_model_version: invoke
+    uri_for_model_alias_or_version->>uri_for_model_alias: invoke
 ```
 
 ### Component Diagram

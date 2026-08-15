@@ -5,10 +5,10 @@ type: "summary"
 title: "Summary"
 description: "Auto-generated summary."
 tags: ["summary"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Summary
 
@@ -89,6 +89,7 @@ last_verified_commit: "8412d40"
 * [code](modules/../tasks/checks.md#code)
 * [commit](modules/../tasks/commits.md#commit)
 * [compose](modules/../tasks/containers.md#compose)
+* [compute_used_by](modules/../generate_openwiki.md#compute_used_by)
 * [confs_path](modules/../tests/conftest.md#confs_path)
 * [convert_file](modules/../skills/validate/scripts/convert_links.md#convert_file)
 * [coverage](modules/../tasks/cleans.md#coverage)
@@ -113,6 +114,7 @@ last_verified_commit: "8412d40"
 * [generate_package_diagram_content](modules/../generate_openwiki.md#generate_package_diagram_content)
 * [generate_plantuml](modules/../generate_openwiki.md#generate_plantuml)
 * [get_changed_files](modules/../generate_openwiki.md#get_changed_files)
+* [get_deleted_files](modules/../generate_openwiki.md#get_deleted_files)
 * [get_last_commit](modules/../generate_openwiki.md#get_last_commit)
 * [imports](modules/../tasks/formats.md#imports)
 * [info](modules/../tasks/commits.md#info)
@@ -139,6 +141,7 @@ last_verified_commit: "8412d40"
 * [outputs_path](modules/../tests/conftest.md#outputs_path)
 * [outputs_reader](modules/../tests/conftest.md#outputs_reader)
 * [parse_args](modules/../generate_openwiki.md#parse_args)
+* [parse_existing_used_by](modules/../generate_openwiki.md#parse_existing_used_by)
 * [parse_file](modules/regression_model_template/io/configs.md#parse_file)
 * [parse_python_file](modules/../generate_openwiki.md#parse_python_file)
 * [parse_string](modules/regression_model_template/io/configs.md#parse_string)
@@ -305,8 +308,6 @@ last_verified_commit: "8412d40"
 * [okf_validate](modules/skills/validate/scripts/okf_validate.md)
 * [osvariables](modules/regression_model_template/io/osvariables.md)
 * [packages](modules/tasks/packages.md)
-* [patch_all](modules/patch_all.md)
-* [patch_ignore](modules/patch_ignore.md)
 * [projects](modules/tasks/projects.md)
 * [promotion](modules/regression_model_template/jobs/promotion.md)
 * [registries](modules/regression_model_template/io/registries.md)

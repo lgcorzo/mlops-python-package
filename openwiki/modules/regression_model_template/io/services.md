@@ -6,10 +6,10 @@ title: "Module: services"
 source_path: "src/regression_model_template/io/services.py"
 description: "Manage global context during execution."
 tags: ["module", "services"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: services
 
@@ -83,33 +83,33 @@ classDiagram
 sequenceDiagram
     PropagateHandler.emit->>handle: invoke
     PropagateHandler.emit->>getLogger: invoke
-    LoggerService.start->>PropagateHandler: invoke
+    LoggerService.start->>create: invoke
+    LoggerService.start->>TracerProvider: invoke
+    LoggerService.start->>set_tracer_provider: invoke
+    LoggerService.start->>OTLPSpanExporter: invoke
+    LoggerService.start->>add_span_processor: invoke
+    LoggerService.start->>LoggerProvider: invoke
+    LoggerService.start->>set_logger_provider: invoke
+    LoggerService.start->>OTLPLogExporter: invoke
+    LoggerService.start->>add_log_record_processor: invoke
+    LoggerService.start->>LoggingHandler: invoke
+    LoggerService.start->>addHandler: invoke
+    LoggerService.start->>basicConfig: invoke
     LoggerService.start->>getLogger: invoke
-    LoggerService.start->>model_dump: invoke
     LoggerService.start->>info: invoke
     LoggerService.start->>remove: invoke
-    LoggerService.start->>TracerProvider: invoke
-    LoggerService.start->>BatchSpanProcessor: invoke
-    LoggerService.start->>LoggerProvider: invoke
-    LoggerService.start->>OTLPSpanExporter: invoke
+    LoggerService.start->>model_dump: invoke
     LoggerService.start->>get: invoke
     LoggerService.start->>add: invoke
+    LoggerService.start->>BatchSpanProcessor: invoke
     LoggerService.start->>BatchLogRecordProcessor: invoke
-    LoggerService.start->>LoggingHandler: invoke
-    LoggerService.start->>basicConfig: invoke
-    LoggerService.start->>OTLPLogExporter: invoke
-    LoggerService.start->>set_tracer_provider: invoke
-    LoggerService.start->>set_logger_provider: invoke
-    LoggerService.start->>add_log_record_processor: invoke
-    LoggerService.start->>create: invoke
-    LoggerService.start->>add_span_processor: invoke
-    LoggerService.start->>addHandler: invoke
+    LoggerService.start->>PropagateHandler: invoke
     AlertsService.notify->>notify: invoke
     AlertsService.notify->>print: invoke
-    MlflowService.start->>set_experiment: invoke
-    MlflowService.start->>set_registry_uri: invoke
-    MlflowService.start->>autolog: invoke
     MlflowService.start->>set_tracking_uri: invoke
+    MlflowService.start->>set_registry_uri: invoke
+    MlflowService.start->>set_experiment: invoke
+    MlflowService.start->>autolog: invoke
     MlflowService.run_context->>start_run: invoke
     MlflowService.client->>MlflowClient: invoke
 ```

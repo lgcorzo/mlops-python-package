@@ -6,10 +6,10 @@ title: "Module: test_searchers"
 source_path: "tests/utils/test_searchers.py"
 description: "No description available."
 tags: ["module", "test_searchers"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_searchers
 
@@ -29,12 +29,12 @@ _No classes found._
 ```plantuml
 sequenceDiagram
     test_grid_cv_searcher->>GridCVSearcher: invoke
-    test_grid_cv_searcher->>set: invoke
-    test_grid_cv_searcher->>values: invoke
-    test_grid_cv_searcher->>sum: invoke
     test_grid_cv_searcher->>search: invoke
-    test_grid_cv_searcher->>len: invoke
+    test_grid_cv_searcher->>set: invoke
     test_grid_cv_searcher->>float: invoke
+    test_grid_cv_searcher->>len: invoke
+    test_grid_cv_searcher->>sum: invoke
+    test_grid_cv_searcher->>values: invoke
 ```
 
 ### Component Diagram

@@ -6,10 +6,10 @@ title: "Module: metrics"
 source_path: "src/regression_model_template/core/metrics.py"
 description: "Evaluate model performances with metrics."
 tags: ["module", "metrics"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: metrics
 
@@ -57,14 +57,14 @@ classDiagram
 sequenceDiagram
     Metric.scorer->>predict: invoke
     Metric.scorer->>score: invoke
-    Metric.to_mlflow->>MlflowMetric: invoke
-    Metric.to_mlflow->>Outputs: invoke
-    Metric.to_mlflow->>score: invoke
     Metric.to_mlflow->>make_metric: invoke
     Metric.to_mlflow->>Targets: invoke
-    SklearnMetric.score->>metric: invoke
+    Metric.to_mlflow->>Outputs: invoke
+    Metric.to_mlflow->>score: invoke
+    Metric.to_mlflow->>MlflowMetric: invoke
     SklearnMetric.score->>getattr: invoke
     SklearnMetric.score->>float: invoke
+    SklearnMetric.score->>metric: invoke
     Threshold.to_mlflow->>MlflowThreshold: invoke
 ```
 

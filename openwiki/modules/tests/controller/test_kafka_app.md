@@ -6,10 +6,10 @@ title: "Module: test_kafka_app"
 source_path: "tests/controller/test_kafka_app.py"
 description: "No description available."
 tags: ["module", "test_kafka_app"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_kafka_app
 
@@ -28,94 +28,94 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    mock_kafka_service->>PredictionResponse: invoke
-    mock_kafka_service->>MagicMock: invoke
     mock_kafka_service->>patch: invoke
+    mock_kafka_service->>MagicMock: invoke
     mock_kafka_service->>FastAPIKafkaService: invoke
-    test_delivery_report->>delivery_report: invoke
+    mock_kafka_service->>PredictionResponse: invoke
     test_delivery_report->>MagicMock: invoke
     test_delivery_report->>patch: invoke
+    test_delivery_report->>delivery_report: invoke
     test_delivery_report->>assert_called_once: invoke
     test_start->>start: invoke
     test_start->>assert_called_once_with: invoke
     test_start_producer_failure->>Exception: invoke
-    test_start_producer_failure->>start: invoke
     test_start_producer_failure->>raises: invoke
+    test_start_producer_failure->>start: invoke
     test_start_consumer_failure->>Exception: invoke
-    test_start_consumer_failure->>start: invoke
     test_start_consumer_failure->>raises: invoke
+    test_start_consumer_failure->>start: invoke
     test_run_server->>patch: invoke
-    test_run_server->>assert_called_once_with: invoke
     test_run_server->>_run_server: invoke
-    test_run_server_failure->>Exception: invoke
+    test_run_server->>assert_called_once_with: invoke
     test_run_server_failure->>patch: invoke
+    test_run_server_failure->>Exception: invoke
     test_run_server_failure->>_run_server: invoke
     test_consume_messages->>MagicMock: invoke
-    test_consume_messages->>assert_called_once: invoke
     test_consume_messages->>_consume_messages: invoke
+    test_consume_messages->>assert_called_once: invoke
     test_consume_messages_with_error->>MagicMock: invoke
-    test_consume_messages_with_error->>assert_not_called: invoke
-    test_consume_messages_with_error->>assert_called_once: invoke
     test_consume_messages_with_error->>_consume_messages: invoke
-    test_poll_message->>_poll_message: invoke
+    test_consume_messages_with_error->>assert_called_once: invoke
+    test_consume_messages_with_error->>assert_not_called: invoke
     test_poll_message->>MagicMock: invoke
+    test_poll_message->>_poll_message: invoke
     test_poll_message->>assert_called_once_with: invoke
-    test_poll_message_no_consumer->>_poll_message: invoke
     test_poll_message_no_consumer->>patch: invoke
+    test_poll_message_no_consumer->>_poll_message: invoke
     test_poll_message_no_consumer->>assert_called_once: invoke
     test_handle_message_error_partition_eof->>MagicMock: invoke
     test_handle_message_error_partition_eof->>patch: invoke
-    test_handle_message_error_partition_eof->>assert_called_once: invoke
     test_handle_message_error_partition_eof->>_handle_message_error: invoke
+    test_handle_message_error_partition_eof->>assert_called_once: invoke
     test_handle_message_error_other_error->>MagicMock: invoke
     test_handle_message_error_other_error->>patch: invoke
-    test_handle_message_error_other_error->>assert_called_once: invoke
     test_handle_message_error_other_error->>_handle_message_error: invoke
+    test_handle_message_error_other_error->>assert_called_once: invoke
     test_handle_message_error_unknown_topic->>MagicMock: invoke
     test_handle_message_error_unknown_topic->>patch: invoke
-    test_handle_message_error_unknown_topic->>assert_called_once: invoke
     test_handle_message_error_unknown_topic->>_handle_message_error: invoke
-    test_process_message->>encode: invoke
+    test_handle_message_error_unknown_topic->>assert_called_once: invoke
     test_process_message->>patch: invoke
-    test_process_message->>dumps: invoke
-    test_process_message->>assert_called_once: invoke
-    test_process_message->>PredictionRequest: invoke
     test_process_message->>MagicMock: invoke
-    test_process_message->>assert_called_once_with: invoke
-    test_process_message->>_process_message: invoke
+    test_process_message->>encode: invoke
+    test_process_message->>dumps: invoke
     test_process_message->>PredictionResponse: invoke
-    test_process_message_json_decode_error->>assert_called: invoke
+    test_process_message->>_process_message: invoke
+    test_process_message->>assert_called_once: invoke
+    test_process_message->>assert_called_once_with: invoke
+    test_process_message->>PredictionRequest: invoke
     test_process_message_json_decode_error->>patch: invoke
-    test_process_message_json_decode_error->>assert_called_once: invoke
     test_process_message_json_decode_error->>JSONDecodeError: invoke
     test_process_message_json_decode_error->>MagicMock: invoke
     test_process_message_json_decode_error->>assert_not_called: invoke
+    test_process_message_json_decode_error->>assert_called_once: invoke
     test_process_message_json_decode_error->>_process_message: invoke
-    test_process_message_prediction_error->>assert_called: invoke
-    test_process_message_prediction_error->>encode: invoke
+    test_process_message_json_decode_error->>assert_called: invoke
     test_process_message_prediction_error->>patch: invoke
-    test_process_message_prediction_error->>Exception: invoke
+    test_process_message_prediction_error->>MagicMock: invoke
+    test_process_message_prediction_error->>encode: invoke
     test_process_message_prediction_error->>dumps: invoke
+    test_process_message_prediction_error->>Exception: invoke
     test_process_message_prediction_error->>assert_called_once: invoke
     test_process_message_prediction_error->>PredictionRequest: invoke
-    test_process_message_prediction_error->>MagicMock: invoke
     test_process_message_prediction_error->>_process_message: invoke
-    test_close_consumer->>assert_called: invoke
-    test_close_consumer->>patch: invoke
-    test_close_consumer->>assert_called_once: invoke
-    test_close_consumer->>_close_consumer: invoke
+    test_process_message_prediction_error->>assert_called: invoke
     test_close_consumer->>MagicMock: invoke
-    test_stop->>patch: invoke
-    test_stop->>assert_called_once: invoke
-    test_stop->>is_set: invoke
+    test_close_consumer->>_close_consumer: invoke
+    test_close_consumer->>assert_called_once: invoke
+    test_close_consumer->>patch: invoke
+    test_close_consumer->>assert_called: invoke
     test_stop->>MagicMock: invoke
     test_stop->>stop: invoke
-    test_main_function->>assert_called: invoke
+    test_stop->>assert_called_once: invoke
+    test_stop->>is_set: invoke
+    test_stop->>patch: invoke
     test_main_function->>patch: invoke
-    test_main_function->>assert_called_once: invoke
     test_main_function->>MagicMock: invoke
-    test_main_function->>assert_called_once_with: invoke
     test_main_function->>main: invoke
+    test_main_function->>assert_called_once: invoke
+    test_main_function->>assert_called_once_with: invoke
+    test_main_function->>assert_called: invoke
 ```
 
 ### Component Diagram

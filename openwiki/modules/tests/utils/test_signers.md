@@ -6,10 +6,10 @@ title: "Module: test_signers"
 source_path: "tests/utils/test_signers.py"
 description: "No description available."
 tags: ["module", "test_signers"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-15T05:57:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "ce3f2af"
 ---
 # Module Specification: test_signers
 
@@ -28,10 +28,10 @@ _No classes found._
 ### Sequence Diagram
 ```plantuml
 sequenceDiagram
-    test_infer_signer->>input_names: invoke
     test_infer_signer->>InferSigner: invoke
     test_infer_signer->>sign: invoke
     test_infer_signer->>set: invoke
+    test_infer_signer->>input_names: invoke
 ```
 
 ### Component Diagram

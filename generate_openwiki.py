@@ -51,9 +51,19 @@ def is_ignored(filepath):
 def get_changed_files():
 
     # Attempt to get changes from the latest commit if HEAD~1 fails (e.g. shallow clone or single commit)
-    diff_output = run_command("git diff --name-only origin/main HEAD", ignore_errors=True)
+    diff_output = run_command("git diff --name-only --diff-filter=d origin/main HEAD", ignore_errors=True)
     if diff_output is None:
-        diff_output = run_command("git show --name-only --format=")
+        diff_output = run_command("git show --name-only --diff-filter=d --format=")
+
+    if not diff_output:
+        return []
+    return [f for f in diff_output.split("\n") if f.endswith(".py") and not is_ignored(f)]
+
+
+def get_deleted_files():
+    diff_output = run_command("git diff --name-only --diff-filter=D origin/main HEAD", ignore_errors=True)
+    if diff_output is None:
+        diff_output = run_command("git show --name-only --diff-filter=D --format=")
 
     if not diff_output:
         return []
@@ -85,7 +95,7 @@ def extract_calls(node):
                 calls.append(child.func.id)
             elif isinstance(child.func, ast.Attribute):
                 calls.append(child.func.attr)
-    return list(set(calls))
+    return list(dict.fromkeys(calls))
 
 
 def extract_complex_doc(docstring):
@@ -148,23 +158,29 @@ def parse_args(args):
     offset = len(args.args) - len(defaults)
 
     for i, arg in enumerate(args.args):
-        parsed.append({
-            "name": arg.arg,
-            "type": unparse_annotation(arg.annotation),
-            "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
-        })
+        parsed.append(
+            {
+                "name": arg.arg,
+                "type": unparse_annotation(arg.annotation),
+                "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
+            }
+        )
     if args.vararg:
-        parsed.append({
-            "name": f"*{args.vararg.arg}",
-            "type": unparse_annotation(args.vararg.annotation),
-            "default": None,
-        })
+        parsed.append(
+            {
+                "name": f"*{args.vararg.arg}",
+                "type": unparse_annotation(args.vararg.annotation),
+                "default": None,
+            }
+        )
     if args.kwarg:
-        parsed.append({
-            "name": f"**{args.kwarg.arg}",
-            "type": unparse_annotation(args.kwarg.annotation),
-            "default": None,
-        })
+        parsed.append(
+            {
+                "name": f"**{args.kwarg.arg}",
+                "type": unparse_annotation(args.kwarg.annotation),
+                "default": None,
+            }
+        )
     return parsed
 
 
@@ -207,10 +223,12 @@ def parse_python_file(filepath):
 
             for child in node.body:
                 if isinstance(child, ast.AnnAssign) and isinstance(child.target, ast.Name):
-                    cls_info["attributes"].append({
-                        "name": child.target.id,
-                        "type": unparse_annotation(child.annotation),
-                    })
+                    cls_info["attributes"].append(
+                        {
+                            "name": child.target.id,
+                            "type": unparse_annotation(child.annotation),
+                        }
+                    )
                 elif isinstance(child, ast.Assign):
                     for target in child.targets:
                         if isinstance(target, ast.Name):
@@ -238,16 +256,18 @@ def parse_python_file(filepath):
             is_private = node.name.startswith("_")
             docstring = extract_docstring(node)
             extracted = extract_complex_doc(docstring)
-            functions.append({
-                "name": node.name,
-                "docstring": extracted["description"],
-                "complexity": extracted["complexity"],
-                "side_effects": extracted["side_effects"],
-                "args": parse_args(node.args),
-                "returns": unparse_annotation(node.returns),
-                "is_private": is_private,
-                "calls": extract_calls(node),
-            })
+            functions.append(
+                {
+                    "name": node.name,
+                    "docstring": extracted["description"],
+                    "complexity": extracted["complexity"],
+                    "side_effects": extracted["side_effects"],
+                    "args": parse_args(node.args),
+                    "returns": unparse_annotation(node.returns),
+                    "is_private": is_private,
+                    "calls": extract_calls(node),
+                }
+            )
 
     return {
         "filepath": filepath,
@@ -647,6 +667,39 @@ def update_index_files(processed_files):
             f.write("Please see [SUMMARY.md](SUMMARY.md) for navigation.\n")
 
 
+def parse_existing_used_by(filepath):
+    if not os.path.exists(filepath):
+        return []
+    with open(filepath, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    if "## Used By" not in content:
+        return []
+
+    used_by_section = content.split("## Used By")[1].split("##")[0]
+
+    import re
+
+    pattern = re.compile(r"^\*\s+\[(.*?)\]\((.*?)\)", re.MULTILINE)
+    matches = pattern.findall(used_by_section)
+
+    return sorted([match[0] for match in matches])
+
+
+def compute_used_by(relative_filepath):
+    used_by = []
+    mod_name = os.path.splitext(os.path.basename(relative_filepath))[0]
+    mod_path_dotted = relative_filepath.replace("src/", "").replace(".py", "").replace("/", ".")
+    for other_py, other_data in registry["modules"].items():
+        if other_py == relative_filepath:
+            continue
+        for imp in other_data["imports"]:
+            if mod_path_dotted in imp or imp.startswith(mod_name):
+                used_by.append(other_py)
+                break
+    return sorted(used_by)
+
+
 def main():
     parser = argparse.ArgumentParser(description="AST Documentation Generator")
     parser.add_argument("--mode", choices=["full", "diff"], default="full")
@@ -667,10 +720,41 @@ def main():
         files_to_process = get_changed_files()
 
     print(f"Mode: {args.mode}")
-    print(f"Files to process: {len(files_to_process)}")
 
     # We must build the registry using ALL files so cross-references are complete
     build_registry(all_files)
+
+    if args.mode == "diff":
+        deleted_files = get_deleted_files()
+        for del_file in deleted_files:
+            if del_file.startswith(f"src{os.sep}") or del_file.startswith("src/"):
+                rel_del = del_file[4:]
+            else:
+                rel_del = del_file
+            md_path = os.path.join("openwiki/modules", rel_del[:-3] + ".md")
+            if os.path.exists(md_path):
+                os.remove(md_path)
+
+        files_to_process_set = set(files_to_process)
+        for py_file in all_files:
+            if py_file in files_to_process_set:
+                continue
+
+            if py_file.startswith(f"src{os.sep}") or py_file.startswith("src/"):
+                rel_py = py_file[4:]
+            else:
+                rel_py = py_file
+            md_path = os.path.join("openwiki/modules", rel_py[:-3] + ".md")
+
+            existing_used_by = parse_existing_used_by(md_path)
+
+            new_used_by_raw = compute_used_by(py_file)
+            new_used_by = sorted([os.path.basename(u) for u in new_used_by_raw])
+
+            if existing_used_by != new_used_by:
+                files_to_process.append(py_file)
+
+    print(f"Files to process: {len(files_to_process)}")
 
     os.makedirs("openwiki/architecture", exist_ok=True)
     os.makedirs("openwiki/modules", exist_ok=True)
