@@ -6,26 +6,32 @@ title: "Module: checks"
 source_path: "tasks/checks.py"
 description: "Check tasks for pyinvoke."
 tags: ["module", "checks"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-16T06:27:37Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "034727a"
 ---
 # Module Specification: checks
 
 * **Source Reference:** [tasks/checks.py](../../../tasks/checks.py)
 
 ## 1. Architectural Role & Responsibilities
+
 Check tasks for pyinvoke.
 
 ### Detected Architecture Patterns
+
 Detected roles: General Subsystem
 
 ## 2. UML Diagrams
+
 ### Class Diagram
+
 _No classes found._
 
+
 ### Sequence Diagram
+
 ```plantuml
 sequenceDiagram
     poetry->>run: invoke
@@ -39,84 +45,110 @@ sequenceDiagram
 ```
 
 ### Component Diagram
+
 ```plantuml
 component [checks] as Comp
 Comp --> [Context]
 Comp --> [task]
 ```
 
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
 
 ### `poetry(ctx: Context) -> None`
+
 Check poetry config files.
 
 #### Inputs
+
 * `ctx` (`Context`)
+
 
 #### Outputs
 * `None`
 
 ### `format(ctx: Context) -> None`
+
 Check the formats with ruff.
 
 #### Inputs
+
 * `ctx` (`Context`)
+
 
 #### Outputs
 * `None`
 
 ### `type(ctx: Context) -> None`
+
 Check the types with mypy.
 
 #### Inputs
+
 * `ctx` (`Context`)
+
 
 #### Outputs
 * `None`
 
 ### `code(ctx: Context) -> None`
+
 Check the codes with ruff.
 
 #### Inputs
+
 * `ctx` (`Context`)
+
 
 #### Outputs
 * `None`
 
 ### `test(ctx: Context) -> None`
+
 Check the tests with pytest.
 
 #### Inputs
+
 * `ctx` (`Context`)
+
 
 #### Outputs
 * `None`
 
 ### `security(ctx: Context) -> None`
+
 Check the security with bandit.
 
 #### Inputs
+
 * `ctx` (`Context`)
+
 
 #### Outputs
 * `None`
 
 ### `coverage(ctx: Context) -> None`
+
 Check the coverage with coverage.
 
 #### Inputs
+
 * `ctx` (`Context`)
+
 
 #### Outputs
 * `None`
 
 ### `all(_: Context) -> None`
+
 Run all check tasks.
 
 #### Inputs
+
 * `_` (`Context`)
+
 
 #### Outputs
 * `None`
@@ -124,7 +156,9 @@ Run all check tasks.
 ## Dependencies
 
 * `invoke.context.Context`
+
 * `invoke.tasks.task`
+
 
 ## Used By
 

@@ -6,26 +6,32 @@ title: "Module: configs"
 source_path: "src/regression_model_template/io/configs.py"
 description: "Parse, merge, and convert config objects."
 tags: ["module", "configs"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-16T06:27:37Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "034727a"
 ---
 # Module Specification: configs
 
 * **Source Reference:** [src/regression_model_template/io/configs.py](../../../../src/regression_model_template/io/configs.py)
 
 ## 1. Architectural Role & Responsibilities
+
 Parse, merge, and convert config objects.
 
 ### Detected Architecture Patterns
+
 Detected roles: General Subsystem
 
 ## 2. UML Diagrams
+
 ### Class Diagram
+
 _No classes found._
 
+
 ### Sequence Diagram
+
 ```plantuml
 sequenceDiagram
     parse_file->>load: invoke
@@ -35,17 +41,20 @@ sequenceDiagram
 ```
 
 ### Component Diagram
+
 ```plantuml
 component [configs] as Comp
 Comp --> [typing]
 Comp --> [omegaconf]
 ```
 
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
 
 ### `parse_file(path: str) -> Config`
+
 Parse a config file from a path.
 
 Args:
@@ -55,12 +64,15 @@ Returns:
     Config: representation of the config file.
 
 #### Inputs
+
 * `path` (`str`)
+
 
 #### Outputs
 * `Config`
 
 ### `parse_string(string: str) -> Config`
+
 Parse the given config string.
 
 Args:
@@ -70,12 +82,15 @@ Returns:
     Config: representation of the config string.
 
 #### Inputs
+
 * `string` (`str`)
+
 
 #### Outputs
 * `Config`
 
 ### `merge_configs(configs: T.Sequence[Config]) -> Config`
+
 Merge a list of config into a single config.
 
 Args:
@@ -85,12 +100,15 @@ Returns:
     Config: representation of the merged config objects.
 
 #### Inputs
+
 * `configs` (`T.Sequence[Config]`)
+
 
 #### Outputs
 * `Config`
 
 ### `to_object(config: Config, resolve: bool) -> object`
+
 Convert a config object to a python object.
 
 Args:
@@ -101,8 +119,11 @@ Returns:
     object: conversion of the config to a python object.
 
 #### Inputs
+
 * `config` (`Config`)
+
 * `resolve` (`bool`)
+
 
 #### Outputs
 * `object`
@@ -110,9 +131,12 @@ Returns:
 ## Dependencies
 
 * `typing`
+
 * `omegaconf`
+
 
 ## Used By
 
 * [scripts.py](../../regression_model_template/scripts.md)
+
 * [test_configs.py](../../tests/io/test_configs.md)

@@ -85,7 +85,7 @@ def extract_calls(node):
                 calls.append(child.func.id)
             elif isinstance(child.func, ast.Attribute):
                 calls.append(child.func.attr)
-    return list(set(calls))
+    return list(dict.fromkeys(calls))
 
 
 def extract_complex_doc(docstring):
@@ -392,11 +392,11 @@ last_verified_commit: "{commit_hash}"
 """
 
     body = []
-    body.append(f"# Module Specification: {mod_name}\n")
-    body.append(f"* **Source Reference:** [{relative_filepath}]({back_path})\n")
+    body.append(f"# Module Specification: {mod_name}")
+    body.append(f"* **Source Reference:** [{relative_filepath}]({back_path})")
 
     body.append("## 1. Architectural Role & Responsibilities")
-    body.append(f"{parsed_data['docstring']}\n")
+    body.append(f"{parsed_data['docstring']}")
     # Architecture Detection
     body.append("### Detected Architecture Patterns")
     patterns = []
@@ -416,9 +416,9 @@ last_verified_commit: "{commit_hash}"
         patterns.append("Adapter / Port")
 
     if patterns:
-        body.append(f"Detected roles: {', '.join(patterns)}\n")
+        body.append(f"Detected roles: {', '.join(patterns)}")
     else:
-        body.append("Detected roles: General Subsystem\n")
+        body.append("Detected roles: General Subsystem")
 
     body.append("## 2. UML Diagrams")
     body.append("### Class Diagram")
@@ -452,7 +452,7 @@ last_verified_commit: "{commit_hash}"
     else:
         body.append("_No sequences found._")
 
-    body.append("\n### Component Diagram")
+    body.append("### Component Diagram")
     comp_lines = ["```plantuml", f"component [{mod_name}] as Comp"]
     # Look for imports as dependencies for the component
     for imp in parsed_data["imports"]:
@@ -462,11 +462,11 @@ last_verified_commit: "{commit_hash}"
     comp_lines.append("```")
     body.append("\n".join(comp_lines))
 
-    body.append("\n## 3. Class & Method Specifications\n")
+    body.append("\n## 3. Class & Method Specifications")
 
     for cls in parsed_data["classes"]:
         body.append(f"### `{cls['name']}`")
-        body.append(f"\n{cls['docstring']}\n")
+        body.append(f"\n{cls['docstring']}")
 
         if cls.get("constructor"):
             c = cls["constructor"]
@@ -479,13 +479,11 @@ last_verified_commit: "{commit_hash}"
             body.append("  - **Inputs**:")
             for arg in c["args"]:
                 body.append(f"    - `{arg['name']}` (`{arg['type']}`)")
-            body.append("")
 
         if cls["attributes"]:
             body.append("#### Attributes")
             for attr in cls["attributes"]:
                 body.append(f"* **`{attr['name']}`** (`{attr['type']}`)")
-            body.append("")
 
         public_methods = [m for m in cls["methods"] if not m["is_private"]]
         private_methods = [m for m in cls["methods"] if m["is_private"]]
@@ -506,7 +504,6 @@ last_verified_commit: "{commit_hash}"
                 for arg in m["args"]:
                     body.append(f"    - `{arg['name']}` (`{arg['type']}`)")
                 body.append(f"  - **Outputs**: `{m['returns']}`")
-            body.append("")
 
         if private_methods:
             body.append("#### Private Methods")
@@ -516,24 +513,23 @@ last_verified_commit: "{commit_hash}"
                 body.append(
                     f"  - **Purpose**: {m['docstring'].splitlines()[0] if m['docstring'] else 'No description available.'}"
                 )
-            body.append("")
 
     if parsed_data["functions"]:
-        body.append("## Standalone Functions\n")
+        body.append("## Standalone Functions")
         for func in parsed_data["functions"]:
             args_str = ", ".join(f"{arg['name']}: {arg['type']}" for arg in func["args"])
             body.append(f"### `{func['name']}({args_str}) -> {func['returns']}`")
-            body.append(f"{func['docstring']}\n")
+            body.append(f"{func['docstring']}")
             if func.get("complexity"):
-                body.append(f"**Complexity**: {func['complexity']}\n")
+                body.append(f"**Complexity**: {func['complexity']}")
             if func.get("side_effects"):
-                body.append(f"**Side Effects**: {func['side_effects']}\n")
+                body.append(f"**Side Effects**: {func['side_effects']}")
             body.append("#### Inputs")
             for arg in func["args"]:
                 body.append(f"* `{arg['name']}` (`{arg['type']}`)")
-            body.append(f"\n#### Outputs\n* `{func['returns']}`\n")
+            body.append(f"\n#### Outputs\n* `{func['returns']}`")
 
-    body.append("## Dependencies\n")
+    body.append("## Dependencies")
     if parsed_data["imports"]:
         for imp in parsed_data["imports"]:
             body.append(f"* `{imp}`")
@@ -551,7 +547,7 @@ last_verified_commit: "{commit_hash}"
                 used_by.append(other_py)
                 break
 
-    body.append("\n## Used By\n")
+    body.append("\n## Used By")
     if used_by:
         for u in sorted(used_by):
             if u.startswith(f"src{os.sep}") or u.startswith("src/"):
@@ -571,7 +567,7 @@ last_verified_commit: "{commit_hash}"
     else:
         body.append("_Not used by any other module._")
 
-    return frontmatter + "\n".join(body) + "\n"
+    return frontmatter + "\n\n".join(body) + "\n"
 
 
 def update_index_files(processed_files):
@@ -660,17 +656,34 @@ def main():
                 filepath = os.path.relpath(os.path.join(root, f), ".")
                 all_files.append(filepath)
 
+    # We must build the registry using ALL files so cross-references are complete
+    build_registry(all_files)
+
     if args.mode == "full":
         delete_generated_docs()
         files_to_process = all_files
     else:
-        files_to_process = get_changed_files()
+        changed_files = get_changed_files()
+        impacted_files = set(changed_files)
+
+        # In diff mode, we need to include files that depend on the changed files or are dependencies of them.
+        for changed_file in changed_files:
+            mod_name = os.path.splitext(os.path.basename(changed_file))[0]
+            mod_path_dotted = changed_file.replace("src/", "").replace(".py", "").replace("/", ".")
+
+            # Find files that import this changed file
+            for other_py, other_data in registry["modules"].items():
+                if other_py in impacted_files:
+                    continue
+                for imp in other_data["imports"]:
+                    if mod_path_dotted in imp or imp.startswith(mod_name):
+                        impacted_files.add(other_py)
+                        break
+
+        files_to_process = list(impacted_files)
 
     print(f"Mode: {args.mode}")
     print(f"Files to process: {len(files_to_process)}")
-
-    # We must build the registry using ALL files so cross-references are complete
-    build_registry(all_files)
 
     os.makedirs("openwiki/architecture", exist_ok=True)
     os.makedirs("openwiki/modules", exist_ok=True)
@@ -683,7 +696,9 @@ def main():
     os.makedirs("openwiki/generated", exist_ok=True)
 
     for py_file in files_to_process:
-        parsed = parse_python_file(py_file)
+        parsed = registry["modules"].get(py_file)
+        if not parsed:
+            parsed = parse_python_file(py_file)
 
         if py_file.startswith(f"src{os.sep}") or py_file.startswith("src/"):
             rel_py = py_file[4:]

@@ -6,26 +6,32 @@ title: "Module: containers"
 source_path: "tasks/containers.py"
 description: "Container tasks for pyinvoke."
 tags: ["module", "containers"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-16T06:27:37Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "034727a"
 ---
 # Module Specification: containers
 
 * **Source Reference:** [tasks/containers.py](../../../tasks/containers.py)
 
 ## 1. Architectural Role & Responsibilities
+
 Container tasks for pyinvoke.
 
 ### Detected Architecture Patterns
+
 Detected roles: General Subsystem
 
 ## 2. UML Diagrams
+
 ### Class Diagram
+
 _No classes found._
 
+
 ### Sequence Diagram
+
 ```plantuml
 sequenceDiagram
     compose->>run: invoke
@@ -36,6 +42,7 @@ sequenceDiagram
 ```
 
 ### Component Diagram
+
 ```plantuml
 component [containers] as Comp
 Comp --> [Context]
@@ -43,44 +50,59 @@ Comp --> [task]
 Comp --> [packages]
 ```
 
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
 
 ### `compose(ctx: Context) -> None`
+
 Start up docker compose.
 
 #### Inputs
+
 * `ctx` (`Context`)
+
 
 #### Outputs
 * `None`
 
 ### `build(ctx: Context, tag: str) -> None`
+
 Build the container image.
 
 #### Inputs
+
 * `ctx` (`Context`)
+
 * `tag` (`str`)
+
 
 #### Outputs
 * `None`
 
 ### `run(ctx: Context, tag: str) -> None`
+
 Run the container image.
 
 #### Inputs
+
 * `ctx` (`Context`)
+
 * `tag` (`str`)
+
 
 #### Outputs
 * `None`
 
 ### `all(_: Context) -> None`
+
 Run all container tasks.
 
 #### Inputs
+
 * `_` (`Context`)
+
 
 #### Outputs
 * `None`
@@ -88,8 +110,11 @@ Run all container tasks.
 ## Dependencies
 
 * `invoke.context.Context`
+
 * `invoke.tasks.task`
+
 * `.packages`
+
 
 ## Used By
 

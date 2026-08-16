@@ -6,23 +6,27 @@ title: "Module: promotion"
 source_path: "src/regression_model_template/jobs/promotion.py"
 description: "Define a job for promoting a registered model version with an alias."
 tags: ["module", "promotion"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-16T06:27:37Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "034727a"
 ---
 # Module Specification: promotion
 
 * **Source Reference:** [src/regression_model_template/jobs/promotion.py](../../../../src/regression_model_template/jobs/promotion.py)
 
 ## 1. Architectural Role & Responsibilities
+
 Define a job for promoting a registered model version with an alias.
 
 ### Detected Architecture Patterns
+
 Detected roles: General Subsystem
 
 ## 2. UML Diagrams
+
 ### Class Diagram
+
 ```plantuml
 classDiagram
     direction BT
@@ -35,31 +39,36 @@ classDiagram
     Job <|-- PromotionJob : Generalization
 ```
 
+
 ### Sequence Diagram
+
 ```plantuml
 sequenceDiagram
-    PromotionJob.run->>debug: invoke
     PromotionJob.run->>logger: invoke
-    PromotionJob.run->>str: invoke
     PromotionJob.run->>info: invoke
-    PromotionJob.run->>get_model_version_by_alias: invoke
-    PromotionJob.run->>search_model_versions: invoke
-    PromotionJob.run->>notify: invoke
-    PromotionJob.run->>set_registered_model_alias: invoke
-    PromotionJob.run->>locals: invoke
     PromotionJob.run->>client: invoke
+    PromotionJob.run->>set_registered_model_alias: invoke
+    PromotionJob.run->>get_model_version_by_alias: invoke
+    PromotionJob.run->>debug: invoke
+    PromotionJob.run->>notify: invoke
+    PromotionJob.run->>locals: invoke
+    PromotionJob.run->>str: invoke
+    PromotionJob.run->>search_model_versions: invoke
 ```
 
 ### Component Diagram
+
 ```plantuml
 component [promotion] as Comp
 Comp --> [typing]
 Comp --> [base]
 ```
 
+
 ## 3. Class & Method Specifications
 
 ### `PromotionJob`
+
 
 Define a job for promoting a registered model version with an alias.
 
@@ -70,21 +79,31 @@ Parameters:
     version (int | None): the model version to transition (use None for latest).
 
 #### Attributes
+
 * **`KIND`** (`T.Literal[PromotionJob]`)
+
 * **`alias`** (`str`)
+
 * **`version`** (`int | None`)
 
 #### Public Methods
+
 * **`run(self: Any) -> base.Locals`**
+
   - **Purpose**: No description available.
+
   - **Inputs**:
+
     - `self` (`Any`)
+
   - **Outputs**: `base.Locals`
 
 ## Dependencies
 
 * `typing`
+
 * `regression_model_template.jobs.base`
+
 
 ## Used By
 
