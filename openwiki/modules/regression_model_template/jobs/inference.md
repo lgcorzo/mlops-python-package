@@ -6,23 +6,27 @@ title: "Module: inference"
 source_path: "src/regression_model_template/jobs/inference.py"
 description: "Define a job for generating batch predictions from a registered model."
 tags: ["module", "inference"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-16T06:27:37Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "034727a"
 ---
 # Module Specification: inference
 
 * **Source Reference:** [src/regression_model_template/jobs/inference.py](../../../../src/regression_model_template/jobs/inference.py)
 
 ## 1. Architectural Role & Responsibilities
+
 Define a job for generating batch predictions from a registered model.
 
 ### Detected Architecture Patterns
+
 Detected roles: General Subsystem
 
 ## 2. UML Diagrams
+
 ### Class Diagram
+
 ```plantuml
 classDiagram
     direction BT
@@ -37,25 +41,28 @@ classDiagram
     Job <|-- InferenceJob : Generalization
 ```
 
+
 ### Sequence Diagram
+
 ```plantuml
 sequenceDiagram
-    InferenceJob.run->>debug: invoke
     InferenceJob.run->>logger: invoke
+    InferenceJob.run->>info: invoke
+    InferenceJob.run->>read: invoke
+    InferenceJob.run->>check: invoke
+    InferenceJob.run->>debug: invoke
+    InferenceJob.run->>uri_for_model_alias_or_version: invoke
     InferenceJob.run->>load: invoke
     InferenceJob.run->>predict: invoke
-    InferenceJob.run->>DataFrame: invoke
-    InferenceJob.run->>info: invoke
-    InferenceJob.run->>len: invoke
     InferenceJob.run->>write: invoke
     InferenceJob.run->>notify: invoke
-    InferenceJob.run->>read: invoke
     InferenceJob.run->>locals: invoke
-    InferenceJob.run->>uri_for_model_alias_or_version: invoke
-    InferenceJob.run->>check: invoke
+    InferenceJob.run->>len: invoke
+    InferenceJob.run->>DataFrame: invoke
 ```
 
 ### Component Diagram
+
 ```plantuml
 component [inference] as Comp
 Comp --> [typing]
@@ -67,9 +74,11 @@ Comp --> [registries]
 Comp --> [base]
 ```
 
+
 ## 3. Class & Method Specifications
 
 ### `InferenceJob`
+
 
 Generate batch predictions from a registered model.
 
@@ -80,28 +89,45 @@ Parameters:
     loader (registries.LoaderKind): registry loader for the model.
 
 #### Attributes
+
 * **`KIND`** (`T.Literal[InferenceJob]`)
+
 * **`inputs`** (`datasets.ReaderKind`)
+
 * **`outputs`** (`datasets.WriterKind`)
+
 * **`alias_or_version`** (`str | int`)
+
 * **`loader`** (`registries.LoaderKind`)
 
 #### Public Methods
+
 * **`run(self: Any) -> base.Locals`**
+
   - **Purpose**: No description available.
+
   - **Inputs**:
+
     - `self` (`Any`)
+
   - **Outputs**: `base.Locals`
 
 ## Dependencies
 
 * `typing`
+
 * `pandas`
+
 * `pydantic`
+
 * `regression_model_template.core.schemas`
+
 * `regression_model_template.io.datasets`
+
 * `regression_model_template.io.registries`
+
 * `regression_model_template.jobs.base`
+
 
 ## Used By
 

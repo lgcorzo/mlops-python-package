@@ -6,23 +6,27 @@ title: "Module: evaluations"
 source_path: "src/regression_model_template/jobs/evaluations.py"
 description: "Define a job for evaluating registered models with data."
 tags: ["module", "evaluations"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-16T06:27:37Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "034727a"
 ---
 # Module Specification: evaluations
 
 * **Source Reference:** [src/regression_model_template/jobs/evaluations.py](../../../../src/regression_model_template/jobs/evaluations.py)
 
 ## 1. Architectural Role & Responsibilities
+
 Define a job for evaluating registered models with data.
 
 ### Detected Architecture Patterns
+
 Detected roles: General Subsystem
 
 ## 2. UML Diagrams
+
 ### Class Diagram
+
 ```plantuml
 classDiagram
     direction BT
@@ -41,31 +45,34 @@ classDiagram
     Job <|-- EvaluationsJob : Generalization
 ```
 
+
 ### Sequence Diagram
+
 ```plantuml
 sequenceDiagram
     EvaluationsJob.run->>logger: invoke
-    EvaluationsJob.run->>log_input: invoke
-    EvaluationsJob.run->>validate_evaluation_results: invoke
     EvaluationsJob.run->>info: invoke
-    EvaluationsJob.run->>evaluate: invoke
-    EvaluationsJob.run->>uri_for_model_alias_or_version: invoke
     EvaluationsJob.run->>client: invoke
-    EvaluationsJob.run->>from_pandas: invoke
-    EvaluationsJob.run->>notify: invoke
-    EvaluationsJob.run->>concat: invoke
-    EvaluationsJob.run->>check: invoke
     EvaluationsJob.run->>locals: invoke
-    EvaluationsJob.run->>to_mlflow: invoke
-    EvaluationsJob.run->>to_dict: invoke
-    EvaluationsJob.run->>items: invoke
+    EvaluationsJob.run->>run_context: invoke
     EvaluationsJob.run->>read: invoke
+    EvaluationsJob.run->>check: invoke
     EvaluationsJob.run->>debug: invoke
     EvaluationsJob.run->>lineage: invoke
-    EvaluationsJob.run->>run_context: invoke
+    EvaluationsJob.run->>log_input: invoke
+    EvaluationsJob.run->>from_pandas: invoke
+    EvaluationsJob.run->>uri_for_model_alias_or_version: invoke
+    EvaluationsJob.run->>evaluate: invoke
+    EvaluationsJob.run->>validate_evaluation_results: invoke
+    EvaluationsJob.run->>notify: invoke
+    EvaluationsJob.run->>to_dict: invoke
+    EvaluationsJob.run->>to_mlflow: invoke
+    EvaluationsJob.run->>concat: invoke
+    EvaluationsJob.run->>items: invoke
 ```
 
 ### Component Diagram
+
 ```plantuml
 component [evaluations] as Comp
 Comp --> [typing]
@@ -80,9 +87,11 @@ Comp --> [services]
 Comp --> [base]
 ```
 
+
 ## 3. Class & Method Specifications
 
 ### `EvaluationsJob`
+
 
 Generate evaluations from a registered model and a dataset.
 
@@ -97,35 +106,59 @@ Parameters:
     thresholds (dict[str, metrics_.Threshold] | None): metric thresholds.
 
 #### Attributes
+
 * **`KIND`** (`T.Literal[EvaluationsJob]`)
+
 * **`run_config`** (`services.MlflowService.RunConfig`)
+
 * **`inputs`** (`datasets.ReaderKind`)
+
 * **`targets`** (`datasets.ReaderKind`)
+
 * **`model_type`** (`str`)
+
 * **`alias_or_version`** (`str | int`)
+
 * **`metrics`** (`metrics_.MetricsKind`)
+
 * **`evaluators`** (`list[str]`)
+
 * **`thresholds`** (`dict[(str, metrics_.Threshold)]`)
 
 #### Public Methods
+
 * **`run(self: Any) -> base.Locals`**
+
   - **Purpose**: No description available.
+
   - **Inputs**:
+
     - `self` (`Any`)
+
   - **Outputs**: `base.Locals`
 
 ## Dependencies
 
 * `typing`
+
 * `mlflow`
+
 * `pandas`
+
 * `pydantic`
+
 * `regression_model_template.core.metrics`
+
 * `regression_model_template.core.schemas`
+
 * `regression_model_template.io.datasets`
+
 * `regression_model_template.io.registries`
+
 * `regression_model_template.io.services`
+
 * `regression_model_template.jobs.base`
+
 
 ## Used By
 

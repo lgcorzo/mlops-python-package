@@ -6,26 +6,32 @@ title: "Module: benchmark_blocking"
 source_path: "tests/performance/benchmark_blocking.py"
 description: "No description available."
 tags: ["module", "benchmark_blocking"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-16T06:27:37Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "034727a"
 ---
 # Module Specification: benchmark_blocking
 
 * **Source Reference:** [tests/performance/benchmark_blocking.py](../../../../tests/performance/benchmark_blocking.py)
 
 ## 1. Architectural Role & Responsibilities
+
 No description available.
 
 ### Detected Architecture Patterns
+
 Detected roles: General Subsystem
 
 ## 2. UML Diagrams
+
 ### Class Diagram
+
 _No classes found._
 
+
 ### Sequence Diagram
+
 ```plantuml
 sequenceDiagram
     sync_prediction->>print: invoke
@@ -33,20 +39,24 @@ sequenceDiagram
 ```
 
 ### Component Diagram
+
 ```plantuml
 component [benchmark_blocking] as Comp
 Comp --> [asyncio]
 Comp --> [time]
 ```
 
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
 
 ### `sync_prediction() -> Any`
+
 Simulates a CPU-bound synchronous prediction call.
 
 #### Inputs
+
 
 #### Outputs
 * `Any`
@@ -54,7 +64,9 @@ Simulates a CPU-bound synchronous prediction call.
 ## Dependencies
 
 * `asyncio`
+
 * `time`
+
 
 ## Used By
 

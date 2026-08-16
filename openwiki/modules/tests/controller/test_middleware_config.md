@@ -6,49 +6,56 @@ title: "Module: test_middleware_config"
 source_path: "tests/controller/test_middleware_config.py"
 description: "No description available."
 tags: ["module", "test_middleware_config"]
-timestamp: "2026-08-10T08:55:52Z"
+timestamp: "2026-08-16T06:27:37Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "8412d40"
+last_verified_commit: "034727a"
 ---
 # Module Specification: test_middleware_config
 
 * **Source Reference:** [tests/controller/test_middleware_config.py](../../../../tests/controller/test_middleware_config.py)
 
 ## 1. Architectural Role & Responsibilities
+
 No description available.
 
 ### Detected Architecture Patterns
+
 Detected roles: Controller
 
 ## 2. UML Diagrams
+
 ### Class Diagram
+
 _No classes found._
 
+
 ### Sequence Diagram
+
 ```plantuml
 sequenceDiagram
-    reset_module->>reload: invoke
-    reset_module->>get: invoke
     reset_module->>fixture: invoke
+    reset_module->>get: invoke
+    reset_module->>reload: invoke
     reset_module->>pop: invoke
     test_cors_default_config->>reload: invoke
+    test_cors_default_config->>next: invoke
     test_cors_default_config->>print: invoke
     test_cors_default_config->>get: invoke
-    test_cors_default_config->>next: invoke
     test_trusted_host_default_config->>reload: invoke
     test_trusted_host_default_config->>next: invoke
+    test_custom_cors_config->>setenv: invoke
     test_custom_cors_config->>reload: invoke
     test_custom_cors_config->>next: invoke
-    test_custom_cors_config->>setenv: invoke
     test_custom_cors_config->>set: invoke
+    test_custom_trusted_host_config->>setenv: invoke
     test_custom_trusted_host_config->>reload: invoke
     test_custom_trusted_host_config->>next: invoke
-    test_custom_trusted_host_config->>setenv: invoke
     test_custom_trusted_host_config->>set: invoke
 ```
 
 ### Component Diagram
+
 ```plantuml
 component [test_middleware_config] as Comp
 Comp --> [CORSMiddleware]
@@ -59,56 +66,71 @@ Comp --> [pytest]
 Comp --> [os]
 ```
 
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
 
 ### `reset_module() -> Any`
+
 Reset module and env vars after each test to prevent state leakage.
 
 #### Inputs
+
 
 #### Outputs
 * `Any`
 
 ### `test_middleware_presence() -> Any`
+
 Verify that CORSMiddleware and TrustedHostMiddleware are present.
 
 #### Inputs
+
 
 #### Outputs
 * `Any`
 
 ### `test_cors_default_config() -> Any`
+
 Verify default CORS configuration.
 
 #### Inputs
+
 
 #### Outputs
 * `Any`
 
 ### `test_trusted_host_default_config() -> Any`
+
 Verify default TrustedHost configuration.
 
 #### Inputs
+
 
 #### Outputs
 * `Any`
 
 ### `test_custom_cors_config(monkeypatch: Any) -> Any`
+
 Verify custom CORS configuration via environment variables.
 
 #### Inputs
+
 * `monkeypatch` (`Any`)
+
 
 #### Outputs
 * `Any`
 
 ### `test_custom_trusted_host_config(monkeypatch: Any) -> Any`
+
 Verify custom TrustedHost configuration via environment variables.
 
 #### Inputs
+
 * `monkeypatch` (`Any`)
+
 
 #### Outputs
 * `Any`
@@ -116,11 +138,17 @@ Verify custom TrustedHost configuration via environment variables.
 ## Dependencies
 
 * `fastapi.middleware.cors.CORSMiddleware`
+
 * `fastapi.middleware.trustedhost.TrustedHostMiddleware`
+
 * `regression_model_template.controller.kafka_app`
+
 * `importlib`
+
 * `pytest`
+
 * `os`
+
 
 ## Used By
 
