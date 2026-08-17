@@ -6,10 +6,10 @@ title: "Module: okf_validate"
 source_path: "skills/validate/scripts/okf_validate.py"
 description: "OKF v0.2 Conformance Checker for OpenWiki Documentation."
 tags: ["module", "okf_validate"]
-timestamp: "2026-08-16T06:27:37Z"
+timestamp: "2026-08-17T05:34:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "034727a"
+last_verified_commit: "73b4d7b"
 ---
 # Module Specification: okf_validate
 

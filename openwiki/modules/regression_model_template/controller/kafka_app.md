@@ -6,10 +6,10 @@ title: "Module: kafka_app"
 source_path: "src/regression_model_template/controller/kafka_app.py"
 description: "FastAPI and Kafka Service for Predictions with Logging."
 tags: ["module", "kafka_app"]
-timestamp: "2026-08-16T06:27:37Z"
+timestamp: "2026-08-17T05:34:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "034727a"
+last_verified_commit: "73b4d7b"
 ---
 # Module Specification: kafka_app
 

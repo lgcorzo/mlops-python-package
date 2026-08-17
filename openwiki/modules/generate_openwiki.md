@@ -6,10 +6,10 @@ title: "Module: generate_openwiki"
 source_path: "generate_openwiki.py"
 description: "No description available."
 tags: ["module", "generate_openwiki"]
-timestamp: "2026-08-16T06:27:37Z"
+timestamp: "2026-08-17T05:34:56Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "034727a"
+last_verified_commit: "73b4d7b"
 ---
 # Module Specification: generate_openwiki
 
@@ -87,19 +87,16 @@ sequenceDiagram
     generate_plantuml->>clean_plantuml_type: invoke
     generate_plantuml->>split: invoke
     build_registry->>parse_python_file: invoke
-    generate_package_diagram_content->>set: invoke
     generate_package_diagram_content->>keys: invoke
     generate_package_diagram_content->>sorted: invoke
     generate_package_diagram_content->>append: invoke
     generate_package_diagram_content->>join: invoke
     generate_package_diagram_content->>split: invoke
-    generate_package_diagram_content->>add: invoke
-    generate_call_graph->>set: invoke
     generate_call_graph->>items: invoke
     generate_call_graph->>sorted: invoke
     generate_call_graph->>append: invoke
     generate_call_graph->>join: invoke
-    generate_call_graph->>add: invoke
+    generate_call_graph->>keys: invoke
     generate_call_graph->>get: invoke
     generate_dependency_graph->>items: invoke
     generate_dependency_graph->>append: invoke
@@ -156,7 +153,6 @@ sequenceDiagram
     main->>update_index_files: invoke
     main->>delete_generated_docs: invoke
     main->>get_changed_files: invoke
-    main->>set: invoke
     main->>list: invoke
     main->>get: invoke
     main->>join: invoke
@@ -164,6 +160,7 @@ sequenceDiagram
     main->>endswith: invoke
     main->>replace: invoke
     main->>items: invoke
+    main->>keys: invoke
     main->>parse_python_file: invoke
     main->>startswith: invoke
     main->>dirname: invoke
@@ -174,7 +171,6 @@ sequenceDiagram
     main->>splitext: invoke
     main->>len: invoke
     main->>basename: invoke
-    main->>add: invoke
 ```
 
 ### Component Diagram
