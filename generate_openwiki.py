@@ -308,13 +308,13 @@ def build_registry(files_to_process):
 
 def generate_package_diagram_content():
     lines = ["```plantuml", 'package "src" {']
-    packages = set()
+    packages = {}
     for py_file in registry["modules"].keys():
         parts = py_file.split("/")[:-1]
         pkg = ".".join(parts)
         if pkg:
-            packages.add(pkg)
-    for pkg in sorted(packages):
+            packages[pkg] = None
+    for pkg in sorted(packages.keys()):
         lines.append(f'    package "{pkg}" {{}}')
     lines.append("}")
     lines.append("```")
@@ -325,28 +325,28 @@ def generate_call_graph():
     lines = ["```plantuml", "digraph CallGraph {"]
 
     # Build a list of all defined functions/methods across the project to map internal calls
-    defined_callables = set()
+    defined_callables = {}
     for mod_path, data in registry["modules"].items():
         for func in data["functions"]:
-            defined_callables.add(func["name"])
+            defined_callables[func["name"]] = None
         for cls in data["classes"]:
-            defined_callables.add(cls["name"])
+            defined_callables[cls["name"]] = None
             for m in cls["methods"]:
-                defined_callables.add(m["name"])
+                defined_callables[m["name"]] = None
 
-    edges = set()
+    edges = {}
     for mod_path, data in registry["modules"].items():
         for func in data["functions"]:
             for call in func.get("calls", []):
                 if call in defined_callables:
-                    edges.add(f'    "{func["name"]}()" -> "{call}()"')
+                    edges[f'    "{func["name"]}()" -> "{call}()"'] = None
         for cls in data["classes"]:
             for m in cls.get("methods", []):
                 for call in m.get("calls", []):
                     if call in defined_callables:
-                        edges.add(f'    "{cls["name"]}.{m["name"]}()" -> "{call}()"')
+                        edges[f'    "{cls["name"]}.{m["name"]}()" -> "{call}()"'] = None
 
-    for edge in sorted(edges):
+    for edge in sorted(edges.keys()):
         lines.append(edge)
 
     lines.append("}")
@@ -664,7 +664,7 @@ def main():
         files_to_process = all_files
     else:
         changed_files = get_changed_files()
-        impacted_files = set(changed_files)
+        impacted_files_dict = {f: None for f in changed_files}
 
         # In diff mode, we need to include files that depend on the changed files or are dependencies of them.
         for changed_file in changed_files:
@@ -673,14 +673,14 @@ def main():
 
             # Find files that import this changed file
             for other_py, other_data in registry["modules"].items():
-                if other_py in impacted_files:
+                if other_py in impacted_files_dict:
                     continue
                 for imp in other_data["imports"]:
                     if mod_path_dotted in imp or imp.startswith(mod_name):
-                        impacted_files.add(other_py)
+                        impacted_files_dict[other_py] = None
                         break
 
-        files_to_process = list(impacted_files)
+        files_to_process = list(impacted_files_dict.keys())
 
     print(f"Mode: {args.mode}")
     print(f"Files to process: {len(files_to_process)}")
