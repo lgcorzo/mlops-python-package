@@ -6,10 +6,10 @@ title: "Module: test_rate_limiter"
 source_path: "tests/controller/test_rate_limiter.py"
 description: "No description available."
 tags: ["module", "test_rate_limiter"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_rate_limiter
 
@@ -28,7 +28,6 @@ Detected roles: Controller
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -59,7 +58,6 @@ Comp --> [time]
 Comp --> [RateLimiter]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -70,7 +68,6 @@ No description available.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -79,7 +76,6 @@ No description available.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -90,7 +86,6 @@ No description available.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -99,7 +94,6 @@ No description available.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -110,7 +104,6 @@ No description available.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -119,7 +112,6 @@ No description available.
 * `time`
 
 * `regression_model_template.controller.kafka_app.RateLimiter`
-
 
 ## Used By
 

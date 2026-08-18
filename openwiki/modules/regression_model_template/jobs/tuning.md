@@ -6,10 +6,10 @@ title: "Module: tuning"
 source_path: "src/regression_model_template/jobs/tuning.py"
 description: "Define a job for finding the best hyperparameters for a model."
 tags: ["module", "tuning"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: tuning
 
@@ -43,7 +43,6 @@ classDiagram
     }
     Job <|-- TuningJob : Generalization
 ```
-
 
 ### Sequence Diagram
 
@@ -80,11 +79,9 @@ Comp --> [searchers]
 Comp --> [splitters]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `TuningJob`
-
 
 Find the best hyperparameters for a model.
 
@@ -150,7 +147,6 @@ Parameters:
 * `regression_model_template.utils.searchers`
 
 * `regression_model_template.utils.splitters`
-
 
 ## Used By
 

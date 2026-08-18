@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_dos"
 source_path: "tests/controller/test_kafka_app_dos.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_dos"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_kafka_app_dos
 
@@ -28,7 +28,6 @@ Detected roles: Controller
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -64,7 +63,6 @@ Comp --> [MAX_INPUT_COLS]
 Comp --> [PredictionRequest]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -75,7 +73,6 @@ Test that PredictionRequest enforces max rows limit.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -84,7 +81,6 @@ Test that PredictionRequest enforces max rows limit.
 Test that PredictionRequest enforces max cols limit.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -95,7 +91,6 @@ Test that PredictionRequest accepts valid rows.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -105,7 +100,6 @@ Test that PredictionRequest rejects empty input.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -114,7 +108,6 @@ Test that PredictionRequest rejects empty input.
 Test that PredictionRequest rejects inconsistent column lengths.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -130,7 +123,6 @@ Test that PredictionRequest rejects inconsistent column lengths.
 * `regression_model_template.controller.kafka_app.MAX_INPUT_COLS`
 
 * `regression_model_template.controller.kafka_app.PredictionRequest`
-
 
 ## Used By
 

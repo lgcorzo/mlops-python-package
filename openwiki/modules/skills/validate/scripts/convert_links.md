@@ -6,10 +6,10 @@ title: "Module: convert_links"
 source_path: "skills/validate/scripts/convert_links.py"
 description: "No description available."
 tags: ["module", "convert_links"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: convert_links
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -83,7 +82,6 @@ Comp --> [re]
 Comp --> [glob]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -95,7 +93,6 @@ No description available.
 #### Inputs
 
 * `name` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -112,7 +109,6 @@ No description available.
 
 * `wiki_root` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -126,7 +122,6 @@ No description available.
 
 * `wiki_root` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -135,7 +130,6 @@ No description available.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -147,7 +141,6 @@ No description available.
 * `re`
 
 * `glob`
-
 
 ## Used By
 

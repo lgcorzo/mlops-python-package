@@ -31,6 +31,7 @@ try:
         return result if isinstance(result, dict) else {}
 
 except ImportError:
+
     def _parse_yaml(text: str) -> dict[str, Any]:
         """Minimal YAML-like parser for key: value frontmatter."""
         data: dict[str, Any] = {}
@@ -43,8 +44,7 @@ except ImportError:
                 key = key.strip()
                 value = value.strip().strip('"').strip("'")
                 if value.startswith("[") and value.endswith("]"):
-                    value = [v.strip().strip('"').strip("'")
-                             for v in value[1:-1].split(",")]
+                    value = [v.strip().strip('"').strip("'") for v in value[1:-1].split(",")]
                 data[key] = value
         return data
 
@@ -57,18 +57,26 @@ REQUIRED_FIELDS = {"type", "title", "description", "tags", "timestamp"}
 STRICT_FIELDS = {"iso_doc_type", "iso_viewpoint"}
 PROVENANCE_FIELDS = {"generated", "verified", "last_verified_commit"}
 
-ABSOLUTE_PATH_PATTERN = re.compile(
-    r"(?:/home/|/mnt/|/tmp/|/usr/|/var/|/opt/|C:\\|D:\\|E:\\)", re.IGNORECASE
-)
+ABSOLUTE_PATH_PATTERN = re.compile(r"(?:/home/|/mnt/|/tmp/|/usr/|/var/|/opt/|C:\\|D:\\|E:\\)", re.IGNORECASE)
 
 VALID_ISO_DOC_TYPES = {
-    "Description", "Specification", "Plan", "Policy",
-    "Procedure", "Report", "Request",
+    "Description",
+    "Specification",
+    "Plan",
+    "Policy",
+    "Procedure",
+    "Report",
+    "Request",
 }
 
 VALID_ISO_VIEWPOINTS = {
-    "ArchitectureDescription", "ContextView", "ComponentView",
-    "SequenceView", "DeploymentView", "SecurityView", "QualityView",
+    "ArchitectureDescription",
+    "ContextView",
+    "ComponentView",
+    "SequenceView",
+    "DeploymentView",
+    "SecurityView",
+    "QualityView",
     "ArchitectureDecision",
 }
 
@@ -85,9 +93,7 @@ def extract_frontmatter(content: str) -> tuple[dict[str, Any], str]:
     return fm, body
 
 
-def check_frontmatter_fields(
-    fm: dict[str, Any], filepath: str, strict: bool
-) -> list[str]:
+def check_frontmatter_fields(fm: dict[str, Any], filepath: str, strict: bool) -> list[str]:
     """Validate required and optional frontmatter fields."""
     errors: list[str] = []
     for field in REQUIRED_FIELDS:
@@ -97,14 +103,10 @@ def check_frontmatter_fields(
     if strict:
         for field in STRICT_FIELDS:
             if field not in fm:
-                errors.append(
-                    f"{filepath}: [STRICT] Missing ISO field '{field}'"
-                )
+                errors.append(f"{filepath}: [STRICT] Missing ISO field '{field}'")
         for field in PROVENANCE_FIELDS:
             if field not in fm:
-                errors.append(
-                    f"{filepath}: [STRICT] Missing provenance field '{field}'"
-                )
+                errors.append(f"{filepath}: [STRICT] Missing provenance field '{field}'")
 
         # Validate iso_doc_type value
         iso_doc_type = fm.get("iso_doc_type", "")
@@ -130,10 +132,7 @@ def check_absolute_paths(body: str, filepath: str) -> list[str]:
     errors: list[str] = []
     for i, line in enumerate(body.splitlines(), start=1):
         if ABSOLUTE_PATH_PATTERN.search(line):
-            errors.append(
-                f"{filepath}:L{i}: Absolute path detected — "
-                f"use relative paths only"
-            )
+            errors.append(f"{filepath}:L{i}: Absolute path detected — use relative paths only")
     return errors
 
 
@@ -160,21 +159,15 @@ def check_mermaid_syntax(body: str, filepath: str) -> list[str]:
         if in_mermaid and stripped == "```":
             if open_braces != 0:
                 errors.append(
-                    f"{filepath}:L{mermaid_start_line}: "
-                    f"Mermaid block has unbalanced braces "
-                    f"({{}}): {open_braces}"
+                    f"{filepath}:L{mermaid_start_line}: Mermaid block has unbalanced braces ({{}}): {open_braces}"
                 )
             if open_brackets != 0:
                 errors.append(
-                    f"{filepath}:L{mermaid_start_line}: "
-                    f"Mermaid block has unbalanced brackets "
-                    f"([]): {open_brackets}"
+                    f"{filepath}:L{mermaid_start_line}: Mermaid block has unbalanced brackets ([]): {open_brackets}"
                 )
             if open_parens != 0:
                 errors.append(
-                    f"{filepath}:L{mermaid_start_line}: "
-                    f"Mermaid block has unbalanced parentheses "
-                    f"(()): {open_parens}"
+                    f"{filepath}:L{mermaid_start_line}: Mermaid block has unbalanced parentheses (()): {open_parens}"
                 )
             in_mermaid = False
             continue
@@ -189,10 +182,7 @@ def check_mermaid_syntax(body: str, filepath: str) -> list[str]:
             open_parens += stripped.count("(") - stripped.count(")")
 
     if in_mermaid:
-        errors.append(
-            f"{filepath}:L{mermaid_start_line}: "
-            f"Unterminated Mermaid code block"
-        )
+        errors.append(f"{filepath}:L{mermaid_start_line}: Unterminated Mermaid code block")
 
     return errors
 
@@ -201,11 +191,10 @@ def check_mermaid_syntax(body: str, filepath: str) -> list[str]:
 # Main
 # ---------------------------------------------------------------------------
 
+
 def validate_wiki(wiki_path: str, strict: bool = False) -> int:
     """Validate all .md files under wiki_path. Returns error count."""
-    md_files = sorted(glob.glob(
-        os.path.join(wiki_path, "**", "*.md"), recursive=True
-    ))
+    md_files = sorted(glob.glob(os.path.join(wiki_path, "**", "*.md"), recursive=True))
 
     if not md_files:
         print(f"WARNING: No .md files found under {wiki_path}")
@@ -234,13 +223,9 @@ def validate_wiki(wiki_path: str, strict: bool = False) -> int:
         fm, body = extract_frontmatter(content)
 
         if not fm:
-            file_errors.append(
-                f"{rel_path}: Missing or invalid YAML frontmatter"
-            )
+            file_errors.append(f"{rel_path}: Missing or invalid YAML frontmatter")
         else:
-            file_errors.extend(
-                check_frontmatter_fields(fm, rel_path, strict)
-            )
+            file_errors.extend(check_frontmatter_fields(fm, rel_path, strict))
 
         file_errors.extend(check_absolute_paths(body, rel_path))
 
@@ -276,18 +261,10 @@ def validate_wiki(wiki_path: str, strict: bool = False) -> int:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="OKF v0.2 Conformance Checker for OpenWiki"
-    )
+    parser = argparse.ArgumentParser(description="OKF v0.2 Conformance Checker for OpenWiki")
+    parser.add_argument("wiki_path", help="Path to the OpenWiki directory to validate")
     parser.add_argument(
-        "wiki_path",
-        help="Path to the OpenWiki directory to validate"
-    )
-    parser.add_argument(
-        "--strict",
-        action="store_true",
-        help="Enable strict mode: validate ISO fields, provenance, "
-             "and Mermaid syntax"
+        "--strict", action="store_true", help="Enable strict mode: validate ISO fields, provenance, and Mermaid syntax"
     )
     args = parser.parse_args()
 

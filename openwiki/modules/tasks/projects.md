@@ -6,10 +6,10 @@ title: "Module: projects"
 source_path: "tasks/projects.py"
 description: "Project tasks for pyinvoke."
 tags: ["module", "projects"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: projects
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -59,7 +58,6 @@ Comp --> [call]
 Comp --> [task]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -72,7 +70,6 @@ Export the project requirements file.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -83,7 +80,6 @@ Export the project environment file.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -98,7 +94,6 @@ Run an mlflow project from the MLproject file.
 
 * `job` (`str`)
 
-
 #### Outputs
 * `None`
 
@@ -109,7 +104,6 @@ Run all project tasks.
 #### Inputs
 
 * `_` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -123,7 +117,6 @@ Run all project tasks.
 * `invoke.tasks.call`
 
 * `invoke.tasks.task`
-
 
 ## Used By
 

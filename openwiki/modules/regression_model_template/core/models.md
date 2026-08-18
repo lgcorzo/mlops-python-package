@@ -6,10 +6,10 @@ title: "Module: models"
 source_path: "src/regression_model_template/core/models.py"
 description: "Define trainable machine learning models."
 tags: ["module", "models"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: models
 
@@ -59,7 +59,6 @@ classDiagram
     }
     Model <|-- BaselineSklearnModel : Generalization
 ```
-
 
 ### Sequence Diagram
 
@@ -111,11 +110,9 @@ Comp --> [preprocessing]
 Comp --> [schemas]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Model`
-
 
 Base class for a project model.
 
@@ -217,7 +214,6 @@ e.g., to swap easily one model with another.
   - **Purpose**: Get the model tags for scikit-learn.
 
 ### `BaselineSklearnModel`
-
 
 Simple baseline model based on scikit-learn.
 
@@ -321,7 +317,6 @@ Parameters:
 * `sklearn.preprocessing`
 
 * `regression_model_template.core.schemas`
-
 
 ## Used By
 

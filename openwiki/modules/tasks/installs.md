@@ -6,10 +6,10 @@ title: "Module: installs"
 source_path: "tasks/installs.py"
 description: "Install tasks for pyinvoke."
 tags: ["module", "installs"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: installs
 
@@ -29,7 +29,6 @@ Detected roles: General Subsystem
 
 _No classes found._
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -47,7 +46,6 @@ Comp --> [Context]
 Comp --> [task]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -60,7 +58,6 @@ Install poetry packages.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -71,7 +68,6 @@ Install pre-commit hooks on git.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -84,7 +80,6 @@ Run all install tasks.
 
 * `_` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -93,7 +88,6 @@ Run all install tasks.
 * `invoke.context.Context`
 
 * `invoke.tasks.task`
-
 
 ## Used By
 

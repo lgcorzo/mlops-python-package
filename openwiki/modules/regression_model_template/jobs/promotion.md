@@ -6,10 +6,10 @@ title: "Module: promotion"
 source_path: "src/regression_model_template/jobs/promotion.py"
 description: "Define a job for promoting a registered model version with an alias."
 tags: ["module", "promotion"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: promotion
 
@@ -39,7 +39,6 @@ classDiagram
     Job <|-- PromotionJob : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -64,11 +63,9 @@ Comp --> [typing]
 Comp --> [base]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `PromotionJob`
-
 
 Define a job for promoting a registered model version with an alias.
 
@@ -103,7 +100,6 @@ Parameters:
 * `typing`
 
 * `regression_model_template.jobs.base`
-
 
 ## Used By
 

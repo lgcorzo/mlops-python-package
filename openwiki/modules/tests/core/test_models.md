@@ -6,10 +6,10 @@ title: "Module: test_models"
 source_path: "tests/core/test_models.py"
 description: "No description available."
 tags: ["module", "test_models"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_models
 
@@ -28,7 +28,6 @@ Detected roles: Entity / Domain Model
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -67,7 +66,6 @@ Comp --> [models]
 Comp --> [schemas]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -80,7 +78,6 @@ No description available.
 
 * `inputs_samples` (`schemas.Inputs`)
 
-
 #### Outputs
 * `None`
 
@@ -91,7 +88,6 @@ No description available.
 #### Inputs
 
 * `train_test_sets` (`tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]`)
-
 
 #### Outputs
 * `None`
@@ -105,7 +101,6 @@ No description available.
 * `regression_model_template.core.models`
 
 * `regression_model_template.core.schemas`
-
 
 ## Used By
 

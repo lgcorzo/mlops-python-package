@@ -6,10 +6,10 @@ title: "Module: checks"
 source_path: "tasks/checks.py"
 description: "Check tasks for pyinvoke."
 tags: ["module", "checks"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: checks
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -52,7 +51,6 @@ Comp --> [Context]
 Comp --> [task]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -65,7 +63,6 @@ Check poetry config files.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -76,7 +73,6 @@ Check the formats with ruff.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -89,7 +85,6 @@ Check the types with mypy.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -100,7 +95,6 @@ Check the codes with ruff.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -113,7 +107,6 @@ Check the tests with pytest.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -124,7 +117,6 @@ Check the security with bandit.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -137,7 +129,6 @@ Check the coverage with coverage.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -149,7 +140,6 @@ Run all check tasks.
 
 * `_` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -158,7 +148,6 @@ Run all check tasks.
 * `invoke.context.Context`
 
 * `invoke.tasks.task`
-
 
 ## Used By
 

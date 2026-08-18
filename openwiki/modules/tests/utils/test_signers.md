@@ -6,10 +6,10 @@ title: "Module: test_signers"
 source_path: "tests/utils/test_signers.py"
 description: "No description available."
 tags: ["module", "test_signers"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_signers
 
@@ -29,7 +29,6 @@ Detected roles: General Subsystem
 
 _No classes found._
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -48,7 +47,6 @@ Comp --> [schemas]
 Comp --> [signers]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -63,7 +61,6 @@ No description available.
 
 * `outputs` (`schemas.Outputs`)
 
-
 #### Outputs
 * `None`
 
@@ -72,7 +69,6 @@ No description available.
 * `regression_model_template.core.schemas`
 
 * `regression_model_template.utils.signers`
-
 
 ## Used By
 

@@ -5,10 +5,10 @@ type: "summary"
 title: "Summary"
 description: "Auto-generated summary."
 tags: ["summary"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Summary
 
@@ -75,7 +75,7 @@ last_verified_commit: "73b4d7b"
 ## Public API index
 
 * [alerts_service](modules/../tests/conftest.md#alerts_service)
-* [all](modules/../tasks/installs.md#all)
+* [all](modules/../tasks/projects.md#all)
 * [api](modules/../tasks/docs.md#api)
 * [build](modules/../tasks/packages.md#build)
 * [build_registry](modules/../generate_openwiki.md#build_registry)
@@ -125,7 +125,7 @@ last_verified_commit: "73b4d7b"
 * [loader](modules/../tests/conftest.md#loader)
 * [logger_caplog](modules/../tests/conftest.md#logger_caplog)
 * [logger_service](modules/../tests/conftest.md#logger_service)
-* [main](modules/../skills/validate/scripts/okf_validate.md#main)
+* [main](modules/regression_model_template/scripts.md#main)
 * [merge_configs](modules/regression_model_template/io/configs.md#merge_configs)
 * [metric](modules/../tests/conftest.md#metric)
 * [mlflow_service](modules/../tests/conftest.md#mlflow_service)
@@ -162,7 +162,7 @@ last_verified_commit: "73b4d7b"
 * [serve](modules/../tasks/mlflow.md#serve)
 * [signature](modules/../tests/conftest.md#signature)
 * [signer](modules/../tests/conftest.md#signer)
-* [sources](modules/../tasks/cleans.md#sources)
+* [sources](modules/../tasks/formats.md#sources)
 * [sync_prediction](modules/../tests/performance/benchmark_blocking.md#sync_prediction)
 * [targets](modules/../tests/conftest.md#targets)
 * [targets_path](modules/../tests/conftest.md#targets_path)

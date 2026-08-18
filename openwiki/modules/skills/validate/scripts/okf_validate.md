@@ -6,10 +6,10 @@ title: "Module: okf_validate"
 source_path: "skills/validate/scripts/okf_validate.py"
 description: "OKF v0.2 Conformance Checker for OpenWiki Documentation."
 tags: ["module", "okf_validate"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: okf_validate
 
@@ -39,7 +39,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -100,7 +99,6 @@ Comp --> [sys]
 Comp --> [Any]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -112,7 +110,6 @@ Split YAML frontmatter from Markdown body.
 #### Inputs
 
 * `content` (`str`)
-
 
 #### Outputs
 * `tuple[(dict[(str, Any)], str)]`
@@ -129,7 +126,6 @@ Validate required and optional frontmatter fields.
 
 * `strict` (`bool`)
 
-
 #### Outputs
 * `list[str]`
 
@@ -142,7 +138,6 @@ Detect absolute file paths in the document body.
 * `body` (`str`)
 
 * `filepath` (`str`)
-
 
 #### Outputs
 * `list[str]`
@@ -157,7 +152,6 @@ Basic structural validation of Mermaid code blocks.
 
 * `filepath` (`str`)
 
-
 #### Outputs
 * `list[str]`
 
@@ -171,7 +165,6 @@ Validate all .md files under wiki_path. Returns error count.
 
 * `strict` (`bool`)
 
-
 #### Outputs
 * `int`
 
@@ -180,7 +173,6 @@ Validate all .md files under wiki_path. Returns error count.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `None`
@@ -198,7 +190,6 @@ No description available.
 * `sys`
 
 * `typing.Any`
-
 
 ## Used By
 

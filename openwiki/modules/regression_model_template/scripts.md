@@ -6,10 +6,10 @@ title: "Module: scripts"
 source_path: "src/regression_model_template/scripts.py"
 description: "Scripts for the CLI application."
 tags: ["module", "scripts"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: scripts
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -59,7 +58,6 @@ Comp --> [settings]
 Comp --> [configs]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -71,7 +69,6 @@ Main script for the application.
 #### Inputs
 
 * `argv` (`list[str] | None`)
-
 
 #### Outputs
 * `int`
@@ -89,7 +86,6 @@ Main script for the application.
 * `regression_model_template.settings`
 
 * `regression_model_template.io.configs`
-
 
 ## Used By
 

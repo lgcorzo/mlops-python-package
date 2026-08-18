@@ -5,10 +5,10 @@ type: "index"
 title: "Index"
 description: "Auto-generated index."
 tags: ["index"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Index
 

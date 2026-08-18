@@ -6,10 +6,10 @@ title: "Module: training"
 source_path: "src/regression_model_template/jobs/training.py"
 description: "Define a job for training and registring a single AI/ML model."
 tags: ["module", "training"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: training
 
@@ -45,7 +45,6 @@ classDiagram
     }
     Job <|-- TrainingJob : Generalization
 ```
-
 
 ### Sequence Diagram
 
@@ -101,11 +100,9 @@ Comp --> [signers]
 Comp --> [splitters]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `TrainingJob`
-
 
 Train and register a single AI/ML model.
 
@@ -183,7 +180,6 @@ Parameters:
 * `regression_model_template.utils.signers`
 
 * `regression_model_template.utils.splitters`
-
 
 ## Used By
 

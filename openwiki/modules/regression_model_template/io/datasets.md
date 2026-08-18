@@ -6,10 +6,10 @@ title: "Module: datasets"
 source_path: "src/regression_model_template/io/datasets.py"
 description: "Read/Write datasets from/to external sources/destinations."
 tags: ["module", "datasets"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: datasets
 
@@ -59,7 +59,6 @@ classDiagram
     Writer <|-- ParquetWriter : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -81,11 +80,9 @@ Comp --> [pandas]
 Comp --> [pydantic]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Reader`
-
 
 Base class for a dataset reader.
 
@@ -133,7 +130,6 @@ Parameters:
 
 ### `ParquetReader`
 
-
 Read a dataframe from a parquet file.
 
 Parameters:
@@ -177,7 +173,6 @@ Parameters:
 
 ### `Writer`
 
-
 Base class for a dataset writer.
 
 Use a writer to save a dataset from memory.
@@ -202,7 +197,6 @@ e.g., to write file, database, cloud storage, ...
   - **Outputs**: `None`
 
 ### `ParquetWriter`
-
 
 Writer a dataframe to a parquet file.
 
@@ -240,7 +234,6 @@ Parameters:
 * `pandas`
 
 * `pydantic`
-
 
 ## Used By
 

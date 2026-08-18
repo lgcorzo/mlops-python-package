@@ -6,10 +6,10 @@ title: "Module: conftest"
 source_path: "tests/conftest.py"
 description: "Configuration for the tests."
 tags: ["module", "conftest"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: conftest
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -163,7 +162,6 @@ Comp --> [signers]
 Comp --> [splitters]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -173,7 +171,6 @@ Comp --> [splitters]
 Return the path of the tests folder.
 
 #### Inputs
-
 
 #### Outputs
 * `str`
@@ -186,7 +183,6 @@ Return the path of the data folder.
 
 * `tests_path` (`str`)
 
-
 #### Outputs
 * `str`
 
@@ -197,7 +193,6 @@ Return the path of the confs folder.
 #### Inputs
 
 * `tests_path` (`str`)
-
 
 #### Outputs
 * `str`
@@ -210,7 +205,6 @@ Return the path of the inputs dataset.
 
 * `data_path` (`str`)
 
-
 #### Outputs
 * `str`
 
@@ -221,7 +215,6 @@ Return the path of the targets dataset.
 #### Inputs
 
 * `data_path` (`str`)
-
 
 #### Outputs
 * `str`
@@ -234,7 +227,6 @@ Return the path of the outputs dataset.
 
 * `data_path` (`str`)
 
-
 #### Outputs
 * `str`
 
@@ -245,7 +237,6 @@ Return a tmp path for the outputs dataset.
 #### Inputs
 
 * `tmp_path` (`str`)
-
 
 #### Outputs
 * `str`
@@ -258,7 +249,6 @@ Return a tmp path for the model explanations dataset.
 
 * `tmp_path` (`str`)
 
-
 #### Outputs
 * `str`
 
@@ -270,7 +260,6 @@ Return a tmp path for the samples explanations dataset.
 
 * `tmp_path` (`str`)
 
-
 #### Outputs
 * `str`
 
@@ -279,7 +268,6 @@ Return a tmp path for the samples explanations dataset.
 Extra config for scripts.
 
 #### Inputs
-
 
 #### Outputs
 * `str`
@@ -292,7 +280,6 @@ Return a reader for the inputs dataset.
 
 * `inputs_path` (`str`)
 
-
 #### Outputs
 * `datasets.ParquetReader`
 
@@ -304,7 +291,6 @@ Return a reader for the inputs samples dataset.
 
 * `inputs_path` (`str`)
 
-
 #### Outputs
 * `datasets.ParquetReader`
 
@@ -315,7 +301,6 @@ Return a reader for the targets dataset.
 #### Inputs
 
 * `targets_path` (`str`)
-
 
 #### Outputs
 * `datasets.ParquetReader`
@@ -332,7 +317,6 @@ Return a reader for the outputs dataset.
 
 * `targets_reader` (`datasets.ParquetReader`)
 
-
 #### Outputs
 * `datasets.ParquetReader`
 
@@ -343,7 +327,6 @@ Return a writer for the tmp outputs dataset.
 #### Inputs
 
 * `tmp_outputs_path` (`str`)
-
 
 #### Outputs
 * `datasets.ParquetWriter`
@@ -356,7 +339,6 @@ Return a writer for the tmp model explanations dataset.
 
 * `tmp_models_explanations_path` (`str`)
 
-
 #### Outputs
 * `datasets.ParquetWriter`
 
@@ -367,7 +349,6 @@ Return a writer for the tmp samples explanations dataset.
 #### Inputs
 
 * `tmp_samples_explanations_path` (`str`)
-
 
 #### Outputs
 * `datasets.ParquetWriter`
@@ -380,7 +361,6 @@ Return the inputs data.
 
 * `inputs_reader` (`datasets.ParquetReader`)
 
-
 #### Outputs
 * `schemas.Inputs`
 
@@ -391,7 +371,6 @@ Return the inputs samples data.
 #### Inputs
 
 * `inputs_samples_reader` (`datasets.ParquetReader`)
-
 
 #### Outputs
 * `schemas.Inputs`
@@ -404,7 +383,6 @@ Return the targets data.
 
 * `targets_reader` (`datasets.ParquetReader`)
 
-
 #### Outputs
 * `schemas.Targets`
 
@@ -416,7 +394,6 @@ Return the outputs data.
 
 * `outputs_reader` (`datasets.ParquetReader`)
 
-
 #### Outputs
 * `schemas.Outputs`
 
@@ -425,7 +402,6 @@ Return the outputs data.
 Return the default train test splitter.
 
 #### Inputs
-
 
 #### Outputs
 * `splitters.TrainTestSplitter`
@@ -436,7 +412,6 @@ Return the default time series splitter.
 
 #### Inputs
 
-
 #### Outputs
 * `splitters.TimeSeriesSplitter`
 
@@ -445,7 +420,6 @@ Return the default time series splitter.
 Return the default searcher object.
 
 #### Inputs
-
 
 #### Outputs
 * `searchers.Searcher`
@@ -462,7 +436,6 @@ Return the inputs and targets train and test sets from the splitter.
 
 * `targets` (`schemas.Targets`)
 
-
 #### Outputs
 * `tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]`
 
@@ -474,7 +447,6 @@ Return a train model for testing.
 
 * `train_test_sets` (`tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]`)
 
-
 #### Outputs
 * `models.BaselineSklearnModel`
 
@@ -483,7 +455,6 @@ Return a train model for testing.
 Return the default metric.
 
 #### Inputs
-
 
 #### Outputs
 * `metrics.SklearnMetric`
@@ -494,7 +465,6 @@ Return a model signer.
 
 #### Inputs
 
-
 #### Outputs
 * `signers.Signer`
 
@@ -503,7 +473,6 @@ Return a model signer.
 Return and start the logger service.
 
 #### Inputs
-
 
 #### Outputs
 * `T.Generator[(services.LoggerService, None, None)]`
@@ -518,7 +487,6 @@ Extend pytest caplog fixture with the logger service (loguru).
 
 * `logger_service` (`services.LoggerService`)
 
-
 #### Outputs
 * `T.Generator[(pl.LogCaptureFixture, None, None)]`
 
@@ -527,7 +495,6 @@ Extend pytest caplog fixture with the logger service (loguru).
 Return and start the alerter service.
 
 #### Inputs
-
 
 #### Outputs
 * `T.Generator[(services.AlertsService, None, None)]`
@@ -540,7 +507,6 @@ Return and start the mlflow service.
 
 * `tmp_path` (`str`)
 
-
 #### Outputs
 * `T.Generator[(services.MlflowService, None, None)]`
 
@@ -552,7 +518,6 @@ Register the tests path resolver with OmegaConf.
 
 * `tests_path` (`str`)
 
-
 #### Outputs
 * `str`
 
@@ -563,7 +528,6 @@ Register the tmp path resolver with OmegaConf.
 #### Inputs
 
 * `tmp_path` (`str`)
-
 
 #### Outputs
 * `str`
@@ -580,7 +544,6 @@ Return the signature for the testing model.
 
 * `outputs` (`schemas.Outputs`)
 
-
 #### Outputs
 * `signers.Signature`
 
@@ -589,7 +552,6 @@ Return the signature for the testing model.
 Return the default model saver.
 
 #### Inputs
-
 
 #### Outputs
 * `registries.CustomSaver`
@@ -600,7 +562,6 @@ Return the default model loader.
 
 #### Inputs
 
-
 #### Outputs
 * `registries.CustomLoader`
 
@@ -609,7 +570,6 @@ Return the default model loader.
 Return the default model register.
 
 #### Inputs
-
 
 #### Outputs
 * `registries.MlflowRegister`
@@ -632,7 +592,6 @@ Save and register the default model version.
 
 * `mlflow_service` (`services.MlflowService`)
 
-
 #### Outputs
 * `registries.Version`
 
@@ -645,7 +604,6 @@ Promote the default model version with an alias.
 * `model_version` (`registries.Version`)
 
 * `mlflow_service` (`services.MlflowService`)
-
 
 #### Outputs
 * `registries.Alias`
@@ -679,7 +637,6 @@ Promote the default model version with an alias.
 * `regression_model_template.utils.signers`
 
 * `regression_model_template.utils.splitters`
-
 
 ## Used By
 

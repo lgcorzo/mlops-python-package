@@ -6,10 +6,10 @@ title: "Module: cleans"
 source_path: "tasks/cleans.py"
 description: "Clean tasks for pyinvoke."
 tags: ["module", "cleans"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: cleans
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -64,7 +63,6 @@ Comp --> [Context]
 Comp --> [task]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -77,7 +75,6 @@ Clean the mypy tool.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -88,7 +85,6 @@ Clean the ruff tool.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -101,7 +97,6 @@ Clean the pytest tool.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -112,7 +107,6 @@ Clean the coverage tool.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -125,7 +119,6 @@ Clean the dist folder.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -136,7 +129,6 @@ Clean the docs folder.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -149,7 +141,6 @@ Clean the cache folder.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -160,7 +151,6 @@ Clean the mlruns folder.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -173,7 +163,6 @@ Clean the outputs folder.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -184,7 +173,6 @@ Clean the venv folder.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -197,7 +185,6 @@ Clean poetry lock file.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -208,7 +195,6 @@ Clean python caches and bytecodes.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -221,7 +207,6 @@ Clean the project requirements file.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -232,7 +217,6 @@ Clean the project environment file.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -245,7 +229,6 @@ Run all tools tasks.
 
 * `_` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -256,7 +239,6 @@ Run all folders tasks.
 #### Inputs
 
 * `_` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -269,7 +251,6 @@ Run all sources tasks.
 
 * `_` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -280,7 +261,6 @@ Run all projects tasks.
 #### Inputs
 
 * `_` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -293,7 +273,6 @@ Run all tools and folders tasks.
 
 * `_` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -305,7 +284,6 @@ Run all tools, folders, sources, and projects tasks.
 
 * `_` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -314,7 +292,6 @@ Run all tools, folders, sources, and projects tasks.
 * `invoke.context.Context`
 
 * `invoke.tasks.task`
-
 
 ## Used By
 

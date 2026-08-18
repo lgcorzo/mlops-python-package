@@ -6,10 +6,10 @@ title: "Module: __main__"
 source_path: "src/regression_model_template/__main__.py"
 description: "Entry point of the package."
 tags: ["module", "__main__"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: __main__
 
@@ -29,7 +29,6 @@ Detected roles: General Subsystem
 
 _No classes found._
 
-
 ### Sequence Diagram
 
 _No sequences found._
@@ -41,13 +40,11 @@ component [__main__] as Comp
 Comp --> [scripts]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Dependencies
 
 * `regression_model_template.scripts`
-
 
 ## Used By
 

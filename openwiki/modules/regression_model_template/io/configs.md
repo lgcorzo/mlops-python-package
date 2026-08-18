@@ -6,10 +6,10 @@ title: "Module: configs"
 source_path: "src/regression_model_template/io/configs.py"
 description: "Parse, merge, and convert config objects."
 tags: ["module", "configs"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: configs
 
@@ -29,7 +29,6 @@ Detected roles: General Subsystem
 
 _No classes found._
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -47,7 +46,6 @@ component [configs] as Comp
 Comp --> [typing]
 Comp --> [omegaconf]
 ```
-
 
 ## 3. Class & Method Specifications
 
@@ -67,7 +65,6 @@ Returns:
 
 * `path` (`str`)
 
-
 #### Outputs
 * `Config`
 
@@ -85,7 +82,6 @@ Returns:
 
 * `string` (`str`)
 
-
 #### Outputs
 * `Config`
 
@@ -102,7 +98,6 @@ Returns:
 #### Inputs
 
 * `configs` (`T.Sequence[Config]`)
-
 
 #### Outputs
 * `Config`
@@ -124,7 +119,6 @@ Returns:
 
 * `resolve` (`bool`)
 
-
 #### Outputs
 * `object`
 
@@ -133,7 +127,6 @@ Returns:
 * `typing`
 
 * `omegaconf`
-
 
 ## Used By
 

@@ -6,10 +6,10 @@ title: "Module: benchmark_blocking"
 source_path: "tests/performance/benchmark_blocking.py"
 description: "No description available."
 tags: ["module", "benchmark_blocking"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: benchmark_blocking
 
@@ -29,7 +29,6 @@ Detected roles: General Subsystem
 
 _No classes found._
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -46,7 +45,6 @@ Comp --> [asyncio]
 Comp --> [time]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -57,7 +55,6 @@ Simulates a CPU-bound synchronous prediction call.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -66,7 +63,6 @@ Simulates a CPU-bound synchronous prediction call.
 * `asyncio`
 
 * `time`
-
 
 ## Used By
 

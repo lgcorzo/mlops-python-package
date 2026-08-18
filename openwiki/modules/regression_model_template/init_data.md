@@ -6,10 +6,10 @@ title: "Module: init_data"
 source_path: "src/regression_model_template/init_data.py"
 description: "Script to initialize synthetic train and test parquet datasets."
 tags: ["module", "init_data"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: init_data
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -66,7 +65,6 @@ Comp --> [InputsSchema]
 Comp --> [TargetsSchema]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -79,7 +77,6 @@ Generate synthetic regression data and validate schemas.
 
 * `output_dir` (`str`)
 
-
 #### Outputs
 * `None`
 
@@ -88,7 +85,6 @@ Generate synthetic regression data and validate schemas.
 CLI entry point for data initialization.
 
 #### Inputs
-
 
 #### Outputs
 * `None`
@@ -106,7 +102,6 @@ CLI entry point for data initialization.
 * `regression_model_template.core.schemas.InputsSchema`
 
 * `regression_model_template.core.schemas.TargetsSchema`
-
 
 ## Used By
 

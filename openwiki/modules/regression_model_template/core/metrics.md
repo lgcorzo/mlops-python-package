@@ -6,10 +6,10 @@ title: "Module: metrics"
 source_path: "src/regression_model_template/core/metrics.py"
 description: "Evaluate model performances with metrics."
 tags: ["module", "metrics"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: metrics
 
@@ -56,7 +56,6 @@ classDiagram
     BaseModel <|-- Threshold : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -90,11 +89,9 @@ Comp --> [models]
 Comp --> [schemas]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Metric`
-
 
 Base class for a project metric.
 
@@ -157,7 +154,6 @@ Parameters:
 
 ### `SklearnMetric`
 
-
 Compute metrics with sklearn.
 
 Parameters:
@@ -189,7 +185,6 @@ Parameters:
   - **Outputs**: `float`
 
 ### `Threshold`
-
 
 A project threshold for a metric.
 
@@ -239,7 +234,6 @@ Parameters:
 * `regression_model_template.core.models`
 
 * `regression_model_template.core.schemas`
-
 
 ## Used By
 

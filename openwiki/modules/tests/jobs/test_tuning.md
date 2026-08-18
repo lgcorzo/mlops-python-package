@@ -6,10 +6,10 @@ title: "Module: test_tuning"
 source_path: "tests/jobs/test_tuning.py"
 description: "No description available."
 tags: ["module", "test_tuning"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_tuning
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -64,7 +63,6 @@ Comp --> [searchers]
 Comp --> [splitters]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -95,7 +93,6 @@ No description available.
 
 * `capsys` (`pc.CaptureFixture[str]`)
 
-
 #### Outputs
 * `None`
 
@@ -118,7 +115,6 @@ No description available.
 * `regression_model_template.utils.searchers`
 
 * `regression_model_template.utils.splitters`
-
 
 ## Used By
 
