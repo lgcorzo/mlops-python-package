@@ -6,10 +6,10 @@ title: "Module: schemas"
 source_path: "src/regression_model_template/core/schemas.py"
 description: "Define and validate dataframe schemas."
 tags: ["module", "schemas"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: schemas
 
@@ -73,7 +73,6 @@ classDiagram
     Schema <|-- FeatureImportancesSchema : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -93,11 +92,9 @@ Comp --> [typing]
 Comp --> [common]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Schema`
-
 
 Base class for a dataframe schema.
 
@@ -119,7 +116,6 @@ e.g., to communicate and validate its fields.
   - **Outputs**: `papd.DataFrame[TSchema]`
 
 ### `InputsSchema`
-
 
 Schema for the project inputs.
 
@@ -159,7 +155,6 @@ Schema for the project inputs.
 
 ### `TargetsSchema`
 
-
 Schema for the project target.
 
 #### Attributes
@@ -169,7 +164,6 @@ Schema for the project target.
 * **`cnt`** (`papd.Series[padt.UInt32]`)
 
 ### `OutputsSchema`
-
 
 Schema for the project output.
 
@@ -181,11 +175,9 @@ Schema for the project output.
 
 ### `SHAPValuesSchema`
 
-
 Schema for the project shap values.
 
 ### `FeatureImportancesSchema`
-
 
 Schema for the project feature importances.
 
@@ -206,7 +198,6 @@ Schema for the project feature importances.
 * `pandera.typing`
 
 * `pandera.typing.common`
-
 
 ## Used By
 

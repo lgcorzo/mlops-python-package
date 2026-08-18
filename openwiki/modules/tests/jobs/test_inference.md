@@ -6,10 +6,10 @@ title: "Module: test_inference"
 source_path: "tests/jobs/test_inference.py"
 description: "No description available."
 tags: ["module", "test_inference"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_inference
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -55,7 +54,6 @@ Comp --> [datasets]
 Comp --> [registries]
 Comp --> [services]
 ```
-
 
 ## 3. Class & Method Specifications
 
@@ -85,7 +83,6 @@ No description available.
 
 * `capsys` (`pc.CaptureFixture[str]`)
 
-
 #### Outputs
 * `None`
 
@@ -102,7 +99,6 @@ No description available.
 * `regression_model_template.io.registries`
 
 * `regression_model_template.io.services`
-
 
 ## Used By
 

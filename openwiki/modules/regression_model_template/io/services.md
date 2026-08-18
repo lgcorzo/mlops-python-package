@@ -6,10 +6,10 @@ title: "Module: services"
 source_path: "src/regression_model_template/io/services.py"
 description: "Manage global context during execution."
 tags: ["module", "services"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: services
 
@@ -82,7 +82,6 @@ classDiagram
     Service <|-- MlflowService : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -149,11 +148,9 @@ Comp --> [notification]
 Comp --> [Env]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `PropagateHandler`
-
 
 No description available.
 
@@ -172,7 +169,6 @@ No description available.
   - **Outputs**: `None`
 
 ### `Service`
-
 
 Base class for a global service.
 
@@ -202,7 +198,6 @@ e.g., logger object, mlflow client, spark context, ...
   - **Outputs**: `None`
 
 ### `LoggerService`
-
 
 Service for logging messages.
 
@@ -260,7 +255,6 @@ Parameters:
 
 ### `AlertsService`
 
-
 Service for sending notifications.
 
 Require libnotify-bin on Linux systems.
@@ -309,7 +303,6 @@ Parameters:
   - **Outputs**: `None`
 
 ### `MlflowService`
-
 
 Service for Mlflow tracking and registry.
 
@@ -436,7 +429,6 @@ Parameters:
 * `plyer.notification`
 
 * `regression_model_template.io.osvariables.Env`
-
 
 ## Used By
 

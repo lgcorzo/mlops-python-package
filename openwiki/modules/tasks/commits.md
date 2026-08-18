@@ -6,10 +6,10 @@ title: "Module: commits"
 source_path: "tasks/commits.py"
 description: "Commits tasks for pyinvoke."
 tags: ["module", "commits"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: commits
 
@@ -29,7 +29,6 @@ Detected roles: General Subsystem
 
 _No classes found._
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -48,7 +47,6 @@ Comp --> [Context]
 Comp --> [task]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -61,7 +59,6 @@ Print a guide for messages.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -72,7 +69,6 @@ Bump the version of the package.
 #### Inputs
 
 * `ctx` (`Context`)
-
 
 #### Outputs
 * `None`
@@ -85,7 +81,6 @@ Commit all changes with a message.
 
 * `ctx` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -97,7 +92,6 @@ Run all commit tasks.
 
 * `_` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -106,7 +100,6 @@ Run all commit tasks.
 * `invoke.context.Context`
 
 * `invoke.tasks.task`
-
 
 ## Used By
 

@@ -6,10 +6,10 @@ title: "Module: test_scripts"
 source_path: "tests/test_scripts.py"
 description: "No description available."
 tags: ["module", "test_scripts"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_scripts
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -62,7 +61,6 @@ Comp --> [capture]
 Comp --> [scripts]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -74,7 +72,6 @@ No description available.
 #### Inputs
 
 * `capsys` (`pc.CaptureFixture[str]`)
-
 
 #### Outputs
 * `None`
@@ -91,7 +88,6 @@ No description available.
 
 * `extra_config` (`str`)
 
-
 #### Outputs
 * `None`
 
@@ -100,7 +96,6 @@ No description available.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `None`
@@ -118,7 +113,6 @@ No description available.
 * `_pytest.capture`
 
 * `regression_model_template.scripts`
-
 
 ## Used By
 

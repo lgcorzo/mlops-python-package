@@ -6,10 +6,10 @@ title: "Module: osvariables"
 source_path: "src/regression_model_template/io/osvariables.py"
 description: "No description available."
 tags: ["module", "osvariables"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: osvariables
 
@@ -45,7 +45,6 @@ classDiagram
     BaseSettings <|-- Env : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -62,11 +61,9 @@ Comp --> [Any]
 Comp --> [BaseSettings]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Singleton`
-
 
 No description available.
 
@@ -81,7 +78,6 @@ No description available.
   - **Purpose**: No description available.
 
 ### `Env`
-
 
 No description available.
 
@@ -100,7 +96,6 @@ No description available.
 * `typing.Any`
 
 * `pydantic_settings.BaseSettings`
-
 
 ## Used By
 

@@ -6,10 +6,10 @@ title: "Module: test_schemas"
 source_path: "tests/core/test_schemas.py"
 description: "No description available."
 tags: ["module", "test_schemas"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_schemas
 
@@ -28,7 +28,6 @@ Detected roles: DTO
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -55,7 +54,6 @@ Comp --> [schemas]
 Comp --> [datasets]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -68,7 +66,6 @@ No description available.
 
 * `inputs_reader` (`datasets.Reader`)
 
-
 #### Outputs
 * `None`
 
@@ -80,7 +77,6 @@ No description available.
 
 * `targets_reader` (`datasets.Reader`)
 
-
 #### Outputs
 * `None`
 
@@ -91,7 +87,6 @@ No description available.
 #### Inputs
 
 * `outputs_reader` (`datasets.Reader`)
-
 
 #### Outputs
 * `None`
@@ -106,7 +101,6 @@ No description available.
 
 * `train_test_sets` (`tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]`)
 
-
 #### Outputs
 * `None`
 
@@ -118,7 +112,6 @@ No description available.
 
 * `model` (`models.Model`)
 
-
 #### Outputs
 * `None`
 
@@ -129,7 +122,6 @@ No description available.
 * `regression_model_template.core.schemas`
 
 * `regression_model_template.io.datasets`
-
 
 ## Used By
 

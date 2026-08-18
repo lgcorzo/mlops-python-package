@@ -6,10 +6,10 @@ title: "Module: kafka_app"
 source_path: "src/regression_model_template/controller/kafka_app.py"
 description: "FastAPI and Kafka Service for Predictions with Logging."
 tags: ["module", "kafka_app"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: kafka_app
 
@@ -61,7 +61,6 @@ classDiagram
         +predict(self: Any, input_data: PredictionRequest) PredictionResponse
     }
 ```
-
 
 ### Sequence Diagram
 
@@ -209,11 +208,9 @@ Comp --> [services]
 Comp --> [CustomLoader]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `RateLimiter`
-
 
 In-memory sliding window rate limiter backed by OrderedDict.
 
@@ -249,7 +246,6 @@ In-memory sliding window rate limiter backed by OrderedDict.
 
 ### `PredictionRequest`
 
-
 Request model for prediction.
 
 #### Attributes
@@ -282,7 +278,6 @@ Request model for prediction.
 
 ### `PredictionResponse`
 
-
 Response model for prediction.
 
 #### Attributes
@@ -290,7 +285,6 @@ Response model for prediction.
 * **`result`** (`Dict[(str, Any)]`)
 
 ### `FastAPIKafkaService`
-
 
 Service for deploying a FastAPI application with a Kafka producer and consumer.
 
@@ -388,7 +382,6 @@ Service for deploying a FastAPI application with a Kafka producer and consumer.
 
 ### `PredictionService`
 
-
 Service to handle prediction logic securely.
 
 #### Constructor
@@ -425,7 +418,6 @@ Generate a fresh default input payload with current timestamps.
 
 #### Inputs
 
-
 #### Outputs
 * `Dict[(str, Any)]`
 
@@ -434,7 +426,6 @@ Generate a fresh default input payload with current timestamps.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `None`
@@ -506,7 +497,6 @@ No description available.
 * `regression_model_template.io.services`
 
 * `regression_model_template.io.registries.CustomLoader`
-
 
 ## Used By
 

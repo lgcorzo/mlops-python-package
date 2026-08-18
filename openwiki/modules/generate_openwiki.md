@@ -6,10 +6,10 @@ title: "Module: generate_openwiki"
 source_path: "generate_openwiki.py"
 description: "No description available."
 tags: ["module", "generate_openwiki"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: generate_openwiki
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -99,6 +98,7 @@ sequenceDiagram
     generate_call_graph->>keys: invoke
     generate_call_graph->>get: invoke
     generate_dependency_graph->>items: invoke
+    generate_dependency_graph->>sorted: invoke
     generate_dependency_graph->>append: invoke
     generate_dependency_graph->>join: invoke
     generate_dependency_graph->>splitext: invoke
@@ -147,6 +147,7 @@ sequenceDiagram
     main->>add_argument: invoke
     main->>parse_args: invoke
     main->>walk: invoke
+    main->>sort: invoke
     main->>build_registry: invoke
     main->>print: invoke
     main->>makedirs: invoke
@@ -184,7 +185,6 @@ Comp --> [os]
 Comp --> [subprocess]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -199,7 +199,6 @@ No description available.
 
 * `ignore_errors` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -208,7 +207,6 @@ No description available.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -221,7 +219,6 @@ No description available.
 
 * `filepath` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -231,7 +228,6 @@ No description available.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -240,7 +236,6 @@ No description available.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -253,7 +248,6 @@ No description available.
 
 * `node` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -264,7 +258,6 @@ No description available.
 #### Inputs
 
 * `docstring` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -277,7 +270,6 @@ No description available.
 
 * `node` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -288,7 +280,6 @@ No description available.
 #### Inputs
 
 * `node` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -301,7 +292,6 @@ No description available.
 
 * `args` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -312,7 +302,6 @@ No description available.
 #### Inputs
 
 * `filepath` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -325,7 +314,6 @@ Make type string safe for PlantUML.
 
 * `t` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -336,7 +324,6 @@ Generate PlantUML class diagram for the classes.
 #### Inputs
 
 * `classes` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -349,7 +336,6 @@ No description available.
 
 * `files_to_process` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -358,7 +344,6 @@ No description available.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -369,7 +354,6 @@ No description available.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -378,7 +362,6 @@ No description available.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -395,7 +378,6 @@ No description available.
 
 * `md_path` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -407,7 +389,6 @@ No description available.
 
 * `processed_files` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -416,7 +397,6 @@ No description available.
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -432,7 +412,6 @@ No description available.
 * `os`
 
 * `subprocess`
-
 
 ## Used By
 

@@ -6,10 +6,10 @@ title: "Module: registries"
 source_path: "src/regression_model_template/io/registries.py"
 description: "Savers, loaders, and registers for model registries."
 tags: ["module", "registries"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: registries
 
@@ -78,7 +78,6 @@ classDiagram
     Register <|-- MlflowRegister : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -111,11 +110,9 @@ Comp --> [schemas]
 Comp --> [signers]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Saver`
-
 
 Base class for saving models in registry.
 
@@ -151,7 +148,6 @@ Parameters:
 
 ### `CustomSaver`
 
-
 Saver for project models using the Mlflow PyFunc module.
 
 https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html
@@ -179,7 +175,6 @@ https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html
   - **Outputs**: `Info`
 
 ### `BuiltinSaver`
-
 
 Saver for built-in models using an Mlflow flavor module.
 
@@ -214,7 +209,6 @@ Parameters:
 
 ### `Loader`
 
-
 Base class for loading models from registry.
 
 Separate model definition from deserialization.
@@ -240,7 +234,6 @@ e.g., to switch between deserialization flavors.
 
 ### `CustomLoader`
 
-
 Loader for custom models using the Mlflow PyFunc module.
 
 https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html
@@ -264,7 +257,6 @@ https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html
   - **Outputs**: `CustomLoader.Adapter`
 
 ### `BuiltinLoader`
-
 
 Loader for built-in models using the Mlflow PyFunc module.
 
@@ -291,7 +283,6 @@ https://mlflow.org/docs/latest/models.html#built-in-model-flavors
   - **Outputs**: `BuiltinLoader.Adapter`
 
 ### `Register`
-
 
 Base class for registring models to a location.
 
@@ -324,7 +315,6 @@ Parameters:
   - **Outputs**: `Version`
 
 ### `MlflowRegister`
-
 
 Register for models in the Mlflow Model Registry.
 
@@ -369,7 +359,6 @@ Returns:
 
 * `alias` (`str`)
 
-
 #### Outputs
 * `str`
 
@@ -389,7 +378,6 @@ Returns:
 * `name` (`str`)
 
 * `version` (`int`)
-
 
 #### Outputs
 * `str`
@@ -411,7 +399,6 @@ Returns:
 
 * `alias_or_version` (`str | int`)
 
-
 #### Outputs
 * `str`
 
@@ -430,7 +417,6 @@ Returns:
 * `regression_model_template.core.schemas`
 
 * `regression_model_template.utils.signers`
-
 
 ## Used By
 

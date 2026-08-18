@@ -6,10 +6,10 @@ title: "Module: signers"
 source_path: "src/regression_model_template/utils/signers.py"
 description: "Generate signatures for AI/ML models."
 tags: ["module", "signers"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: signers
 
@@ -43,7 +43,6 @@ classDiagram
     Signer <|-- InferSigner : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -63,11 +62,9 @@ Comp --> [signature]
 Comp --> [schemas]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Signer`
-
 
 Base class for generating model signatures.
 
@@ -97,7 +94,6 @@ https://mlflow.org/docs/latest/models.html#model-signature-and-input-example
   - **Outputs**: `Signature`
 
 ### `InferSigner`
-
 
 Generate model signatures from inputs/outputs data.
 
@@ -134,7 +130,6 @@ Generate model signatures from inputs/outputs data.
 * `mlflow.models.signature`
 
 * `regression_model_template.core.schemas`
-
 
 ## Used By
 

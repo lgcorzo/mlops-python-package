@@ -6,10 +6,10 @@ title: "Module: packages"
 source_path: "tasks/packages.py"
 description: "Package tasks for pyinvoke."
 tags: ["module", "packages"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: packages
 
@@ -29,7 +29,6 @@ Detected roles: General Subsystem
 
 _No classes found._
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -48,7 +47,6 @@ Comp --> [task]
 Comp --> [cleans]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -63,7 +61,6 @@ Build the python package.
 
 * `format` (`str`)
 
-
 #### Outputs
 * `None`
 
@@ -75,7 +72,6 @@ Run all package tasks.
 
 * `_` (`Context`)
 
-
 #### Outputs
 * `None`
 
@@ -86,7 +82,6 @@ Run all package tasks.
 * `invoke.tasks.task`
 
 * `.cleans`
-
 
 ## Used By
 

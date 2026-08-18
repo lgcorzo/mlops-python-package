@@ -6,10 +6,10 @@ title: "Module: searchers"
 source_path: "src/regression_model_template/utils/searchers.py"
 description: "Find the best hyperparameters for a model."
 tags: ["module", "searchers"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: searchers
 
@@ -49,7 +49,6 @@ classDiagram
     Searcher <|-- GridCVSearcher : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -75,11 +74,9 @@ Comp --> [schemas]
 Comp --> [splitters]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Searcher`
-
 
 Base class for a searcher.
 
@@ -118,7 +115,6 @@ Parameters:
   - **Outputs**: `Results`
 
 ### `GridCVSearcher`
-
 
 Grid searcher with cross-fold validation.
 
@@ -188,7 +184,6 @@ Parameters:
 * `regression_model_template.core.schemas`
 
 * `regression_model_template.utils.splitters`
-
 
 ## Used By
 

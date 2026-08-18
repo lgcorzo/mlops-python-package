@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_logging"
 source_path: "tests/controller/test_kafka_app_logging.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_logging"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_kafka_app_logging
 
@@ -28,7 +28,6 @@ Detected roles: Controller
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -61,7 +60,6 @@ Comp --> [predict]
 Comp --> [FastAPIKafkaService]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -71,7 +69,6 @@ Comp --> [FastAPIKafkaService]
 Mock the FastAPIKafkaService and its dependencies.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -85,7 +82,6 @@ Test that Kafka consumer logs correctly using debug and safe info logs.
 * `mock_logger` (`Any`)
 
 * `mock_kafka_service` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -107,7 +103,6 @@ Test that Kafka consumer logs correctly using debug and safe info logs.
 * `regression_model_template.controller.kafka_app.predict`
 
 * `regression_model_template.controller.kafka_app.FastAPIKafkaService`
-
 
 ## Used By
 

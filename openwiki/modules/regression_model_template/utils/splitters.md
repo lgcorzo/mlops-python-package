@@ -6,10 +6,10 @@ title: "Module: splitters"
 source_path: "src/regression_model_template/utils/splitters.py"
 description: "Split dataframes into subsets (e.g., train/valid/test)."
 tags: ["module", "splitters"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: splitters
 
@@ -57,7 +57,6 @@ classDiagram
     Splitter <|-- TimeSeriesSplitter : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -82,11 +81,9 @@ Comp --> [model_selection]
 Comp --> [schemas]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Splitter`
-
 
 Base class for a splitter.
 
@@ -134,7 +131,6 @@ e.g., split between a train/test subsets.
   - **Outputs**: `int`
 
 ### `TrainTestSplitter`
-
 
 Split a dataframe into a train and test set.
 
@@ -188,7 +184,6 @@ Parameters:
   - **Outputs**: `int`
 
 ### `TimeSeriesSplitter`
-
 
 Split a dataframe into fixed time series subsets.
 
@@ -256,7 +251,6 @@ Parameters:
 * `sklearn.model_selection`
 
 * `regression_model_template.core.schemas`
-
 
 ## Used By
 

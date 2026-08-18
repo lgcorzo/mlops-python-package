@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_leakage"
 source_path: "tests/controller/test_kafka_app_leakage.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_leakage"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_kafka_app_leakage
 
@@ -28,7 +28,6 @@ Detected roles: Controller
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -52,7 +51,6 @@ Comp --> [MagicMock]
 Comp --> [FastAPIKafkaService]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -62,7 +60,6 @@ Comp --> [FastAPIKafkaService]
 No description available.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -74,7 +71,6 @@ No description available.
 * `unittest.mock.MagicMock`
 
 * `regression_model_template.controller.kafka_app.FastAPIKafkaService`
-
 
 ## Used By
 

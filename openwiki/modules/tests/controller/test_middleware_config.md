@@ -6,10 +6,10 @@ title: "Module: test_middleware_config"
 source_path: "tests/controller/test_middleware_config.py"
 description: "No description available."
 tags: ["module", "test_middleware_config"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_middleware_config
 
@@ -28,7 +28,6 @@ Detected roles: Controller
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -66,7 +65,6 @@ Comp --> [pytest]
 Comp --> [os]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -77,7 +75,6 @@ Reset module and env vars after each test to prevent state leakage.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -86,7 +83,6 @@ Reset module and env vars after each test to prevent state leakage.
 Verify that CORSMiddleware and TrustedHostMiddleware are present.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -97,7 +93,6 @@ Verify default CORS configuration.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -106,7 +101,6 @@ Verify default CORS configuration.
 Verify default TrustedHost configuration.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -119,7 +113,6 @@ Verify custom CORS configuration via environment variables.
 
 * `monkeypatch` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -130,7 +123,6 @@ Verify custom TrustedHost configuration via environment variables.
 #### Inputs
 
 * `monkeypatch` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -148,7 +140,6 @@ Verify custom TrustedHost configuration via environment variables.
 * `pytest`
 
 * `os`
-
 
 ## Used By
 

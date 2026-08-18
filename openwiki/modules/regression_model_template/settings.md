@@ -6,10 +6,10 @@ title: "Module: settings"
 source_path: "src/regression_model_template/settings.py"
 description: "Define settings for the application."
 tags: ["module", "settings"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: settings
 
@@ -39,7 +39,6 @@ classDiagram
     Settings <|-- MainSettings : Generalization
 ```
 
-
 ### Sequence Diagram
 
 _No sequences found._
@@ -53,11 +52,9 @@ Comp --> [pydantic_settings]
 Comp --> [jobs]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Settings`
-
 
 Base class for application settings.
 
@@ -65,7 +62,6 @@ Use settings to provide high-level preferences.
 i.e., to separate settings from provider (e.g., CLI).
 
 ### `MainSettings`
-
 
 Main settings of the application.
 
@@ -83,7 +79,6 @@ Parameters:
 * `pydantic_settings`
 
 * `regression_model_template.jobs`
-
 
 ## Used By
 

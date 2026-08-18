@@ -148,23 +148,29 @@ def parse_args(args):
     offset = len(args.args) - len(defaults)
 
     for i, arg in enumerate(args.args):
-        parsed.append({
-            "name": arg.arg,
-            "type": unparse_annotation(arg.annotation),
-            "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
-        })
+        parsed.append(
+            {
+                "name": arg.arg,
+                "type": unparse_annotation(arg.annotation),
+                "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
+            }
+        )
     if args.vararg:
-        parsed.append({
-            "name": f"*{args.vararg.arg}",
-            "type": unparse_annotation(args.vararg.annotation),
-            "default": None,
-        })
+        parsed.append(
+            {
+                "name": f"*{args.vararg.arg}",
+                "type": unparse_annotation(args.vararg.annotation),
+                "default": None,
+            }
+        )
     if args.kwarg:
-        parsed.append({
-            "name": f"**{args.kwarg.arg}",
-            "type": unparse_annotation(args.kwarg.annotation),
-            "default": None,
-        })
+        parsed.append(
+            {
+                "name": f"**{args.kwarg.arg}",
+                "type": unparse_annotation(args.kwarg.annotation),
+                "default": None,
+            }
+        )
     return parsed
 
 
@@ -207,10 +213,12 @@ def parse_python_file(filepath):
 
             for child in node.body:
                 if isinstance(child, ast.AnnAssign) and isinstance(child.target, ast.Name):
-                    cls_info["attributes"].append({
-                        "name": child.target.id,
-                        "type": unparse_annotation(child.annotation),
-                    })
+                    cls_info["attributes"].append(
+                        {
+                            "name": child.target.id,
+                            "type": unparse_annotation(child.annotation),
+                        }
+                    )
                 elif isinstance(child, ast.Assign):
                     for target in child.targets:
                         if isinstance(target, ast.Name):
@@ -238,16 +246,18 @@ def parse_python_file(filepath):
             is_private = node.name.startswith("_")
             docstring = extract_docstring(node)
             extracted = extract_complex_doc(docstring)
-            functions.append({
-                "name": node.name,
-                "docstring": extracted["description"],
-                "complexity": extracted["complexity"],
-                "side_effects": extracted["side_effects"],
-                "args": parse_args(node.args),
-                "returns": unparse_annotation(node.returns),
-                "is_private": is_private,
-                "calls": extract_calls(node),
-            })
+            functions.append(
+                {
+                    "name": node.name,
+                    "docstring": extracted["description"],
+                    "complexity": extracted["complexity"],
+                    "side_effects": extracted["side_effects"],
+                    "args": parse_args(node.args),
+                    "returns": unparse_annotation(node.returns),
+                    "is_private": is_private,
+                    "calls": extract_calls(node),
+                }
+            )
 
     return {
         "filepath": filepath,
@@ -356,12 +366,15 @@ def generate_call_graph():
 
 def generate_dependency_graph():
     lines = ["```plantuml", "digraph Dependencies {"]
+    edges = []
     for mod_path, data in registry["modules"].items():
         mod_name = os.path.splitext(os.path.basename(mod_path))[0]
         for imp in data["imports"]:
             imp_name = imp.split(".")[-1] if "." in imp else imp
             if imp_name != "*":
-                lines.append(f'    "{mod_name}" -> "{imp_name}"')
+                edges.append(f'    "{mod_name}" -> "{imp_name}"')
+    for edge in sorted(edges):
+        lines.append(edge)
     lines.append("}")
     lines.append("```")
     return "\n".join(lines)
@@ -428,7 +441,7 @@ last_verified_commit: "{commit_hash}"
     else:
         body.append("_No classes found._")
 
-    body.append("\n### Sequence Diagram")
+    body.append("### Sequence Diagram")
     seq_lines = ["```plantuml", "sequenceDiagram"]
     has_seq = False
 
@@ -462,11 +475,11 @@ last_verified_commit: "{commit_hash}"
     comp_lines.append("```")
     body.append("\n".join(comp_lines))
 
-    body.append("\n## 3. Class & Method Specifications")
+    body.append("## 3. Class & Method Specifications")
 
     for cls in parsed_data["classes"]:
         body.append(f"### `{cls['name']}`")
-        body.append(f"\n{cls['docstring']}")
+        body.append(f"{cls['docstring']}")
 
         if cls.get("constructor"):
             c = cls["constructor"]
@@ -527,7 +540,7 @@ last_verified_commit: "{commit_hash}"
             body.append("#### Inputs")
             for arg in func["args"]:
                 body.append(f"* `{arg['name']}` (`{arg['type']}`)")
-            body.append(f"\n#### Outputs\n* `{func['returns']}`")
+            body.append(f"#### Outputs\n* `{func['returns']}`")
 
     body.append("## Dependencies")
     if parsed_data["imports"]:
@@ -547,7 +560,7 @@ last_verified_commit: "{commit_hash}"
                 used_by.append(other_py)
                 break
 
-    body.append("\n## Used By")
+    body.append("## Used By")
     if used_by:
         for u in sorted(used_by):
             if u.startswith(f"src{os.sep}") or u.startswith("src/"):
@@ -655,6 +668,8 @@ def main():
             if f.endswith(".py"):
                 filepath = os.path.relpath(os.path.join(root, f), ".")
                 all_files.append(filepath)
+
+    all_files.sort()
 
     # We must build the registry using ALL files so cross-references are complete
     build_registry(all_files)

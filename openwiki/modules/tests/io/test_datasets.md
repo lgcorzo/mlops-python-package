@@ -6,10 +6,10 @@ title: "Module: test_datasets"
 source_path: "tests/io/test_datasets.py"
 description: "No description available."
 tags: ["module", "test_datasets"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_datasets
 
@@ -28,7 +28,6 @@ Detected roles: General Subsystem
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -56,7 +55,6 @@ Comp --> [schemas]
 Comp --> [datasets]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -71,7 +69,6 @@ No description available.
 
 * `inputs_path` (`str`)
 
-
 #### Outputs
 * `None`
 
@@ -85,7 +82,6 @@ No description available.
 
 * `tmp_outputs_path` (`str`)
 
-
 #### Outputs
 * `None`
 
@@ -98,7 +94,6 @@ No description available.
 * `regression_model_template.core.schemas`
 
 * `regression_model_template.io.datasets`
-
 
 ## Used By
 

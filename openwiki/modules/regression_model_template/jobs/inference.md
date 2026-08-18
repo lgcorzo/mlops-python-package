@@ -6,10 +6,10 @@ title: "Module: inference"
 source_path: "src/regression_model_template/jobs/inference.py"
 description: "Define a job for generating batch predictions from a registered model."
 tags: ["module", "inference"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: inference
 
@@ -40,7 +40,6 @@ classDiagram
     }
     Job <|-- InferenceJob : Generalization
 ```
-
 
 ### Sequence Diagram
 
@@ -74,11 +73,9 @@ Comp --> [registries]
 Comp --> [base]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `InferenceJob`
-
 
 Generate batch predictions from a registered model.
 
@@ -127,7 +124,6 @@ Parameters:
 * `regression_model_template.io.registries`
 
 * `regression_model_template.jobs.base`
-
 
 ## Used By
 

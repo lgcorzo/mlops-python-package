@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_security"
 source_path: "tests/controller/test_kafka_app_security.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_security"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_kafka_app_security
 
@@ -28,7 +28,6 @@ Detected roles: Controller
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -61,7 +60,6 @@ Comp --> [PredictionService]
 Comp --> [predict]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -72,7 +70,6 @@ Test that PredictionService sanitizes exceptions.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -81,7 +78,6 @@ Test that PredictionService sanitizes exceptions.
 Test that the predict endpoint does NOT leak exception details.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -101,7 +97,6 @@ Test that the predict endpoint does NOT leak exception details.
 * `regression_model_template.controller.kafka_app.PredictionService`
 
 * `regression_model_template.controller.kafka_app.predict`
-
 
 ## Used By
 

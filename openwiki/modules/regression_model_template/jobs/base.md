@@ -6,10 +6,10 @@ title: "Module: base"
 source_path: "src/regression_model_template/jobs/base.py"
 description: "Base for high-level project jobs."
 tags: ["module", "base"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: base
 
@@ -43,7 +43,6 @@ classDiagram
     BaseModel <|-- Job : Generalization
 ```
 
-
 ### Sequence Diagram
 
 ```plantuml
@@ -67,11 +66,9 @@ Comp --> [pydantic]
 Comp --> [services]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ### `Job`
-
 
 Base class for a job.
 
@@ -126,7 +123,6 @@ Parameters:
 * `pydantic`
 
 * `regression_model_template.io.services`
-
 
 ## Used By
 

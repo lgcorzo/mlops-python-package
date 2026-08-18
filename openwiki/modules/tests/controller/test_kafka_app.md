@@ -6,10 +6,10 @@ title: "Module: test_kafka_app"
 source_path: "tests/controller/test_kafka_app.py"
 description: "No description available."
 tags: ["module", "test_kafka_app"]
-timestamp: "2026-08-17T05:34:56Z"
+timestamp: "2026-08-18T05:58:44Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "73b4d7b"
+last_verified_commit: "5aba7e1"
 ---
 # Module Specification: test_kafka_app
 
@@ -28,7 +28,6 @@ Detected roles: Controller
 ### Class Diagram
 
 _No classes found._
-
 
 ### Sequence Diagram
 
@@ -144,7 +143,6 @@ Comp --> [health_check]
 Comp --> [predict]
 ```
 
-
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -154,7 +152,6 @@ Comp --> [predict]
 Fixture to create a mocked FastAPIKafkaService.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -167,7 +164,6 @@ Test FastAPIKafkaService initialization.
 
 * `mock_kafka_service` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -178,7 +174,6 @@ Test delivery report logging.
 #### Inputs
 
 * `mock_kafka_service` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -191,7 +186,6 @@ Test the start method.
 
 * `mock_kafka_service` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -202,7 +196,6 @@ Test start method when producer initialization fails.
 #### Inputs
 
 * `mock_kafka_service` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -215,7 +208,6 @@ Test start method when consumer initialization fails.
 
 * `mock_kafka_service` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -226,7 +218,6 @@ Test the _run_server method.
 #### Inputs
 
 * `mock_kafka_service` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -239,7 +230,6 @@ Test the _run_server method when uvicorn fails.
 
 * `mock_kafka_service` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -250,7 +240,6 @@ Test the _consume_messages method.
 #### Inputs
 
 * `mock_kafka_service` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -263,7 +252,6 @@ Test _consume_messages handles message errors.
 
 * `mock_kafka_service` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -274,7 +262,6 @@ Test the _poll_message method.
 #### Inputs
 
 * `mock_kafka_service` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -287,7 +274,6 @@ Test _poll_message handles missing consumer.
 
 * `mock_kafka_service` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -298,7 +284,6 @@ Test _handle_message_error handles partition EOF.
 #### Inputs
 
 * `mock_kafka_service` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -311,7 +296,6 @@ Test _handle_message_error handles other Kafka errors.
 
 * `mock_kafka_service` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -322,7 +306,6 @@ Test _handle_message_error handles transient UNKNOWN_TOPIC_OR_PART errors withou
 #### Inputs
 
 * `mock_kafka_service` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -337,7 +320,6 @@ Test the _process_message method.
 
 * `mock_kafka_service` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -350,7 +332,6 @@ Test _process_message handles JSON decoding errors.
 * `mock_json_loads` (`Any`)
 
 * `mock_kafka_service` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -365,7 +346,6 @@ Test _process_message handles prediction callback errors.
 
 * `mock_kafka_service` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -376,7 +356,6 @@ Test the _close_consumer method.
 #### Inputs
 
 * `mock_kafka_service` (`Any`)
-
 
 #### Outputs
 * `Any`
@@ -389,7 +368,6 @@ Test the stop method.
 
 * `mock_kafka_service` (`Any`)
 
-
 #### Outputs
 * `Any`
 
@@ -399,7 +377,6 @@ Test the main function.
 
 #### Inputs
 
-
 #### Outputs
 * `Any`
 
@@ -408,7 +385,6 @@ Test the main function.
 Test that security middlewares are configured.
 
 #### Inputs
-
 
 #### Outputs
 * `Any`
@@ -442,7 +418,6 @@ Test that security middlewares are configured.
 * `regression_model_template.controller.kafka_app.health_check`
 
 * `regression_model_template.controller.kafka_app.predict`
-
 
 ## Used By
 
