@@ -5,10 +5,10 @@ type: "diagrams"
 title: "Diagrams"
 description: "Auto-generated architecture diagrams."
 tags: ["diagrams"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-20T05:56:47Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Architecture Diagrams
 
@@ -665,6 +665,7 @@ digraph CallGraph {
     "parse_python_file()" -> "extract_calls()"
     "parse_python_file()" -> "extract_complex_doc()"
     "parse_python_file()" -> "extract_docstring()"
+    "parse_python_file()" -> "extract_referenced_types()"
     "parse_python_file()" -> "parse_args()"
     "parse_python_file()" -> "read()"
     "parse_python_file()" -> "unparse_annotation()"

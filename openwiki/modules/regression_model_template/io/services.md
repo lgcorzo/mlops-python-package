@@ -6,10 +6,10 @@ title: "Module: services"
 source_path: "src/regression_model_template/io/services.py"
 description: "Manage global context during execution."
 tags: ["module", "services"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-20T05:56:47Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: services
 
@@ -80,6 +80,7 @@ classDiagram
         +client(self: Any) mt.MlflowClient
     }
     Service <|-- MlflowService : Generalization
+    MlflowService *-- Env : Composition
 ```
 
 ### Sequence Diagram

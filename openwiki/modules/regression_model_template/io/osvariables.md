@@ -6,10 +6,10 @@ title: "Module: osvariables"
 source_path: "src/regression_model_template/io/osvariables.py"
 description: "No description available."
 tags: ["module", "osvariables"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-20T05:56:47Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: osvariables
 
@@ -43,6 +43,8 @@ classDiagram
     }
     Singleton <|-- Env : Generalization
     BaseSettings <|-- Env : Generalization
+    Singleton *-- Singleton : Composition
+    Singleton ..> Singleton : Dependency
 ```
 
 ### Sequence Diagram

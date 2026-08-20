@@ -6,10 +6,10 @@ title: "Module: generate_openwiki"
 source_path: "generate_openwiki.py"
 description: "No description available."
 tags: ["module", "generate_openwiki"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-20T05:56:47Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: generate_openwiki
 
@@ -58,6 +58,11 @@ sequenceDiagram
     extract_complex_doc->>lower: invoke
     extract_complex_doc->>append: invoke
     extract_complex_doc->>join: invoke
+    extract_referenced_types->>walk: invoke
+    extract_referenced_types->>list: invoke
+    extract_referenced_types->>isinstance: invoke
+    extract_referenced_types->>fromkeys: invoke
+    extract_referenced_types->>append: invoke
     unparse_annotation->>isinstance: invoke
     unparse_annotation->>unparse: invoke
     unparse_annotation->>unparse_annotation: invoke
@@ -76,15 +81,26 @@ sequenceDiagram
     parse_python_file->>isinstance: invoke
     parse_python_file->>append: invoke
     parse_python_file->>extract_complex_doc: invoke
+    parse_python_file->>list: invoke
     parse_python_file->>extract_calls: invoke
+    parse_python_file->>fromkeys: invoke
     parse_python_file->>startswith: invoke
     parse_python_file->>unparse_annotation: invoke
+    parse_python_file->>extend: invoke
+    parse_python_file->>extract_referenced_types: invoke
     parse_python_file->>parse_args: invoke
+    parse_python_file->>hasattr: invoke
     clean_plantuml_type->>replace: invoke
+    generate_plantuml->>set: invoke
+    generate_plantuml->>dirname: invoke
+    generate_plantuml->>sorted: invoke
     generate_plantuml->>append: invoke
     generate_plantuml->>join: invoke
+    generate_plantuml->>get: invoke
     generate_plantuml->>clean_plantuml_type: invoke
     generate_plantuml->>split: invoke
+    generate_plantuml->>startswith: invoke
+    generate_plantuml->>add: invoke
     build_registry->>parse_python_file: invoke
     generate_package_diagram_content->>keys: invoke
     generate_package_diagram_content->>sorted: invoke
@@ -262,6 +278,17 @@ No description available.
 #### Outputs
 * `Any`
 
+### `extract_referenced_types(node: Any) -> Any`
+
+No description available.
+
+#### Inputs
+
+* `node` (`Any`)
+
+#### Outputs
+* `Any`
+
 ### `unparse_annotation(node: Any) -> Any`
 
 No description available.
@@ -317,13 +344,15 @@ Make type string safe for PlantUML.
 #### Outputs
 * `Any`
 
-### `generate_plantuml(classes: Any) -> Any`
+### `generate_plantuml(classes: Any, py_file: Any) -> Any`
 
 Generate PlantUML class diagram for the classes.
 
 #### Inputs
 
 * `classes` (`Any`)
+
+* `py_file` (`Any`)
 
 #### Outputs
 * `Any`

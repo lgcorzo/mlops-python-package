@@ -6,10 +6,10 @@ title: "Module: registries"
 source_path: "src/regression_model_template/io/registries.py"
 description: "Savers, loaders, and registers for model registries."
 tags: ["module", "registries"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-20T05:56:47Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: registries
 
@@ -76,6 +76,11 @@ classDiagram
         +register(self: Any, name: str, model_uri: str) Version
     }
     Register <|-- MlflowRegister : Generalization
+    BuiltinLoader *-- BuiltinLoader : Composition
+    BuiltinSaver *-- BuiltinSaver : Composition
+    CustomLoader *-- CustomLoader : Composition
+    CustomSaver *-- CustomSaver : Composition
+    MlflowRegister *-- MlflowRegister : Composition
 ```
 
 ### Sequence Diagram

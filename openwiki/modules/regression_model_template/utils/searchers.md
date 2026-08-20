@@ -6,10 +6,10 @@ title: "Module: searchers"
 source_path: "src/regression_model_template/utils/searchers.py"
 description: "Find the best hyperparameters for a model."
 tags: ["module", "searchers"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-20T05:56:47Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: searchers
 
@@ -47,6 +47,7 @@ classDiagram
         +search(self: Any, model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) Results
     }
     Searcher <|-- GridCVSearcher : Generalization
+    GridCVSearcher *-- GridCVSearcher : Composition
 ```
 
 ### Sequence Diagram

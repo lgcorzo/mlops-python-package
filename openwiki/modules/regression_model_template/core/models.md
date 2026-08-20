@@ -6,10 +6,10 @@ title: "Module: models"
 source_path: "src/regression_model_template/core/models.py"
 description: "Define trainable machine learning models."
 tags: ["module", "models"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-20T05:56:47Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: models
 
@@ -58,6 +58,8 @@ classDiagram
         +get_internal_model(self: Any) pipeline.Pipeline
     }
     Model <|-- BaselineSklearnModel : Generalization
+    BaselineSklearnModel *-- BaselineSklearnModel : Composition
+    BaselineSklearnModel ..> BaselineSklearnModel : Dependency
 ```
 
 ### Sequence Diagram

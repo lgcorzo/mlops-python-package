@@ -111,6 +111,21 @@ def extract_complex_doc(docstring):
     }
 
 
+def extract_referenced_types(node):
+    if node is None:
+        return []
+    refs = []
+    for child in ast.walk(node):
+        if isinstance(child, ast.Name):
+            refs.append(child.id)
+        elif isinstance(child, ast.Attribute):
+            refs.append(child.attr)
+        elif isinstance(child, ast.Constant):
+            if isinstance(child.value, str):
+                refs.append(child.value)
+    return list(dict.fromkeys(refs))
+
+
 def unparse_annotation(node):
     if node is None:
         return "Any"
@@ -209,7 +224,12 @@ def parse_python_file(filepath):
                 "methods": [],
                 "constructor": None,
                 "calls": extract_calls(node),
+                "structural_refs": [],
+                "behavioral_refs": [],
             }
+
+            structural_refs = []
+            behavioral_refs = []
 
             for child in node.body:
                 if isinstance(child, ast.AnnAssign) and isinstance(child.target, ast.Name):
@@ -219,6 +239,7 @@ def parse_python_file(filepath):
                             "type": unparse_annotation(child.annotation),
                         }
                     )
+                    structural_refs.extend(extract_referenced_types(child.annotation))
                 elif isinstance(child, ast.Assign):
                     for target in child.targets:
                         if isinstance(target, ast.Name):
@@ -237,10 +258,28 @@ def parse_python_file(filepath):
                         "is_private": is_private,
                         "calls": extract_calls(child),
                     }
+
+                    for arg in child.args.args:
+                        behavioral_refs.extend(extract_referenced_types(arg.annotation))
+                    if hasattr(child.args, "posonlyargs"):
+                        for arg in child.args.posonlyargs:
+                            behavioral_refs.extend(extract_referenced_types(arg.annotation))
+                    if hasattr(child.args, "kwonlyargs"):
+                        for arg in child.args.kwonlyargs:
+                            behavioral_refs.extend(extract_referenced_types(arg.annotation))
+                    if child.args.vararg:
+                        behavioral_refs.extend(extract_referenced_types(child.args.vararg.annotation))
+                    if child.args.kwarg:
+                        behavioral_refs.extend(extract_referenced_types(child.args.kwarg.annotation))
+                    behavioral_refs.extend(extract_referenced_types(child.returns))
+
                     if child.name == "__init__":
                         cls_info["constructor"] = method_info
                     else:
                         cls_info["methods"].append(method_info)
+
+            cls_info["structural_refs"] = list(dict.fromkeys(structural_refs))
+            cls_info["behavioral_refs"] = list(dict.fromkeys(behavioral_refs))
             classes.append(cls_info)
         elif isinstance(node, ast.FunctionDef):
             is_private = node.name.startswith("_")
@@ -274,12 +313,15 @@ def clean_plantuml_type(t):
     return t
 
 
-def generate_plantuml(classes):
+def generate_plantuml(classes, py_file):
     """Generate PlantUML class diagram for the classes."""
     if not classes:
         return ""
 
     lines = ["```plantuml", "classDiagram", "    direction BT"]
+
+    edges = set()
+    current_pkg = os.path.dirname(py_file)
 
     for cls in classes:
         lines.append(f"    class {cls['name']} {{")
@@ -298,6 +340,23 @@ def generate_plantuml(classes):
         for base in cls["bases"]:
             base_name = base.split(".")[-1]
             lines.append(f"    {base_name} <|-- {cls['name']} : Generalization")
+
+        # Add structural relationships
+        for ref in cls.get("structural_refs", []):
+            if ref in registry["class_to_module"]:
+                ref_file = registry["class_to_module"][ref]
+                if os.path.dirname(ref_file).startswith(current_pkg) or current_pkg.startswith(os.path.dirname(ref_file)):
+                    edges.add(f"    {cls['name']} *-- {ref} : Composition")
+
+        # Add behavioral relationships
+        for ref in cls.get("behavioral_refs", []):
+            if ref in registry["class_to_module"]:
+                ref_file = registry["class_to_module"][ref]
+                if os.path.dirname(ref_file).startswith(current_pkg) or current_pkg.startswith(os.path.dirname(ref_file)):
+                    edges.add(f"    {cls['name']} ..> {ref} : Dependency")
+
+    for edge in sorted(edges):
+        lines.append(edge)
 
     lines.append("```")
     return "\n".join(lines)
@@ -435,7 +494,7 @@ last_verified_commit: "{commit_hash}"
 
     body.append("## 2. UML Diagrams")
     body.append("### Class Diagram")
-    puml = generate_plantuml(parsed_data["classes"])
+    puml = generate_plantuml(parsed_data["classes"], relative_filepath)
     if puml:
         body.append(puml)
     else:
@@ -580,6 +639,7 @@ last_verified_commit: "{commit_hash}"
     else:
         body.append("_Not used by any other module._")
 
+    body = [b for b in body if b]
     return frontmatter + "\n\n".join(body) + "\n"
 
 

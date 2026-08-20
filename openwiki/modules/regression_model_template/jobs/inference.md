@@ -6,10 +6,10 @@ title: "Module: inference"
 source_path: "src/regression_model_template/jobs/inference.py"
 description: "Define a job for generating batch predictions from a registered model."
 tags: ["module", "inference"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-20T05:56:47Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: inference
 
@@ -39,6 +39,7 @@ classDiagram
         +run(self: Any) base.Locals
     }
     Job <|-- InferenceJob : Generalization
+    InferenceJob *-- InferenceJob : Composition
 ```
 
 ### Sequence Diagram

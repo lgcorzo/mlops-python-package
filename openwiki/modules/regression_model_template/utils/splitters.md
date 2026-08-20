@@ -6,10 +6,10 @@ title: "Module: splitters"
 source_path: "src/regression_model_template/utils/splitters.py"
 description: "Split dataframes into subsets (e.g., train/valid/test)."
 tags: ["module", "splitters"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-20T05:56:47Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: splitters
 
@@ -55,6 +55,8 @@ classDiagram
         +get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) int
     }
     Splitter <|-- TimeSeriesSplitter : Generalization
+    TimeSeriesSplitter *-- TimeSeriesSplitter : Composition
+    TrainTestSplitter *-- TrainTestSplitter : Composition
 ```
 
 ### Sequence Diagram
