@@ -6,10 +6,10 @@ title: "Module: containers"
 source_path: "tasks/containers.py"
 description: "Container tasks for pyinvoke."
 tags: ["module", "containers"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-21T05:06:05Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: containers
 

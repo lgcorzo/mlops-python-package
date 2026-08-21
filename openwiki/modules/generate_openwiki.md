@@ -6,10 +6,10 @@ title: "Module: generate_openwiki"
 source_path: "generate_openwiki.py"
 description: "No description available."
 tags: ["module", "generate_openwiki"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-21T05:06:05Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: generate_openwiki
 
@@ -97,12 +97,14 @@ sequenceDiagram
     generate_call_graph->>join: invoke
     generate_call_graph->>keys: invoke
     generate_call_graph->>get: invoke
+    generate_dependency_graph->>set: invoke
     generate_dependency_graph->>items: invoke
     generate_dependency_graph->>sorted: invoke
     generate_dependency_graph->>append: invoke
     generate_dependency_graph->>join: invoke
     generate_dependency_graph->>splitext: invoke
     generate_dependency_graph->>basename: invoke
+    generate_dependency_graph->>add: invoke
     generate_dependency_graph->>split: invoke
     generate_markdown->>strftime: invoke
     generate_markdown->>get_last_commit: invoke
