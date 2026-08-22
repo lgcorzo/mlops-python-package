@@ -121,6 +121,8 @@ def unparse_annotation(node):
     elif isinstance(node, ast.Subscript):
         return f"{unparse_annotation(node.value)}[{unparse_annotation(node.slice)}]"
     elif isinstance(node, ast.Constant):
+        if isinstance(node.value, str):
+            return node.value
         return str(node.value)
     elif isinstance(node, ast.Tuple):
         return f"({', '.join(unparse_annotation(el) for el in node.elts)})"
@@ -144,33 +146,40 @@ def extract_docstring(node):
 def parse_args(args):
     parsed = []
     defaults = args.defaults
-    # Defaults are aligned to the end of args.args
-    offset = len(args.args) - len(defaults)
+    # Defaults are aligned to the end of args.args + args.posonlyargs
+    total_positional = len(args.posonlyargs) + len(args.args)
+    offset = total_positional - len(defaults)
 
-    for i, arg in enumerate(args.args):
-        parsed.append(
-            {
-                "name": arg.arg,
-                "type": unparse_annotation(arg.annotation),
-                "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
-            }
-        )
+    for i, arg in enumerate(args.posonlyargs):
+        parsed.append({
+            "name": arg.arg,
+            "type": unparse_annotation(arg.annotation),
+            "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
+        })
+    for i, arg in enumerate(args.args, start=len(args.posonlyargs)):
+        parsed.append({
+            "name": arg.arg,
+            "type": unparse_annotation(arg.annotation),
+            "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
+        })
     if args.vararg:
-        parsed.append(
-            {
-                "name": f"*{args.vararg.arg}",
-                "type": unparse_annotation(args.vararg.annotation),
-                "default": None,
-            }
-        )
+        parsed.append({
+            "name": f"*{args.vararg.arg}",
+            "type": unparse_annotation(args.vararg.annotation),
+            "default": None,
+        })
+    for i, arg in enumerate(args.kwonlyargs):
+        parsed.append({
+            "name": arg.arg,
+            "type": unparse_annotation(arg.annotation),
+            "default": ast.unparse(args.kw_defaults[i]) if args.kw_defaults[i] is not None else None,
+        })
     if args.kwarg:
-        parsed.append(
-            {
-                "name": f"**{args.kwarg.arg}",
-                "type": unparse_annotation(args.kwarg.annotation),
-                "default": None,
-            }
-        )
+        parsed.append({
+            "name": f"**{args.kwarg.arg}",
+            "type": unparse_annotation(args.kwarg.annotation),
+            "default": None,
+        })
     return parsed
 
 
@@ -213,12 +222,10 @@ def parse_python_file(filepath):
 
             for child in node.body:
                 if isinstance(child, ast.AnnAssign) and isinstance(child.target, ast.Name):
-                    cls_info["attributes"].append(
-                        {
-                            "name": child.target.id,
-                            "type": unparse_annotation(child.annotation),
-                        }
-                    )
+                    cls_info["attributes"].append({
+                        "name": child.target.id,
+                        "type": unparse_annotation(child.annotation),
+                    })
                 elif isinstance(child, ast.Assign):
                     for target in child.targets:
                         if isinstance(target, ast.Name):
@@ -246,18 +253,16 @@ def parse_python_file(filepath):
             is_private = node.name.startswith("_")
             docstring = extract_docstring(node)
             extracted = extract_complex_doc(docstring)
-            functions.append(
-                {
-                    "name": node.name,
-                    "docstring": extracted["description"],
-                    "complexity": extracted["complexity"],
-                    "side_effects": extracted["side_effects"],
-                    "args": parse_args(node.args),
-                    "returns": unparse_annotation(node.returns),
-                    "is_private": is_private,
-                    "calls": extract_calls(node),
-                }
-            )
+            functions.append({
+                "name": node.name,
+                "docstring": extracted["description"],
+                "complexity": extracted["complexity"],
+                "side_effects": extracted["side_effects"],
+                "args": parse_args(node.args),
+                "returns": unparse_annotation(node.returns),
+                "is_private": is_private,
+                "calls": extract_calls(node),
+            })
 
     return {
         "filepath": filepath,
@@ -366,13 +371,13 @@ def generate_call_graph():
 
 def generate_dependency_graph():
     lines = ["```plantuml", "digraph Dependencies {"]
-    edges = []
+    edges = set()
     for mod_path, data in registry["modules"].items():
         mod_name = os.path.splitext(os.path.basename(mod_path))[0]
         for imp in data["imports"]:
             imp_name = imp.split(".")[-1] if "." in imp else imp
             if imp_name != "*":
-                edges.append(f'    "{mod_name}" -> "{imp_name}"')
+                edges.add(f'    "{mod_name}" -> "{imp_name}"')
     for edge in sorted(edges):
         lines.append(edge)
     lines.append("}")
@@ -580,7 +585,7 @@ last_verified_commit: "{commit_hash}"
     else:
         body.append("_Not used by any other module._")
 
-    return frontmatter + "\n\n".join(body) + "\n"
+    return frontmatter + "\n\n".join(b for b in body if b) + "\n"
 
 
 def update_index_files(processed_files):
