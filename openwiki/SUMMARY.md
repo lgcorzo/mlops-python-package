@@ -5,10 +5,10 @@ type: "summary"
 title: "Summary"
 description: "Auto-generated summary."
 tags: ["summary"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-22T05:33:26Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Summary
 
@@ -138,7 +138,7 @@ last_verified_commit: "5aba7e1"
 * [outputs](modules/../tests/conftest.md#outputs)
 * [outputs_path](modules/../tests/conftest.md#outputs_path)
 * [outputs_reader](modules/../tests/conftest.md#outputs_reader)
-* [parse_args](modules/../generate_openwiki.md#parse_args)
+* [parse_args](modules/../test_parse_bug.md#parse_args)
 * [parse_file](modules/regression_model_template/io/configs.md#parse_file)
 * [parse_python_file](modules/../generate_openwiki.md#parse_python_file)
 * [parse_string](modules/regression_model_template/io/configs.md#parse_string)
@@ -262,7 +262,7 @@ last_verified_commit: "5aba7e1"
 * [train_test_sets](modules/../tests/conftest.md#train_test_sets)
 * [train_test_splitter](modules/../tests/conftest.md#train_test_splitter)
 * [type](modules/../tasks/checks.md#type)
-* [unparse_annotation](modules/../generate_openwiki.md#unparse_annotation)
+* [unparse_annotation](modules/../test_parse.md#unparse_annotation)
 * [update_index_files](modules/../generate_openwiki.md#update_index_files)
 * [uri_for_model_alias](modules/regression_model_template/io/registries.md#uri_for_model_alias)
 * [uri_for_model_alias_or_version](modules/regression_model_template/io/registries.md#uri_for_model_alias_or_version)
@@ -305,6 +305,7 @@ last_verified_commit: "5aba7e1"
 * [okf_validate](modules/skills/validate/scripts/okf_validate.md)
 * [osvariables](modules/regression_model_template/io/osvariables.md)
 * [packages](modules/tasks/packages.md)
+* [patch](modules/patch.md)
 * [projects](modules/tasks/projects.md)
 * [promotion](modules/regression_model_template/jobs/promotion.md)
 * [registries](modules/regression_model_template/io/registries.md)
@@ -331,6 +332,8 @@ last_verified_commit: "5aba7e1"
 * [test_metrics](modules/tests/core/test_metrics.md)
 * [test_middleware_config](modules/tests/controller/test_middleware_config.md)
 * [test_models](modules/tests/core/test_models.md)
+* [test_parse](modules/test_parse.md)
+* [test_parse_bug](modules/test_parse_bug.md)
 * [test_promotion](modules/tests/jobs/test_promotion.md)
 * [test_rate_limiter](modules/tests/controller/test_rate_limiter.md)
 * [test_registries](modules/tests/io/test_registries.md)

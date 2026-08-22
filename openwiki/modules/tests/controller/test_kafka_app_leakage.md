@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_leakage"
 source_path: "tests/controller/test_kafka_app_leakage.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_leakage"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-22T05:33:26Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: test_kafka_app_leakage
 

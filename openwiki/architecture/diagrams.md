@@ -5,10 +5,10 @@ type: "diagrams"
 title: "Diagrams"
 description: "Auto-generated architecture diagrams."
 tags: ["diagrams"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-22T05:33:26Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Architecture Diagrams
 
@@ -200,6 +200,7 @@ digraph Dependencies {
     "packages" -> "Context"
     "packages" -> "cleans"
     "packages" -> "task"
+    "patch" -> "ast"
     "projects" -> "Context"
     "projects" -> "call"
     "projects" -> "json"
@@ -368,6 +369,8 @@ digraph Dependencies {
     "test_models" -> "pytest"
     "test_models" -> "schemas"
     "test_models" -> "typing"
+    "test_parse" -> "ast"
+    "test_parse_bug" -> "ast"
     "test_promotion" -> "capture"
     "test_promotion" -> "jobs"
     "test_promotion" -> "mlflow"

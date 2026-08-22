@@ -6,10 +6,10 @@ title: "Module: test_splitters"
 source_path: "tests/utils/test_splitters.py"
 description: "No description available."
 tags: ["module", "test_splitters"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-22T05:33:26Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: test_splitters
 

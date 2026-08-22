@@ -121,6 +121,8 @@ def unparse_annotation(node):
     elif isinstance(node, ast.Subscript):
         return f"{unparse_annotation(node.value)}[{unparse_annotation(node.slice)}]"
     elif isinstance(node, ast.Constant):
+        if isinstance(node.value, str):
+            return node.value
         return str(node.value)
     elif isinstance(node, ast.Tuple):
         return f"({', '.join(unparse_annotation(el) for el in node.elts)})"
@@ -143,16 +145,22 @@ def extract_docstring(node):
 
 def parse_args(args):
     parsed = []
+    pos_kw_args = getattr(args, 'posonlyargs', []) + args.args
     defaults = args.defaults
-    # Defaults are aligned to the end of args.args
-    offset = len(args.args) - len(defaults)
+    # Defaults are aligned to the end of posonlyargs + args
+    offset = len(pos_kw_args) - len(defaults)
 
-    for i, arg in enumerate(args.args):
+    for i, arg in enumerate(pos_kw_args):
+        default_val = None
+        if i >= offset:
+            default_node = defaults[i - offset]
+            if default_node is not None:
+                default_val = ast.unparse(default_node)
         parsed.append(
             {
                 "name": arg.arg,
                 "type": unparse_annotation(arg.annotation),
-                "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
+                "default": default_val,
             }
         )
     if args.vararg:
@@ -161,6 +169,19 @@ def parse_args(args):
                 "name": f"*{args.vararg.arg}",
                 "type": unparse_annotation(args.vararg.annotation),
                 "default": None,
+            }
+        )
+    kwonlyargs = getattr(args, 'kwonlyargs', [])
+    kw_defaults = getattr(args, 'kw_defaults', [])
+    for i, arg in enumerate(kwonlyargs):
+        default_val = None
+        if kw_defaults and i < len(kw_defaults) and kw_defaults[i] is not None:
+            default_val = ast.unparse(kw_defaults[i])
+        parsed.append(
+            {
+                "name": arg.arg,
+                "type": unparse_annotation(arg.annotation),
+                "default": default_val,
             }
         )
     if args.kwarg:

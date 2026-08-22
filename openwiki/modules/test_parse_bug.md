@@ -2,18 +2,18 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: test_signers"
-source_path: "tests/utils/test_signers.py"
+title: "Module: test_parse_bug"
+source_path: "test_parse_bug.py"
 description: "No description available."
-tags: ["module", "test_signers"]
+tags: ["module", "test_parse_bug"]
 timestamp: "2026-08-22T05:33:26Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
 last_verified_commit: "32cdac7"
 ---
-# Module Specification: test_signers
+# Module Specification: test_parse_bug
 
-* **Source Reference:** [tests/utils/test_signers.py](../../../../tests/utils/test_signers.py)
+* **Source Reference:** [test_parse_bug.py](../../test_parse_bug.py)
 
 ## 1. Architectural Role & Responsibilities
 
@@ -33,42 +33,37 @@ _No classes found._
 
 ```plantuml
 sequenceDiagram
-    test_infer_signer->>InferSigner: invoke
-    test_infer_signer->>sign: invoke
-    test_infer_signer->>set: invoke
-    test_infer_signer->>input_names: invoke
+    parse_args->>enumerate: invoke
+    parse_args->>len: invoke
+    parse_args->>append: invoke
+    parse_args->>unparse: invoke
 ```
 
 ### Component Diagram
 
 ```plantuml
-component [test_signers] as Comp
-Comp --> [schemas]
-Comp --> [signers]
+component [test_parse_bug] as Comp
+Comp --> [ast]
 ```
 
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
 
-### `test_infer_signer(inputs: schemas.Inputs, outputs: schemas.Outputs) -> None`
+### `parse_args(args: Any) -> Any`
 
 No description available.
 
 #### Inputs
 
-* `inputs` (`schemas.Inputs`)
-
-* `outputs` (`schemas.Outputs`)
+* `args` (`Any`)
 
 #### Outputs
-* `None`
+* `Any`
 
 ## Dependencies
 
-* `regression_model_template.core.schemas`
-
-* `regression_model_template.utils.signers`
+* `ast`
 
 ## Used By
 

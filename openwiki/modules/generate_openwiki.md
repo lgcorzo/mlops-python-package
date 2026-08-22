@@ -6,10 +6,10 @@ title: "Module: generate_openwiki"
 source_path: "generate_openwiki.py"
 description: "No description available."
 tags: ["module", "generate_openwiki"]
-timestamp: "2026-08-18T05:58:44Z"
+timestamp: "2026-08-22T05:33:25Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5aba7e1"
+last_verified_commit: "32cdac7"
 ---
 # Module Specification: generate_openwiki
 
@@ -65,10 +65,11 @@ sequenceDiagram
     unparse_annotation->>join: invoke
     extract_docstring->>get_docstring: invoke
     parse_args->>enumerate: invoke
+    parse_args->>getattr: invoke
     parse_args->>len: invoke
     parse_args->>append: invoke
-    parse_args->>unparse_annotation: invoke
     parse_args->>unparse: invoke
+    parse_args->>unparse_annotation: invoke
     parse_python_file->>parse: invoke
     parse_python_file->>extract_docstring: invoke
     parse_python_file->>open: invoke
