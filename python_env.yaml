@@ -178,7 +178,7 @@
         "slicer==0.0.8",
         "smmap==5.0.3",
         "sqlalchemy==2.0.51",
-        "sqlparse==0.5.5",
+        "sqlparse==0.6.0",
         "sqltrie==0.11.2",
         "starlette-exporter==0.24.0",
         "starlette==0.50.0",
