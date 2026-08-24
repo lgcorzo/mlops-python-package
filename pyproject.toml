@@ -45,6 +45,8 @@ dependencies = [
     "starlette (>=0.50.0,<1.0.0)",
     # explicitly define secure version for transitive dependency cryptography (April 2026 environment)
     "cryptography (>=46.0.6,<50.0.0)",
+    # explicitly define secure version for transitive dependency (April 2026 environment)
+    "gitpython (==3.1.58)",
 ]
 
 [project.scripts]
