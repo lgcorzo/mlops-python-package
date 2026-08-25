@@ -111,6 +111,20 @@ def extract_complex_doc(docstring):
     }
 
 
+def extract_type_refs(node):
+    refs = []
+    if node is None:
+        return refs
+    for child in ast.walk(node):
+        if isinstance(child, ast.Name):
+            refs.append(child.id)
+        elif isinstance(child, ast.Attribute):
+            refs.append(child.attr)
+        elif isinstance(child, ast.Constant) and isinstance(child.value, str):
+            refs.append(child.value)
+    return list(dict.fromkeys(refs))
+
+
 def unparse_annotation(node):
     if node is None:
         return "Any"
@@ -146,40 +160,56 @@ def extract_docstring(node):
 def parse_args(args):
     parsed = []
     defaults = args.defaults
+    posonlyargs = getattr(args, "posonlyargs", [])
     # Defaults are aligned to the end of args.args + args.posonlyargs
-    total_positional = len(args.posonlyargs) + len(args.args)
+    total_positional = len(posonlyargs) + len(args.args)
     offset = total_positional - len(defaults)
 
-    for i, arg in enumerate(args.posonlyargs):
-        parsed.append({
-            "name": arg.arg,
-            "type": unparse_annotation(arg.annotation),
-            "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
-        })
-    for i, arg in enumerate(args.args, start=len(args.posonlyargs)):
-        parsed.append({
-            "name": arg.arg,
-            "type": unparse_annotation(arg.annotation),
-            "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
-        })
+    for i, arg in enumerate(posonlyargs):
+        parsed.append(
+            {
+                "name": arg.arg,
+                "type": unparse_annotation(arg.annotation),
+                "type_refs": extract_type_refs(arg.annotation),
+                "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
+            }
+        )
+    for i, arg in enumerate(args.args, start=len(posonlyargs)):
+        parsed.append(
+            {
+                "name": arg.arg,
+                "type": unparse_annotation(arg.annotation),
+                "type_refs": extract_type_refs(arg.annotation),
+                "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
+            }
+        )
     if args.vararg:
-        parsed.append({
-            "name": f"*{args.vararg.arg}",
-            "type": unparse_annotation(args.vararg.annotation),
-            "default": None,
-        })
+        parsed.append(
+            {
+                "name": f"*{args.vararg.arg}",
+                "type": unparse_annotation(args.vararg.annotation),
+                "type_refs": extract_type_refs(args.vararg.annotation),
+                "default": None,
+            }
+        )
     for i, arg in enumerate(args.kwonlyargs):
-        parsed.append({
-            "name": arg.arg,
-            "type": unparse_annotation(arg.annotation),
-            "default": ast.unparse(args.kw_defaults[i]) if args.kw_defaults[i] is not None else None,
-        })
+        parsed.append(
+            {
+                "name": arg.arg,
+                "type": unparse_annotation(arg.annotation),
+                "type_refs": extract_type_refs(arg.annotation),
+                "default": ast.unparse(args.kw_defaults[i]) if args.kw_defaults[i] is not None else None,
+            }
+        )
     if args.kwarg:
-        parsed.append({
-            "name": f"**{args.kwarg.arg}",
-            "type": unparse_annotation(args.kwarg.annotation),
-            "default": None,
-        })
+        parsed.append(
+            {
+                "name": f"**{args.kwarg.arg}",
+                "type": unparse_annotation(args.kwarg.annotation),
+                "type_refs": extract_type_refs(args.kwarg.annotation),
+                "default": None,
+            }
+        )
     return parsed
 
 
@@ -222,14 +252,17 @@ def parse_python_file(filepath):
 
             for child in node.body:
                 if isinstance(child, ast.AnnAssign) and isinstance(child.target, ast.Name):
-                    cls_info["attributes"].append({
-                        "name": child.target.id,
-                        "type": unparse_annotation(child.annotation),
-                    })
+                    cls_info["attributes"].append(
+                        {
+                            "name": child.target.id,
+                            "type": unparse_annotation(child.annotation),
+                            "type_refs": extract_type_refs(child.annotation),
+                        }
+                    )
                 elif isinstance(child, ast.Assign):
                     for target in child.targets:
                         if isinstance(target, ast.Name):
-                            cls_info["attributes"].append({"name": target.id, "type": "Any"})
+                            cls_info["attributes"].append({"name": target.id, "type": "Any", "type_refs": []})
                 elif isinstance(child, ast.FunctionDef):
                     is_private = child.name.startswith("_") and child.name != "__init__"
                     docstring = extract_docstring(child)
@@ -241,6 +274,7 @@ def parse_python_file(filepath):
                         "side_effects": extracted["side_effects"],
                         "args": parse_args(child.args),
                         "returns": unparse_annotation(child.returns),
+                        "return_type_refs": extract_type_refs(child.returns),
                         "is_private": is_private,
                         "calls": extract_calls(child),
                     }
@@ -253,16 +287,19 @@ def parse_python_file(filepath):
             is_private = node.name.startswith("_")
             docstring = extract_docstring(node)
             extracted = extract_complex_doc(docstring)
-            functions.append({
-                "name": node.name,
-                "docstring": extracted["description"],
-                "complexity": extracted["complexity"],
-                "side_effects": extracted["side_effects"],
-                "args": parse_args(node.args),
-                "returns": unparse_annotation(node.returns),
-                "is_private": is_private,
-                "calls": extract_calls(node),
-            })
+            functions.append(
+                {
+                    "name": node.name,
+                    "docstring": extracted["description"],
+                    "complexity": extracted["complexity"],
+                    "side_effects": extracted["side_effects"],
+                    "args": parse_args(node.args),
+                    "returns": unparse_annotation(node.returns),
+                    "return_type_refs": extract_type_refs(node.returns),
+                    "is_private": is_private,
+                    "calls": extract_calls(node),
+                }
+            )
 
     return {
         "filepath": filepath,
@@ -286,23 +323,43 @@ def generate_plantuml(classes):
 
     lines = ["```plantuml", "classDiagram", "    direction BT"]
 
+    class_names = {cls["name"] for cls in classes}
+    relationships = set()
+
     for cls in classes:
         lines.append(f"    class {cls['name']} {{")
         # Add attributes
         for attr in cls["attributes"]:
             safe_type = clean_plantuml_type(attr["type"])
             lines.append(f"        +{attr['name']}: {safe_type}")
+            for ref in attr.get("type_refs", []):
+                if ref in class_names and ref != cls["name"]:
+                    relationships.add(f"    {cls['name']} --> {ref} : Association")
+
         # Add methods
         for method in cls["methods"]:
             args_str = ", ".join(f"{arg['name']}: {clean_plantuml_type(arg['type'])}" for arg in method["args"])
             ret_str = clean_plantuml_type(method["returns"])
             lines.append(f"        +{method['name']}({args_str}) {ret_str}")
+
+            for arg in method["args"]:
+                for ref in arg.get("type_refs", []):
+                    if ref in class_names and ref != cls["name"]:
+                        relationships.add(f"    {cls['name']} ..> {ref} : Usage")
+
+            for ref in method.get("return_type_refs", []):
+                if ref in class_names and ref != cls["name"]:
+                    relationships.add(f"    {cls['name']} ..> {ref} : Usage")
+
         lines.append("    }")
 
         # Add inheritance
         for base in cls["bases"]:
             base_name = base.split(".")[-1]
             lines.append(f"    {base_name} <|-- {cls['name']} : Generalization")
+
+    for rel in sorted(relationships):
+        lines.append(rel)
 
     lines.append("```")
     return "\n".join(lines)

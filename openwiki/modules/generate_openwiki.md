@@ -6,10 +6,10 @@ title: "Module: generate_openwiki"
 source_path: "generate_openwiki.py"
 description: "No description available."
 tags: ["module", "generate_openwiki"]
-timestamp: "2026-08-21T05:06:05Z"
+timestamp: "2026-08-25T05:40:20Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "32cdac7"
+last_verified_commit: "74a428a"
 ---
 # Module Specification: generate_openwiki
 
@@ -58,16 +58,23 @@ sequenceDiagram
     extract_complex_doc->>lower: invoke
     extract_complex_doc->>append: invoke
     extract_complex_doc->>join: invoke
+    extract_type_refs->>walk: invoke
+    extract_type_refs->>list: invoke
+    extract_type_refs->>isinstance: invoke
+    extract_type_refs->>fromkeys: invoke
+    extract_type_refs->>append: invoke
     unparse_annotation->>isinstance: invoke
     unparse_annotation->>unparse: invoke
     unparse_annotation->>unparse_annotation: invoke
     unparse_annotation->>str: invoke
     unparse_annotation->>join: invoke
     extract_docstring->>get_docstring: invoke
+    parse_args->>getattr: invoke
     parse_args->>enumerate: invoke
     parse_args->>len: invoke
     parse_args->>append: invoke
     parse_args->>unparse_annotation: invoke
+    parse_args->>extract_type_refs: invoke
     parse_args->>unparse: invoke
     parse_python_file->>parse: invoke
     parse_python_file->>extract_docstring: invoke
@@ -80,11 +87,16 @@ sequenceDiagram
     parse_python_file->>startswith: invoke
     parse_python_file->>unparse_annotation: invoke
     parse_python_file->>parse_args: invoke
+    parse_python_file->>extract_type_refs: invoke
     clean_plantuml_type->>replace: invoke
+    generate_plantuml->>set: invoke
+    generate_plantuml->>sorted: invoke
     generate_plantuml->>append: invoke
     generate_plantuml->>join: invoke
     generate_plantuml->>clean_plantuml_type: invoke
+    generate_plantuml->>get: invoke
     generate_plantuml->>split: invoke
+    generate_plantuml->>add: invoke
     build_registry->>parse_python_file: invoke
     generate_package_diagram_content->>keys: invoke
     generate_package_diagram_content->>sorted: invoke
@@ -260,6 +272,17 @@ No description available.
 #### Inputs
 
 * `docstring` (`Any`)
+
+#### Outputs
+* `Any`
+
+### `extract_type_refs(node: Any) -> Any`
+
+No description available.
+
+#### Inputs
+
+* `node` (`Any`)
 
 #### Outputs
 * `Any`
