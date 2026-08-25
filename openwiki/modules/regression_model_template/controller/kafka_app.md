@@ -6,10 +6,10 @@ title: "Module: kafka_app"
 source_path: "src/regression_model_template/controller/kafka_app.py"
 description: "FastAPI and Kafka Service for Predictions with Logging."
 tags: ["module", "kafka_app"]
-timestamp: "2026-08-21T05:06:05Z"
+timestamp: "2026-08-25T05:40:20Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "32cdac7"
+last_verified_commit: "74a428a"
 ---
 # Module Specification: kafka_app
 
@@ -60,6 +60,8 @@ classDiagram
     class PredictionService {
         +predict(self: Any, input_data: PredictionRequest) PredictionResponse
     }
+    PredictionService ..> PredictionRequest : Usage
+    PredictionService ..> PredictionResponse : Usage
 ```
 
 ### Sequence Diagram

@@ -5,10 +5,10 @@ type: "summary"
 title: "Summary"
 description: "Auto-generated summary."
 tags: ["summary"]
-timestamp: "2026-08-21T05:06:05Z"
+timestamp: "2026-08-25T05:40:20Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "32cdac7"
+last_verified_commit: "74a428a"
 ---
 # Summary
 
@@ -104,6 +104,7 @@ last_verified_commit: "32cdac7"
 * [extract_complex_doc](modules/../generate_openwiki.md#extract_complex_doc)
 * [extract_docstring](modules/../generate_openwiki.md#extract_docstring)
 * [extract_frontmatter](modules/../skills/validate/scripts/okf_validate.md#extract_frontmatter)
+* [extract_type_refs](modules/../generate_openwiki.md#extract_type_refs)
 * [folders](modules/../tasks/cleans.md#folders)
 * [format](modules/../tasks/checks.md#format)
 * [generate_call_graph](modules/../generate_openwiki.md#generate_call_graph)
