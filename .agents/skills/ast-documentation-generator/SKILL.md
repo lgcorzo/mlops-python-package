@@ -521,7 +521,7 @@ Public API index
 
 # Language
 
-Documentation must be written in high quality technical English.
+Documentation must be written in high-quality technical English.
 
 Descriptions should be written in clear natural language suitable for both developers and AI agents.
 
