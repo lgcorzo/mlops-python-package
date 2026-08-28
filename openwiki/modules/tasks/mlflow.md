@@ -6,18 +6,46 @@ title: "Module: mlflow"
 source_path: "tasks/mlflow.py"
 description: "Mlflow tasks for pyinvoke."
 tags: ["module", "mlflow"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: mlflow
 
 * **Source Reference:** [tasks/mlflow.py](../../../tasks/mlflow.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Mlflow tasks for pyinvoke.
+
+## Responsibilities
+
+Mlflow tasks for pyinvoke.
+
+## Dependencies
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+# Each File Documentation
+
+## Imported modules
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+## Exported functions
+
+* `doctor`
+
+* `serve`
+
+* `all`
 
 ### Detected Architecture Patterns
 
@@ -52,48 +80,81 @@ Comp --> [task]
 
 ### `doctor(ctx: Context) -> None`
 
+### Description
+
 Run mlflow doctor.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `serve(ctx: Context, host: str, port: str, backend_uri: str) -> None`
 
+### Description
+
 Start the mlflow server.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-* `host` (`str`)
+  - **type**: Context
 
-* `port` (`str`)
+  - **optional?**: No
 
-* `backend_uri` (`str`)
+* `host`
 
-#### Outputs
-* `None`
+  - **type**: str
+
+  - **optional?**: Yes
+
+  - **default value**: '127.0.0.1'
+
+* `port`
+
+  - **type**: str
+
+  - **optional?**: Yes
+
+  - **default value**: '5000'
+
+* `backend_uri`
+
+  - **type**: str
+
+  - **optional?**: Yes
+
+  - **default value**: './mlruns'
+
+### Output
+
+* **return type**: None
 
 ### `all(_: Context) -> None`
 
+### Description
+
 Run all mlflow tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
 
-## Dependencies
+  - **optional?**: No
 
-* `invoke.context.Context`
+### Output
 
-* `invoke.tasks.task`
+* **return type**: None
 
 ## Used By
 

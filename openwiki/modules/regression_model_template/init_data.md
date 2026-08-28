@@ -6,18 +6,60 @@ title: "Module: init_data"
 source_path: "src/regression_model_template/init_data.py"
 description: "Script to initialize synthetic train and test parquet datasets."
 tags: ["module", "init_data"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: init_data
 
 * **Source Reference:** [src/regression_model_template/init_data.py](../../../src/regression_model_template/init_data.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Script to initialize synthetic train and test parquet datasets.
+
+## Responsibilities
+
+Script to initialize synthetic train and test parquet datasets.
+
+## Dependencies
+
+* `argparse`
+
+* `os`
+
+* `numpy`
+
+* `pandas`
+
+* `regression_model_template.core.schemas.InputsSchema`
+
+* `regression_model_template.core.schemas.TargetsSchema`
+
+# Each File Documentation
+
+## Imported modules
+
+* `argparse`
+
+* `os`
+
+* `numpy`
+
+* `pandas`
+
+* `regression_model_template.core.schemas.InputsSchema`
+
+* `regression_model_template.core.schemas.TargetsSchema`
+
+## Exported functions
+
+* `generate_data`
+
+* `main`
 
 ### Detected Architecture Patterns
 
@@ -71,37 +113,35 @@ Comp --> [TargetsSchema]
 
 ### `generate_data(output_dir: str) -> None`
 
+### Description
+
 Generate synthetic regression data and validate schemas.
 
-#### Inputs
+### Inputs
 
-* `output_dir` (`str`)
+* `output_dir`
 
-#### Outputs
-* `None`
+  - **type**: str
+
+  - **optional?**: Yes
+
+  - **default value**: 'data'
+
+### Output
+
+* **return type**: None
 
 ### `main() -> None`
 
+### Description
+
 CLI entry point for data initialization.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
 
-## Dependencies
-
-* `argparse`
-
-* `os`
-
-* `numpy`
-
-* `pandas`
-
-* `regression_model_template.core.schemas.InputsSchema`
-
-* `regression_model_template.core.schemas.TargetsSchema`
+* **return type**: None
 
 ## Used By
 

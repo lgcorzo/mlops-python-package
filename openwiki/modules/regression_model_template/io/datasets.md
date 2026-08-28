@@ -6,18 +6,60 @@ title: "Module: datasets"
 source_path: "src/regression_model_template/io/datasets.py"
 description: "Read/Write datasets from/to external sources/destinations."
 tags: ["module", "datasets"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: datasets
 
 * **Source Reference:** [src/regression_model_template/io/datasets.py](../../../../src/regression_model_template/io/datasets.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Read/Write datasets from/to external sources/destinations.
+
+## Responsibilities
+
+Read/Write datasets from/to external sources/destinations.
+
+## Dependencies
+
+* `abc`
+
+* `typing`
+
+* `mlflow.data.pandas_dataset`
+
+* `pandas`
+
+* `pydantic`
+
+# Each File Documentation
+
+## Imported modules
+
+* `abc`
+
+* `typing`
+
+* `mlflow.data.pandas_dataset`
+
+* `pandas`
+
+* `pydantic`
+
+## Exported classes
+
+* `Reader`
+
+* `ParquetReader`
+
+* `Writer`
+
+* `ParquetWriter`
 
 ### Detected Architecture Patterns
 
@@ -82,7 +124,11 @@ Comp --> [pydantic]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `Reader`
+
+## Overview
 
 Base class for a dataset reader.
 
@@ -92,148 +138,252 @@ e.g., to read file, database, cloud storage, ...
 Parameters:
     limit (int, optional): maximum number of rows to read. Defaults to None.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`str`)
+* **`KIND`**
 
-* **`limit`** (`int | None`)
+  - **Type**: str
 
-#### Public Methods
+* **`limit`**
+
+  - **Type**: int | None
+
+## Public Methods
 
 * **`read(self: Any) -> pd.DataFrame`**
 
-  - **Purpose**: Read a dataframe from a dataset.
+### Description
 
-  - **Inputs**:
+Read a dataframe from a dataset.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `pd.DataFrame`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: pd.DataFrame
 
 * **`lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`**
 
-  - **Purpose**: Generate lineage information.
+### Description
 
-  - **Inputs**:
+Generate lineage information.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `name` (`str`)
+* `self`
 
-    - `data` (`pd.DataFrame`)
+  - **type**: Any
 
-    - `targets` (`str | None`)
+  - **optional?**: No
 
-    - `predictions` (`str | None`)
+* `name`
 
-  - **Outputs**: `Lineage`
+  - **type**: str
+
+  - **optional?**: No
+
+* `data`
+
+  - **type**: pd.DataFrame
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: str | None
+
+  - **optional?**: Yes
+
+  - **default value**: None
+
+* `predictions`
+
+  - **type**: str | None
+
+  - **optional?**: Yes
+
+  - **default value**: None
+
+### Output
+
+* **return type**: Lineage
 
 ### `ParquetReader`
+
+## Overview
 
 Read a dataframe from a parquet file.
 
 Parameters:
     path (str): local path to the dataset.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[ParquetReader]`)
+* **`KIND`**
 
-* **`path`** (`str`)
+  - **Type**: T.Literal[ParquetReader]
 
-#### Public Methods
+* **`path`**
+
+  - **Type**: str
+
+## Public Methods
 
 * **`read(self: Any) -> pd.DataFrame`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `pd.DataFrame`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: pd.DataFrame
 
 * **`lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `name` (`str`)
+* `self`
 
-    - `data` (`pd.DataFrame`)
+  - **type**: Any
 
-    - `targets` (`str | None`)
+  - **optional?**: No
 
-    - `predictions` (`str | None`)
+* `name`
 
-  - **Outputs**: `Lineage`
+  - **type**: str
+
+  - **optional?**: No
+
+* `data`
+
+  - **type**: pd.DataFrame
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: str | None
+
+  - **optional?**: Yes
+
+  - **default value**: None
+
+* `predictions`
+
+  - **type**: str | None
+
+  - **optional?**: Yes
+
+  - **default value**: None
+
+### Output
+
+* **return type**: Lineage
 
 ### `Writer`
+
+## Overview
 
 Base class for a dataset writer.
 
 Use a writer to save a dataset from memory.
 e.g., to write file, database, cloud storage, ...
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`str`)
+* **`KIND`**
 
-#### Public Methods
+  - **Type**: str
+
+## Public Methods
 
 * **`write(self: Any, data: pd.DataFrame) -> None`**
 
-  - **Purpose**: Write a dataframe to a dataset.
+### Description
 
-  - **Inputs**:
+Write a dataframe to a dataset.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `data` (`pd.DataFrame`)
+* `self`
 
-  - **Outputs**: `None`
+  - **type**: Any
+
+  - **optional?**: No
+
+* `data`
+
+  - **type**: pd.DataFrame
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `ParquetWriter`
+
+## Overview
 
 Writer a dataframe to a parquet file.
 
 Parameters:
     path (str): local or S3 path to the dataset.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[ParquetWriter]`)
+* **`KIND`**
 
-* **`path`** (`str`)
+  - **Type**: T.Literal[ParquetWriter]
 
-#### Public Methods
+* **`path`**
+
+  - **Type**: str
+
+## Public Methods
 
 * **`write(self: Any, data: pd.DataFrame) -> None`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `data` (`pd.DataFrame`)
+* `self`
 
-  - **Outputs**: `None`
+  - **type**: Any
 
-## Dependencies
+  - **optional?**: No
 
-* `abc`
+* `data`
 
-* `typing`
+  - **type**: pd.DataFrame
 
-* `mlflow.data.pandas_dataset`
+  - **optional?**: No
 
-* `pandas`
+### Output
 
-* `pydantic`
+* **return type**: None
 
 ## Used By
 

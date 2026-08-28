@@ -6,18 +6,34 @@ title: "Module: __main__"
 source_path: "src/regression_model_template/__main__.py"
 description: "Entry point of the package."
 tags: ["module", "__main__"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:57Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: __main__
 
 * **Source Reference:** [src/regression_model_template/__main__.py](../../../src/regression_model_template/__main__.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Entry point of the package.
+
+## Responsibilities
+
+Entry point of the package.
+
+## Dependencies
+
+* `regression_model_template.scripts`
+
+# Each File Documentation
+
+## Imported modules
+
+* `regression_model_template.scripts`
 
 ### Detected Architecture Patterns
 
@@ -39,12 +55,6 @@ _No sequences found._
 component [__main__] as Comp
 Comp --> [scripts]
 ```
-
-## 3. Class & Method Specifications
-
-## Dependencies
-
-* `regression_model_template.scripts`
 
 ## Used By
 

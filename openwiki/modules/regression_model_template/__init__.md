@@ -6,18 +6,30 @@ title: "Module: __init__"
 source_path: "src/regression_model_template/__init__.py"
 description: "Predict the number of regression_model_template available."
 tags: ["module", "__init__"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:57Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: __init__
 
 * **Source Reference:** [src/regression_model_template/__init__.py](../../../src/regression_model_template/__init__.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Predict the number of regression_model_template available.
+
+## Responsibilities
+
+Predict the number of regression_model_template available.
+
+## Dependencies
+
+_No dependencies found._
+
+# Each File Documentation
 
 ### Detected Architecture Patterns
 
@@ -38,12 +50,6 @@ _No sequences found._
 ```plantuml
 component [__init__] as Comp
 ```
-
-## 3. Class & Method Specifications
-
-## Dependencies
-
-_No dependencies found._
 
 ## Used By
 

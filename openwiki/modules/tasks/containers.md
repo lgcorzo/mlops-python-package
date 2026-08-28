@@ -6,18 +6,52 @@ title: "Module: containers"
 source_path: "tasks/containers.py"
 description: "Container tasks for pyinvoke."
 tags: ["module", "containers"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: containers
 
 * **Source Reference:** [tasks/containers.py](../../../tasks/containers.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Container tasks for pyinvoke.
+
+## Responsibilities
+
+Container tasks for pyinvoke.
+
+## Dependencies
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+* `.packages`
+
+# Each File Documentation
+
+## Imported modules
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+* `.packages`
+
+## Exported functions
+
+* `compose`
+
+* `build`
+
+* `run`
+
+* `all`
 
 ### Detected Architecture Patterns
 
@@ -55,59 +89,91 @@ Comp --> [packages]
 
 ### `compose(ctx: Context) -> None`
 
+### Description
+
 Start up docker compose.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `build(ctx: Context, tag: str) -> None`
 
+### Description
+
 Build the container image.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-* `tag` (`str`)
+  - **type**: Context
 
-#### Outputs
-* `None`
+  - **optional?**: No
+
+* `tag`
+
+  - **type**: str
+
+  - **optional?**: Yes
+
+  - **default value**: IMAGE_TAG
+
+### Output
+
+* **return type**: None
 
 ### `run(ctx: Context, tag: str) -> None`
 
+### Description
+
 Run the container image.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-* `tag` (`str`)
+  - **type**: Context
 
-#### Outputs
-* `None`
+  - **optional?**: No
+
+* `tag`
+
+  - **type**: str
+
+  - **optional?**: Yes
+
+  - **default value**: IMAGE_TAG
+
+### Output
+
+* **return type**: None
 
 ### `all(_: Context) -> None`
 
+### Description
+
 Run all container tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
 
-## Dependencies
+  - **optional?**: No
 
-* `invoke.context.Context`
+### Output
 
-* `invoke.tasks.task`
-
-* `.packages`
+* **return type**: None
 
 ## Used By
 

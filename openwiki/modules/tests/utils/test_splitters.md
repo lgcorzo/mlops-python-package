@@ -6,18 +6,44 @@ title: "Module: test_splitters"
 source_path: "tests/utils/test_splitters.py"
 description: "No description available."
 tags: ["module", "test_splitters"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_splitters
 
 * **Source Reference:** [tests/utils/test_splitters.py](../../../../tests/utils/test_splitters.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.utils.splitters`
+
+# Each File Documentation
+
+## Imported modules
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.utils.splitters`
+
+## Exported functions
+
+* `test_train_test_splitter`
+
+* `test_time_series_splitter`
 
 ### Detected Architecture Patterns
 
@@ -62,35 +88,51 @@ Comp --> [splitters]
 
 ### `test_train_test_splitter(inputs: schemas.Inputs, targets: schemas.Targets) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `inputs` (`schemas.Inputs`)
+* `inputs`
 
-* `targets` (`schemas.Targets`)
+  - **type**: schemas.Inputs
 
-#### Outputs
-* `None`
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `test_time_series_splitter(inputs: schemas.Inputs, targets: schemas.Targets) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `inputs` (`schemas.Inputs`)
+* `inputs`
 
-* `targets` (`schemas.Targets`)
+  - **type**: schemas.Inputs
 
-#### Outputs
-* `None`
+  - **optional?**: No
 
-## Dependencies
+* `targets`
 
-* `regression_model_template.core.schemas`
+  - **type**: schemas.Targets
 
-* `regression_model_template.utils.splitters`
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ## Used By
 

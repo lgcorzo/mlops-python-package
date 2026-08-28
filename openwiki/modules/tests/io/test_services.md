@@ -6,18 +6,66 @@ title: "Module: test_services"
 source_path: "tests/io/test_services.py"
 description: "No description available."
 tags: ["module", "test_services"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_services
 
 * **Source Reference:** [tests/io/test_services.py](../../../../tests/io/test_services.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `_pytest.capture`
+
+* `_pytest.logging`
+
+* `mlflow`
+
+* `plyer`
+
+* `pytest`
+
+* `pytest_mock`
+
+* `regression_model_template.io.services`
+
+# Each File Documentation
+
+## Imported modules
+
+* `_pytest.capture`
+
+* `_pytest.logging`
+
+* `mlflow`
+
+* `plyer`
+
+* `pytest`
+
+* `pytest_mock`
+
+* `regression_model_template.io.services`
+
+## Exported functions
+
+* `test_logger_service`
+
+* `test_alerts_service`
+
+* `test_mlflow_service`
 
 ### Detected Architecture Patterns
 
@@ -73,58 +121,75 @@ Comp --> [services]
 
 ### `test_logger_service(logger_service: services.LoggerService, logger_caplog: pl.LogCaptureFixture) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `logger_service` (`services.LoggerService`)
+* `logger_service`
 
-* `logger_caplog` (`pl.LogCaptureFixture`)
+  - **type**: services.LoggerService
 
-#### Outputs
-* `None`
+  - **optional?**: No
+
+* `logger_caplog`
+
+  - **type**: pl.LogCaptureFixture
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `test_alerts_service(enable: bool, mocker: pm.MockerFixture, capsys: pc.CaptureFixture[str]) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `enable` (`bool`)
+* `enable`
 
-* `mocker` (`pm.MockerFixture`)
+  - **type**: bool
 
-* `capsys` (`pc.CaptureFixture[str]`)
+  - **optional?**: No
 
-#### Outputs
-* `None`
+* `mocker`
+
+  - **type**: pm.MockerFixture
+
+  - **optional?**: No
+
+* `capsys`
+
+  - **type**: pc.CaptureFixture[str]
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `test_mlflow_service(mlflow_service: services.MlflowService) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `mlflow_service` (`services.MlflowService`)
+* `mlflow_service`
 
-#### Outputs
-* `None`
+  - **type**: services.MlflowService
 
-## Dependencies
+  - **optional?**: No
 
-* `_pytest.capture`
+### Output
 
-* `_pytest.logging`
-
-* `mlflow`
-
-* `plyer`
-
-* `pytest`
-
-* `pytest_mock`
-
-* `regression_model_template.io.services`
+* **return type**: None
 
 ## Used By
 

@@ -6,18 +6,68 @@ title: "Module: test_middleware_config"
 source_path: "tests/controller/test_middleware_config.py"
 description: "No description available."
 tags: ["module", "test_middleware_config"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_middleware_config
 
 * **Source Reference:** [tests/controller/test_middleware_config.py](../../../../tests/controller/test_middleware_config.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `fastapi.middleware.cors.CORSMiddleware`
+
+* `fastapi.middleware.trustedhost.TrustedHostMiddleware`
+
+* `regression_model_template.controller.kafka_app`
+
+* `importlib`
+
+* `pytest`
+
+* `os`
+
+# Each File Documentation
+
+## Imported modules
+
+* `fastapi.middleware.cors.CORSMiddleware`
+
+* `fastapi.middleware.trustedhost.TrustedHostMiddleware`
+
+* `regression_model_template.controller.kafka_app`
+
+* `importlib`
+
+* `pytest`
+
+* `os`
+
+## Exported functions
+
+* `reset_module`
+
+* `test_middleware_presence`
+
+* `test_cors_default_config`
+
+* `test_trusted_host_default_config`
+
+* `test_custom_cors_config`
+
+* `test_custom_trusted_host_config`
 
 ### Detected Architecture Patterns
 
@@ -71,75 +121,87 @@ Comp --> [os]
 
 ### `reset_module() -> Any`
 
+### Description
+
 Reset module and env vars after each test to prevent state leakage.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_middleware_presence() -> Any`
 
+### Description
+
 Verify that CORSMiddleware and TrustedHostMiddleware are present.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_cors_default_config() -> Any`
 
+### Description
+
 Verify default CORS configuration.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_trusted_host_default_config() -> Any`
 
+### Description
+
 Verify default TrustedHost configuration.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_custom_cors_config(monkeypatch: Any) -> Any`
 
+### Description
+
 Verify custom CORS configuration via environment variables.
 
-#### Inputs
+### Inputs
 
-* `monkeypatch` (`Any`)
+* `monkeypatch`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_custom_trusted_host_config(monkeypatch: Any) -> Any`
 
+### Description
+
 Verify custom TrustedHost configuration via environment variables.
 
-#### Inputs
+### Inputs
 
-* `monkeypatch` (`Any`)
+* `monkeypatch`
 
-#### Outputs
-* `Any`
+  - **type**: Any
 
-## Dependencies
+  - **optional?**: No
 
-* `fastapi.middleware.cors.CORSMiddleware`
+### Output
 
-* `fastapi.middleware.trustedhost.TrustedHostMiddleware`
-
-* `regression_model_template.controller.kafka_app`
-
-* `importlib`
-
-* `pytest`
-
-* `os`
+* **return type**: Any
 
 ## Used By
 

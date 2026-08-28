@@ -6,18 +6,66 @@ title: "Module: test_evaluations"
 source_path: "tests/jobs/test_evaluations.py"
 description: "No description available."
 tags: ["module", "test_evaluations"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_evaluations
 
 * **Source Reference:** [tests/jobs/test_evaluations.py](../../../../tests/jobs/test_evaluations.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `_pytest.capture`
+
+* `pytest`
+
+* `regression_model_template.jobs`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+# Each File Documentation
+
+## Imported modules
+
+* `_pytest.capture`
+
+* `pytest`
+
+* `regression_model_template.jobs`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+## Exported functions
+
+* `test_evaluations_job`
 
 ### Detected Architecture Patterns
 
@@ -74,50 +122,75 @@ Comp --> [services]
 
 ### `test_evaluations_job(alias_or_version: str | int, thresholds: dict[(str, metrics.Threshold)], mlflow_service: services.MlflowService, alerts_service: services.AlertsService, logger_service: services.LoggerService, inputs_reader: datasets.ParquetReader, targets_reader: datasets.ParquetReader, model_alias: registries.Version, metric: metrics.Metric, capsys: pc.CaptureFixture[str]) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `alias_or_version` (`str | int`)
+* `alias_or_version`
 
-* `thresholds` (`dict[(str, metrics.Threshold)]`)
+  - **type**: str | int
 
-* `mlflow_service` (`services.MlflowService`)
+  - **optional?**: No
 
-* `alerts_service` (`services.AlertsService`)
+* `thresholds`
 
-* `logger_service` (`services.LoggerService`)
+  - **type**: dict[(str, metrics.Threshold)]
 
-* `inputs_reader` (`datasets.ParquetReader`)
+  - **optional?**: No
 
-* `targets_reader` (`datasets.ParquetReader`)
+* `mlflow_service`
 
-* `model_alias` (`registries.Version`)
+  - **type**: services.MlflowService
 
-* `metric` (`metrics.Metric`)
+  - **optional?**: No
 
-* `capsys` (`pc.CaptureFixture[str]`)
+* `alerts_service`
 
-#### Outputs
-* `None`
+  - **type**: services.AlertsService
 
-## Dependencies
+  - **optional?**: No
 
-* `_pytest.capture`
+* `logger_service`
 
-* `pytest`
+  - **type**: services.LoggerService
 
-* `regression_model_template.jobs`
+  - **optional?**: No
 
-* `regression_model_template.core.metrics`
+* `inputs_reader`
 
-* `regression_model_template.core.schemas`
+  - **type**: datasets.ParquetReader
 
-* `regression_model_template.io.datasets`
+  - **optional?**: No
 
-* `regression_model_template.io.registries`
+* `targets_reader`
 
-* `regression_model_template.io.services`
+  - **type**: datasets.ParquetReader
+
+  - **optional?**: No
+
+* `model_alias`
+
+  - **type**: registries.Version
+
+  - **optional?**: No
+
+* `metric`
+
+  - **type**: metrics.Metric
+
+  - **optional?**: No
+
+* `capsys`
+
+  - **type**: pc.CaptureFixture[str]
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ## Used By
 

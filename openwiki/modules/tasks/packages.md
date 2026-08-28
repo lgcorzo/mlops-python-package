@@ -6,18 +6,48 @@ title: "Module: packages"
 source_path: "tasks/packages.py"
 description: "Package tasks for pyinvoke."
 tags: ["module", "packages"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: packages
 
 * **Source Reference:** [tasks/packages.py](../../../tasks/packages.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Package tasks for pyinvoke.
+
+## Responsibilities
+
+Package tasks for pyinvoke.
+
+## Dependencies
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+* `.cleans`
+
+# Each File Documentation
+
+## Imported modules
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+* `.cleans`
+
+## Exported functions
+
+* `build`
+
+* `all`
 
 ### Detected Architecture Patterns
 
@@ -53,35 +83,47 @@ Comp --> [cleans]
 
 ### `build(ctx: Context, format: str) -> None`
 
+### Description
+
 Build the python package.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-* `format` (`str`)
+  - **type**: Context
 
-#### Outputs
-* `None`
+  - **optional?**: No
+
+* `format`
+
+  - **type**: str
+
+  - **optional?**: Yes
+
+  - **default value**: BUILD_FORMAT
+
+### Output
+
+* **return type**: None
 
 ### `all(_: Context) -> None`
 
+### Description
+
 Run all package tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
 
-## Dependencies
+  - **optional?**: No
 
-* `invoke.context.Context`
+### Output
 
-* `invoke.tasks.task`
-
-* `.cleans`
+* **return type**: None
 
 ## Used By
 

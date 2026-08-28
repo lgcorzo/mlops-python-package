@@ -6,18 +6,70 @@ title: "Module: test_tuning"
 source_path: "tests/jobs/test_tuning.py"
 description: "No description available."
 tags: ["module", "test_tuning"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_tuning
 
 * **Source Reference:** [tests/jobs/test_tuning.py](../../../../tests/jobs/test_tuning.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `_pytest.capture`
+
+* `regression_model_template.jobs`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.utils.searchers`
+
+* `regression_model_template.utils.splitters`
+
+# Each File Documentation
+
+## Imported modules
+
+* `_pytest.capture`
+
+* `regression_model_template.jobs`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.utils.searchers`
+
+* `regression_model_template.utils.splitters`
+
+## Exported functions
+
+* `test_tuning_job`
 
 ### Detected Architecture Patterns
 
@@ -69,52 +121,75 @@ Comp --> [splitters]
 
 ### `test_tuning_job(mlflow_service: services.MlflowService, alerts_service: services.AlertsService, logger_service: services.LoggerService, inputs_reader: datasets.ParquetReader, targets_reader: datasets.ParquetReader, model: models.Model, metric: metrics.Metric, time_series_splitter: splitters.Splitter, searcher: searchers.Searcher, capsys: pc.CaptureFixture[str]) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `mlflow_service` (`services.MlflowService`)
+* `mlflow_service`
 
-* `alerts_service` (`services.AlertsService`)
+  - **type**: services.MlflowService
 
-* `logger_service` (`services.LoggerService`)
+  - **optional?**: No
 
-* `inputs_reader` (`datasets.ParquetReader`)
+* `alerts_service`
 
-* `targets_reader` (`datasets.ParquetReader`)
+  - **type**: services.AlertsService
 
-* `model` (`models.Model`)
+  - **optional?**: No
 
-* `metric` (`metrics.Metric`)
+* `logger_service`
 
-* `time_series_splitter` (`splitters.Splitter`)
+  - **type**: services.LoggerService
 
-* `searcher` (`searchers.Searcher`)
+  - **optional?**: No
 
-* `capsys` (`pc.CaptureFixture[str]`)
+* `inputs_reader`
 
-#### Outputs
-* `None`
+  - **type**: datasets.ParquetReader
 
-## Dependencies
+  - **optional?**: No
 
-* `_pytest.capture`
+* `targets_reader`
 
-* `regression_model_template.jobs`
+  - **type**: datasets.ParquetReader
 
-* `regression_model_template.core.metrics`
+  - **optional?**: No
 
-* `regression_model_template.core.models`
+* `model`
 
-* `regression_model_template.core.schemas`
+  - **type**: models.Model
 
-* `regression_model_template.io.datasets`
+  - **optional?**: No
 
-* `regression_model_template.io.services`
+* `metric`
 
-* `regression_model_template.utils.searchers`
+  - **type**: metrics.Metric
 
-* `regression_model_template.utils.splitters`
+  - **optional?**: No
+
+* `time_series_splitter`
+
+  - **type**: splitters.Splitter
+
+  - **optional?**: No
+
+* `searcher`
+
+  - **type**: searchers.Searcher
+
+  - **optional?**: No
+
+* `capsys`
+
+  - **type**: pc.CaptureFixture[str]
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ## Used By
 

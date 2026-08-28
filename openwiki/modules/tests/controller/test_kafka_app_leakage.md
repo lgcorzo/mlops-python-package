@@ -6,18 +6,46 @@ title: "Module: test_kafka_app_leakage"
 source_path: "tests/controller/test_kafka_app_leakage.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_leakage"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_kafka_app_leakage
 
 * **Source Reference:** [tests/controller/test_kafka_app_leakage.py](../../../../tests/controller/test_kafka_app_leakage.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `json`
+
+* `unittest.mock.MagicMock`
+
+* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
+
+# Each File Documentation
+
+## Imported modules
+
+* `json`
+
+* `unittest.mock.MagicMock`
+
+* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
+
+## Exported functions
+
+* `test_process_message_exception_leakage`
 
 ### Detected Architecture Patterns
 
@@ -57,20 +85,15 @@ Comp --> [FastAPIKafkaService]
 
 ### `test_process_message_exception_leakage() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
 
-## Dependencies
-
-* `json`
-
-* `unittest.mock.MagicMock`
-
-* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
+* **return type**: Any
 
 ## Used By
 

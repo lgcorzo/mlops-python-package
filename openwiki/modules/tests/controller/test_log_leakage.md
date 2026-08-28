@@ -6,18 +6,64 @@ title: "Module: test_log_leakage"
 source_path: "tests/controller/test_log_leakage.py"
 description: "No description available."
 tags: ["module", "test_log_leakage"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_log_leakage
 
 * **Source Reference:** [tests/controller/test_log_leakage.py](../../../../tests/controller/test_log_leakage.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `pytest`
+
+* `logging`
+
+* `unittest.mock.MagicMock`
+
+* `regression_model_template.controller.kafka_app.PredictionRequest`
+
+* `regression_model_template.controller.kafka_app.predict`
+
+* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
+
+* `pandas`
+
+# Each File Documentation
+
+## Imported modules
+
+* `pytest`
+
+* `logging`
+
+* `unittest.mock.MagicMock`
+
+* `regression_model_template.controller.kafka_app.PredictionRequest`
+
+* `regression_model_template.controller.kafka_app.predict`
+
+* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
+
+* `pandas`
+
+## Exported functions
+
+* `test_kafka_consumer_log_leakage`
+
+* `test_kafka_consumer_prediction_result_leakage`
 
 ### Detected Architecture Patterns
 
@@ -66,42 +112,40 @@ Comp --> [pandas]
 
 ### `test_kafka_consumer_log_leakage(caplog: Any) -> Any`
 
+### Description
+
 Test that the Kafka consumer processing does not log sensitive information at INFO level.
 
-#### Inputs
+### Inputs
 
-* `caplog` (`Any`)
+* `caplog`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_kafka_consumer_prediction_result_leakage(caplog: Any) -> Any`
+
+### Description
 
 Test that the Kafka consumer processing does not log raw prediction result values (inference)
 at any log level, and instead uses a masked/summarized format.
 
-#### Inputs
+### Inputs
 
-* `caplog` (`Any`)
+* `caplog`
 
-#### Outputs
-* `Any`
+  - **type**: Any
 
-## Dependencies
+  - **optional?**: No
 
-* `pytest`
+### Output
 
-* `logging`
-
-* `unittest.mock.MagicMock`
-
-* `regression_model_template.controller.kafka_app.PredictionRequest`
-
-* `regression_model_template.controller.kafka_app.predict`
-
-* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
-
-* `pandas`
+* **return type**: Any
 
 ## Used By
 

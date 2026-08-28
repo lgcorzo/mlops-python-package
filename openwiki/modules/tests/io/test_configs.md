@@ -6,18 +6,52 @@ title: "Module: test_configs"
 source_path: "tests/io/test_configs.py"
 description: "No description available."
 tags: ["module", "test_configs"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_configs
 
 * **Source Reference:** [tests/io/test_configs.py](../../../../tests/io/test_configs.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `os`
+
+* `omegaconf`
+
+* `regression_model_template.io.configs`
+
+# Each File Documentation
+
+## Imported modules
+
+* `os`
+
+* `omegaconf`
+
+* `regression_model_template.io.configs`
+
+## Exported functions
+
+* `test_parse_file`
+
+* `test_parse_string`
+
+* `test_merge_configs`
+
+* `test_to_object`
 
 ### Detected Architecture Patterns
 
@@ -61,49 +95,57 @@ Comp --> [configs]
 
 ### `test_parse_file(tmp_path: str) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `tmp_path` (`str`)
+* `tmp_path`
 
-#### Outputs
-* `None`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `test_parse_string() -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
+
+* **return type**: None
 
 ### `test_merge_configs() -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
+
+* **return type**: None
 
 ### `test_to_object() -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
 
-## Dependencies
-
-* `os`
-
-* `omegaconf`
-
-* `regression_model_template.io.configs`
+* **return type**: None
 
 ## Used By
 

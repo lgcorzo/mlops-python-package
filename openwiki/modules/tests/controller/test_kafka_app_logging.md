@@ -6,18 +6,68 @@ title: "Module: test_kafka_app_logging"
 source_path: "tests/controller/test_kafka_app_logging.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_logging"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_kafka_app_logging
 
 * **Source Reference:** [tests/controller/test_kafka_app_logging.py](../../../../tests/controller/test_kafka_app_logging.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `json`
+
+* `pytest`
+
+* `unittest.mock.MagicMock`
+
+* `unittest.mock.patch`
+
+* `regression_model_template.controller.kafka_app.PredictionRequest`
+
+* `regression_model_template.controller.kafka_app.PredictionResponse`
+
+* `regression_model_template.controller.kafka_app.predict`
+
+* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
+
+# Each File Documentation
+
+## Imported modules
+
+* `json`
+
+* `pytest`
+
+* `unittest.mock.MagicMock`
+
+* `unittest.mock.patch`
+
+* `regression_model_template.controller.kafka_app.PredictionRequest`
+
+* `regression_model_template.controller.kafka_app.PredictionResponse`
+
+* `regression_model_template.controller.kafka_app.predict`
+
+* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
+
+## Exported functions
+
+* `mock_kafka_service`
+
+* `test_kafka_process_message_logging`
 
 ### Detected Architecture Patterns
 
@@ -66,43 +116,39 @@ Comp --> [FastAPIKafkaService]
 
 ### `mock_kafka_service() -> Any`
 
+### Description
+
 Mock the FastAPIKafkaService and its dependencies.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_kafka_process_message_logging(mock_logger: Any, mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test that Kafka consumer logs correctly using debug and safe info logs.
 
-#### Inputs
+### Inputs
 
-* `mock_logger` (`Any`)
+* `mock_logger`
 
-* `mock_kafka_service` (`Any`)
+  - **type**: Any
 
-#### Outputs
-* `Any`
+  - **optional?**: No
 
-## Dependencies
+* `mock_kafka_service`
 
-* `json`
+  - **type**: Any
 
-* `pytest`
+  - **optional?**: No
 
-* `unittest.mock.MagicMock`
+### Output
 
-* `unittest.mock.patch`
-
-* `regression_model_template.controller.kafka_app.PredictionRequest`
-
-* `regression_model_template.controller.kafka_app.PredictionResponse`
-
-* `regression_model_template.controller.kafka_app.predict`
-
-* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
+* **return type**: Any
 
 ## Used By
 

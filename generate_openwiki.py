@@ -166,50 +166,40 @@ def parse_args(args):
     offset = total_positional - len(defaults)
 
     for i, arg in enumerate(posonlyargs):
-        parsed.append(
-            {
-                "name": arg.arg,
-                "type": unparse_annotation(arg.annotation),
-                "type_refs": extract_type_refs(arg.annotation),
-                "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
-            }
-        )
+        parsed.append({
+            "name": arg.arg,
+            "type": unparse_annotation(arg.annotation),
+            "type_refs": extract_type_refs(arg.annotation),
+            "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
+        })
     for i, arg in enumerate(args.args, start=len(posonlyargs)):
-        parsed.append(
-            {
-                "name": arg.arg,
-                "type": unparse_annotation(arg.annotation),
-                "type_refs": extract_type_refs(arg.annotation),
-                "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
-            }
-        )
+        parsed.append({
+            "name": arg.arg,
+            "type": unparse_annotation(arg.annotation),
+            "type_refs": extract_type_refs(arg.annotation),
+            "default": ast.unparse(defaults[i - offset]) if i >= offset else None,
+        })
     if args.vararg:
-        parsed.append(
-            {
-                "name": f"*{args.vararg.arg}",
-                "type": unparse_annotation(args.vararg.annotation),
-                "type_refs": extract_type_refs(args.vararg.annotation),
-                "default": None,
-            }
-        )
+        parsed.append({
+            "name": f"*{args.vararg.arg}",
+            "type": unparse_annotation(args.vararg.annotation),
+            "type_refs": extract_type_refs(args.vararg.annotation),
+            "default": None,
+        })
     for i, arg in enumerate(args.kwonlyargs):
-        parsed.append(
-            {
-                "name": arg.arg,
-                "type": unparse_annotation(arg.annotation),
-                "type_refs": extract_type_refs(arg.annotation),
-                "default": ast.unparse(args.kw_defaults[i]) if args.kw_defaults[i] is not None else None,
-            }
-        )
+        parsed.append({
+            "name": arg.arg,
+            "type": unparse_annotation(arg.annotation),
+            "type_refs": extract_type_refs(arg.annotation),
+            "default": ast.unparse(args.kw_defaults[i]) if args.kw_defaults[i] is not None else None,
+        })
     if args.kwarg:
-        parsed.append(
-            {
-                "name": f"**{args.kwarg.arg}",
-                "type": unparse_annotation(args.kwarg.annotation),
-                "type_refs": extract_type_refs(args.kwarg.annotation),
-                "default": None,
-            }
-        )
+        parsed.append({
+            "name": f"**{args.kwarg.arg}",
+            "type": unparse_annotation(args.kwarg.annotation),
+            "type_refs": extract_type_refs(args.kwarg.annotation),
+            "default": None,
+        })
     return parsed
 
 
@@ -252,13 +242,11 @@ def parse_python_file(filepath):
 
             for child in node.body:
                 if isinstance(child, ast.AnnAssign) and isinstance(child.target, ast.Name):
-                    cls_info["attributes"].append(
-                        {
-                            "name": child.target.id,
-                            "type": unparse_annotation(child.annotation),
-                            "type_refs": extract_type_refs(child.annotation),
-                        }
-                    )
+                    cls_info["attributes"].append({
+                        "name": child.target.id,
+                        "type": unparse_annotation(child.annotation),
+                        "type_refs": extract_type_refs(child.annotation),
+                    })
                 elif isinstance(child, ast.Assign):
                     for target in child.targets:
                         if isinstance(target, ast.Name):
@@ -287,19 +275,17 @@ def parse_python_file(filepath):
             is_private = node.name.startswith("_")
             docstring = extract_docstring(node)
             extracted = extract_complex_doc(docstring)
-            functions.append(
-                {
-                    "name": node.name,
-                    "docstring": extracted["description"],
-                    "complexity": extracted["complexity"],
-                    "side_effects": extracted["side_effects"],
-                    "args": parse_args(node.args),
-                    "returns": unparse_annotation(node.returns),
-                    "return_type_refs": extract_type_refs(node.returns),
-                    "is_private": is_private,
-                    "calls": extract_calls(node),
-                }
-            )
+            functions.append({
+                "name": node.name,
+                "docstring": extracted["description"],
+                "complexity": extracted["complexity"],
+                "side_effects": extracted["side_effects"],
+                "args": parse_args(node.args),
+                "returns": unparse_annotation(node.returns),
+                "return_type_refs": extract_type_refs(node.returns),
+                "is_private": is_private,
+                "calls": extract_calls(node),
+            })
 
     return {
         "filepath": filepath,
@@ -470,8 +456,34 @@ last_verified_commit: "{commit_hash}"
     body.append(f"# Module Specification: {mod_name}")
     body.append(f"* **Source Reference:** [{relative_filepath}]({back_path})")
 
-    body.append("## 1. Architectural Role & Responsibilities")
+    body.append("# Module Overview")
+    body.append("## Purpose")
+    body.append(
+        f"{parsed_data['docstring'].splitlines()[0] if parsed_data['docstring'] else 'No description available.'}"
+    )
+    body.append("## Responsibilities")
     body.append(f"{parsed_data['docstring']}")
+    body.append("## Dependencies")
+    if parsed_data["imports"]:
+        for imp in parsed_data["imports"]:
+            body.append(f"* `{imp}`")
+    else:
+        body.append("_No dependencies found._")
+
+    body.append("# Each File Documentation")
+    if parsed_data["imports"]:
+        body.append("## Imported modules")
+        for imp in parsed_data["imports"]:
+            body.append(f"* `{imp}`")
+    if parsed_data["classes"]:
+        body.append("## Exported classes")
+        for cls in parsed_data["classes"]:
+            body.append(f"* `{cls['name']}`")
+    if parsed_data["functions"]:
+        body.append("## Exported functions")
+        for func in parsed_data["functions"]:
+            body.append(f"* `{func['name']}`")
+
     # Architecture Detection
     body.append("### Detected Architecture Patterns")
     patterns = []
@@ -537,79 +549,113 @@ last_verified_commit: "{commit_hash}"
     comp_lines.append("```")
     body.append("\n".join(comp_lines))
 
-    body.append("## 3. Class & Method Specifications")
+    if parsed_data["classes"] or parsed_data["functions"]:
+        body.append("## 3. Class & Method Specifications")
 
+    if parsed_data["classes"]:
+        body.append("# Public Classes")
     for cls in parsed_data["classes"]:
         body.append(f"### `{cls['name']}`")
+        body.append("## Overview")
         body.append(f"{cls['docstring']}")
 
         if cls.get("constructor"):
             c = cls["constructor"]
-            body.append("#### Constructor")
+            body.append("## Constructor")
             args_str = ", ".join(f"{arg['name']}: {arg['type']}" for arg in c["args"])
             body.append(f"* **`__init__({args_str})`**")
-            body.append(
-                f"  - **Purpose**: {c['docstring'].splitlines()[0] if c['docstring'] else 'No description available.'}"
-            )
-            body.append("  - **Inputs**:")
+            body.append("### Description")
+            body.append(f"{c['docstring'].splitlines()[0] if c['docstring'] else 'No description available.'}")
+            body.append("### Inputs")
             for arg in c["args"]:
-                body.append(f"    - `{arg['name']}` (`{arg['type']}`)")
+                body.append(f"* `{arg['name']}`")
+                body.append(f"  - **type**: {arg['type']}")
+                if arg.get("default") is not None:
+                    body.append("  - **optional?**: Yes")
+                    body.append(f"  - **default value**: {arg['default']}")
+                else:
+                    body.append("  - **optional?**: No")
+            body.append("### Output")
+            body.append("* **return type**: None")
+            body.append("* **semantic meaning**: Initialization")
+            if c.get("side_effects"):
+                body.append("### Side Effects")
+                body.append(c["side_effects"])
+            if c.get("complexity"):
+                body.append("### Complexity")
+                body.append(f"Time Complexity: {c['complexity']}")
 
         if cls["attributes"]:
-            body.append("#### Attributes")
+            body.append("## Attributes")
             for attr in cls["attributes"]:
-                body.append(f"* **`{attr['name']}`** (`{attr['type']}`)")
+                body.append(f"* **`{attr['name']}`**")
+                body.append(f"  - **Type**: {attr['type']}")
 
         public_methods = [m for m in cls["methods"] if not m["is_private"]]
         private_methods = [m for m in cls["methods"] if m["is_private"]]
 
         if public_methods:
-            body.append("#### Public Methods")
+            body.append("## Public Methods")
             for m in public_methods:
                 args_str = ", ".join(f"{arg['name']}: {arg['type']}" for arg in m["args"])
                 body.append(f"* **`{m['name']}({args_str}) -> {m['returns']}`**")
-                body.append(
-                    f"  - **Purpose**: {m['docstring'].splitlines()[0] if m['docstring'] else 'No description available.'}"
-                )
-                if m.get("complexity"):
-                    body.append(f"  - **Complexity**: {m['complexity']}")
-                if m.get("side_effects"):
-                    body.append(f"  - **Side Effects**: {m['side_effects']}")
-                body.append("  - **Inputs**:")
+                body.append("### Description")
+                body.append(f"{m['docstring'].splitlines()[0] if m['docstring'] else 'No description available.'}")
+                body.append("### Inputs")
                 for arg in m["args"]:
-                    body.append(f"    - `{arg['name']}` (`{arg['type']}`)")
-                body.append(f"  - **Outputs**: `{m['returns']}`")
+                    body.append(f"* `{arg['name']}`")
+                    body.append(f"  - **type**: {arg['type']}")
+                    if arg.get("default") is not None:
+                        body.append("  - **optional?**: Yes")
+                        body.append(f"  - **default value**: {arg['default']}")
+                    else:
+                        body.append("  - **optional?**: No")
+                body.append("### Output")
+                body.append(f"* **return type**: {m['returns']}")
+                if m.get("side_effects"):
+                    body.append("### Side Effects")
+                    body.append(m["side_effects"])
+                if m.get("complexity"):
+                    body.append("### Complexity")
+                    body.append(f"Time Complexity: {m['complexity']}")
 
         if private_methods:
-            body.append("#### Private Methods")
+            body.append("# Private Methods")
             for m in private_methods:
                 args_str = ", ".join(f"{arg['name']}: {arg['type']}" for arg in m["args"])
                 body.append(f"* **`{m['name']}({args_str}) -> {m['returns']}`**")
-                body.append(
-                    f"  - **Purpose**: {m['docstring'].splitlines()[0] if m['docstring'] else 'No description available.'}"
-                )
+                body.append("### Purpose")
+                body.append(f"{m['docstring'].splitlines()[0] if m['docstring'] else 'No description available.'}")
+                body.append("### Parameters")
+                for arg in m["args"]:
+                    body.append(f"* `{arg['name']}` (`{arg['type']}`)")
+                body.append("### Return value")
+                body.append(f"* `{m['returns']}`")
 
     if parsed_data["functions"]:
         body.append("## Standalone Functions")
         for func in parsed_data["functions"]:
             args_str = ", ".join(f"{arg['name']}: {arg['type']}" for arg in func["args"])
             body.append(f"### `{func['name']}({args_str}) -> {func['returns']}`")
+            body.append("### Description")
             body.append(f"{func['docstring']}")
-            if func.get("complexity"):
-                body.append(f"**Complexity**: {func['complexity']}")
-            if func.get("side_effects"):
-                body.append(f"**Side Effects**: {func['side_effects']}")
-            body.append("#### Inputs")
+            body.append("### Inputs")
             for arg in func["args"]:
-                body.append(f"* `{arg['name']}` (`{arg['type']}`)")
-            body.append(f"#### Outputs\n* `{func['returns']}`")
-
-    body.append("## Dependencies")
-    if parsed_data["imports"]:
-        for imp in parsed_data["imports"]:
-            body.append(f"* `{imp}`")
-    else:
-        body.append("_No dependencies found._")
+                body.append(f"* `{arg['name']}`")
+                body.append(f"  - **type**: {arg['type']}")
+                if arg.get("default") is not None:
+                    body.append("  - **optional?**: Yes")
+                    body.append(f"  - **default value**: {arg['default']}")
+                else:
+                    body.append("  - **optional?**: No")
+            body.append("### Output")
+            body.append(f"* **return type**: {func['returns']}")
+            if func.get("side_effects"):
+                body.append("### Side Effects")
+                body.append(func["side_effects"])
+            if func.get("complexity"):
+                body.append("### Complexity")
+                body.append(f"Time Complexity: {func['complexity']}")
 
     # Inject Used By
     used_by = []

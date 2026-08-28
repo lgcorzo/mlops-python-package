@@ -6,18 +6,58 @@ title: "Module: scripts"
 source_path: "src/regression_model_template/scripts.py"
 description: "Scripts for the CLI application."
 tags: ["module", "scripts"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: scripts
 
 * **Source Reference:** [src/regression_model_template/scripts.py](../../../src/regression_model_template/scripts.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Scripts for the CLI application.
+
+## Responsibilities
+
+Scripts for the CLI application.
+
+## Dependencies
+
+* `argparse`
+
+* `json`
+
+* `sys`
+
+* `warnings`
+
+* `regression_model_template.settings`
+
+* `regression_model_template.io.configs`
+
+# Each File Documentation
+
+## Imported modules
+
+* `argparse`
+
+* `json`
+
+* `sys`
+
+* `warnings`
+
+* `regression_model_template.settings`
+
+* `regression_model_template.io.configs`
+
+## Exported functions
+
+* `main`
 
 ### Detected Architecture Patterns
 
@@ -64,28 +104,23 @@ Comp --> [configs]
 
 ### `main(argv: list[str] | None) -> int`
 
+### Description
+
 Main script for the application.
 
-#### Inputs
+### Inputs
 
-* `argv` (`list[str] | None`)
+* `argv`
 
-#### Outputs
-* `int`
+  - **type**: list[str] | None
 
-## Dependencies
+  - **optional?**: Yes
 
-* `argparse`
+  - **default value**: None
 
-* `json`
+### Output
 
-* `sys`
-
-* `warnings`
-
-* `regression_model_template.settings`
-
-* `regression_model_template.io.configs`
+* **return type**: int
 
 ## Used By
 

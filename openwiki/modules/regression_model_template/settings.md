@@ -6,18 +6,48 @@ title: "Module: settings"
 source_path: "src/regression_model_template/settings.py"
 description: "Define settings for the application."
 tags: ["module", "settings"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: settings
 
 * **Source Reference:** [src/regression_model_template/settings.py](../../../src/regression_model_template/settings.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Define settings for the application.
+
+## Responsibilities
+
+Define settings for the application.
+
+## Dependencies
+
+* `pydantic`
+
+* `pydantic_settings`
+
+* `regression_model_template.jobs`
+
+# Each File Documentation
+
+## Imported modules
+
+* `pydantic`
+
+* `pydantic_settings`
+
+* `regression_model_template.jobs`
+
+## Exported classes
+
+* `Settings`
+
+* `MainSettings`
 
 ### Detected Architecture Patterns
 
@@ -54,7 +84,11 @@ Comp --> [jobs]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `Settings`
+
+## Overview
 
 Base class for application settings.
 
@@ -63,22 +97,18 @@ i.e., to separate settings from provider (e.g., CLI).
 
 ### `MainSettings`
 
+## Overview
+
 Main settings of the application.
 
 Parameters:
     job (jobs.JobKind): job to run.
 
-#### Attributes
+## Attributes
 
-* **`job`** (`jobs.JobKind`)
+* **`job`**
 
-## Dependencies
-
-* `pydantic`
-
-* `pydantic_settings`
-
-* `regression_model_template.jobs`
+  - **Type**: jobs.JobKind
 
 ## Used By
 

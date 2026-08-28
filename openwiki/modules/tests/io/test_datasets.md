@@ -6,18 +6,52 @@ title: "Module: test_datasets"
 source_path: "tests/io/test_datasets.py"
 description: "No description available."
 tags: ["module", "test_datasets"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_datasets
 
 * **Source Reference:** [tests/io/test_datasets.py](../../../../tests/io/test_datasets.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `os`
+
+* `pytest`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+# Each File Documentation
+
+## Imported modules
+
+* `os`
+
+* `pytest`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+## Exported functions
+
+* `test_parquet_reader`
+
+* `test_parquet_writer`
 
 ### Detected Architecture Patterns
 
@@ -61,39 +95,51 @@ Comp --> [datasets]
 
 ### `test_parquet_reader(limit: int | None, inputs_path: str) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `limit` (`int | None`)
+* `limit`
 
-* `inputs_path` (`str`)
+  - **type**: int | None
 
-#### Outputs
-* `None`
+  - **optional?**: No
+
+* `inputs_path`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `test_parquet_writer(targets: schemas.Targets, tmp_outputs_path: str) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `targets` (`schemas.Targets`)
+* `targets`
 
-* `tmp_outputs_path` (`str`)
+  - **type**: schemas.Targets
 
-#### Outputs
-* `None`
+  - **optional?**: No
 
-## Dependencies
+* `tmp_outputs_path`
 
-* `os`
+  - **type**: str
 
-* `pytest`
+  - **optional?**: No
 
-* `regression_model_template.core.schemas`
+### Output
 
-* `regression_model_template.io.datasets`
+* **return type**: None
 
 ## Used By
 

@@ -6,16 +6,22 @@ title: "Module: okf_validate"
 source_path: "skills/validate/scripts/okf_validate.py"
 description: "OKF v0.2 Conformance Checker for OpenWiki Documentation."
 tags: ["module", "okf_validate"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:57Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: okf_validate
 
 * **Source Reference:** [skills/validate/scripts/okf_validate.py](../../../../../skills/validate/scripts/okf_validate.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
+
+OKF v0.2 Conformance Checker for OpenWiki Documentation.
+
+## Responsibilities
 
 OKF v0.2 Conformance Checker for OpenWiki Documentation.
 
@@ -29,6 +35,50 @@ Usage:
 Exit codes:
     0 — All validations passed.
     1 — One or more validations failed.
+
+## Dependencies
+
+* `argparse`
+
+* `glob`
+
+* `os`
+
+* `re`
+
+* `sys`
+
+* `typing.Any`
+
+# Each File Documentation
+
+## Imported modules
+
+* `argparse`
+
+* `glob`
+
+* `os`
+
+* `re`
+
+* `sys`
+
+* `typing.Any`
+
+## Exported functions
+
+* `extract_frontmatter`
+
+* `check_frontmatter_fields`
+
+* `check_absolute_paths`
+
+* `check_mermaid_syntax`
+
+* `validate_wiki`
+
+* `main`
 
 ### Detected Architecture Patterns
 
@@ -105,91 +155,137 @@ Comp --> [Any]
 
 ### `extract_frontmatter(content: str) -> tuple[(dict[(str, Any)], str)]`
 
+### Description
+
 Split YAML frontmatter from Markdown body.
 
-#### Inputs
+### Inputs
 
-* `content` (`str`)
+* `content`
 
-#### Outputs
-* `tuple[(dict[(str, Any)], str)]`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: tuple[(dict[(str, Any)], str)]
 
 ### `check_frontmatter_fields(fm: dict[(str, Any)], filepath: str, strict: bool) -> list[str]`
 
+### Description
+
 Validate required and optional frontmatter fields.
 
-#### Inputs
+### Inputs
 
-* `fm` (`dict[(str, Any)]`)
+* `fm`
 
-* `filepath` (`str`)
+  - **type**: dict[(str, Any)]
 
-* `strict` (`bool`)
+  - **optional?**: No
 
-#### Outputs
-* `list[str]`
+* `filepath`
+
+  - **type**: str
+
+  - **optional?**: No
+
+* `strict`
+
+  - **type**: bool
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: list[str]
 
 ### `check_absolute_paths(body: str, filepath: str) -> list[str]`
 
+### Description
+
 Detect absolute file paths in the document body.
 
-#### Inputs
+### Inputs
 
-* `body` (`str`)
+* `body`
 
-* `filepath` (`str`)
+  - **type**: str
 
-#### Outputs
-* `list[str]`
+  - **optional?**: No
+
+* `filepath`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: list[str]
 
 ### `check_mermaid_syntax(body: str, filepath: str) -> list[str]`
 
+### Description
+
 Basic structural validation of Mermaid code blocks.
 
-#### Inputs
+### Inputs
 
-* `body` (`str`)
+* `body`
 
-* `filepath` (`str`)
+  - **type**: str
 
-#### Outputs
-* `list[str]`
+  - **optional?**: No
+
+* `filepath`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: list[str]
 
 ### `validate_wiki(wiki_path: str, strict: bool) -> int`
 
+### Description
+
 Validate all .md files under wiki_path. Returns error count.
 
-#### Inputs
+### Inputs
 
-* `wiki_path` (`str`)
+* `wiki_path`
 
-* `strict` (`bool`)
+  - **type**: str
 
-#### Outputs
-* `int`
+  - **optional?**: No
+
+* `strict`
+
+  - **type**: bool
+
+  - **optional?**: Yes
+
+  - **default value**: False
+
+### Output
+
+* **return type**: int
 
 ### `main() -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
 
-## Dependencies
-
-* `argparse`
-
-* `glob`
-
-* `os`
-
-* `re`
-
-* `sys`
-
-* `typing.Any`
+* **return type**: None
 
 ## Used By
 

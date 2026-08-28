@@ -6,18 +6,42 @@ title: "Module: benchmark_blocking"
 source_path: "tests/performance/benchmark_blocking.py"
 description: "No description available."
 tags: ["module", "benchmark_blocking"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: benchmark_blocking
 
 * **Source Reference:** [tests/performance/benchmark_blocking.py](../../../../tests/performance/benchmark_blocking.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `asyncio`
+
+* `time`
+
+# Each File Documentation
+
+## Imported modules
+
+* `asyncio`
+
+* `time`
+
+## Exported functions
+
+* `sync_prediction`
 
 ### Detected Architecture Patterns
 
@@ -51,18 +75,15 @@ Comp --> [time]
 
 ### `sync_prediction() -> Any`
 
+### Description
+
 Simulates a CPU-bound synchronous prediction call.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
 
-## Dependencies
-
-* `asyncio`
-
-* `time`
+* **return type**: Any
 
 ## Used By
 

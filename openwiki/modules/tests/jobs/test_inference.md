@@ -6,18 +6,58 @@ title: "Module: test_inference"
 source_path: "tests/jobs/test_inference.py"
 description: "No description available."
 tags: ["module", "test_inference"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_inference
 
 * **Source Reference:** [tests/jobs/test_inference.py](../../../../tests/jobs/test_inference.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `_pytest.capture`
+
+* `pytest`
+
+* `regression_model_template.jobs`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+# Each File Documentation
+
+## Imported modules
+
+* `_pytest.capture`
+
+* `pytest`
+
+* `regression_model_template.jobs`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+## Exported functions
+
+* `test_inference_job`
 
 ### Detected Architecture Patterns
 
@@ -61,44 +101,69 @@ Comp --> [services]
 
 ### `test_inference_job(alias_or_version: str | int, mlflow_service: services.MlflowService, alerts_service: services.AlertsService, logger_service: services.LoggerService, inputs_reader: datasets.Reader, tmp_outputs_writer: datasets.Writer, model_alias: registries.Version, loader: registries.Loader, capsys: pc.CaptureFixture[str]) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `alias_or_version` (`str | int`)
+* `alias_or_version`
 
-* `mlflow_service` (`services.MlflowService`)
+  - **type**: str | int
 
-* `alerts_service` (`services.AlertsService`)
+  - **optional?**: No
 
-* `logger_service` (`services.LoggerService`)
+* `mlflow_service`
 
-* `inputs_reader` (`datasets.Reader`)
+  - **type**: services.MlflowService
 
-* `tmp_outputs_writer` (`datasets.Writer`)
+  - **optional?**: No
 
-* `model_alias` (`registries.Version`)
+* `alerts_service`
 
-* `loader` (`registries.Loader`)
+  - **type**: services.AlertsService
 
-* `capsys` (`pc.CaptureFixture[str]`)
+  - **optional?**: No
 
-#### Outputs
-* `None`
+* `logger_service`
 
-## Dependencies
+  - **type**: services.LoggerService
 
-* `_pytest.capture`
+  - **optional?**: No
 
-* `pytest`
+* `inputs_reader`
 
-* `regression_model_template.jobs`
+  - **type**: datasets.Reader
 
-* `regression_model_template.io.datasets`
+  - **optional?**: No
 
-* `regression_model_template.io.registries`
+* `tmp_outputs_writer`
 
-* `regression_model_template.io.services`
+  - **type**: datasets.Writer
+
+  - **optional?**: No
+
+* `model_alias`
+
+  - **type**: registries.Version
+
+  - **optional?**: No
+
+* `loader`
+
+  - **type**: registries.Loader
+
+  - **optional?**: No
+
+* `capsys`
+
+  - **type**: pc.CaptureFixture[str]
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ## Used By
 

@@ -6,18 +6,64 @@ title: "Module: test_kafka_app_security"
 source_path: "tests/controller/test_kafka_app_security.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_security"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_kafka_app_security
 
 * **Source Reference:** [tests/controller/test_kafka_app_security.py](../../../../tests/controller/test_kafka_app_security.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `asyncio`
+
+* `unittest.mock.MagicMock`
+
+* `pytest`
+
+* `fastapi.HTTPException`
+
+* `regression_model_template.controller.kafka_app.PredictionRequest`
+
+* `regression_model_template.controller.kafka_app.PredictionService`
+
+* `regression_model_template.controller.kafka_app.predict`
+
+# Each File Documentation
+
+## Imported modules
+
+* `asyncio`
+
+* `unittest.mock.MagicMock`
+
+* `pytest`
+
+* `fastapi.HTTPException`
+
+* `regression_model_template.controller.kafka_app.PredictionRequest`
+
+* `regression_model_template.controller.kafka_app.PredictionService`
+
+* `regression_model_template.controller.kafka_app.predict`
+
+## Exported functions
+
+* `test_prediction_service_sanitization`
+
+* `test_predict_endpoint_exception_leak`
 
 ### Detected Architecture Patterns
 
@@ -66,37 +112,27 @@ Comp --> [predict]
 
 ### `test_prediction_service_sanitization() -> Any`
 
+### Description
+
 Test that PredictionService sanitizes exceptions.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_predict_endpoint_exception_leak() -> Any`
 
+### Description
+
 Test that the predict endpoint does NOT leak exception details.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
 
-## Dependencies
-
-* `asyncio`
-
-* `unittest.mock.MagicMock`
-
-* `pytest`
-
-* `fastapi.HTTPException`
-
-* `regression_model_template.controller.kafka_app.PredictionRequest`
-
-* `regression_model_template.controller.kafka_app.PredictionService`
-
-* `regression_model_template.controller.kafka_app.predict`
+* **return type**: Any
 
 ## Used By
 

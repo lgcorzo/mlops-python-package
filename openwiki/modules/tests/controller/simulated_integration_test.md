@@ -6,18 +6,54 @@ title: "Module: simulated_integration_test"
 source_path: "tests/controller/simulated_integration_test.py"
 description: "No description available."
 tags: ["module", "simulated_integration_test"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: simulated_integration_test
 
 * **Source Reference:** [tests/controller/simulated_integration_test.py](../../../../tests/controller/simulated_integration_test.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `os`
+
+* `subprocess`
+
+* `sys`
+
+* `time`
+
+* `requests`
+
+# Each File Documentation
+
+## Imported modules
+
+* `os`
+
+* `subprocess`
+
+* `sys`
+
+* `time`
+
+* `requests`
+
+## Exported functions
+
+* `run_simulated_test`
 
 ### Detected Architecture Patterns
 
@@ -65,24 +101,15 @@ Comp --> [requests]
 
 ### `run_simulated_test() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
 
-## Dependencies
-
-* `os`
-
-* `subprocess`
-
-* `sys`
-
-* `time`
-
-* `requests`
+* **return type**: Any
 
 ## Used By
 
