@@ -6,18 +6,46 @@ title: "Module: formats"
 source_path: "tasks/formats.py"
 description: "Format tasks for pyinvoke."
 tags: ["module", "formats"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: formats
 
 * **Source Reference:** [tasks/formats.py](../../../tasks/formats.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Format tasks for pyinvoke.
+
+## Responsibilities
+
+Format tasks for pyinvoke.
+
+## Dependencies
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+# Each File Documentation
+
+## Imported modules
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+## Exported functions
+
+* `imports`
+
+* `sources`
+
+* `all`
 
 ### Detected Architecture Patterns
 
@@ -52,42 +80,57 @@ Comp --> [task]
 
 ### `imports(ctx: Context) -> None`
 
+### Description
+
 Format python imports with ruff.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `sources(ctx: Context) -> None`
 
+### Description
+
 Format python sources with ruff.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `all(_: Context) -> None`
 
+### Description
+
 Run all format tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
 
-## Dependencies
+  - **optional?**: No
 
-* `invoke.context.Context`
+### Output
 
-* `invoke.tasks.task`
+* **return type**: None
 
 ## Used By
 

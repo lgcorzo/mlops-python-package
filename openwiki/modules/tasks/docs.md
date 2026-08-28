@@ -6,18 +6,50 @@ title: "Module: docs"
 source_path: "tasks/docs.py"
 description: "Docs tasks for pyinvoke."
 tags: ["module", "docs"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: docs
 
 * **Source Reference:** [tasks/docs.py](../../../tasks/docs.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Docs tasks for pyinvoke.
+
+## Responsibilities
+
+Docs tasks for pyinvoke.
+
+## Dependencies
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+* `.cleans`
+
+# Each File Documentation
+
+## Imported modules
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+* `.cleans`
+
+## Exported functions
+
+* `serve`
+
+* `api`
+
+* `all`
 
 ### Detected Architecture Patterns
 
@@ -53,52 +85,89 @@ Comp --> [cleans]
 
 ### `serve(ctx: Context, format: str, port: int) -> None`
 
+### Description
+
 Serve the API docs with pdoc.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-* `format` (`str`)
+  - **type**: Context
 
-* `port` (`int`)
+  - **optional?**: No
 
-#### Outputs
-* `None`
+* `format`
+
+  - **type**: str
+
+  - **optional?**: Yes
+
+  - **default value**: DOC_FORMAT
+
+* `port`
+
+  - **type**: int
+
+  - **optional?**: Yes
+
+  - **default value**: 8088
+
+### Output
+
+* **return type**: None
 
 ### `api(ctx: Context, format: str, output_dir: str) -> None`
 
+### Description
+
 Generate the API docs with pdoc.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-* `format` (`str`)
+  - **type**: Context
 
-* `output_dir` (`str`)
+  - **optional?**: No
 
-#### Outputs
-* `None`
+* `format`
+
+  - **type**: str
+
+  - **optional?**: Yes
+
+  - **default value**: DOC_FORMAT
+
+* `output_dir`
+
+  - **type**: str
+
+  - **optional?**: Yes
+
+  - **default value**: OUTPUT_DIR
+
+### Output
+
+* **return type**: None
 
 ### `all(_: Context) -> None`
 
+### Description
+
 Run all docs tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
 
-## Dependencies
+  - **optional?**: No
 
-* `invoke.context.Context`
+### Output
 
-* `invoke.tasks.task`
-
-* `.cleans`
+* **return type**: None
 
 ## Used By
 

@@ -6,18 +6,54 @@ title: "Module: base"
 source_path: "src/regression_model_template/jobs/base.py"
 description: "Base for high-level project jobs."
 tags: ["module", "base"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: base
 
 * **Source Reference:** [src/regression_model_template/jobs/base.py](../../../../src/regression_model_template/jobs/base.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Base for high-level project jobs.
+
+## Responsibilities
+
+Base for high-level project jobs.
+
+## Dependencies
+
+* `abc`
+
+* `types`
+
+* `typing`
+
+* `pydantic`
+
+* `regression_model_template.io.services`
+
+# Each File Documentation
+
+## Imported modules
+
+* `abc`
+
+* `types`
+
+* `typing`
+
+* `pydantic`
+
+* `regression_model_template.io.services`
+
+## Exported classes
+
+* `Job`
 
 ### Detected Architecture Patterns
 
@@ -68,7 +104,11 @@ Comp --> [services]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `Job`
+
+## Overview
 
 Base class for a job.
 
@@ -80,49 +120,79 @@ Parameters:
     alerts_service (services.AlertsService): manage the alerts system.
     mlflow_service (services.MlflowService): manage the mlflow system.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`str`)
+* **`KIND`**
 
-* **`logger_service`** (`services.LoggerService`)
+  - **Type**: str
 
-* **`alerts_service`** (`services.AlertsService`)
+* **`logger_service`**
 
-* **`mlflow_service`** (`services.MlflowService`)
+  - **Type**: services.LoggerService
 
-#### Public Methods
+* **`alerts_service`**
+
+  - **Type**: services.AlertsService
+
+* **`mlflow_service`**
+
+  - **Type**: services.MlflowService
+
+## Public Methods
 
 * **`run(self: Any) -> Locals`**
 
-  - **Purpose**: Run the job in context.
+### Description
 
-  - **Inputs**:
+Run the job in context.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `Locals`
+* `self`
 
-#### Private Methods
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Locals
+
+# Private Methods
 
 * **`__enter__(self: Any) -> T.Self`**
 
-  - **Purpose**: Enter the job context.
+### Purpose
+
+Enter the job context.
+
+### Parameters
+
+* `self` (`Any`)
+
+### Return value
+
+* `T.Self`
 
 * **`__exit__(self: Any, exc_type: T.Type[BaseException] | None, exc_value: BaseException | None, exc_traceback: TS.TracebackType | None) -> T.Literal[False]`**
 
-  - **Purpose**: Exit the job context.
+### Purpose
 
-## Dependencies
+Exit the job context.
 
-* `abc`
+### Parameters
 
-* `types`
+* `self` (`Any`)
 
-* `typing`
+* `exc_type` (`T.Type[BaseException] | None`)
 
-* `pydantic`
+* `exc_value` (`BaseException | None`)
 
-* `regression_model_template.io.services`
+* `exc_traceback` (`TS.TracebackType | None`)
+
+### Return value
+
+* `T.Literal[False]`
 
 ## Used By
 

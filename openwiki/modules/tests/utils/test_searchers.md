@@ -6,18 +6,54 @@ title: "Module: test_searchers"
 source_path: "tests/utils/test_searchers.py"
 description: "No description available."
 tags: ["module", "test_searchers"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_searchers
 
 * **Source Reference:** [tests/utils/test_searchers.py](../../../../tests/utils/test_searchers.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.utils.searchers`
+
+* `regression_model_template.utils.splitters`
+
+# Each File Documentation
+
+## Imported modules
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.utils.searchers`
+
+* `regression_model_template.utils.splitters`
+
+## Exported functions
+
+* `test_grid_cv_searcher`
 
 ### Detected Architecture Patterns
 
@@ -59,34 +95,45 @@ Comp --> [splitters]
 
 ### `test_grid_cv_searcher(model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, train_test_splitter: splitters.Splitter) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `model` (`models.Model`)
+* `model`
 
-* `metric` (`metrics.Metric`)
+  - **type**: models.Model
 
-* `inputs` (`schemas.Inputs`)
+  - **optional?**: No
 
-* `targets` (`schemas.Targets`)
+* `metric`
 
-* `train_test_splitter` (`splitters.Splitter`)
+  - **type**: metrics.Metric
 
-#### Outputs
-* `None`
+  - **optional?**: No
 
-## Dependencies
+* `inputs`
 
-* `regression_model_template.core.metrics`
+  - **type**: schemas.Inputs
 
-* `regression_model_template.core.models`
+  - **optional?**: No
 
-* `regression_model_template.core.schemas`
+* `targets`
 
-* `regression_model_template.utils.searchers`
+  - **type**: schemas.Targets
 
-* `regression_model_template.utils.splitters`
+  - **optional?**: No
+
+* `train_test_splitter`
+
+  - **type**: splitters.Splitter
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ## Used By
 

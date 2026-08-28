@@ -6,18 +6,168 @@ title: "Module: conftest"
 source_path: "tests/conftest.py"
 description: "Configuration for the tests."
 tags: ["module", "conftest"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: conftest
 
 * **Source Reference:** [tests/conftest.py](../../../tests/conftest.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Configuration for the tests.
+
+## Responsibilities
+
+Configuration for the tests.
+
+## Dependencies
+
+* `os`
+
+* `typing`
+
+* `omegaconf`
+
+* `pytest`
+
+* `_pytest.logging`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.utils.searchers`
+
+* `regression_model_template.utils.signers`
+
+* `regression_model_template.utils.splitters`
+
+# Each File Documentation
+
+## Imported modules
+
+* `os`
+
+* `typing`
+
+* `omegaconf`
+
+* `pytest`
+
+* `_pytest.logging`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.utils.searchers`
+
+* `regression_model_template.utils.signers`
+
+* `regression_model_template.utils.splitters`
+
+## Exported functions
+
+* `tests_path`
+
+* `data_path`
+
+* `confs_path`
+
+* `inputs_path`
+
+* `targets_path`
+
+* `outputs_path`
+
+* `tmp_outputs_path`
+
+* `tmp_models_explanations_path`
+
+* `tmp_samples_explanations_path`
+
+* `extra_config`
+
+* `inputs_reader`
+
+* `inputs_samples_reader`
+
+* `targets_reader`
+
+* `outputs_reader`
+
+* `tmp_outputs_writer`
+
+* `tmp_models_explanations_writer`
+
+* `tmp_samples_explanations_writer`
+
+* `inputs`
+
+* `inputs_samples`
+
+* `targets`
+
+* `outputs`
+
+* `train_test_splitter`
+
+* `time_series_splitter`
+
+* `searcher`
+
+* `train_test_sets`
+
+* `model`
+
+* `metric`
+
+* `signer`
+
+* `logger_service`
+
+* `logger_caplog`
+
+* `alerts_service`
+
+* `mlflow_service`
+
+* `tests_path_resolver`
+
+* `tmp_path_resolver`
+
+* `signature`
+
+* `saver`
+
+* `loader`
+
+* `register`
+
+* `model_version`
+
+* `model_alias`
 
 ### Detected Architecture Patterns
 
@@ -168,475 +318,729 @@ Comp --> [splitters]
 
 ### `tests_path() -> str`
 
+### Description
+
 Return the path of the tests folder.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `str`
+### Output
+
+* **return type**: str
 
 ### `data_path(tests_path: str) -> str`
 
+### Description
+
 Return the path of the data folder.
 
-#### Inputs
+### Inputs
 
-* `tests_path` (`str`)
+* `tests_path`
 
-#### Outputs
-* `str`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `confs_path(tests_path: str) -> str`
 
+### Description
+
 Return the path of the confs folder.
 
-#### Inputs
+### Inputs
 
-* `tests_path` (`str`)
+* `tests_path`
 
-#### Outputs
-* `str`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `inputs_path(data_path: str) -> str`
 
+### Description
+
 Return the path of the inputs dataset.
 
-#### Inputs
+### Inputs
 
-* `data_path` (`str`)
+* `data_path`
 
-#### Outputs
-* `str`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `targets_path(data_path: str) -> str`
 
+### Description
+
 Return the path of the targets dataset.
 
-#### Inputs
+### Inputs
 
-* `data_path` (`str`)
+* `data_path`
 
-#### Outputs
-* `str`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `outputs_path(data_path: str) -> str`
 
+### Description
+
 Return the path of the outputs dataset.
 
-#### Inputs
+### Inputs
 
-* `data_path` (`str`)
+* `data_path`
 
-#### Outputs
-* `str`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `tmp_outputs_path(tmp_path: str) -> str`
 
+### Description
+
 Return a tmp path for the outputs dataset.
 
-#### Inputs
+### Inputs
 
-* `tmp_path` (`str`)
+* `tmp_path`
 
-#### Outputs
-* `str`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `tmp_models_explanations_path(tmp_path: str) -> str`
 
+### Description
+
 Return a tmp path for the model explanations dataset.
 
-#### Inputs
+### Inputs
 
-* `tmp_path` (`str`)
+* `tmp_path`
 
-#### Outputs
-* `str`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `tmp_samples_explanations_path(tmp_path: str) -> str`
 
+### Description
+
 Return a tmp path for the samples explanations dataset.
 
-#### Inputs
+### Inputs
 
-* `tmp_path` (`str`)
+* `tmp_path`
 
-#### Outputs
-* `str`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `extra_config() -> str`
 
+### Description
+
 Extra config for scripts.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `str`
+### Output
+
+* **return type**: str
 
 ### `inputs_reader(inputs_path: str) -> datasets.ParquetReader`
 
+### Description
+
 Return a reader for the inputs dataset.
 
-#### Inputs
+### Inputs
 
-* `inputs_path` (`str`)
+* `inputs_path`
 
-#### Outputs
-* `datasets.ParquetReader`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: datasets.ParquetReader
 
 ### `inputs_samples_reader(inputs_path: str) -> datasets.ParquetReader`
 
+### Description
+
 Return a reader for the inputs samples dataset.
 
-#### Inputs
+### Inputs
 
-* `inputs_path` (`str`)
+* `inputs_path`
 
-#### Outputs
-* `datasets.ParquetReader`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: datasets.ParquetReader
 
 ### `targets_reader(targets_path: str) -> datasets.ParquetReader`
 
+### Description
+
 Return a reader for the targets dataset.
 
-#### Inputs
+### Inputs
 
-* `targets_path` (`str`)
+* `targets_path`
 
-#### Outputs
-* `datasets.ParquetReader`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: datasets.ParquetReader
 
 ### `outputs_reader(outputs_path: str, inputs_reader: datasets.ParquetReader, targets_reader: datasets.ParquetReader) -> datasets.ParquetReader`
 
+### Description
+
 Return a reader for the outputs dataset.
 
-#### Inputs
+### Inputs
 
-* `outputs_path` (`str`)
+* `outputs_path`
 
-* `inputs_reader` (`datasets.ParquetReader`)
+  - **type**: str
 
-* `targets_reader` (`datasets.ParquetReader`)
+  - **optional?**: No
 
-#### Outputs
-* `datasets.ParquetReader`
+* `inputs_reader`
+
+  - **type**: datasets.ParquetReader
+
+  - **optional?**: No
+
+* `targets_reader`
+
+  - **type**: datasets.ParquetReader
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: datasets.ParquetReader
 
 ### `tmp_outputs_writer(tmp_outputs_path: str) -> datasets.ParquetWriter`
 
+### Description
+
 Return a writer for the tmp outputs dataset.
 
-#### Inputs
+### Inputs
 
-* `tmp_outputs_path` (`str`)
+* `tmp_outputs_path`
 
-#### Outputs
-* `datasets.ParquetWriter`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: datasets.ParquetWriter
 
 ### `tmp_models_explanations_writer(tmp_models_explanations_path: str) -> datasets.ParquetWriter`
 
+### Description
+
 Return a writer for the tmp model explanations dataset.
 
-#### Inputs
+### Inputs
 
-* `tmp_models_explanations_path` (`str`)
+* `tmp_models_explanations_path`
 
-#### Outputs
-* `datasets.ParquetWriter`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: datasets.ParquetWriter
 
 ### `tmp_samples_explanations_writer(tmp_samples_explanations_path: str) -> datasets.ParquetWriter`
 
+### Description
+
 Return a writer for the tmp samples explanations dataset.
 
-#### Inputs
+### Inputs
 
-* `tmp_samples_explanations_path` (`str`)
+* `tmp_samples_explanations_path`
 
-#### Outputs
-* `datasets.ParquetWriter`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: datasets.ParquetWriter
 
 ### `inputs(inputs_reader: datasets.ParquetReader) -> schemas.Inputs`
 
+### Description
+
 Return the inputs data.
 
-#### Inputs
+### Inputs
 
-* `inputs_reader` (`datasets.ParquetReader`)
+* `inputs_reader`
 
-#### Outputs
-* `schemas.Inputs`
+  - **type**: datasets.ParquetReader
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: schemas.Inputs
 
 ### `inputs_samples(inputs_samples_reader: datasets.ParquetReader) -> schemas.Inputs`
 
+### Description
+
 Return the inputs samples data.
 
-#### Inputs
+### Inputs
 
-* `inputs_samples_reader` (`datasets.ParquetReader`)
+* `inputs_samples_reader`
 
-#### Outputs
-* `schemas.Inputs`
+  - **type**: datasets.ParquetReader
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: schemas.Inputs
 
 ### `targets(targets_reader: datasets.ParquetReader) -> schemas.Targets`
 
+### Description
+
 Return the targets data.
 
-#### Inputs
+### Inputs
 
-* `targets_reader` (`datasets.ParquetReader`)
+* `targets_reader`
 
-#### Outputs
-* `schemas.Targets`
+  - **type**: datasets.ParquetReader
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: schemas.Targets
 
 ### `outputs(outputs_reader: datasets.ParquetReader) -> schemas.Outputs`
 
+### Description
+
 Return the outputs data.
 
-#### Inputs
+### Inputs
 
-* `outputs_reader` (`datasets.ParquetReader`)
+* `outputs_reader`
 
-#### Outputs
-* `schemas.Outputs`
+  - **type**: datasets.ParquetReader
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: schemas.Outputs
 
 ### `train_test_splitter() -> splitters.TrainTestSplitter`
 
+### Description
+
 Return the default train test splitter.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `splitters.TrainTestSplitter`
+### Output
+
+* **return type**: splitters.TrainTestSplitter
 
 ### `time_series_splitter() -> splitters.TimeSeriesSplitter`
 
+### Description
+
 Return the default time series splitter.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `splitters.TimeSeriesSplitter`
+### Output
+
+* **return type**: splitters.TimeSeriesSplitter
 
 ### `searcher() -> searchers.Searcher`
 
+### Description
+
 Return the default searcher object.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `searchers.Searcher`
+### Output
+
+* **return type**: searchers.Searcher
 
 ### `train_test_sets(train_test_splitter: splitters.Splitter, inputs: schemas.Inputs, targets: schemas.Targets) -> tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]`
 
+### Description
+
 Return the inputs and targets train and test sets from the splitter.
 
-#### Inputs
+### Inputs
 
-* `train_test_splitter` (`splitters.Splitter`)
+* `train_test_splitter`
 
-* `inputs` (`schemas.Inputs`)
+  - **type**: splitters.Splitter
 
-* `targets` (`schemas.Targets`)
+  - **optional?**: No
 
-#### Outputs
-* `tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]`
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]
 
 ### `model(train_test_sets: tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]) -> models.BaselineSklearnModel`
 
+### Description
+
 Return a train model for testing.
 
-#### Inputs
+### Inputs
 
-* `train_test_sets` (`tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]`)
+* `train_test_sets`
 
-#### Outputs
-* `models.BaselineSklearnModel`
+  - **type**: tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: models.BaselineSklearnModel
 
 ### `metric() -> metrics.SklearnMetric`
 
+### Description
+
 Return the default metric.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `metrics.SklearnMetric`
+### Output
+
+* **return type**: metrics.SklearnMetric
 
 ### `signer() -> signers.Signer`
 
+### Description
+
 Return a model signer.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `signers.Signer`
+### Output
+
+* **return type**: signers.Signer
 
 ### `logger_service() -> T.Generator[(services.LoggerService, None, None)]`
 
+### Description
+
 Return and start the logger service.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `T.Generator[(services.LoggerService, None, None)]`
+### Output
+
+* **return type**: T.Generator[(services.LoggerService, None, None)]
 
 ### `logger_caplog(caplog: pl.LogCaptureFixture, logger_service: services.LoggerService) -> T.Generator[(pl.LogCaptureFixture, None, None)]`
 
+### Description
+
 Extend pytest caplog fixture with the logger service (loguru).
 
-#### Inputs
+### Inputs
 
-* `caplog` (`pl.LogCaptureFixture`)
+* `caplog`
 
-* `logger_service` (`services.LoggerService`)
+  - **type**: pl.LogCaptureFixture
 
-#### Outputs
-* `T.Generator[(pl.LogCaptureFixture, None, None)]`
+  - **optional?**: No
+
+* `logger_service`
+
+  - **type**: services.LoggerService
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: T.Generator[(pl.LogCaptureFixture, None, None)]
 
 ### `alerts_service() -> T.Generator[(services.AlertsService, None, None)]`
 
+### Description
+
 Return and start the alerter service.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `T.Generator[(services.AlertsService, None, None)]`
+### Output
+
+* **return type**: T.Generator[(services.AlertsService, None, None)]
 
 ### `mlflow_service(tmp_path: str) -> T.Generator[(services.MlflowService, None, None)]`
 
+### Description
+
 Return and start the mlflow service.
 
-#### Inputs
+### Inputs
 
-* `tmp_path` (`str`)
+* `tmp_path`
 
-#### Outputs
-* `T.Generator[(services.MlflowService, None, None)]`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: T.Generator[(services.MlflowService, None, None)]
 
 ### `tests_path_resolver(tests_path: str) -> str`
 
+### Description
+
 Register the tests path resolver with OmegaConf.
 
-#### Inputs
+### Inputs
 
-* `tests_path` (`str`)
+* `tests_path`
 
-#### Outputs
-* `str`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `tmp_path_resolver(tmp_path: str) -> str`
 
+### Description
+
 Register the tmp path resolver with OmegaConf.
 
-#### Inputs
+### Inputs
 
-* `tmp_path` (`str`)
+* `tmp_path`
 
-#### Outputs
-* `str`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `signature(signer: signers.Signer, inputs: schemas.Inputs, outputs: schemas.Outputs) -> signers.Signature`
 
+### Description
+
 Return the signature for the testing model.
 
-#### Inputs
+### Inputs
 
-* `signer` (`signers.Signer`)
+* `signer`
 
-* `inputs` (`schemas.Inputs`)
+  - **type**: signers.Signer
 
-* `outputs` (`schemas.Outputs`)
+  - **optional?**: No
 
-#### Outputs
-* `signers.Signature`
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `outputs`
+
+  - **type**: schemas.Outputs
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: signers.Signature
 
 ### `saver() -> registries.CustomSaver`
 
+### Description
+
 Return the default model saver.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `registries.CustomSaver`
+### Output
+
+* **return type**: registries.CustomSaver
 
 ### `loader() -> registries.CustomLoader`
 
+### Description
+
 Return the default model loader.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `registries.CustomLoader`
+### Output
+
+* **return type**: registries.CustomLoader
 
 ### `register() -> registries.MlflowRegister`
 
+### Description
+
 Return the default model register.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `registries.MlflowRegister`
+### Output
+
+* **return type**: registries.MlflowRegister
 
 ### `model_version(model: models.Model, inputs: schemas.Inputs, signature: signers.Signature, saver: registries.Saver, register: registries.Register, mlflow_service: services.MlflowService) -> registries.Version`
 
+### Description
+
 Save and register the default model version.
 
-#### Inputs
+### Inputs
 
-* `model` (`models.Model`)
+* `model`
 
-* `inputs` (`schemas.Inputs`)
+  - **type**: models.Model
 
-* `signature` (`signers.Signature`)
+  - **optional?**: No
 
-* `saver` (`registries.Saver`)
+* `inputs`
 
-* `register` (`registries.Register`)
+  - **type**: schemas.Inputs
 
-* `mlflow_service` (`services.MlflowService`)
+  - **optional?**: No
 
-#### Outputs
-* `registries.Version`
+* `signature`
+
+  - **type**: signers.Signature
+
+  - **optional?**: No
+
+* `saver`
+
+  - **type**: registries.Saver
+
+  - **optional?**: No
+
+* `register`
+
+  - **type**: registries.Register
+
+  - **optional?**: No
+
+* `mlflow_service`
+
+  - **type**: services.MlflowService
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: registries.Version
 
 ### `model_alias(model_version: registries.Version, mlflow_service: services.MlflowService) -> registries.Alias`
 
+### Description
+
 Promote the default model version with an alias.
 
-#### Inputs
+### Inputs
 
-* `model_version` (`registries.Version`)
+* `model_version`
 
-* `mlflow_service` (`services.MlflowService`)
+  - **type**: registries.Version
 
-#### Outputs
-* `registries.Alias`
+  - **optional?**: No
 
-## Dependencies
+* `mlflow_service`
 
-* `os`
+  - **type**: services.MlflowService
 
-* `typing`
+  - **optional?**: No
 
-* `omegaconf`
+### Output
 
-* `pytest`
-
-* `_pytest.logging`
-
-* `regression_model_template.core.metrics`
-
-* `regression_model_template.core.models`
-
-* `regression_model_template.core.schemas`
-
-* `regression_model_template.io.datasets`
-
-* `regression_model_template.io.registries`
-
-* `regression_model_template.io.services`
-
-* `regression_model_template.utils.searchers`
-
-* `regression_model_template.utils.signers`
-
-* `regression_model_template.utils.splitters`
+* **return type**: registries.Alias
 
 ## Used By
 

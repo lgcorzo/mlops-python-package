@@ -6,18 +6,48 @@ title: "Module: configs"
 source_path: "src/regression_model_template/io/configs.py"
 description: "Parse, merge, and convert config objects."
 tags: ["module", "configs"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: configs
 
 * **Source Reference:** [src/regression_model_template/io/configs.py](../../../../src/regression_model_template/io/configs.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Parse, merge, and convert config objects.
+
+## Responsibilities
+
+Parse, merge, and convert config objects.
+
+## Dependencies
+
+* `typing`
+
+* `omegaconf`
+
+# Each File Documentation
+
+## Imported modules
+
+* `typing`
+
+* `omegaconf`
+
+## Exported functions
+
+* `parse_file`
+
+* `parse_string`
+
+* `merge_configs`
+
+* `to_object`
 
 ### Detected Architecture Patterns
 
@@ -53,6 +83,8 @@ Comp --> [omegaconf]
 
 ### `parse_file(path: str) -> Config`
 
+### Description
+
 Parse a config file from a path.
 
 Args:
@@ -61,14 +93,21 @@ Args:
 Returns:
     Config: representation of the config file.
 
-#### Inputs
+### Inputs
 
-* `path` (`str`)
+* `path`
 
-#### Outputs
-* `Config`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Config
 
 ### `parse_string(string: str) -> Config`
+
+### Description
 
 Parse the given config string.
 
@@ -78,14 +117,21 @@ Args:
 Returns:
     Config: representation of the config string.
 
-#### Inputs
+### Inputs
 
-* `string` (`str`)
+* `string`
 
-#### Outputs
-* `Config`
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Config
 
 ### `merge_configs(configs: T.Sequence[Config]) -> Config`
+
+### Description
 
 Merge a list of config into a single config.
 
@@ -95,14 +141,21 @@ Args:
 Returns:
     Config: representation of the merged config objects.
 
-#### Inputs
+### Inputs
 
-* `configs` (`T.Sequence[Config]`)
+* `configs`
 
-#### Outputs
-* `Config`
+  - **type**: T.Sequence[Config]
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Config
 
 ### `to_object(config: Config, resolve: bool) -> object`
+
+### Description
 
 Convert a config object to a python object.
 
@@ -113,20 +166,25 @@ Args:
 Returns:
     object: conversion of the config to a python object.
 
-#### Inputs
+### Inputs
 
-* `config` (`Config`)
+* `config`
 
-* `resolve` (`bool`)
+  - **type**: Config
 
-#### Outputs
-* `object`
+  - **optional?**: No
 
-## Dependencies
+* `resolve`
 
-* `typing`
+  - **type**: bool
 
-* `omegaconf`
+  - **optional?**: Yes
+
+  - **default value**: True
+
+### Output
+
+* **return type**: object
 
 ## Used By
 

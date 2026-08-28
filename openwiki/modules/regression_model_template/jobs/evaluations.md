@@ -6,18 +6,74 @@ title: "Module: evaluations"
 source_path: "src/regression_model_template/jobs/evaluations.py"
 description: "Define a job for evaluating registered models with data."
 tags: ["module", "evaluations"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: evaluations
 
 * **Source Reference:** [src/regression_model_template/jobs/evaluations.py](../../../../src/regression_model_template/jobs/evaluations.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Define a job for evaluating registered models with data.
+
+## Responsibilities
+
+Define a job for evaluating registered models with data.
+
+## Dependencies
+
+* `typing`
+
+* `mlflow`
+
+* `pandas`
+
+* `pydantic`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.jobs.base`
+
+# Each File Documentation
+
+## Imported modules
+
+* `typing`
+
+* `mlflow`
+
+* `pandas`
+
+* `pydantic`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.jobs.base`
+
+## Exported classes
+
+* `EvaluationsJob`
 
 ### Detected Architecture Patterns
 
@@ -88,7 +144,11 @@ Comp --> [base]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `EvaluationsJob`
+
+## Overview
 
 Generate evaluations from a registered model and a dataset.
 
@@ -102,59 +162,63 @@ Parameters:
     evaluators (list[str]): list of evaluators to use.
     thresholds (dict[str, metrics_.Threshold] | None): metric thresholds.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[EvaluationsJob]`)
+* **`KIND`**
 
-* **`run_config`** (`services.MlflowService.RunConfig`)
+  - **Type**: T.Literal[EvaluationsJob]
 
-* **`inputs`** (`datasets.ReaderKind`)
+* **`run_config`**
 
-* **`targets`** (`datasets.ReaderKind`)
+  - **Type**: services.MlflowService.RunConfig
 
-* **`model_type`** (`str`)
+* **`inputs`**
 
-* **`alias_or_version`** (`str | int`)
+  - **Type**: datasets.ReaderKind
 
-* **`metrics`** (`metrics_.MetricsKind`)
+* **`targets`**
 
-* **`evaluators`** (`list[str]`)
+  - **Type**: datasets.ReaderKind
 
-* **`thresholds`** (`dict[(str, metrics_.Threshold)]`)
+* **`model_type`**
 
-#### Public Methods
+  - **Type**: str
+
+* **`alias_or_version`**
+
+  - **Type**: str | int
+
+* **`metrics`**
+
+  - **Type**: metrics_.MetricsKind
+
+* **`evaluators`**
+
+  - **Type**: list[str]
+
+* **`thresholds`**
+
+  - **Type**: dict[(str, metrics_.Threshold)]
+
+## Public Methods
 
 * **`run(self: Any) -> base.Locals`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `base.Locals`
+* `self`
 
-## Dependencies
+  - **type**: Any
 
-* `typing`
+  - **optional?**: No
 
-* `mlflow`
+### Output
 
-* `pandas`
-
-* `pydantic`
-
-* `regression_model_template.core.metrics`
-
-* `regression_model_template.core.schemas`
-
-* `regression_model_template.io.datasets`
-
-* `regression_model_template.io.registries`
-
-* `regression_model_template.io.services`
-
-* `regression_model_template.jobs.base`
+* **return type**: base.Locals
 
 ## Used By
 

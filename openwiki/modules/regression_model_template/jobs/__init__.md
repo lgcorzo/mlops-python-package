@@ -6,18 +6,54 @@ title: "Module: __init__"
 source_path: "src/regression_model_template/jobs/__init__.py"
 description: "High-level jobs of the project."
 tags: ["module", "__init__"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: __init__
 
 * **Source Reference:** [src/regression_model_template/jobs/__init__.py](../../../../src/regression_model_template/jobs/__init__.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 High-level jobs of the project.
+
+## Responsibilities
+
+High-level jobs of the project.
+
+## Dependencies
+
+* `regression_model_template.jobs.evaluations.EvaluationsJob`
+
+* `regression_model_template.jobs.explanations.ExplanationsJob`
+
+* `regression_model_template.jobs.inference.InferenceJob`
+
+* `regression_model_template.jobs.promotion.PromotionJob`
+
+* `regression_model_template.jobs.training.TrainingJob`
+
+* `regression_model_template.jobs.tuning.TuningJob`
+
+# Each File Documentation
+
+## Imported modules
+
+* `regression_model_template.jobs.evaluations.EvaluationsJob`
+
+* `regression_model_template.jobs.explanations.ExplanationsJob`
+
+* `regression_model_template.jobs.inference.InferenceJob`
+
+* `regression_model_template.jobs.promotion.PromotionJob`
+
+* `regression_model_template.jobs.training.TrainingJob`
+
+* `regression_model_template.jobs.tuning.TuningJob`
 
 ### Detected Architecture Patterns
 
@@ -44,22 +80,6 @@ Comp --> [PromotionJob]
 Comp --> [TrainingJob]
 Comp --> [TuningJob]
 ```
-
-## 3. Class & Method Specifications
-
-## Dependencies
-
-* `regression_model_template.jobs.evaluations.EvaluationsJob`
-
-* `regression_model_template.jobs.explanations.ExplanationsJob`
-
-* `regression_model_template.jobs.inference.InferenceJob`
-
-* `regression_model_template.jobs.promotion.PromotionJob`
-
-* `regression_model_template.jobs.training.TrainingJob`
-
-* `regression_model_template.jobs.tuning.TuningJob`
 
 ## Used By
 

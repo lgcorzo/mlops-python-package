@@ -6,18 +6,76 @@ title: "Module: searchers"
 source_path: "src/regression_model_template/utils/searchers.py"
 description: "Find the best hyperparameters for a model."
 tags: ["module", "searchers"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: searchers
 
 * **Source Reference:** [src/regression_model_template/utils/searchers.py](../../../../src/regression_model_template/utils/searchers.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Find the best hyperparameters for a model.
+
+## Responsibilities
+
+Find the best hyperparameters for a model.
+
+## Dependencies
+
+* `abc`
+
+* `typing`
+
+* `typing.Union`
+
+* `pandas`
+
+* `pydantic`
+
+* `sklearn.model_selection`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.utils.splitters`
+
+# Each File Documentation
+
+## Imported modules
+
+* `abc`
+
+* `typing`
+
+* `typing.Union`
+
+* `pandas`
+
+* `pydantic`
+
+* `sklearn.model_selection`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.utils.splitters`
+
+## Exported classes
+
+* `Searcher`
+
+* `GridCVSearcher`
 
 ### Detected Architecture Patterns
 
@@ -76,7 +134,11 @@ Comp --> [splitters]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `Searcher`
+
+## Overview
 
 Base class for a searcher.
 
@@ -86,35 +148,69 @@ i.e., to find the best model params.
 Parameters:
     param_grid (Grid): mapping of param key -> values.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`str`)
+* **`KIND`**
 
-* **`param_grid`** (`Grid`)
+  - **Type**: str
 
-#### Public Methods
+* **`param_grid`**
+
+  - **Type**: Grid
+
+## Public Methods
 
 * **`search(self: Any, model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) -> Results`**
 
-  - **Purpose**: Search the best model for the given inputs and targets.
+### Description
 
-  - **Inputs**:
+Search the best model for the given inputs and targets.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `model` (`models.Model`)
+* `self`
 
-    - `metric` (`metrics.Metric`)
+  - **type**: Any
 
-    - `inputs` (`schemas.Inputs`)
+  - **optional?**: No
 
-    - `targets` (`schemas.Targets`)
+* `model`
 
-    - `cv` (`CrossValidation`)
+  - **type**: models.Model
 
-  - **Outputs**: `Results`
+  - **optional?**: No
+
+* `metric`
+
+  - **type**: metrics.Metric
+
+  - **optional?**: No
+
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+* `cv`
+
+  - **type**: CrossValidation
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Results
 
 ### `GridCVSearcher`
+
+## Overview
 
 Grid searcher with cross-fold validation.
 
@@ -127,63 +223,81 @@ Parameters:
     error_score (str | float): strategy or value on error.
     return_train_score (bool): include train scores if True.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[GridCVSearcher]`)
+* **`KIND`**
 
-* **`n_jobs`** (`int | None`)
+  - **Type**: T.Literal[GridCVSearcher]
 
-* **`refit`** (`bool`)
+* **`n_jobs`**
 
-* **`verbose`** (`int`)
+  - **Type**: int | None
 
-* **`error_score`** (`str | float`)
+* **`refit`**
 
-* **`return_train_score`** (`bool`)
+  - **Type**: bool
 
-#### Public Methods
+* **`verbose`**
+
+  - **Type**: int
+
+* **`error_score`**
+
+  - **Type**: str | float
+
+* **`return_train_score`**
+
+  - **Type**: bool
+
+## Public Methods
 
 * **`search(self: Any, model: models.Model, metric: metrics.Metric, inputs: schemas.Inputs, targets: schemas.Targets, cv: CrossValidation) -> Results`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `model` (`models.Model`)
+* `self`
 
-    - `metric` (`metrics.Metric`)
+  - **type**: Any
 
-    - `inputs` (`schemas.Inputs`)
+  - **optional?**: No
 
-    - `targets` (`schemas.Targets`)
+* `model`
 
-    - `cv` (`CrossValidation`)
+  - **type**: models.Model
 
-  - **Outputs**: `Results`
+  - **optional?**: No
 
-## Dependencies
+* `metric`
 
-* `abc`
+  - **type**: metrics.Metric
 
-* `typing`
+  - **optional?**: No
 
-* `typing.Union`
+* `inputs`
 
-* `pandas`
+  - **type**: schemas.Inputs
 
-* `pydantic`
+  - **optional?**: No
 
-* `sklearn.model_selection`
+* `targets`
 
-* `regression_model_template.core.metrics`
+  - **type**: schemas.Targets
 
-* `regression_model_template.core.models`
+  - **optional?**: No
 
-* `regression_model_template.core.schemas`
+* `cv`
 
-* `regression_model_template.utils.splitters`
+  - **type**: CrossValidation
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Results
 
 ## Used By
 

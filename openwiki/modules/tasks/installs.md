@@ -6,18 +6,46 @@ title: "Module: installs"
 source_path: "tasks/installs.py"
 description: "Install tasks for pyinvoke."
 tags: ["module", "installs"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: installs
 
 * **Source Reference:** [tasks/installs.py](../../../tasks/installs.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Install tasks for pyinvoke.
+
+## Responsibilities
+
+Install tasks for pyinvoke.
+
+## Dependencies
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+# Each File Documentation
+
+## Imported modules
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+## Exported functions
+
+* `poetry`
+
+* `pre_commit`
+
+* `all`
 
 ### Detected Architecture Patterns
 
@@ -52,42 +80,57 @@ Comp --> [task]
 
 ### `poetry(ctx: Context) -> None`
 
+### Description
+
 Install poetry packages.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `pre_commit(ctx: Context) -> None`
 
+### Description
+
 Install pre-commit hooks on git.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `all(_: Context) -> None`
 
+### Description
+
 Run all install tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
 
-## Dependencies
+  - **optional?**: No
 
-* `invoke.context.Context`
+### Output
 
-* `invoke.tasks.task`
+* **return type**: None
 
 ## Used By
 

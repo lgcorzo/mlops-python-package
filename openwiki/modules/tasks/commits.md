@@ -6,18 +6,48 @@ title: "Module: commits"
 source_path: "tasks/commits.py"
 description: "Commits tasks for pyinvoke."
 tags: ["module", "commits"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: commits
 
 * **Source Reference:** [tasks/commits.py](../../../tasks/commits.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Commits tasks for pyinvoke.
+
+## Responsibilities
+
+Commits tasks for pyinvoke.
+
+## Dependencies
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+# Each File Documentation
+
+## Imported modules
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+## Exported functions
+
+* `info`
+
+* `bump`
+
+* `commit`
+
+* `all`
 
 ### Detected Architecture Patterns
 
@@ -53,53 +83,75 @@ Comp --> [task]
 
 ### `info(ctx: Context) -> None`
 
+### Description
+
 Print a guide for messages.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `bump(ctx: Context) -> None`
 
+### Description
+
 Bump the version of the package.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `commit(ctx: Context) -> None`
 
+### Description
+
 Commit all changes with a message.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `all(_: Context) -> None`
 
+### Description
+
 Run all commit tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
 
-## Dependencies
+  - **optional?**: No
 
-* `invoke.context.Context`
+### Output
 
-* `invoke.tasks.task`
+* **return type**: None
 
 ## Used By
 

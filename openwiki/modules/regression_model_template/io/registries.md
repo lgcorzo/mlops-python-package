@@ -6,18 +6,84 @@ title: "Module: registries"
 source_path: "src/regression_model_template/io/registries.py"
 description: "Savers, loaders, and registers for model registries."
 tags: ["module", "registries"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: registries
 
 * **Source Reference:** [src/regression_model_template/io/registries.py](../../../../src/regression_model_template/io/registries.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Savers, loaders, and registers for model registries.
+
+## Responsibilities
+
+Savers, loaders, and registers for model registries.
+
+## Dependencies
+
+* `abc`
+
+* `typing`
+
+* `mlflow`
+
+* `pydantic`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.utils.signers`
+
+# Each File Documentation
+
+## Imported modules
+
+* `abc`
+
+* `typing`
+
+* `mlflow`
+
+* `pydantic`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.utils.signers`
+
+## Exported classes
+
+* `Saver`
+
+* `CustomSaver`
+
+* `BuiltinSaver`
+
+* `Loader`
+
+* `CustomLoader`
+
+* `BuiltinLoader`
+
+* `Register`
+
+* `MlflowRegister`
+
+## Exported functions
+
+* `uri_for_model_alias`
+
+* `uri_for_model_version`
+
+* `uri_for_model_alias_or_version`
 
 ### Detected Architecture Patterns
 
@@ -112,7 +178,11 @@ Comp --> [signers]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `Saver`
+
+## Overview
 
 Base class for saving models in registry.
 
@@ -122,59 +192,109 @@ e.g., to switch between serialization flavors.
 Parameters:
     path (str): model path inside the Mlflow store.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`str`)
+* **`KIND`**
 
-* **`path`** (`str`)
+  - **Type**: str
 
-#### Public Methods
+* **`path`**
+
+  - **Type**: str
+
+## Public Methods
 
 * **`save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info`**
 
-  - **Purpose**: Save a model in the model registry.
+### Description
 
-  - **Inputs**:
+Save a model in the model registry.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `model` (`models.Model`)
+* `self`
 
-    - `signature` (`signers.Signature`)
+  - **type**: Any
 
-    - `input_example` (`schemas.Inputs`)
+  - **optional?**: No
 
-  - **Outputs**: `Info`
+* `model`
+
+  - **type**: models.Model
+
+  - **optional?**: No
+
+* `signature`
+
+  - **type**: signers.Signature
+
+  - **optional?**: No
+
+* `input_example`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Info
 
 ### `CustomSaver`
+
+## Overview
 
 Saver for project models using the Mlflow PyFunc module.
 
 https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[CustomSaver]`)
+* **`KIND`**
 
-#### Public Methods
+  - **Type**: T.Literal[CustomSaver]
+
+## Public Methods
 
 * **`save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `model` (`models.Model`)
+* `self`
 
-    - `signature` (`signers.Signature`)
+  - **type**: Any
 
-    - `input_example` (`schemas.Inputs`)
+  - **optional?**: No
 
-  - **Outputs**: `Info`
+* `model`
+
+  - **type**: models.Model
+
+  - **optional?**: No
+
+* `signature`
+
+  - **type**: signers.Signature
+
+  - **optional?**: No
+
+* `input_example`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Info
 
 ### `BuiltinSaver`
+
+## Overview
 
 Saver for built-in models using an Mlflow flavor module.
 
@@ -183,80 +303,140 @@ https://mlflow.org/docs/latest/models.html#built-in-model-flavors
 Parameters:
     flavor (str): Mlflow flavor module to use for the serialization.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[BuiltinSaver]`)
+* **`KIND`**
 
-* **`flavor`** (`str`)
+  - **Type**: T.Literal[BuiltinSaver]
 
-#### Public Methods
+* **`flavor`**
+
+  - **Type**: str
+
+## Public Methods
 
 * **`save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs | None) -> Info`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `model` (`models.Model`)
+* `self`
 
-    - `signature` (`signers.Signature`)
+  - **type**: Any
 
-    - `input_example` (`schemas.Inputs | None`)
+  - **optional?**: No
 
-  - **Outputs**: `Info`
+* `model`
+
+  - **type**: models.Model
+
+  - **optional?**: No
+
+* `signature`
+
+  - **type**: signers.Signature
+
+  - **optional?**: No
+
+* `input_example`
+
+  - **type**: schemas.Inputs | None
+
+  - **optional?**: Yes
+
+  - **default value**: None
+
+### Output
+
+* **return type**: Info
 
 ### `Loader`
+
+## Overview
 
 Base class for loading models from registry.
 
 Separate model definition from deserialization.
 e.g., to switch between deserialization flavors.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`str`)
+* **`KIND`**
 
-#### Public Methods
+  - **Type**: str
+
+## Public Methods
 
 * **`load(self: Any, uri: str) -> Loader.Adapter`**
 
-  - **Purpose**: Load a model from the model registry.
+### Description
 
-  - **Inputs**:
+Load a model from the model registry.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `uri` (`str`)
+* `self`
 
-  - **Outputs**: `Loader.Adapter`
+  - **type**: Any
+
+  - **optional?**: No
+
+* `uri`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Loader.Adapter
 
 ### `CustomLoader`
+
+## Overview
 
 Loader for custom models using the Mlflow PyFunc module.
 
 https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[CustomLoader]`)
+* **`KIND`**
 
-#### Public Methods
+  - **Type**: T.Literal[CustomLoader]
+
+## Public Methods
 
 * **`load(self: Any, uri: str) -> CustomLoader.Adapter`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `uri` (`str`)
+* `self`
 
-  - **Outputs**: `CustomLoader.Adapter`
+  - **type**: Any
+
+  - **optional?**: No
+
+* `uri`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: CustomLoader.Adapter
 
 ### `BuiltinLoader`
+
+## Overview
 
 Loader for built-in models using the Mlflow PyFunc module.
 
@@ -264,25 +444,41 @@ Note: use Mlflow PyFunc instead of flavors to use standard API.
 
 https://mlflow.org/docs/latest/models.html#built-in-model-flavors
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[BuiltinLoader]`)
+* **`KIND`**
 
-#### Public Methods
+  - **Type**: T.Literal[BuiltinLoader]
+
+## Public Methods
 
 * **`load(self: Any, uri: str) -> BuiltinLoader.Adapter`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `uri` (`str`)
+* `self`
 
-  - **Outputs**: `BuiltinLoader.Adapter`
+  - **type**: Any
+
+  - **optional?**: No
+
+* `uri`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: BuiltinLoader.Adapter
 
 ### `Register`
+
+## Overview
 
 Base class for registring models to a location.
 
@@ -292,57 +488,99 @@ e.g., to change the model registry backend.
 Parameters:
     tags (dict[str, T.Any]): tags for the model.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`str`)
+* **`KIND`**
 
-* **`tags`** (`dict[(str, T.Any)]`)
+  - **Type**: str
 
-#### Public Methods
+* **`tags`**
+
+  - **Type**: dict[(str, T.Any)]
+
+## Public Methods
 
 * **`register(self: Any, name: str, model_uri: str) -> Version`**
 
-  - **Purpose**: Register a model given its name and URI.
+### Description
 
-  - **Inputs**:
+Register a model given its name and URI.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `name` (`str`)
+* `self`
 
-    - `model_uri` (`str`)
+  - **type**: Any
 
-  - **Outputs**: `Version`
+  - **optional?**: No
+
+* `name`
+
+  - **type**: str
+
+  - **optional?**: No
+
+* `model_uri`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Version
 
 ### `MlflowRegister`
+
+## Overview
 
 Register for models in the Mlflow Model Registry.
 
 https://mlflow.org/docs/latest/model-registry.html
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[MlflowRegister]`)
+* **`KIND`**
 
-#### Public Methods
+  - **Type**: T.Literal[MlflowRegister]
+
+## Public Methods
 
 * **`register(self: Any, name: str, model_uri: str) -> Version`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `name` (`str`)
+* `self`
 
-    - `model_uri` (`str`)
+  - **type**: Any
 
-  - **Outputs**: `Version`
+  - **optional?**: No
+
+* `name`
+
+  - **type**: str
+
+  - **optional?**: No
+
+* `model_uri`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Version
 
 ## Standalone Functions
 
 ### `uri_for_model_alias(name: str, alias: str) -> str`
+
+### Description
 
 Create a model URI from a model name and an alias.
 
@@ -353,16 +591,27 @@ Args:
 Returns:
     str: model URI as "models:/name@alias".
 
-#### Inputs
+### Inputs
 
-* `name` (`str`)
+* `name`
 
-* `alias` (`str`)
+  - **type**: str
 
-#### Outputs
-* `str`
+  - **optional?**: No
+
+* `alias`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `uri_for_model_version(name: str, version: int) -> str`
+
+### Description
 
 Create a model URI from a model name and a version.
 
@@ -373,16 +622,27 @@ Args:
 Returns:
     str: model URI as "models:/name/version."
 
-#### Inputs
+### Inputs
 
-* `name` (`str`)
+* `name`
 
-* `version` (`int`)
+  - **type**: str
 
-#### Outputs
-* `str`
+  - **optional?**: No
+
+* `version`
+
+  - **type**: int
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: str
 
 ### `uri_for_model_alias_or_version(name: str, alias_or_version: str | int) -> str`
+
+### Description
 
 Create a model URi from a model name and an alias or version.
 
@@ -393,30 +653,23 @@ Args:
 Returns:
     str: model URI as "models:/name@alias" or "models:/name/version" based on input.
 
-#### Inputs
+### Inputs
 
-* `name` (`str`)
+* `name`
 
-* `alias_or_version` (`str | int`)
+  - **type**: str
 
-#### Outputs
-* `str`
+  - **optional?**: No
 
-## Dependencies
+* `alias_or_version`
 
-* `abc`
+  - **type**: str | int
 
-* `typing`
+  - **optional?**: No
 
-* `mlflow`
+### Output
 
-* `pydantic`
-
-* `regression_model_template.core.models`
-
-* `regression_model_template.core.schemas`
-
-* `regression_model_template.utils.signers`
+* **return type**: str
 
 ## Used By
 

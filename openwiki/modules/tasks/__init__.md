@@ -6,18 +6,74 @@ title: "Module: __init__"
 source_path: "tasks/__init__.py"
 description: "Task collections for the project."
 tags: ["module", "__init__"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: __init__
 
 * **Source Reference:** [tasks/__init__.py](../../../tasks/__init__.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Task collections for the project.
+
+## Responsibilities
+
+Task collections for the project.
+
+## Dependencies
+
+* `invoke.Collection`
+
+* `.checks`
+
+* `.cleans`
+
+* `.commits`
+
+* `.containers`
+
+* `.docs`
+
+* `.formats`
+
+* `.installs`
+
+* `.mlflow`
+
+* `.packages`
+
+* `.projects`
+
+# Each File Documentation
+
+## Imported modules
+
+* `invoke.Collection`
+
+* `.checks`
+
+* `.cleans`
+
+* `.commits`
+
+* `.containers`
+
+* `.docs`
+
+* `.formats`
+
+* `.installs`
+
+* `.mlflow`
+
+* `.packages`
+
+* `.projects`
 
 ### Detected Architecture Patterns
 
@@ -49,32 +105,6 @@ Comp --> [mlflow]
 Comp --> [packages]
 Comp --> [projects]
 ```
-
-## 3. Class & Method Specifications
-
-## Dependencies
-
-* `invoke.Collection`
-
-* `.checks`
-
-* `.cleans`
-
-* `.commits`
-
-* `.containers`
-
-* `.docs`
-
-* `.formats`
-
-* `.installs`
-
-* `.mlflow`
-
-* `.packages`
-
-* `.projects`
 
 ## Used By
 

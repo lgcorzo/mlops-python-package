@@ -6,18 +6,50 @@ title: "Module: test_rate_limiter"
 source_path: "tests/controller/test_rate_limiter.py"
 description: "No description available."
 tags: ["module", "test_rate_limiter"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_rate_limiter
 
 * **Source Reference:** [tests/controller/test_rate_limiter.py](../../../../tests/controller/test_rate_limiter.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `time`
+
+* `regression_model_template.controller.kafka_app.RateLimiter`
+
+# Each File Documentation
+
+## Imported modules
+
+* `time`
+
+* `regression_model_template.controller.kafka_app.RateLimiter`
+
+## Exported functions
+
+* `test_rate_limiter_allows_requests_below_limit`
+
+* `test_rate_limiter_rejects_requests_above_limit`
+
+* `test_rate_limiter_evicts_oldest_ips`
+
+* `test_rate_limiter_window_expiration`
+
+* `test_rate_limiter_move_to_end_on_access`
 
 ### Detected Architecture Patterns
 
@@ -64,54 +96,63 @@ Comp --> [RateLimiter]
 
 ### `test_rate_limiter_allows_requests_below_limit() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_rate_limiter_rejects_requests_above_limit() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_rate_limiter_evicts_oldest_ips() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_rate_limiter_window_expiration() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_rate_limiter_move_to_end_on_access() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
 
-## Dependencies
-
-* `time`
-
-* `regression_model_template.controller.kafka_app.RateLimiter`
+* **return type**: Any
 
 ## Used By
 

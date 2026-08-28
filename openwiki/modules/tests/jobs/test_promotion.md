@@ -6,18 +6,58 @@ title: "Module: test_promotion"
 source_path: "tests/jobs/test_promotion.py"
 description: "No description available."
 tags: ["module", "test_promotion"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_promotion
 
 * **Source Reference:** [tests/jobs/test_promotion.py](../../../../tests/jobs/test_promotion.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `_pytest.capture`
+
+* `mlflow`
+
+* `pytest`
+
+* `regression_model_template.jobs`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+# Each File Documentation
+
+## Imported modules
+
+* `_pytest.capture`
+
+* `mlflow`
+
+* `pytest`
+
+* `regression_model_template.jobs`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+## Exported functions
+
+* `test_promotion_job`
 
 ### Detected Architecture Patterns
 
@@ -60,38 +100,51 @@ Comp --> [services]
 
 ### `test_promotion_job(version: int | None, mlflow_service: services.MlflowService, alerts_service: services.AlertsService, logger_service: services.LoggerService, model_version: registries.Version, capsys: pc.CaptureFixture[str]) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `version` (`int | None`)
+* `version`
 
-* `mlflow_service` (`services.MlflowService`)
+  - **type**: int | None
 
-* `alerts_service` (`services.AlertsService`)
+  - **optional?**: No
 
-* `logger_service` (`services.LoggerService`)
+* `mlflow_service`
 
-* `model_version` (`registries.Version`)
+  - **type**: services.MlflowService
 
-* `capsys` (`pc.CaptureFixture[str]`)
+  - **optional?**: No
 
-#### Outputs
-* `None`
+* `alerts_service`
 
-## Dependencies
+  - **type**: services.AlertsService
 
-* `_pytest.capture`
+  - **optional?**: No
 
-* `mlflow`
+* `logger_service`
 
-* `pytest`
+  - **type**: services.LoggerService
 
-* `regression_model_template.jobs`
+  - **optional?**: No
 
-* `regression_model_template.io.registries`
+* `model_version`
 
-* `regression_model_template.io.services`
+  - **type**: registries.Version
+
+  - **optional?**: No
+
+* `capsys`
+
+  - **type**: pc.CaptureFixture[str]
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ## Used By
 

@@ -6,18 +6,60 @@ title: "Module: test_metrics"
 source_path: "tests/core/test_metrics.py"
 description: "No description available."
 tags: ["module", "test_metrics"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_metrics
 
 * **Source Reference:** [tests/core/test_metrics.py](../../../../tests/core/test_metrics.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `mlflow`
+
+* `pandas`
+
+* `pytest`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+# Each File Documentation
+
+## Imported modules
+
+* `mlflow`
+
+* `pandas`
+
+* `pytest`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+## Exported functions
+
+* `test_sklearn_metric`
+
+* `test_threshold`
 
 ### Detected Architecture Patterns
 
@@ -63,49 +105,69 @@ Comp --> [schemas]
 
 ### `test_sklearn_metric(name: str, interval: tuple[(int, int)], greater_is_better: bool, model: models.Model, inputs: schemas.Inputs, targets: schemas.Targets, outputs: schemas.Outputs) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `name` (`str`)
+* `name`
 
-* `interval` (`tuple[(int, int)]`)
+  - **type**: str
 
-* `greater_is_better` (`bool`)
+  - **optional?**: No
 
-* `model` (`models.Model`)
+* `interval`
 
-* `inputs` (`schemas.Inputs`)
+  - **type**: tuple[(int, int)]
 
-* `targets` (`schemas.Targets`)
+  - **optional?**: No
 
-* `outputs` (`schemas.Outputs`)
+* `greater_is_better`
 
-#### Outputs
-* `None`
+  - **type**: bool
+
+  - **optional?**: No
+
+* `model`
+
+  - **type**: models.Model
+
+  - **optional?**: No
+
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+* `outputs`
+
+  - **type**: schemas.Outputs
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `test_threshold() -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
 
-## Dependencies
-
-* `mlflow`
-
-* `pandas`
-
-* `pytest`
-
-* `regression_model_template.core.metrics`
-
-* `regression_model_template.core.models`
-
-* `regression_model_template.core.schemas`
+* **return type**: None
 
 ## Used By
 

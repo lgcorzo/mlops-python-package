@@ -6,18 +6,56 @@ title: "Module: projects"
 source_path: "tasks/projects.py"
 description: "Project tasks for pyinvoke."
 tags: ["module", "projects"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: projects
 
 * **Source Reference:** [tasks/projects.py](../../../tasks/projects.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Project tasks for pyinvoke.
+
+## Responsibilities
+
+Project tasks for pyinvoke.
+
+## Dependencies
+
+* `json`
+
+* `invoke.context.Context`
+
+* `invoke.tasks.call`
+
+* `invoke.tasks.task`
+
+# Each File Documentation
+
+## Imported modules
+
+* `json`
+
+* `invoke.context.Context`
+
+* `invoke.tasks.call`
+
+* `invoke.tasks.task`
+
+## Exported functions
+
+* `requirements`
+
+* `environment`
+
+* `run`
+
+* `all`
 
 ### Detected Architecture Patterns
 
@@ -64,59 +102,81 @@ Comp --> [task]
 
 ### `requirements(ctx: Context) -> None`
 
+### Description
+
 Export the project requirements file.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `environment(ctx: Context) -> None`
 
+### Description
+
 Export the project environment file.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `run(ctx: Context, job: str) -> None`
 
+### Description
+
 Run an mlflow project from the MLproject file.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-* `job` (`str`)
+  - **type**: Context
 
-#### Outputs
-* `None`
+  - **optional?**: No
+
+* `job`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `all(_: Context) -> None`
 
+### Description
+
 Run all project tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
 
-## Dependencies
+  - **optional?**: No
 
-* `json`
+### Output
 
-* `invoke.context.Context`
-
-* `invoke.tasks.call`
-
-* `invoke.tasks.task`
+* **return type**: None
 
 ## Used By
 

@@ -6,18 +6,80 @@ title: "Module: cleans"
 source_path: "tasks/cleans.py"
 description: "Clean tasks for pyinvoke."
 tags: ["module", "cleans"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: cleans
 
 * **Source Reference:** [tasks/cleans.py](../../../tasks/cleans.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Clean tasks for pyinvoke.
+
+## Responsibilities
+
+Clean tasks for pyinvoke.
+
+## Dependencies
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+# Each File Documentation
+
+## Imported modules
+
+* `invoke.context.Context`
+
+* `invoke.tasks.task`
+
+## Exported functions
+
+* `mypy`
+
+* `ruff`
+
+* `pytest`
+
+* `coverage`
+
+* `dist`
+
+* `docs`
+
+* `cache`
+
+* `mlruns`
+
+* `outputs`
+
+* `venv`
+
+* `poetry`
+
+* `python`
+
+* `requirements`
+
+* `environment`
+
+* `tools`
+
+* `folders`
+
+* `sources`
+
+* `projects`
+
+* `all`
+
+* `reset`
 
 ### Detected Architecture Patterns
 
@@ -69,229 +131,363 @@ Comp --> [task]
 
 ### `mypy(ctx: Context) -> None`
 
+### Description
+
 Clean the mypy tool.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `ruff(ctx: Context) -> None`
 
+### Description
+
 Clean the ruff tool.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `pytest(ctx: Context) -> None`
 
+### Description
+
 Clean the pytest tool.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `coverage(ctx: Context) -> None`
 
+### Description
+
 Clean the coverage tool.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `dist(ctx: Context) -> None`
 
+### Description
+
 Clean the dist folder.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `docs(ctx: Context) -> None`
 
+### Description
+
 Clean the docs folder.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `cache(ctx: Context) -> None`
 
+### Description
+
 Clean the cache folder.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `mlruns(ctx: Context) -> None`
 
+### Description
+
 Clean the mlruns folder.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `outputs(ctx: Context) -> None`
 
+### Description
+
 Clean the outputs folder.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `venv(ctx: Context) -> None`
 
+### Description
+
 Clean the venv folder.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `poetry(ctx: Context) -> None`
 
+### Description
+
 Clean poetry lock file.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `python(ctx: Context) -> None`
 
+### Description
+
 Clean python caches and bytecodes.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `requirements(ctx: Context) -> None`
 
+### Description
+
 Clean the project requirements file.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `environment(ctx: Context) -> None`
 
+### Description
+
 Clean the project environment file.
 
-#### Inputs
+### Inputs
 
-* `ctx` (`Context`)
+* `ctx`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `tools(_: Context) -> None`
 
+### Description
+
 Run all tools tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `folders(_: Context) -> None`
 
+### Description
+
 Run all folders tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `sources(_: Context) -> None`
 
+### Description
+
 Run all sources tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `projects(_: Context) -> None`
 
+### Description
+
 Run all projects tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `all(_: Context) -> None`
 
+### Description
+
 Run all tools and folders tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `reset(_: Context) -> None`
 
+### Description
+
 Run all tools, folders, sources, and projects tasks.
 
-#### Inputs
+### Inputs
 
-* `_` (`Context`)
+* `_`
 
-#### Outputs
-* `None`
+  - **type**: Context
 
-## Dependencies
+  - **optional?**: No
 
-* `invoke.context.Context`
+### Output
 
-* `invoke.tasks.task`
+* **return type**: None
 
 ## Used By
 

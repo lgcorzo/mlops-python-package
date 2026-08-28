@@ -6,18 +6,90 @@ title: "Module: training"
 source_path: "src/regression_model_template/jobs/training.py"
 description: "Define a job for training and registring a single AI/ML model."
 tags: ["module", "training"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: training
 
 * **Source Reference:** [src/regression_model_template/jobs/training.py](../../../../src/regression_model_template/jobs/training.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Define a job for training and registring a single AI/ML model.
+
+## Responsibilities
+
+Define a job for training and registring a single AI/ML model.
+
+## Dependencies
+
+* `time`
+
+* `typing`
+
+* `mlflow`
+
+* `pydantic`
+
+* `mlflow.entities.Metric`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.jobs.base`
+
+* `regression_model_template.utils.signers`
+
+* `regression_model_template.utils.splitters`
+
+# Each File Documentation
+
+## Imported modules
+
+* `time`
+
+* `typing`
+
+* `mlflow`
+
+* `pydantic`
+
+* `mlflow.entities.Metric`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.jobs.base`
+
+* `regression_model_template.utils.signers`
+
+* `regression_model_template.utils.splitters`
+
+## Exported classes
+
+* `TrainingJob`
 
 ### Detected Architecture Patterns
 
@@ -102,7 +174,11 @@ Comp --> [splitters]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `TrainingJob`
+
+## Overview
 
 Train and register a single AI/ML model.
 
@@ -117,69 +193,67 @@ Parameters:
     signer (signers.SignerKind): model signer.
     registry (registries.RegisterKind): model register.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[TrainingJob]`)
+* **`KIND`**
 
-* **`run_config`** (`services.MlflowService.RunConfig`)
+  - **Type**: T.Literal[TrainingJob]
 
-* **`inputs`** (`datasets.ReaderKind`)
+* **`run_config`**
 
-* **`targets`** (`datasets.ReaderKind`)
+  - **Type**: services.MlflowService.RunConfig
 
-* **`model`** (`models.ModelKind`)
+* **`inputs`**
 
-* **`metrics`** (`metrics_.MetricsKind`)
+  - **Type**: datasets.ReaderKind
 
-* **`splitter`** (`splitters.SplitterKind`)
+* **`targets`**
 
-* **`saver`** (`registries.SaverKind`)
+  - **Type**: datasets.ReaderKind
 
-* **`signer`** (`signers.SignerKind`)
+* **`model`**
 
-* **`registry`** (`registries.RegisterKind`)
+  - **Type**: models.ModelKind
 
-#### Public Methods
+* **`metrics`**
+
+  - **Type**: metrics_.MetricsKind
+
+* **`splitter`**
+
+  - **Type**: splitters.SplitterKind
+
+* **`saver`**
+
+  - **Type**: registries.SaverKind
+
+* **`signer`**
+
+  - **Type**: signers.SignerKind
+
+* **`registry`**
+
+  - **Type**: registries.RegisterKind
+
+## Public Methods
 
 * **`run(self: Any) -> base.Locals`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `base.Locals`
+* `self`
 
-## Dependencies
+  - **type**: Any
 
-* `time`
+  - **optional?**: No
 
-* `typing`
+### Output
 
-* `mlflow`
-
-* `pydantic`
-
-* `mlflow.entities.Metric`
-
-* `regression_model_template.core.metrics`
-
-* `regression_model_template.core.models`
-
-* `regression_model_template.core.schemas`
-
-* `regression_model_template.io.datasets`
-
-* `regression_model_template.io.registries`
-
-* `regression_model_template.io.services`
-
-* `regression_model_template.jobs.base`
-
-* `regression_model_template.utils.signers`
-
-* `regression_model_template.utils.splitters`
+* **return type**: base.Locals
 
 ## Used By
 

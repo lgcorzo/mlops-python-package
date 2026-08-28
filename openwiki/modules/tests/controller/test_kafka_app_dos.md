@@ -6,18 +6,62 @@ title: "Module: test_kafka_app_dos"
 source_path: "tests/controller/test_kafka_app_dos.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_dos"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_kafka_app_dos
 
 * **Source Reference:** [tests/controller/test_kafka_app_dos.py](../../../../tests/controller/test_kafka_app_dos.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `pytest`
+
+* `pydantic.ValidationError`
+
+* `regression_model_template.controller.kafka_app.MAX_INPUT_ROWS`
+
+* `regression_model_template.controller.kafka_app.MAX_INPUT_COLS`
+
+* `regression_model_template.controller.kafka_app.PredictionRequest`
+
+# Each File Documentation
+
+## Imported modules
+
+* `pytest`
+
+* `pydantic.ValidationError`
+
+* `regression_model_template.controller.kafka_app.MAX_INPUT_ROWS`
+
+* `regression_model_template.controller.kafka_app.MAX_INPUT_COLS`
+
+* `regression_model_template.controller.kafka_app.PredictionRequest`
+
+## Exported functions
+
+* `test_prediction_request_max_rows`
+
+* `test_prediction_request_max_cols`
+
+* `test_prediction_request_valid_rows`
+
+* `test_prediction_request_empty`
+
+* `test_prediction_request_inconsistent_lengths`
 
 ### Detected Architecture Patterns
 
@@ -69,60 +113,63 @@ Comp --> [PredictionRequest]
 
 ### `test_prediction_request_max_rows() -> Any`
 
+### Description
+
 Test that PredictionRequest enforces max rows limit.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_prediction_request_max_cols() -> Any`
 
+### Description
+
 Test that PredictionRequest enforces max cols limit.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_prediction_request_valid_rows() -> Any`
 
+### Description
+
 Test that PredictionRequest accepts valid rows.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_prediction_request_empty() -> Any`
 
+### Description
+
 Test that PredictionRequest rejects empty input.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_prediction_request_inconsistent_lengths() -> Any`
 
+### Description
+
 Test that PredictionRequest rejects inconsistent column lengths.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
 
-## Dependencies
-
-* `pytest`
-
-* `pydantic.ValidationError`
-
-* `regression_model_template.controller.kafka_app.MAX_INPUT_ROWS`
-
-* `regression_model_template.controller.kafka_app.MAX_INPUT_COLS`
-
-* `regression_model_template.controller.kafka_app.PredictionRequest`
+* **return type**: Any
 
 ## Used By
 

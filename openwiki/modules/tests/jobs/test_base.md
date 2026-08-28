@@ -6,18 +6,42 @@ title: "Module: test_base"
 source_path: "tests/jobs/test_base.py"
 description: "No description available."
 tags: ["module", "test_base"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_base
 
 * **Source Reference:** [tests/jobs/test_base.py](../../../../tests/jobs/test_base.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.jobs.base`
+
+# Each File Documentation
+
+## Imported modules
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.jobs.base`
+
+## Exported functions
+
+* `test_job`
 
 ### Detected Architecture Patterns
 
@@ -54,24 +78,33 @@ Comp --> [base]
 
 ### `test_job(logger_service: services.LoggerService, alerts_service: services.AlertsService, mlflow_service: services.MlflowService) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `logger_service` (`services.LoggerService`)
+* `logger_service`
 
-* `alerts_service` (`services.AlertsService`)
+  - **type**: services.LoggerService
 
-* `mlflow_service` (`services.MlflowService`)
+  - **optional?**: No
 
-#### Outputs
-* `None`
+* `alerts_service`
 
-## Dependencies
+  - **type**: services.AlertsService
 
-* `regression_model_template.io.services`
+  - **optional?**: No
 
-* `regression_model_template.jobs.base`
+* `mlflow_service`
+
+  - **type**: services.MlflowService
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ## Used By
 

@@ -6,18 +6,52 @@ title: "Module: convert_links"
 source_path: "skills/validate/scripts/convert_links.py"
 description: "No description available."
 tags: ["module", "convert_links"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:57Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: convert_links
 
 * **Source Reference:** [skills/validate/scripts/convert_links.py](../../../../../skills/validate/scripts/convert_links.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `os`
+
+* `re`
+
+* `glob`
+
+# Each File Documentation
+
+## Imported modules
+
+* `os`
+
+* `re`
+
+* `glob`
+
+## Exported functions
+
+* `camel_to_snake`
+
+* `resolve_wiki_link`
+
+* `convert_file`
+
+* `main`
 
 ### Detected Architecture Patterns
 
@@ -88,59 +122,87 @@ Comp --> [glob]
 
 ### `camel_to_snake(name: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `name` (`Any`)
+* `name`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `resolve_wiki_link(link_content: Any, current_file_dir: Any, wiki_root: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `link_content` (`Any`)
+* `link_content`
 
-* `current_file_dir` (`Any`)
+  - **type**: Any
 
-* `wiki_root` (`Any`)
+  - **optional?**: No
 
-#### Outputs
-* `Any`
+* `current_file_dir`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+* `wiki_root`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `convert_file(file_path: Any, wiki_root: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `file_path` (`Any`)
+* `file_path`
 
-* `wiki_root` (`Any`)
+  - **type**: Any
 
-#### Outputs
-* `Any`
+  - **optional?**: No
+
+* `wiki_root`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `main() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
 
-## Dependencies
-
-* `os`
-
-* `re`
-
-* `glob`
+* **return type**: Any
 
 ## Used By
 

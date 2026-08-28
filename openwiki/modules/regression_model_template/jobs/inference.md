@@ -6,18 +6,62 @@ title: "Module: inference"
 source_path: "src/regression_model_template/jobs/inference.py"
 description: "Define a job for generating batch predictions from a registered model."
 tags: ["module", "inference"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: inference
 
 * **Source Reference:** [src/regression_model_template/jobs/inference.py](../../../../src/regression_model_template/jobs/inference.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Define a job for generating batch predictions from a registered model.
+
+## Responsibilities
+
+Define a job for generating batch predictions from a registered model.
+
+## Dependencies
+
+* `typing`
+
+* `pandas`
+
+* `pydantic`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.jobs.base`
+
+# Each File Documentation
+
+## Imported modules
+
+* `typing`
+
+* `pandas`
+
+* `pydantic`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.jobs.base`
+
+## Exported classes
+
+* `InferenceJob`
 
 ### Detected Architecture Patterns
 
@@ -75,7 +119,11 @@ Comp --> [base]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `InferenceJob`
+
+## Overview
 
 Generate batch predictions from a registered model.
 
@@ -85,45 +133,47 @@ Parameters:
     alias_or_version (str | int): alias or version for the  model.
     loader (registries.LoaderKind): registry loader for the model.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[InferenceJob]`)
+* **`KIND`**
 
-* **`inputs`** (`datasets.ReaderKind`)
+  - **Type**: T.Literal[InferenceJob]
 
-* **`outputs`** (`datasets.WriterKind`)
+* **`inputs`**
 
-* **`alias_or_version`** (`str | int`)
+  - **Type**: datasets.ReaderKind
 
-* **`loader`** (`registries.LoaderKind`)
+* **`outputs`**
 
-#### Public Methods
+  - **Type**: datasets.WriterKind
+
+* **`alias_or_version`**
+
+  - **Type**: str | int
+
+* **`loader`**
+
+  - **Type**: registries.LoaderKind
+
+## Public Methods
 
 * **`run(self: Any) -> base.Locals`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `base.Locals`
+* `self`
 
-## Dependencies
+  - **type**: Any
 
-* `typing`
+  - **optional?**: No
 
-* `pandas`
+### Output
 
-* `pydantic`
-
-* `regression_model_template.core.schemas`
-
-* `regression_model_template.io.datasets`
-
-* `regression_model_template.io.registries`
-
-* `regression_model_template.jobs.base`
+* **return type**: base.Locals
 
 ## Used By
 

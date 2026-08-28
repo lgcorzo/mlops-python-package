@@ -6,18 +6,132 @@ title: "Module: test_kafka_app"
 source_path: "tests/controller/test_kafka_app.py"
 description: "No description available."
 tags: ["module", "test_kafka_app"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_kafka_app
 
 * **Source Reference:** [tests/controller/test_kafka_app.py](../../../../tests/controller/test_kafka_app.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `json`
+
+* `unittest.mock.MagicMock`
+
+* `unittest.mock.patch`
+
+* `pytest`
+
+* `confluent_kafka.KafkaError`
+
+* `fastapi.HTTPException`
+
+* `regression_model_template.controller.kafka_app.DEFAULT_FASTAPI_HOST`
+
+* `regression_model_template.controller.kafka_app.DEFAULT_FASTAPI_PORT`
+
+* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
+
+* `regression_model_template.controller.kafka_app.PredictionRequest`
+
+* `regression_model_template.controller.kafka_app.PredictionResponse`
+
+* `regression_model_template.controller.kafka_app.app`
+
+* `regression_model_template.controller.kafka_app.health_check`
+
+* `regression_model_template.controller.kafka_app.predict`
+
+# Each File Documentation
+
+## Imported modules
+
+* `json`
+
+* `unittest.mock.MagicMock`
+
+* `unittest.mock.patch`
+
+* `pytest`
+
+* `confluent_kafka.KafkaError`
+
+* `fastapi.HTTPException`
+
+* `regression_model_template.controller.kafka_app.DEFAULT_FASTAPI_HOST`
+
+* `regression_model_template.controller.kafka_app.DEFAULT_FASTAPI_PORT`
+
+* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
+
+* `regression_model_template.controller.kafka_app.PredictionRequest`
+
+* `regression_model_template.controller.kafka_app.PredictionResponse`
+
+* `regression_model_template.controller.kafka_app.app`
+
+* `regression_model_template.controller.kafka_app.health_check`
+
+* `regression_model_template.controller.kafka_app.predict`
+
+## Exported functions
+
+* `mock_kafka_service`
+
+* `test_initialization`
+
+* `test_delivery_report`
+
+* `test_start`
+
+* `test_start_producer_failure`
+
+* `test_start_consumer_failure`
+
+* `test_run_server`
+
+* `test_run_server_failure`
+
+* `test_consume_messages`
+
+* `test_consume_messages_with_error`
+
+* `test_poll_message`
+
+* `test_poll_message_no_consumer`
+
+* `test_handle_message_error_partition_eof`
+
+* `test_handle_message_error_other_error`
+
+* `test_handle_message_error_unknown_topic`
+
+* `test_process_message`
+
+* `test_process_message_json_decode_error`
+
+* `test_process_message_prediction_error`
+
+* `test_close_consumer`
+
+* `test_stop`
+
+* `test_main_function`
+
+* `test_middleware_configuration`
 
 ### Detected Architecture Patterns
 
@@ -149,275 +263,399 @@ Comp --> [predict]
 
 ### `mock_kafka_service() -> Any`
 
+### Description
+
 Fixture to create a mocked FastAPIKafkaService.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_initialization(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test FastAPIKafkaService initialization.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_delivery_report(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test delivery report logging.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_start(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test the start method.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_start_producer_failure(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test start method when producer initialization fails.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_start_consumer_failure(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test start method when consumer initialization fails.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_run_server(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test the _run_server method.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_run_server_failure(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test the _run_server method when uvicorn fails.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_consume_messages(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test the _consume_messages method.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_consume_messages_with_error(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test _consume_messages handles message errors.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_poll_message(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test the _poll_message method.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_poll_message_no_consumer(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test _poll_message handles missing consumer.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_handle_message_error_partition_eof(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test _handle_message_error handles partition EOF.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_handle_message_error_other_error(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test _handle_message_error handles other Kafka errors.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_handle_message_error_unknown_topic(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test _handle_message_error handles transient UNKNOWN_TOPIC_OR_PART errors without breaking loop.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_process_message(mock_json_loads: Any, mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test the _process_message method.
 
-#### Inputs
+### Inputs
 
-* `mock_json_loads` (`Any`)
+* `mock_json_loads`
 
-* `mock_kafka_service` (`Any`)
+  - **type**: Any
 
-#### Outputs
-* `Any`
+  - **optional?**: No
+
+* `mock_kafka_service`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_process_message_json_decode_error(mock_json_loads: Any, mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test _process_message handles JSON decoding errors.
 
-#### Inputs
+### Inputs
 
-* `mock_json_loads` (`Any`)
+* `mock_json_loads`
 
-* `mock_kafka_service` (`Any`)
+  - **type**: Any
 
-#### Outputs
-* `Any`
+  - **optional?**: No
+
+* `mock_kafka_service`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_process_message_prediction_error(mock_json_loads: Any, mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test _process_message handles prediction callback errors.
 
-#### Inputs
+### Inputs
 
-* `mock_json_loads` (`Any`)
+* `mock_json_loads`
 
-* `mock_kafka_service` (`Any`)
+  - **type**: Any
 
-#### Outputs
-* `Any`
+  - **optional?**: No
+
+* `mock_kafka_service`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_close_consumer(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test the _close_consumer method.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_stop(mock_kafka_service: Any) -> Any`
 
+### Description
+
 Test the stop method.
 
-#### Inputs
+### Inputs
 
-* `mock_kafka_service` (`Any`)
+* `mock_kafka_service`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `test_main_function() -> Any`
 
+### Description
+
 Test the main function.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `test_middleware_configuration() -> Any`
 
+### Description
+
 Test that security middlewares are configured.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
 
-## Dependencies
-
-* `json`
-
-* `unittest.mock.MagicMock`
-
-* `unittest.mock.patch`
-
-* `pytest`
-
-* `confluent_kafka.KafkaError`
-
-* `fastapi.HTTPException`
-
-* `regression_model_template.controller.kafka_app.DEFAULT_FASTAPI_HOST`
-
-* `regression_model_template.controller.kafka_app.DEFAULT_FASTAPI_PORT`
-
-* `regression_model_template.controller.kafka_app.FastAPIKafkaService`
-
-* `regression_model_template.controller.kafka_app.PredictionRequest`
-
-* `regression_model_template.controller.kafka_app.PredictionResponse`
-
-* `regression_model_template.controller.kafka_app.app`
-
-* `regression_model_template.controller.kafka_app.health_check`
-
-* `regression_model_template.controller.kafka_app.predict`
+* **return type**: Any
 
 ## Used By
 

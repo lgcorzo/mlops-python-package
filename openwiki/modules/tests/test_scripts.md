@@ -6,18 +6,62 @@ title: "Module: test_scripts"
 source_path: "tests/test_scripts.py"
 description: "No description available."
 tags: ["module", "test_scripts"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_scripts
 
 * **Source Reference:** [tests/test_scripts.py](../../../tests/test_scripts.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `json`
+
+* `os`
+
+* `pydantic`
+
+* `pytest`
+
+* `_pytest.capture`
+
+* `regression_model_template.scripts`
+
+# Each File Documentation
+
+## Imported modules
+
+* `json`
+
+* `os`
+
+* `pydantic`
+
+* `pytest`
+
+* `_pytest.capture`
+
+* `regression_model_template.scripts`
+
+## Exported functions
+
+* `test_schema`
+
+* `test_main`
+
+* `test_main__no_configs`
 
 ### Detected Architecture Patterns
 
@@ -67,52 +111,63 @@ Comp --> [scripts]
 
 ### `test_schema(capsys: pc.CaptureFixture[str]) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `capsys` (`pc.CaptureFixture[str]`)
+* `capsys`
 
-#### Outputs
-* `None`
+  - **type**: pc.CaptureFixture[str]
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `test_main(scenario: str, confs_path: str, extra_config: str) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `scenario` (`str`)
+* `scenario`
 
-* `confs_path` (`str`)
+  - **type**: str
 
-* `extra_config` (`str`)
+  - **optional?**: No
 
-#### Outputs
-* `None`
+* `confs_path`
+
+  - **type**: str
+
+  - **optional?**: No
+
+* `extra_config`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `test_main__no_configs() -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
 
-## Dependencies
-
-* `json`
-
-* `os`
-
-* `pydantic`
-
-* `pytest`
-
-* `_pytest.capture`
-
-* `regression_model_template.scripts`
+* **return type**: None
 
 ## Used By
 

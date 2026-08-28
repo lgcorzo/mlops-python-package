@@ -6,18 +6,42 @@ title: "Module: promotion"
 source_path: "src/regression_model_template/jobs/promotion.py"
 description: "Define a job for promoting a registered model version with an alias."
 tags: ["module", "promotion"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: promotion
 
 * **Source Reference:** [src/regression_model_template/jobs/promotion.py](../../../../src/regression_model_template/jobs/promotion.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Define a job for promoting a registered model version with an alias.
+
+## Responsibilities
+
+Define a job for promoting a registered model version with an alias.
+
+## Dependencies
+
+* `typing`
+
+* `regression_model_template.jobs.base`
+
+# Each File Documentation
+
+## Imported modules
+
+* `typing`
+
+* `regression_model_template.jobs.base`
+
+## Exported classes
+
+* `PromotionJob`
 
 ### Detected Architecture Patterns
 
@@ -65,7 +89,11 @@ Comp --> [base]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `PromotionJob`
+
+## Overview
 
 Define a job for promoting a registered model version with an alias.
 
@@ -75,31 +103,39 @@ Parameters:
     alias (str): the mlflow alias to transition the registered model version.
     version (int | None): the model version to transition (use None for latest).
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[PromotionJob]`)
+* **`KIND`**
 
-* **`alias`** (`str`)
+  - **Type**: T.Literal[PromotionJob]
 
-* **`version`** (`int | None`)
+* **`alias`**
 
-#### Public Methods
+  - **Type**: str
+
+* **`version`**
+
+  - **Type**: int | None
+
+## Public Methods
 
 * **`run(self: Any) -> base.Locals`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `base.Locals`
+* `self`
 
-## Dependencies
+  - **type**: Any
 
-* `typing`
+  - **optional?**: No
 
-* `regression_model_template.jobs.base`
+### Output
+
+* **return type**: base.Locals
 
 ## Used By
 

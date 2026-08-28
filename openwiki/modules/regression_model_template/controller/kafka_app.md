@@ -6,18 +6,180 @@ title: "Module: kafka_app"
 source_path: "src/regression_model_template/controller/kafka_app.py"
 description: "FastAPI and Kafka Service for Predictions with Logging."
 tags: ["module", "kafka_app"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: kafka_app
 
 * **Source Reference:** [src/regression_model_template/controller/kafka_app.py](../../../../src/regression_model_template/controller/kafka_app.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 FastAPI and Kafka Service for Predictions with Logging.
+
+## Responsibilities
+
+FastAPI and Kafka Service for Predictions with Logging.
+
+## Dependencies
+
+* `json`
+
+* `logging`
+
+* `os`
+
+* `threading`
+
+* `time`
+
+* `collections`
+
+* `typing.Any`
+
+* `typing.Callable`
+
+* `typing.Dict`
+
+* `typing.cast`
+
+* `pandas`
+
+* `uvicorn`
+
+* `confluent_kafka.Consumer`
+
+* `confluent_kafka.KafkaError`
+
+* `confluent_kafka.Message`
+
+* `confluent_kafka.Producer`
+
+* `confluent_kafka.admin.AdminClient`
+
+* `confluent_kafka.admin.NewTopic`
+
+* `fastapi.FastAPI`
+
+* `fastapi.HTTPException`
+
+* `fastapi.Request`
+
+* `fastapi.concurrency.run_in_threadpool`
+
+* `fastapi.middleware.cors.CORSMiddleware`
+
+* `fastapi.middleware.trustedhost.TrustedHostMiddleware`
+
+* `uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware`
+
+* `pydantic.BaseModel`
+
+* `pydantic.Field`
+
+* `pydantic.field_validator`
+
+* `regression_model_template.core.schemas.InputsSchema`
+
+* `regression_model_template.core.schemas.Outputs`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.io.registries.CustomLoader`
+
+# Each File Documentation
+
+## Imported modules
+
+* `json`
+
+* `logging`
+
+* `os`
+
+* `threading`
+
+* `time`
+
+* `collections`
+
+* `typing.Any`
+
+* `typing.Callable`
+
+* `typing.Dict`
+
+* `typing.cast`
+
+* `pandas`
+
+* `uvicorn`
+
+* `confluent_kafka.Consumer`
+
+* `confluent_kafka.KafkaError`
+
+* `confluent_kafka.Message`
+
+* `confluent_kafka.Producer`
+
+* `confluent_kafka.admin.AdminClient`
+
+* `confluent_kafka.admin.NewTopic`
+
+* `fastapi.FastAPI`
+
+* `fastapi.HTTPException`
+
+* `fastapi.Request`
+
+* `fastapi.concurrency.run_in_threadpool`
+
+* `fastapi.middleware.cors.CORSMiddleware`
+
+* `fastapi.middleware.trustedhost.TrustedHostMiddleware`
+
+* `uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware`
+
+* `pydantic.BaseModel`
+
+* `pydantic.Field`
+
+* `pydantic.field_validator`
+
+* `regression_model_template.core.schemas.InputsSchema`
+
+* `regression_model_template.core.schemas.Outputs`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.io.registries.CustomLoader`
+
+## Exported classes
+
+* `RateLimiter`
+
+* `PredictionRequest`
+
+* `PredictionResponse`
+
+* `FastAPIKafkaService`
+
+* `PredictionService`
+
+## Exported functions
+
+* `default_input_payload`
+
+* `main`
 
 ### Detected Architecture Patterns
 
@@ -212,293 +374,491 @@ Comp --> [CustomLoader]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `RateLimiter`
+
+## Overview
 
 In-memory sliding window rate limiter backed by OrderedDict.
 
-#### Constructor
+## Constructor
 
 * **`__init__(self: Any, max_requests: int, window_seconds: int, max_tracked_ips: int)`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `max_requests` (`int`)
+* `self`
 
-    - `window_seconds` (`int`)
+  - **type**: Any
 
-    - `max_tracked_ips` (`int`)
+  - **optional?**: No
 
-#### Public Methods
+* `max_requests`
+
+  - **type**: int
+
+  - **optional?**: Yes
+
+  - **default value**: 100
+
+* `window_seconds`
+
+  - **type**: int
+
+  - **optional?**: Yes
+
+  - **default value**: 60
+
+* `max_tracked_ips`
+
+  - **type**: int
+
+  - **optional?**: Yes
+
+  - **default value**: MAX_TRACKED_IPS
+
+### Output
+
+* **return type**: None
+
+* **semantic meaning**: Initialization
+
+## Public Methods
 
 * **`is_allowed(self: Any, ip: str) -> bool`**
 
-  - **Purpose**: Check if the given IP is allowed to make a request.
+### Description
 
-  - **Inputs**:
+Check if the given IP is allowed to make a request.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `ip` (`str`)
+* `self`
 
-  - **Outputs**: `bool`
+  - **type**: Any
+
+  - **optional?**: No
+
+* `ip`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: bool
 
 ### `PredictionRequest`
 
+## Overview
+
 Request model for prediction.
 
-#### Attributes
+## Attributes
 
-* **`input_data`** (`Dict[(str, Any)]`)
+* **`input_data`**
 
-#### Public Methods
+  - **Type**: Dict[(str, Any)]
+
+## Public Methods
 
 * **`validate_schema(self: Any) -> pd.DataFrame`**
 
-  - **Purpose**: Validates the input data against InputsSchema.
+### Description
 
-  - **Inputs**:
+Validates the input data against InputsSchema.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `pd.DataFrame`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: pd.DataFrame
 
 * **`check_input_size(cls: Any, v: Dict[(str, Any)]) -> Dict[(str, Any)]`**
 
-  - **Purpose**: Check if the input data size is within limits.
+### Description
 
-  - **Inputs**:
+Check if the input data size is within limits.
 
-    - `cls` (`Any`)
+### Inputs
 
-    - `v` (`Dict[(str, Any)]`)
+* `cls`
 
-  - **Outputs**: `Dict[(str, Any)]`
+  - **type**: Any
+
+  - **optional?**: No
+
+* `v`
+
+  - **type**: Dict[(str, Any)]
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Dict[(str, Any)]
 
 ### `PredictionResponse`
 
+## Overview
+
 Response model for prediction.
 
-#### Attributes
+## Attributes
 
-* **`result`** (`Dict[(str, Any)]`)
+* **`result`**
+
+  - **Type**: Dict[(str, Any)]
 
 ### `FastAPIKafkaService`
 
+## Overview
+
 Service for deploying a FastAPI application with a Kafka producer and consumer.
 
-#### Constructor
+## Constructor
 
 * **`__init__(self: Any, prediction_callback: Callable[([PredictionRequest], PredictionResponse)], kafka_config: Dict[(str, Any)], input_topic: str, output_topic: str)`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `prediction_callback` (`Callable[([PredictionRequest], PredictionResponse)]`)
+* `self`
 
-    - `kafka_config` (`Dict[(str, Any)]`)
+  - **type**: Any
 
-    - `input_topic` (`str`)
+  - **optional?**: No
 
-    - `output_topic` (`str`)
+* `prediction_callback`
 
-#### Public Methods
+  - **type**: Callable[([PredictionRequest], PredictionResponse)]
+
+  - **optional?**: No
+
+* `kafka_config`
+
+  - **type**: Dict[(str, Any)]
+
+  - **optional?**: No
+
+* `input_topic`
+
+  - **type**: str
+
+  - **optional?**: No
+
+* `output_topic`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
+
+* **semantic meaning**: Initialization
+
+## Public Methods
 
 * **`delivery_report(self: Any, err: KafkaError | None, msg: Message) -> None`**
 
-  - **Purpose**: Called once for each message produced to indicate delivery result.
+### Description
 
-  - **Inputs**:
+Called once for each message produced to indicate delivery result.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `err` (`KafkaError | None`)
+* `self`
 
-    - `msg` (`Message`)
+  - **type**: Any
 
-  - **Outputs**: `None`
+  - **optional?**: No
+
+* `err`
+
+  - **type**: KafkaError | None
+
+  - **optional?**: No
+
+* `msg`
+
+  - **type**: Message
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 * **`start(self: Any) -> None`**
 
-  - **Purpose**: Start the FastAPI application and Kafka consumer.
+### Description
 
-  - **Inputs**:
+Start the FastAPI application and Kafka consumer.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `None`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 * **`stop(self: Any) -> None`**
 
-  - **Purpose**: Stop the FastAPI application and Kafka consumer.
+### Description
 
-  - **Inputs**:
+Stop the FastAPI application and Kafka consumer.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `None`
+* `self`
 
-#### Private Methods
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
+
+# Private Methods
 
 * **`_initialize_kafka_producer(self: Any) -> None`**
 
-  - **Purpose**: Initialize Kafka producer.
+### Purpose
+
+Initialize Kafka producer.
+
+### Parameters
+
+* `self` (`Any`)
+
+### Return value
+
+* `None`
 
 * **`_initialize_kafka_consumer(self: Any) -> None`**
 
-  - **Purpose**: Initialize Kafka consumer.
+### Purpose
+
+Initialize Kafka consumer.
+
+### Parameters
+
+* `self` (`Any`)
+
+### Return value
+
+* `None`
 
 * **`_ensure_topics_exist(self: Any) -> None`**
 
-  - **Purpose**: Ensure input and output Kafka topics exist on the broker.
+### Purpose
+
+Ensure input and output Kafka topics exist on the broker.
+
+### Parameters
+
+* `self` (`Any`)
+
+### Return value
+
+* `None`
 
 * **`_run_server(self: Any) -> None`**
 
-  - **Purpose**: Run the FastAPI server.
+### Purpose
+
+Run the FastAPI server.
+
+### Parameters
+
+* `self` (`Any`)
+
+### Return value
+
+* `None`
 
 * **`_consume_messages(self: Any) -> None`**
 
-  - **Purpose**: Consume messages from Kafka topic and produce predictions.
+### Purpose
+
+Consume messages from Kafka topic and produce predictions.
+
+### Parameters
+
+* `self` (`Any`)
+
+### Return value
+
+* `None`
 
 * **`_poll_message(self: Any) -> Message | None`**
 
-  - **Purpose**: Poll message from Kafka consumer.
+### Purpose
+
+Poll message from Kafka consumer.
+
+### Parameters
+
+* `self` (`Any`)
+
+### Return value
+
+* `Message | None`
 
 * **`_handle_message_error(self: Any, msg: Message) -> bool`**
 
-  - **Purpose**: Handle errors in polled messages.
+### Purpose
+
+Handle errors in polled messages.
+
+### Parameters
+
+* `self` (`Any`)
+
+* `msg` (`Message`)
+
+### Return value
+
+* `bool`
 
 * **`_process_message(self: Any, msg: Message) -> None`**
 
-  - **Purpose**: Process a valid Kafka message.
+### Purpose
+
+Process a valid Kafka message.
+
+### Parameters
+
+* `self` (`Any`)
+
+* `msg` (`Message`)
+
+### Return value
+
+* `None`
 
 * **`_close_consumer(self: Any) -> None`**
 
-  - **Purpose**: Close the Kafka consumer.
+### Purpose
+
+Close the Kafka consumer.
+
+### Parameters
+
+* `self` (`Any`)
+
+### Return value
+
+* `None`
 
 ### `PredictionService`
 
+## Overview
+
 Service to handle prediction logic securely.
 
-#### Constructor
+## Constructor
 
 * **`__init__(self: Any, model: Any)`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `model` (`Any`)
+* `self`
 
-#### Public Methods
+  - **type**: Any
+
+  - **optional?**: No
+
+* `model`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
+
+* **semantic meaning**: Initialization
+
+## Public Methods
 
 * **`predict(self: Any, input_data: PredictionRequest) -> PredictionResponse`**
 
-  - **Purpose**: Make a prediction using the model.
+### Description
 
-  - **Inputs**:
+Make a prediction using the model.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `input_data` (`PredictionRequest`)
+* `self`
 
-  - **Outputs**: `PredictionResponse`
+  - **type**: Any
+
+  - **optional?**: No
+
+* `input_data`
+
+  - **type**: PredictionRequest
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: PredictionResponse
 
 ## Standalone Functions
 
 ### `default_input_payload() -> Dict[(str, Any)]`
 
+### Description
+
 Generate a fresh default input payload with current timestamps.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Dict[(str, Any)]`
+### Output
+
+* **return type**: Dict[(str, Any)]
 
 ### `main() -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
 
-## Dependencies
-
-* `json`
-
-* `logging`
-
-* `os`
-
-* `threading`
-
-* `time`
-
-* `collections`
-
-* `typing.Any`
-
-* `typing.Callable`
-
-* `typing.Dict`
-
-* `typing.cast`
-
-* `pandas`
-
-* `uvicorn`
-
-* `confluent_kafka.Consumer`
-
-* `confluent_kafka.KafkaError`
-
-* `confluent_kafka.Message`
-
-* `confluent_kafka.Producer`
-
-* `confluent_kafka.admin.AdminClient`
-
-* `confluent_kafka.admin.NewTopic`
-
-* `fastapi.FastAPI`
-
-* `fastapi.HTTPException`
-
-* `fastapi.Request`
-
-* `fastapi.concurrency.run_in_threadpool`
-
-* `fastapi.middleware.cors.CORSMiddleware`
-
-* `fastapi.middleware.trustedhost.TrustedHostMiddleware`
-
-* `uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware`
-
-* `pydantic.BaseModel`
-
-* `pydantic.Field`
-
-* `pydantic.field_validator`
-
-* `regression_model_template.core.schemas.InputsSchema`
-
-* `regression_model_template.core.schemas.Outputs`
-
-* `regression_model_template.io.registries`
-
-* `regression_model_template.io.services`
-
-* `regression_model_template.io.registries.CustomLoader`
+* **return type**: None
 
 ## Used By
 

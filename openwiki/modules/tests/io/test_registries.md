@@ -6,18 +6,62 @@ title: "Module: test_registries"
 source_path: "tests/io/test_registries.py"
 description: "No description available."
 tags: ["module", "test_registries"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_registries
 
 * **Source Reference:** [tests/io/test_registries.py](../../../../tests/io/test_registries.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.utils.signers`
+
+# Each File Documentation
+
+## Imported modules
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.registries`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.utils.signers`
+
+## Exported functions
+
+* `test_uri_for_model_alias`
+
+* `test_uri_for_model_version`
+
+* `test_uri_for_model_alias_or_version`
+
+* `test_custom_pipeline`
+
+* `test_builtin_pipeline`
 
 ### Detected Architecture Patterns
 
@@ -79,76 +123,111 @@ Comp --> [signers]
 
 ### `test_uri_for_model_alias() -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
+
+* **return type**: None
 
 ### `test_uri_for_model_version() -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
+
+* **return type**: None
 
 ### `test_uri_for_model_alias_or_version() -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `None`
+### Output
+
+* **return type**: None
 
 ### `test_custom_pipeline(model: models.Model, inputs: schemas.Inputs, signature: signers.Signature, mlflow_service: services.MlflowService) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `model` (`models.Model`)
+* `model`
 
-* `inputs` (`schemas.Inputs`)
+  - **type**: models.Model
 
-* `signature` (`signers.Signature`)
+  - **optional?**: No
 
-* `mlflow_service` (`services.MlflowService`)
+* `inputs`
 
-#### Outputs
-* `None`
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `signature`
+
+  - **type**: signers.Signature
+
+  - **optional?**: No
+
+* `mlflow_service`
+
+  - **type**: services.MlflowService
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `test_builtin_pipeline(model: models.Model, inputs: schemas.Inputs, signature: signers.Signature, mlflow_service: services.MlflowService) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `model` (`models.Model`)
+* `model`
 
-* `inputs` (`schemas.Inputs`)
+  - **type**: models.Model
 
-* `signature` (`signers.Signature`)
+  - **optional?**: No
 
-* `mlflow_service` (`services.MlflowService`)
+* `inputs`
 
-#### Outputs
-* `None`
+  - **type**: schemas.Inputs
 
-## Dependencies
+  - **optional?**: No
 
-* `regression_model_template.core.models`
+* `signature`
 
-* `regression_model_template.core.schemas`
+  - **type**: signers.Signature
 
-* `regression_model_template.io.registries`
+  - **optional?**: No
 
-* `regression_model_template.io.services`
+* `mlflow_service`
 
-* `regression_model_template.utils.signers`
+  - **type**: services.MlflowService
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ## Used By
 

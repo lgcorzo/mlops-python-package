@@ -6,18 +6,60 @@ title: "Module: signers"
 source_path: "src/regression_model_template/utils/signers.py"
 description: "Generate signatures for AI/ML models."
 tags: ["module", "signers"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: signers
 
 * **Source Reference:** [src/regression_model_template/utils/signers.py](../../../../src/regression_model_template/utils/signers.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Generate signatures for AI/ML models.
+
+## Responsibilities
+
+Generate signatures for AI/ML models.
+
+## Dependencies
+
+* `abc`
+
+* `typing`
+
+* `mlflow`
+
+* `pydantic`
+
+* `mlflow.models.signature`
+
+* `regression_model_template.core.schemas`
+
+# Each File Documentation
+
+## Imported modules
+
+* `abc`
+
+* `typing`
+
+* `mlflow`
+
+* `pydantic`
+
+* `mlflow.models.signature`
+
+* `regression_model_template.core.schemas`
+
+## Exported classes
+
+* `Signer`
+
+* `InferSigner`
 
 ### Detected Architecture Patterns
 
@@ -64,7 +106,11 @@ Comp --> [schemas]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `Signer`
+
+## Overview
 
 Base class for generating model signatures.
 
@@ -73,63 +119,87 @@ e.g., automatic inference, manual model signature, ...
 
 https://mlflow.org/docs/latest/models.html#model-signature-and-input-example
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`str`)
+* **`KIND`**
 
-#### Public Methods
+  - **Type**: str
+
+## Public Methods
 
 * **`sign(self: Any, inputs: schemas.Inputs, outputs: schemas.Outputs) -> Signature`**
 
-  - **Purpose**: Generate a model signature from its inputs/outputs.
+### Description
 
-  - **Inputs**:
+Generate a model signature from its inputs/outputs.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `inputs` (`schemas.Inputs`)
+* `self`
 
-    - `outputs` (`schemas.Outputs`)
+  - **type**: Any
 
-  - **Outputs**: `Signature`
+  - **optional?**: No
+
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `outputs`
+
+  - **type**: schemas.Outputs
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Signature
 
 ### `InferSigner`
 
+## Overview
+
 Generate model signatures from inputs/outputs data.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[InferSigner]`)
+* **`KIND`**
 
-#### Public Methods
+  - **Type**: T.Literal[InferSigner]
+
+## Public Methods
 
 * **`sign(self: Any, inputs: schemas.Inputs, outputs: schemas.Outputs) -> Signature`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `inputs` (`schemas.Inputs`)
+* `self`
 
-    - `outputs` (`schemas.Outputs`)
+  - **type**: Any
 
-  - **Outputs**: `Signature`
+  - **optional?**: No
 
-## Dependencies
+* `inputs`
 
-* `abc`
+  - **type**: schemas.Inputs
 
-* `typing`
+  - **optional?**: No
 
-* `mlflow`
+* `outputs`
 
-* `pydantic`
+  - **type**: schemas.Outputs
 
-* `mlflow.models.signature`
+  - **optional?**: No
 
-* `regression_model_template.core.schemas`
+### Output
+
+* **return type**: Signature
 
 ## Used By
 

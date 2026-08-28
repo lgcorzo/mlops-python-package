@@ -6,18 +6,44 @@ title: "Module: osvariables"
 source_path: "src/regression_model_template/io/osvariables.py"
 description: "No description available."
 tags: ["module", "osvariables"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: osvariables
 
 * **Source Reference:** [src/regression_model_template/io/osvariables.py](../../../../src/regression_model_template/io/osvariables.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `typing.Any`
+
+* `pydantic_settings.BaseSettings`
+
+# Each File Documentation
+
+## Imported modules
+
+* `typing.Any`
+
+* `pydantic_settings.BaseSettings`
+
+## Exported classes
+
+* `Singleton`
+
+* `Env`
 
 ### Detected Architecture Patterns
 
@@ -63,39 +89,63 @@ Comp --> [BaseSettings]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `Singleton`
+
+## Overview
 
 No description available.
 
-#### Attributes
+## Attributes
 
-* **`_instances`** (`dict[(type, Singleton)]`)
+* **`_instances`**
 
-#### Private Methods
+  - **Type**: dict[(type, Singleton)]
+
+# Private Methods
 
 * **`__new__(cls: type[Singleton], *args: tuple[(Any, Ellipsis)], **kwargs: dict[(str, Any)]) -> Singleton`**
 
-  - **Purpose**: No description available.
-
-### `Env`
+### Purpose
 
 No description available.
 
-#### Attributes
+### Parameters
 
-* **`mlflow_tracking_uri`** (`str`)
+* `cls` (`type[Singleton]`)
 
-* **`mlflow_registry_uri`** (`str`)
+* `*args` (`tuple[(Any, Ellipsis)]`)
 
-* **`mlflow_experiment_name`** (`str`)
+* `**kwargs` (`dict[(str, Any)]`)
 
-* **`mlflow_registered_model_name`** (`str`)
+### Return value
 
-## Dependencies
+* `Singleton`
 
-* `typing.Any`
+### `Env`
 
-* `pydantic_settings.BaseSettings`
+## Overview
+
+No description available.
+
+## Attributes
+
+* **`mlflow_tracking_uri`**
+
+  - **Type**: str
+
+* **`mlflow_registry_uri`**
+
+  - **Type**: str
+
+* **`mlflow_experiment_name`**
+
+  - **Type**: str
+
+* **`mlflow_registered_model_name`**
+
+  - **Type**: str
 
 ## Used By
 

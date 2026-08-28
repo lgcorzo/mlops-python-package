@@ -6,18 +6,52 @@ title: "Module: test_models"
 source_path: "tests/core/test_models.py"
 description: "No description available."
 tags: ["module", "test_models"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_models
 
 * **Source Reference:** [tests/core/test_models.py](../../../../tests/core/test_models.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `typing`
+
+* `pytest`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+# Each File Documentation
+
+## Imported modules
+
+* `typing`
+
+* `pytest`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+## Exported functions
+
+* `test_model`
+
+* `test_baseline_sklearn_model`
 
 ### Detected Architecture Patterns
 
@@ -72,35 +106,39 @@ Comp --> [schemas]
 
 ### `test_model(inputs_samples: schemas.Inputs) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `inputs_samples` (`schemas.Inputs`)
+* `inputs_samples`
 
-#### Outputs
-* `None`
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `test_baseline_sklearn_model(train_test_sets: tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `train_test_sets` (`tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]`)
+* `train_test_sets`
 
-#### Outputs
-* `None`
+  - **type**: tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]
 
-## Dependencies
+  - **optional?**: No
 
-* `typing`
+### Output
 
-* `pytest`
-
-* `regression_model_template.core.models`
-
-* `regression_model_template.core.schemas`
+* **return type**: None
 
 ## Used By
 

@@ -6,18 +6,66 @@ title: "Module: splitters"
 source_path: "src/regression_model_template/utils/splitters.py"
 description: "Split dataframes into subsets (e.g., train/valid/test)."
 tags: ["module", "splitters"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: splitters
 
 * **Source Reference:** [src/regression_model_template/utils/splitters.py](../../../../src/regression_model_template/utils/splitters.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Split dataframes into subsets (e.g., train/valid/test).
+
+## Responsibilities
+
+Split dataframes into subsets (e.g., train/valid/test).
+
+## Dependencies
+
+* `abc`
+
+* `typing`
+
+* `numpy`
+
+* `numpy.typing`
+
+* `pydantic`
+
+* `sklearn.model_selection`
+
+* `regression_model_template.core.schemas`
+
+# Each File Documentation
+
+## Imported modules
+
+* `abc`
+
+* `typing`
+
+* `numpy`
+
+* `numpy.typing`
+
+* `pydantic`
+
+* `sklearn.model_selection`
+
+* `regression_model_template.core.schemas`
+
+## Exported classes
+
+* `Splitter`
+
+* `TrainTestSplitter`
+
+* `TimeSeriesSplitter`
 
 ### Detected Architecture Patterns
 
@@ -83,7 +131,11 @@ Comp --> [schemas]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `Splitter`
+
+## Overview
 
 Base class for a splitter.
 
@@ -92,45 +144,93 @@ e.g., split between a train/test subsets.
 
 # https://scikit-learn.org/stable/glossary.html#term-CV-splitter
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`str`)
+* **`KIND`**
 
-#### Public Methods
+  - **Type**: str
+
+## Public Methods
 
 * **`split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`**
 
-  - **Purpose**: Split a dataframe into subsets.
+### Description
 
-  - **Inputs**:
+Split a dataframe into subsets.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `inputs` (`schemas.Inputs`)
+* `self`
 
-    - `targets` (`schemas.Targets`)
+  - **type**: Any
 
-    - `groups` (`Index | None`)
+  - **optional?**: No
 
-  - **Outputs**: `TrainTestSplits`
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+* `groups`
+
+  - **type**: Index | None
+
+  - **optional?**: Yes
+
+  - **default value**: None
+
+### Output
+
+* **return type**: TrainTestSplits
 
 * **`get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`**
 
-  - **Purpose**: Get the number of splits generated.
+### Description
 
-  - **Inputs**:
+Get the number of splits generated.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `inputs` (`schemas.Inputs`)
+* `self`
 
-    - `targets` (`schemas.Targets`)
+  - **type**: Any
 
-    - `groups` (`Index | None`)
+  - **optional?**: No
 
-  - **Outputs**: `int`
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+* `groups`
+
+  - **type**: Index | None
+
+  - **optional?**: Yes
+
+  - **default value**: None
+
+### Output
+
+* **return type**: int
 
 ### `TrainTestSplitter`
+
+## Overview
 
 Split a dataframe into a train and test set.
 
@@ -139,51 +239,105 @@ Parameters:
     test_size (int | float): number/ratio for the test set.
     random_state (int): random state for the splitter object.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[TrainTestSplitter]`)
+* **`KIND`**
 
-* **`shuffle`** (`bool`)
+  - **Type**: T.Literal[TrainTestSplitter]
 
-* **`test_size`** (`int | float`)
+* **`shuffle`**
 
-* **`random_state`** (`int`)
+  - **Type**: bool
 
-#### Public Methods
+* **`test_size`**
+
+  - **Type**: int | float
+
+* **`random_state`**
+
+  - **Type**: int
+
+## Public Methods
 
 * **`split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `inputs` (`schemas.Inputs`)
+* `self`
 
-    - `targets` (`schemas.Targets`)
+  - **type**: Any
 
-    - `groups` (`Index | None`)
+  - **optional?**: No
 
-  - **Outputs**: `TrainTestSplits`
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+* `groups`
+
+  - **type**: Index | None
+
+  - **optional?**: Yes
+
+  - **default value**: None
+
+### Output
+
+* **return type**: TrainTestSplits
 
 * **`get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `inputs` (`schemas.Inputs`)
+* `self`
 
-    - `targets` (`schemas.Targets`)
+  - **type**: Any
 
-    - `groups` (`Index | None`)
+  - **optional?**: No
 
-  - **Outputs**: `int`
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+* `groups`
+
+  - **type**: Index | None
+
+  - **optional?**: Yes
+
+  - **default value**: None
+
+### Output
+
+* **return type**: int
 
 ### `TimeSeriesSplitter`
+
+## Overview
 
 Split a dataframe into fixed time series subsets.
 
@@ -192,65 +346,101 @@ Parameters:
     n_splits (int): number of split to generate.
     test_size (int | float): number or ratio for the test dataset.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[TimeSeriesSplitter]`)
+* **`KIND`**
 
-* **`gap`** (`int`)
+  - **Type**: T.Literal[TimeSeriesSplitter]
 
-* **`n_splits`** (`int`)
+* **`gap`**
 
-* **`test_size`** (`int | float`)
+  - **Type**: int
 
-#### Public Methods
+* **`n_splits`**
+
+  - **Type**: int
+
+* **`test_size`**
+
+  - **Type**: int | float
+
+## Public Methods
 
 * **`split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `inputs` (`schemas.Inputs`)
+* `self`
 
-    - `targets` (`schemas.Targets`)
+  - **type**: Any
 
-    - `groups` (`Index | None`)
+  - **optional?**: No
 
-  - **Outputs**: `TrainTestSplits`
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+* `groups`
+
+  - **type**: Index | None
+
+  - **optional?**: Yes
+
+  - **default value**: None
+
+### Output
+
+* **return type**: TrainTestSplits
 
 * **`get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `inputs` (`schemas.Inputs`)
+* `self`
 
-    - `targets` (`schemas.Targets`)
+  - **type**: Any
 
-    - `groups` (`Index | None`)
+  - **optional?**: No
 
-  - **Outputs**: `int`
+* `inputs`
 
-## Dependencies
+  - **type**: schemas.Inputs
 
-* `abc`
+  - **optional?**: No
 
-* `typing`
+* `targets`
 
-* `numpy`
+  - **type**: schemas.Targets
 
-* `numpy.typing`
+  - **optional?**: No
 
-* `pydantic`
+* `groups`
 
-* `sklearn.model_selection`
+  - **type**: Index | None
 
-* `regression_model_template.core.schemas`
+  - **optional?**: Yes
+
+  - **default value**: None
+
+### Output
+
+* **return type**: int
 
 ## Used By
 

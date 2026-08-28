@@ -6,18 +6,42 @@ title: "Module: test_signers"
 source_path: "tests/utils/test_signers.py"
 description: "No description available."
 tags: ["module", "test_signers"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: test_signers
 
 * **Source Reference:** [tests/utils/test_signers.py](../../../../tests/utils/test_signers.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.utils.signers`
+
+# Each File Documentation
+
+## Imported modules
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.utils.signers`
+
+## Exported functions
+
+* `test_infer_signer`
 
 ### Detected Architecture Patterns
 
@@ -53,22 +77,27 @@ Comp --> [signers]
 
 ### `test_infer_signer(inputs: schemas.Inputs, outputs: schemas.Outputs) -> None`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `inputs` (`schemas.Inputs`)
+* `inputs`
 
-* `outputs` (`schemas.Outputs`)
+  - **type**: schemas.Inputs
 
-#### Outputs
-* `None`
+  - **optional?**: No
 
-## Dependencies
+* `outputs`
 
-* `regression_model_template.core.schemas`
+  - **type**: schemas.Outputs
 
-* `regression_model_template.utils.signers`
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ## Used By
 

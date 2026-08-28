@@ -6,18 +6,64 @@ title: "Module: schemas"
 source_path: "src/regression_model_template/core/schemas.py"
 description: "Define and validate dataframe schemas."
 tags: ["module", "schemas"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: schemas
 
 * **Source Reference:** [src/regression_model_template/core/schemas.py](../../../../src/regression_model_template/core/schemas.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Define and validate dataframe schemas.
+
+## Responsibilities
+
+Define and validate dataframe schemas.
+
+## Dependencies
+
+* `typing`
+
+* `pandas`
+
+* `pandera`
+
+* `pandera.typing`
+
+* `pandera.typing.common`
+
+# Each File Documentation
+
+## Imported modules
+
+* `typing`
+
+* `pandas`
+
+* `pandera`
+
+* `pandera.typing`
+
+* `pandera.typing.common`
+
+## Exported classes
+
+* `Schema`
+
+* `InputsSchema`
+
+* `TargetsSchema`
+
+* `OutputsSchema`
+
+* `SHAPValuesSchema`
+
+* `FeatureImportancesSchema`
 
 ### Detected Architecture Patterns
 
@@ -94,110 +140,168 @@ Comp --> [common]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `Schema`
+
+## Overview
 
 Base class for a dataframe schema.
 
 Use a schema to type your dataframe object.
 e.g., to communicate and validate its fields.
 
-#### Public Methods
+## Public Methods
 
 * **`check(cls: T.Type[TSchema], data: pd.DataFrame) -> papd.DataFrame[TSchema]`**
 
-  - **Purpose**: Check the dataframe with this schema.
+### Description
 
-  - **Inputs**:
+Check the dataframe with this schema.
 
-    - `cls` (`T.Type[TSchema]`)
+### Inputs
 
-    - `data` (`pd.DataFrame`)
+* `cls`
 
-  - **Outputs**: `papd.DataFrame[TSchema]`
+  - **type**: T.Type[TSchema]
+
+  - **optional?**: No
+
+* `data`
+
+  - **type**: pd.DataFrame
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: papd.DataFrame[TSchema]
 
 ### `InputsSchema`
 
+## Overview
+
 Schema for the project inputs.
 
-#### Attributes
+## Attributes
 
-* **`instant`** (`papd.Index[padt.UInt32]`)
+* **`instant`**
 
-* **`dteday`** (`papd.Series[padt.DateTime]`)
+  - **Type**: papd.Index[padt.UInt32]
 
-* **`season`** (`papd.Series[padt.UInt8]`)
+* **`dteday`**
 
-* **`yr`** (`papd.Series[padt.UInt8]`)
+  - **Type**: papd.Series[padt.DateTime]
 
-* **`mnth`** (`papd.Series[padt.UInt8]`)
+* **`season`**
 
-* **`hr`** (`papd.Series[padt.UInt8]`)
+  - **Type**: papd.Series[padt.UInt8]
 
-* **`holiday`** (`papd.Series[padt.Bool]`)
+* **`yr`**
 
-* **`weekday`** (`papd.Series[padt.UInt8]`)
+  - **Type**: papd.Series[padt.UInt8]
 
-* **`workingday`** (`papd.Series[padt.Bool]`)
+* **`mnth`**
 
-* **`weathersit`** (`papd.Series[padt.UInt8]`)
+  - **Type**: papd.Series[padt.UInt8]
 
-* **`temp`** (`papd.Series[padt.Float16]`)
+* **`hr`**
 
-* **`atemp`** (`papd.Series[padt.Float16]`)
+  - **Type**: papd.Series[padt.UInt8]
 
-* **`hum`** (`papd.Series[padt.Float16]`)
+* **`holiday`**
 
-* **`windspeed`** (`papd.Series[padt.Float16]`)
+  - **Type**: papd.Series[padt.Bool]
 
-* **`casual`** (`papd.Series[padt.UInt32]`)
+* **`weekday`**
 
-* **`registered`** (`papd.Series[padt.UInt32]`)
+  - **Type**: papd.Series[padt.UInt8]
+
+* **`workingday`**
+
+  - **Type**: papd.Series[padt.Bool]
+
+* **`weathersit`**
+
+  - **Type**: papd.Series[padt.UInt8]
+
+* **`temp`**
+
+  - **Type**: papd.Series[padt.Float16]
+
+* **`atemp`**
+
+  - **Type**: papd.Series[padt.Float16]
+
+* **`hum`**
+
+  - **Type**: papd.Series[padt.Float16]
+
+* **`windspeed`**
+
+  - **Type**: papd.Series[padt.Float16]
+
+* **`casual`**
+
+  - **Type**: papd.Series[padt.UInt32]
+
+* **`registered`**
+
+  - **Type**: papd.Series[padt.UInt32]
 
 ### `TargetsSchema`
 
+## Overview
+
 Schema for the project target.
 
-#### Attributes
+## Attributes
 
-* **`instant`** (`papd.Index[padt.UInt32]`)
+* **`instant`**
 
-* **`cnt`** (`papd.Series[padt.UInt32]`)
+  - **Type**: papd.Index[padt.UInt32]
+
+* **`cnt`**
+
+  - **Type**: papd.Series[padt.UInt32]
 
 ### `OutputsSchema`
 
+## Overview
+
 Schema for the project output.
 
-#### Attributes
+## Attributes
 
-* **`instant`** (`papd.Index[padt.UInt32]`)
+* **`instant`**
 
-* **`prediction`** (`papd.Series[padt.UInt32]`)
+  - **Type**: papd.Index[padt.UInt32]
+
+* **`prediction`**
+
+  - **Type**: papd.Series[padt.UInt32]
 
 ### `SHAPValuesSchema`
+
+## Overview
 
 Schema for the project shap values.
 
 ### `FeatureImportancesSchema`
 
+## Overview
+
 Schema for the project feature importances.
 
-#### Attributes
+## Attributes
 
-* **`feature`** (`papd.Series[str]`)
+* **`feature`**
 
-* **`importance`** (`papd.Series[float]`)
+  - **Type**: papd.Series[str]
 
-## Dependencies
+* **`importance`**
 
-* `typing`
-
-* `pandas`
-
-* `pandera`
-
-* `pandera.typing`
-
-* `pandera.typing.common`
+  - **Type**: papd.Series[float]
 
 ## Used By
 

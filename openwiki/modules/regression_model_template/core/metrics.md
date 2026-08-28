@@ -6,18 +6,78 @@ title: "Module: metrics"
 source_path: "src/regression_model_template/core/metrics.py"
 description: "Evaluate model performances with metrics."
 tags: ["module", "metrics"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: metrics
 
 * **Source Reference:** [src/regression_model_template/core/metrics.py](../../../../src/regression_model_template/core/metrics.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Evaluate model performances with metrics.
+
+## Responsibilities
+
+Evaluate model performances with metrics.
+
+## Dependencies
+
+* `__future__.annotations`
+
+* `abc`
+
+* `typing`
+
+* `mlflow`
+
+* `pandas`
+
+* `pydantic`
+
+* `mlflow.metrics.MetricValue`
+
+* `sklearn.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+# Each File Documentation
+
+## Imported modules
+
+* `__future__.annotations`
+
+* `abc`
+
+* `typing`
+
+* `mlflow`
+
+* `pandas`
+
+* `pydantic`
+
+* `mlflow.metrics.MetricValue`
+
+* `sklearn.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+## Exported classes
+
+* `Metric`
+
+* `SklearnMetric`
+
+* `Threshold`
 
 ### Detected Architecture Patterns
 
@@ -91,7 +151,11 @@ Comp --> [schemas]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `Metric`
+
+## Overview
 
 Base class for a project metric.
 
@@ -102,57 +166,109 @@ Parameters:
     name (str): name of the metric for the reporting.
     greater_is_better (bool): maximize or minimize result.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`str`)
+* **`KIND`**
 
-* **`name`** (`str`)
+  - **Type**: str
 
-* **`greater_is_better`** (`bool`)
+* **`name`**
 
-#### Public Methods
+  - **Type**: str
+
+* **`greater_is_better`**
+
+  - **Type**: bool
+
+## Public Methods
 
 * **`score(self: Any, targets: schemas.Targets, outputs: schemas.Outputs) -> float`**
 
-  - **Purpose**: Score the outputs against the targets.
+### Description
 
-  - **Inputs**:
+Score the outputs against the targets.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `targets` (`schemas.Targets`)
+* `self`
 
-    - `outputs` (`schemas.Outputs`)
+  - **type**: Any
 
-  - **Outputs**: `float`
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+* `outputs`
+
+  - **type**: schemas.Outputs
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: float
 
 * **`scorer(self: Any, model: models.Model, inputs: schemas.Inputs, targets: schemas.Targets) -> float`**
 
-  - **Purpose**: Score model outputs against targets.
+### Description
 
-  - **Inputs**:
+Score model outputs against targets.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `model` (`models.Model`)
+* `self`
 
-    - `inputs` (`schemas.Inputs`)
+  - **type**: Any
 
-    - `targets` (`schemas.Targets`)
+  - **optional?**: No
 
-  - **Outputs**: `float`
+* `model`
+
+  - **type**: models.Model
+
+  - **optional?**: No
+
+* `inputs`
+
+  - **type**: schemas.Inputs
+
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: float
 
 * **`to_mlflow(self: Any) -> MlflowMetric`**
 
-  - **Purpose**: Convert the metric to an Mlflow metric.
+### Description
 
-  - **Inputs**:
+Convert the metric to an Mlflow metric.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `MlflowMetric`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: MlflowMetric
 
 ### `SklearnMetric`
+
+## Overview
 
 Compute metrics with sklearn.
 
@@ -160,31 +276,55 @@ Parameters:
     name (str): name of the sklearn metric.
     greater_is_better (bool): maximize or minimize.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[SklearnMetric]`)
+* **`KIND`**
 
-* **`name`** (`str`)
+  - **Type**: T.Literal[SklearnMetric]
 
-* **`greater_is_better`** (`bool`)
+* **`name`**
 
-#### Public Methods
+  - **Type**: str
+
+* **`greater_is_better`**
+
+  - **Type**: bool
+
+## Public Methods
 
 * **`score(self: Any, targets: schemas.Targets, outputs: schemas.Outputs) -> float`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `targets` (`schemas.Targets`)
+* `self`
 
-    - `outputs` (`schemas.Outputs`)
+  - **type**: Any
 
-  - **Outputs**: `float`
+  - **optional?**: No
+
+* `targets`
+
+  - **type**: schemas.Targets
+
+  - **optional?**: No
+
+* `outputs`
+
+  - **type**: schemas.Outputs
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: float
 
 ### `Threshold`
+
+## Overview
 
 A project threshold for a metric.
 
@@ -195,45 +335,35 @@ Parameters:
     threshold (int | float): absolute threshold value.
     greater_is_better (bool): maximize or minimize result.
 
-#### Attributes
+## Attributes
 
-* **`threshold`** (`int | float`)
+* **`threshold`**
 
-* **`greater_is_better`** (`bool`)
+  - **Type**: int | float
 
-#### Public Methods
+* **`greater_is_better`**
+
+  - **Type**: bool
+
+## Public Methods
 
 * **`to_mlflow(self: Any) -> MlflowThreshold`**
 
-  - **Purpose**: Convert the threshold to an mlflow threshold.
+### Description
 
-  - **Inputs**:
+Convert the threshold to an mlflow threshold.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `MlflowThreshold`
+* `self`
 
-## Dependencies
+  - **type**: Any
 
-* `__future__.annotations`
+  - **optional?**: No
 
-* `abc`
+### Output
 
-* `typing`
-
-* `mlflow`
-
-* `pandas`
-
-* `pydantic`
-
-* `mlflow.metrics.MetricValue`
-
-* `sklearn.metrics`
-
-* `regression_model_template.core.models`
-
-* `regression_model_template.core.schemas`
+* **return type**: MlflowThreshold
 
 ## Used By
 

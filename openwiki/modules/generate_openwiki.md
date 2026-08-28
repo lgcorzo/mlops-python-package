@@ -6,18 +6,94 @@ title: "Module: generate_openwiki"
 source_path: "generate_openwiki.py"
 description: "No description available."
 tags: ["module", "generate_openwiki"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:57Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: generate_openwiki
 
 * **Source Reference:** [generate_openwiki.py](../../generate_openwiki.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 No description available.
+
+## Responsibilities
+
+No description available.
+
+## Dependencies
+
+* `argparse`
+
+* `ast`
+
+* `datetime`
+
+* `os`
+
+* `subprocess`
+
+# Each File Documentation
+
+## Imported modules
+
+* `argparse`
+
+* `ast`
+
+* `datetime`
+
+* `os`
+
+* `subprocess`
+
+## Exported functions
+
+* `run_command`
+
+* `get_last_commit`
+
+* `is_ignored`
+
+* `get_changed_files`
+
+* `delete_generated_docs`
+
+* `extract_calls`
+
+* `extract_complex_doc`
+
+* `extract_type_refs`
+
+* `unparse_annotation`
+
+* `extract_docstring`
+
+* `parse_args`
+
+* `parse_python_file`
+
+* `clean_plantuml_type`
+
+* `generate_plantuml`
+
+* `build_registry`
+
+* `generate_package_diagram_content`
+
+* `generate_call_graph`
+
+* `generate_dependency_graph`
+
+* `generate_markdown`
+
+* `update_index_files`
+
+* `main`
 
 ### Detected Architecture Patterns
 
@@ -205,238 +281,359 @@ Comp --> [subprocess]
 
 ### `run_command(command: Any, ignore_errors: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `command` (`Any`)
+* `command`
 
-* `ignore_errors` (`Any`)
+  - **type**: Any
 
-#### Outputs
-* `Any`
+  - **optional?**: No
+
+* `ignore_errors`
+
+  - **type**: Any
+
+  - **optional?**: Yes
+
+  - **default value**: False
+
+### Output
+
+* **return type**: Any
 
 ### `get_last_commit() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `is_ignored(filepath: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `filepath` (`Any`)
+* `filepath`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `get_changed_files() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `delete_generated_docs() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `extract_calls(node: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `node` (`Any`)
+* `node`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `extract_complex_doc(docstring: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `docstring` (`Any`)
+* `docstring`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `extract_type_refs(node: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `node` (`Any`)
+* `node`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `unparse_annotation(node: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `node` (`Any`)
+* `node`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `extract_docstring(node: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `node` (`Any`)
+* `node`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `parse_args(args: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `args` (`Any`)
+* `args`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `parse_python_file(filepath: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `filepath` (`Any`)
+* `filepath`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `clean_plantuml_type(t: Any) -> Any`
 
+### Description
+
 Make type string safe for PlantUML.
 
-#### Inputs
+### Inputs
 
-* `t` (`Any`)
+* `t`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `generate_plantuml(classes: Any) -> Any`
 
+### Description
+
 Generate PlantUML class diagram for the classes.
 
-#### Inputs
+### Inputs
 
-* `classes` (`Any`)
+* `classes`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `build_registry(files_to_process: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `files_to_process` (`Any`)
+* `files_to_process`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `generate_package_diagram_content() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `generate_call_graph() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `generate_dependency_graph() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
+
+* **return type**: Any
 
 ### `generate_markdown(parsed_data: Any, relative_filepath: Any, md_path: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `parsed_data` (`Any`)
+* `parsed_data`
 
-* `relative_filepath` (`Any`)
+  - **type**: Any
 
-* `md_path` (`Any`)
+  - **optional?**: No
 
-#### Outputs
-* `Any`
+* `relative_filepath`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+* `md_path`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `update_index_files(processed_files: Any) -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-* `processed_files` (`Any`)
+* `processed_files`
 
-#### Outputs
-* `Any`
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
 
 ### `main() -> Any`
 
+### Description
+
 No description available.
 
-#### Inputs
+### Inputs
 
-#### Outputs
-* `Any`
+### Output
 
-## Dependencies
-
-* `argparse`
-
-* `ast`
-
-* `datetime`
-
-* `os`
-
-* `subprocess`
+* **return type**: Any
 
 ## Used By
 

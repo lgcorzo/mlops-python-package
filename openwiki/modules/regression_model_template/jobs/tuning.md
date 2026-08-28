@@ -6,18 +6,78 @@ title: "Module: tuning"
 source_path: "src/regression_model_template/jobs/tuning.py"
 description: "Define a job for finding the best hyperparameters for a model."
 tags: ["module", "tuning"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: tuning
 
 * **Source Reference:** [src/regression_model_template/jobs/tuning.py](../../../../src/regression_model_template/jobs/tuning.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Define a job for finding the best hyperparameters for a model.
+
+## Responsibilities
+
+Define a job for finding the best hyperparameters for a model.
+
+## Dependencies
+
+* `typing`
+
+* `mlflow`
+
+* `pydantic`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.jobs.base`
+
+* `regression_model_template.utils.searchers`
+
+* `regression_model_template.utils.splitters`
+
+# Each File Documentation
+
+## Imported modules
+
+* `typing`
+
+* `mlflow`
+
+* `pydantic`
+
+* `regression_model_template.core.metrics`
+
+* `regression_model_template.core.models`
+
+* `regression_model_template.core.schemas`
+
+* `regression_model_template.io.datasets`
+
+* `regression_model_template.io.services`
+
+* `regression_model_template.jobs.base`
+
+* `regression_model_template.utils.searchers`
+
+* `regression_model_template.utils.splitters`
+
+## Exported classes
+
+* `TuningJob`
 
 ### Detected Architecture Patterns
 
@@ -81,7 +141,11 @@ Comp --> [splitters]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `TuningJob`
+
+## Overview
 
 Find the best hyperparameters for a model.
 
@@ -94,59 +158,59 @@ Parameters:
     splitter (splitters.SplitterKind): data sets splitter.
     searcher: (searchers.SearcherKind): hparams searcher.
 
-#### Attributes
+## Attributes
 
-* **`KIND`** (`T.Literal[TuningJob]`)
+* **`KIND`**
 
-* **`run_config`** (`services.MlflowService.RunConfig`)
+  - **Type**: T.Literal[TuningJob]
 
-* **`inputs`** (`datasets.ReaderKind`)
+* **`run_config`**
 
-* **`targets`** (`datasets.ReaderKind`)
+  - **Type**: services.MlflowService.RunConfig
 
-* **`model`** (`models.ModelKind`)
+* **`inputs`**
 
-* **`metric`** (`metrics.MetricKind`)
+  - **Type**: datasets.ReaderKind
 
-* **`splitter`** (`splitters.SplitterKind`)
+* **`targets`**
 
-* **`searcher`** (`searchers.SearcherKind`)
+  - **Type**: datasets.ReaderKind
 
-#### Public Methods
+* **`model`**
+
+  - **Type**: models.ModelKind
+
+* **`metric`**
+
+  - **Type**: metrics.MetricKind
+
+* **`splitter`**
+
+  - **Type**: splitters.SplitterKind
+
+* **`searcher`**
+
+  - **Type**: searchers.SearcherKind
+
+## Public Methods
 
 * **`run(self: Any) -> base.Locals`**
 
-  - **Purpose**: Run the tuning job in context.
+### Description
 
-  - **Inputs**:
+Run the tuning job in context.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `base.Locals`
+* `self`
 
-## Dependencies
+  - **type**: Any
 
-* `typing`
+  - **optional?**: No
 
-* `mlflow`
+### Output
 
-* `pydantic`
-
-* `regression_model_template.core.metrics`
-
-* `regression_model_template.core.models`
-
-* `regression_model_template.core.schemas`
-
-* `regression_model_template.io.datasets`
-
-* `regression_model_template.io.services`
-
-* `regression_model_template.jobs.base`
-
-* `regression_model_template.utils.searchers`
-
-* `regression_model_template.utils.splitters`
+* **return type**: base.Locals
 
 ## Used By
 

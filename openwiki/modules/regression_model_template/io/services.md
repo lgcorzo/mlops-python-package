@@ -6,18 +6,134 @@ title: "Module: services"
 source_path: "src/regression_model_template/io/services.py"
 description: "Manage global context during execution."
 tags: ["module", "services"]
-timestamp: "2026-08-25T05:40:20Z"
+timestamp: "2026-08-28T06:13:58Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "74a428a"
+last_verified_commit: "3029bb6"
 ---
 # Module Specification: services
 
 * **Source Reference:** [src/regression_model_template/io/services.py](../../../../src/regression_model_template/io/services.py)
 
-## 1. Architectural Role & Responsibilities
+# Module Overview
+
+## Purpose
 
 Manage global context during execution.
+
+## Responsibilities
+
+Manage global context during execution.
+
+## Dependencies
+
+* `__future__.annotations`
+
+* `abc`
+
+* `contextlib`
+
+* `logging`
+
+* `sys`
+
+* `typing`
+
+* `typing.ClassVar`
+
+* `loguru`
+
+* `mlflow`
+
+* `mlflow.tracking`
+
+* `pydantic`
+
+* `opentelemetry.trace`
+
+* `opentelemetry._logs.set_logger_provider`
+
+* `opentelemetry.exporter.otlp.proto.http._log_exporter.OTLPLogExporter`
+
+* `opentelemetry.exporter.otlp.proto.http.trace_exporter.OTLPSpanExporter`
+
+* `opentelemetry.sdk._logs.LoggerProvider`
+
+* `opentelemetry.sdk._logs.LoggingHandler`
+
+* `opentelemetry.sdk._logs.export.BatchLogRecordProcessor`
+
+* `opentelemetry.sdk.resources.Resource`
+
+* `opentelemetry.sdk.trace.TracerProvider`
+
+* `opentelemetry.sdk.trace.export.BatchSpanProcessor`
+
+* `plyer.notification`
+
+* `regression_model_template.io.osvariables.Env`
+
+# Each File Documentation
+
+## Imported modules
+
+* `__future__.annotations`
+
+* `abc`
+
+* `contextlib`
+
+* `logging`
+
+* `sys`
+
+* `typing`
+
+* `typing.ClassVar`
+
+* `loguru`
+
+* `mlflow`
+
+* `mlflow.tracking`
+
+* `pydantic`
+
+* `opentelemetry.trace`
+
+* `opentelemetry._logs.set_logger_provider`
+
+* `opentelemetry.exporter.otlp.proto.http._log_exporter.OTLPLogExporter`
+
+* `opentelemetry.exporter.otlp.proto.http.trace_exporter.OTLPSpanExporter`
+
+* `opentelemetry.sdk._logs.LoggerProvider`
+
+* `opentelemetry.sdk._logs.LoggingHandler`
+
+* `opentelemetry.sdk._logs.export.BatchLogRecordProcessor`
+
+* `opentelemetry.sdk.resources.Resource`
+
+* `opentelemetry.sdk.trace.TracerProvider`
+
+* `opentelemetry.sdk.trace.export.BatchSpanProcessor`
+
+* `plyer.notification`
+
+* `regression_model_template.io.osvariables.Env`
+
+## Exported classes
+
+* `PropagateHandler`
+
+* `Service`
+
+* `LoggerService`
+
+* `AlertsService`
+
+* `MlflowService`
 
 ### Detected Architecture Patterns
 
@@ -150,54 +266,90 @@ Comp --> [Env]
 
 ## 3. Class & Method Specifications
 
+# Public Classes
+
 ### `PropagateHandler`
+
+## Overview
 
 No description available.
 
-#### Public Methods
+## Public Methods
 
 * **`emit(self: Any, record: logging.LogRecord) -> None`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `record` (`logging.LogRecord`)
+* `self`
 
-  - **Outputs**: `None`
+  - **type**: Any
+
+  - **optional?**: No
+
+* `record`
+
+  - **type**: logging.LogRecord
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `Service`
+
+## Overview
 
 Base class for a global service.
 
 Use services to manage global contexts.
 e.g., logger object, mlflow client, spark context, ...
 
-#### Public Methods
+## Public Methods
 
 * **`start(self: Any) -> None`**
 
-  - **Purpose**: Start the service.
+### Description
 
-  - **Inputs**:
+Start the service.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `None`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 * **`stop(self: Any) -> None`**
 
-  - **Purpose**: Stop the service.
+### Description
 
-  - **Inputs**:
+Stop the service.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `None`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `LoggerService`
+
+## Overview
 
 Service for logging messages.
 
@@ -213,47 +365,81 @@ Parameters:
     diagnose (bool): enable variable display.
     catch (bool): catch errors during log handling.
 
-#### Attributes
+## Attributes
 
-* **`sink`** (`str`)
+* **`sink`**
 
-* **`level`** (`str`)
+  - **Type**: str
 
-* **`format`** (`str`)
+* **`level`**
 
-* **`colorize`** (`bool`)
+  - **Type**: str
 
-* **`serialize`** (`bool`)
+* **`format`**
 
-* **`backtrace`** (`bool`)
+  - **Type**: str
 
-* **`diagnose`** (`bool`)
+* **`colorize`**
 
-* **`catch`** (`bool`)
+  - **Type**: bool
 
-#### Public Methods
+* **`serialize`**
+
+  - **Type**: bool
+
+* **`backtrace`**
+
+  - **Type**: bool
+
+* **`diagnose`**
+
+  - **Type**: bool
+
+* **`catch`**
+
+  - **Type**: bool
+
+## Public Methods
 
 * **`start(self: Any) -> None`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `None`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 * **`logger(self: Any) -> loguru.Logger`**
 
-  - **Purpose**: Return the main logger.
+### Description
 
-  - **Inputs**:
+Return the main logger.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `loguru.Logger`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: loguru.Logger
 
 ### `AlertsService`
+
+## Overview
 
 Service for sending notifications.
 
@@ -268,41 +454,73 @@ Parameters:
     app_name (str): name of the application.
     timeout (int | None): timeout in secs.
 
-#### Attributes
+## Attributes
 
-* **`enable`** (`bool`)
+* **`enable`**
 
-* **`app_name`** (`str`)
+  - **Type**: bool
 
-* **`timeout`** (`int | None`)
+* **`app_name`**
 
-#### Public Methods
+  - **Type**: str
+
+* **`timeout`**
+
+  - **Type**: int | None
+
+## Public Methods
 
 * **`start(self: Any) -> None`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `None`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 * **`notify(self: Any, title: str, message: str) -> None`**
 
-  - **Purpose**: Send a notification to the system.
+### Description
 
-  - **Inputs**:
+Send a notification to the system.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `title` (`str`)
+* `self`
 
-    - `message` (`str`)
+  - **type**: Any
 
-  - **Outputs**: `None`
+  - **optional?**: No
+
+* `title`
+
+  - **type**: str
+
+  - **optional?**: No
+
+* `message`
+
+  - **type**: str
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 ### `MlflowService`
+
+## Overview
 
 Service for Mlflow tracking and registry.
 
@@ -320,115 +538,121 @@ Parameters:
     autolog_log_datasets (bool): If True, logs datasets used during autologging.
     autolog_silent (bool): If True, suppresses all Mlflow warnings during autologging.
 
-#### Attributes
+## Attributes
 
-* **`env`** (`ClassVar[Env]`)
+* **`env`**
 
-* **`tracking_uri`** (`str`)
+  - **Type**: ClassVar[Env]
 
-* **`registry_uri`** (`str`)
+* **`tracking_uri`**
 
-* **`experiment_name`** (`str`)
+  - **Type**: str
 
-* **`registry_name`** (`str`)
+* **`registry_uri`**
 
-* **`autolog_disable`** (`bool`)
+  - **Type**: str
 
-* **`autolog_disable_for_unsupported_versions`** (`bool`)
+* **`experiment_name`**
 
-* **`autolog_exclusive`** (`bool`)
+  - **Type**: str
 
-* **`autolog_log_input_examples`** (`bool`)
+* **`registry_name`**
 
-* **`autolog_log_model_signatures`** (`bool`)
+  - **Type**: str
 
-* **`autolog_log_models`** (`bool`)
+* **`autolog_disable`**
 
-* **`autolog_log_datasets`** (`bool`)
+  - **Type**: bool
 
-* **`autolog_silent`** (`bool`)
+* **`autolog_disable_for_unsupported_versions`**
 
-#### Public Methods
+  - **Type**: bool
+
+* **`autolog_exclusive`**
+
+  - **Type**: bool
+
+* **`autolog_log_input_examples`**
+
+  - **Type**: bool
+
+* **`autolog_log_model_signatures`**
+
+  - **Type**: bool
+
+* **`autolog_log_models`**
+
+  - **Type**: bool
+
+* **`autolog_log_datasets`**
+
+  - **Type**: bool
+
+* **`autolog_silent`**
+
+  - **Type**: bool
+
+## Public Methods
 
 * **`start(self: Any) -> None`**
 
-  - **Purpose**: No description available.
+### Description
 
-  - **Inputs**:
+No description available.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `None`
+* `self`
+
+  - **type**: Any
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: None
 
 * **`run_context(self: Any, run_config: RunConfig) -> T.Generator[(mlflow.ActiveRun, None, None)]`**
 
-  - **Purpose**: Yield an active Mlflow run and exit it afterwards.
+### Description
 
-  - **Inputs**:
+Yield an active Mlflow run and exit it afterwards.
 
-    - `self` (`Any`)
+### Inputs
 
-    - `run_config` (`RunConfig`)
+* `self`
 
-  - **Outputs**: `T.Generator[(mlflow.ActiveRun, None, None)]`
+  - **type**: Any
+
+  - **optional?**: No
+
+* `run_config`
+
+  - **type**: RunConfig
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: T.Generator[(mlflow.ActiveRun, None, None)]
 
 * **`client(self: Any) -> mt.MlflowClient`**
 
-  - **Purpose**: Return a new Mlflow client.
+### Description
 
-  - **Inputs**:
+Return a new Mlflow client.
 
-    - `self` (`Any`)
+### Inputs
 
-  - **Outputs**: `mt.MlflowClient`
+* `self`
 
-## Dependencies
+  - **type**: Any
 
-* `__future__.annotations`
+  - **optional?**: No
 
-* `abc`
+### Output
 
-* `contextlib`
-
-* `logging`
-
-* `sys`
-
-* `typing`
-
-* `typing.ClassVar`
-
-* `loguru`
-
-* `mlflow`
-
-* `mlflow.tracking`
-
-* `pydantic`
-
-* `opentelemetry.trace`
-
-* `opentelemetry._logs.set_logger_provider`
-
-* `opentelemetry.exporter.otlp.proto.http._log_exporter.OTLPLogExporter`
-
-* `opentelemetry.exporter.otlp.proto.http.trace_exporter.OTLPSpanExporter`
-
-* `opentelemetry.sdk._logs.LoggerProvider`
-
-* `opentelemetry.sdk._logs.LoggingHandler`
-
-* `opentelemetry.sdk._logs.export.BatchLogRecordProcessor`
-
-* `opentelemetry.sdk.resources.Resource`
-
-* `opentelemetry.sdk.trace.TracerProvider`
-
-* `opentelemetry.sdk.trace.export.BatchSpanProcessor`
-
-* `plyer.notification`
-
-* `regression_model_template.io.osvariables.Env`
+* **return type**: mt.MlflowClient
 
 ## Used By
 
