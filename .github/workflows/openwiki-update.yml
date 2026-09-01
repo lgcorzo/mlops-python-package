@@ -16,16 +16,28 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate OpenWiki Documentation via AST
+        run: |
+          python3 generate_openwiki.py --mode full
+
+      - name: Set up Node.js (Optional LLM Enhancement)
+        if: env.OPENROUTER_API_KEY != ''
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
-      - name: Install OpenWiki
-        run: npm install --global openwiki
-
-      - name: Run OpenWiki
-        run: openwiki code --update --print
+      - name: Run OpenWiki CLI (if API key configured)
+        if: env.OPENROUTER_API_KEY != ''
+        run: |
+          npm install --global openwiki
+          openwiki code --update --print
         env:
           OPENWIKI_PROVIDER: openrouter
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
