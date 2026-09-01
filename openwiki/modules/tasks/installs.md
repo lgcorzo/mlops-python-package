@@ -6,10 +6,10 @@ title: "Module: installs"
 source_path: "tasks/installs.py"
 description: "Install tasks for pyinvoke."
 tags: ["module", "installs"]
-timestamp: "2026-08-28T06:13:58Z"
+timestamp: "2026-09-01T16:59:35Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "3029bb6"
+last_verified_commit: "193029c"
 ---
 # Module Specification: installs
 

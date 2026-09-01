@@ -6,10 +6,10 @@ title: "Module: convert_links"
 source_path: "skills/validate/scripts/convert_links.py"
 description: "No description available."
 tags: ["module", "convert_links"]
-timestamp: "2026-08-28T06:13:57Z"
+timestamp: "2026-09-01T16:59:35Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "3029bb6"
+last_verified_commit: "193029c"
 ---
 # Module Specification: convert_links
 

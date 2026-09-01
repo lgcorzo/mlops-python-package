@@ -6,10 +6,10 @@ title: "Module: test_schemas"
 source_path: "tests/core/test_schemas.py"
 description: "No description available."
 tags: ["module", "test_schemas"]
-timestamp: "2026-08-28T06:13:58Z"
+timestamp: "2026-09-01T16:59:35Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "3029bb6"
+last_verified_commit: "193029c"
 ---
 # Module Specification: test_schemas
 
