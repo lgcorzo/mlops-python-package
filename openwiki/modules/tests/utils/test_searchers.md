@@ -6,10 +6,10 @@ title: "Module: test_searchers"
 source_path: "tests/utils/test_searchers.py"
 description: "No description available."
 tags: ["module", "test_searchers"]
-timestamp: "2026-08-28T06:13:58Z"
+timestamp: "2026-09-01T16:59:35Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "3029bb6"
+last_verified_commit: "193029c"
 ---
 # Module Specification: test_searchers
 

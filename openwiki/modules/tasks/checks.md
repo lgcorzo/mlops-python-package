@@ -6,10 +6,10 @@ title: "Module: checks"
 source_path: "tasks/checks.py"
 description: "Check tasks for pyinvoke."
 tags: ["module", "checks"]
-timestamp: "2026-08-28T06:13:58Z"
+timestamp: "2026-09-01T16:59:35Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "3029bb6"
+last_verified_commit: "193029c"
 ---
 # Module Specification: checks
 
