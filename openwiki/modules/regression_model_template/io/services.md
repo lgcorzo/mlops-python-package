@@ -6,10 +6,10 @@ title: "Module: services"
 source_path: "src/regression_model_template/io/services.py"
 description: "Manage global context during execution."
 tags: ["module", "services"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: services
 
@@ -134,6 +134,34 @@ Manage global context during execution.
 * `AlertsService`
 
 * `MlflowService`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -274,9 +302,15 @@ Comp --> [Env]
 
 No description available.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Public Methods
 
-* **`emit(self: Any, record: logging.LogRecord) -> None`**
+### `emit(self: Any, record: logging.LogRecord) -> None`
 
 ### Description
 
@@ -288,17 +322,39 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `record`
 
   - **type**: logging.LogRecord
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for emit
+
+```
 
 ### `Service`
 
@@ -309,9 +365,15 @@ Base class for a global service.
 Use services to manage global contexts.
 e.g., logger object, mlflow client, spark context, ...
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Public Methods
 
-* **`start(self: Any) -> None`**
+### `start(self: Any) -> None`
 
 ### Description
 
@@ -323,13 +385,31 @@ Start the service.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
 
-* **`stop(self: Any) -> None`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for start
+
+```
+
+### `stop(self: Any) -> None`
 
 ### Description
 
@@ -341,11 +421,29 @@ Stop the service.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for stop
+
+```
 
 ### `LoggerService`
 
@@ -365,43 +463,81 @@ Parameters:
     diagnose (bool): enable variable display.
     catch (bool): catch errors during log handling.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`sink`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`level`**
 
   - **Type**: str
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`format`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`colorize`**
 
   - **Type**: bool
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`serialize`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`backtrace`**
 
   - **Type**: bool
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`diagnose`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`catch`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`start(self: Any) -> None`**
+### `start(self: Any) -> None`
 
 ### Description
 
@@ -413,13 +549,31 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
 
-* **`logger(self: Any) -> loguru.Logger`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for start
+
+```
+
+### `logger(self: Any) -> loguru.Logger`
 
 ### Description
 
@@ -431,11 +585,29 @@ Return the main logger.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: loguru.Logger
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for logger
+
+```
 
 ### `AlertsService`
 
@@ -454,23 +626,41 @@ Parameters:
     app_name (str): name of the application.
     timeout (int | None): timeout in secs.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`enable`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`app_name`**
 
   - **Type**: str
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`timeout`**
 
   - **Type**: int | None
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`start(self: Any) -> None`**
+### `start(self: Any) -> None`
 
 ### Description
 
@@ -482,13 +672,31 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
 
-* **`notify(self: Any, title: str, message: str) -> None`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for start
+
+```
+
+### `notify(self: Any, title: str, message: str) -> None`
 
 ### Description
 
@@ -500,11 +708,19 @@ Send a notification to the system.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `title`
 
   - **type**: str
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -512,11 +728,29 @@ Send a notification to the system.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for notify
+
+```
 
 ### `MlflowService`
 
@@ -538,63 +772,121 @@ Parameters:
     autolog_log_datasets (bool): If True, logs datasets used during autologging.
     autolog_silent (bool): If True, suppresses all Mlflow warnings during autologging.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`env`**
 
   - **Type**: ClassVar[Env]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`tracking_uri`**
 
   - **Type**: str
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`registry_uri`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`experiment_name`**
 
   - **Type**: str
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`registry_name`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`autolog_disable`**
 
   - **Type**: bool
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`autolog_disable_for_unsupported_versions`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`autolog_exclusive`**
 
   - **Type**: bool
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`autolog_log_input_examples`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`autolog_log_model_signatures`**
 
   - **Type**: bool
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`autolog_log_models`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`autolog_log_datasets`**
 
   - **Type**: bool
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`autolog_silent`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`start(self: Any) -> None`**
+### `start(self: Any) -> None`
 
 ### Description
 
@@ -606,13 +898,31 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
 
-* **`run_context(self: Any, run_config: RunConfig) -> T.Generator[(mlflow.ActiveRun, None, None)]`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for start
+
+```
+
+### `run_context(self: Any, run_config: RunConfig) -> T.Generator[(mlflow.ActiveRun, None, None)]`
 
 ### Description
 
@@ -624,11 +934,19 @@ Yield an active Mlflow run and exit it afterwards.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `run_config`
 
   - **type**: RunConfig
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -636,7 +954,21 @@ Yield an active Mlflow run and exit it afterwards.
 
 * **return type**: T.Generator[(mlflow.ActiveRun, None, None)]
 
-* **`client(self: Any) -> mt.MlflowClient`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for run_context
+
+```
+
+### `client(self: Any) -> mt.MlflowClient`
 
 ### Description
 
@@ -648,11 +980,29 @@ Return a new Mlflow client.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: mt.MlflowClient
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for client
+
+```
 
 ## Used By
 

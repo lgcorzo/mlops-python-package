@@ -2,18 +2,18 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: benchmark_blocking"
-source_path: "tests/performance/benchmark_blocking.py"
+title: "Module: fix_methods"
+source_path: "fix_methods.py"
 description: "No description available."
-tags: ["module", "benchmark_blocking"]
-timestamp: "2026-09-05T05:14:18Z"
+tags: ["module", "fix_methods"]
+timestamp: "2026-09-05T05:14:17Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
 last_verified_commit: "4860b15"
 ---
-# Module Specification: benchmark_blocking
+# Module Specification: fix_methods
 
-* **Source Reference:** [tests/performance/benchmark_blocking.py](../../../../tests/performance/benchmark_blocking.py)
+* **Source Reference:** [fix_methods.py](../../fix_methods.py)
 
 # Module Overview
 
@@ -27,21 +27,19 @@ No description available.
 
 ## Dependencies
 
-* `asyncio`
-
-* `time`
+* `re`
 
 # Each File Documentation
 
 ## Imported modules
 
-* `asyncio`
-
-* `time`
+* `re`
 
 ## Exported functions
 
-* `sync_prediction`
+* `replace_public_methods`
+
+* `replace_func_output`
 
 ## Exported interfaces
 
@@ -83,31 +81,36 @@ _No classes found._
 
 ### Sequence Diagram
 
-```plantuml
-sequenceDiagram
-    sync_prediction->>print: invoke
-    sync_prediction->>sleep: invoke
-```
+_No sequences found._
 
 ### Component Diagram
 
 ```plantuml
-component [benchmark_blocking] as Comp
-Comp --> [asyncio]
-Comp --> [time]
+component [fix_methods] as Comp
+Comp --> [re]
 ```
 
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
 
-### `sync_prediction() -> Any`
+### `replace_public_methods(match: Any) -> Any`
 
 ### Description
 
-Simulates a CPU-bound synchronous prediction call.
+No description available.
 
 ### Inputs
+
+* `match`
+
+  - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
+  - **optional?**: No
 
 ### Output
 
@@ -123,7 +126,43 @@ Simulates a CPU-bound synchronous prediction call.
 
 ```python
 
-# Example usage for sync_prediction
+# Example usage for replace_public_methods
+
+```
+
+### `replace_func_output(match: Any) -> Any`
+
+### Description
+
+No description available.
+
+### Inputs
+
+* `match`
+
+  - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
+  - **optional?**: No
+
+### Output
+
+* **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for replace_func_output
 
 ```
 

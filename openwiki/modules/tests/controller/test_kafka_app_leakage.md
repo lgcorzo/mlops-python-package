@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_leakage"
 source_path: "tests/controller/test_kafka_app_leakage.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_leakage"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_kafka_app_leakage
 
@@ -46,6 +46,34 @@ No description available.
 ## Exported functions
 
 * `test_process_message_exception_leakage`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -94,6 +122,20 @@ No description available.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_process_message_exception_leakage
+
+```
 
 ## Used By
 

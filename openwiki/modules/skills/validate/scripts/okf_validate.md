@@ -6,10 +6,10 @@ title: "Module: okf_validate"
 source_path: "skills/validate/scripts/okf_validate.py"
 description: "OKF v0.2 Conformance Checker for OpenWiki Documentation."
 tags: ["module", "okf_validate"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:17Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: okf_validate
 
@@ -79,6 +79,34 @@ Exit codes:
 * `validate_wiki`
 
 * `main`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -165,11 +193,29 @@ Split YAML frontmatter from Markdown body.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: tuple[(dict[(str, Any)], str)]
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for extract_frontmatter
+
+```
 
 ### `check_frontmatter_fields(fm: dict[(str, Any)], filepath: str, strict: bool) -> list[str]`
 
@@ -183,11 +229,19 @@ Validate required and optional frontmatter fields.
 
   - **type**: dict[(str, Any)]
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `filepath`
 
   - **type**: str
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -195,11 +249,29 @@ Validate required and optional frontmatter fields.
 
   - **type**: bool
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: list[str]
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for check_frontmatter_fields
+
+```
 
 ### `check_absolute_paths(body: str, filepath: str) -> list[str]`
 
@@ -213,17 +285,39 @@ Detect absolute file paths in the document body.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `filepath`
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: list[str]
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for check_absolute_paths
+
+```
 
 ### `check_mermaid_syntax(body: str, filepath: str) -> list[str]`
 
@@ -237,17 +331,39 @@ Basic structural validation of Mermaid code blocks.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `filepath`
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: list[str]
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for check_mermaid_syntax
+
+```
 
 ### `validate_wiki(wiki_path: str, strict: bool) -> int`
 
@@ -261,11 +377,19 @@ Validate all .md files under wiki_path. Returns error count.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `strict`
 
   - **type**: bool
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -274,6 +398,20 @@ Validate all .md files under wiki_path. Returns error count.
 ### Output
 
 * **return type**: int
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for validate_wiki
+
+```
 
 ### `main() -> None`
 
@@ -286,6 +424,20 @@ No description available.
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for main
+
+```
 
 ## Used By
 

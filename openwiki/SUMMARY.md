@@ -5,10 +5,10 @@ type: "summary"
 title: "Summary"
 description: "Auto-generated summary."
 tags: ["summary"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Summary
 
@@ -74,6 +74,7 @@ last_verified_commit: "193029c"
 
 ## Public API index
 
+* [add_example](modules/../fix_generate.md#add_example)
 * [alerts_service](modules/../tests/conftest.md#alerts_service)
 * [all](modules/../tasks/projects.md#all)
 * [api](modules/../tasks/docs.md#api)
@@ -105,6 +106,7 @@ last_verified_commit: "193029c"
 * [extract_docstring](modules/../generate_openwiki.md#extract_docstring)
 * [extract_frontmatter](modules/../skills/validate/scripts/okf_validate.md#extract_frontmatter)
 * [extract_type_refs](modules/../generate_openwiki.md#extract_type_refs)
+* [fix_indent](modules/../fix_methods5.md#fix_indent)
 * [folders](modules/../tasks/cleans.md#folders)
 * [format](modules/../tasks/checks.md#format)
 * [generate_call_graph](modules/../generate_openwiki.md#generate_call_graph)
@@ -149,6 +151,10 @@ last_verified_commit: "193029c"
 * [pytest](modules/../tasks/cleans.md#pytest)
 * [python](modules/../tasks/cleans.md#python)
 * [register](modules/../tests/conftest.md#register)
+* [replace_func_output](modules/../fix_methods.md#replace_func_output)
+* [replace_inputs](modules/../fix_generate.md#replace_inputs)
+* [replace_output](modules/../fix_generate.md#replace_output)
+* [replace_public_methods](modules/../fix_methods7.md#replace_public_methods)
 * [requirements](modules/../tasks/projects.md#requirements)
 * [reset](modules/../tasks/cleans.md#reset)
 * [reset_module](modules/../tests/controller/test_middleware_config.md#reset_module)
@@ -294,6 +300,14 @@ last_verified_commit: "193029c"
 * [docs](modules/tasks/docs.md)
 * [evaluations](modules/regression_model_template/jobs/evaluations.md)
 * [explanations](modules/regression_model_template/jobs/explanations.md)
+* [fix_generate](modules/fix_generate.md)
+* [fix_methods](modules/fix_methods.md)
+* [fix_methods2](modules/fix_methods2.md)
+* [fix_methods3](modules/fix_methods3.md)
+* [fix_methods4](modules/fix_methods4.md)
+* [fix_methods5](modules/fix_methods5.md)
+* [fix_methods6](modules/fix_methods6.md)
+* [fix_methods7](modules/fix_methods7.md)
 * [formats](modules/tasks/formats.md)
 * [generate_openwiki](modules/generate_openwiki.md)
 * [inference](modules/regression_model_template/jobs/inference.md)

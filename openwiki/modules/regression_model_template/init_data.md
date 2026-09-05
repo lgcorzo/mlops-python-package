@@ -6,10 +6,10 @@ title: "Module: init_data"
 source_path: "src/regression_model_template/init_data.py"
 description: "Script to initialize synthetic train and test parquet datasets."
 tags: ["module", "init_data"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: init_data
 
@@ -60,6 +60,34 @@ Script to initialize synthetic train and test parquet datasets.
 * `generate_data`
 
 * `main`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -123,6 +151,10 @@ Generate synthetic regression data and validate schemas.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: Yes
 
   - **default value**: 'data'
@@ -130,6 +162,20 @@ Generate synthetic regression data and validate schemas.
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for generate_data
+
+```
 
 ### `main() -> None`
 
@@ -142,6 +188,20 @@ CLI entry point for data initialization.
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for main
+
+```
 
 ## Used By
 

@@ -6,10 +6,10 @@ title: "Module: test_middleware_config"
 source_path: "tests/controller/test_middleware_config.py"
 description: "No description available."
 tags: ["module", "test_middleware_config"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_middleware_config
 
@@ -68,6 +68,34 @@ No description available.
 * `test_custom_cors_config`
 
 * `test_custom_trusted_host_config`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -131,6 +159,20 @@ Reset module and env vars after each test to prevent state leakage.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for reset_module
+
+```
+
 ### `test_middleware_presence() -> Any`
 
 ### Description
@@ -142,6 +184,20 @@ Verify that CORSMiddleware and TrustedHostMiddleware are present.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_middleware_presence
+
+```
 
 ### `test_cors_default_config() -> Any`
 
@@ -155,6 +211,20 @@ Verify default CORS configuration.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_cors_default_config
+
+```
+
 ### `test_trusted_host_default_config() -> Any`
 
 ### Description
@@ -166,6 +236,20 @@ Verify default TrustedHost configuration.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_trusted_host_default_config
+
+```
 
 ### `test_custom_cors_config(monkeypatch: Any) -> Any`
 
@@ -179,11 +263,29 @@ Verify custom CORS configuration via environment variables.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_custom_cors_config
+
+```
 
 ### `test_custom_trusted_host_config(monkeypatch: Any) -> Any`
 
@@ -197,11 +299,29 @@ Verify custom TrustedHost configuration via environment variables.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_custom_trusted_host_config
+
+```
 
 ## Used By
 

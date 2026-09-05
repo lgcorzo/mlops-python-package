@@ -5,10 +5,10 @@ type: "diagrams"
 title: "Diagrams"
 description: "Auto-generated architecture diagrams."
 tags: ["diagrams"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Architecture Diagrams
 
@@ -113,6 +113,14 @@ digraph Dependencies {
     "explanations" -> "registries"
     "explanations" -> "schemas"
     "explanations" -> "typing"
+    "fix_generate" -> "re"
+    "fix_methods" -> "re"
+    "fix_methods2" -> "re"
+    "fix_methods3" -> "re"
+    "fix_methods4" -> "re"
+    "fix_methods5" -> "re"
+    "fix_methods6" -> "re"
+    "fix_methods7" -> "re"
     "formats" -> "Context"
     "formats" -> "task"
     "generate_openwiki" -> "argparse"

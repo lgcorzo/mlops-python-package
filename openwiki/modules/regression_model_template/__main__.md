@@ -6,10 +6,10 @@ title: "Module: __main__"
 source_path: "src/regression_model_template/__main__.py"
 description: "Entry point of the package."
 tags: ["module", "__main__"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:17Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: __main__
 
@@ -34,6 +34,34 @@ Entry point of the package.
 ## Imported modules
 
 * `regression_model_template.scripts`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 

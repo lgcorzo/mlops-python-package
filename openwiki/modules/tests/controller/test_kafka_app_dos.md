@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_dos"
 source_path: "tests/controller/test_kafka_app_dos.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_dos"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_kafka_app_dos
 
@@ -62,6 +62,34 @@ No description available.
 * `test_prediction_request_empty`
 
 * `test_prediction_request_inconsistent_lengths`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -123,6 +151,20 @@ Test that PredictionRequest enforces max rows limit.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_prediction_request_max_rows
+
+```
+
 ### `test_prediction_request_max_cols() -> Any`
 
 ### Description
@@ -134,6 +176,20 @@ Test that PredictionRequest enforces max cols limit.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_prediction_request_max_cols
+
+```
 
 ### `test_prediction_request_valid_rows() -> Any`
 
@@ -147,6 +203,20 @@ Test that PredictionRequest accepts valid rows.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_prediction_request_valid_rows
+
+```
+
 ### `test_prediction_request_empty() -> Any`
 
 ### Description
@@ -159,6 +229,20 @@ Test that PredictionRequest rejects empty input.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_prediction_request_empty
+
+```
+
 ### `test_prediction_request_inconsistent_lengths() -> Any`
 
 ### Description
@@ -170,6 +254,20 @@ Test that PredictionRequest rejects inconsistent column lengths.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_prediction_request_inconsistent_lengths
+
+```
 
 ## Used By
 

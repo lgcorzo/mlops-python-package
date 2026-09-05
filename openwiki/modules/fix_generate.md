@@ -2,18 +2,18 @@
 iso_doc_type: "Specification"
 iso_viewpoint: "ComponentView"
 type: "module"
-title: "Module: test_configs"
-source_path: "tests/io/test_configs.py"
+title: "Module: fix_generate"
+source_path: "fix_generate.py"
 description: "No description available."
-tags: ["module", "test_configs"]
-timestamp: "2026-09-05T05:14:18Z"
+tags: ["module", "fix_generate"]
+timestamp: "2026-09-05T05:14:17Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
 last_verified_commit: "4860b15"
 ---
-# Module Specification: test_configs
+# Module Specification: fix_generate
 
-* **Source Reference:** [tests/io/test_configs.py](../../../../tests/io/test_configs.py)
+* **Source Reference:** [fix_generate.py](../../fix_generate.py)
 
 # Module Overview
 
@@ -27,31 +27,21 @@ No description available.
 
 ## Dependencies
 
-* `os`
-
-* `omegaconf`
-
-* `regression_model_template.io.configs`
+* `re`
 
 # Each File Documentation
 
 ## Imported modules
 
-* `os`
-
-* `omegaconf`
-
-* `regression_model_template.io.configs`
+* `re`
 
 ## Exported functions
 
-* `test_parse_file`
+* `replace_inputs`
 
-* `test_parse_string`
+* `replace_output`
 
-* `test_merge_configs`
-
-* `test_to_object`
+* `add_example`
 
 ## Exported interfaces
 
@@ -95,33 +85,23 @@ _No classes found._
 
 ```plantuml
 sequenceDiagram
-    test_parse_file->>join: invoke
-    test_parse_file->>parse_file: invoke
-    test_parse_file->>open: invoke
-    test_parse_file->>write: invoke
-    test_parse_string->>parse_string: invoke
-    test_merge_configs->>merge_configs: invoke
-    test_merge_configs->>create: invoke
-    test_merge_configs->>range: invoke
-    test_to_object->>create: invoke
-    test_to_object->>to_object: invoke
-    test_to_object->>isinstance: invoke
+    replace_inputs->>group: invoke
+    replace_output->>group: invoke
+    add_example->>group: invoke
 ```
 
 ### Component Diagram
 
 ```plantuml
-component [test_configs] as Comp
-Comp --> [os]
-Comp --> [omegaconf]
-Comp --> [configs]
+component [fix_generate] as Comp
+Comp --> [re]
 ```
 
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
 
-### `test_parse_file(tmp_path: str) -> None`
+### `replace_inputs(match: Any) -> Any`
 
 ### Description
 
@@ -129,9 +109,9 @@ No description available.
 
 ### Inputs
 
-* `tmp_path`
+* `match`
 
-  - **type**: str
+  - **type**: Any
 
   - **meaning**: Parameter description
 
@@ -141,7 +121,7 @@ No description available.
 
 ### Output
 
-* **return type**: None
+* **return type**: Any
 
 * **semantic meaning**: Result of the operation
 
@@ -153,11 +133,11 @@ No description available.
 
 ```python
 
-# Example usage for test_parse_file
+# Example usage for replace_inputs
 
 ```
 
-### `test_parse_string() -> None`
+### `replace_output(match: Any) -> Any`
 
 ### Description
 
@@ -165,9 +145,19 @@ No description available.
 
 ### Inputs
 
+* `match`
+
+  - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
+  - **optional?**: No
+
 ### Output
 
-* **return type**: None
+* **return type**: Any
 
 * **semantic meaning**: Result of the operation
 
@@ -179,11 +169,11 @@ No description available.
 
 ```python
 
-# Example usage for test_parse_string
+# Example usage for replace_output
 
 ```
 
-### `test_merge_configs() -> None`
+### `add_example(match: Any) -> Any`
 
 ### Description
 
@@ -191,9 +181,19 @@ No description available.
 
 ### Inputs
 
+* `match`
+
+  - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
+  - **optional?**: No
+
 ### Output
 
-* **return type**: None
+* **return type**: Any
 
 * **semantic meaning**: Result of the operation
 
@@ -205,33 +205,7 @@ No description available.
 
 ```python
 
-# Example usage for test_merge_configs
-
-```
-
-### `test_to_object() -> None`
-
-### Description
-
-No description available.
-
-### Inputs
-
-### Output
-
-* **return type**: None
-
-* **semantic meaning**: Result of the operation
-
-* **possible null values**: Dependent on implementation
-
-* **exceptions**: Unspecified
-
-### Example
-
-```python
-
-# Example usage for test_to_object
+# Example usage for add_example
 
 ```
 

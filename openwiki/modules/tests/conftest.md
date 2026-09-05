@@ -6,10 +6,10 @@ title: "Module: conftest"
 source_path: "tests/conftest.py"
 description: "Configuration for the tests."
 tags: ["module", "conftest"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: conftest
 
@@ -168,6 +168,34 @@ Configuration for the tests.
 * `model_version`
 
 * `model_alias`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -328,6 +356,20 @@ Return the path of the tests folder.
 
 * **return type**: str
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for tests_path
+
+```
+
 ### `data_path(tests_path: str) -> str`
 
 ### Description
@@ -340,11 +382,29 @@ Return the path of the data folder.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for data_path
+
+```
 
 ### `confs_path(tests_path: str) -> str`
 
@@ -358,11 +418,29 @@ Return the path of the confs folder.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for confs_path
+
+```
 
 ### `inputs_path(data_path: str) -> str`
 
@@ -376,11 +454,29 @@ Return the path of the inputs dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for inputs_path
+
+```
 
 ### `targets_path(data_path: str) -> str`
 
@@ -394,11 +490,29 @@ Return the path of the targets dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for targets_path
+
+```
 
 ### `outputs_path(data_path: str) -> str`
 
@@ -412,11 +526,29 @@ Return the path of the outputs dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for outputs_path
+
+```
 
 ### `tmp_outputs_path(tmp_path: str) -> str`
 
@@ -430,11 +562,29 @@ Return a tmp path for the outputs dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for tmp_outputs_path
+
+```
 
 ### `tmp_models_explanations_path(tmp_path: str) -> str`
 
@@ -448,11 +598,29 @@ Return a tmp path for the model explanations dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for tmp_models_explanations_path
+
+```
 
 ### `tmp_samples_explanations_path(tmp_path: str) -> str`
 
@@ -466,11 +634,29 @@ Return a tmp path for the samples explanations dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for tmp_samples_explanations_path
+
+```
 
 ### `extra_config() -> str`
 
@@ -484,6 +670,20 @@ Extra config for scripts.
 
 * **return type**: str
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for extra_config
+
+```
+
 ### `inputs_reader(inputs_path: str) -> datasets.ParquetReader`
 
 ### Description
@@ -496,11 +696,29 @@ Return a reader for the inputs dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: datasets.ParquetReader
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for inputs_reader
+
+```
 
 ### `inputs_samples_reader(inputs_path: str) -> datasets.ParquetReader`
 
@@ -514,11 +732,29 @@ Return a reader for the inputs samples dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: datasets.ParquetReader
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for inputs_samples_reader
+
+```
 
 ### `targets_reader(targets_path: str) -> datasets.ParquetReader`
 
@@ -532,11 +768,29 @@ Return a reader for the targets dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: datasets.ParquetReader
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for targets_reader
+
+```
 
 ### `outputs_reader(outputs_path: str, inputs_reader: datasets.ParquetReader, targets_reader: datasets.ParquetReader) -> datasets.ParquetReader`
 
@@ -550,11 +804,19 @@ Return a reader for the outputs dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs_reader`
 
   - **type**: datasets.ParquetReader
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -562,11 +824,29 @@ Return a reader for the outputs dataset.
 
   - **type**: datasets.ParquetReader
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: datasets.ParquetReader
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for outputs_reader
+
+```
 
 ### `tmp_outputs_writer(tmp_outputs_path: str) -> datasets.ParquetWriter`
 
@@ -580,11 +860,29 @@ Return a writer for the tmp outputs dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: datasets.ParquetWriter
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for tmp_outputs_writer
+
+```
 
 ### `tmp_models_explanations_writer(tmp_models_explanations_path: str) -> datasets.ParquetWriter`
 
@@ -598,11 +896,29 @@ Return a writer for the tmp model explanations dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: datasets.ParquetWriter
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for tmp_models_explanations_writer
+
+```
 
 ### `tmp_samples_explanations_writer(tmp_samples_explanations_path: str) -> datasets.ParquetWriter`
 
@@ -616,11 +932,29 @@ Return a writer for the tmp samples explanations dataset.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: datasets.ParquetWriter
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for tmp_samples_explanations_writer
+
+```
 
 ### `inputs(inputs_reader: datasets.ParquetReader) -> schemas.Inputs`
 
@@ -634,11 +968,29 @@ Return the inputs data.
 
   - **type**: datasets.ParquetReader
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.Inputs
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for inputs
+
+```
 
 ### `inputs_samples(inputs_samples_reader: datasets.ParquetReader) -> schemas.Inputs`
 
@@ -652,11 +1004,29 @@ Return the inputs samples data.
 
   - **type**: datasets.ParquetReader
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.Inputs
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for inputs_samples
+
+```
 
 ### `targets(targets_reader: datasets.ParquetReader) -> schemas.Targets`
 
@@ -670,11 +1040,29 @@ Return the targets data.
 
   - **type**: datasets.ParquetReader
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.Targets
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for targets
+
+```
 
 ### `outputs(outputs_reader: datasets.ParquetReader) -> schemas.Outputs`
 
@@ -688,11 +1076,29 @@ Return the outputs data.
 
   - **type**: datasets.ParquetReader
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.Outputs
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for outputs
+
+```
 
 ### `train_test_splitter() -> splitters.TrainTestSplitter`
 
@@ -706,6 +1112,20 @@ Return the default train test splitter.
 
 * **return type**: splitters.TrainTestSplitter
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for train_test_splitter
+
+```
+
 ### `time_series_splitter() -> splitters.TimeSeriesSplitter`
 
 ### Description
@@ -717,6 +1137,20 @@ Return the default time series splitter.
 ### Output
 
 * **return type**: splitters.TimeSeriesSplitter
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for time_series_splitter
+
+```
 
 ### `searcher() -> searchers.Searcher`
 
@@ -730,6 +1164,20 @@ Return the default searcher object.
 
 * **return type**: searchers.Searcher
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for searcher
+
+```
+
 ### `train_test_sets(train_test_splitter: splitters.Splitter, inputs: schemas.Inputs, targets: schemas.Targets) -> tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]`
 
 ### Description
@@ -742,11 +1190,19 @@ Return the inputs and targets train and test sets from the splitter.
 
   - **type**: splitters.Splitter
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -754,11 +1210,29 @@ Return the inputs and targets train and test sets from the splitter.
 
   - **type**: schemas.Targets
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for train_test_sets
+
+```
 
 ### `model(train_test_sets: tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]) -> models.BaselineSklearnModel`
 
@@ -772,11 +1246,29 @@ Return a train model for testing.
 
   - **type**: tuple[(schemas.Inputs, schemas.Targets, schemas.Inputs, schemas.Targets)]
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: models.BaselineSklearnModel
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for model
+
+```
 
 ### `metric() -> metrics.SklearnMetric`
 
@@ -790,6 +1282,20 @@ Return the default metric.
 
 * **return type**: metrics.SklearnMetric
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for metric
+
+```
+
 ### `signer() -> signers.Signer`
 
 ### Description
@@ -801,6 +1307,20 @@ Return a model signer.
 ### Output
 
 * **return type**: signers.Signer
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for signer
+
+```
 
 ### `logger_service() -> T.Generator[(services.LoggerService, None, None)]`
 
@@ -814,6 +1334,20 @@ Return and start the logger service.
 
 * **return type**: T.Generator[(services.LoggerService, None, None)]
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for logger_service
+
+```
+
 ### `logger_caplog(caplog: pl.LogCaptureFixture, logger_service: services.LoggerService) -> T.Generator[(pl.LogCaptureFixture, None, None)]`
 
 ### Description
@@ -826,17 +1360,39 @@ Extend pytest caplog fixture with the logger service (loguru).
 
   - **type**: pl.LogCaptureFixture
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `logger_service`
 
   - **type**: services.LoggerService
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: T.Generator[(pl.LogCaptureFixture, None, None)]
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for logger_caplog
+
+```
 
 ### `alerts_service() -> T.Generator[(services.AlertsService, None, None)]`
 
@@ -850,6 +1406,20 @@ Return and start the alerter service.
 
 * **return type**: T.Generator[(services.AlertsService, None, None)]
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for alerts_service
+
+```
+
 ### `mlflow_service(tmp_path: str) -> T.Generator[(services.MlflowService, None, None)]`
 
 ### Description
@@ -862,11 +1432,29 @@ Return and start the mlflow service.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: T.Generator[(services.MlflowService, None, None)]
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for mlflow_service
+
+```
 
 ### `tests_path_resolver(tests_path: str) -> str`
 
@@ -880,11 +1468,29 @@ Register the tests path resolver with OmegaConf.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for tests_path_resolver
+
+```
 
 ### `tmp_path_resolver(tmp_path: str) -> str`
 
@@ -898,11 +1504,29 @@ Register the tmp path resolver with OmegaConf.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for tmp_path_resolver
+
+```
 
 ### `signature(signer: signers.Signer, inputs: schemas.Inputs, outputs: schemas.Outputs) -> signers.Signature`
 
@@ -916,11 +1540,19 @@ Return the signature for the testing model.
 
   - **type**: signers.Signer
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -928,11 +1560,29 @@ Return the signature for the testing model.
 
   - **type**: schemas.Outputs
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: signers.Signature
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for signature
+
+```
 
 ### `saver() -> registries.CustomSaver`
 
@@ -946,6 +1596,20 @@ Return the default model saver.
 
 * **return type**: registries.CustomSaver
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for saver
+
+```
+
 ### `loader() -> registries.CustomLoader`
 
 ### Description
@@ -957,6 +1621,20 @@ Return the default model loader.
 ### Output
 
 * **return type**: registries.CustomLoader
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for loader
+
+```
 
 ### `register() -> registries.MlflowRegister`
 
@@ -970,6 +1648,20 @@ Return the default model register.
 
 * **return type**: registries.MlflowRegister
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for register
+
+```
+
 ### `model_version(model: models.Model, inputs: schemas.Inputs, signature: signers.Signature, saver: registries.Saver, register: registries.Register, mlflow_service: services.MlflowService) -> registries.Version`
 
 ### Description
@@ -982,11 +1674,19 @@ Save and register the default model version.
 
   - **type**: models.Model
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -994,11 +1694,19 @@ Save and register the default model version.
 
   - **type**: signers.Signature
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `saver`
 
   - **type**: registries.Saver
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -1006,17 +1714,39 @@ Save and register the default model version.
 
   - **type**: registries.Register
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `mlflow_service`
 
   - **type**: services.MlflowService
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: registries.Version
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for model_version
+
+```
 
 ### `model_alias(model_version: registries.Version, mlflow_service: services.MlflowService) -> registries.Alias`
 
@@ -1030,17 +1760,39 @@ Promote the default model version with an alias.
 
   - **type**: registries.Version
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `mlflow_service`
 
   - **type**: services.MlflowService
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: registries.Alias
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for model_alias
+
+```
 
 ## Used By
 

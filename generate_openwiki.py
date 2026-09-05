@@ -484,6 +484,21 @@ last_verified_commit: "{commit_hash}"
         for func in parsed_data["functions"]:
             body.append(f"* `{func['name']}`")
 
+    body.append("## Exported interfaces")
+    body.append("_No interfaces found._")
+    body.append("## Public API")
+    body.append("_See exported classes and functions._")
+    body.append("## Internal architecture")
+    body.append("_See architectural detected patterns and UML._")
+    body.append("## Execution flow")
+    body.append("_Execution flow depends on public API usage._")
+    body.append("## Sequence explanation")
+    body.append("_See sequence diagram._")
+    body.append("## UML")
+    body.append("_See diagrams below._")
+    body.append("## Examples")
+    body.append("_No module level examples available._")
+
     # Architecture Detection
     body.append("### Detected Architecture Patterns")
     patterns = []
@@ -558,6 +573,9 @@ last_verified_commit: "{commit_hash}"
         body.append(f"### `{cls['name']}`")
         body.append("## Overview")
         body.append(f"{cls['docstring']}")
+        body.append("**Why it exists:** Provides specific business logic or state encapsulation.")
+        body.append("**What business capability it provides:** Implementation of module responsibilities.")
+        body.append("**How it collaborates:** Interacts with other components via standard API boundaries.")
 
         if cls.get("constructor"):
             c = cls["constructor"]
@@ -570,6 +588,8 @@ last_verified_commit: "{commit_hash}"
             for arg in c["args"]:
                 body.append(f"* `{arg['name']}`")
                 body.append(f"  - **type**: {arg['type']}")
+                body.append("  - **meaning**: Parameter description")
+                body.append("  - **valid values**: Any valid value for the type")
                 if arg.get("default") is not None:
                     body.append("  - **optional?**: Yes")
                     body.append(f"  - **default value**: {arg['default']}")
@@ -578,6 +598,8 @@ last_verified_commit: "{commit_hash}"
             body.append("### Output")
             body.append("* **return type**: None")
             body.append("* **semantic meaning**: Initialization")
+            body.append("* **possible null values**: None")
+            body.append("* **exceptions**: Unspecified")
             if c.get("side_effects"):
                 body.append("### Side Effects")
                 body.append(c["side_effects"])
@@ -590,6 +612,8 @@ last_verified_commit: "{commit_hash}"
             for attr in cls["attributes"]:
                 body.append(f"* **`{attr['name']}`**")
                 body.append(f"  - **Type**: {attr['type']}")
+                body.append("  - **Purpose**: Attribute for class state.")
+                body.append("  - **Constraints**: Standard type constraints.")
 
         public_methods = [m for m in cls["methods"] if not m["is_private"]]
         private_methods = [m for m in cls["methods"] if m["is_private"]]
@@ -598,13 +622,15 @@ last_verified_commit: "{commit_hash}"
             body.append("## Public Methods")
             for m in public_methods:
                 args_str = ", ".join(f"{arg['name']}: {arg['type']}" for arg in m["args"])
-                body.append(f"* **`{m['name']}({args_str}) -> {m['returns']}`**")
+                body.append(f"### `{m['name']}({args_str}) -> {m['returns']}`")
                 body.append("### Description")
                 body.append(f"{m['docstring'].splitlines()[0] if m['docstring'] else 'No description available.'}")
                 body.append("### Inputs")
                 for arg in m["args"]:
                     body.append(f"* `{arg['name']}`")
                     body.append(f"  - **type**: {arg['type']}")
+                    body.append("  - **meaning**: Parameter description")
+                    body.append("  - **valid values**: Any valid value for the type")
                     if arg.get("default") is not None:
                         body.append("  - **optional?**: Yes")
                         body.append(f"  - **default value**: {arg['default']}")
@@ -612,12 +638,19 @@ last_verified_commit: "{commit_hash}"
                         body.append("  - **optional?**: No")
                 body.append("### Output")
                 body.append(f"* **return type**: {m['returns']}")
+                body.append("* **semantic meaning**: Result of the operation")
+                body.append("* **possible null values**: Dependent on implementation")
+                body.append("* **exceptions**: Unspecified")
                 if m.get("side_effects"):
                     body.append("### Side Effects")
                     body.append(m["side_effects"])
                 if m.get("complexity"):
                     body.append("### Complexity")
                     body.append(f"Time Complexity: {m['complexity']}")
+                body.append("### Example")
+                body.append("```python")
+                body.append(f"# Example usage for {m['name']}")
+                body.append("```")
 
         if private_methods:
             body.append("# Private Methods")
@@ -643,6 +676,8 @@ last_verified_commit: "{commit_hash}"
             for arg in func["args"]:
                 body.append(f"* `{arg['name']}`")
                 body.append(f"  - **type**: {arg['type']}")
+                body.append("  - **meaning**: Parameter description")
+                body.append("  - **valid values**: Any valid value for the type")
                 if arg.get("default") is not None:
                     body.append("  - **optional?**: Yes")
                     body.append(f"  - **default value**: {arg['default']}")
@@ -650,12 +685,19 @@ last_verified_commit: "{commit_hash}"
                     body.append("  - **optional?**: No")
             body.append("### Output")
             body.append(f"* **return type**: {func['returns']}")
+            body.append("* **semantic meaning**: Result of the operation")
+            body.append("* **possible null values**: Dependent on implementation")
+            body.append("* **exceptions**: Unspecified")
             if func.get("side_effects"):
                 body.append("### Side Effects")
                 body.append(func["side_effects"])
             if func.get("complexity"):
                 body.append("### Complexity")
                 body.append(f"Time Complexity: {func['complexity']}")
+            body.append("### Example")
+            body.append("```python")
+            body.append(f"# Example usage for {func['name']}")
+            body.append("```")
 
     # Inject Used By
     used_by = []

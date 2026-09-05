@@ -6,10 +6,10 @@ title: "Module: signers"
 source_path: "src/regression_model_template/utils/signers.py"
 description: "Generate signatures for AI/ML models."
 tags: ["module", "signers"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: signers
 
@@ -60,6 +60,34 @@ Generate signatures for AI/ML models.
 * `Signer`
 
 * `InferSigner`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -119,15 +147,25 @@ e.g., automatic inference, manual model signature, ...
 
 https://mlflow.org/docs/latest/models.html#model-signature-and-input-example
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`sign(self: Any, inputs: schemas.Inputs, outputs: schemas.Outputs) -> Signature`**
+### `sign(self: Any, inputs: schemas.Inputs, outputs: schemas.Outputs) -> Signature`
 
 ### Description
 
@@ -139,11 +177,19 @@ Generate a model signature from its inputs/outputs.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -151,11 +197,29 @@ Generate a model signature from its inputs/outputs.
 
   - **type**: schemas.Outputs
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Signature
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for sign
+
+```
 
 ### `InferSigner`
 
@@ -163,15 +227,25 @@ Generate a model signature from its inputs/outputs.
 
 Generate model signatures from inputs/outputs data.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[InferSigner]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`sign(self: Any, inputs: schemas.Inputs, outputs: schemas.Outputs) -> Signature`**
+### `sign(self: Any, inputs: schemas.Inputs, outputs: schemas.Outputs) -> Signature`
 
 ### Description
 
@@ -183,11 +257,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -195,11 +277,29 @@ No description available.
 
   - **type**: schemas.Outputs
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Signature
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for sign
+
+```
 
 ## Used By
 

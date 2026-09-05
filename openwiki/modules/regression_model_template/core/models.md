@@ -6,10 +6,10 @@ title: "Module: models"
 source_path: "src/regression_model_template/core/models.py"
 description: "Define trainable machine learning models."
 tags: ["module", "models"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: models
 
@@ -72,6 +72,34 @@ Define trainable machine learning models.
 * `Model`
 
 * `BaselineSklearnModel`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -177,15 +205,25 @@ Base class for a project model.
 Use a model to adapt AI/ML frameworks.
 e.g., to swap easily one model with another.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`get_params(self: Any, deep: bool) -> Params`**
+### `get_params(self: Any, deep: bool) -> Params`
 
 ### Description
 
@@ -197,11 +235,19 @@ Get the model params.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `deep`
 
   - **type**: bool
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -211,7 +257,21 @@ Get the model params.
 
 * **return type**: Params
 
-* **`set_params(self: Any, **params: ParamValue) -> T.Self`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for get_params
+
+```
+
+### `set_params(self: Any, **params: ParamValue) -> T.Self`
 
 ### Description
 
@@ -223,11 +283,19 @@ Set the model params in place.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `**params`
 
   - **type**: ParamValue
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -235,7 +303,21 @@ Set the model params in place.
 
 * **return type**: T.Self
 
-* **`fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) -> T.Self`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for set_params
+
+```
+
+### `fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) -> T.Self`
 
 ### Description
 
@@ -247,11 +329,19 @@ Fit the model on the given inputs and targets.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -259,13 +349,31 @@ Fit the model on the given inputs and targets.
 
   - **type**: schemas.Targets
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: T.Self
 
-* **`predict(self: Any, inputs: T.Any) -> schemas.Outputs`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for fit
+
+```
+
+### `predict(self: Any, inputs: T.Any) -> schemas.Outputs`
 
 ### Description
 
@@ -277,11 +385,19 @@ Generate outputs with the model for the given inputs.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: T.Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -289,7 +405,21 @@ Generate outputs with the model for the given inputs.
 
 * **return type**: schemas.Outputs
 
-* **`explain_model(self: Any) -> schemas.FeatureImportances`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for predict
+
+```
+
+### `explain_model(self: Any) -> schemas.FeatureImportances`
 
 ### Description
 
@@ -301,13 +431,31 @@ Explain the internal model structure.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.FeatureImportances
 
-* **`explain_samples(self: Any, inputs: schemas.Inputs) -> schemas.SHAPValues`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for explain_model
+
+```
+
+### `explain_samples(self: Any, inputs: schemas.Inputs) -> schemas.SHAPValues`
 
 ### Description
 
@@ -319,11 +467,19 @@ Explain model outputs on input samples.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -331,7 +487,21 @@ Explain model outputs on input samples.
 
 * **return type**: schemas.SHAPValues
 
-* **`get_internal_model(self: Any) -> T.Any`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for explain_samples
+
+```
+
+### `get_internal_model(self: Any) -> T.Any`
 
 ### Description
 
@@ -343,11 +513,29 @@ Return the internal model in the object.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: T.Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for get_internal_model
+
+```
 
 # Private Methods
 
@@ -376,39 +564,73 @@ Parameters:
     n_estimators (int): number of estimators in the random forest.
     random_state (int, optional): random state of the machine learning pipeline.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[BaselineSklearnModel]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`max_depth`**
 
   - **Type**: int
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`n_estimators`**
 
   - **Type**: int
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`random_state`**
 
   - **Type**: int | None
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`_pipeline`**
 
   - **Type**: pipeline.Pipeline | None
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`_numericals`**
 
   - **Type**: list[str]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`_categoricals`**
 
   - **Type**: list[str]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) -> BaselineSklearnModel`**
+### `fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) -> BaselineSklearnModel`
 
 ### Description
 
@@ -420,11 +642,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -432,13 +662,31 @@ No description available.
 
   - **type**: schemas.Targets
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: BaselineSklearnModel
 
-* **`predict(self: Any, inputs: T.Any) -> schemas.Outputs`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for fit
+
+```
+
+### `predict(self: Any, inputs: T.Any) -> schemas.Outputs`
 
 ### Description
 
@@ -449,6 +697,10 @@ No description available.
 * `self`
 
   - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -456,13 +708,31 @@ No description available.
 
   - **type**: T.Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.Outputs
 
-* **`explain_model(self: Any) -> schemas.FeatureImportances`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for predict
+
+```
+
+### `explain_model(self: Any) -> schemas.FeatureImportances`
 
 ### Description
 
@@ -473,6 +743,10 @@ No description available.
 * `self`
 
   - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -480,7 +754,21 @@ No description available.
 
 * **return type**: schemas.FeatureImportances
 
-* **`explain_samples(self: Any, inputs: schemas.Inputs) -> schemas.SHAPValues`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for explain_model
+
+```
+
+### `explain_samples(self: Any, inputs: schemas.Inputs) -> schemas.SHAPValues`
 
 ### Description
 
@@ -491,6 +779,10 @@ No description available.
 * `self`
 
   - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -498,13 +790,31 @@ No description available.
 
   - **type**: schemas.Inputs
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.SHAPValues
 
-* **`get_internal_model(self: Any) -> pipeline.Pipeline`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for explain_samples
+
+```
+
+### `get_internal_model(self: Any) -> pipeline.Pipeline`
 
 ### Description
 
@@ -516,11 +826,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: pipeline.Pipeline
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for get_internal_model
+
+```
 
 ## Used By
 
