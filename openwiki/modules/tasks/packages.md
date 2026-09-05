@@ -6,10 +6,10 @@ title: "Module: packages"
 source_path: "tasks/packages.py"
 description: "Package tasks for pyinvoke."
 tags: ["module", "packages"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T11:29:30Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: packages
 

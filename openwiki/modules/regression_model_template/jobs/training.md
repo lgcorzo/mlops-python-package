@@ -6,10 +6,10 @@ title: "Module: training"
 source_path: "src/regression_model_template/jobs/training.py"
 description: "Define a job for training and registring a single AI/ML model."
 tags: ["module", "training"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T11:29:30Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: training
 
