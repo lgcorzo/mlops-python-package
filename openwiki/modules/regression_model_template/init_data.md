@@ -6,10 +6,10 @@ title: "Module: init_data"
 source_path: "src/regression_model_template/init_data.py"
 description: "Script to initialize synthetic train and test parquet datasets."
 tags: ["module", "init_data"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T11:29:30Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: init_data
 
