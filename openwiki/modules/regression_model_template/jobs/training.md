@@ -6,10 +6,10 @@ title: "Module: training"
 source_path: "src/regression_model_template/jobs/training.py"
 description: "Define a job for training and registring a single AI/ML model."
 tags: ["module", "training"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: training
 
@@ -90,6 +90,34 @@ Define a job for training and registring a single AI/ML model.
 ## Exported classes
 
 * `TrainingJob`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -193,51 +221,97 @@ Parameters:
     signer (signers.SignerKind): model signer.
     registry (registries.RegisterKind): model register.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[TrainingJob]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`run_config`**
 
   - **Type**: services.MlflowService.RunConfig
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`inputs`**
 
   - **Type**: datasets.ReaderKind
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`targets`**
 
   - **Type**: datasets.ReaderKind
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`model`**
 
   - **Type**: models.ModelKind
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`metrics`**
 
   - **Type**: metrics_.MetricsKind
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`splitter`**
 
   - **Type**: splitters.SplitterKind
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`saver`**
 
   - **Type**: registries.SaverKind
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`signer`**
 
   - **Type**: signers.SignerKind
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`registry`**
 
   - **Type**: registries.RegisterKind
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`run(self: Any) -> base.Locals`**
+### `run(self: Any) -> base.Locals`
 
 ### Description
 
@@ -249,11 +323,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: base.Locals
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for run
+
+```
 
 ## Used By
 

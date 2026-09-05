@@ -6,10 +6,10 @@ title: "Module: test_scripts"
 source_path: "tests/test_scripts.py"
 description: "No description available."
 tags: ["module", "test_scripts"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_scripts
 
@@ -62,6 +62,34 @@ No description available.
 * `test_main`
 
 * `test_main__no_configs`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -121,11 +149,29 @@ No description available.
 
   - **type**: pc.CaptureFixture[str]
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_schema
+
+```
 
 ### `test_main(scenario: str, confs_path: str, extra_config: str) -> None`
 
@@ -139,11 +185,19 @@ No description available.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `confs_path`
 
   - **type**: str
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -151,11 +205,29 @@ No description available.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_main
+
+```
 
 ### `test_main__no_configs() -> None`
 
@@ -168,6 +240,20 @@ No description available.
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_main__no_configs
+
+```
 
 ## Used By
 

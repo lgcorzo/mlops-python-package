@@ -6,10 +6,10 @@ title: "Module: test_services"
 source_path: "tests/io/test_services.py"
 description: "No description available."
 tags: ["module", "test_services"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_services
 
@@ -66,6 +66,34 @@ No description available.
 * `test_alerts_service`
 
 * `test_mlflow_service`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -131,17 +159,39 @@ No description available.
 
   - **type**: services.LoggerService
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `logger_caplog`
 
   - **type**: pl.LogCaptureFixture
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_logger_service
+
+```
 
 ### `test_alerts_service(enable: bool, mocker: pm.MockerFixture, capsys: pc.CaptureFixture[str]) -> None`
 
@@ -155,11 +205,19 @@ No description available.
 
   - **type**: bool
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `mocker`
 
   - **type**: pm.MockerFixture
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -167,11 +225,29 @@ No description available.
 
   - **type**: pc.CaptureFixture[str]
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_alerts_service
+
+```
 
 ### `test_mlflow_service(mlflow_service: services.MlflowService) -> None`
 
@@ -185,11 +261,29 @@ No description available.
 
   - **type**: services.MlflowService
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_mlflow_service
+
+```
 
 ## Used By
 

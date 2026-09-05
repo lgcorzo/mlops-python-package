@@ -6,10 +6,10 @@ title: "Module: kafka_app"
 source_path: "src/regression_model_template/controller/kafka_app.py"
 description: "FastAPI and Kafka Service for Predictions with Logging."
 tags: ["module", "kafka_app"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:17Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: kafka_app
 
@@ -180,6 +180,34 @@ FastAPI and Kafka Service for Predictions with Logging.
 * `default_input_payload`
 
 * `main`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -382,6 +410,12 @@ Comp --> [CustomLoader]
 
 In-memory sliding window rate limiter backed by OrderedDict.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Constructor
 
 * **`__init__(self: Any, max_requests: int, window_seconds: int, max_tracked_ips: int)`**
@@ -396,11 +430,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `max_requests`
 
   - **type**: int
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -410,6 +452,10 @@ No description available.
 
   - **type**: int
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: Yes
 
   - **default value**: 60
@@ -417,6 +463,10 @@ No description available.
 * `max_tracked_ips`
 
   - **type**: int
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -428,9 +478,13 @@ No description available.
 
 * **semantic meaning**: Initialization
 
+* **possible null values**: None
+
+* **exceptions**: Unspecified
+
 ## Public Methods
 
-* **`is_allowed(self: Any, ip: str) -> bool`**
+### `is_allowed(self: Any, ip: str) -> bool`
 
 ### Description
 
@@ -442,11 +496,19 @@ Check if the given IP is allowed to make a request.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `ip`
 
   - **type**: str
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -454,11 +516,31 @@ Check if the given IP is allowed to make a request.
 
 * **return type**: bool
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for is_allowed
+
+```
+
 ### `PredictionRequest`
 
 ## Overview
 
 Request model for prediction.
+
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
 
 ## Attributes
 
@@ -466,9 +548,13 @@ Request model for prediction.
 
   - **Type**: Dict[(str, Any)]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`validate_schema(self: Any) -> pd.DataFrame`**
+### `validate_schema(self: Any) -> pd.DataFrame`
 
 ### Description
 
@@ -480,13 +566,31 @@ Validates the input data against InputsSchema.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: pd.DataFrame
 
-* **`check_input_size(cls: Any, v: Dict[(str, Any)]) -> Dict[(str, Any)]`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for validate_schema
+
+```
+
+### `check_input_size(cls: Any, v: Dict[(str, Any)]) -> Dict[(str, Any)]`
 
 ### Description
 
@@ -498,11 +602,19 @@ Check if the input data size is within limits.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `v`
 
   - **type**: Dict[(str, Any)]
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -510,11 +622,31 @@ Check if the input data size is within limits.
 
 * **return type**: Dict[(str, Any)]
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for check_input_size
+
+```
+
 ### `PredictionResponse`
 
 ## Overview
 
 Response model for prediction.
+
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
 
 ## Attributes
 
@@ -522,11 +654,21 @@ Response model for prediction.
 
   - **Type**: Dict[(str, Any)]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ### `FastAPIKafkaService`
 
 ## Overview
 
 Service for deploying a FastAPI application with a Kafka producer and consumer.
+
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
 
 ## Constructor
 
@@ -542,11 +684,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `prediction_callback`
 
   - **type**: Callable[([PredictionRequest], PredictionResponse)]
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -554,17 +704,29 @@ No description available.
 
   - **type**: Dict[(str, Any)]
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `input_topic`
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `output_topic`
 
   - **type**: str
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -574,9 +736,13 @@ No description available.
 
 * **semantic meaning**: Initialization
 
+* **possible null values**: None
+
+* **exceptions**: Unspecified
+
 ## Public Methods
 
-* **`delivery_report(self: Any, err: KafkaError | None, msg: Message) -> None`**
+### `delivery_report(self: Any, err: KafkaError | None, msg: Message) -> None`
 
 ### Description
 
@@ -588,11 +754,19 @@ Called once for each message produced to indicate delivery result.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `err`
 
   - **type**: KafkaError | None
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -600,13 +774,31 @@ Called once for each message produced to indicate delivery result.
 
   - **type**: Message
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
 
-* **`start(self: Any) -> None`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for delivery_report
+
+```
+
+### `start(self: Any) -> None`
 
 ### Description
 
@@ -618,13 +810,31 @@ Start the FastAPI application and Kafka consumer.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
 
-* **`stop(self: Any) -> None`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for start
+
+```
+
+### `stop(self: Any) -> None`
 
 ### Description
 
@@ -636,11 +846,29 @@ Stop the FastAPI application and Kafka consumer.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for stop
+
+```
 
 # Private Methods
 
@@ -780,6 +1008,12 @@ Close the Kafka consumer.
 
 Service to handle prediction logic securely.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Constructor
 
 * **`__init__(self: Any, model: Any)`**
@@ -794,11 +1028,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `model`
 
   - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -808,9 +1050,13 @@ No description available.
 
 * **semantic meaning**: Initialization
 
+* **possible null values**: None
+
+* **exceptions**: Unspecified
+
 ## Public Methods
 
-* **`predict(self: Any, input_data: PredictionRequest) -> PredictionResponse`**
+### `predict(self: Any, input_data: PredictionRequest) -> PredictionResponse`
 
 ### Description
 
@@ -822,17 +1068,39 @@ Make a prediction using the model.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `input_data`
 
   - **type**: PredictionRequest
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: PredictionResponse
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for predict
+
+```
 
 ## Standalone Functions
 
@@ -848,6 +1116,20 @@ Generate a fresh default input payload with current timestamps.
 
 * **return type**: Dict[(str, Any)]
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for default_input_payload
+
+```
+
 ### `main() -> None`
 
 ### Description
@@ -859,6 +1141,20 @@ No description available.
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for main
+
+```
 
 ## Used By
 

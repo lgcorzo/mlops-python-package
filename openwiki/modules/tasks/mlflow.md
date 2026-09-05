@@ -6,10 +6,10 @@ title: "Module: mlflow"
 source_path: "tasks/mlflow.py"
 description: "Mlflow tasks for pyinvoke."
 tags: ["module", "mlflow"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: mlflow
 
@@ -46,6 +46,34 @@ Mlflow tasks for pyinvoke.
 * `serve`
 
 * `all`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -90,11 +118,29 @@ Run mlflow doctor.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for doctor
+
+```
 
 ### `serve(ctx: Context, host: str, port: str, backend_uri: str) -> None`
 
@@ -108,11 +154,19 @@ Start the mlflow server.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `host`
 
   - **type**: str
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -122,6 +176,10 @@ Start the mlflow server.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: Yes
 
   - **default value**: '5000'
@@ -130,6 +188,10 @@ Start the mlflow server.
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: Yes
 
   - **default value**: './mlruns'
@@ -137,6 +199,20 @@ Start the mlflow server.
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for serve
+
+```
 
 ### `all(_: Context) -> None`
 
@@ -150,11 +226,29 @@ Run all mlflow tasks.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for all
+
+```
 
 ## Used By
 

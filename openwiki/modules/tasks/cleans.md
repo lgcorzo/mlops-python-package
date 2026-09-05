@@ -6,10 +6,10 @@ title: "Module: cleans"
 source_path: "tasks/cleans.py"
 description: "Clean tasks for pyinvoke."
 tags: ["module", "cleans"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: cleans
 
@@ -81,6 +81,34 @@ Clean tasks for pyinvoke.
 
 * `reset`
 
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
+
 ### Detected Architecture Patterns
 
 Detected roles: General Subsystem
@@ -141,11 +169,29 @@ Clean the mypy tool.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for mypy
+
+```
 
 ### `ruff(ctx: Context) -> None`
 
@@ -159,11 +205,29 @@ Clean the ruff tool.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for ruff
+
+```
 
 ### `pytest(ctx: Context) -> None`
 
@@ -177,11 +241,29 @@ Clean the pytest tool.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for pytest
+
+```
 
 ### `coverage(ctx: Context) -> None`
 
@@ -195,11 +277,29 @@ Clean the coverage tool.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for coverage
+
+```
 
 ### `dist(ctx: Context) -> None`
 
@@ -213,11 +313,29 @@ Clean the dist folder.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for dist
+
+```
 
 ### `docs(ctx: Context) -> None`
 
@@ -231,11 +349,29 @@ Clean the docs folder.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for docs
+
+```
 
 ### `cache(ctx: Context) -> None`
 
@@ -249,11 +385,29 @@ Clean the cache folder.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for cache
+
+```
 
 ### `mlruns(ctx: Context) -> None`
 
@@ -267,11 +421,29 @@ Clean the mlruns folder.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for mlruns
+
+```
 
 ### `outputs(ctx: Context) -> None`
 
@@ -285,11 +457,29 @@ Clean the outputs folder.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for outputs
+
+```
 
 ### `venv(ctx: Context) -> None`
 
@@ -303,11 +493,29 @@ Clean the venv folder.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for venv
+
+```
 
 ### `poetry(ctx: Context) -> None`
 
@@ -321,11 +529,29 @@ Clean poetry lock file.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for poetry
+
+```
 
 ### `python(ctx: Context) -> None`
 
@@ -339,11 +565,29 @@ Clean python caches and bytecodes.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for python
+
+```
 
 ### `requirements(ctx: Context) -> None`
 
@@ -357,11 +601,29 @@ Clean the project requirements file.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for requirements
+
+```
 
 ### `environment(ctx: Context) -> None`
 
@@ -375,11 +637,29 @@ Clean the project environment file.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for environment
+
+```
 
 ### `tools(_: Context) -> None`
 
@@ -393,11 +673,29 @@ Run all tools tasks.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for tools
+
+```
 
 ### `folders(_: Context) -> None`
 
@@ -411,11 +709,29 @@ Run all folders tasks.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for folders
+
+```
 
 ### `sources(_: Context) -> None`
 
@@ -429,11 +745,29 @@ Run all sources tasks.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for sources
+
+```
 
 ### `projects(_: Context) -> None`
 
@@ -447,11 +781,29 @@ Run all projects tasks.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for projects
+
+```
 
 ### `all(_: Context) -> None`
 
@@ -465,11 +817,29 @@ Run all tools and folders tasks.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for all
+
+```
 
 ### `reset(_: Context) -> None`
 
@@ -483,11 +853,29 @@ Run all tools, folders, sources, and projects tasks.
 
   - **type**: Context
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for reset
+
+```
 
 ## Used By
 

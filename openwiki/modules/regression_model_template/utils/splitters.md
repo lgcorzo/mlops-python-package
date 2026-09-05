@@ -6,10 +6,10 @@ title: "Module: splitters"
 source_path: "src/regression_model_template/utils/splitters.py"
 description: "Split dataframes into subsets (e.g., train/valid/test)."
 tags: ["module", "splitters"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: splitters
 
@@ -66,6 +66,34 @@ Split dataframes into subsets (e.g., train/valid/test).
 * `TrainTestSplitter`
 
 * `TimeSeriesSplitter`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -144,15 +172,25 @@ e.g., split between a train/test subsets.
 
 # https://scikit-learn.org/stable/glossary.html#term-CV-splitter
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`**
+### `split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`
 
 ### Description
 
@@ -164,11 +202,19 @@ Split a dataframe into subsets.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -176,11 +222,19 @@ Split a dataframe into subsets.
 
   - **type**: schemas.Targets
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `groups`
 
   - **type**: Index | None
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -190,7 +244,21 @@ Split a dataframe into subsets.
 
 * **return type**: TrainTestSplits
 
-* **`get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for split
+
+```
+
+### `get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`
 
 ### Description
 
@@ -202,11 +270,19 @@ Get the number of splits generated.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -214,11 +290,19 @@ Get the number of splits generated.
 
   - **type**: schemas.Targets
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `groups`
 
   - **type**: Index | None
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -227,6 +311,20 @@ Get the number of splits generated.
 ### Output
 
 * **return type**: int
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for get_n_splits
+
+```
 
 ### `TrainTestSplitter`
 
@@ -239,27 +337,49 @@ Parameters:
     test_size (int | float): number/ratio for the test set.
     random_state (int): random state for the splitter object.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[TrainTestSplitter]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`shuffle`**
 
   - **Type**: bool
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`test_size`**
 
   - **Type**: int | float
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`random_state`**
 
   - **Type**: int
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`**
+### `split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`
 
 ### Description
 
@@ -271,11 +391,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -283,11 +411,19 @@ No description available.
 
   - **type**: schemas.Targets
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `groups`
 
   - **type**: Index | None
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -297,7 +433,21 @@ No description available.
 
 * **return type**: TrainTestSplits
 
-* **`get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for split
+
+```
+
+### `get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`
 
 ### Description
 
@@ -309,11 +459,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -321,11 +479,19 @@ No description available.
 
   - **type**: schemas.Targets
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `groups`
 
   - **type**: Index | None
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -334,6 +500,20 @@ No description available.
 ### Output
 
 * **return type**: int
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for get_n_splits
+
+```
 
 ### `TimeSeriesSplitter`
 
@@ -346,27 +526,49 @@ Parameters:
     n_splits (int): number of split to generate.
     test_size (int | float): number or ratio for the test dataset.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[TimeSeriesSplitter]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`gap`**
 
   - **Type**: int
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`n_splits`**
 
   - **Type**: int
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`test_size`**
 
   - **Type**: int | float
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`**
+### `split(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> TrainTestSplits`
 
 ### Description
 
@@ -378,11 +580,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -390,11 +600,19 @@ No description available.
 
   - **type**: schemas.Targets
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `groups`
 
   - **type**: Index | None
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -404,7 +622,21 @@ No description available.
 
 * **return type**: TrainTestSplits
 
-* **`get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for split
+
+```
+
+### `get_n_splits(self: Any, inputs: schemas.Inputs, targets: schemas.Targets, groups: Index | None) -> int`
 
 ### Description
 
@@ -416,11 +648,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -428,11 +668,19 @@ No description available.
 
   - **type**: schemas.Targets
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `groups`
 
   - **type**: Index | None
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -441,6 +689,20 @@ No description available.
 ### Output
 
 * **return type**: int
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for get_n_splits
+
+```
 
 ## Used By
 

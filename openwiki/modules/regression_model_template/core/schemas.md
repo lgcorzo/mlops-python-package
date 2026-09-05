@@ -6,10 +6,10 @@ title: "Module: schemas"
 source_path: "src/regression_model_template/core/schemas.py"
 description: "Define and validate dataframe schemas."
 tags: ["module", "schemas"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: schemas
 
@@ -64,6 +64,34 @@ Define and validate dataframe schemas.
 * `SHAPValuesSchema`
 
 * `FeatureImportancesSchema`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -151,9 +179,15 @@ Base class for a dataframe schema.
 Use a schema to type your dataframe object.
 e.g., to communicate and validate its fields.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Public Methods
 
-* **`check(cls: T.Type[TSchema], data: pd.DataFrame) -> papd.DataFrame[TSchema]`**
+### `check(cls: T.Type[TSchema], data: pd.DataFrame) -> papd.DataFrame[TSchema]`
 
 ### Description
 
@@ -165,11 +199,19 @@ Check the dataframe with this schema.
 
   - **type**: T.Type[TSchema]
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `data`
 
   - **type**: pd.DataFrame
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -177,11 +219,31 @@ Check the dataframe with this schema.
 
 * **return type**: papd.DataFrame[TSchema]
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for check
+
+```
+
 ### `InputsSchema`
 
 ## Overview
 
 Schema for the project inputs.
+
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
 
 ## Attributes
 
@@ -189,65 +251,129 @@ Schema for the project inputs.
 
   - **Type**: papd.Index[padt.UInt32]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`dteday`**
 
   - **Type**: papd.Series[padt.DateTime]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`season`**
 
   - **Type**: papd.Series[padt.UInt8]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`yr`**
 
   - **Type**: papd.Series[padt.UInt8]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`mnth`**
 
   - **Type**: papd.Series[padt.UInt8]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`hr`**
 
   - **Type**: papd.Series[padt.UInt8]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`holiday`**
 
   - **Type**: papd.Series[padt.Bool]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`weekday`**
 
   - **Type**: papd.Series[padt.UInt8]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`workingday`**
 
   - **Type**: papd.Series[padt.Bool]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`weathersit`**
 
   - **Type**: papd.Series[padt.UInt8]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`temp`**
 
   - **Type**: papd.Series[padt.Float16]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`atemp`**
 
   - **Type**: papd.Series[padt.Float16]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`hum`**
 
   - **Type**: papd.Series[padt.Float16]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`windspeed`**
 
   - **Type**: papd.Series[padt.Float16]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`casual`**
 
   - **Type**: papd.Series[padt.UInt32]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`registered`**
 
   - **Type**: papd.Series[padt.UInt32]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 ### `TargetsSchema`
 
@@ -255,15 +381,29 @@ Schema for the project inputs.
 
 Schema for the project target.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`instant`**
 
   - **Type**: papd.Index[padt.UInt32]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`cnt`**
 
   - **Type**: papd.Series[padt.UInt32]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 ### `OutputsSchema`
 
@@ -271,15 +411,29 @@ Schema for the project target.
 
 Schema for the project output.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`instant`**
 
   - **Type**: papd.Index[padt.UInt32]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`prediction`**
 
   - **Type**: papd.Series[padt.UInt32]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 ### `SHAPValuesSchema`
 
@@ -287,11 +441,23 @@ Schema for the project output.
 
 Schema for the project shap values.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ### `FeatureImportancesSchema`
 
 ## Overview
 
 Schema for the project feature importances.
+
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
 
 ## Attributes
 
@@ -299,9 +465,17 @@ Schema for the project feature importances.
 
   - **Type**: papd.Series[str]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`importance`**
 
   - **Type**: papd.Series[float]
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 ## Used By
 

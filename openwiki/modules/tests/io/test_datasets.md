@@ -6,10 +6,10 @@ title: "Module: test_datasets"
 source_path: "tests/io/test_datasets.py"
 description: "No description available."
 tags: ["module", "test_datasets"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_datasets
 
@@ -52,6 +52,34 @@ No description available.
 * `test_parquet_reader`
 
 * `test_parquet_writer`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -105,17 +133,39 @@ No description available.
 
   - **type**: int | None
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `inputs_path`
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_parquet_reader
+
+```
 
 ### `test_parquet_writer(targets: schemas.Targets, tmp_outputs_path: str) -> None`
 
@@ -129,17 +179,39 @@ No description available.
 
   - **type**: schemas.Targets
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `tmp_outputs_path`
 
   - **type**: str
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_parquet_writer
+
+```
 
 ## Used By
 

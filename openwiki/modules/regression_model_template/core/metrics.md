@@ -6,10 +6,10 @@ title: "Module: metrics"
 source_path: "src/regression_model_template/core/metrics.py"
 description: "Evaluate model performances with metrics."
 tags: ["module", "metrics"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: metrics
 
@@ -78,6 +78,34 @@ Evaluate model performances with metrics.
 * `SklearnMetric`
 
 * `Threshold`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -166,23 +194,41 @@ Parameters:
     name (str): name of the metric for the reporting.
     greater_is_better (bool): maximize or minimize result.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`name`**
 
   - **Type**: str
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`greater_is_better`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`score(self: Any, targets: schemas.Targets, outputs: schemas.Outputs) -> float`**
+### `score(self: Any, targets: schemas.Targets, outputs: schemas.Outputs) -> float`
 
 ### Description
 
@@ -194,11 +240,19 @@ Score the outputs against the targets.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `targets`
 
   - **type**: schemas.Targets
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -206,13 +260,31 @@ Score the outputs against the targets.
 
   - **type**: schemas.Outputs
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: float
 
-* **`scorer(self: Any, model: models.Model, inputs: schemas.Inputs, targets: schemas.Targets) -> float`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for score
+
+```
+
+### `scorer(self: Any, model: models.Model, inputs: schemas.Inputs, targets: schemas.Targets) -> float`
 
 ### Description
 
@@ -224,11 +296,19 @@ Score model outputs against targets.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `model`
 
   - **type**: models.Model
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -236,11 +316,19 @@ Score model outputs against targets.
 
   - **type**: schemas.Inputs
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `targets`
 
   - **type**: schemas.Targets
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -248,7 +336,21 @@ Score model outputs against targets.
 
 * **return type**: float
 
-* **`to_mlflow(self: Any) -> MlflowMetric`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for scorer
+
+```
+
+### `to_mlflow(self: Any) -> MlflowMetric`
 
 ### Description
 
@@ -260,11 +362,29 @@ Convert the metric to an Mlflow metric.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: MlflowMetric
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for to_mlflow
+
+```
 
 ### `SklearnMetric`
 
@@ -276,23 +396,41 @@ Parameters:
     name (str): name of the sklearn metric.
     greater_is_better (bool): maximize or minimize.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[SklearnMetric]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`name`**
 
   - **Type**: str
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`greater_is_better`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`score(self: Any, targets: schemas.Targets, outputs: schemas.Outputs) -> float`**
+### `score(self: Any, targets: schemas.Targets, outputs: schemas.Outputs) -> float`
 
 ### Description
 
@@ -304,11 +442,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `targets`
 
   - **type**: schemas.Targets
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -316,11 +462,29 @@ No description available.
 
   - **type**: schemas.Outputs
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: float
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for score
+
+```
 
 ### `Threshold`
 
@@ -335,19 +499,33 @@ Parameters:
     threshold (int | float): absolute threshold value.
     greater_is_better (bool): maximize or minimize result.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`threshold`**
 
   - **Type**: int | float
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`greater_is_better`**
 
   - **Type**: bool
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`to_mlflow(self: Any) -> MlflowThreshold`**
+### `to_mlflow(self: Any) -> MlflowThreshold`
 
 ### Description
 
@@ -359,11 +537,29 @@ Convert the threshold to an mlflow threshold.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: MlflowThreshold
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for to_mlflow
+
+```
 
 ## Used By
 

@@ -6,10 +6,10 @@ title: "Module: test_kafka_app"
 source_path: "tests/controller/test_kafka_app.py"
 description: "No description available."
 tags: ["module", "test_kafka_app"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_kafka_app
 
@@ -132,6 +132,34 @@ No description available.
 * `test_main_function`
 
 * `test_middleware_configuration`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -273,6 +301,20 @@ Fixture to create a mocked FastAPIKafkaService.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for mock_kafka_service
+
+```
+
 ### `test_initialization(mock_kafka_service: Any) -> Any`
 
 ### Description
@@ -285,11 +327,29 @@ Test FastAPIKafkaService initialization.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_initialization
+
+```
 
 ### `test_delivery_report(mock_kafka_service: Any) -> Any`
 
@@ -303,11 +363,29 @@ Test delivery report logging.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_delivery_report
+
+```
 
 ### `test_start(mock_kafka_service: Any) -> Any`
 
@@ -321,11 +399,29 @@ Test the start method.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_start
+
+```
 
 ### `test_start_producer_failure(mock_kafka_service: Any) -> Any`
 
@@ -339,11 +435,29 @@ Test start method when producer initialization fails.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_start_producer_failure
+
+```
 
 ### `test_start_consumer_failure(mock_kafka_service: Any) -> Any`
 
@@ -357,11 +471,29 @@ Test start method when consumer initialization fails.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_start_consumer_failure
+
+```
 
 ### `test_run_server(mock_kafka_service: Any) -> Any`
 
@@ -375,11 +507,29 @@ Test the _run_server method.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_run_server
+
+```
 
 ### `test_run_server_failure(mock_kafka_service: Any) -> Any`
 
@@ -393,11 +543,29 @@ Test the _run_server method when uvicorn fails.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_run_server_failure
+
+```
 
 ### `test_consume_messages(mock_kafka_service: Any) -> Any`
 
@@ -411,11 +579,29 @@ Test the _consume_messages method.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_consume_messages
+
+```
 
 ### `test_consume_messages_with_error(mock_kafka_service: Any) -> Any`
 
@@ -429,11 +615,29 @@ Test _consume_messages handles message errors.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_consume_messages_with_error
+
+```
 
 ### `test_poll_message(mock_kafka_service: Any) -> Any`
 
@@ -447,11 +651,29 @@ Test the _poll_message method.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_poll_message
+
+```
 
 ### `test_poll_message_no_consumer(mock_kafka_service: Any) -> Any`
 
@@ -465,11 +687,29 @@ Test _poll_message handles missing consumer.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_poll_message_no_consumer
+
+```
 
 ### `test_handle_message_error_partition_eof(mock_kafka_service: Any) -> Any`
 
@@ -483,11 +723,29 @@ Test _handle_message_error handles partition EOF.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_handle_message_error_partition_eof
+
+```
 
 ### `test_handle_message_error_other_error(mock_kafka_service: Any) -> Any`
 
@@ -501,11 +759,29 @@ Test _handle_message_error handles other Kafka errors.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_handle_message_error_other_error
+
+```
 
 ### `test_handle_message_error_unknown_topic(mock_kafka_service: Any) -> Any`
 
@@ -519,11 +795,29 @@ Test _handle_message_error handles transient UNKNOWN_TOPIC_OR_PART errors withou
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_handle_message_error_unknown_topic
+
+```
 
 ### `test_process_message(mock_json_loads: Any, mock_kafka_service: Any) -> Any`
 
@@ -537,17 +831,39 @@ Test the _process_message method.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `mock_kafka_service`
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_process_message
+
+```
 
 ### `test_process_message_json_decode_error(mock_json_loads: Any, mock_kafka_service: Any) -> Any`
 
@@ -561,17 +877,39 @@ Test _process_message handles JSON decoding errors.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `mock_kafka_service`
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_process_message_json_decode_error
+
+```
 
 ### `test_process_message_prediction_error(mock_json_loads: Any, mock_kafka_service: Any) -> Any`
 
@@ -585,17 +923,39 @@ Test _process_message handles prediction callback errors.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `mock_kafka_service`
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_process_message_prediction_error
+
+```
 
 ### `test_close_consumer(mock_kafka_service: Any) -> Any`
 
@@ -609,11 +969,29 @@ Test the _close_consumer method.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_close_consumer
+
+```
 
 ### `test_stop(mock_kafka_service: Any) -> Any`
 
@@ -627,11 +1005,29 @@ Test the stop method.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_stop
+
+```
 
 ### `test_main_function() -> Any`
 
@@ -645,6 +1041,20 @@ Test the main function.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_main_function
+
+```
+
 ### `test_middleware_configuration() -> Any`
 
 ### Description
@@ -656,6 +1066,20 @@ Test that security middlewares are configured.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_middleware_configuration
+
+```
 
 ## Used By
 

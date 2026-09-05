@@ -6,10 +6,10 @@ title: "Module: generate_openwiki"
 source_path: "generate_openwiki.py"
 description: "No description available."
 tags: ["module", "generate_openwiki"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:17Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: generate_openwiki
 
@@ -94,6 +94,34 @@ No description available.
 * `update_index_files`
 
 * `main`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -291,11 +319,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `ignore_errors`
 
   - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -304,6 +340,20 @@ No description available.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for run_command
+
+```
 
 ### `get_last_commit() -> Any`
 
@@ -317,6 +367,20 @@ No description available.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for get_last_commit
+
+```
+
 ### `is_ignored(filepath: Any) -> Any`
 
 ### Description
@@ -329,11 +393,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for is_ignored
+
+```
 
 ### `get_changed_files() -> Any`
 
@@ -347,6 +429,20 @@ No description available.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for get_changed_files
+
+```
+
 ### `delete_generated_docs() -> Any`
 
 ### Description
@@ -358,6 +454,20 @@ No description available.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for delete_generated_docs
+
+```
 
 ### `extract_calls(node: Any) -> Any`
 
@@ -371,11 +481,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for extract_calls
+
+```
 
 ### `extract_complex_doc(docstring: Any) -> Any`
 
@@ -389,11 +517,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for extract_complex_doc
+
+```
 
 ### `extract_type_refs(node: Any) -> Any`
 
@@ -407,11 +553,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for extract_type_refs
+
+```
 
 ### `unparse_annotation(node: Any) -> Any`
 
@@ -425,11 +589,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for unparse_annotation
+
+```
 
 ### `extract_docstring(node: Any) -> Any`
 
@@ -443,11 +625,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for extract_docstring
+
+```
 
 ### `parse_args(args: Any) -> Any`
 
@@ -461,11 +661,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for parse_args
+
+```
 
 ### `parse_python_file(filepath: Any) -> Any`
 
@@ -479,11 +697,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for parse_python_file
+
+```
 
 ### `clean_plantuml_type(t: Any) -> Any`
 
@@ -497,11 +733,29 @@ Make type string safe for PlantUML.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for clean_plantuml_type
+
+```
 
 ### `generate_plantuml(classes: Any) -> Any`
 
@@ -515,11 +769,29 @@ Generate PlantUML class diagram for the classes.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for generate_plantuml
+
+```
 
 ### `build_registry(files_to_process: Any) -> Any`
 
@@ -533,11 +805,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for build_registry
+
+```
 
 ### `generate_package_diagram_content() -> Any`
 
@@ -551,6 +841,20 @@ No description available.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for generate_package_diagram_content
+
+```
+
 ### `generate_call_graph() -> Any`
 
 ### Description
@@ -562,6 +866,20 @@ No description available.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for generate_call_graph
+
+```
 
 ### `generate_dependency_graph() -> Any`
 
@@ -575,6 +893,20 @@ No description available.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for generate_dependency_graph
+
+```
+
 ### `generate_markdown(parsed_data: Any, relative_filepath: Any, md_path: Any) -> Any`
 
 ### Description
@@ -587,11 +919,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `relative_filepath`
 
   - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -599,11 +939,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for generate_markdown
+
+```
 
 ### `update_index_files(processed_files: Any) -> Any`
 
@@ -617,11 +975,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for update_index_files
+
+```
 
 ### `main() -> Any`
 
@@ -634,6 +1010,20 @@ No description available.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for main
+
+```
 
 ## Used By
 

@@ -6,10 +6,10 @@ title: "Module: datasets"
 source_path: "src/regression_model_template/io/datasets.py"
 description: "Read/Write datasets from/to external sources/destinations."
 tags: ["module", "datasets"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: datasets
 
@@ -60,6 +60,34 @@ Read/Write datasets from/to external sources/destinations.
 * `Writer`
 
 * `ParquetWriter`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -138,19 +166,33 @@ e.g., to read file, database, cloud storage, ...
 Parameters:
     limit (int, optional): maximum number of rows to read. Defaults to None.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`limit`**
 
   - **Type**: int | None
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`read(self: Any) -> pd.DataFrame`**
+### `read(self: Any) -> pd.DataFrame`
 
 ### Description
 
@@ -162,13 +204,31 @@ Read a dataframe from a dataset.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: pd.DataFrame
 
-* **`lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for read
+
+```
+
+### `lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`
 
 ### Description
 
@@ -180,11 +240,19 @@ Generate lineage information.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `name`
 
   - **type**: str
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -192,11 +260,19 @@ Generate lineage information.
 
   - **type**: pd.DataFrame
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `targets`
 
   - **type**: str | None
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -206,6 +282,10 @@ Generate lineage information.
 
   - **type**: str | None
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: Yes
 
   - **default value**: None
@@ -213,6 +293,20 @@ Generate lineage information.
 ### Output
 
 * **return type**: Lineage
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for lineage
+
+```
 
 ### `ParquetReader`
 
@@ -223,19 +317,33 @@ Read a dataframe from a parquet file.
 Parameters:
     path (str): local path to the dataset.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[ParquetReader]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`path`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`read(self: Any) -> pd.DataFrame`**
+### `read(self: Any) -> pd.DataFrame`
 
 ### Description
 
@@ -246,6 +354,10 @@ No description available.
 * `self`
 
   - **type**: Any
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -253,7 +365,21 @@ No description available.
 
 * **return type**: pd.DataFrame
 
-* **`lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`**
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for read
+
+```
+
+### `lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`
 
 ### Description
 
@@ -265,11 +391,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `name`
 
   - **type**: str
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: No
 
@@ -277,11 +411,19 @@ No description available.
 
   - **type**: pd.DataFrame
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `targets`
 
   - **type**: str | None
+
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
 
   - **optional?**: Yes
 
@@ -291,6 +433,10 @@ No description available.
 
   - **type**: str | None
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: Yes
 
   - **default value**: None
@@ -298,6 +444,20 @@ No description available.
 ### Output
 
 * **return type**: Lineage
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for lineage
+
+```
 
 ### `Writer`
 
@@ -308,15 +468,25 @@ Base class for a dataset writer.
 Use a writer to save a dataset from memory.
 e.g., to write file, database, cloud storage, ...
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`write(self: Any, data: pd.DataFrame) -> None`**
+### `write(self: Any, data: pd.DataFrame) -> None`
 
 ### Description
 
@@ -328,17 +498,39 @@ Write a dataframe to a dataset.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `data`
 
   - **type**: pd.DataFrame
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for write
+
+```
 
 ### `ParquetWriter`
 
@@ -349,19 +541,33 @@ Writer a dataframe to a parquet file.
 Parameters:
     path (str): local or S3 path to the dataset.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[ParquetWriter]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`path`**
 
   - **Type**: str
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`write(self: Any, data: pd.DataFrame) -> None`**
+### `write(self: Any, data: pd.DataFrame) -> None`
 
 ### Description
 
@@ -373,17 +579,39 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 * `data`
 
   - **type**: pd.DataFrame
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for write
+
+```
 
 ## Used By
 

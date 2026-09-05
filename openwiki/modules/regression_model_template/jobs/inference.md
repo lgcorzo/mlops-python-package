@@ -6,10 +6,10 @@ title: "Module: inference"
 source_path: "src/regression_model_template/jobs/inference.py"
 description: "Define a job for generating batch predictions from a registered model."
 tags: ["module", "inference"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: inference
 
@@ -62,6 +62,34 @@ Define a job for generating batch predictions from a registered model.
 ## Exported classes
 
 * `InferenceJob`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -133,31 +161,57 @@ Parameters:
     alias_or_version (str | int): alias or version for the  model.
     loader (registries.LoaderKind): registry loader for the model.
 
+**Why it exists:** Provides specific business logic or state encapsulation.
+
+**What business capability it provides:** Implementation of module responsibilities.
+
+**How it collaborates:** Interacts with other components via standard API boundaries.
+
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[InferenceJob]
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`inputs`**
 
   - **Type**: datasets.ReaderKind
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`outputs`**
 
   - **Type**: datasets.WriterKind
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 * **`alias_or_version`**
 
   - **Type**: str | int
+
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
 
 * **`loader`**
 
   - **Type**: registries.LoaderKind
 
+  - **Purpose**: Attribute for class state.
+
+  - **Constraints**: Standard type constraints.
+
 ## Public Methods
 
-* **`run(self: Any) -> base.Locals`**
+### `run(self: Any) -> base.Locals`
 
 ### Description
 
@@ -169,11 +223,29 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: Parameter description
+
+  - **valid values**: Any valid value for the type
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: base.Locals
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for run
+
+```
 
 ## Used By
 

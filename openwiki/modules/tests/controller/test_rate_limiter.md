@@ -6,10 +6,10 @@ title: "Module: test_rate_limiter"
 source_path: "tests/controller/test_rate_limiter.py"
 description: "No description available."
 tags: ["module", "test_rate_limiter"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-05T05:14:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_rate_limiter
 
@@ -50,6 +50,34 @@ No description available.
 * `test_rate_limiter_window_expiration`
 
 * `test_rate_limiter_move_to_end_on_access`
+
+## Exported interfaces
+
+_No interfaces found._
+
+## Public API
+
+_See exported classes and functions._
+
+## Internal architecture
+
+_See architectural detected patterns and UML._
+
+## Execution flow
+
+_Execution flow depends on public API usage._
+
+## Sequence explanation
+
+_See sequence diagram._
+
+## UML
+
+_See diagrams below._
+
+## Examples
+
+_No module level examples available._
 
 ### Detected Architecture Patterns
 
@@ -106,6 +134,20 @@ No description available.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_rate_limiter_allows_requests_below_limit
+
+```
+
 ### `test_rate_limiter_rejects_requests_above_limit() -> Any`
 
 ### Description
@@ -117,6 +159,20 @@ No description available.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_rate_limiter_rejects_requests_above_limit
+
+```
 
 ### `test_rate_limiter_evicts_oldest_ips() -> Any`
 
@@ -130,6 +186,20 @@ No description available.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_rate_limiter_evicts_oldest_ips
+
+```
+
 ### `test_rate_limiter_window_expiration() -> Any`
 
 ### Description
@@ -142,6 +212,20 @@ No description available.
 
 * **return type**: Any
 
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_rate_limiter_window_expiration
+
+```
+
 ### `test_rate_limiter_move_to_end_on_access() -> Any`
 
 ### Description
@@ -153,6 +237,20 @@ No description available.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: Result of the operation
+
+* **possible null values**: Dependent on implementation
+
+* **exceptions**: Unspecified
+
+### Example
+
+```python
+
+# Example usage for test_rate_limiter_move_to_end_on_access
+
+```
 
 ## Used By
 
