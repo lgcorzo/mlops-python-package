@@ -6,10 +6,10 @@ title: "Module: datasets"
 source_path: "src/regression_model_template/io/datasets.py"
 description: "Read/Write datasets from/to external sources/destinations."
 tags: ["module", "datasets"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: datasets
 
@@ -60,6 +60,26 @@ Read/Write datasets from/to external sources/destinations.
 * `Writer`
 
 * `ParquetWriter`
+
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -122,6 +142,10 @@ Comp --> [pandas]
 Comp --> [pydantic]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -135,18 +159,23 @@ Base class for a dataset reader.
 Use a reader to load a dataset in memory.
 e.g., to read file, database, cloud storage, ...
 
-Parameters:
-    limit (int, optional): maximum number of rows to read. Defaults to None.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`limit`**
 
   - **Type**: int | None
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -162,11 +191,35 @@ Read a dataframe from a dataset.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: pd.DataFrame
+
+* **semantic meaning**: pd.DataFrame: dataframe representation.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`**
 
@@ -180,11 +233,19 @@ Generate lineage information.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `name`
 
   - **type**: str
+
+  - **meaning**: dataset name.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -192,11 +253,19 @@ Generate lineage information.
 
   - **type**: pd.DataFrame
 
+  - **meaning**: reader dataframe.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `targets`
 
   - **type**: str | None
+
+  - **meaning**: name of the target column.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: Yes
 
@@ -206,6 +275,10 @@ Generate lineage information.
 
   - **type**: str | None
 
+  - **meaning**: name of the prediction column.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: Yes
 
   - **default value**: None
@@ -214,14 +287,31 @@ Generate lineage information.
 
 * **return type**: Lineage
 
+* **semantic meaning**: Lineage: lineage information.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
+
 ### `ParquetReader`
 
 ## Overview
 
 Read a dataframe from a parquet file.
-
-Parameters:
-    path (str): local path to the dataset.
 
 ## Attributes
 
@@ -229,9 +319,17 @@ Parameters:
 
   - **Type**: T.Literal[ParquetReader]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`path`**
 
   - **Type**: str
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -247,11 +345,35 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: pd.DataFrame
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`lineage(self: Any, name: str, data: pd.DataFrame, targets: str | None, predictions: str | None) -> Lineage`**
 
@@ -265,11 +387,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `name`
 
   - **type**: str
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -277,11 +407,19 @@ No description available.
 
   - **type**: pd.DataFrame
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `targets`
 
   - **type**: str | None
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: Yes
 
@@ -291,6 +429,10 @@ No description available.
 
   - **type**: str | None
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: Yes
 
   - **default value**: None
@@ -298,6 +440,26 @@ No description available.
 ### Output
 
 * **return type**: Lineage
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `Writer`
 
@@ -314,6 +476,10 @@ e.g., to write file, database, cloud storage, ...
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 ## Public Methods
 
 * **`write(self: Any, data: pd.DataFrame) -> None`**
@@ -328,11 +494,19 @@ Write a dataframe to a dataset.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `data`
 
   - **type**: pd.DataFrame
+
+  - **meaning**: dataframe representation.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -340,14 +514,31 @@ Write a dataframe to a dataset.
 
 * **return type**: None
 
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
+
 ### `ParquetWriter`
 
 ## Overview
 
 Writer a dataframe to a parquet file.
-
-Parameters:
-    path (str): local or S3 path to the dataset.
 
 ## Attributes
 
@@ -355,9 +546,17 @@ Parameters:
 
   - **Type**: T.Literal[ParquetWriter]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`path`**
 
   - **Type**: str
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -373,17 +572,45 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `data`
 
   - **type**: pd.DataFrame
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

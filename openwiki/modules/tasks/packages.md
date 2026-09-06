@@ -6,10 +6,10 @@ title: "Module: packages"
 source_path: "tasks/packages.py"
 description: "Package tasks for pyinvoke."
 tags: ["module", "packages"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: packages
 
@@ -43,11 +43,31 @@ Package tasks for pyinvoke.
 
 * `.cleans`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
 ## Exported functions
 
 * `build`
 
 * `all`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -77,6 +97,10 @@ Comp --> [task]
 Comp --> [cleans]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -93,11 +117,19 @@ Build the python package.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `format`
 
   - **type**: str
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: Yes
 
@@ -106,6 +138,26 @@ Build the python package.
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `all(_: Context) -> None`
 
@@ -119,11 +171,35 @@ Run all package tasks.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

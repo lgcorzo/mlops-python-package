@@ -6,10 +6,10 @@ title: "Module: cleans"
 source_path: "tasks/cleans.py"
 description: "Clean tasks for pyinvoke."
 tags: ["module", "cleans"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: cleans
 
@@ -38,6 +38,10 @@ Clean tasks for pyinvoke.
 * `invoke.context.Context`
 
 * `invoke.tasks.task`
+
+## Exported interfaces
+
+_Dependent on implementation_
 
 ## Exported functions
 
@@ -80,6 +84,22 @@ Clean tasks for pyinvoke.
 * `all`
 
 * `reset`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -125,6 +145,10 @@ Comp --> [Context]
 Comp --> [task]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -141,11 +165,35 @@ Clean the mypy tool.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `ruff(ctx: Context) -> None`
 
@@ -159,11 +207,35 @@ Clean the ruff tool.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `pytest(ctx: Context) -> None`
 
@@ -177,11 +249,35 @@ Clean the pytest tool.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `coverage(ctx: Context) -> None`
 
@@ -195,11 +291,35 @@ Clean the coverage tool.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `dist(ctx: Context) -> None`
 
@@ -213,11 +333,35 @@ Clean the dist folder.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `docs(ctx: Context) -> None`
 
@@ -231,11 +375,35 @@ Clean the docs folder.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `cache(ctx: Context) -> None`
 
@@ -249,11 +417,35 @@ Clean the cache folder.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `mlruns(ctx: Context) -> None`
 
@@ -267,11 +459,35 @@ Clean the mlruns folder.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `outputs(ctx: Context) -> None`
 
@@ -285,11 +501,35 @@ Clean the outputs folder.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `venv(ctx: Context) -> None`
 
@@ -303,11 +543,35 @@ Clean the venv folder.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `poetry(ctx: Context) -> None`
 
@@ -321,11 +585,35 @@ Clean poetry lock file.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `python(ctx: Context) -> None`
 
@@ -339,11 +627,35 @@ Clean python caches and bytecodes.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `requirements(ctx: Context) -> None`
 
@@ -357,11 +669,35 @@ Clean the project requirements file.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `environment(ctx: Context) -> None`
 
@@ -375,11 +711,35 @@ Clean the project environment file.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `tools(_: Context) -> None`
 
@@ -393,11 +753,35 @@ Run all tools tasks.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `folders(_: Context) -> None`
 
@@ -411,11 +795,35 @@ Run all folders tasks.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `sources(_: Context) -> None`
 
@@ -429,11 +837,35 @@ Run all sources tasks.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `projects(_: Context) -> None`
 
@@ -447,11 +879,35 @@ Run all projects tasks.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `all(_: Context) -> None`
 
@@ -465,11 +921,35 @@ Run all tools and folders tasks.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `reset(_: Context) -> None`
 
@@ -483,11 +963,35 @@ Run all tools, folders, sources, and projects tasks.
 
   - **type**: Context
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

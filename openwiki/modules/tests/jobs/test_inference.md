@@ -6,10 +6,10 @@ title: "Module: test_inference"
 source_path: "tests/jobs/test_inference.py"
 description: "No description available."
 tags: ["module", "test_inference"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:19Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_inference
 
@@ -55,9 +55,29 @@ No description available.
 
 * `regression_model_template.io.services`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
 ## Exported functions
 
 * `test_inference_job`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -95,6 +115,10 @@ Comp --> [registries]
 Comp --> [services]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -111,11 +135,19 @@ No description available.
 
   - **type**: str | int
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `mlflow_service`
 
   - **type**: services.MlflowService
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -123,11 +155,19 @@ No description available.
 
   - **type**: services.AlertsService
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `logger_service`
 
   - **type**: services.LoggerService
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -135,11 +175,19 @@ No description available.
 
   - **type**: datasets.Reader
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `tmp_outputs_writer`
 
   - **type**: datasets.Writer
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -147,11 +195,19 @@ No description available.
 
   - **type**: registries.Version
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `loader`
 
   - **type**: registries.Loader
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -159,11 +215,35 @@ No description available.
 
   - **type**: pc.CaptureFixture[str]
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

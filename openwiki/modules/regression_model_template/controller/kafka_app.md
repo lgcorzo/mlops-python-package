@@ -6,10 +6,10 @@ title: "Module: kafka_app"
 source_path: "src/regression_model_template/controller/kafka_app.py"
 description: "FastAPI and Kafka Service for Predictions with Logging."
 tags: ["module", "kafka_app"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: kafka_app
 
@@ -175,11 +175,31 @@ FastAPI and Kafka Service for Predictions with Logging.
 
 * `PredictionService`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
 ## Exported functions
 
 * `default_input_payload`
 
 * `main`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -372,6 +392,10 @@ Comp --> [services]
 Comp --> [CustomLoader]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -392,15 +416,25 @@ No description available.
 
 ### Inputs
 
+#### Parameters
+
 * `self`
 
   - **type**: Any
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
 * `max_requests`
 
   - **type**: int
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: Yes
 
@@ -410,6 +444,10 @@ No description available.
 
   - **type**: int
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: Yes
 
   - **default value**: 60
@@ -418,15 +456,45 @@ No description available.
 
   - **type**: int
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: Yes
 
   - **default value**: MAX_TRACKED_IPS
+
+#### Dependencies
+
+_Dependent on implementation_
+
+#### Initialization
+
+_Dependent on implementation_
 
 ### Output
 
 * **return type**: None
 
 * **semantic meaning**: Initialization
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Public Methods
 
@@ -442,17 +510,45 @@ Check if the given IP is allowed to make a request.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `ip`
 
   - **type**: str
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: bool
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `PredictionRequest`
 
@@ -465,6 +561,10 @@ Request model for prediction.
 * **`input_data`**
 
   - **Type**: Dict[(str, Any)]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -480,11 +580,35 @@ Validates the input data against InputsSchema.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: pd.DataFrame
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`check_input_size(cls: Any, v: Dict[(str, Any)]) -> Dict[(str, Any)]`**
 
@@ -498,17 +622,45 @@ Check if the input data size is within limits.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `v`
 
   - **type**: Dict[(str, Any)]
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Dict[(str, Any)]
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `PredictionResponse`
 
@@ -521,6 +673,10 @@ Response model for prediction.
 * **`result`**
 
   - **Type**: Dict[(str, Any)]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ### `FastAPIKafkaService`
 
@@ -538,9 +694,15 @@ No description available.
 
 ### Inputs
 
+#### Parameters
+
 * `self`
 
   - **type**: Any
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -548,11 +710,19 @@ No description available.
 
   - **type**: Callable[([PredictionRequest], PredictionResponse)]
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `kafka_config`
 
   - **type**: Dict[(str, Any)]
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -560,19 +730,53 @@ No description available.
 
   - **type**: str
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `output_topic`
 
   - **type**: str
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
+
+#### Dependencies
+
+_Dependent on implementation_
+
+#### Initialization
+
+_Dependent on implementation_
 
 ### Output
 
 * **return type**: None
 
 * **semantic meaning**: Initialization
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Public Methods
 
@@ -588,11 +792,19 @@ Called once for each message produced to indicate delivery result.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `err`
 
   - **type**: KafkaError | None
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -600,11 +812,35 @@ Called once for each message produced to indicate delivery result.
 
   - **type**: Message
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`start(self: Any) -> None`**
 
@@ -618,11 +854,35 @@ Start the FastAPI application and Kafka consumer.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`stop(self: Any) -> None`**
 
@@ -636,11 +896,35 @@ Stop the FastAPI application and Kafka consumer.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 # Private Methods
 
@@ -790,9 +1074,15 @@ No description available.
 
 ### Inputs
 
+#### Parameters
+
 * `self`
 
   - **type**: Any
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -800,13 +1090,43 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
+
+#### Dependencies
+
+_Dependent on implementation_
+
+#### Initialization
+
+_Dependent on implementation_
 
 ### Output
 
 * **return type**: None
 
 * **semantic meaning**: Initialization
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Public Methods
 
@@ -822,17 +1142,45 @@ Make a prediction using the model.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `input_data`
 
   - **type**: PredictionRequest
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: PredictionResponse
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Standalone Functions
 
@@ -848,6 +1196,26 @@ Generate a fresh default input payload with current timestamps.
 
 * **return type**: Dict[(str, Any)]
 
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
+
 ### `main() -> None`
 
 ### Description
@@ -859,6 +1227,26 @@ No description available.
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

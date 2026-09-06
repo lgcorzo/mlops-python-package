@@ -6,10 +6,10 @@ title: "Module: scripts"
 source_path: "src/regression_model_template/scripts.py"
 description: "Scripts for the CLI application."
 tags: ["module", "scripts"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: scripts
 
@@ -55,9 +55,29 @@ Scripts for the CLI application.
 
 * `regression_model_template.io.configs`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
 ## Exported functions
 
 * `main`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -98,6 +118,10 @@ Comp --> [settings]
 Comp --> [configs]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -114,6 +138,10 @@ Main script for the application.
 
   - **type**: list[str] | None
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: Yes
 
   - **default value**: None
@@ -121,6 +149,26 @@ Main script for the application.
 ### Output
 
 * **return type**: int
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

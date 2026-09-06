@@ -6,10 +6,10 @@ title: "Module: osvariables"
 source_path: "src/regression_model_template/io/osvariables.py"
 description: "No description available."
 tags: ["module", "osvariables"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: osvariables
 
@@ -44,6 +44,26 @@ No description available.
 * `Singleton`
 
 * `Env`
+
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -87,6 +107,10 @@ Comp --> [Any]
 Comp --> [BaseSettings]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -102,6 +126,10 @@ No description available.
 * **`_instances`**
 
   - **Type**: dict[(type, Singleton)]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 # Private Methods
 
@@ -135,17 +163,33 @@ No description available.
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`mlflow_registry_uri`**
 
   - **Type**: str
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`mlflow_experiment_name`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`mlflow_registered_model_name`**
 
   - **Type**: str
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Used By
 

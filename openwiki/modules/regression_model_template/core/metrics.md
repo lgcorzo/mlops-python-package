@@ -6,10 +6,10 @@ title: "Module: metrics"
 source_path: "src/regression_model_template/core/metrics.py"
 description: "Evaluate model performances with metrics."
 tags: ["module", "metrics"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: metrics
 
@@ -78,6 +78,26 @@ Evaluate model performances with metrics.
 * `SklearnMetric`
 
 * `Threshold`
+
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -149,6 +169,10 @@ Comp --> [models]
 Comp --> [schemas]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -162,23 +186,31 @@ Base class for a project metric.
 Use metrics to evaluate model performance.
 e.g., accuracy, precision, recall, MAE, F1, ...
 
-Parameters:
-    name (str): name of the metric for the reporting.
-    greater_is_better (bool): maximize or minimize result.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`name`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`greater_is_better`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -194,11 +226,19 @@ Score the outputs against the targets.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `targets`
 
   - **type**: schemas.Targets
+
+  - **meaning**: expected values.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -206,11 +246,35 @@ Score the outputs against the targets.
 
   - **type**: schemas.Outputs
 
+  - **meaning**: predicted values.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: float
+
+* **semantic meaning**: float: single result from the metric computation.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`scorer(self: Any, model: models.Model, inputs: schemas.Inputs, targets: schemas.Targets) -> float`**
 
@@ -224,11 +288,19 @@ Score model outputs against targets.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `model`
 
   - **type**: models.Model
+
+  - **meaning**: model to evaluate.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -236,17 +308,45 @@ Score model outputs against targets.
 
   - **type**: schemas.Inputs
 
+  - **meaning**: model inputs values.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `targets`
 
   - **type**: schemas.Targets
 
+  - **meaning**: model expected values.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: float
+
+* **semantic meaning**: float: single result from the metric computation.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`to_mlflow(self: Any) -> MlflowMetric`**
 
@@ -260,11 +360,35 @@ Convert the metric to an Mlflow metric.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: MlflowMetric
+
+* **semantic meaning**: MlflowMetric: the Mlflow metric.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `SklearnMetric`
 
@@ -272,23 +396,31 @@ Convert the metric to an Mlflow metric.
 
 Compute metrics with sklearn.
 
-Parameters:
-    name (str): name of the sklearn metric.
-    greater_is_better (bool): maximize or minimize.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[SklearnMetric]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`name`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`greater_is_better`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -304,11 +436,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `targets`
 
   - **type**: schemas.Targets
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -316,11 +456,35 @@ No description available.
 
   - **type**: schemas.Outputs
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: float
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `Threshold`
 
@@ -331,19 +495,23 @@ A project threshold for a metric.
 Use thresholds to monitor model performances.
 e.g., to trigger an alert when a threshold is met.
 
-Parameters:
-    threshold (int | float): absolute threshold value.
-    greater_is_better (bool): maximize or minimize result.
-
 ## Attributes
 
 * **`threshold`**
 
   - **Type**: int | float
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`greater_is_better`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -359,11 +527,35 @@ Convert the threshold to an mlflow threshold.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: MlflowThreshold
+
+* **semantic meaning**: MlflowThreshold: the mlflow threshold.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

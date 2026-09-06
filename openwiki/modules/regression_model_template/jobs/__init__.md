@@ -6,10 +6,10 @@ title: "Module: __init__"
 source_path: "src/regression_model_template/jobs/__init__.py"
 description: "High-level jobs of the project."
 tags: ["module", "__init__"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: __init__
 
@@ -55,6 +55,26 @@ High-level jobs of the project.
 
 * `regression_model_template.jobs.tuning.TuningJob`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
+
 ### Detected Architecture Patterns
 
 Detected roles: General Subsystem
@@ -80,6 +100,10 @@ Comp --> [PromotionJob]
 Comp --> [TrainingJob]
 Comp --> [TuningJob]
 ```
+
+## Examples
+
+_Dependent on implementation_
 
 ## Used By
 

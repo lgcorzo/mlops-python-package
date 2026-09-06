@@ -6,10 +6,10 @@ title: "Module: services"
 source_path: "src/regression_model_template/io/services.py"
 description: "Manage global context during execution."
 tags: ["module", "services"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: services
 
@@ -134,6 +134,26 @@ Manage global context during execution.
 * `AlertsService`
 
 * `MlflowService`
+
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -264,6 +284,10 @@ Comp --> [notification]
 Comp --> [Env]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -288,17 +312,45 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `record`
 
   - **type**: logging.LogRecord
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `Service`
 
@@ -323,11 +375,35 @@ Start the service.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`stop(self: Any) -> None`**
 
@@ -341,11 +417,35 @@ Stop the service.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `LoggerService`
 
@@ -355,49 +455,71 @@ Service for logging messages.
 
 https://loguru.readthedocs.io/en/stable/api/logger.html
 
-Parameters:
-    sink (str): logging output.
-    level (str): logging level.
-    format (str): logging format.
-    colorize (bool): colorize output.
-    serialize (bool): convert to JSON.
-    backtrace (bool): enable exception trace.
-    diagnose (bool): enable variable display.
-    catch (bool): catch errors during log handling.
-
 ## Attributes
 
 * **`sink`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`level`**
 
   - **Type**: str
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`format`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`colorize`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`serialize`**
 
   - **Type**: bool
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`backtrace`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`diagnose`**
 
   - **Type**: bool
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`catch`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -413,11 +535,35 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`logger(self: Any) -> loguru.Logger`**
 
@@ -431,11 +577,35 @@ Return the main logger.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: loguru.Logger
+
+* **semantic meaning**: loguru.Logger: the main logger.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `AlertsService`
 
@@ -449,24 +619,31 @@ In production, use with Slack, Discord, or emails.
 
 https://plyer.readthedocs.io/en/latest/api.html#plyer.facades.Notification
 
-Parameters:
-    enable (bool): use notifications or print.
-    app_name (str): name of the application.
-    timeout (int | None): timeout in secs.
-
 ## Attributes
 
 * **`enable`**
 
   - **Type**: bool
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`app_name`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`timeout`**
 
   - **Type**: int | None
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -482,11 +659,35 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`notify(self: Any, title: str, message: str) -> None`**
 
@@ -500,11 +701,19 @@ Send a notification to the system.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `title`
 
   - **type**: str
+
+  - **meaning**: title of the notification.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -512,11 +721,35 @@ Send a notification to the system.
 
   - **type**: str
 
+  - **meaning**: message of the notification.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `MlflowService`
 
@@ -524,73 +757,111 @@ Send a notification to the system.
 
 Service for Mlflow tracking and registry.
 
-Parameters:
-    tracking_uri (str): the URI for the Mlflow tracking server.
-    registry_uri (str): the URI for the Mlflow model registry.
-    experiment_name (str): the name of tracking experiment.
-    registry_name (str): the name of model registry.
-    autolog_disable (bool): disable autologging.
-    autolog_disable_for_unsupported_versions (bool): disable autologging for unsupported versions.
-    autolog_exclusive (bool): If True, enables exclusive autologging.
-    autolog_log_input_examples (bool): If True, logs input examples during autologging.
-    autolog_log_model_signatures (bool): If True, logs model signatures during autologging.
-    autolog_log_models (bool): If True, enables logging of models during autologging.
-    autolog_log_datasets (bool): If True, logs datasets used during autologging.
-    autolog_silent (bool): If True, suppresses all Mlflow warnings during autologging.
-
 ## Attributes
 
 * **`env`**
 
   - **Type**: ClassVar[Env]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`tracking_uri`**
 
   - **Type**: str
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`registry_uri`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`experiment_name`**
 
   - **Type**: str
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`registry_name`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`autolog_disable`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`autolog_disable_for_unsupported_versions`**
 
   - **Type**: bool
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`autolog_exclusive`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`autolog_log_input_examples`**
 
   - **Type**: bool
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`autolog_log_model_signatures`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`autolog_log_models`**
 
   - **Type**: bool
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`autolog_log_datasets`**
 
   - **Type**: bool
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`autolog_silent`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -606,11 +877,35 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: None
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`run_context(self: Any, run_config: RunConfig) -> T.Generator[(mlflow.ActiveRun, None, None)]`**
 
@@ -624,17 +919,45 @@ Yield an active Mlflow run and exit it afterwards.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `run_config`
 
   - **type**: RunConfig
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: T.Generator[(mlflow.ActiveRun, None, None)]
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`client(self: Any) -> mt.MlflowClient`**
 
@@ -648,11 +971,35 @@ Return a new Mlflow client.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: mt.MlflowClient
+
+* **semantic meaning**: MlflowClient: the mlflow client.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

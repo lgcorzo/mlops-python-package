@@ -6,10 +6,10 @@ title: "Module: models"
 source_path: "src/regression_model_template/core/models.py"
 description: "Define trainable machine learning models."
 tags: ["module", "models"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: models
 
@@ -72,6 +72,26 @@ Define trainable machine learning models.
 * `Model`
 
 * `BaselineSklearnModel`
+
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -164,6 +184,10 @@ Comp --> [preprocessing]
 Comp --> [schemas]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -183,6 +207,10 @@ e.g., to swap easily one model with another.
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 ## Public Methods
 
 * **`get_params(self: Any, deep: bool) -> Params`**
@@ -197,11 +225,19 @@ Get the model params.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `deep`
 
   - **type**: bool
+
+  - **meaning**: ignored.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: Yes
 
@@ -210,6 +246,26 @@ Get the model params.
 ### Output
 
 * **return type**: Params
+
+* **semantic meaning**: Params: internal model parameters.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`set_params(self: Any, **params: ParamValue) -> T.Self`**
 
@@ -223,17 +279,45 @@ Set the model params in place.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `**params`
 
   - **type**: ParamValue
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: T.Self
+
+* **semantic meaning**: T.Self: instance of the model.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`fit(self: Any, inputs: schemas.Inputs, targets: schemas.Targets) -> T.Self`**
 
@@ -247,11 +331,19 @@ Fit the model on the given inputs and targets.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: model training inputs.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -259,11 +351,35 @@ Fit the model on the given inputs and targets.
 
   - **type**: schemas.Targets
 
+  - **meaning**: model training targets.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: T.Self
+
+* **semantic meaning**: T.Self: instance of the model.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`predict(self: Any, inputs: T.Any) -> schemas.Outputs`**
 
@@ -277,17 +393,45 @@ Generate outputs with the model for the given inputs.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: T.Any
 
+  - **meaning**: model prediction inputs.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.Outputs
+
+* **semantic meaning**: schemas.Outputs: model prediction outputs.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`explain_model(self: Any) -> schemas.FeatureImportances`**
 
@@ -301,11 +445,35 @@ Explain the internal model structure.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.FeatureImportances
+
+* **semantic meaning**: schemas.FeatureImportances: feature importances.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: NotImplementedError: method not implemented.
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`explain_samples(self: Any, inputs: schemas.Inputs) -> schemas.SHAPValues`**
 
@@ -319,17 +487,45 @@ Explain model outputs on input samples.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.SHAPValues
+
+* **semantic meaning**: schemas.SHAPValues: SHAP values.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: NotImplementedError: method not implemented.
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`get_internal_model(self: Any) -> T.Any`**
 
@@ -343,11 +539,35 @@ Return the internal model in the object.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: T.Any
+
+* **semantic meaning**: T.Any: any internal model (either empty or fitted).
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: NotImplementedError: method not implemented.
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 # Private Methods
 
@@ -371,40 +591,63 @@ Get the model tags for scikit-learn.
 
 Simple baseline model based on scikit-learn.
 
-Parameters:
-    max_depth (int): maximum depth of the random forest.
-    n_estimators (int): number of estimators in the random forest.
-    random_state (int, optional): random state of the machine learning pipeline.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[BaselineSklearnModel]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`max_depth`**
 
   - **Type**: int
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`n_estimators`**
 
   - **Type**: int
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`random_state`**
 
   - **Type**: int | None
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`_pipeline`**
 
   - **Type**: pipeline.Pipeline | None
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`_numericals`**
 
   - **Type**: list[str]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`_categoricals`**
 
   - **Type**: list[str]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -420,11 +663,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -432,11 +683,35 @@ No description available.
 
   - **type**: schemas.Targets
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: BaselineSklearnModel
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`predict(self: Any, inputs: T.Any) -> schemas.Outputs`**
 
@@ -450,17 +725,45 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: T.Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.Outputs
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`explain_model(self: Any) -> schemas.FeatureImportances`**
 
@@ -474,11 +777,35 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.FeatureImportances
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`explain_samples(self: Any, inputs: schemas.Inputs) -> schemas.SHAPValues`**
 
@@ -492,17 +819,45 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: schemas.SHAPValues
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 * **`get_internal_model(self: Any) -> pipeline.Pipeline`**
 
@@ -516,11 +871,35 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: pipeline.Pipeline
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

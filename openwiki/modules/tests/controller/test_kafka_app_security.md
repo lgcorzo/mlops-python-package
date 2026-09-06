@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_security"
 source_path: "tests/controller/test_kafka_app_security.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_security"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_kafka_app_security
 
@@ -59,11 +59,31 @@ No description available.
 
 * `regression_model_template.controller.kafka_app.predict`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
 ## Exported functions
 
 * `test_prediction_service_sanitization`
 
 * `test_predict_endpoint_exception_leak`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -106,6 +126,10 @@ Comp --> [PredictionService]
 Comp --> [predict]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -122,6 +146,26 @@ Test that PredictionService sanitizes exceptions.
 
 * **return type**: Any
 
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
+
 ### `test_predict_endpoint_exception_leak() -> Any`
 
 ### Description
@@ -133,6 +177,26 @@ Test that the predict endpoint does NOT leak exception details.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

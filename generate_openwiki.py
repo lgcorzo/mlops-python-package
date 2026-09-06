@@ -90,24 +90,84 @@ def extract_calls(node):
 
 def extract_complex_doc(docstring):
     if not docstring:
-        return {"description": "No description available.", "complexity": None, "side_effects": None}
+        return {
+            "description": "No description available.",
+            "complexity": None,
+            "side_effects": None,
+            "params": {},
+            "returns": None,
+            "raises": None,
+        }
     lines = docstring.split("\n")
     complexity = None
     side_effects = None
     desc = []
 
+    params = {}
+    returns = None
+    raises = None
+
+    mode = "desc"
+    current_param = None
+    current_desc = []
+
     for line in lines:
+        s = line.strip()
+
         if line.lower().startswith("complexity:"):
             complexity = line.split(":", 1)[1].strip()
+            continue
         elif line.lower().startswith("side effects:"):
             side_effects = line.split(":", 1)[1].strip()
-        else:
+            continue
+
+        if s.lower().startswith("args:") or s.lower().startswith("parameters:"):
+            mode = "args"
+            continue
+        elif s.lower().startswith("returns:"):
+            if current_param and mode == "args":
+                params[current_param] = " ".join(current_desc).strip()
+            mode = "returns"
+            continue
+        elif s.lower().startswith("raises:") or s.lower().startswith("exceptions:"):
+            if current_param and mode == "args":
+                params[current_param] = " ".join(current_desc).strip()
+            mode = "raises"
+            continue
+
+        if mode == "desc":
             desc.append(line)
+        elif mode == "args":
+            if s and ":" in s and not s.startswith("-"):
+                if current_param:
+                    params[current_param] = " ".join(current_desc).strip()
+                part1, part2 = line.split(":", 1)
+                part1 = part1.strip()
+                if "(" in part1:
+                    pname = part1.split("(")[0].strip()
+                else:
+                    pname = part1
+                current_param = pname
+                current_desc = [part2.strip()]
+            elif s and current_param:
+                current_desc.append(s)
+        elif mode == "returns":
+            if s:
+                returns = s if not returns else returns + " " + s
+        elif mode == "raises":
+            if s:
+                raises = s if not raises else raises + " " + s
+
+    if current_param and mode == "args":
+        params[current_param] = " ".join(current_desc).strip()
 
     return {
         "description": "\n".join(desc).strip() or "No description available.",
         "complexity": complexity,
         "side_effects": side_effects,
+        "params": params,
+        "returns": returns,
+        "raises": raises,
     }
 
 
@@ -233,6 +293,9 @@ def parse_python_file(filepath):
                 "docstring": extracted["description"],
                 "complexity": extracted["complexity"],
                 "side_effects": extracted["side_effects"],
+                "params": extracted["params"],
+                "returns": extracted["returns"],
+                "raises": extracted["raises"],
                 "bases": [unparse_annotation(b) for b in node.bases],
                 "attributes": [],
                 "methods": [],
@@ -260,6 +323,9 @@ def parse_python_file(filepath):
                         "docstring": extracted["description"],
                         "complexity": extracted["complexity"],
                         "side_effects": extracted["side_effects"],
+                        "params": extracted["params"],
+                        "returns_desc": extracted["returns"],
+                        "raises": extracted["raises"],
                         "args": parse_args(child.args),
                         "returns": unparse_annotation(child.returns),
                         "return_type_refs": extract_type_refs(child.returns),
@@ -280,6 +346,9 @@ def parse_python_file(filepath):
                 "docstring": extracted["description"],
                 "complexity": extracted["complexity"],
                 "side_effects": extracted["side_effects"],
+                "params": extracted["params"],
+                "returns_desc": extracted["returns"],
+                "raises": extracted["raises"],
                 "args": parse_args(node.args),
                 "returns": unparse_annotation(node.returns),
                 "return_type_refs": extract_type_refs(node.returns),
@@ -479,10 +548,25 @@ last_verified_commit: "{commit_hash}"
         body.append("## Exported classes")
         for cls in parsed_data["classes"]:
             body.append(f"* `{cls['name']}`")
+    body.append("## Exported interfaces")
+    body.append("_Dependent on implementation_")
+
     if parsed_data["functions"]:
         body.append("## Exported functions")
         for func in parsed_data["functions"]:
             body.append(f"* `{func['name']}`")
+
+    body.append("## Public API")
+    body.append("_Dependent on implementation_")
+
+    body.append("## Internal architecture")
+    body.append("_Dependent on implementation_")
+
+    body.append("## Execution flow")
+    body.append("_Dependent on implementation_")
+
+    body.append("## Sequence explanation")
+    body.append("_Dependent on implementation_")
 
     # Architecture Detection
     body.append("### Detected Architecture Patterns")
@@ -549,6 +633,9 @@ last_verified_commit: "{commit_hash}"
     comp_lines.append("```")
     body.append("\n".join(comp_lines))
 
+    body.append("## Examples")
+    body.append("_Dependent on implementation_")
+
     if parsed_data["classes"] or parsed_data["functions"]:
         body.append("## 3. Class & Method Specifications")
 
@@ -567,29 +654,59 @@ last_verified_commit: "{commit_hash}"
             body.append("### Description")
             body.append(f"{c['docstring'].splitlines()[0] if c['docstring'] else 'No description available.'}")
             body.append("### Inputs")
+            body.append("#### Parameters")
             for arg in c["args"]:
                 body.append(f"* `{arg['name']}`")
                 body.append(f"  - **type**: {arg['type']}")
+                p_desc = (
+                    c.get("params", {}).get(arg["name"])
+                    or cls.get("params", {}).get(arg["name"])
+                    or "_Parameter description_"
+                )
+                body.append(f"  - **meaning**: {p_desc}")
+                body.append("  - **valid values**: _Dependent on implementation_")
                 if arg.get("default") is not None:
                     body.append("  - **optional?**: Yes")
                     body.append(f"  - **default value**: {arg['default']}")
                 else:
                     body.append("  - **optional?**: No")
+            body.append("#### Dependencies")
+            body.append("_Dependent on implementation_")
+            body.append("#### Initialization")
+            body.append("_Dependent on implementation_")
+
             body.append("### Output")
             body.append("* **return type**: None")
             body.append("* **semantic meaning**: Initialization")
+            body.append("* **possible null values**: _Dependent on implementation_")
+            if c.get("raises"):
+                body.append(f"* **exceptions**: {c['raises']}")
+            else:
+                body.append("* **exceptions**: _Dependent on implementation_")
+
+            body.append("### Side Effects")
             if c.get("side_effects"):
-                body.append("### Side Effects")
                 body.append(c["side_effects"])
+            else:
+                body.append("_Dependent on implementation_")
+
+            body.append("### Complexity")
             if c.get("complexity"):
-                body.append("### Complexity")
                 body.append(f"Time Complexity: {c['complexity']}")
+            else:
+                body.append("Time Complexity: _Dependent on implementation_")
+                body.append("Space Complexity: _Dependent on implementation_")
+
+            body.append("### Example")
+            body.append("_Dependent on implementation_")
 
         if cls["attributes"]:
             body.append("## Attributes")
             for attr in cls["attributes"]:
                 body.append(f"* **`{attr['name']}`**")
                 body.append(f"  - **Type**: {attr['type']}")
+                body.append("  - **Purpose**: _Dependent on implementation_")
+                body.append("  - **Constraints**: _Dependent on implementation_")
 
         public_methods = [m for m in cls["methods"] if not m["is_private"]]
         private_methods = [m for m in cls["methods"] if m["is_private"]]
@@ -605,6 +722,9 @@ last_verified_commit: "{commit_hash}"
                 for arg in m["args"]:
                     body.append(f"* `{arg['name']}`")
                     body.append(f"  - **type**: {arg['type']}")
+                    p_desc = m.get("params", {}).get(arg["name"], "_Parameter description_")
+                    body.append(f"  - **meaning**: {p_desc}")
+                    body.append("  - **valid values**: _Dependent on implementation_")
                     if arg.get("default") is not None:
                         body.append("  - **optional?**: Yes")
                         body.append(f"  - **default value**: {arg['default']}")
@@ -612,12 +732,29 @@ last_verified_commit: "{commit_hash}"
                         body.append("  - **optional?**: No")
                 body.append("### Output")
                 body.append(f"* **return type**: {m['returns']}")
+                r_desc = m.get("returns_desc") or "_Dependent on implementation_"
+                body.append(f"* **semantic meaning**: {r_desc}")
+                body.append("* **possible null values**: _Dependent on implementation_")
+                if m.get("raises"):
+                    body.append(f"* **exceptions**: {m['raises']}")
+                else:
+                    body.append("* **exceptions**: _Dependent on implementation_")
+
+                body.append("### Side Effects")
                 if m.get("side_effects"):
-                    body.append("### Side Effects")
                     body.append(m["side_effects"])
+                else:
+                    body.append("_Dependent on implementation_")
+
+                body.append("### Complexity")
                 if m.get("complexity"):
-                    body.append("### Complexity")
                     body.append(f"Time Complexity: {m['complexity']}")
+                else:
+                    body.append("Time Complexity: _Dependent on implementation_")
+                    body.append("Space Complexity: _Dependent on implementation_")
+
+                body.append("### Example")
+                body.append("_Dependent on implementation_")
 
         if private_methods:
             body.append("# Private Methods")
@@ -643,6 +780,9 @@ last_verified_commit: "{commit_hash}"
             for arg in func["args"]:
                 body.append(f"* `{arg['name']}`")
                 body.append(f"  - **type**: {arg['type']}")
+                p_desc = func.get("params", {}).get(arg["name"], "_Parameter description_")
+                body.append(f"  - **meaning**: {p_desc}")
+                body.append("  - **valid values**: _Dependent on implementation_")
                 if arg.get("default") is not None:
                     body.append("  - **optional?**: Yes")
                     body.append(f"  - **default value**: {arg['default']}")
@@ -650,12 +790,29 @@ last_verified_commit: "{commit_hash}"
                     body.append("  - **optional?**: No")
             body.append("### Output")
             body.append(f"* **return type**: {func['returns']}")
+            r_desc = func.get("returns_desc") or "_Dependent on implementation_"
+            body.append(f"* **semantic meaning**: {r_desc}")
+            body.append("* **possible null values**: _Dependent on implementation_")
+            if func.get("raises"):
+                body.append(f"* **exceptions**: {func['raises']}")
+            else:
+                body.append("* **exceptions**: _Dependent on implementation_")
+
+            body.append("### Side Effects")
             if func.get("side_effects"):
-                body.append("### Side Effects")
                 body.append(func["side_effects"])
+            else:
+                body.append("_Dependent on implementation_")
+
+            body.append("### Complexity")
             if func.get("complexity"):
-                body.append("### Complexity")
                 body.append(f"Time Complexity: {func['complexity']}")
+            else:
+                body.append("Time Complexity: _Dependent on implementation_")
+                body.append("Space Complexity: _Dependent on implementation_")
+
+            body.append("### Example")
+            body.append("_Dependent on implementation_")
 
     # Inject Used By
     used_by = []

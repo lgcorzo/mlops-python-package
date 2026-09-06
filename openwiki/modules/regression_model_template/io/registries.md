@@ -6,10 +6,10 @@ title: "Module: registries"
 source_path: "src/regression_model_template/io/registries.py"
 description: "Savers, loaders, and registers for model registries."
 tags: ["module", "registries"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: registries
 
@@ -77,6 +77,10 @@ Savers, loaders, and registers for model registries.
 
 * `MlflowRegister`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
 ## Exported functions
 
 * `uri_for_model_alias`
@@ -84,6 +88,22 @@ Savers, loaders, and registers for model registries.
 * `uri_for_model_version`
 
 * `uri_for_model_alias_or_version`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -176,6 +196,10 @@ Comp --> [schemas]
 Comp --> [signers]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -189,18 +213,23 @@ Base class for saving models in registry.
 Separate model definition from serialization.
 e.g., to switch between serialization flavors.
 
-Parameters:
-    path (str): model path inside the Mlflow store.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`path`**
 
   - **Type**: str
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -216,11 +245,19 @@ Save a model in the model registry.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `model`
 
   - **type**: models.Model
+
+  - **meaning**: project model to save.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -228,17 +265,45 @@ Save a model in the model registry.
 
   - **type**: signers.Signature
 
+  - **meaning**: model signature.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `input_example`
 
   - **type**: schemas.Inputs
 
+  - **meaning**: sample of inputs.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Info
+
+* **semantic meaning**: Info: model saving information.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `CustomSaver`
 
@@ -254,6 +319,10 @@ https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html
 
   - **Type**: T.Literal[CustomSaver]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 ## Public Methods
 
 * **`save(self: Any, model: models.Model, signature: signers.Signature, input_example: schemas.Inputs) -> Info`**
@@ -268,11 +337,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `model`
 
   - **type**: models.Model
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -280,17 +357,45 @@ No description available.
 
   - **type**: signers.Signature
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `input_example`
 
   - **type**: schemas.Inputs
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Info
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `BuiltinSaver`
 
@@ -300,18 +405,23 @@ Saver for built-in models using an Mlflow flavor module.
 
 https://mlflow.org/docs/latest/models.html#built-in-model-flavors
 
-Parameters:
-    flavor (str): Mlflow flavor module to use for the serialization.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[BuiltinSaver]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`flavor`**
 
   - **Type**: str
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -327,11 +437,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `model`
 
   - **type**: models.Model
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -339,11 +457,19 @@ No description available.
 
   - **type**: signers.Signature
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `input_example`
 
   - **type**: schemas.Inputs | None
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: Yes
 
@@ -352,6 +478,26 @@ No description available.
 ### Output
 
 * **return type**: Info
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `Loader`
 
@@ -368,6 +514,10 @@ e.g., to switch between deserialization flavors.
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 ## Public Methods
 
 * **`load(self: Any, uri: str) -> Loader.Adapter`**
@@ -382,17 +532,45 @@ Load a model from the model registry.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `uri`
 
   - **type**: str
 
+  - **meaning**: URI of a model to load.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Loader.Adapter
+
+* **semantic meaning**: Loader.Adapter: model loaded.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `CustomLoader`
 
@@ -408,6 +586,10 @@ https://mlflow.org/docs/latest/python_api/mlflow.pyfunc.html
 
   - **Type**: T.Literal[CustomLoader]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 ## Public Methods
 
 * **`load(self: Any, uri: str) -> CustomLoader.Adapter`**
@@ -422,17 +604,45 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `uri`
 
   - **type**: str
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: CustomLoader.Adapter
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `BuiltinLoader`
 
@@ -450,6 +660,10 @@ https://mlflow.org/docs/latest/models.html#built-in-model-flavors
 
   - **Type**: T.Literal[BuiltinLoader]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 ## Public Methods
 
 * **`load(self: Any, uri: str) -> BuiltinLoader.Adapter`**
@@ -464,17 +678,45 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `uri`
 
   - **type**: str
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: BuiltinLoader.Adapter
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `Register`
 
@@ -485,18 +727,23 @@ Base class for registring models to a location.
 Separate model definition from its registration.
 e.g., to change the model registry backend.
 
-Parameters:
-    tags (dict[str, T.Any]): tags for the model.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`tags`**
 
   - **Type**: dict[(str, T.Any)]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -512,11 +759,19 @@ Register a model given its name and URI.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `name`
 
   - **type**: str
+
+  - **meaning**: name of the model to register.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -524,11 +779,35 @@ Register a model given its name and URI.
 
   - **type**: str
 
+  - **meaning**: URI of a model to register.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Version
+
+* **semantic meaning**: Version: information about the registered model.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `MlflowRegister`
 
@@ -544,6 +823,10 @@ https://mlflow.org/docs/latest/model-registry.html
 
   - **Type**: T.Literal[MlflowRegister]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 ## Public Methods
 
 * **`register(self: Any, name: str, model_uri: str) -> Version`**
@@ -558,11 +841,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `name`
 
   - **type**: str
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -570,11 +861,35 @@ No description available.
 
   - **type**: str
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Version
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Standalone Functions
 
@@ -584,18 +899,15 @@ No description available.
 
 Create a model URI from a model name and an alias.
 
-Args:
-    name (str): name of the mlflow registered model.
-    alias (str): alias of the registered model.
-
-Returns:
-    str: model URI as "models:/name@alias".
-
 ### Inputs
 
 * `name`
 
   - **type**: str
+
+  - **meaning**: name of the mlflow registered model.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -603,11 +915,35 @@ Returns:
 
   - **type**: str
 
+  - **meaning**: alias of the registered model.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: str: model URI as "models:/name@alias".
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `uri_for_model_version(name: str, version: int) -> str`
 
@@ -615,18 +951,15 @@ Returns:
 
 Create a model URI from a model name and a version.
 
-Args:
-    name (str): name of the mlflow registered model.
-    version (int): version of the registered model.
-
-Returns:
-    str: model URI as "models:/name/version."
-
 ### Inputs
 
 * `name`
 
   - **type**: str
+
+  - **meaning**: name of the mlflow registered model.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -634,11 +967,35 @@ Returns:
 
   - **type**: int
 
+  - **meaning**: version of the registered model.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: str: model URI as "models:/name/version."
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `uri_for_model_alias_or_version(name: str, alias_or_version: str | int) -> str`
 
@@ -646,18 +1003,15 @@ Returns:
 
 Create a model URi from a model name and an alias or version.
 
-Args:
-    name (str): name of the mlflow registered model.
-    alias_or_version (str | int): alias or version of the registered model.
-
-Returns:
-    str: model URI as "models:/name@alias" or "models:/name/version" based on input.
-
 ### Inputs
 
 * `name`
 
   - **type**: str
+
+  - **meaning**: name of the mlflow registered model.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -665,11 +1019,35 @@ Returns:
 
   - **type**: str | int
 
+  - **meaning**: alias or version of the registered model.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: str
+
+* **semantic meaning**: str: model URI as "models:/name@alias" or "models:/name/version" based on input.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

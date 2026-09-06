@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_dos"
 source_path: "tests/controller/test_kafka_app_dos.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_dos"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_kafka_app_dos
 
@@ -51,6 +51,10 @@ No description available.
 
 * `regression_model_template.controller.kafka_app.PredictionRequest`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
 ## Exported functions
 
 * `test_prediction_request_max_rows`
@@ -62,6 +66,22 @@ No description available.
 * `test_prediction_request_empty`
 
 * `test_prediction_request_inconsistent_lengths`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -107,6 +127,10 @@ Comp --> [MAX_INPUT_COLS]
 Comp --> [PredictionRequest]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -123,6 +147,26 @@ Test that PredictionRequest enforces max rows limit.
 
 * **return type**: Any
 
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
+
 ### `test_prediction_request_max_cols() -> Any`
 
 ### Description
@@ -134,6 +178,26 @@ Test that PredictionRequest enforces max cols limit.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `test_prediction_request_valid_rows() -> Any`
 
@@ -147,6 +211,26 @@ Test that PredictionRequest accepts valid rows.
 
 * **return type**: Any
 
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
+
 ### `test_prediction_request_empty() -> Any`
 
 ### Description
@@ -159,6 +243,26 @@ Test that PredictionRequest rejects empty input.
 
 * **return type**: Any
 
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
+
 ### `test_prediction_request_inconsistent_lengths() -> Any`
 
 ### Description
@@ -170,6 +274,26 @@ Test that PredictionRequest rejects inconsistent column lengths.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

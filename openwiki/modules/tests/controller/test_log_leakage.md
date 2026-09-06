@@ -6,10 +6,10 @@ title: "Module: test_log_leakage"
 source_path: "tests/controller/test_log_leakage.py"
 description: "No description available."
 tags: ["module", "test_log_leakage"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: test_log_leakage
 
@@ -59,11 +59,31 @@ No description available.
 
 * `pandas`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
 ## Exported functions
 
 * `test_kafka_consumer_log_leakage`
 
 * `test_kafka_consumer_prediction_result_leakage`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -106,6 +126,10 @@ Comp --> [FastAPIKafkaService]
 Comp --> [pandas]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -122,11 +146,35 @@ Test that the Kafka consumer processing does not log sensitive information at IN
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `test_kafka_consumer_prediction_result_leakage(caplog: Any) -> Any`
 
@@ -141,11 +189,35 @@ at any log level, and instead uses a masked/summarized format.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 
