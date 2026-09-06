@@ -6,10 +6,10 @@ title: "Module: benchmark_blocking"
 source_path: "tests/performance/benchmark_blocking.py"
 description: "No description available."
 tags: ["module", "benchmark_blocking"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:19Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: benchmark_blocking
 
@@ -39,9 +39,29 @@ No description available.
 
 * `time`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
 ## Exported functions
 
 * `sync_prediction`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -69,6 +89,10 @@ Comp --> [asyncio]
 Comp --> [time]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -84,6 +108,26 @@ Simulates a CPU-bound synchronous prediction call.
 ### Output
 
 * **return type**: Any
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

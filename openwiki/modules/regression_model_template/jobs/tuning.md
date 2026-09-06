@@ -6,10 +6,10 @@ title: "Module: tuning"
 source_path: "src/regression_model_template/jobs/tuning.py"
 description: "Define a job for finding the best hyperparameters for a model."
 tags: ["module", "tuning"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: tuning
 
@@ -79,6 +79,26 @@ Define a job for finding the best hyperparameters for a model.
 
 * `TuningJob`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
+
 ### Detected Architecture Patterns
 
 Detected roles: General Subsystem
@@ -139,6 +159,10 @@ Comp --> [searchers]
 Comp --> [splitters]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -149,48 +173,71 @@ Comp --> [splitters]
 
 Find the best hyperparameters for a model.
 
-Parameters:
-    run_config (services.MlflowService.RunConfig): mlflow run config.
-    inputs (datasets.ReaderKind): reader for the inputs data.
-    targets (datasets.ReaderKind): reader for the targets data.
-    model (models.ModelKind): machine learning model to tune.
-    metric (metrics.MetricKind): tuning metric to optimize.
-    splitter (splitters.SplitterKind): data sets splitter.
-    searcher: (searchers.SearcherKind): hparams searcher.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[TuningJob]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`run_config`**
 
   - **Type**: services.MlflowService.RunConfig
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`inputs`**
 
   - **Type**: datasets.ReaderKind
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`targets`**
 
   - **Type**: datasets.ReaderKind
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`model`**
 
   - **Type**: models.ModelKind
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`metric`**
 
   - **Type**: metrics.MetricKind
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`splitter`**
 
   - **Type**: splitters.SplitterKind
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`searcher`**
 
   - **Type**: searchers.SearcherKind
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -206,11 +253,35 @@ Run the tuning job in context.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: base.Locals
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

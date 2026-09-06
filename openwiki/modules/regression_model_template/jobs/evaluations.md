@@ -6,10 +6,10 @@ title: "Module: evaluations"
 source_path: "src/regression_model_template/jobs/evaluations.py"
 description: "Define a job for evaluating registered models with data."
 tags: ["module", "evaluations"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: evaluations
 
@@ -74,6 +74,26 @@ Define a job for evaluating registered models with data.
 ## Exported classes
 
 * `EvaluationsJob`
+
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -142,6 +162,10 @@ Comp --> [services]
 Comp --> [base]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -152,53 +176,79 @@ Comp --> [base]
 
 Generate evaluations from a registered model and a dataset.
 
-Parameters:
-    run_config (services.MlflowService.RunConfig): mlflow run config.
-    inputs (datasets.ReaderKind): reader for the inputs data.
-    targets (datasets.ReaderKind): reader for the targets data.
-    model_type (str): model type (e.g. "regressor", "classifier").
-    alias_or_version (str | int): alias or version for the  model.
-    metrics (metrics_.MetricKind): metrics for the reporting.
-    evaluators (list[str]): list of evaluators to use.
-    thresholds (dict[str, metrics_.Threshold] | None): metric thresholds.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[EvaluationsJob]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`run_config`**
 
   - **Type**: services.MlflowService.RunConfig
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`inputs`**
 
   - **Type**: datasets.ReaderKind
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`targets`**
 
   - **Type**: datasets.ReaderKind
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`model_type`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`alias_or_version`**
 
   - **Type**: str | int
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`metrics`**
 
   - **Type**: metrics_.MetricsKind
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`evaluators`**
 
   - **Type**: list[str]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`thresholds`**
 
   - **Type**: dict[(str, metrics_.Threshold)]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -214,11 +264,35 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: base.Locals
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

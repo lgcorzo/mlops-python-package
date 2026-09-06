@@ -6,10 +6,10 @@ title: "Module: schemas"
 source_path: "src/regression_model_template/core/schemas.py"
 description: "Define and validate dataframe schemas."
 tags: ["module", "schemas"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: schemas
 
@@ -64,6 +64,26 @@ Define and validate dataframe schemas.
 * `SHAPValuesSchema`
 
 * `FeatureImportancesSchema`
+
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -138,6 +158,10 @@ Comp --> [typing]
 Comp --> [common]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -165,17 +189,45 @@ Check the dataframe with this schema.
 
   - **type**: T.Type[TSchema]
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `data`
 
   - **type**: pd.DataFrame
 
+  - **meaning**: dataframe to check.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: papd.DataFrame[TSchema]
+
+* **semantic meaning**: papd.DataFrame[TSchema]: validated dataframe.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `InputsSchema`
 
@@ -189,65 +241,129 @@ Schema for the project inputs.
 
   - **Type**: papd.Index[padt.UInt32]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`dteday`**
 
   - **Type**: papd.Series[padt.DateTime]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`season`**
 
   - **Type**: papd.Series[padt.UInt8]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`yr`**
 
   - **Type**: papd.Series[padt.UInt8]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`mnth`**
 
   - **Type**: papd.Series[padt.UInt8]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`hr`**
 
   - **Type**: papd.Series[padt.UInt8]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`holiday`**
 
   - **Type**: papd.Series[padt.Bool]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`weekday`**
 
   - **Type**: papd.Series[padt.UInt8]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`workingday`**
 
   - **Type**: papd.Series[padt.Bool]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`weathersit`**
 
   - **Type**: papd.Series[padt.UInt8]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`temp`**
 
   - **Type**: papd.Series[padt.Float16]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`atemp`**
 
   - **Type**: papd.Series[padt.Float16]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`hum`**
 
   - **Type**: papd.Series[padt.Float16]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`windspeed`**
 
   - **Type**: papd.Series[padt.Float16]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`casual`**
 
   - **Type**: papd.Series[padt.UInt32]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`registered`**
 
   - **Type**: papd.Series[padt.UInt32]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ### `TargetsSchema`
 
@@ -261,9 +377,17 @@ Schema for the project target.
 
   - **Type**: papd.Index[padt.UInt32]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`cnt`**
 
   - **Type**: papd.Series[padt.UInt32]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ### `OutputsSchema`
 
@@ -277,9 +401,17 @@ Schema for the project output.
 
   - **Type**: papd.Index[padt.UInt32]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`prediction`**
 
   - **Type**: papd.Series[padt.UInt32]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ### `SHAPValuesSchema`
 
@@ -299,9 +431,17 @@ Schema for the project feature importances.
 
   - **Type**: papd.Series[str]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`importance`**
 
   - **Type**: papd.Series[float]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Used By
 

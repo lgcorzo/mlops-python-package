@@ -6,10 +6,10 @@ title: "Module: configs"
 source_path: "src/regression_model_template/io/configs.py"
 description: "Parse, merge, and convert config objects."
 tags: ["module", "configs"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: configs
 
@@ -39,6 +39,10 @@ Parse, merge, and convert config objects.
 
 * `omegaconf`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
 ## Exported functions
 
 * `parse_file`
@@ -48,6 +52,22 @@ Parse, merge, and convert config objects.
 * `merge_configs`
 
 * `to_object`
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -77,6 +97,10 @@ Comp --> [typing]
 Comp --> [omegaconf]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 ## Standalone Functions
@@ -87,23 +111,41 @@ Comp --> [omegaconf]
 
 Parse a config file from a path.
 
-Args:
-    path (str): path to local config.
-
-Returns:
-    Config: representation of the config file.
-
 ### Inputs
 
 * `path`
 
   - **type**: str
 
+  - **meaning**: path to local config.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Config
+
+* **semantic meaning**: Config: representation of the config file.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `parse_string(string: str) -> Config`
 
@@ -111,23 +153,41 @@ Returns:
 
 Parse the given config string.
 
-Args:
-    string (str): content of config string.
-
-Returns:
-    Config: representation of the config string.
-
 ### Inputs
 
 * `string`
 
   - **type**: str
 
+  - **meaning**: content of config string.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Config
+
+* **semantic meaning**: Config: representation of the config string.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `merge_configs(configs: T.Sequence[Config]) -> Config`
 
@@ -135,17 +195,15 @@ Returns:
 
 Merge a list of config into a single config.
 
-Args:
-    configs (T.Sequence[Config]): list of configs.
-
-Returns:
-    Config: representation of the merged config objects.
-
 ### Inputs
 
 * `configs`
 
   - **type**: T.Sequence[Config]
+
+  - **meaning**: list of configs.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -153,18 +211,31 @@ Returns:
 
 * **return type**: Config
 
+* **semantic meaning**: Config: representation of the merged config objects.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
+
 ### `to_object(config: Config, resolve: bool) -> object`
 
 ### Description
 
 Convert a config object to a python object.
-
-Args:
-    config (Config): representation of the config.
-    resolve (bool): resolve variables. Defaults to True.
-
-Returns:
-    object: conversion of the config to a python object.
 
 ### Inputs
 
@@ -172,11 +243,19 @@ Returns:
 
   - **type**: Config
 
+  - **meaning**: representation of the config.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `resolve`
 
   - **type**: bool
+
+  - **meaning**: resolve variables. Defaults to True.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: Yes
 
@@ -185,6 +264,26 @@ Returns:
 ### Output
 
 * **return type**: object
+
+* **semantic meaning**: object: conversion of the config to a python object.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

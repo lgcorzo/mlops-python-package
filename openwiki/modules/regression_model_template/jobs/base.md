@@ -6,10 +6,10 @@ title: "Module: base"
 source_path: "src/regression_model_template/jobs/base.py"
 description: "Base for high-level project jobs."
 tags: ["module", "base"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: base
 
@@ -54,6 +54,26 @@ Base for high-level project jobs.
 ## Exported classes
 
 * `Job`
+
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
 
 ### Detected Architecture Patterns
 
@@ -102,6 +122,10 @@ Comp --> [pydantic]
 Comp --> [services]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -115,28 +139,39 @@ Base class for a job.
 use a job to execute runs in  context.
 e.g., to define common services like logger
 
-Parameters:
-    logger_service (services.LoggerService): manage the logger system.
-    alerts_service (services.AlertsService): manage the alerts system.
-    mlflow_service (services.MlflowService): manage the mlflow system.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`logger_service`**
 
   - **Type**: services.LoggerService
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`alerts_service`**
 
   - **Type**: services.AlertsService
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`mlflow_service`**
 
   - **Type**: services.MlflowService
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -152,11 +187,35 @@ Run the job in context.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Locals
+
+* **semantic meaning**: Locals: local job variables.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 # Private Methods
 

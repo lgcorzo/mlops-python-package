@@ -6,10 +6,10 @@ title: "Module: signers"
 source_path: "src/regression_model_template/utils/signers.py"
 description: "Generate signatures for AI/ML models."
 tags: ["module", "signers"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: signers
 
@@ -61,6 +61,26 @@ Generate signatures for AI/ML models.
 
 * `InferSigner`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
+
 ### Detected Architecture Patterns
 
 Detected roles: General Subsystem
@@ -104,6 +124,10 @@ Comp --> [signature]
 Comp --> [schemas]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -125,6 +149,10 @@ https://mlflow.org/docs/latest/models.html#model-signature-and-input-example
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 ## Public Methods
 
 * **`sign(self: Any, inputs: schemas.Inputs, outputs: schemas.Outputs) -> Signature`**
@@ -139,11 +167,19 @@ Generate a model signature from its inputs/outputs.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: inputs data.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -151,11 +187,35 @@ Generate a model signature from its inputs/outputs.
 
   - **type**: schemas.Outputs
 
+  - **meaning**: outputs data.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Signature
+
+* **semantic meaning**: Signature: signature of the model.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `InferSigner`
 
@@ -168,6 +228,10 @@ Generate model signatures from inputs/outputs data.
 * **`KIND`**
 
   - **Type**: T.Literal[InferSigner]
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -183,11 +247,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -195,11 +267,35 @@ No description available.
 
   - **type**: schemas.Outputs
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Signature
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 

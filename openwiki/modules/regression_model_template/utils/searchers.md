@@ -6,10 +6,10 @@ title: "Module: searchers"
 source_path: "src/regression_model_template/utils/searchers.py"
 description: "Find the best hyperparameters for a model."
 tags: ["module", "searchers"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-06T06:26:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: searchers
 
@@ -77,6 +77,26 @@ Find the best hyperparameters for a model.
 
 * `GridCVSearcher`
 
+## Exported interfaces
+
+_Dependent on implementation_
+
+## Public API
+
+_Dependent on implementation_
+
+## Internal architecture
+
+_Dependent on implementation_
+
+## Execution flow
+
+_Dependent on implementation_
+
+## Sequence explanation
+
+_Dependent on implementation_
+
 ### Detected Architecture Patterns
 
 Detected roles: General Subsystem
@@ -132,6 +152,10 @@ Comp --> [schemas]
 Comp --> [splitters]
 ```
 
+## Examples
+
+_Dependent on implementation_
+
 ## 3. Class & Method Specifications
 
 # Public Classes
@@ -145,18 +169,23 @@ Base class for a searcher.
 Use searcher to fine-tune models.
 i.e., to find the best model params.
 
-Parameters:
-    param_grid (Grid): mapping of param key -> values.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: str
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`param_grid`**
 
   - **Type**: Grid
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -172,11 +201,19 @@ Search the best model for the given inputs and targets.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `model`
 
   - **type**: models.Model
+
+  - **meaning**: AI/ML model to fine-tune.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -184,11 +221,19 @@ Search the best model for the given inputs and targets.
 
   - **type**: metrics.Metric
 
+  - **meaning**: main metric to optimize.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: model inputs for tuning.
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -196,17 +241,45 @@ Search the best model for the given inputs and targets.
 
   - **type**: schemas.Targets
 
+  - **meaning**: model targets for tuning.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `cv`
 
   - **type**: CrossValidation
 
+  - **meaning**: choice for cross-fold validation.
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Results
+
+* **semantic meaning**: Results: all the results of the searcher execution process.
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ### `GridCVSearcher`
 
@@ -216,38 +289,55 @@ Grid searcher with cross-fold validation.
 
 Convention: metric returns higher values for better models.
 
-Parameters:
-    n_jobs (int, optional): number of jobs to run in parallel.
-    refit (bool): refit the model after the tuning.
-    verbose (int): set the searcher verbosity level.
-    error_score (str | float): strategy or value on error.
-    return_train_score (bool): include train scores if True.
-
 ## Attributes
 
 * **`KIND`**
 
   - **Type**: T.Literal[GridCVSearcher]
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`n_jobs`**
 
   - **Type**: int | None
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`refit`**
 
   - **Type**: bool
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`verbose`**
 
   - **Type**: int
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 * **`error_score`**
 
   - **Type**: str | float
 
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
+
 * **`return_train_score`**
 
   - **Type**: bool
+
+  - **Purpose**: _Dependent on implementation_
+
+  - **Constraints**: _Dependent on implementation_
 
 ## Public Methods
 
@@ -263,11 +353,19 @@ No description available.
 
   - **type**: Any
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `model`
 
   - **type**: models.Model
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -275,11 +373,19 @@ No description available.
 
   - **type**: metrics.Metric
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `inputs`
 
   - **type**: schemas.Inputs
+
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
 
   - **optional?**: No
 
@@ -287,17 +393,45 @@ No description available.
 
   - **type**: schemas.Targets
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 * `cv`
 
   - **type**: CrossValidation
 
+  - **meaning**: _Parameter description_
+
+  - **valid values**: _Dependent on implementation_
+
   - **optional?**: No
 
 ### Output
 
 * **return type**: Results
+
+* **semantic meaning**: _Dependent on implementation_
+
+* **possible null values**: _Dependent on implementation_
+
+* **exceptions**: _Dependent on implementation_
+
+### Side Effects
+
+_Dependent on implementation_
+
+### Complexity
+
+Time Complexity: _Dependent on implementation_
+
+Space Complexity: _Dependent on implementation_
+
+### Example
+
+_Dependent on implementation_
 
 ## Used By
 
