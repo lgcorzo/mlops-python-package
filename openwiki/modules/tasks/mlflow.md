@@ -6,10 +6,10 @@ title: "Module: mlflow"
 source_path: "tasks/mlflow.py"
 description: "Mlflow tasks for pyinvoke."
 tags: ["module", "mlflow"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-09-15T13:00:03Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "4860b15"
 ---
 # Module Specification: mlflow
 
