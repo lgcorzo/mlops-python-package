@@ -16,7 +16,7 @@ requires-python = ">=3.12,<3.13"
 dependencies = [
     "loguru (>=0.7.2,<0.8.0)",
     "matplotlib (>=3.9.0,<4.0.0)",
-    "mlflow (>=3.11.1,<4.0.0)",
+    "mlflow (>=3.16.0,<4.0.0)",
     "numpy (>=1.26.4,<2.0.0)",
     "omegaconf (>=2.3.0,<3.0.0)",
     "pandas (>=2.2.2,<3.0.0)",
@@ -42,11 +42,12 @@ dependencies = [
     "fastapi (>=0.124.0,<1.0.0)",
     "pyopenssl (>=26.0.0,<27.0.0)",
     "diskcache (>=5.6.3,<6.0.0)",
-    "starlette (>=0.50.0,<1.0.0)",
-    # explicitly define secure version for transitive dependency cryptography (April 2026 environment)
-    "cryptography (>=46.0.6,<50.0.0)",
-    # explicitly define secure version for transitive dependency (April 2026 environment)
-    "gitpython (==3.1.58)",
+    # explicitly define secure version for transitive dependency cryptography
+    "cryptography (>=50.0.0,<51.0.0)",
+    # explicitly define secure version for transitive dependency GitPython
+    "gitpython (>=3.1.59,<4.0.0)",
+    # explicitly define secure version for transitive dependency tornado
+    "tornado (>=6.5.8,<7.0.0)",
 ]
 
 [project.scripts]
@@ -74,7 +75,6 @@ pre-commit = "^3.7.1"
 [tool.poetry.group.dev.dependencies]
 invoke = "^2.2.0"
 pip-audit = "^2.10.0"
-safety = "^3.7.0"
 
 [tool.poetry.group.docs.dependencies]
 pdoc = "^14.5.1"
