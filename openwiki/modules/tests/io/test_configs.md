@@ -6,10 +6,10 @@ title: "Module: test_configs"
 source_path: "tests/io/test_configs.py"
 description: "No description available."
 tags: ["module", "test_configs"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-10-01T14:56:30Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "073b5fd"
 ---
 # Module Specification: test_configs
 

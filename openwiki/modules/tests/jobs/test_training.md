@@ -6,10 +6,10 @@ title: "Module: test_training"
 source_path: "tests/jobs/test_training.py"
 description: "No description available."
 tags: ["module", "test_training"]
-timestamp: "2026-09-01T16:59:35Z"
+timestamp: "2026-10-01T14:56:30Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "193029c"
+last_verified_commit: "073b5fd"
 ---
 # Module Specification: test_training
 
