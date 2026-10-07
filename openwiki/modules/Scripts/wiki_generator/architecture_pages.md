@@ -6,10 +6,10 @@ title: "Module: architecture_pages"
 source_path: "Scripts/wiki_generator/architecture_pages.py"
 description: "No description available."
 tags: ["module", "architecture_pages"]
-timestamp: "2026-10-04T13:34:09Z"
+timestamp: "2026-10-07T14:55:37Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "d186315"
+last_verified_commit: "a2a679e"
 ---
 # Module Specification: architecture_pages
 
