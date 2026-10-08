@@ -6,10 +6,10 @@ title: "Module: test_log_leakage"
 source_path: "tests/controller/test_log_leakage.py"
 description: "No description available."
 tags: ["module", "test_log_leakage"]
-timestamp: "2026-10-04T13:34:09Z"
+timestamp: "2026-10-08T15:04:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "d186315"
+last_verified_commit: "a2a679e"
 ---
 # Module Specification: test_log_leakage
 

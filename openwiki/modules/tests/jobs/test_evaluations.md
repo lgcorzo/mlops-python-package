@@ -6,10 +6,10 @@ title: "Module: test_evaluations"
 source_path: "tests/jobs/test_evaluations.py"
 description: "No description available."
 tags: ["module", "test_evaluations"]
-timestamp: "2026-10-04T13:34:09Z"
+timestamp: "2026-10-08T15:04:16Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "d186315"
+last_verified_commit: "a2a679e"
 ---
 # Module Specification: test_evaluations
 
