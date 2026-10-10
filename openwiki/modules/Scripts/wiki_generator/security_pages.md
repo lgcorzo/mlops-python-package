@@ -6,10 +6,10 @@ title: "Module: security_pages"
 source_path: "Scripts/wiki_generator/security_pages.py"
 description: "No description available."
 tags: ["module", "security_pages"]
-timestamp: "2026-10-04T13:34:09Z"
+timestamp: "2026-10-10T14:06:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "d186315"
+last_verified_commit: "a2a679e"
 ---
 # Module Specification: security_pages
 

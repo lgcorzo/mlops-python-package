@@ -6,10 +6,10 @@ title: "Module: __main__"
 source_path: "src/regression_model_template/__main__.py"
 description: "Entry point of the package."
 tags: ["module", "__main__"]
-timestamp: "2026-10-04T13:34:09Z"
+timestamp: "2026-10-10T14:06:18Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "d186315"
+last_verified_commit: "a2a679e"
 ---
 # Module Specification: __main__
 
