@@ -32,9 +32,90 @@ This repository is integrated as the MLOps and Machine Learning Pipeline standar
 ---
 
 
+## 🔀 Fork Origin & Separate Maintenance
+
+This repository started as a fork of **[fmind/mlops-python-package](https://github.com/fmind/mlops-python-package)** (MIT) by Médéric Hurier, and is now maintained **separately** from it. The upstream project stays the credited origin and the generic reference; this repository is the version adapted to the needs of the Dark Gravity factory and governed by its sovereignty rules.
+
+| | Upstream (original) | This repository (Dark Gravity) |
+|:---|:---|:---|
+| **Repository** | [`fmind/mlops-python-package`](https://github.com/fmind/mlops-python-package) | [`lgcorzo/mlops-python-package`](https://github.com/lgcorzo/mlops-python-package) |
+| **Purpose** | Generic, best-practice MLOps template | MLOps standard for the autonomous factory (sovereign, sandboxed, auditable) |
+| **Governance** | Upstream maintainer | Independent maintainer, human sign-off on every merge |
+| **Git remotes** | n/a | Only `github.com/lgcorzo/*`; no upstream remote is configured |
+| **Release line** | Own semver line (v6.x at the time of writing) | Own semver line (`2.x`), independent of upstream version numbers |
+| **License** | MIT | MIT, original copyright notice retained in [`LICENSE.txt`](LICENSE.txt) |
+
+### Divergence snapshot
+
+Measured on **2026-10-12** against upstream `main`:
+
+- **Common ancestor:** upstream commit [`6baa645`](https://github.com/fmind/mlops-python-package/commit/6baa64548d67a5bcf0a7f1422dfc8d45ed229aed) (*bump: version 1.1.3 → 2.0.0*, 2024-07-28).
+- **This repository:** 395 commits ahead of the common ancestor.
+- **Upstream:** 61 commits ahead of the common ancestor that are **not** merged here (up to its `v6.1.0` release).
+- **Scope of the difference:** about 259 files changed, so the two code bases should be treated as different products with a shared history, not as mirrors.
+
+> [!NOTE]
+> These numbers are a point-in-time measurement. Re-run the comparison below to refresh them.
+
+### What was changed for Dark Gravity
+
+| Area | Upstream | Dark Gravity version |
+|:---|:---|:---|
+| **Package** | `bikes` (bike-sharing demo) | `regression_model_template`, a domain-neutral template that agents can specialise |
+| **Packaging** | Poetry `[tool.poetry]` metadata | PEP 621 `[project]` metadata with bounded dependency ranges and a pinned Python range |
+| **Serving** | Batch jobs and CLI | Adds a Kafka-driven controller (`controller/kafka_app.py`) for event-based inference inside the factory |
+| **Security tests** | Standard unit tests | Adds tests for rate limiting, DoS resistance, log leakage, middleware configuration and credential redaction |
+| **Data & lineage** | Data files in the repository | DVC pipeline (`dvc.yaml`) and S3-backed MLflow tracking on the sovereign storage tier |
+| **Sandbox fit** | n/a | Test suite calibrated for gVisor limits (≤ 30 MiB RAM, ≤ 250m CPU) |
+| **Agent tooling** | n/a | `AGENTS.md`, agent skills, git hooks and automated ISO/OpenWiki documentation generators |
+| **CI/CD** | Upstream workflows | Adapted workflows plus wiki/documentation update workflows and `CODEOWNERS` review |
+| **Dependencies** | Upstream pins | Independently bumped and patched (for example `mlflow >= 3.16`), with 0 high-severity Dependabot alerts |
+
+### Maintenance policy
+
+```mermaid
+flowchart LR
+    U["Upstream fmind/mlops-python-package"] -. reference only .-> R{"Review upstream change"}
+    R -->|useful and compatible| P["Cherry-pick or re-implement in a PR"]
+    R -->|not needed| X["Ignore"]
+    P --> T["Tests, SAST score 8.0 or higher"]
+    T --> H["Human sign-off"]
+    H --> M["Merge to main"]
+```
+
+1. **No upstream rebase or merge.** Upstream is treated as a third-party reference, never as the authoritative base branch, and no automated sync is configured.
+2. **Selective adoption.** Upstream fixes and features are evaluated individually. Accepted ones are cherry-picked or re-implemented through a normal pull request.
+3. **Same quality gate as any change.** Full test verification, SAST score of at least 8.0/10.0 and explicit manual human approval before merging into `main`.
+4. **Attribution is preserved.** The upstream project and author remain credited here and in `LICENSE.txt`, as required by the MIT license.
+5. **Upstream issues stay upstream.** Bugs that also exist in the original are reported there when relevant; Dark Gravity-specific fixes are made here.
+
+### Comparing with upstream
+
+You can inspect the difference without adding an upstream remote, which keeps the repository's remote topology sovereign:
+
+```bash
+# fetch upstream main into a throw-away local ref (no remote is added)
+git fetch https://github.com/fmind/mlops-python-package.git main:refs/upstream-probe/main
+
+# common ancestor and divergence (ahead  behind)
+BASE=$(git merge-base HEAD refs/upstream-probe/main)
+git rev-list --left-right --count HEAD...refs/upstream-probe/main
+
+# what upstream changed since the split
+git log --oneline $BASE..refs/upstream-probe/main
+
+# clean up
+git update-ref -d refs/upstream-probe/main
+```
+
+See the ecosystem-wide policy in the [Sovereignty Policy](https://lgcorzo.github.io/sovereignty.html) and in [`lgcorzo/docs`](https://github.com/lgcorzo/docs).
+
+---
+
 # Table of Contents
 
 - [MLOps Python Package](#mlops-python-package)
+- [Fork Origin & Separate Maintenance](#-fork-origin--separate-maintenance)
 - [Table of Contents](#table-of-contents)
 - [Install](#install)
   - [Prerequisites](#prerequisites)
