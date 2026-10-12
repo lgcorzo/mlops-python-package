@@ -14,6 +14,23 @@ The package leverages several [tools](#tools) and [tips](#tips) to make your MLO
 
 You can use this package as part of your MLOps toolkit or platform (e.g., Model Registry, Experiment Tracking, Realtime Inference, ...).
 
+---
+
+## 🛡️ Dark Gravity Integration & Technological Sovereignty Policy
+
+This repository is integrated as the MLOps and Machine Learning Pipeline standard for the **[Dark Gravity Autonomous CA/CD Software Factory](https://github.com/lgcorzo/rust_CACD_autonomous_factory)** ([Architecture Knowledge Base](https://notebook.google.com/notebook/116d5f03-2fb0-4fa7-bd7c-1c9849920abc)).
+
+### 1. Architectural Role in Dark Gravity
+- **Pipeline Industrialization & Model Lineage:** Provides the standardized Python package foundation for machine learning pipelines generated and maintained by the autonomous factory, enforcing deterministic dependencies via Poetry and data versioning via DVC.
+- **MLflow Model Persistence:** Integrates with the sovereign S3 storage tier (`mlflow` bucket) in the `storage` Kubernetes namespace for model weights, dataset partitions, and training run tracking.
+- **FinOps & Resource Clamping:** Calibrated to run test suites within Dark Gravity's strict gVisor sandboxing boundaries ($\le 30\text{ MiB}$ RAM, $\le 250\text{m}$ CPU) and conform to FinOps daily budget guardrails.
+
+### 2. Supply-Chain Sovereignty & Independent Maintenance
+- **Sovereign Dependency Hardening:** To insulate the autonomous factory against supply-chain poisoning, unmaintained dependencies, and breaking upstream licensing changes, all libraries in this package are maintained, tested, and patched under independent governance (enforcing 0 Dependabot high-severity vulnerabilities).
+- **Human-in-the-Loop (HITL) Governance:** Every code mutation, dependency bump, and release requires full test verification, SAST score $\ge 8.0/10.0$, and explicit manual human sign-off before merging into `main`.
+
+---
+
 
 # Table of Contents
 
