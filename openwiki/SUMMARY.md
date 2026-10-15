@@ -5,10 +5,10 @@ type: "summary"
 title: "Summary"
 description: "Auto-generated summary."
 tags: ["summary"]
-timestamp: "2026-10-04T13:34:09Z"
+timestamp: "2026-10-15T18:53:06Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "d186315"
+last_verified_commit: "5fb00b9"
 ---
 # Summary
 
