@@ -91,4 +91,4 @@ graph TD
 
 ---
 
-> *Related: [Verification Triad](../security/verification_triad.md) · [Production Operations](../operations/production_operations.md) · [Master Index](../index.md)*
+> *Related: [Lab Notebook EXP-2026-008](exp_2026_008_llm_judge_vs_pytest.md) · [Verification Triad](../security/verification_triad.md) · [Production Operations](../operations/production_operations.md) · [Master Index](../index.md)*

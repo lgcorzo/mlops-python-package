@@ -5,10 +5,10 @@ type: "summary"
 title: "Summary"
 description: "Auto-generated summary."
 tags: ["summary"]
-timestamp: "2026-10-15T18:53:06Z"
+timestamp: "2026-10-16T16:14:25Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5fb00b9"
+last_verified_commit: "5d50ba2"
 ---
 # Summary
 
@@ -26,12 +26,14 @@ last_verified_commit: "5fb00b9"
 * [BuiltinSaver](modules/regression_model_template/io/registries.md#builtinsaver)
 * [CustomLoader](modules/regression_model_template/io/registries.md#customloader)
 * [CustomSaver](modules/regression_model_template/io/registries.md#customsaver)
+* [DarkGravityDirectiveHandler](modules/../tests/controller/test_hitl_governance.md#darkgravitydirectivehandler)
 * [Env](modules/regression_model_template/io/osvariables.md#env)
 * [EvaluationsJob](modules/regression_model_template/jobs/evaluations.md#evaluationsjob)
 * [ExplanationsJob](modules/regression_model_template/jobs/explanations.md#explanationsjob)
 * [FastAPIKafkaService](modules/regression_model_template/controller/kafka_app.md#fastapikafkaservice)
 * [FeatureImportancesSchema](modules/regression_model_template/core/schemas.md#featureimportancesschema)
 * [GridCVSearcher](modules/regression_model_template/utils/searchers.md#gridcvsearcher)
+* [HITLPolicyEvaluator](modules/../tests/controller/test_hitl_governance.md#hitlpolicyevaluator)
 * [InferSigner](modules/regression_model_template/utils/signers.md#infersigner)
 * [InferenceJob](modules/regression_model_template/jobs/inference.md#inferencejob)
 * [InputsSchema](modules/regression_model_template/core/schemas.md#inputsschema)
@@ -203,6 +205,9 @@ last_verified_commit: "5fb00b9"
 * [test_custom_cors_config](modules/../tests/controller/test_middleware_config.md#test_custom_cors_config)
 * [test_custom_pipeline](modules/../tests/io/test_registries.md#test_custom_pipeline)
 * [test_custom_trusted_host_config](modules/../tests/controller/test_middleware_config.md#test_custom_trusted_host_config)
+* [test_darkgravity_directive_refine](modules/../tests/controller/test_hitl_governance.md#test_darkgravity_directive_refine)
+* [test_darkgravity_directive_status](modules/../tests/controller/test_hitl_governance.md#test_darkgravity_directive_status)
+* [test_darkgravity_directive_validate](modules/../tests/controller/test_hitl_governance.md#test_darkgravity_directive_validate)
 * [test_delivery_report](modules/../tests/controller/test_kafka_app.md#test_delivery_report)
 * [test_evaluations_job](modules/../tests/jobs/test_evaluations.md#test_evaluations_job)
 * [test_explanations_job](modules/../tests/jobs/test_explanations.md#test_explanations_job)
@@ -211,6 +216,8 @@ last_verified_commit: "5fb00b9"
 * [test_handle_message_error_other_error](modules/../tests/controller/test_kafka_app.md#test_handle_message_error_other_error)
 * [test_handle_message_error_partition_eof](modules/../tests/controller/test_kafka_app.md#test_handle_message_error_partition_eof)
 * [test_handle_message_error_unknown_topic](modules/../tests/controller/test_kafka_app.md#test_handle_message_error_unknown_topic)
+* [test_hitl_branch_protection_policy_parameters](modules/../tests/controller/test_hitl_governance.md#test_hitl_branch_protection_policy_parameters)
+* [test_hitl_merge_allowed_only_after_human_approval](modules/../tests/controller/test_hitl_governance.md#test_hitl_merge_allowed_only_after_human_approval)
 * [test_infer_signer](modules/../tests/utils/test_signers.md#test_infer_signer)
 * [test_inference_job](modules/../tests/jobs/test_inference.md#test_inference_job)
 * [test_initialization](modules/../tests/controller/test_kafka_app.md#test_initialization)
@@ -358,6 +365,7 @@ last_verified_commit: "5fb00b9"
 * [test_datasets](modules/tests/io/test_datasets.md)
 * [test_evaluations](modules/tests/jobs/test_evaluations.md)
 * [test_explanations](modules/tests/jobs/test_explanations.md)
+* [test_hitl_governance](modules/tests/controller/test_hitl_governance.md)
 * [test_inference](modules/tests/jobs/test_inference.md)
 * [test_kafka_app](modules/tests/controller/test_kafka_app.md)
 * [test_kafka_app_dos](modules/tests/controller/test_kafka_app_dos.md)

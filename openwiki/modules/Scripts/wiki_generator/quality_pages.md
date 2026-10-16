@@ -6,10 +6,10 @@ title: "Module: quality_pages"
 source_path: "Scripts/wiki_generator/quality_pages.py"
 description: "No description available."
 tags: ["module", "quality_pages"]
-timestamp: "2026-10-04T13:34:09Z"
+timestamp: "2026-10-16T16:14:24Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "d186315"
+last_verified_commit: "5d50ba2"
 ---
 # Module Specification: quality_pages
 

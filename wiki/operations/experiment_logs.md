@@ -55,4 +55,12 @@ mlruns/
 
 ---
 
-> *Related: [Production Operations](production_operations.md) · [Tactical Design](../architecture/tactical_design.md) · [Master Index](../index.md)*
+## 3. Engineering Lab Notebook Experiments Catalog
+
+| Experiment ID | Title / Focus | Deliverable / Artifact Location | Primary Findings |
+|:---|:---|:---|:---|
+| `EXP-2026-008` | Deterministic Verification vs. LLM-as-a-Judge Bias | [`evidence/evaluations/llm-judge-vs-pytest-benchmark.json`](../../evidence/evaluations/llm-judge-vs-pytest-benchmark.json) · [Lab Notebook Notebook](../quality/exp_2026_008_llm_judge_vs_pytest.md) | LLM judge had 44% False Negative rate (11/25 defects missed); Pytest harness detected 100% of defects. |
+
+---
+
+> *Related: [Lab Notebook EXP-2026-008](../quality/exp_2026_008_llm_judge_vs_pytest.md) · [Production Operations](production_operations.md) · [Tactical Design](../architecture/tactical_design.md) · [Master Index](../index.md)*

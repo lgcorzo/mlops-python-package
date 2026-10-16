@@ -67,6 +67,7 @@ last_verified_commit: "073b5fd"
 | **DeploymentView** | [Production Operations](operations/production_operations.md) | Docker containerization, Docker Compose multi-service setup, runbook & troubleshooting. |
 | **Report** | [Experiment Logs](operations/experiment_logs.md) | MLflow tracking schema, parameters, metrics, and artifact layout. |
 | **QualityView** | [Test Plan & Report](quality/test_plan_report.md) | ISO 25010 software quality evaluation, 29 Pytest suites, performance benchmarks. |
+| **QualityView** | [Lab Notebook EXP-2026-008](quality/exp_2026_008_llm_judge_vs_pytest.md) | Empirical benchmark: Deterministic Verification vs. LLM-as-a-Judge Bias (50 mutations, 44% FNR). |
 
 ---
 

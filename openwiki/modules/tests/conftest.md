@@ -6,10 +6,10 @@ title: "Module: conftest"
 source_path: "tests/conftest.py"
 description: "Configuration for the tests."
 tags: ["module", "conftest"]
-timestamp: "2026-10-04T13:34:09Z"
+timestamp: "2026-10-16T16:14:24Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "d186315"
+last_verified_commit: "5d50ba2"
 ---
 # Module Specification: conftest
 
