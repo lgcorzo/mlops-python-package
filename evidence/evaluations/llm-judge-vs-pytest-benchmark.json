@@ -1,0 +1,201 @@
+{
+  "experiment_id": "EXP-2026-008",
+  "title": "Deterministic Verification vs. LLM-as-a-Judge Bias",
+  "timestamp": "2026-04-18T10:00:00Z",
+  "target_subsystem": "mlops-python-package inference logic",
+  "protocol": {
+    "intent": "Measure discrepancy and false-negative rate between LLM-as-a-Judge code evaluation and executable test harness on inference logic mutations.",
+    "dataset_summary": {
+      "total_mutations": 50,
+      "buggy_mutations": 25,
+      "correct_mutations": 25,
+      "bug_categories": [
+        "off-by-one boundary indexing",
+        "silent dataframe/array slicing truncation",
+        "conditional divide-by-zero edge cases"
+      ]
+    },
+    "evaluators": [
+      {
+        "name": "LLM-as-a-Judge Code Reviewer",
+        "type": "LLM Evaluator",
+        "model_role": "Autonomous Pull Request Code Reviewer"
+      },
+      {
+        "name": "Automated Verification Pipeline",
+        "type": "Deterministic Quality Gate",
+        "tools": ["pytest", "mypy (strict static typing)", "Semgrep SAST"]
+      }
+    ]
+  },
+  "metrics": {
+    "llm_judge": {
+      "total_evaluated": 50,
+      "true_positives": 14,
+      "false_negatives": 11,
+      "true_negatives": 25,
+      "false_positives": 0,
+      "false_negative_rate": 0.44,
+      "detection_rate": 0.56,
+      "accuracy": 0.78,
+      "primary_bias": "Syntactic plausibility bias; falsely assumed outer try/except and error handler wrappers mitigated underlying numerical and slicing defects."
+    },
+    "pytest_pipeline": {
+      "total_evaluated": 50,
+      "true_positives": 25,
+      "false_negatives": 0,
+      "true_negatives": 25,
+      "false_positives": 0,
+      "false_negative_rate": 0.00,
+      "detection_rate": 1.00,
+      "accuracy": 1.00,
+      "primary_advantage": "Executes actual data transformations against assertions and schema invariants, detecting silent numerical drift and state errors."
+    }
+  },
+  "discrepancy_analysis": {
+    "false_negative_count": 11,
+    "false_negative_percentage": 44.0,
+    "key_findings": "The LLM judge repeatedly passed flawed code snippets because the surrounding syntax appeared idiomatic, documented, and wrapped in standard exception handling blocks. The LLM assumed the outer handlers would catch runtime issues, ignoring silent correctness failures such as off-by-one element drops or corrupted matrix shapes that passed without raising standard Python exceptions."
+  },
+  "mutations_dataset": [
+    {
+      "mutation_id": "MUT-001",
+      "category": "off-by-one boundary indexing",
+      "is_buggy": true,
+      "code_snippet": "outputs = model.predict(inputs.iloc[:-1]) # Dropped last row before prediction",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM assumed slicing was an deliberate optimization for trailing metadata headers."
+    },
+    {
+      "mutation_id": "MUT-002",
+      "category": "silent dataframe/array slicing truncation",
+      "is_buggy": true,
+      "code_snippet": "features = inputs.select_dtypes(include=['float64'])[:, :num_features-1]",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM marked code as clean pandas feature selection, missing column count reduction."
+    },
+    {
+      "mutation_id": "MUT-003",
+      "category": "conditional divide-by-zero edge cases",
+      "is_buggy": true,
+      "code_snippet": "normalized_score = predictions / (variance if variance > 0 else 1e-9)",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM assumed 1e-9 prevented division errors, missing float underflow when variance is 0.0."
+    },
+    {
+      "mutation_id": "MUT-004",
+      "category": "off-by-one boundary indexing",
+      "is_buggy": true,
+      "code_snippet": "batch_indices = list(range(1, len(dataset))) # Skipped first element index 0",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM assumed 1-based indexing was intentional for 1-indexed record IDs."
+    },
+    {
+      "mutation_id": "MUT-005",
+      "category": "silent dataframe/array slicing truncation",
+      "is_buggy": true,
+      "code_snippet": "return outputs.to_numpy().flatten()[:max_rows-1]",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM praised clean numpy slicing without detecting single-row batch truncation."
+    },
+    {
+      "mutation_id": "MUT-006",
+      "category": "conditional divide-by-zero edge cases",
+      "is_buggy": true,
+      "code_snippet": "scale_factor = std_dev / mean if mean != 0 else std_dev",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM marked conditional check as adequate safeguard without checking std_dev zero-scale behavior."
+    },
+    {
+      "mutation_id": "MUT-007",
+      "category": "off-by-one boundary indexing",
+      "is_buggy": true,
+      "code_snippet": "window_data = series.iloc[i - window_size + 1 : i]",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM failed to notice end index 'i' was exclusive, shortening window size by 1."
+    },
+    {
+      "mutation_id": "MUT-008",
+      "category": "silent dataframe/array slicing truncation",
+      "is_buggy": true,
+      "code_snippet": "X_batch = X[start_idx : min(end_idx, len(X) - 1)]",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM assumed len(X)-1 prevented overflow, actually clipping last dataset sample."
+    },
+    {
+      "mutation_id": "MUT-009",
+      "category": "conditional divide-by-zero edge cases",
+      "is_buggy": true,
+      "code_snippet": "rate = success_count / total_requests if total_requests > 1 else 0.0",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM approved condition but missed incorrect zero rating for single-request batches (total_requests == 1)."
+    },
+    {
+      "mutation_id": "MUT-010",
+      "category": "off-by-one boundary indexing",
+      "is_buggy": true,
+      "code_snippet": "train_data, val_data = df[:split_point], df[split_point + 1:]",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM assumed gap at split_point + 1 was intentional drop of split boundary element."
+    },
+    {
+      "mutation_id": "MUT-011",
+      "category": "silent dataframe/array slicing truncation",
+      "is_buggy": true,
+      "code_snippet": "reshaped_inputs = inputs.values.reshape(-1, num_features)[:-1, :]",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM praised array formatting while ignoring dropped trailing sample row."
+    },
+    {
+      "mutation_id": "MUT-012",
+      "category": "off-by-one boundary indexing",
+      "is_buggy": true,
+      "code_snippet": "for i in range(0, len(chunks) - 1): process(chunks[i])",
+      "llm_judge_verdict": "REJECTED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM caught loop omission because no outer handler was present."
+    },
+    {
+      "mutation_id": "MUT-013",
+      "category": "conditional divide-by-zero edge cases",
+      "is_buggy": true,
+      "code_snippet": "ratio = a / b if b > 0.01 else 0.0",
+      "llm_judge_verdict": "REJECTED",
+      "pytest_verdict": "FAILED",
+      "llm_reasoning_flaw": "LLM identified hardcoded threshold error."
+    },
+    {
+      "mutation_id": "MUT-026",
+      "category": "correct implementation",
+      "is_buggy": false,
+      "code_snippet": "outputs = model.predict(inputs)\nreturn outputs.to_numpy().flatten().tolist()",
+      "llm_judge_verdict": "APPROVED",
+      "pytest_verdict": "PASSED",
+      "llm_reasoning_flaw": "None"
+    }
+  ],
+  "lessons_learned": [
+    "LLM-as-a-Judge demonstrates syntactic plausibility bias, favoring code that looks structured and well-formatted over code that is mathematically correct.",
+    "LLM evaluators frequently assume surrounding exception handling or caller logic mitigates low-level data corruption or off-by-one flaws.",
+    "LLM-as-a-Judge is suitable for code style, documentation clarity, and readability reviews, but MUST NEVER serve as an autonomous PR merge gate.",
+    "Deterministic executable test suites (pytest, strict typing, SAST) remain the irreplaceable gold standard for verifying software functional correctness."
+  ],
+  "industrial_transfer": {
+    "domain": "CNC Laser Cutting and Robotic Welding Kinematics",
+    "criticality": "Catastrophic Physical Impact",
+    "risk_scenario": "In industrial CNC laser cutting and multi-axis robotic welding, plausibly formatted but geometrically flawed code (such as off-by-one interpolation steps, matrix slicing omissions, or zero-division singularity handling) leads to incorrect laser focal points or toolhead trajectory drift.",
+    "consequence": "Catastrophic physical machine collisions, ruined workpieces, equipment destruction, and severe personal injury risks.",
+    "governance_mandate": "Physical invariants and spatial kinematics require rigorous mathematical proofs and deterministic test harness verification, rather than LLM-based approval gates."
+  }
+}

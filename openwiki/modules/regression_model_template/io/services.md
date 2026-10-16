@@ -6,10 +6,10 @@ title: "Module: services"
 source_path: "src/regression_model_template/io/services.py"
 description: "Manage global context during execution."
 tags: ["module", "services"]
-timestamp: "2026-10-04T13:34:09Z"
+timestamp: "2026-10-16T16:14:24Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "d186315"
+last_verified_commit: "5d50ba2"
 ---
 # Module Specification: services
 

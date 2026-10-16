@@ -6,10 +6,10 @@ title: "Module: evaluations"
 source_path: "src/regression_model_template/jobs/evaluations.py"
 description: "Define a job for evaluating registered models with data."
 tags: ["module", "evaluations"]
-timestamp: "2026-10-04T13:34:09Z"
+timestamp: "2026-10-16T16:14:24Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "d186315"
+last_verified_commit: "5d50ba2"
 ---
 # Module Specification: evaluations
 
