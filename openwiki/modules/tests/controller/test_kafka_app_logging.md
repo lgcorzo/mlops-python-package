@@ -6,10 +6,10 @@ title: "Module: test_kafka_app_logging"
 source_path: "tests/controller/test_kafka_app_logging.py"
 description: "No description available."
 tags: ["module", "test_kafka_app_logging"]
-timestamp: "2026-10-16T16:14:25Z"
+timestamp: "2026-10-20T15:15:31Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5d50ba2"
+last_verified_commit: "275b872"
 ---
 # Module Specification: test_kafka_app_logging
 
