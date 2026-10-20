@@ -6,10 +6,10 @@ title: "Module: configs"
 source_path: "src/regression_model_template/io/configs.py"
 description: "Parse, merge, and convert config objects."
 tags: ["module", "configs"]
-timestamp: "2026-10-16T16:14:24Z"
+timestamp: "2026-10-20T15:15:31Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5d50ba2"
+last_verified_commit: "275b872"
 ---
 # Module Specification: configs
 

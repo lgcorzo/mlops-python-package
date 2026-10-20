@@ -6,10 +6,10 @@ title: "Module: base"
 source_path: "src/regression_model_template/jobs/base.py"
 description: "Base for high-level project jobs."
 tags: ["module", "base"]
-timestamp: "2026-10-16T16:14:24Z"
+timestamp: "2026-10-20T15:15:31Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5d50ba2"
+last_verified_commit: "275b872"
 ---
 # Module Specification: base
 

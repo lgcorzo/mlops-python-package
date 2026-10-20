@@ -5,10 +5,10 @@ type: "diagrams"
 title: "Diagrams"
 description: "Auto-generated architecture diagrams."
 tags: ["diagrams"]
-timestamp: "2026-10-16T16:14:25Z"
+timestamp: "2026-10-20T15:15:32Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5d50ba2"
+last_verified_commit: "275b872"
 ---
 # Architecture Diagrams
 

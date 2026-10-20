@@ -6,10 +6,10 @@ title: "Module: osvariables"
 source_path: "src/regression_model_template/io/osvariables.py"
 description: "No description available."
 tags: ["module", "osvariables"]
-timestamp: "2026-10-16T16:14:24Z"
+timestamp: "2026-10-20T15:15:31Z"
 generated: "agent:ast-documentation-generator"
 verified: "true"
-last_verified_commit: "5d50ba2"
+last_verified_commit: "275b872"
 ---
 # Module Specification: osvariables
 
