@@ -50,7 +50,7 @@ dependencies = [
     "tornado (>=6.5.8,<7.0.0)",
     # explicitly define secure version for transitive dependency aiohttp
     "aiohttp (>=3.14.4,<4.0.0)",
-    # explicitly define secure version for transitive dependency Pillow
+    # explicitly define secure version for transitive dependency pillow (April 2026 environment)
     "pillow (>=13.0.0,<14.0.0)",
 ]
 
