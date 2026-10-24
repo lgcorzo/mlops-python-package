@@ -45,7 +45,7 @@ dependencies = [
     # explicitly define secure version for transitive dependency cryptography
     "cryptography (>=50.0.0,<51.0.0)",
     # explicitly define secure version for transitive dependency GitPython
-    "gitpython (>=3.1.59,<4.0.0)",
+    "gitpython (>=3.2.1,<4.0.0)",
     # explicitly define secure version for transitive dependency tornado
     "tornado (>=6.5.8,<7.0.0)",
     # explicitly define secure version for transitive dependency aiohttp
