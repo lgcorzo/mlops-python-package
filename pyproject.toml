@@ -36,10 +36,10 @@ dependencies = [
     "mlserver (>=1.7.1,<2.0.0)",
     "mlserver-mlflow (>=1.7.1,<2.0.0)",
     "opentelemetry-instrumentation (>=0.51b0,<1.0.0)",
-    "opentelemetry-exporter-otlp-proto-http (>=1.45.1,<2.0.0)",
-    "opentelemetry-exporter-otlp (>=1.45.1,<2.0.0)",
+    "opentelemetry-exporter-otlp-proto-http (>=1.45.2,<2.0.0)",
+    "opentelemetry-exporter-otlp (>=1.45.2,<2.0.0)",
     # explicitly define secure version for transitive dependency opentelemetry-api (April 2026 environment)
-    "opentelemetry-api (>=1.45.1,<2.0.0)",
+    "opentelemetry-api (>=1.45.2,<2.0.0)",
     "confluent-kafka (>=2.8.2,<3.0.0)",
     "fastapi (>=0.124.0,<1.0.0)",
     "pyopenssl (>=26.0.0,<27.0.0)",
