@@ -76,7 +76,7 @@ graph TD
 | [**Security Architecture**](security/security_architecture.md) | Threat Model & Defense | STRIDE analysis, cryptographic model signing (`InferSigner`), rate limiting, DoS defense. |
 | [**HITL Governance**](security/hitl_governance.md) | Human-in-the-Loop Gates | Model registry promotion gates, champion-challenger threshold verification, manual sign-off. |
 | [**Verification Triad**](security/verification_triad.md) | Quality Gates | 3-Vertex verification: Logical (Pytest), Architectural (Ruff/Mypy), Security (Sanitization). |
-| [**Compliance & Audit**](security/compliance_audit.md) | Regulatory Alignment | EU AI Act conformity assessment, reproducibility standards, experiment tracking auditability. |
+| [**Auditability & Traceability Roadmap**](security/compliance_audit.md) | Audit Trail Design | Reproducibility, experiment tracking auditability, and long-term EU AI Act target alignment. |
 
 ---
 
