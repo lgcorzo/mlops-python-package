@@ -29,7 +29,7 @@ last_verified_commit: "073b5fd"
 | :--- | :--- | :--- | :--- |
 | **Lead Data Scientist** | Model accuracy, baseline comparison, SHAP feature attributions | ContextView & ComponentView | [Business Context](architecture/business_context.md), [Lifecycle Jobs](architecture/agent_specifications.md) |
 | **MLOps Engineer** | CI/CD pipelines, experiment tracking, model registry promotion | ComponentView & SequenceView | [Tactical Design](architecture/tactical_design.md), [Runtime Sequences](architecture/runtime_sequences.md) |
-| **Security & Compliance Auditor** | Model integrity, input sanitization, EU AI Act conformity | SecurityView & QualityView | [Security Architecture](security/security_architecture.md), [Compliance Audit](security/compliance_audit.md) |
+| **Security & Audit Reviewer** | Model integrity, input sanitization, audit trail verification | SecurityView & QualityView | [Security Architecture](security/security_architecture.md), [Auditability Roadmap](security/compliance_audit.md) |
 | **Platform / DevOps Engineer**| Kafka streaming latency, Docker deployment, resource quotas | DeploymentView & Operations | [Infrastructure Adapters](architecture/infrastructure_adapters.md), [Production Operations](operations/production_operations.md) |
 
 ---
@@ -55,7 +55,7 @@ last_verified_commit: "073b5fd"
 | **SecurityView** | [Security Architecture](security/security_architecture.md) | STRIDE threat model, cryptographic model signing, rate limiting, DoS protection. |
 | **Policy** | [HITL Governance](security/hitl_governance.md) | 4-Vertex Human-in-the-Loop governance mesh & promotion threshold verification. |
 | **Policy** | [Verification Triad](security/verification_triad.md) | Logical, Architectural, and Security quality gates. |
-| **Report** | [Compliance & Audit](security/compliance_audit.md) | EU AI Act conformity assessment, reproducibility standards, experiment auditability. |
+| **Report** | [Auditability & Traceability Roadmap](security/compliance_audit.md) | Reproducibility, experiment auditability, and long-term regulatory target (no certification claimed). |
 
 ---
 

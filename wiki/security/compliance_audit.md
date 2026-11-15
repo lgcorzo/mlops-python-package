@@ -11,15 +11,15 @@ verified: "true"
 last_verified_commit: "073b5fd"
 ---
 
-# Compliance & Audit Trail Specification
+# Auditability & Traceability Specification (Target Roadmap)
 
-> **Purpose**: Document regulatory compliance alignments, specifically addressing EU AI Act (Regulation 2024/1689) requirements for high-risk AI lifecycle management.
+> **Purpose**: Document technical mechanisms designed to facilitate auditing and traceability, with future alignment to the EU AI Act (Regulation 2024/1689) as a **long-term roadmap objective** (no formal compliance certification is claimed).
 
 ---
 
-## 1. EU AI Act Conformity Assessment
+## 1. Target Design Mapping (Long-Term Objective)
 
-| EU AI Act Article | Regulatory Requirement | Repository Implementation Mechanism |
+| Target Reference | Objective | Repository Technical Mechanism (Facilitates Auditing) |
 |:---|:---|:---|
 | **Article 10** | **Data Governance**: Datasets must be relevant, representative, and validated. | DVC immutable versioning, Parquet schema enforcement, Pandera validation. |
 | **Article 11** | **Technical Documentation**: Comprehensive technical records before market placement. | ISO 42010 / 15289 wiki documentation with 1:1 codebase mirroring. |
