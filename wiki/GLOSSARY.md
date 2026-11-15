@@ -7,7 +7,7 @@ description: "Comprehensive domain definitions and ubiquitous acronyms for the M
 tags: ["iso42010", "glossary", "ddd", "mlops"]
 timestamp: "2026-10-01T17:50:00Z"
 generated: "agent:wiki-iso-documentation-standard"
-verified: "true"
+verified: "false"
 last_verified_commit: "073b5fd"
 ---
 

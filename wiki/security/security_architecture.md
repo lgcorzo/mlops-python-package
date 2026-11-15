@@ -7,7 +7,7 @@ description: "ISO 42010 SecurityView / ISO 15289 Description documentation for S
 tags: ["iso42010", "okf", "security_view", "security", "threat_model"]
 timestamp: "2026-10-01T17:50:00Z"
 generated: "agent:wiki-iso-documentation-standard"
-verified: "true"
+verified: "false"
 last_verified_commit: "073b5fd"
 ---
 

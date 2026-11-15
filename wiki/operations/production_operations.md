@@ -7,7 +7,7 @@ description: "ISO 42010 DeploymentView / ISO 15289 Procedure documentation cover
 tags: ["iso42010", "okf", "deployment_view", "docker", "runbook"]
 timestamp: "2026-10-01T17:50:00Z"
 generated: "agent:wiki-iso-documentation-standard"
-verified: "true"
+verified: "false"
 last_verified_commit: "073b5fd"
 ---
 

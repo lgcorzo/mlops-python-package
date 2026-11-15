@@ -7,7 +7,7 @@ description: "ISO 42010 QualityView / ISO 15289 Report documentation evaluating 
 tags: ["iso42010", "iso25010", "okf", "quality_view", "testing", "pytest"]
 timestamp: "2026-10-01T17:50:00Z"
 generated: "agent:wiki-iso-documentation-standard"
-verified: "true"
+verified: "false"
 last_verified_commit: "073b5fd"
 ---
 

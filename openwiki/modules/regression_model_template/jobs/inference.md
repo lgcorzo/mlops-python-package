@@ -8,7 +8,7 @@ description: "Define a job for generating batch predictions from a registered mo
 tags: ["module", "inference"]
 timestamp: "2026-10-20T15:15:31Z"
 generated: "agent:ast-documentation-generator"
-verified: "true"
+verified: "false"
 last_verified_commit: "275b872"
 ---
 # Module Specification: inference
