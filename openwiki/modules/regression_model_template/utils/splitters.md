@@ -8,7 +8,7 @@ description: "Split dataframes into subsets (e.g., train/valid/test)."
 tags: ["module", "splitters"]
 timestamp: "2026-10-20T15:15:31Z"
 generated: "agent:ast-documentation-generator"
-verified: "true"
+verified: "false"
 last_verified_commit: "275b872"
 ---
 # Module Specification: splitters

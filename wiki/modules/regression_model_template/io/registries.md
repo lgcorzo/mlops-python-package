@@ -8,7 +8,7 @@ description: "Abstract Loader/Register interfaces and MLflow model registry inte
 tags: ["iso42010", "okf", "component_view", "registry", "mlflow"]
 timestamp: "2026-10-01T17:50:00Z"
 generated: "agent:wiki-iso-documentation-standard"
-verified: "true"
+verified: "false"
 last_verified_commit: "073b5fd"
 ---
 

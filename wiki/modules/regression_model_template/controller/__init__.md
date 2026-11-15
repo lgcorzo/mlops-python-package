@@ -8,7 +8,7 @@ description: "Package exports for the controller streaming and REST interface."
 tags: ["iso42010", "okf", "component_view", "controller"]
 timestamp: "2026-10-01T17:50:00Z"
 generated: "agent:wiki-iso-documentation-standard"
-verified: "true"
+verified: "false"
 last_verified_commit: "073b5fd"
 ---
 

@@ -8,7 +8,7 @@ description: "Project tasks for pyinvoke."
 tags: ["module", "projects"]
 timestamp: "2026-10-20T15:15:31Z"
 generated: "agent:ast-documentation-generator"
-verified: "true"
+verified: "false"
 last_verified_commit: "275b872"
 ---
 # Module Specification: projects

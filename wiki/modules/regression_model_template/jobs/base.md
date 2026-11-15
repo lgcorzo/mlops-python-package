@@ -8,7 +8,7 @@ description: "Abstract Job base class coordinating service start, error handling
 tags: ["iso42010", "okf", "component_view", "template_method", "context_manager"]
 timestamp: "2026-10-01T17:50:00Z"
 generated: "agent:wiki-iso-documentation-standard"
-verified: "true"
+verified: "false"
 last_verified_commit: "073b5fd"
 ---
 

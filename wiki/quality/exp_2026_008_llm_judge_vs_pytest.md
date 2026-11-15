@@ -7,7 +7,7 @@ description: "Empirical benchmark measuring discrepancy and false-negative rate 
 tags: ["iso42010", "okf", "quality_view", "exp-2026-008", "llm-judge", "pytest", "verification_triad"]
 timestamp: "2026-04-18T10:00:00Z"
 generated: "agent:jules-senior-engineer"
-verified: "true"
+verified: "false"
 last_verified_commit: "073b5fd"
 ---
 

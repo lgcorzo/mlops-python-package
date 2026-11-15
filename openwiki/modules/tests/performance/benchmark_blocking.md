@@ -8,7 +8,7 @@ description: "No description available."
 tags: ["module", "benchmark_blocking"]
 timestamp: "2026-10-20T15:15:32Z"
 generated: "agent:ast-documentation-generator"
-verified: "true"
+verified: "false"
 last_verified_commit: "275b872"
 ---
 # Module Specification: benchmark_blocking

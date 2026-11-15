@@ -7,7 +7,7 @@ description: "Master index of the MLOps Python Package documentation under ISO/I
 tags: ["iso42010", "iso15289", "index", "architecture_description"]
 timestamp: "2026-10-01T17:50:00Z"
 generated: "agent:wiki-iso-documentation-standard"
-verified: "true"
+verified: "false"
 last_verified_commit: "073b5fd"
 ---
 

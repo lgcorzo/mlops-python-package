@@ -8,7 +8,7 @@ description: "Generates global and local feature attribution values via SHAP Tre
 tags: ["iso42010", "okf", "component_view", "xai", "shap"]
 timestamp: "2026-10-01T17:50:00Z"
 generated: "agent:wiki-iso-documentation-standard"
-verified: "true"
+verified: "false"
 last_verified_commit: "073b5fd"
 ---
 
