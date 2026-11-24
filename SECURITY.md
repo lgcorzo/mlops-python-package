@@ -2,10 +2,4 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in `mlops-python-package`, please report it responsibly by opening a private security advisory on GitHub or contacting the repository maintainer directly.
-
-**Do not** open a public issue for undisclosed security vulnerabilities.
-
-## Supported Versions
-
-Security fixes are applied to the default branch (`main`).
+Please report security vulnerabilities via **GitHub Private Security Advisories** (`Security` -> `Advisories` -> `Report a vulnerability`).
