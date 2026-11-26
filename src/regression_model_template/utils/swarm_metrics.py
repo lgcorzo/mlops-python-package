@@ -2,6 +2,7 @@
 
 import math
 
+
 def compute_latency_stats(samples: list[float]) -> dict[str, float]:
     """Compute min, max, mean, and p95 latency statistics from sample values."""
     if not samples:

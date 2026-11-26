@@ -2,6 +2,7 @@
 
 from regression_model_template.utils.swarm_checksums import sha256_canonical_json
 
+
 def test_sha256_canonical_json_is_key_order_independent() -> None:
     """Key ordering must not change the resulting SHA-256 digest."""
     d1 = sha256_canonical_json({"b": 2, "a": {"y": 1, "x": 0}})
