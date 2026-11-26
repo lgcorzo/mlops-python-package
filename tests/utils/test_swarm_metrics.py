@@ -1,6 +1,5 @@
 """Unit tests for swarm_metrics."""
 
-from __future__ import annotations
 
 import pytest
 

@@ -1,6 +1,5 @@
 """Identifier sanitization utilities for Swarm Mode."""
 
-from __future__ import annotations
 
 import re
 

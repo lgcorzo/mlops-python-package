@@ -1,6 +1,5 @@
 """Deterministic canonical JSON SHA-256 checksum utilities."""
 
-from __future__ import annotations
 
 import hashlib
 import json

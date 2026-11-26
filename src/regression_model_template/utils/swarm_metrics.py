@@ -1,6 +1,5 @@
 """Latency statistics utilities for Swarm Mode telemetry."""
 
-from __future__ import annotations
 
 import math
 

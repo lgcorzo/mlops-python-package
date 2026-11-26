@@ -1,6 +1,5 @@
 """Unit tests for swarm_sanitizers."""
 
-from __future__ import annotations
 
 import pytest
 

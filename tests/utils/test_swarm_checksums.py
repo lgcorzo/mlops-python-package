@@ -1,6 +1,5 @@
 """Unit tests for swarm_checksums."""
 
-from __future__ import annotations
 
 from regression_model_template.utils.swarm_checksums import sha256_canonical_json
 
