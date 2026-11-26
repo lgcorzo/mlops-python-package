@@ -1,8 +1,6 @@
 """Unit tests for swarm_checksums."""
 
-
 from regression_model_template.utils.swarm_checksums import sha256_canonical_json
-
 
 def test_sha256_canonical_json_is_key_order_independent() -> None:
     """Key ordering must not change the resulting SHA-256 digest."""
