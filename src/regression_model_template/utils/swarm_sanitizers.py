@@ -1,5 +1,18 @@
-# Deliverable `src/regression_model_template/utils/swarm_sanitizers.py`
+"""Identifier sanitization utilities for Swarm Mode."""
 
-- **Mission**: `lgcorzo-mlops-python-package-478`
-- **Task**: T002 — Create `src/regression_model_template/utils/swarm_sanitizers.py` with `sanitize_identifier(value: str) -> str` (lowercase alphanumeric + hyphens, max 64 chars) and unit tests in `tests/utils/test_swarm_sanitizers.py`.
-- **TDD Verified**: Red -> Green in gVisor sandbox
+from __future__ import annotations
+
+import re
+
+_INVALID_CHARS_RE = re.compile(r"[^a-z0-9-]+")
+_MULTI_HYPHEN_RE = re.compile(r"-{2,}")
+
+
+def sanitize_identifier(value: str) -> str:
+    """Normalize a string into a lowercase alphanumeric+hyphen identifier (<= 64 chars)."""
+    cleaned = _INVALID_CHARS_RE.sub("-", value.strip().lower())
+    cleaned = _MULTI_HYPHEN_RE.sub("-", cleaned).strip("-")
+    cleaned = cleaned[:64].rstrip("-")
+    if not cleaned:
+        raise ValueError("identifier contains no alphanumeric characters")
+    return cleaned

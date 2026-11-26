@@ -1,5 +1,23 @@
-# Deliverable `tests/utils/test_swarm_metrics.py`
+"""Unit tests for swarm_metrics."""
 
-- **Mission**: `lgcorzo-mlops-python-package-478`
-- **Task**: T001 — Create `src/regression_model_template/utils/swarm_metrics.py` with `compute_latency_stats(samples: list[float]) -> dict[str, float]` (`min`, `max`, `mean`, `p95`) and unit tests in `tests/utils/test_swarm_metrics.py`.
-- **TDD Verified**: Red -> Green in gVisor sandbox
+from __future__ import annotations
+
+import pytest
+
+from regression_model_template.utils.swarm_metrics import compute_latency_stats
+
+
+def test_compute_latency_stats_basic() -> None:
+    """Verify min, max, mean, and p95 on a 20-element sample."""
+    samples = [float(i) for i in range(1, 21)]
+    stats = compute_latency_stats(samples)
+    assert stats["min"] == 1.0
+    assert stats["max"] == 20.0
+    assert stats["mean"] == pytest.approx(10.5)
+    assert stats["p95"] == 19.0
+
+
+def test_compute_latency_stats_empty_raises() -> None:
+    """Empty sample list must raise ValueError."""
+    with pytest.raises(ValueError, match="empty"):
+        compute_latency_stats([])

@@ -1,5 +1,13 @@
-# Deliverable `tests/utils/test_swarm_checksums.py`
+"""Unit tests for swarm_checksums."""
 
-- **Mission**: `lgcorzo-mlops-python-package-478`
-- **Task**: T003 — Create `src/regression_model_template/utils/swarm_checksums.py` with `sha256_canonical_json(payload: dict) -> str` (deterministic sorted-keys SHA-256 hex digest) and unit tests in `tests/utils/test_swarm_checksums.py`.
-- **TDD Verified**: Red -> Green in gVisor sandbox
+from __future__ import annotations
+
+from regression_model_template.utils.swarm_checksums import sha256_canonical_json
+
+
+def test_sha256_canonical_json_is_key_order_independent() -> None:
+    """Key ordering must not change the resulting SHA-256 digest."""
+    d1 = sha256_canonical_json({"b": 2, "a": {"y": 1, "x": 0}})
+    d2 = sha256_canonical_json({"a": {"x": 0, "y": 1}, "b": 2})
+    assert d1 == d2
+    assert len(d1) == 64
